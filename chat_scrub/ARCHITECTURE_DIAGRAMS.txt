@@ -1,0 +1,123 @@
+FRONTIER SYNTAX v2.0 — ARCHITECTURE DIAGRAMS
+================================================
+
+1. HIGH-LEVEL SYSTEM ARCHITECTURE
+---------------------------------
+
+┌─────────────────────────────────────────────────────────────────────┐
+│                        FRONTIER ECOSYSTEM                            │
+├─────────────────────────────────────────────────────────────────────┤
+│  CLI (frontier)          Browser UI           Cloud Agent            │
+│  ├─ compile              ├─ index.html        ├─ frontier_agent.py   │
+│  ├─ knowledge            ├─ frontier_runtime  ├─ symbiotic_agents.py │
+│  ├─ unity                └─ wasm_compiler     └─ frontier_agent.sh  │
+│  └─ foundation                                                       │
+├─────────────────────────────────────────────────────────────────────┤
+│  COMPILER PIPELINE                                                   │
+│  Source → Lexer(re2c) → Parser → Resolver → WASM Codegen → Output   │
+│                    ↓              ↓                                  │
+│              Knowledge Hypercube   V2 Resolver (imports, proofs)     │
+├─────────────────────────────────────────────────────────────────────┤
+│  7 INNOVATIONS                                                       │
+│  Grammar Mutator | Proof Generator | PQ Signatures | ZK Verifier     │
+│  IPFS Resolver   | Neural LSP      | Package Registry                │
+├─────────────────────────────────────────────────────────────────────┤
+│  LIGHTHOUSE STACK (100% Frontier Syntax)                             │
+│  ARC Engine | Discovery Engine | Agent Distiller | Browser Compiler  │
+└─────────────────────────────────────────────────────────────────────┘
+
+
+2. UNITY MODULE FACADE
+----------------------
+
+                    ┌──────────────────┐
+                    │  UnityCompiler   │
+                    │  (src/unity.rs)  │
+                    └────────┬─────────┘
+                             │
+         ┌───────────────────┼───────────────────┐
+         ▼                   ▼                   ▼
+  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+  │ WASM Codegen│    │  Knowledge  │    │ Spec Valid. │
+  │ (wasm_gen)  │    │  Bridge     │    │ (validate)  │
+  └─────────────┘    └─────────────┘    └─────────────┘
+         │                   │                   │
+         └───────────────────┼───────────────────┘
+                             ▼
+                    ┌──────────────────┐
+                    │   UnityModule    │
+                    │ wasm + glue +    │
+                    │ knowledge + spec │
+                    └──────────────────┘
+
+
+3. SYMBIOTIC TANDEM AGENT FLOW
+-----------------------------
+
+  ┌─────────────────────┐
+  │ MasterOrchestrator  │
+  │ plan_repair()       │
+  └──────────┬──────────┘
+             │ enqueue intents
+             ▼
+  ┌─────────────────────┐     ThreadPoolExecutor (4 workers)
+  │    WorkerAgent      │ ──────────────────────────────►
+  │  execute_intent()   │     frontier_agent.process()
+  └──────────┬──────────┘
+             │ results
+             ▼
+  ┌─────────────────────┐
+  │ verify_intent()     │ ──► cross-verify
+  │ learn_from_result() │ ──► feedback loop + retry
+  └─────────────────────┘
+
+
+4. ARC AUDIT CYCLE DEPENDENCY GRAPH
+-----------------------------------
+
+  Cycle 1 (Lexicon)
+       │
+       ▼
+  Cycle 2 (Grammar)
+       │
+       ▼
+  Cycle 3 (Orthogonality)
+       │
+       ▼
+  Cycle 4 (Resolution)
+       │
+       ▼
+  Cycle 5 (AST Hashing)
+       │
+       ▼
+  Cycle 6 (Adversarial)
+
+
+5. DEPLOYMENT TOPOLOGY
+----------------------
+
+  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐
+  │frontier-api │  │frontier-mig │  │frontier-lsp │
+  │  :8080 x3   │  │  :8081 x5   │  │  :8082 x2   │
+  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘
+         │                │                │
+         └────────────────┼────────────────┘
+                          ▼
+              ┌───────────────────────┐
+              │ Prometheus / Grafana    │
+              │ Elasticsearch / Kibana  │
+              └───────────────────────┘
+
+
+6. CHAT SCRUB → WORKER INGESTION
+--------------------------------
+
+  Chat History ──► Scrub Agent ──► decision_log.jsonl
+                        │
+                        ├──► WORKER_REPORT.json
+                        │
+                        └──► Redis (chat_scrub_report, TTL 7d)
+                                      │
+                                      ▼
+                              frontier_agent.py
+                              (shared_knowledge pool)
