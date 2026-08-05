@@ -18,6 +18,7 @@ dist/
 test_projects/
 __pycache__/
 *.pyc
+.frontier_state.json
 .build_truth_*/
 .build_truth_sandbox/
 .verification_cache/
