@@ -1,0 +1,12 @@
+fn main(): void {
+    let x: int = 10;
+    let y: int = 20;
+    let z: int = x + y * 2;
+    if (z > 25) {
+        let msg: string = "big";
+        return;
+    } else {
+        let msg: string = "small";
+        return;
+    }
+}

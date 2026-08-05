@@ -216,14 +216,6 @@
       "pattern": "\\}",
       "category": "delimiter"
     },
-    "LBRACKET": {
-      "pattern": "\\[",
-      "category": "delimiter"
-    },
-    "RBRACKET": {
-      "pattern": "\\]",
-      "category": "delimiter"
-    },
     "COMMA": {
       "pattern": ",",
       "category": "delimiter"
