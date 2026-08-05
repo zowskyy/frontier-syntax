@@ -2,6 +2,7 @@ pub mod ast;
 pub mod canonicalize;
 pub mod error;
 pub mod lexer;
+pub mod lsp;
 pub mod parser;
 pub mod resolver;
 
