@@ -1,0 +1,331 @@
+/**
+ * FRONTIER SYNTAX — CORE PARSER
+ *
+ * This module defines the lexical analysis and abstract syntax tree
+ * for the Frontier programming language. It is the foundation upon
+ * which all other language features are built.
+ *
+ * ARC Gate: Parse 10,000 lines < 100ms
+ */
+
+component Lexer {
+    state: {
+        source: String,
+        position: usize,
+        tokens: [Token],
+        line: usize,
+        column: usize,
+    },
+
+    /**
+     * Tokenize source code into tokens
+     * @param source Source code string
+     * @returns Array of tokens
+     */
+    static tokenize(source: String) -> [Token] {
+        let lexer = Lexer { source: source };
+        while lexer.position < source.length() {
+            lexer.skip_whitespace();
+            if lexer.position >= source.length() { break; }
+
+            let char = source[lexer.position];
+
+            // Keywords
+            if char.is_alpha() {
+                lexer.tokenize_identifier();
+            }
+            // Numbers
+            else if char.is_digit() {
+                lexer.tokenize_number();
+            }
+            // Strings
+            else if char == '"' {
+                lexer.tokenize_string();
+            }
+            // Symbols
+            else if char == '=' {
+                if source[lexer.position + 1] == '=' {
+                    lexer.add_token(TokenType.Equal);
+                    lexer.position += 2;
+                } else {
+                    lexer.add_token(TokenType.Assign);
+                    lexer.position += 1;
+                }
+            }
+            else if char == '+' {
+                lexer.add_token(TokenType.Plus);
+                lexer.position += 1;
+            }
+            else if char == '-' {
+                lexer.add_token(TokenType.Minus);
+                lexer.position += 1;
+            }
+            else if char == '*' {
+                lexer.add_token(TokenType.Star);
+                lexer.position += 1;
+            }
+            else if char == '/' {
+                if source[lexer.position + 1] == '/' {
+                    lexer.skip_line_comment();
+                } else if source[lexer.position + 1] == '*' {
+                    lexer.skip_block_comment();
+                } else {
+                    lexer.add_token(TokenType.Slash);
+                    lexer.position += 1;
+                }
+            }
+            else if char == '(' {
+                lexer.add_token(TokenType.LeftParen);
+                lexer.position += 1;
+            }
+            else if char == ')' {
+                lexer.add_token(TokenType.RightParen);
+                lexer.position += 1;
+            }
+            else if char == '{' {
+                lexer.add_token(TokenType.LeftBrace);
+                lexer.position += 1;
+            }
+            else if char == '}' {
+                lexer.add_token(TokenType.RightBrace);
+                lexer.position += 1;
+            }
+            else if char == '[' {
+                lexer.add_token(TokenType.LeftBracket);
+                lexer.position += 1;
+            }
+            else if char == ']' {
+                lexer.add_token(TokenType.RightBracket);
+                lexer.position += 1;
+            }
+            else if char == ';' {
+                lexer.add_token(TokenType.Semicolon);
+                lexer.position += 1;
+            }
+            else if char == ':' {
+                lexer.add_token(TokenType.Colon);
+                lexer.position += 1;
+            }
+            else if char == ',' {
+                lexer.add_token(TokenType.Comma);
+                lexer.position += 1;
+            }
+            else if char == '.' {
+                lexer.add_token(TokenType.Dot);
+                lexer.position += 1;
+            }
+            else {
+                // Unknown character — error
+                lexer.add_error("Unexpected character: " + char);
+                lexer.position += 1;
+            }
+        }
+
+        lexer.add_token(TokenType.EOF);
+
+        // ARC Gate: Lexing < 100ms per 10,000 lines
+        assert(lexer.execution_time < 100.0);
+
+        return lexer.tokens;
+    },
+
+    /**
+     * Tokenize an identifier (variable/function/type name)
+     */
+    tokenize_identifier() {
+        let start = this.position;
+        while this.position < this.source.length() &&
+              (this.source[this.position].is_alphanumeric() ||
+               this.source[this.position] == '_') {
+            this.position += 1;
+        }
+
+        let name = this.source.slice(start, this.position);
+
+        // Check for keywords
+        let type = TokenType.Identifier;
+        if KEYWORDS.contains(name) {
+            type = TokenType.from_keyword(name);
+        }
+
+        this.add_token(type, name);
+    },
+
+    /**
+     * Tokenize a numeric literal
+     */
+    tokenize_number() {
+        let start = this.position;
+        let is_float = false;
+
+        while this.position < this.source.length() &&
+              (this.source[this.position].is_digit() ||
+               this.source[this.position] == '.') {
+            if this.source[this.position] == '.' {
+                is_float = true;
+            }
+            this.position += 1;
+        }
+
+        let value = this.source.slice(start, this.position);
+        let type = is_float ? TokenType.Float : TokenType.Integer;
+        this.add_token(type, value);
+    },
+
+    /**
+     * Tokenize a string literal
+     */
+    tokenize_string() {
+        this.position += 1; // Skip opening quote
+        let start = this.position;
+
+        while this.position < this.source.length() &&
+              this.source[this.position] != '"' {
+            if this.source[this.position] == '\\' {
+                this.position += 1; // Skip escape
+            }
+            this.position += 1;
+        }
+
+        let value = this.source.slice(start, this.position);
+        this.position += 1; // Skip closing quote
+
+        this.add_token(TokenType.String, value);
+    }
+}
+
+/**
+ * Abstract Syntax Tree (AST) — Represents the structure of Frontier code
+ */
+component AST {
+    state: {
+        nodes: [ASTNode],
+        source_map: SourceMap,
+    },
+
+    /**
+     * Parse tokens into AST
+     * @param tokens Array of tokens from lexer
+     * @returns AST structure
+     */
+    static parse(tokens: [Token]) -> AST {
+        let parser = Parser { tokens: tokens };
+        let ast = AST { nodes: [] };
+
+        while !parser.is_at_end() {
+            let node = parser.parse_statement();
+            ast.nodes.push(node);
+        }
+
+        // ARC Gate: Parsing < 500ms per 10,000 lines
+        assert(parser.execution_time < 500.0);
+
+        return ast;
+    }
+}
+
+/**
+ * AST Node types
+ */
+enum ASTNodeType {
+    Program,
+    Function,
+    Variable,
+    If,
+    For,
+    While,
+    Return,
+    Binary,
+    Unary,
+    Call,
+    Assign,
+    Block,
+    Import,
+    Export,
+    Struct,
+    Enum,
+    Trait,
+    Impl,
+    Match,
+    Try,
+    Await,
+    Async,
+    Yield,
+}
+
+/**
+ * Token types
+ */
+enum TokenType {
+    // Identifiers
+    Identifier,
+    // Keywords
+    Let,
+    Const,
+    If,
+    Else,
+    For,
+    In,
+    While,
+    Return,
+    Fn,
+    Struct,
+    Enum,
+    Trait,
+    Impl,
+    Match,
+    Try,
+    Catch,
+    Async,
+    Await,
+    Yield,
+    Import,
+    Export,
+    Pub,
+    Mut,
+    Ref,
+    // Literals
+    Integer,
+    Float,
+    String,
+    Boolean,
+    Nil,
+    // Symbols
+    Plus,
+    Minus,
+    Star,
+    Slash,
+    Percent,
+    Equal,
+    EqualEqual,
+    NotEqual,
+    Less,
+    LessEqual,
+    Greater,
+    GreaterEqual,
+    And,
+    Or,
+    Not,
+    Assign,
+    PlusAssign,
+    MinusAssign,
+    StarAssign,
+    SlashAssign,
+    Arrow,
+    Pipe,
+    // Punctuation
+    LeftParen,
+    RightParen,
+    LeftBrace,
+    RightBrace,
+    LeftBracket,
+    RightBracket,
+    Semicolon,
+    Colon,
+    Comma,
+    Dot,
+    Question,
+    // Special
+    EOF,
+    Error,
+}

@@ -1,0 +1,321 @@
+/**
+ * FRONTIER SYNTAX — STANDARD LIBRARY
+ *
+ * This module defines Frontier's core standard library,
+ * providing essential functionality for all programs.
+ *
+ * ARC Gate: All stdlib functions < 1ms
+ */
+
+module std {
+    /**
+     * Collections
+     */
+    component Vec<T> {
+        state: {
+            data: [T],
+            capacity: usize,
+            length: usize,
+        },
+
+        static new() -> Vec<T> {
+            return Vec { data: [], capacity: 0, length: 0 };
+        },
+
+        static with_capacity(capacity: usize) -> Vec<T> {
+            return Vec { data: [], capacity: capacity, length: 0 };
+        },
+
+        push(value: T) {
+            if this.length >= this.capacity {
+                this.grow();
+            }
+            this.data[this.length] = value;
+            this.length += 1;
+        },
+
+        pop() -> Option<T> {
+            if this.length > 0 {
+                this.length -= 1;
+                return Some(this.data[this.length]);
+            } else {
+                return None;
+            }
+        },
+
+        get(index: usize) -> Option<T> {
+            if index < this.length {
+                return Some(this.data[index]);
+            } else {
+                return None;
+            }
+        },
+
+        set(index: usize, value: T) {
+            if index < this.length {
+                this.data[index] = value;
+            }
+        },
+
+        len() -> usize { return this.length; },
+
+        is_empty() -> bool { return this.length == 0; },
+
+        grow() {
+            let new_capacity = if this.capacity == 0 { 4 } else { this.capacity * 2 };
+            let new_data = [];
+            for i in 0..this.length {
+                new_data.push(this.data[i]);
+            }
+            this.data = new_data;
+            this.capacity = new_capacity;
+        },
+
+        // Iterator
+        iter() -> VecIterator<T> {
+            return VecIterator { vec: this, index: 0 };
+        }
+    },
+
+    component VecIterator<T> {
+        state: {
+            vec: Vec<T>,
+            index: usize,
+        },
+
+        next() -> Option<T> {
+            if this.index < this.vec.len() {
+                let value = this.vec.get(this.index);
+                this.index += 1;
+                return value;
+            } else {
+                return None;
+            }
+        }
+    },
+
+    component Map<K, V> {
+        state: {
+            entries: [(K, V)],
+        },
+
+        static new() -> Map<K, V> {
+            return Map { entries: [] };
+        },
+
+        insert(key: K, value: V) {
+            for i in 0..this.entries.len() {
+                if this.entries[i].0 == key {
+                    this.entries[i].1 = value;
+                    return;
+                }
+            }
+            this.entries.push((key, value));
+        },
+
+        get(key: K) -> Option<V> {
+            for entry in this.entries {
+                if entry.0 == key {
+                    return Some(entry.1);
+                }
+            }
+            return None;
+        },
+
+        remove(key: K) -> Option<V> {
+            for i in 0..this.entries.len() {
+                if this.entries[i].0 == key {
+                    let value = this.entries[i].1;
+                    this.entries.remove(i);
+                    return Some(value);
+                }
+            }
+            return None;
+        }
+    },
+
+    component Set<T> {
+        state: {
+            map: Map<T, Unit>,
+        },
+
+        static new() -> Set<T> {
+            return Set { map: Map.new() };
+        },
+
+        insert(value: T) {
+            this.map.insert(value, Unit);
+        },
+
+        contains(value: T) -> bool {
+            return this.map.get(value).is_some();
+        }
+    },
+
+    /**
+     * String utilities
+     */
+    component String {
+        static split(text: String, delimiter: String) -> [String] {
+            let result = [];
+            let parts = text.split(delimiter);
+            for part in parts {
+                result.push(part);
+            }
+            return result;
+        },
+
+        static join(parts: [String], delimiter: String) -> String {
+            let result = "";
+            for i in 0..parts.len() {
+                result += parts[i];
+                if i < parts.len() - 1 {
+                    result += delimiter;
+                }
+            }
+            return result;
+        },
+
+        static trim(text: String) -> String {
+            let start = text.find_first_not_of(" \t\n\r");
+            let end = text.find_last_not_of(" \t\n\r");
+            return text.slice(start, end + 1);
+        },
+
+        static to_lower(text: String) -> String {
+            let result = "";
+            for char in text.chars() {
+                result += char.to_lower();
+            }
+            return result;
+        },
+
+        static to_upper(text: String) -> String {
+            let result = "";
+            for char in text.chars() {
+                result += char.to_upper();
+            }
+            return result;
+        },
+
+        static contains(text: String, substring: String) -> bool {
+            return text.find(substring).is_some();
+        },
+
+        static starts_with(text: String, prefix: String) -> bool {
+            return text.slice(0, prefix.len()) == prefix;
+        },
+
+        static ends_with(text: String, suffix: String) -> bool {
+            return text.slice(text.len() - suffix.len(), text.len()) == suffix;
+        }
+    },
+
+    /**
+     * Math utilities
+     */
+    component Math {
+        static PI: f64 = 3.14159265358979323846;
+        static E: f64 = 2.71828182845904523536;
+
+        static sin(x: f64) -> f64 { return x.sin(); }
+        static cos(x: f64) -> f64 { return x.cos(); }
+        static tan(x: f64) -> f64 { return x.tan(); }
+        static asin(x: f64) -> f64 { return x.asin(); }
+        static acos(x: f64) -> f64 { return x.acos(); }
+        static atan(x: f64) -> f64 { return x.atan(); }
+
+        static sqrt(x: f64) -> f64 { return x.sqrt(); }
+        static cbrt(x: f64) -> f64 { return x.cbrt(); }
+        static pow(x: f64, y: f64) -> f64 { return x.pow(y); }
+        static exp(x: f64) -> f64 { return x.exp(); }
+        static log(x: f64) -> f64 { return x.log(); }
+        static log2(x: f64) -> f64 { return x.log2(); }
+        static log10(x: f64) -> f64 { return x.log10(); }
+
+        static floor(x: f64) -> f64 { return x.floor(); }
+        static ceil(x: f64) -> f64 { return x.ceil(); }
+        static round(x: f64) -> f64 { return x.round(); }
+        static trunc(x: f64) -> f64 { return x.trunc(); }
+
+        static abs(x: f64) -> f64 { return x.abs(); }
+        static signum(x: f64) -> f64 { return x.signum(); }
+
+        static min<T: Comparable>(a: T, b: T) -> T {
+            return if a < b { a } else { b };
+        }
+
+        static max<T: Comparable>(a: T, b: T) -> T {
+            return if a > b { a } else { b };
+        }
+
+        static clamp<T: Comparable>(value: T, min: T, max: T) -> T {
+            if value < min { return min; }
+            if value > max { return max; }
+            return value;
+        }
+
+        static lerp(a: f64, b: f64, t: f64) -> f64 {
+            return a + (b - a) * t;
+        }
+
+        static smoothstep(t: f64) -> f64 {
+            return t * t * (3.0 - 2.0 * t);
+        }
+    },
+
+    /**
+     * IO utilities
+     */
+    component IO {
+        static read_file(path: String) -> Result<String, Error> {
+            try {
+                let content = fs.read_file(path);
+                return Result.ok(content);
+            } catch(error) {
+                return Result.err(error);
+            }
+        },
+
+        static write_file(path: String, content: String) -> Result<Unit, Error> {
+            try {
+                fs.write_file(path, content);
+                return Result.ok(Unit);
+            } catch(error) {
+                return Result.err(error);
+            }
+        },
+
+        static read_line() -> String {
+            return stdin.read_line();
+        },
+
+        static print(message: String) {
+            stdout.print(message);
+        },
+
+        static println(message: String) {
+            stdout.println(message);
+        }
+    },
+
+    /**
+     * Time utilities
+     */
+    component Time {
+        static now() -> Instant {
+            return Instant.now();
+        },
+
+        static sleep(duration: Duration) {
+            thread.sleep(duration);
+        },
+
+        static measure<T>(f: Function() -> T) -> (T, Duration) {
+            let start = Time.now();
+            let result = f();
+            let duration = Time.now() - start;
+            return (result, duration);
+        }
+    }
+}

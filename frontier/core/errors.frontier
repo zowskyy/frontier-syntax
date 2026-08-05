@@ -1,0 +1,201 @@
+/**
+ * FRONTIER SYNTAX — ERROR HANDLING
+ *
+ * This module defines Frontier's error handling model,
+ * including Result, Option, Try/Catch, and custom errors.
+ *
+ * ARC Gate: Error propagation < 1μs
+ */
+
+component ErrorHandling {
+    state: {
+        error_registry: Map<usize, ErrorType>,
+    },
+
+    /**
+     * Result — success or failure
+     */
+    component Result<T, E> {
+        state: {
+            success: Option<T>,
+            error: Option<E>,
+        },
+
+        /**
+         * Create success result
+         */
+        static ok(value: T) -> Result<T, E> {
+            return Result { success: Some(value), error: None };
+        },
+
+        /**
+         * Create error result
+         */
+        static err(error: E) -> Result<T, E> {
+            return Result { success: None, error: Some(error) };
+        },
+
+        /**
+         * Unwrap — get value or panic
+         */
+        unwrap() -> T {
+            if this.success.is_some() {
+                return this.success.unwrap();
+            } else {
+                panic("Unwrap of error result: " + this.error.unwrap());
+            }
+        },
+
+        /**
+         * Unwrap or else — get value or use fallback
+         */
+        unwrap_or(fallback: T) -> T {
+            if this.success.is_some() {
+                return this.success.unwrap();
+            } else {
+                return fallback;
+            }
+        },
+
+        /**
+         * Map — transform success value
+         */
+        map<U>(f: Function(T) -> U) -> Result<U, E> {
+            if this.success.is_some() {
+                return Result.ok(f(this.success.unwrap()));
+            } else {
+                return Result.err(this.error.unwrap());
+            }
+        },
+
+        /**
+         * And then — chain operations
+         */
+        and_then<U>(f: Function(T) -> Result<U, E>) -> Result<U, E> {
+            if this.success.is_some() {
+                return f(this.success.unwrap());
+            } else {
+                return Result.err(this.error.unwrap());
+            }
+        },
+
+        /**
+         * Try operator (?) — propagate error
+         */
+        try_operator() -> T {
+            if this.success.is_some() {
+                return this.success.unwrap();
+            } else {
+                return this.propagate_error();
+            }
+        }
+    },
+
+    /**
+     * Option — some or none
+     */
+    component Option<T> {
+        state: {
+            value: T,
+            is_some: bool,
+        },
+
+        static none() -> Option<T> {
+            return Option { is_some: false };
+        },
+
+        static some(value: T) -> Option<T> {
+            return Option { value: value, is_some: true };
+        },
+
+        is_some() -> bool { return this.is_some; },
+        is_none() -> bool { return !this.is_some; },
+
+        unwrap() -> T {
+            if this.is_some {
+                return this.value;
+            } else {
+                panic("Unwrap of None");
+            }
+        },
+
+        unwrap_or(fallback: T) -> T {
+            if this.is_some {
+                return this.value;
+            } else {
+                return fallback;
+            }
+        },
+
+        map<U>(f: Function(T) -> U) -> Option<U> {
+            if this.is_some {
+                return Option.some(f(this.value));
+            } else {
+                return Option.none();
+            }
+        }
+    },
+
+    /**
+     * Try/Catch — exception handling
+     */
+    component TryCatch {
+        /**
+         * Try block
+         */
+        static try_block(block: Function) -> Result<Value, Error> {
+            try {
+                return Result.ok(block());
+            } catch(error) {
+                return Result.err(error);
+            }
+        },
+
+        /**
+         * Catch block
+         */
+        static catch_block(block: Function(Error) -> Value) -> Function {
+            return (error: Error) => {
+                return block(error);
+            };
+        }
+    },
+
+    /**
+     * Custom errors
+     */
+    component Error {
+        type: ErrorType,
+        message: String,
+        stack: [StackFrame],
+        cause: Option<Error>,
+
+        static new(type: ErrorType, message: String) -> Error {
+            return Error {
+                type: type,
+                message: message,
+                stack: [],
+                cause: None,
+            };
+        },
+
+        /**
+         * Add context to error
+         */
+        context(message: String) -> Error {
+            let new_error = Error.new(this.type, message);
+            new_error.cause = Some(this);
+            return new_error;
+        }
+    },
+
+    enum ErrorType {
+        IO,          // Input/output error
+        Parse,       // Parsing error
+        Type,        // Type error
+        Memory,      // Memory allocation error
+        Concurrency, // Concurrency error
+        Runtime,     // Runtime error
+        Custom,      // User-defined error
+    }
+}

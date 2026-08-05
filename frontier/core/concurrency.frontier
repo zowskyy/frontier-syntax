@@ -1,0 +1,151 @@
+/**
+ * FRONTIER SYNTAX — CONCURRENCY MODEL
+ *
+ * This module defines Frontier's concurrency model,
+ * including async/await, channels, and parallel execution.
+ *
+ * ARC Gate: 10,000 concurrent tasks < 1s
+ */
+
+component Concurrency {
+    state: {
+        async_runtime: AsyncRuntime,
+        channel_manager: ChannelManager,
+        parallel_scheduler: ParallelScheduler,
+    },
+
+    /**
+     * Async/Await — non-blocking execution
+     */
+    component AsyncRuntime {
+        state: {
+            task_queue: Queue<Task>,
+            worker_pool: [Worker],
+            event_loop: EventLoop,
+        },
+
+        /**
+         * Spawn an async task
+         */
+        spawn(task: Task) -> Future {
+            let future = Future { id: task.id };
+            this.task_queue.push(task);
+            return future;
+        },
+
+        /**
+         * Await a future
+         */
+        await(future: Future) -> Value {
+            while !future.is_ready() {
+                this.event_loop.poll();
+            }
+            return future.value();
+        },
+
+        /**
+         * Event loop — drives async tasks
+         */
+        run() {
+            while this.task_queue.len() > 0 {
+                let task = this.task_queue.pop();
+                let worker = this.worker_pool.next_available();
+                worker.execute(task);
+            }
+        }
+    },
+
+    /**
+     * Channels — communication between tasks
+     */
+    component ChannelManager {
+        state: {
+            channels: Map<usize, Channel>,
+        },
+
+        /**
+         * Create a channel
+         */
+        create<T>(buffer: usize) -> (Sender<T>, Receiver<T>) {
+            let channel = Channel { buffer: buffer, data: [] };
+            let id = this.channels.len();
+            this.channels[id] = channel;
+
+            return (Sender { id: id }, Receiver { id: id });
+        },
+
+        /**
+         * Sender — send values
+         */
+        component Sender<T> {
+            id: usize,
+
+            send(value: T) {
+                let channel = ChannelManager.channels[this.id];
+                channel.data.push(value);
+            }
+        },
+
+        /**
+         * Receiver — receive values
+         */
+        component Receiver<T> {
+            id: usize,
+
+            recv() -> T {
+                let channel = ChannelManager.channels[this.id];
+                while channel.data.len() == 0 {
+                    AsyncRuntime.yield();
+                }
+                return channel.data.pop();
+            }
+        }
+    },
+
+    /**
+     * Parallel Scheduler — CPU parallelism
+     */
+    component ParallelScheduler {
+        state: {
+            thread_pool: [Thread],
+            work_stealing: bool,
+        },
+
+        /**
+         * Parallel execution
+         */
+        parallel_for(start: usize, end: usize, closure: Function) {
+            let chunk_size = (end - start) / this.thread_pool.len();
+            let futures = [];
+
+            for i in 0..this.thread_pool.len() {
+                let chunk_start = start + i * chunk_size;
+                let chunk_end = min(chunk_start + chunk_size, end);
+                let future = this.thread_pool[i].spawn({
+                    for j in chunk_start..chunk_end {
+                        closure(j);
+                    }
+                });
+                futures.push(future);
+            }
+
+            for future in futures {
+                future.await();
+            }
+        },
+
+        /**
+         * Map — parallel map
+         */
+        map<T, U>(input: [T], closure: Function(T) -> U) -> [U] {
+            let output = [];
+            output.resize(input.len());
+
+            this.parallel_for(0, input.len(), (i) => {
+                output[i] = closure(input[i]);
+            });
+
+            return output;
+        }
+    }
+}
