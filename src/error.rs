@@ -49,6 +49,16 @@ impl FrontierError {
             column,
         )
     }
+
+    pub fn internal(message: String) -> Self {
+        Self::resolve("E-INTERNAL", message, 0, 0)
+    }
+}
+
+impl From<std::io::Error> for FrontierError {
+    fn from(e: std::io::Error) -> Self {
+        FrontierError::internal(e.to_string())
+    }
 }
 
 impl std::fmt::Display for FrontierError {

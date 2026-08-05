@@ -6,6 +6,7 @@ pub mod grammar;
 pub mod ipfs;
 pub mod lexer;
 pub mod lsp;
+pub mod migrate;
 pub mod neural;
 pub mod packages;
 pub mod parser;

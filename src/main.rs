@@ -62,8 +62,52 @@ fn main() {
             let count: usize = args.get(2).and_then(|s| s.parse().ok()).unwrap_or(1_000_000);
             run_fuzz(count);
         }
+        "migrate" => {
+            let input = args
+                .iter()
+                .position(|a| a == "--input")
+                .and_then(|i| args.get(i + 1))
+                .expect("usage: frontier migrate --input <dir> --output <dir>");
+            let output = args
+                .iter()
+                .position(|a| a == "--output")
+                .and_then(|i| args.get(i + 1))
+                .expect("usage: frontier migrate --input <dir> --output <dir>");
+            let report = frontier::migrate::migrate_project(
+                PathBuf::from(input).as_path(),
+                PathBuf::from(output).as_path(),
+            )
+            .expect("migration failed");
+            println!("✅ Migration complete");
+            println!("  Language: {}", report.source_language);
+            println!("  Files scanned: {}", report.files_scanned);
+            println!("  Migrated: {}", report.files_migrated);
+            println!("  Manual review: {}", report.files_manual);
+            println!("  Output: {}", report.output_dir.display());
+        }
+        "verify" => {
+            let input = args
+                .iter()
+                .position(|a| a == "--input")
+                .and_then(|i| args.get(i + 1))
+                .expect("usage: frontier verify --input <dir>");
+            let result = frontier::migrate::verify_migrated_project(PathBuf::from(input).as_path())
+                .expect("verification failed");
+            println!("{}", serde_json::to_string_pretty(&result).unwrap());
+            if result["errors"].as_array().map(|a| !a.is_empty()).unwrap_or(false) {
+                std::process::exit(1);
+            }
+        }
+        "run" => {
+            let path = args.get(2).expect("usage: frontier run <file.frontier>");
+            let msg = frontier::migrate::run_frontier_file(PathBuf::from(path).as_path())
+                .expect("run failed");
+            println!("{msg}");
+        }
         _ => {
-            eprintln!("Commands: parse, parse-v2, resolve, hash, gen-artifacts, fuzz");
+            eprintln!(
+                "Commands: parse, parse-v2, resolve, hash, gen-artifacts, fuzz, migrate, verify, run"
+            );
         }
     }
 }
