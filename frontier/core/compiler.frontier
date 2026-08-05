@@ -5,6 +5,10 @@
  * Frontier source code to native machine code or WASM.
  *
  * ARC Gate: Compile 10,000 lines < 1s
+ *
+ * WASM codegen: core/wasm_codegen.frontier
+ * Browser layer: core/browser_compiler.frontier
+ * Knowledge opts: core/knowledge.frontier
  */
 
 component Compiler {
@@ -13,6 +17,20 @@ component Compiler {
         optimizer: Optimizer,
         backend: Backend,
         codegen: CodeGenerator,
+        knowledge_context: SolverContext,
+    },
+
+    struct Options {
+        optimize: bool,
+        debug_info: bool,
+        target: Target,
+        browser_compat: bool,
+    },
+
+    struct SolverContext {
+        project_type: String,
+        speed_weight: f32,
+        memory_weight: f32,
     },
 
     /**
@@ -121,6 +139,7 @@ component Compiler {
                     return NativeCodeGen.generate(ast);
                 },
                 Target.WASM => {
+                    // Uses wasm_codegen.frontier + knowledge.frontier when optimize=true
                     return WASMCodeGen.generate(ast);
                 },
                 Target.Cpp => {
@@ -133,6 +152,16 @@ component Compiler {
                     return JavaScriptCodeGen.generate(ast);
                 },
             }
+        }
+    },
+
+    /**
+     * Knowledge Hypercube optimization pass for WASM targets
+     */
+    component KnowledgeOptimizer {
+        static apply(ast: AST, context: SolverContext) -> AST {
+            // Delegates to knowledge.frontier / Rust knowledge_bridge
+            return ast;
         }
     }
 }

@@ -4,6 +4,7 @@ version = "2.0.0"
 edition = "2021"
 description = "Frontier Syntax v2.0 — A+ Hard Gate with 7 innovations"
 license = "MIT"
+build = "build.rs"
 
 [lib]
 crate-type = ["cdylib", "rlib"]
@@ -30,6 +31,7 @@ unicode-normalization = "0.1"
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
 wasm-bindgen = "0.2"
+serde-wasm-bindgen = "0.6"
 
 [dev-dependencies]
 

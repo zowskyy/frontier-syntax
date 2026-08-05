@@ -1,0 +1,106 @@
+/**
+ * FRONTIER SYNTAX — KNOWLEDGE HYPERCUBE BRIDGE
+ *
+ * Exposes the embedded Knowledge Hypercube solver to Frontier code.
+ * Rust implementation: src/knowledge_bridge.rs
+ */
+
+module knowledge {
+    struct TradeoffEntry {
+        speed: u8,
+        memory: u8,
+        clarity: u8,
+        safety: u8,
+        portability: u8,
+        energy: u8,
+        parallelism: u8,
+        realtime: u8,
+    }
+
+    struct AlgorithmSuggestion {
+        name: String,
+        discovery_year: u16,
+        paradigm_flags: u8,
+        complexity_class: u8,
+        tradeoffs: TradeoffEntry,
+        implementation_hint: String,
+    }
+
+    enum SizeHint {
+        Tiny,
+        Small,
+        Medium,
+        Large,
+        Huge,
+        Unknown,
+    }
+
+    struct SolverContext {
+        speed_weight: f32,
+        memory_weight: f32,
+        clarity_weight: f32,
+        safety_weight: f32,
+        portability_weight: f32,
+        energy_weight: f32,
+        parallelism_weight: f32,
+        realtime_weight: f32,
+        project_type: String,
+        target_hardware: [String],
+    }
+
+    static get_optimal_algorithm(
+        operation: String,
+        data_type: String,
+        size_hint: SizeHint,
+        context: SolverContext,
+    ) -> AlgorithmSuggestion {
+        // Bridged to Rust via knowledge_bridge (FFI stub in spec)
+        return AlgorithmSuggestion {
+            name: operation,
+            discovery_year: 2002,
+            paradigm_flags: 4,
+            complexity_class: 3,
+            tradeoffs: TradeoffEntry {
+                speed: 92,
+                memory: 80,
+                clarity: 65,
+                safety: 85,
+                portability: 95,
+                energy: 85,
+                parallelism: 70,
+                realtime: 70,
+            },
+            implementation_hint: "timsort",
+        }
+    }
+
+    static browser_context() -> SolverContext {
+        return SolverContext {
+            speed_weight: 0.6,
+            memory_weight: 0.4,
+            clarity_weight: 0.7,
+            safety_weight: 0.8,
+            portability_weight: 0.9,
+            energy_weight: 0.3,
+            parallelism_weight: 0.5,
+            realtime_weight: 0.2,
+            project_type: "web",
+            target_hardware: ["wasm32", "wasm64"],
+        }
+    }
+
+    static native_context() -> SolverContext {
+        return SolverContext {
+            speed_weight: 0.8,
+            memory_weight: 0.5,
+            clarity_weight: 0.5,
+            safety_weight: 0.7,
+            portability_weight: 0.4,
+            energy_weight: 0.6,
+            parallelism_weight: 0.7,
+            realtime_weight: 0.6,
+            project_type: "native",
+            target_hardware: ["x86_64", "arm64"],
+        }
+    }
+}

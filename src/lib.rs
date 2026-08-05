@@ -1,10 +1,12 @@
 pub mod ast;
+pub mod browser_compiler;
 pub mod canonicalize;
 pub mod compiler;
 pub mod error;
 pub mod grammar;
 pub mod ipfs;
 pub mod knowledge;
+pub mod knowledge_bridge;
 pub mod lexer;
 pub mod lsp;
 pub mod migrate;
@@ -14,6 +16,7 @@ pub mod parser;
 pub mod pq_signatures;
 pub mod resolver;
 pub mod v2_resolver;
+pub mod wasm_codegen;
 pub mod zk;
 
 pub use ast::Program;
@@ -67,6 +70,9 @@ pub fn process_v2_ast(ast_json: &str) -> Result<serde_json::Value, String> {
 
 #[cfg(target_arch = "wasm32")]
 mod wasm;
+
+#[cfg(target_arch = "wasm32")]
+pub mod browser_wasm;
 
 #[cfg(test)]
 mod integration_tests {
