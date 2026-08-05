@@ -1,0 +1,16 @@
+// frontier.hardware — Device sensors (GPS, camera, barcode)
+// Source: Lighthouse community templates
+
+module frontier.hardware;
+
+type GPS = opaque;
+type Camera = opaque;
+type Barcode = opaque;
+type GpsReading = { latitude: Float, longitude: Float };
+type Photo = opaque;
+type BarcodeData = { data: String };
+
+extern fn GPS::current() -> Result<GpsReading, String>;
+extern fn Camera::capture() -> Result<Photo, String>;
+extern fn Camera::compress(photo: Photo, quality: &str) -> Result<Binary, String>;
+extern fn Barcode::scan() -> Result<BarcodeData, String>;

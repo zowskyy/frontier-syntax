@@ -1,0 +1,47 @@
+{
+  "version": "2.0.0",
+  "cycle": 2,
+  "source": "examples/community/water-tracker/app.frontier",
+  "description": "10-line canonical program — module + fn + Result type (strictly binary AST nodes)",
+  "program": {
+    "kind": "Program",
+    "module": "water_tracker",
+    "imports": [
+      {
+        "kind": "Import",
+        "path": "frontier.ui",
+        "items": ["Screen", "Button", "List", "TextInput"]
+      }
+    ],
+    "declarations": [
+      {
+        "kind": "FunctionDecl",
+        "name": "main",
+        "params": [],
+        "returnType": { "kind": "TypeName", "name": "Void" },
+        "body": {
+          "kind": "Block",
+          "statements": [
+            {
+              "kind": "Let",
+              "name": "screen",
+              "init": {
+                "kind": "Call",
+                "callee": { "kind": "Path", "segments": ["Screen", "new"] },
+                "args": [{ "kind": "Literal", "type": "string", "value": "Water Tracker" }]
+              }
+            },
+            {
+              "kind": "ExprStmt",
+              "expr": {
+                "kind": "Call",
+                "callee": { "kind": "Path", "segments": ["screen", "render"] },
+                "args": []
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

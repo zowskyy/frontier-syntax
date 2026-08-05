@@ -1,0 +1,32 @@
+// frontier.ui — Native platform bindings (UIKit / Android Views)
+// Source: Lighthouse Frontier overhaul → canonical std module
+// Replaces: Capacitor WebView HTML/CSS rendering
+
+module frontier.ui;
+
+type Screen = opaque;
+type Button = opaque;
+type List = opaque;
+type TextInput = opaque;
+type Card = opaque;
+type Navigation = opaque;
+
+extern fn Screen::new(title: &str) -> Screen;
+extern fn Screen::set_icon(screen: Screen, icon: &str);
+extern fn Screen::add_widget(screen: Screen, widget: TextInput);
+extern fn Screen::add_button(screen: Screen, id: &str, label: &str, action: &str);
+extern fn Screen::add_list(screen: Screen, list: List);
+extern fn Screen::set_navigation(screen: Screen, nav: Navigation);
+extern fn Screen::render(screen: Screen);
+
+extern fn TextInput::new(id: &str) -> TextInput;
+extern fn TextInput::set_placeholder(input: TextInput, text: &str);
+extern fn TextInput::on_change(input: TextInput, callback: &str);
+
+extern fn List::new(id: &str) -> List;
+extern fn List::add_card(list: List, card: Card);
+
+extern fn Card::new(content: &str) -> Card;
+
+extern fn Navigation::new() -> Navigation;
+extern fn Navigation::add_tab(nav: Navigation, label: &str, action: &str);

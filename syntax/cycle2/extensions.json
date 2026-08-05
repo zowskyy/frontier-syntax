@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Frontier Syntax Cycle 2 Token Extensions",
+  "version": "2.0.0",
+  "extends": "syntax/token_regex_table.json",
+  "cycle": 2,
+  "note": "Additive extensions for module system, imports, and native FFI. Cycle 1 artifacts remain immutable.",
+  "tokens": {
+    "KW_MODULE": {
+      "pattern": "module(?![A-Za-z0-9_])",
+      "category": "keyword",
+      "literal": "module"
+    },
+    "KW_IMPORT": {
+      "pattern": "import(?![A-Za-z0-9_])",
+      "category": "keyword",
+      "literal": "import"
+    },
+    "KW_TYPE": {
+      "pattern": "type(?![A-Za-z0-9_])",
+      "category": "keyword",
+      "literal": "type"
+    },
+    "KW_EXTERN": {
+      "pattern": "extern(?![A-Za-z0-9_])",
+      "category": "keyword",
+      "literal": "extern"
+    },
+    "KW_OPAQUE": {
+      "pattern": "opaque(?![A-Za-z0-9_])",
+      "category": "keyword",
+      "literal": "opaque"
+    },
+    "KW_FOR": {
+      "pattern": "for(?![A-Za-z0-9_])",
+      "category": "keyword",
+      "literal": "for"
+    },
+    "KW_IN": {
+      "pattern": "in(?![A-Za-z0-9_])",
+      "category": "keyword",
+      "literal": "in"
+    },
+    "KW_AS": {
+      "pattern": "as(?![A-Za-z0-9_])",
+      "category": "keyword",
+      "literal": "as"
+    },
+    "KW_OK": {
+      "pattern": "Ok(?![A-Za-z0-9_])",
+      "category": "keyword",
+      "literal": "Ok"
+    },
+    "KW_ERR": {
+      "pattern": "Err(?![A-Za-z0-9_])",
+      "category": "keyword",
+      "literal": "Err"
+    },
+    "OP_ARROW": {
+      "pattern": "->",
+      "category": "operator",
+      "precedence": 0,
+      "note": "Function return type arrow"
+    },
+    "OP_COLONCOLON": {
+      "pattern": "::",
+      "category": "operator",
+      "note": "Module path / associated function separator"
+    },
+    "OP_AMPERSAND": {
+      "pattern": "&",
+      "category": "operator",
+      "note": "Borrow / reference type prefix"
+    }
+  },
+  "builtin_types": [
+    "Int", "Float", "String", "Bool", "Binary", "Void",
+    "Result", "Vec", "Option"
+  ]
+}

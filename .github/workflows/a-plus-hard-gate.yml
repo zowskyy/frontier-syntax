@@ -1,0 +1,50 @@
+name: A+ Hard Gate
+
+on:
+  push:
+    branches: [main, 'cursor/**']
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  hard-gate:
+    name: Frontier Syntax verification
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - name: Gate 1 — Cycle 1 lexicon
+        run: python3 scripts/verify_cycle1.py
+
+      - name: Gate 2 — Cycle 2 grammar + extensions
+        run: python3 scripts/verify_cycle2.py
+
+      - name: Gate 3 — Rust lexer tests
+        run: cargo test -p frontier-lexer
+
+      - name: Gate 4 — CLI builds and validates example
+        run: |
+          cargo build --release -p frontier-cli
+          ./target/release/frontier --version
+          ./target/release/frontier validate examples/community/water-tracker/app.frontier
+
+      - name: Gate 5 — Standard library present
+        run: |
+          for f in std/frontier/ui.fr std/frontier/storage.fr std/frontier/hardware.fr std/frontier/ai.fr; do
+            test -f "$f" || { echo "Missing $f"; exit 1; }
+          done
+          echo "✅ std modules"
+
+      - name: Gate 6 — WASM build (optional smoke)
+        run: |
+          rustup target add wasm32-unknown-unknown
+          cargo build --release -p frontier-wasm --target wasm32-unknown-unknown
+          test -f target/wasm32-unknown-unknown/release/frontier_wasm.wasm

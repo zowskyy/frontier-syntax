@@ -1,0 +1,19 @@
+// frontier.storage — Offline-first SQLite storage + sync
+// Source: Lighthouse community templates (water-tracker, clinic-records, etc.)
+
+module frontier.storage;
+
+type Database = opaque;
+type Query = opaque;
+type Sync = opaque;
+
+extern fn Database::open(path: &str) -> Result<Database, String>;
+extern fn Database::create_table(db: Database, name: &str, columns: Vec<(String, String)>) -> Result<(), String>;
+extern fn Database::insert(db: Database, table: &str, data: String) -> Result<Int, String>;
+extern fn Database::query(db: Database, sql: &str) -> Result<Vec<String>, String>;
+extern fn Database::query_one(db: Database, sql: &str, params: Vec<Int>) -> Result<String, String>;
+extern fn Database::execute(db: Database, sql: &str, params: Vec<String>) -> Result<(), String>;
+
+extern fn Sync::new() -> Sync;
+extern fn Sync::on_connect(sync: Sync, callback: &str);
+extern fn Sync::push(sync: Sync, change: String) -> Result<(), String>;

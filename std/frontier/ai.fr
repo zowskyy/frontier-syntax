@@ -1,0 +1,17 @@
+// frontier.ai — On-device inference via llama.cpp FFI
+// Source: Lighthouse Frontier overhaul
+// Replaces: WebLLM (2GB browser model) with on-device inference (~200MB)
+
+module frontier.ai;
+
+type Model = opaque;
+
+extern fn Model::load(path: &str) -> Result<Model, String>;
+extern fn Model::infer(model: Model, prompt: &str, system: &str) -> Result<String, String>;
+extern fn Model::unload(model: Model);
+extern fn Model::get() -> Result<Model, String>;
+
+fn arc_infer(stage: &str, prompt: &str) -> Result<String, String> {
+  let model = Model::get()?;
+  Model::infer(model, prompt, "Lighthouse ARC stage: " + stage)
+}
