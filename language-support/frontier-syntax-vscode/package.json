@@ -1,0 +1,61 @@
+{
+  "name": "frontier-syntax",
+  "displayName": "Frontier Syntax",
+  "description": "Syntax highlighting, diagnostics, and LSP support for Frontier (.fr) files",
+  "version": "0.1.0",
+  "publisher": "frontier-lang",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": ["Programming Languages"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "frontier",
+        "aliases": ["Frontier", "frontier"],
+        "extensions": [".fr"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "frontier",
+        "scopeName": "source.frontier",
+        "path": "./syntaxes/frontier.tmLanguage.json"
+      }
+    ],
+    "configuration": {
+      "title": "Frontier",
+      "properties": {
+        "frontier.lsp.path": {
+          "type": "string",
+          "default": "frontier-lsp",
+          "description": "Path to the Frontier LSP binary"
+        },
+        "frontier.wasm.path": {
+          "type": "string",
+          "default": "",
+          "description": "Path to wasm_parser.wasm (optional, for WASM diagnostics)"
+        }
+      }
+    }
+  },
+  "activationEvents": [
+    "onLanguage:frontier"
+  ],
+  "scripts": {
+    "compile": "tsc -p ./",
+    "vscode:prepublish": "npm run compile",
+    "package": "vsce package --out frontier-syntax-0.1.0.vsix"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.80.0",
+    "typescript": "^5.0.0",
+    "@vscode/vsce": "^2.22.0"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.0"
+  }
+}
