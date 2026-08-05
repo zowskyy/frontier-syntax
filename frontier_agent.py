@@ -112,12 +112,17 @@ class FrontierAgent:
         """Parse natural language intent into structured actions."""
         intent_lower = intent.lower()
 
-        if any(word in intent_lower for word in ["add", "new", "create", "implement"]):
-            return {
-                "type": "add_feature",
-                "feature": intent,
-                "target": self.detect_target(intent),
-            }
+        # Order matters: specific intents before broad keyword matches.
+        if any(word in intent_lower for word in ["documentation", "document", "doc "]):
+            return {"type": "update_docs", "content": intent}
+        if intent_lower.startswith("update doc") or " update doc" in intent_lower:
+            return {"type": "update_docs", "content": intent}
+
+        if any(word in intent_lower for word in ["deploy", "release", "publish"]):
+            return {"type": "deploy", "version": self.detect_version(intent)}
+
+        if any(word in intent_lower for word in ["audit", "verify", "check"]):
+            return {"type": "run_audit", "cycle": self.detect_cycle(intent)}
 
         if any(word in intent_lower for word in ["fix", "bug", "error", "issue"]):
             return {
@@ -126,14 +131,12 @@ class FrontierAgent:
                 "target": self.detect_target(intent),
             }
 
-        if any(word in intent_lower for word in ["doc", "documentation", "comment"]):
-            return {"type": "update_docs", "content": intent}
-
-        if any(word in intent_lower for word in ["audit", "verify", "check", "test"]):
-            return {"type": "run_audit", "cycle": self.detect_cycle(intent)}
-
-        if any(word in intent_lower for word in ["deploy", "release", "publish"]):
-            return {"type": "deploy", "version": self.detect_version(intent)}
+        if self._is_add_feature_intent(intent_lower):
+            return {
+                "type": "add_feature",
+                "feature": intent,
+                "target": self.detect_target(intent),
+            }
 
         return {
             "type": "add_feature",
@@ -141,13 +144,24 @@ class FrontierAgent:
             "target": "auto",
         }
 
+    def _is_add_feature_intent(self, intent_lower: str) -> bool:
+        """Detect feature-addition intents without false positives on 'new' in docs."""
+        if any(word in intent_lower for word in ["add", "create", "implement"]):
+            return True
+        if re.search(r"\bnew\b", intent_lower) and any(
+            word in intent_lower
+            for word in ["type", "struct", "keyword", "feature", "module", "support"]
+        ):
+            return True
+        return False
+
     def detect_target(self, intent: str) -> str:
         """Detect which component the intent targets."""
         targets = {
-            "type": ["types", "type system", "type checker"],
             "parser": ["parser", "syntax", "grammar"],
             "memory": ["memory", "allocation", "gc"],
-            "concurrency": ["concurrency", "thread", "async"],
+            "concurrency": ["concurrency", "thread", "async", "channel"],
+            "type": ["types", "type system", "type checker", " called ", "decimal"],
             "error": ["error", "exception", "panic"],
             "stdlib": ["standard library", "lib", "collection"],
             "compiler": ["compiler", "backend", "codegen"],
@@ -188,12 +202,13 @@ class FrontierAgent:
 
         print(f"Adding feature: {feature} (target={target})")
 
-        changes = self.analyze_feature_impact(feature)
+        changes = self.analyze_feature_impact(feature, target)
         changed_files: List[str] = []
 
         for section in ("core", "syntax", "resolver"):
             for file_path, content in changes.get(section, {}).items():
-                self.update_file(file_path, content, append=section != "syntax")
+                append = section != "syntax" or file_path.endswith(".ebnf")
+                self.update_file(file_path, content, append=append)
                 changed_files.append(file_path)
 
         self.generate_tests(feature)
@@ -214,7 +229,9 @@ class FrontierAgent:
             "message": f"Feature scaffold created for: {feature}",
         }
 
-    def analyze_feature_impact(self, feature: str) -> Dict[str, Dict[str, str]]:
+    def analyze_feature_impact(
+        self, feature: str, target: str = "auto"
+    ) -> Dict[str, Dict[str, str]]:
         """Analyze what files need to change for a feature."""
         impact: Dict[str, Dict[str, str]] = {
             "core": {},
@@ -223,13 +240,25 @@ class FrontierAgent:
         }
         feature_lower = feature.lower()
 
-        if "type" in feature_lower or "struct" in feature_lower:
+        if target == "type" or "type" in feature_lower or "struct" in feature_lower:
             impact["core"]["frontier/core/types.frontier"] = self.generate_type_def(feature)
             impact["syntax"]["syntax/schema_v2.json"] = self.update_schema(feature)
             impact["resolver"]["src/v2_resolver.rs"] = self.update_resolver(feature)
-        elif "keyword" in feature_lower:
+        elif target == "concurrency":
+            impact["core"]["frontier/core/concurrency.frontier"] = (
+                self.generate_core_module_feature(feature, "concurrency")
+            )
+        elif target == "pq":
+            impact["resolver"]["src/pq_signatures.rs"] = self.update_pq_module(feature)
+        elif target == "zk":
+            impact["resolver"]["src/zk/verifier.rs"] = self.update_zk_module(feature)
+        elif target == "parser" or "keyword" in feature_lower:
             impact["syntax"]["syntax/lexicon.ebnf"] = self.add_keyword(feature)
             impact["core"]["frontier/core/parser.frontier"] = self.update_parser(feature)
+        elif target in ("compiler", "memory", "error", "stdlib"):
+            impact["core"][f"frontier/core/{target}.frontier"] = (
+                self.generate_core_module_feature(feature, target)
+            )
         else:
             impact["core"]["frontier/core/stdlib.frontier"] = self.generate_stdlib_feature(
                 feature
@@ -264,7 +293,11 @@ class FrontierAgent:
         """Locate bug based on description."""
         description_lower = description.lower()
         if "resolver" in description_lower:
-            return {"file": "src/v2_resolver.rs", "line": 0}
+            line_match = re.search(r"line\s+(\d+)", description_lower)
+            return {
+                "file": "src/v2_resolver.rs",
+                "line": int(line_match.group(1)) if line_match else 0,
+            }
         if "parser" in description_lower:
             return {"file": "frontier/core/parser.frontier", "line": 0}
         if "type" in description_lower:
@@ -539,6 +572,33 @@ pub mod {module_name} {{
 }}
 """
 
+    def generate_core_module_feature(self, feature: str, module: str) -> str:
+        """Return a scaffold snippet for a core .frontier module."""
+        return f"""
+// Auto-generated {module} feature: {feature}
+// Generated by Frontier Agent v2.0
+"""
+
+    def update_pq_module(self, feature: str) -> str:
+        """Return a PQ module scaffold snippet."""
+        handler = re.sub(r"[^a-z0-9_]+", "_", feature.lower()).strip("_")
+        return f"""
+// Auto-generated PQ update for: {feature}
+pub fn handle_{handler}() -> Result<String, String> {{
+    Ok("pq scaffold".to_string())
+}}
+"""
+
+    def update_zk_module(self, feature: str) -> str:
+        """Return a ZK verifier scaffold snippet."""
+        handler = re.sub(r"[^a-z0-9_]+", "_", feature.lower()).strip("_")
+        return f"""
+// Auto-generated ZK update for: {feature}
+pub fn verify_{handler}(_proof: &str) -> bool {{
+    true
+}}
+"""
+
     def update_schema(self, feature: str) -> str:
         """Update schema JSON."""
         schema_file = self.syntax_dir / "schema_v2.json"
@@ -678,15 +738,34 @@ class CostTracker:
         return self.prompts_saved * self.cost_per_prompt
 
 
+def print_usage() -> None:
+    """Print CLI usage with all supported intent categories."""
+    print("Usage: python3 frontier_agent.py <intent>")
+    print()
+    print("1. Add Features")
+    print("  python3 frontier_agent.py 'Add a new type called Decimal for financial calculations'")
+    print("  python3 frontier_agent.py 'Add concurrency support with channels'")
+    print("  python3 frontier_agent.py 'Implement post-quantum signatures'")
+    print()
+    print("2. Fix Bugs")
+    print("  python3 frontier_agent.py 'Fix the type resolver bug at line 342'")
+    print("  python3 frontier_agent.py 'Fix the WASM build error'")
+    print()
+    print("3. Run Audits")
+    print("  python3 frontier_agent.py 'Run audit cycle 3'")
+    print("  python3 frontier_agent.py 'Run full audit'")
+    print()
+    print("4. Deploy")
+    print("  python3 frontier_agent.py 'Deploy v2.1.0'")
+    print()
+    print("5. Update Documentation")
+    print("  python3 frontier_agent.py 'Update documentation for the new Decimal type'")
+
+
 def main() -> None:
     """Command-line interface for the agent."""
     if len(sys.argv) < 2:
-        print("Usage: python frontier_agent.py <intent>")
-        print("Examples:")
-        print("  python frontier_agent.py 'Add a new type called Decimal'")
-        print("  python frontier_agent.py 'Fix the type resolver bug'")
-        print("  python frontier_agent.py 'Run audit cycle 3'")
-        print("  python frontier_agent.py 'Deploy v2.1.0'")
+        print_usage()
         sys.exit(1)
 
     intent = " ".join(sys.argv[1:])
