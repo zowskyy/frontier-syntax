@@ -23,3 +23,8 @@ truth_certificate_*.txt
 truth_certificate_*.txt.sha256
 verification/reports/*.json
 proof/certificates/*.json
+frontier.toml
+.frontierrc
+.frontierrc.toml
+.frontier-telemetry.log
+.frontier-telemetry.log.old
