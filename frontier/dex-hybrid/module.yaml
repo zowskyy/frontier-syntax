@@ -1,0 +1,7 @@
+# Frontier-DEX hybrid module
+# Integrates self-mutating grammar with DEX opcode table generation.
+
+module: dex-hybrid
+version: 2.0
+grammar: Frontier.g4
+opcode_mutator: mutate_to_dex_opcodes

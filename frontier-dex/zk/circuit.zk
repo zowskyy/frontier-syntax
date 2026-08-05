@@ -1,0 +1,7 @@
+# Frontier-DEX ZK circuit manifest
+# Verified with ark-crypto (Groth16 BN254)
+circuit: ast_hash_commitment
+constraints:
+  - public: ast_hash
+  - witness: ast_bytes
+algorithm: groth16_bn254

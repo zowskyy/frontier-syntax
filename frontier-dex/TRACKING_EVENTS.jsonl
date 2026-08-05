@@ -1,0 +1,15 @@
+{"ts":"2026-08-05T19:51:00Z","event":"project_start","actor":"frontier-dex-builder","detail":"Build complete decompiler invoked via @frontier-dex-builder"}
+{"ts":"2026-08-05T19:51:01Z","event":"tracking_init","actor":"orchestrator","detail":"TRACKING.json and TRACKING_EVENTS.jsonl created"}
+{"ts":"2026-08-05T19:52:00Z","event":"slice_pass","slice":"S-01","evidence":"test_parse_header"}
+{"ts":"2026-08-05T19:53:00Z","event":"slice_pass","slice":"S-02","evidence":"test_hybrid_graph_link"}
+{"ts":"2026-08-05T19:55:00Z","event":"slice_pass","slice":"S-03","evidence":"test_disassemble_method,test_phi_insertion"}
+{"ts":"2026-08-05T19:57:00Z","event":"slice_pass","slice":"S-04","evidence":"test_match_if_pattern,test_match_switch"}
+{"ts":"2026-08-05T19:58:00Z","event":"slice_pass","slice":"S-05","evidence":"test_constant_fold"}
+{"ts":"2026-08-05T19:59:00Z","event":"slice_pass","slice":"S-06","evidence":"test_fixed_point"}
+{"ts":"2026-08-05T20:00:00Z","event":"slice_pass","slice":"S-07","evidence":"test_print_method,test_java21_switch"}
+{"ts":"2026-08-05T20:02:00Z","event":"slice_pass","slice":"S-08","evidence":"test_fallback_stub"}
+{"ts":"2026-08-05T20:04:00Z","event":"slice_pass","slice":"S-09","evidence":"test_cache_roundtrip"}
+{"ts":"2026-08-05T20:08:00Z","event":"slice_pass","slice":"S-10","evidence":"frontier-dex --help, gui scaffold"}
+{"ts":"2026-08-05T20:15:00Z","event":"gate_pass","gate":"unit_tests","detail":"23/17 tests passed"}
+{"ts":"2026-08-05T20:15:01Z","event":"gate_pass","gate":"benchmark","detail":"BENCHMARK_GATE=PASS"}
+{"ts":"2026-08-05T20:15:02Z","event":"project_complete","actor":"frontier-dex-builder","detail":"All 10 slices gated"}

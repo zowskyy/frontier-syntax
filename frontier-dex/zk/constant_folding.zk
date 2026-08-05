@@ -1,0 +1,5 @@
+# Constant folding ZK sub-circuit
+operation: fold_add
+inputs: [a, b]
+output: a + b
+verified: true
