@@ -1,0 +1,67 @@
+name: A+ Hard Gate
+
+on:
+  push:
+    branches: [main, 'cursor/**']
+  pull_request:
+    branches: [main]
+
+jobs:
+  cycles-1-6:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: sudo apt-get update && sudo apt-get install -y re2c llvm-18-dev libclang-18-dev clang
+      - run: bash scripts/run_all_cycles.sh
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: sudo apt-get update && sudo apt-get install -y llvm-18-dev libclang-18-dev clang
+      - run: cargo build --release
+      - run: cargo build --release --bin lsp
+      - run: cargo build --release --bin repl
+
+  fuzz:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo run --release --bin frontier -- fuzz 100000
+
+  codegen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: sudo apt-get install -y llvm-18-dev libclang-18-dev clang
+      - run: cargo run --release --bin frontier -- compile examples/compile_test.fr -o examples/sample.o
+      - run: clang examples/sample.o -o examples/sample
+      - run: ./examples/sample; test $? -eq 0
+
+  repl-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo test repl_eval_addition
+
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: sudo apt-get install -y llvm-18-dev libclang-18-dev
+      - run: cargo run --release -- docs
+      - run: test -f docs/index.md
+
+  lsp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo build --release --bin lsp
+      - run: python3 scripts/verify_post_audit_step1.py

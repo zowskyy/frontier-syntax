@@ -1,5 +1,9 @@
 node_modules/
+examples/sample
+examples/sample.o
+build.log
 target/
+pkg/
 pkg/
 *.o
 .DS_Store

@@ -2,13 +2,15 @@
 name = "frontier"
 version = "1.0.0"
 edition = "2021"
-description = "Frontier Syntax — formally verifiable parser and resolver"
+description = "Frontier Syntax — formally verifiable programming language"
 license = "MIT"
 repository = "https://github.com/zowskyy/frontier-syntax"
 readme = "README.md"
+keywords = ["parser", "language", "compiler", "lsp"]
+categories = ["compilers", "development-tools"]
 
 [lib]
-crate-type = ["cdylib", "rlib"]
+crate-type = ["rlib"]
 
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }
@@ -18,11 +20,18 @@ unicode-normalization = "0.1"
 tower-lsp = "0.20"
 tokio = { version = "1", features = ["rt-multi-thread", "macros", "io-std"] }
 wasmi = "0.32"
+inkwell = { version = "0.5", features = ["llvm18-0"] }
+rustyline = "14"
+toml = "0.8"
+reqwest = { version = "0.12", default-features = false, features = ["blocking", "json", "rustls-tls"] }
+semver = "1.0"
+dirs = "5.0"
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
 wasm-bindgen = "0.2"
 
 [dev-dependencies]
+criterion = { version = "0.5", features = ["html_reports"] }
 
 [[bin]]
 name = "frontier"
@@ -32,6 +41,17 @@ path = "src/main.rs"
 name = "lsp"
 path = "src/bin/lsp.rs"
 
+[[bin]]
+name = "repl"
+path = "src/bin/repl.rs"
+
+[[bench]]
+name = "parser_bench"
+harness = false
+
 [profile.release]
 opt-level = "s"
 lto = true
+
+[profile.bench]
+opt-level = 3

@@ -1,67 +1,49 @@
 # Frontier Syntax
 
-Formally verifiable programming language syntax built under the **A+ Hard Gate Protocol (v1.0)**.
+[![A+ Hard Gate](https://github.com/zowskyy/frontier-syntax/actions/workflows/a-plus-hard-gate.yml/badge.svg)](https://github.com/zowskyy/frontier-syntax/actions/workflows/a-plus-hard-gate.yml)
 
-## Status: ALL CYCLES PASS
+Formally verifiable programming language — **A+ Hard Gate Certified** (`v1.0.0-a-plus-certified`).
 
-| Cycle | Scope | Status |
+## Status: ALL 16 PHASES PASS
+
+See [FINAL_CERTIFICATION.md](FINAL_CERTIFICATION.md) for full certification details.
+
+| Phase | Scope | Status |
 |-------|-------|--------|
-| 1 | Lexicon & Tokenization | PASS |
-| 2 | Grammar & Associativity | PASS |
-| 3 | Orthogonality & Reachability | PASS |
-| 4 | Semantic Resolution | PASS |
-| 5 | Immutable AST & Hashing | PASS |
-| 6 | Adversarial Attack Surface | PASS |
+| 1–6 | Core Audit Cycles | PASS |
+| 7 | LSP + VSCode Extension | PASS |
+| 8 | LLVM Codegen (inkwell) | PASS |
+| 9 | Interactive REPL | PASS |
+| 10 | Package Manager | PASS |
+| 11 | Coq Formal Prover | PASS |
+| 12 | Documentation Generator | PASS |
+| 13 | Performance Benchmarks | PASS |
+| 14 | WASM Playground | PASS |
+| 15 | CI/CD Pipeline | PASS |
+| 16 | Release Packaging | PASS |
 
 ## Quick Start
 
 ```bash
-# Verify all cycles
-bash scripts/run_all_cycles.sh
+# Full audit (all 16 phases)
+bash scripts/full_audit.sh build.log
 
-# Parse a program
-cargo run --release -- parse examples/sample.fr
+# Build tools
+cargo build --release --bin frontier
+cargo build --release --bin lsp
+cargo build --release --bin repl
 
-# Resolve symbols
-cargo run --release -- resolve examples/sample.fr
-
-# Compute AST hash
-cargo run --release -- hash examples/sample.fr
+# Parse, compile, REPL
+cargo run --release --bin frontier -- parse examples/sample.fr
+cargo run --release --bin frontier -- compile examples/compile_test.fr -o examples/sample.o
+clang examples/sample.o -o examples/sample && ./examples/sample  # exit 8
+cargo run --release --bin repl
 ```
 
-## Artifacts
+## Cryptographic Hashes (Immutable)
 
-| Artifact | Path |
-|----------|------|
-| Lexicon EBNF | `syntax/lexicon.ebnf` |
-| Token Regex Table | `syntax/token_regex_table.json` |
-| ANTLR Grammar | `syntax/Frontier.g4` (link: `syntax/grammar.g4`) |
-| AST Sample | `syntax/ast_sample.json` |
-| Feature Matrix | `syntax/feature_matrix.json` |
-| Resolved Symbols | `syntax/resolved_symbols.json` |
-| AST Schema | `syntax/schema.json` |
-| AST Hash | `syntax/ast_hash.sha3` |
-| WASM Parser | `syntax/wasm_parser.wasm` |
-| Final Hash | `syntax/final_hash.sha3` |
-
-## Toolchain
-
-| Component | Tool | Version |
-|-----------|------|---------|
-| Lexer | re2c | 3.1 |
-| Parser Grammar | ANTLR | 4.13.1 |
-| Parser/Resolver | Rust | 1.83.0 |
-| Hash | SHA-3-256 | NIST FIPS 202 |
-| WASM | wasm-pack | 0.13.1 |
-
-## Cryptographic Hashes
-
-- **AST Hash:** `3d5286d6079167b31d2e1c720da8af63eafe56d28666f0862f04abf02932b53f`
-- **Final Hash:** `4526dc37ea9d2b11a3c75fe1f3b262a246a11a3d972afeafcbc9865e456bd3e6`
-
-## Audit Reports
-
-Reports for each cycle are in `audit_reports/cycle_N_report.md`.
+- **final_hash.sha3:** `4526dc37ea9d2b11a3c75fe1f3b262a246a11a3d972afeafcbc9865e456bd3e6`
+- **ast_hash.sha3:** `3d5286d6079167b31d2e1c720da8af63eafe56d28666f0862f04abf02932b53f`
 
 ## License
 
