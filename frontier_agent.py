@@ -108,6 +108,8 @@ class FrontierAgent:
             result = self.generate_system_status(parsed)
         elif parsed["type"] == "build_crawler":
             result = self.build_archive_crawler(parsed)
+        elif parsed["type"] == "self_creation":
+            result = self.run_self_creation(parsed)
         else:
             result = {"error": f"Unknown intent type: {parsed['type']}"}
 
@@ -223,6 +225,12 @@ class FrontierAgent:
             if any(word in intent_lower for word in ["ingest", "embed", "hypercube"]):
                 return {"type": "ingest_scrub", "content": intent}
             return {"type": "run_scrub", "content": intent, "delta": "delta" in intent_lower}
+
+        if any(
+            word in intent_lower
+            for word in ["self-creation", "self creation", "flawless build", "create itself", "no-screw"]
+        ):
+            return {"type": "self_creation", "content": intent}
 
         if any(
             word in intent_lower
@@ -663,6 +671,24 @@ class FrontierAgent:
             created.append(issue_record)
 
         return {"status": "success", "issues": created, "count": len(created)}
+
+    def run_self_creation(self, parsed: Dict[str, Any]) -> Dict[str, Any]:
+        """Run the autonomous self-creation orchestrator."""
+        orchestrator = self.scripts_dir / "self_creation_orchestrator.py"
+        result = self._run_command([str(orchestrator)], capture=True)
+        summary_path = self.repo_root / "manifest" / "self_creation.json"
+        summary = {}
+        if summary_path.exists():
+            summary = json.loads(summary_path.read_text(encoding="utf-8"))
+        return {
+            "status": "success" if result["returncode"] == 0 else "partial",
+            "flawless": summary.get("flawless", False),
+            "summary": summary,
+            "audit_report": "audit_reports/flawless_audit_report.md",
+            "log": "self_creation.log",
+            "output": result.get("stdout", "")[-2000:],
+            "message": "Self-creation orchestrator complete",
+        }
 
     def build_archive_crawler(self, parsed: Dict[str, Any]) -> Dict[str, Any]:
         """Verify the advanced archive crawler module (20 improvements)."""

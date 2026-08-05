@@ -3,6 +3,8 @@
  *
  * Exposes the embedded Knowledge Hypercube solver to Frontier code.
  * Rust implementation: src/knowledge_bridge.rs
+ *
+ * ARC Gate: Query solver < 1ms
  */
 
 module knowledge {

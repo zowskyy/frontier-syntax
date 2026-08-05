@@ -1,0 +1,77 @@
+// Swarm sync protocol with IPFS-backed knowledge sharing
+// Phase 5.1: Complete swarm sync
+
+module swarm_sync_protocol;
+
+import frontier.core.swarm.{Swarm, GossipMessage};
+import frontier.core.ipfs.{IpfsImportResolver};
+import frontier.knowledge.just_in_time.{JITKnowledge};
+
+const SYNC_TARGET_MS: u64 = 5000;
+
+type SyncResult = {
+    peers_synced: u32,
+    entries_merged: u32,
+    duration_ms: u64,
+    within_target: bool,
+};
+
+component SwarmSyncProtocol {
+    state: {
+        ipfs: IpfsImportResolver,
+        jit: JITKnowledge,
+        last_sync: u64,
+    },
+
+    fn new() -> SwarmSyncProtocol {
+        SwarmSyncProtocol {
+            ipfs: IpfsImportResolver::new(),
+            jit: JITKnowledge::new(),
+            last_sync: 0,
+        }
+    },
+
+    fn sync_instances(self, peer_a: String, peer_b: String) -> SyncResult {
+        let start = now();
+        let local = self.export_knowledge_state();
+        let remote = Swarm.gossip_to(peer_b, GossipMessage::KnowledgeState(local));
+        let merged = self.merge_states(local, remote);
+        self.apply_state(merged);
+        let duration = now() - start;
+        SyncResult {
+            peers_synced: 2,
+            entries_merged: merged.len() as u32,
+            duration_ms: duration,
+            within_target: duration <= SYNC_TARGET_MS,
+        }
+    }
+
+    fn export_knowledge_state(self) -> Vec<KnowledgeEntry> {
+        self.jit.export_all()
+    }
+
+    fn merge_states(self, a: Vec<KnowledgeEntry>, b: Vec<KnowledgeEntry>) -> Vec<KnowledgeEntry> {
+        let mut merged = a;
+        for entry in b {
+            if !merged.iter().any(|e| e.id == entry.id) {
+                merged.push(entry);
+            }
+        }
+        merged
+    }
+
+    fn apply_state(self, state: Vec<KnowledgeEntry>) {
+        for entry in state {
+            self.jit.import_entry(entry);
+        }
+        self.publish_to_ipfs(state);
+        self.last_sync = now();
+    }
+
+    fn publish_to_ipfs(self, state: Vec<KnowledgeEntry>) {
+        let cid = self.ipfs.publish(encode(state));
+        Swarm.broadcast(GossipMessage::IpfsCid(cid));
+    }
+}
+
+type KnowledgeEntry = { id: String, topic: String, content: String };

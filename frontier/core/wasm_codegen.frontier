@@ -3,6 +3,8 @@
  *
  * Converts Frontier AST to WebAssembly bytecode.
  * Rust implementation: src/wasm_codegen.rs
+ *
+ * ARC Gate: Emit WASM < 500ms
  */
 
 module wasm_codegen {

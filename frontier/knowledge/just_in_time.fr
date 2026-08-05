@@ -1,0 +1,73 @@
+// JIT Knowledge — generates answers on demand, no static database
+// Phase 1.2 / 2.2: Replace knowledge database with just-in-time generation
+
+module just_in_time;
+
+import frontier.core.knowledge_hypercube.KnowledgeHypercube;
+import frontier.lighthouse.arc_engine.{run_arc};
+import frontier.bindings.ai.{LocalModel};
+import frontier.modules.archive_unity.knowledge_graph.{SemanticIndex};
+
+type KnowledgeAnswer = {
+    topic: String,
+    answer: String,
+    sources: Vec<String>,
+    generated_at: u64,
+    novel: bool,
+};
+
+component JITKnowledge {
+    state: {
+        hypercube: KnowledgeHypercube,
+        semantic: SemanticIndex,
+        model: LocalModel,
+        generation_cache: Map<String, KnowledgeAnswer>,
+    },
+
+    fn new() -> JITKnowledge {
+        JITKnowledge {
+            hypercube: KnowledgeHypercube::load(),
+            semantic: SemanticIndex::new(),
+            model: LocalModel::load("model.gguf"),
+            generation_cache: Map::new(),
+        }
+    },
+
+    fn know(self, topic: String) -> Result<KnowledgeAnswer, String> {
+        if let Some(cached) = self.generation_cache.get(topic) {
+            return Ok(cached);
+        }
+
+        let context_hits = self.semantic.search(topic);
+        let prompt = build_knowledge_prompt(topic, context_hits);
+        let generated = LocalModel::infer(self.model, prompt, KNOW_SYSTEM)?;
+
+        let answer = KnowledgeAnswer {
+            topic: topic.clone(),
+            answer: generated,
+            sources: context_hits.iter().map(|h| h.uri).collect(),
+            generated_at: now(),
+            novel: context_hits.is_empty(),
+        };
+        self.generation_cache.insert(topic, answer.clone());
+        Ok(answer)
+    }
+
+    fn know_without_database(self, topic: String) -> bool {
+        let result = self.know(topic);
+        result.is_ok() && !self.hypercube.has_static_entry(topic)
+    }
+}
+
+const KNOW_SYSTEM: &str = "Generate accurate Frontier knowledge. Cite patterns from context when available.";
+
+fn build_knowledge_prompt(topic: String, hits: Vec<Result>) -> String {
+    format!("Topic: {}\nContext: {:?}\nAnswer:", topic, hits)
+}
+
+fn main() {
+    let topic = env::arg(1);
+    let jit = JITKnowledge::new();
+    let answer = jit.know(topic).expect("know failed");
+    print(answer.answer);
+}

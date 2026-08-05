@@ -1,0 +1,81 @@
+// Emergent Evolution — system generates new versions through conversation
+// Phase 1.5 / 2.5: Replace build process with emergent evolution
+
+module emergent_evolution;
+
+import frontier.lighthouse.arc_engine.{run_arc, ARCResult};
+import frontier.learning.symbiotic_learner.{SymbioticLearner};
+import frontier.interpreter.ai_interpreter.{AIInterpreter};
+
+type EvolutionGeneration = {
+    version: String,
+    changes: Vec<String>,
+    parent: String,
+    fitness_score: f32,
+    timestamp: u64,
+};
+
+component EmergentEvolution {
+    state: {
+        generation: u32,
+        history: Vec<EvolutionGeneration>,
+        learner: SymbioticLearner,
+        interpreter: AIInterpreter,
+    },
+
+    fn new() -> EmergentEvolution {
+        EmergentEvolution {
+            generation: 0,
+            history: Vec::new(),
+            learner: SymbioticLearner::new("genesis"),
+            interpreter: AIInterpreter::new(),
+        }
+    },
+
+    fn evolve(self, conversation: String) -> EvolutionGeneration {
+        let arc = run_arc(conversation, Context::empty()).expect("arc");
+        let fitness = self.evaluate_fitness(arc);
+        let version = format!("2.{}.{}", self.generation / 100, self.generation % 100);
+
+        let gen = EvolutionGeneration {
+            version,
+            changes: arc.code.files.iter().map(|f| f.path.clone()).collect(),
+            parent: self.current_version(),
+            fitness_score: fitness,
+            timestamp: now(),
+        };
+
+        self.apply_changes(arc);
+        self.history.push(gen.clone());
+        self.generation += 1;
+        gen
+    }
+
+    fn evaluate_fitness(self, arc: ARCResult) -> f32 {
+        let mut score = arc.review.score;
+        if arc.review.passed { score += 0.2; }
+        min(1.0, score)
+    }
+
+    fn apply_changes(self, arc: ARCResult) {
+        for file in arc.code.files {
+            Storage.write(file.path, file.content);
+        }
+    }
+
+    fn current_version(self) -> String {
+        self.history.last().map(|g| g.version.clone()).unwrap_or("2.0.0".into())
+    }
+
+    fn run_loop(self, rounds: u32) -> Vec<EvolutionGeneration> {
+        let mut results = Vec::new();
+        for i in 0..rounds {
+            let prompt = format!("Evolve Frontier generation {} — close P0 gaps", i);
+            results.push(self.evolve(prompt));
+        }
+        results
+    }
+}
+
+type Context = { memories: Vec<String> };
+impl Context { fn empty() -> Context { Context { memories: vec![] } } }

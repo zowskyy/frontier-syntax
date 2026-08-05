@@ -3,6 +3,8 @@
  *
  * Browser-targeted compilation layer with JS glue generation.
  * Rust implementation: src/browser_compiler.rs
+ *
+ * ARC Gate: Browser compile < 1s
  */
 
 module browser_compiler {

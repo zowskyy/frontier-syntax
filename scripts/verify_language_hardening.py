@@ -52,6 +52,24 @@ CORE_MODULES = {
         "arc_gates": ["1s", "500ms"],
         "forbidden": ["render", "physics", "game", "benchmark", "ide"],
     },
+    "knowledge.frontier": {
+        "title": "KNOWLEDGE HYPERCUBE",
+        "components": ["TradeoffEntry", "AlgorithmSuggestion", "SolverContext", "SizeHint"],
+        "arc_gates": ["1ms"],
+        "forbidden": ["render", "physics", "game", "benchmark", "ide"],
+    },
+    "wasm_codegen.frontier": {
+        "title": "WASM CODE GENERATOR",
+        "components": ["WasmModule", "WasmFunction", "WasmExport", "WasmType"],
+        "arc_gates": ["500ms"],
+        "forbidden": ["render", "physics", "game", "benchmark", "ide"],
+    },
+    "browser_compiler.frontier": {
+        "title": "BROWSER COMPILER",
+        "components": ["CompiledBrowserModule", "Compiler"],
+        "arc_gates": ["1s"],
+        "forbidden": ["render", "physics", "game", "benchmark", "ide"],
+    },
 }
 
 DOC_SECTIONS = [
@@ -137,8 +155,9 @@ def check_no_third_party():
 
 def check_module_count():
     frontier_files = list(CORE_DIR.glob("*.frontier"))
-    if len(frontier_files) != 7:
-        return [f"Expected 7 core modules, found {len(frontier_files)}"]
+    expected = len(CORE_MODULES)
+    if len(frontier_files) != expected:
+        return [f"Expected {expected} core modules, found {len(frontier_files)}"]
     return []
 
 
