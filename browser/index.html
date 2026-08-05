@@ -9,16 +9,18 @@
     textarea { width: 100%; height: 280px; background: #1a1a2e; color: #e0e0e0; border: 1px solid #3a3a5e; border-radius: 8px; padding: 16px; font-family: inherit; }
     button { background: #4a4a8a; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; margin: 6px 4px; }
     button:hover { background: #6a6aaa; }
+    label { margin-left: 8px; }
     .output { background: #1a1a2e; border: 1px solid #3a3a5e; border-radius: 8px; padding: 16px; margin-top: 16px; white-space: pre-wrap; min-height: 120px; }
     .status { padding: 8px 12px; border-radius: 4px; margin: 10px 0; }
     .success { background: #1a3a2a; color: #8ae0a0; }
     .error { background: #3a1a1a; color: #e08080; }
     .info { background: #1a2a3a; color: #80a0e0; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; background: #2a2a4a; margin-left: 8px; font-size: 0.85em; }
   </style>
 </head>
 <body>
   <h1>Frontier Browser Compiler</h1>
-  <p>Compile Frontier source to WASM in the browser (requires built <code>frontier_browser.wasm</code>).</p>
+  <p>Compile Frontier source to WASM in the browser via wasm-bindgen exports.</p>
   <textarea id="source">version: 2.0;
 
 fn main(): int {
@@ -28,8 +30,10 @@ fn main(): int {
     <button id="compileBtn">Compile to WASM</button>
     <button id="validateBtn">Validate</button>
     <button id="suggestBtn">Knowledge: sort</button>
+    <label><input type="checkbox" id="optimizeToggle" checked> Optimize</label>
+    <span id="optimizeBadge" class="badge">Optimize: ON</span>
   </div>
-  <div id="status" class="status info">Ready</div>
+  <div id="status" class="status info">Loading compiler...</div>
   <div id="output" class="output">Output will appear here.</div>
   <script type="module">
     import { createFrontierRuntime } from './frontier_runtime.js';
@@ -37,14 +41,23 @@ fn main(): int {
     const sourceEl = document.getElementById('source');
     const outputEl = document.getElementById('output');
     const statusEl = document.getElementById('status');
+    const optimizeToggle = document.getElementById('optimizeToggle');
+    const optimizeBadge = document.getElementById('optimizeBadge');
     let runtime = null;
+
+    optimizeToggle.addEventListener('change', () => {
+      const on = optimizeToggle.checked;
+      if (runtime) runtime.setOptimize(on);
+      optimizeBadge.textContent = on ? 'Optimize: ON' : 'Optimize: OFF';
+    });
 
     async function loadRuntime() {
       try {
-        const resp = await fetch('../syntax/wasm/frontier_browser.wasm');
-        if (!resp.ok) throw new Error('Build frontier_browser.wasm first (wasm32-unknown-unknown target)');
-        runtime = await createFrontierRuntime(await resp.arrayBuffer());
-        setStatus('Compiler WASM loaded', 'success');
+        const t0 = performance.now();
+        runtime = await createFrontierRuntime();
+        runtime.setOptimize(optimizeToggle.checked);
+        const ms = Math.round(performance.now() - t0);
+        setStatus(`Compiler WASM loaded (${ms}ms)`, 'success');
       } catch (e) {
         setStatus(e.message, 'error');
       }
@@ -55,36 +68,47 @@ fn main(): int {
       statusEl.className = 'status ' + cls;
     }
 
-    document.getElementById('compileBtn').addEventListener('click', async () => {
-      if (!runtime) return setStatus('Runtime not loaded', 'error');
+    function formatResult(result) {
+      if (!result || typeof result !== 'object') return String(result);
+      const copy = { ...result };
+      if (copy.wasm instanceof Uint8Array) {
+        copy.wasm = `<Uint8Array ${copy.wasm.length} bytes>`;
+      }
+      return JSON.stringify(copy, null, 2);
+    }
+
+    document.getElementById('compileBtn').addEventListener('click', () => {
+      if (!runtime) return setStatus('Compiler not loaded', 'error');
       try {
+        const t0 = performance.now();
         const result = runtime.compile(sourceEl.value);
-        outputEl.textContent = JSON.stringify(result, null, 2);
-        setStatus('Compiled', 'success');
+        outputEl.textContent = formatResult(result);
+        const ms = Math.round(performance.now() - t0);
+        setStatus(`Compiled in ${ms}ms`, 'success');
       } catch (e) {
-        setStatus(e.message, 'error');
+        setStatus(e.message || String(e), 'error');
       }
     });
 
-    document.getElementById('validateBtn').addEventListener('click', async () => {
-      if (!runtime) return setStatus('Runtime not loaded', 'error');
+    document.getElementById('validateBtn').addEventListener('click', () => {
+      if (!runtime) return setStatus('Compiler not loaded', 'error');
       try {
         const result = runtime.validate(sourceEl.value);
-        outputEl.textContent = JSON.stringify(result, null, 2);
-        setStatus(result.valid ? 'Valid' : 'Invalid', result.valid ? 'success' : 'error');
+        outputEl.textContent = formatResult(result);
+        setStatus(result.valid ? 'Validation passed' : 'Validation failed', result.valid ? 'success' : 'error');
       } catch (e) {
-        setStatus(e.message, 'error');
+        setStatus(e.message || String(e), 'error');
       }
     });
 
-    document.getElementById('suggestBtn').addEventListener('click', async () => {
-      if (!runtime) return setStatus('Runtime not loaded', 'error');
+    document.getElementById('suggestBtn').addEventListener('click', () => {
+      if (!runtime) return setStatus('Compiler not loaded', 'error');
       try {
         const result = runtime.getAlgorithmSuggestion('sort', 'list::i32');
-        outputEl.textContent = JSON.stringify(result, null, 2);
+        outputEl.textContent = formatResult(result);
         setStatus('Knowledge suggestion loaded', 'success');
       } catch (e) {
-        setStatus(e.message, 'error');
+        setStatus(e.message || String(e), 'error');
       }
     });
 

@@ -504,6 +504,7 @@ dependencies = [
  "ark-serialize",
  "ark-snark",
  "ark-std",
+ "getrandom 0.2.17",
  "hex",
  "pqcrypto-dilithium",
  "pqcrypto-kyber",

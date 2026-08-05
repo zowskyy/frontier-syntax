@@ -1,62 +1,39 @@
-// Frontier Browser Runtime — JS glue for in-browser compilation
+// Frontier Browser Runtime — wasm-bindgen glue for in-browser compilation
+
+import init, { BrowserCompiler } from './wasm-bindings/frontier_browser.js';
+
+let initPromise = null;
+
+async function ensureInit() {
+  if (!initPromise) {
+    initPromise = init();
+  }
+  await initPromise;
+}
 
 export class FrontierRuntime {
-  constructor(wasmModule) {
-    this.module = wasmModule;
-    this.memory = wasmModule.instance.exports.memory;
-    this.exports = wasmModule.instance.exports;
+  constructor(compiler) {
+    this.compiler = compiler;
+  }
+
+  setOptimize(enabled) {
+    this.compiler.set_optimize(enabled);
   }
 
   compile(source) {
-    if (this.exports.compile_frontier) {
-      return this.exports.compile_frontier(source);
-    }
-    if (this.exports.compile) {
-      return this.exports.compile(source);
-    }
-    throw new Error('No compile export found in WASM module');
+    return this.compiler.compile(source);
   }
 
   validate(source) {
-    if (this.exports.validate_frontier) {
-      return this.exports.validate_frontier(source);
-    }
-    if (this.exports.validate) {
-      return this.exports.validate(source);
-    }
-    throw new Error('No validate export found in WASM module');
+    return this.compiler.validate(source);
   }
 
   getAlgorithmSuggestion(operation, dataType) {
-    if (this.exports.get_algorithm_suggestion) {
-      return this.exports.get_algorithm_suggestion(operation, dataType);
-    }
-    return { operation, dataType, note: 'Build with browser_wasm exports enabled' };
+    return this.compiler.get_algorithm_suggestion(operation, dataType);
   }
 }
 
-export async function createFrontierRuntime(wasmBytes) {
-  const memory = new WebAssembly.Memory({ initial: 1, maximum: 64 });
-  const imports = {
-    env: {
-      memory,
-      console_log: (ptr, len) => {
-        const bytes = new Uint8Array(memory.buffer, ptr, len);
-        console.log('[Frontier]', new TextDecoder().decode(bytes));
-      },
-    },
-  };
-  const wasmModule = await WebAssembly.instantiate(wasmBytes, imports);
-  return new FrontierRuntime(wasmModule);
-}
-
-export function readString(memory, ptr, len) {
-  return new TextDecoder().decode(new Uint8Array(memory.buffer, ptr, len));
-}
-
-export function writeString(memory, str) {
-  const bytes = new TextEncoder().encode(str);
-  const view = new Uint8Array(memory.buffer, 0, bytes.length);
-  view.set(bytes);
-  return 0;
+export async function createFrontierRuntime() {
+  await ensureInit();
+  return new FrontierRuntime(new BrowserCompiler());
 }

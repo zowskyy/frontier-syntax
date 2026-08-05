@@ -58,29 +58,16 @@ pub fn hash_ast(ast_json: &str) -> String {
 }
 
 #[wasm_bindgen]
-pub fn verify_zk_proof(ast_json: &str, proof_json: &str) -> bool {
-    let Ok(ast) = serde_json::from_str::<serde_json::Value>(ast_json) else {
-        return false;
-    };
-    let Ok(vk) = setup_zk_verifier() else {
-        return false;
-    };
-    vk.verify_proof_json(&ast, proof_json)
+pub fn verify_zk_proof(_ast_json: &str, _proof_json: &str) -> bool {
+    false
 }
 
 #[wasm_bindgen]
-pub fn generate_zk_proof(ast_json: &str) -> String {
-    let Ok(ast) = serde_json::from_str::<serde_json::Value>(ast_json) else {
-        return r#"{"status":"error","message":"invalid ast"}"#.to_string();
-    };
-    let Ok(mut verifier) = setup_zk_verifier_mut() else {
-        return r#"{"status":"error","message":"zk setup failed"}"#.to_string();
-    };
-    verifier
-        .generate_proof_json(&ast)
-        .unwrap_or_else(|e| format!(r#"{{"status":"error","message":"{e}"}}"#))
+pub fn generate_zk_proof(_ast_json: &str) -> String {
+    r#"{"status":"error","message":"zk unavailable on browser wasm build"}"#.to_string()
 }
 
+/*
 fn setup_zk_verifier_mut() -> Result<crate::zk::verifier::ZkVerifier, String> {
     let mut verifier = crate::zk::verifier::ZkVerifier::new();
     verifier.setup()?;
@@ -90,6 +77,7 @@ fn setup_zk_verifier_mut() -> Result<crate::zk::verifier::ZkVerifier, String> {
 fn setup_zk_verifier() -> Result<crate::zk::verifier::ZkVerifier, String> {
     setup_zk_verifier_mut()
 }
+*/
 
 #[wasm_bindgen]
 pub fn parse_source_with_resolve(source: &str) -> WasmParseResult {

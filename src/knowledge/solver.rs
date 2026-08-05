@@ -109,11 +109,10 @@ const SORT_ALGORITHMS: &[&str] = &[
 const HASH_ALGORITHMS: &[&str] = &["hash_search"];
 
 impl Solver {
-    pub fn new(knowledge_path: &str) -> Result<Self, Box<dyn std::error::Error>> {
-        let index_path = Path::new(knowledge_path).join("index.bin");
-        let index_data = fs::read(&index_path)?;
+    pub fn from_embedded() -> Result<Self, Box<dyn std::error::Error>> {
+        let index_data = include_bytes!("hypercube/index.bin").to_vec();
         let master = parse_master_index(&index_data)
-            .ok_or_else(|| format!("Invalid knowledge index: {}", index_path.display()))?;
+            .ok_or_else(|| "Invalid embedded knowledge index".to_string())?;
 
         Ok(Self {
             index_data,
@@ -122,6 +121,30 @@ impl Solver {
             tradeoff_cache: HashMap::new(),
             context: SolverContext::default(),
         })
+    }
+
+    pub fn new(knowledge_path: &str) -> Result<Self, Box<dyn std::error::Error>> {
+        #[cfg(target_arch = "wasm32")]
+        {
+            let _ = knowledge_path;
+            return Self::from_embedded();
+        }
+
+        #[cfg(not(target_arch = "wasm32"))]
+        {
+            let index_path = Path::new(knowledge_path).join("index.bin");
+            let index_data = fs::read(&index_path)?;
+            let master = parse_master_index(&index_data)
+                .ok_or_else(|| format!("Invalid knowledge index: {}", index_path.display()))?;
+
+            Ok(Self {
+                index_data,
+                master,
+                algorithm_cache: HashMap::new(),
+                tradeoff_cache: HashMap::new(),
+                context: SolverContext::default(),
+            })
+        }
     }
 
     pub fn with_context(mut self, context: SolverContext) -> Self {

@@ -34,6 +34,40 @@ def main() -> int:
     if rc != 0:
         return rc
 
+    wasm32 = subprocess.call(
+        ["cargo", "build", "--release", "--target", "wasm32-unknown-unknown"],
+        cwd=ROOT,
+    )
+    if wasm32 != 0:
+        print("FAIL: wasm32 build")
+        return wasm32
+
+    wasm_bin = ROOT / "target" / "wasm32-unknown-unknown" / "release" / "frontier.wasm"
+    bindings_dir = ROOT / "browser" / "wasm-bindings"
+    bindings_dir.mkdir(parents=True, exist_ok=True)
+    rc = subprocess.call(
+        [
+            "wasm-bindgen",
+            str(wasm_bin),
+            "--out-dir",
+            str(bindings_dir),
+            "--target",
+            "web",
+            "--out-name",
+            "frontier_browser",
+        ],
+        cwd=ROOT,
+    )
+    if rc != 0:
+        print("FAIL: wasm-bindgen (install wasm-bindgen-cli if missing)")
+        return rc
+
+    syntax_wasm = ROOT / "syntax" / "wasm"
+    syntax_wasm.mkdir(parents=True, exist_ok=True)
+    import shutil
+
+    shutil.copy2(wasm_bin, syntax_wasm / "frontier_browser.wasm")
+
     example = ROOT / "examples" / "auto_optimize.fr"
     if not example.exists():
         example = ROOT / "examples" / "v2_parser_test.fr"
