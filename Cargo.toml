@@ -1,0 +1,28 @@
+[package]
+name = "frontier"
+version = "1.0.0"
+edition = "2021"
+description = "Frontier Syntax — formally verifiable parser and resolver"
+license = "MIT"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+sha3 = "0.10"
+unicode-normalization = "0.1"
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = "0.2"
+
+[dev-dependencies]
+
+[[bin]]
+name = "frontier"
+path = "src/main.rs"
+
+[profile.release]
+opt-level = "s"
+lto = true

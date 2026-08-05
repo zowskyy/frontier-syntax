@@ -1,6 +1,13 @@
 node_modules/
-*.o
-*.wasm
 target/
+pkg/
+*.o
 .DS_Store
-*.sha3
+/tmp/
+
+# Generated at build time (regenerate with: cargo run --release -- gen-artifacts)
+# syntax/ast_sample.json
+# syntax/resolved_symbols.json
+# syntax/ast_hash.sha3
+# syntax/final_hash.sha3
+# syntax/wasm_parser.wasm

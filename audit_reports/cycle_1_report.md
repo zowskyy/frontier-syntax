@@ -71,7 +71,7 @@ UTF-8 with **NFC normalization applied before lexing**.
 
 ```
 $ python3 scripts/verify_cycle1.py
-PASS: Cycle 1 verification (42 emitting tokens)
+PASS: Cycle 1 verification (45 emitting tokens)
 ```
 
 ---
@@ -85,7 +85,7 @@ PASS: Cycle 1 verification (42 emitting tokens)
 | Literals | 3 | INTEGER_LITERAL, FLOAT_LITERAL, STRING_LITERAL |
 | Operators | 16 | OP_EXPONENT … OP_OPTIONAL |
 | Delimiters | 10 | LPAREN … DOT |
-| **Total emitting** | **42** | |
+| **Total emitting** | **45** | |
 | Non-emitting | 3 | LINE_COMMENT, BLOCK_COMMENT, WHITESPACE |
 
 ---
