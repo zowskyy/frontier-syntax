@@ -1,0 +1,203 @@
+{
+  "version": "1.0.0",
+  "description": "Maps every Frontier operation to exactly one syntax form. No duplicate paths.",
+  "removed_features": {
+    "increment_decrement": {
+      "status": "removed",
+      "reason": "Duplicate path with explicit assignment (x = x + 1)",
+      "banned_tokens": ["++", "--"]
+    },
+    "method_call": {
+      "status": "removed",
+      "reason": "Function-call syntax chosen as sole invocation form",
+      "banned_syntax": "obj.method(args)",
+      "allowed_syntax": "method(obj, args) or fn(args)"
+    }
+  },
+  "dead_terminals_removed": ["LBRACKET", "RBRACKET"],
+  "operations": {
+    "variable_declaration": {
+      "syntax": "let IDENTIFIER : typeSpec = expression ;",
+      "ast_node": "let_decl",
+      "unique": true
+    },
+    "function_declaration": {
+      "syntax": "fn IDENTIFIER ( paramList? ) : typeSpec block",
+      "ast_node": "fn_decl",
+      "unique": true
+    },
+    "return": {
+      "syntax": "return expression? ;",
+      "ast_node": "return",
+      "unique": true
+    },
+    "conditional": {
+      "syntax": "if ( expression ) block ( else block )?",
+      "ast_node": "if",
+      "unique": true
+    },
+    "assignment": {
+      "syntax": "IDENTIFIER = expression",
+      "ast_node": "binary_expr",
+      "operator": "=",
+      "unique": true,
+      "note": "No ++/--; use explicit assignment only"
+    },
+    "function_call": {
+      "syntax": "expression ( argList? )",
+      "ast_node": "call_expr",
+      "unique": true
+    },
+    "field_access": {
+      "syntax": "expression . IDENTIFIER",
+      "ast_node": "field_access",
+      "unique": true,
+      "note": "Data access only; not method invocation"
+    },
+    "unary_negation": {
+      "syntax": "- expression",
+      "ast_node": "unary_expr",
+      "operator": "-",
+      "unique": true
+    },
+    "unary_not": {
+      "syntax": "! expression",
+      "ast_node": "unary_expr",
+      "operator": "!",
+      "unique": true
+    },
+    "unary_bitwise_not": {
+      "syntax": "~ expression",
+      "ast_node": "unary_expr",
+      "operator": "~",
+      "unique": true
+    },
+    "required_annotation": {
+      "syntax": "expression !",
+      "ast_node": "required_expr",
+      "unique": true
+    },
+    "optional_type": {
+      "syntax": "baseType ?",
+      "ast_node": "type_spec.annotation=optional",
+      "unique": true
+    },
+    "required_type": {
+      "syntax": "baseType !",
+      "ast_node": "type_spec.annotation=required",
+      "unique": true
+    },
+    "addition": {
+      "syntax": "expression + expression",
+      "ast_node": "binary_expr",
+      "operator": "+",
+      "associativity": "left",
+      "precedence": 4,
+      "unique": true
+    },
+    "subtraction": {
+      "syntax": "expression - expression",
+      "ast_node": "binary_expr",
+      "operator": "-",
+      "associativity": "left",
+      "precedence": 4,
+      "unique": true
+    },
+    "multiplication": {
+      "syntax": "expression * expression",
+      "ast_node": "binary_expr",
+      "operator": "*",
+      "associativity": "left",
+      "precedence": 3,
+      "unique": true
+    },
+    "division": {
+      "syntax": "expression / expression",
+      "ast_node": "binary_expr",
+      "operator": "/",
+      "associativity": "left",
+      "precedence": 3,
+      "unique": true
+    },
+    "modulo": {
+      "syntax": "expression % expression",
+      "ast_node": "binary_expr",
+      "operator": "%",
+      "associativity": "left",
+      "precedence": 3,
+      "unique": true
+    },
+    "exponentiation": {
+      "syntax": "expression ^ expression",
+      "ast_node": "binary_expr",
+      "operator": "^",
+      "associativity": "right",
+      "precedence": "3.5",
+      "unique": true
+    },
+    "less_than": {
+      "syntax": "expression < expression",
+      "ast_node": "binary_expr",
+      "operator": "<",
+      "associativity": "left",
+      "precedence": 5,
+      "unique": true
+    },
+    "greater_than": {
+      "syntax": "expression > expression",
+      "ast_node": "binary_expr",
+      "operator": ">",
+      "associativity": "left",
+      "precedence": 5,
+      "unique": true
+    },
+    "less_equal": {
+      "syntax": "expression <= expression",
+      "ast_node": "binary_expr",
+      "operator": "<=",
+      "associativity": "left",
+      "precedence": 5,
+      "unique": true
+    },
+    "greater_equal": {
+      "syntax": "expression >= expression",
+      "ast_node": "binary_expr",
+      "operator": ">=",
+      "associativity": "left",
+      "precedence": 5,
+      "unique": true
+    },
+    "equal": {
+      "syntax": "expression == expression",
+      "ast_node": "binary_expr",
+      "operator": "==",
+      "associativity": "left",
+      "precedence": 6,
+      "unique": true
+    },
+    "not_equal": {
+      "syntax": "expression != expression",
+      "ast_node": "binary_expr",
+      "operator": "!=",
+      "associativity": "left",
+      "precedence": 6,
+      "unique": true
+    },
+    "logical_and": {
+      "syntax": "expression && expression",
+      "ast_node": "binary_expr",
+      "operator": "&&",
+      "associativity": "left",
+      "precedence": 7,
+      "unique": true
+    },
+    "logical_or": {
+      "syntax": "expression || expression",
+      "ast_node": "binary_expr",
+      "operator": "||",
+      "associativity": "left",
+      "precedence": 8,
+      "unique": true
+    }
+  }
+}

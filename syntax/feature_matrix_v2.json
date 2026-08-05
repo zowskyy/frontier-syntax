@@ -1,0 +1,82 @@
+{
+  "version": "2.0.0",
+  "description": "Frontier v2.0 feature matrix — orthogonality with imports, proofs, and versioning",
+  "removed_features": {
+    "increment_decrement": {
+      "status": "removed",
+      "reason": "Duplicate path with explicit assignment",
+      "banned_tokens": ["++", "--"]
+    },
+    "method_call": {
+      "status": "removed",
+      "reason": "Function-call syntax chosen as sole invocation form",
+      "banned_syntax": "obj.method(args)"
+    }
+  },
+  "v2_features": {
+    "grammar_version": {
+      "syntax": "version: 2.0;",
+      "ast_node": "version_decl",
+      "unique": true
+    },
+    "import_statement": {
+      "syntax": "import \"ipfs://CID\" as name;",
+      "ast_node": "import_decl",
+      "unique": true
+    },
+    "proof_requires": {
+      "syntax": "@requires(expr)",
+      "ast_node": "proof_annotation",
+      "unique": true
+    },
+    "proof_ensures": {
+      "syntax": "@ensures(expr)",
+      "ast_node": "proof_annotation",
+      "unique": true
+    },
+    "proof_invariant": {
+      "syntax": "@invariant(expr)",
+      "ast_node": "proof_annotation",
+      "unique": true
+    },
+    "while_loop": {
+      "syntax": "while (expr) { ... }",
+      "ast_node": "while",
+      "unique": true
+    }
+  },
+  "operations": {
+    "variable_declaration": {
+      "syntax": "let IDENTIFIER : typeSpec = expression ;",
+      "ast_node": "let_decl",
+      "unique": true
+    },
+    "function_declaration": {
+      "syntax": "fn IDENTIFIER ( paramList? ) : typeSpec block",
+      "ast_node": "fn_decl",
+      "unique": true
+    },
+    "return": {
+      "syntax": "return expression? ;",
+      "ast_node": "return",
+      "unique": true
+    },
+    "conditional": {
+      "syntax": "if ( expression ) block ( else block )?",
+      "ast_node": "if",
+      "unique": true
+    },
+    "binary_ops": {
+      "syntax": "+ - * / % == != < > <= >= && || ^",
+      "ast_node": "binary_expr",
+      "unique": true
+    },
+    "unary_ops": {
+      "syntax": "- ! ~",
+      "ast_node": "unary_expr",
+      "unique": true
+    }
+  },
+  "total_features": 13,
+  "status": "PASS"
+}

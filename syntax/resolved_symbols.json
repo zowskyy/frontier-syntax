@@ -1,0 +1,75 @@
+{
+  "node_symbols": {
+    "node_1": 1,
+    "node_3": 3,
+    "node_4": 2,
+    "node_7": 4,
+    "node_9": 6,
+    "node_2": 2,
+    "node_6": 4,
+    "node_5": 3,
+    "node_8": 5
+  },
+  "symbol_table": [
+    {
+      "id": 1,
+      "name": "main",
+      "kind": "function",
+      "type_spec": {
+        "base": "void",
+        "annotation": "none"
+      },
+      "scope_id": 0
+    },
+    {
+      "id": 2,
+      "name": "x",
+      "kind": "variable",
+      "type_spec": {
+        "base": "int",
+        "annotation": "none"
+      },
+      "scope_id": 1
+    },
+    {
+      "id": 3,
+      "name": "y",
+      "kind": "variable",
+      "type_spec": {
+        "base": "int",
+        "annotation": "none"
+      },
+      "scope_id": 1
+    },
+    {
+      "id": 4,
+      "name": "z",
+      "kind": "variable",
+      "type_spec": {
+        "base": "int",
+        "annotation": "none"
+      },
+      "scope_id": 1
+    },
+    {
+      "id": 5,
+      "name": "msg",
+      "kind": "variable",
+      "type_spec": {
+        "base": "string",
+        "annotation": "none"
+      },
+      "scope_id": 2
+    },
+    {
+      "id": 6,
+      "name": "msg",
+      "kind": "variable",
+      "type_spec": {
+        "base": "string",
+        "annotation": "none"
+      },
+      "scope_id": 3
+    }
+  ]
+}
