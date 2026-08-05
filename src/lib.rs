@@ -18,6 +18,7 @@ pub mod parser;
 pub mod pq_signatures;
 pub mod resolver;
 pub mod v2_resolver;
+pub mod unity;
 pub mod wasm_codegen;
 #[cfg(not(target_arch = "wasm32"))]
 pub mod zk;
@@ -29,6 +30,7 @@ pub use parser::parse_program;
 pub use resolver::resolve_program;
 pub use knowledge::{get_ancestors, get_tradeoffs, hypercube_stats, optimize_hash, optimize_sort};
 pub use knowledge::solver::{SizeHint, SolverContext as KnowledgeContext};
+pub use unity::{unity_compile, unity_evaluate, unity_verify, UnityCompiler, UnityModule};
 
 const MAX_NESTING_DEPTH: usize = 64;
 
