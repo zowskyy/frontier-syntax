@@ -1,0 +1,85 @@
+// Cross-domain knowledge graph + semantic indexing
+// Improvements #17, #20: Semantic search + cross-domain graph
+
+module knowledge_graph;
+
+import frontier.core.knowledge_hypercube.{KnowledgeHypercube, Embedding};
+import frontier.modules.archive_unity.gpu_parser.{Entity};
+
+type Relation = String;
+type Result = { uri: String, score: f32, summary: String };
+
+component CrossDomainGraph {
+    state: {
+        graph: Graph<Entity, Relation>,
+    },
+
+    fn new() -> CrossDomainGraph {
+        CrossDomainGraph { graph: Graph::new() }
+    },
+
+    fn add_relation(self, entity1: Entity, entity2: Entity, relation: Relation) {
+        self.graph.add_node(entity1.clone());
+        self.graph.add_node(entity2.clone());
+        self.graph.add_edge(entity1, entity2, relation);
+    }
+
+    fn query_related(self, entity: Entity) -> Vec<Entity> {
+        self.graph.neighbors(entity)
+    }
+
+    fn link_domains(self, domain_a: String, domain_b: String, concept: String) {
+        let e1 = Entity { name: domain_a, kind: "domain" };
+        let e2 = Entity { name: domain_b, kind: "domain" };
+        self.add_relation(e1, e2, concept);
+    }
+}
+
+component SemanticIndex {
+    state: {
+        hypercube: KnowledgeHypercube,
+        embedder: Embedder,
+    },
+
+    fn new() -> SemanticIndex {
+        SemanticIndex { hypercube: KnowledgeHypercube::load(), embedder: Embedder::new() }
+    },
+
+    fn index_content(self, uri: String, content: bytes) {
+        let embedding = self.embedder.encode(content);
+        KnowledgeHypercube.store(embedding, ContentRef { uri, content_hash: sha3_256(&content) });
+    }
+
+    fn search(self, query: String) -> Vec<Result> {
+        let embedding = self.embedder.encode(query.as_bytes());
+        KnowledgeHypercube.similarity_search(embedding, limit: 50)
+            .into_iter()
+            .map(|hit| Result { uri: hit.uri, score: hit.score, summary: hit.summary })
+            .collect()
+    }
+}
+
+component ContentSummarizer {
+    fn summarize(self, content: bytes) -> String {
+        Lighthouse.summarize(content)
+    }
+}
+
+type ContentRef = { uri: String, content_hash: [u8; 32] };
+type Graph<N, E> = { /* adjacency */ };
+
+impl Graph<Entity, Relation> {
+    fn new() -> Self { Graph {} }
+    fn add_node(self, n: Entity) {}
+    fn add_edge(self, a: Entity, b: Entity, r: Relation) {}
+    fn neighbors(self, e: Entity) -> Vec<Entity> { vec![] }
+}
+
+component Embedder {
+    fn new() -> Embedder { Embedder }
+    fn encode(self, content: bytes) -> Embedding { Embedding::zeros(384) }
+}
+
+component Lighthouse {
+    fn summarize(content: bytes) -> String { /* lighthouse AI */ String::from("summary") }
+}

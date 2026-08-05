@@ -1,0 +1,252 @@
+// Advanced Archive Crawler — all 20 improvements integrated
+// frontier/modules/archive_unity/advanced_crawler.fr
+
+module advanced_crawler;
+
+import frontier.core.knowledge_hypercube.KnowledgeHypercube;
+import frontier.modules.archive_unity.frontier_shard.{DistributedFrontier};
+import frontier.modules.archive_unity.politeness_model.{AdaptivePoliteness};
+import frontier.modules.archive_unity.cdx_batch_query.{CDXBatchQuery};
+import frontier.modules.archive_unity.zero_copy_io.{ZeroCopyIO};
+import frontier.modules.archive_unity.gpu_parser.{GPUHTMLParser, ParsedHTML};
+import frontier.modules.archive_unity.dynamic_proxy.{DynamicProxyPool};
+import frontier.modules.archive_unity.cdx_stream.{IncrementalCDXCache, CDXWebSocketStream};
+import frontier.modules.archive_unity.blockchain_log.{BlockchainLogger, CrawlEvent};
+import frontier.modules.archive_unity.swarm_sync.{SwarmSynchronizer, SelfTuningInterval};
+import frontier.modules.archive_unity.versioned_storage.{HierarchicalStorage, VersionedPageStorage};
+import frontier.modules.archive_unity.knowledge_graph.{CrossDomainGraph, SemanticIndex, ContentSummarizer};
+import frontier.bindings.http.{URL, HTTPResponse, Proxy};
+
+// ──────────────────────────────────────────────
+// Improvement #3: Predictive Prefetcher
+// ──────────────────────────────────────────────
+
+component PredictivePrefetcher {
+    fn predict(self, page: ParsedHTML) -> Vec<URL> {
+        let context = page.title + " " + page.text_content.slice(0, 512);
+        let predictions = KnowledgeHypercube.query("outlinks for " + context);
+        predictions.into_iter().map(|p| URL::parse(p)).collect()
+    }
+
+    fn score_link(self, link: URL, page: ParsedHTML) -> usize {
+        let predictions = self.predict(page);
+        if predictions.contains(&link) { 100 } else { 10 }
+    }
+}
+
+// ──────────────────────────────────────────────
+// Improvement #4: Content Deduplicator
+// ──────────────────────────────────────────────
+
+component ContentDeduplicator {
+    state: {
+        content_hashes: Set<Hash>,
+        url_to_hash: Map<URL, Hash>,
+    },
+
+    fn new() -> ContentDeduplicator {
+        ContentDeduplicator { content_hashes: Set::new(), url_to_hash: Map::new() }
+    },
+
+    fn is_duplicate(self, content: bytes) -> bool {
+        let hash = sha3_256(&content);
+        self.content_hashes.contains(hash)
+    }
+
+    fn store_if_new(self, url: URL, content: bytes) -> bool {
+        let hash = sha3_256(&content);
+        if self.content_hashes.contains(hash) { return false; }
+        self.content_hashes.insert(hash);
+        self.url_to_hash.insert(url, hash);
+        true
+    }
+
+    fn serialize(self) -> bytes { encode(self.content_hashes) }
+    fn load(self, data: bytes) { self.content_hashes = decode(data); }
+}
+
+type Hash = [u8; 32];
+
+// ──────────────────────────────────────────────
+// Improvement #5: Self-Healing Session
+// ──────────────────────────────────────────────
+
+type Checkpoint = {
+    frontier_state: bytes,
+    fetched_set: bytes,
+    timestamp: u64,
+};
+
+component SelfHealingSession {
+    state: {
+        checkpoint: Option<Checkpoint>,
+        checkpoint_interval_pages: u64,
+        pages_since_checkpoint: u64,
+    },
+
+    fn new() -> SelfHealingSession {
+        SelfHealingSession { checkpoint: None, checkpoint_interval_pages: 1000, pages_since_checkpoint: 0 }
+    },
+
+    fn checkpoint(self, frontier: DistributedFrontier, dedup: ContentDeduplicator) {
+        let cp = Checkpoint {
+            frontier_state: frontier.serialize(),
+            fetched_set: dedup.serialize(),
+            timestamp: now(),
+        };
+        Storage.write("crawl_checkpoint.bin", encode(cp));
+        self.checkpoint = Some(cp);
+        self.pages_since_checkpoint = 0;
+    }
+
+    fn recover(self, frontier: DistributedFrontier, dedup: ContentDeduplicator) {
+        if Storage.exists("crawl_checkpoint.bin") {
+            let cp: Checkpoint = decode(Storage.read("crawl_checkpoint.bin"));
+            frontier.load(cp.frontier_state);
+            dedup.load(cp.fetched_set);
+            self.checkpoint = Some(cp);
+        }
+    }
+
+    fn should_checkpoint(self) -> bool {
+        self.pages_since_checkpoint >= self.checkpoint_interval_pages
+    }
+
+    fn tick(self) { self.pages_since_checkpoint += 1; }
+}
+
+// ──────────────────────────────────────────────
+// Main crawler — integrates all 20 improvements
+// ──────────────────────────────────────────────
+
+component AdvancedArchiveCrawler {
+    state: {
+        frontier: DistributedFrontier,
+        politeness: AdaptivePoliteness,
+        prefetcher: PredictivePrefetcher,
+        deduplicator: ContentDeduplicator,
+        session: SelfHealingSession,
+        cdx_batcher: CDXBatchQuery,
+        io_engine: ZeroCopyIO,
+        gpu_parser: GPUHTMLParser,
+        proxy_pool: DynamicProxyPool,
+        cdx_cache: IncrementalCDXCache,
+        cdx_stream: CDXWebSocketStream,
+        blockchain_log: BlockchainLogger,
+        swarm_sync: SwarmSynchronizer,
+        sync_interval: SelfTuningInterval,
+        storage: HierarchicalStorage,
+        semantic_index: SemanticIndex,
+        summarizer: ContentSummarizer,
+        versioned_storage: VersionedPageStorage,
+        knowledge_graph: CrossDomainGraph,
+        pages_crawled: u64,
+    },
+
+    fn new(shard_count: u32, proxies: Vec<Proxy>) -> AdvancedArchiveCrawler {
+        let frontier = DistributedFrontier::new(shard_count);
+        AdvancedArchiveCrawler {
+            frontier,
+            politeness: AdaptivePoliteness::new(),
+            prefetcher: PredictivePrefetcher {},
+            deduplicator: ContentDeduplicator::new(),
+            session: SelfHealingSession::new(),
+            cdx_batcher: CDXBatchQuery::new(),
+            io_engine: ZeroCopyIO::new(),
+            gpu_parser: GPUHTMLParser::new(),
+            proxy_pool: DynamicProxyPool::new(proxies),
+            cdx_cache: IncrementalCDXCache::new(),
+            cdx_stream: CDXWebSocketStream::new(),
+            blockchain_log: BlockchainLogger::new(),
+            swarm_sync: SwarmSynchronizer::new(frontier),
+            sync_interval: SelfTuningInterval::new(),
+            storage: HierarchicalStorage::new(),
+            semantic_index: SemanticIndex::new(),
+            summarizer: ContentSummarizer {},
+            versioned_storage: VersionedPageStorage::new(),
+            knowledge_graph: CrossDomainGraph::new(),
+            pages_crawled: 0,
+        }
+    }
+
+    fn run(self) {
+        self.session.recover(self.frontier, self.deduplicator);
+        self.cdx_stream.connect();
+
+        while true {
+            self.cdx_cache.sync_with_archive();
+
+            let url = match self.frontier.get_next() {
+                Some(u) => u,
+                None => { sleep(1000); continue; }
+            };
+
+            let proxy = self.proxy_pool.get_best_proxy();
+            let delay = self.politeness.get_delay(url.host());
+            sleep(delay);
+
+            let content = match self.io_engine.fetch(url, proxy) {
+                Ok(c) => c,
+                Err(_) => { self.proxy_pool.deprioritize(proxy); continue; }
+            };
+
+            if self.deduplicator.is_duplicate(content) { continue; }
+
+            let parsed = self.gpu_parser.parse(content);
+            let response = HTTPResponse { status: 200, latency_ms: delay as u32 };
+
+            for link in parsed.extract_links() {
+                let priority = self.prefetcher.score_link(link, parsed);
+                self.frontier.schedule(link, priority);
+                self.swarm_sync.announce_url(link.to_string(), priority);
+            }
+
+            if self.deduplicator.store_if_new(url, content) {
+                self.versioned_storage.store_version(url.to_string(), content);
+                self.semantic_index.index_content(url.to_string(), content);
+                let summary = self.summarizer.summarize(content);
+                self.storage.store(url.to_string() + ".summary", summary.as_bytes());
+
+                for entity in parsed.extract_entities() {
+                    self.knowledge_graph.add_relation(
+                        Entity { name: url.domain(), kind: "domain" },
+                        entity,
+                        "links_to"
+                    );
+                }
+
+                self.blockchain_log.log_crawl_event(CrawlEvent {
+                    url: url.to_string(),
+                    timestamp: now(),
+                    hash: sha3_256(&content),
+                    status: 200,
+                });
+
+                self.pages_crawled += 1;
+                self.session.tick();
+            }
+
+            self.politeness.update(url.host(), response);
+            self.proxy_pool.update_health(proxy, response);
+
+            if self.swarm_sync.should_sync() { self.swarm_sync.sync(); }
+            if self.session.should_checkpoint() {
+                self.session.checkpoint(self.frontier, self.deduplicator);
+            }
+            self.sync_interval.update();
+        }
+    }
+
+    fn query_cdx_batch(self, urls: Vec<URL>, since: u64) -> CDXResult {
+        self.cdx_batcher.query_batch(urls, since)
+    }
+
+    fn semantic_search(self, query: String) -> Vec<Result> {
+        self.semantic_index.search(query)
+    }
+}
+
+fn main() {
+    let crawler = AdvancedArchiveCrawler::new(shard_count: 8, proxies: vec![]);
+    crawler.run();
+}

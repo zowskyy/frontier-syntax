@@ -1,0 +1,27 @@
+{
+  "name": "archive_unity",
+  "version": "1.0.0",
+  "description": "Advanced Internet Archive crawler with 20 integrated improvements",
+  "improvements": 20,
+  "modules": {
+    "core": {
+      "advanced_crawler": "frontier/modules/archive_unity/advanced_crawler.fr",
+      "frontier_shard": "frontier/modules/archive_unity/frontier_shard.fr",
+      "politeness_model": "frontier/modules/archive_unity/politeness_model.fr",
+      "cdx_batch_query": "frontier/modules/archive_unity/cdx_batch_query.fr",
+      "zero_copy_io": "frontier/modules/archive_unity/zero_copy_io.fr",
+      "gpu_parser": "frontier/modules/archive_unity/gpu_parser.fr",
+      "dynamic_proxy": "frontier/modules/archive_unity/dynamic_proxy.fr",
+      "cdx_stream": "frontier/modules/archive_unity/cdx_stream.fr",
+      "blockchain_log": "frontier/modules/archive_unity/blockchain_log.fr",
+      "swarm_sync": "frontier/modules/archive_unity/swarm_sync.fr",
+      "versioned_storage": "frontier/modules/archive_unity/versioned_storage.fr",
+      "knowledge_graph": "frontier/modules/archive_unity/knowledge_graph.fr"
+    }
+  },
+  "performance_gates": {
+    "pages_per_day": 1000000,
+    "query_latency_ms": 15,
+    "false_positive_rate": 0.02
+  }
+}

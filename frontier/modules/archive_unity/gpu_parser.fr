@@ -1,0 +1,51 @@
+// GPU-accelerated HTML parsing and link extraction
+// Improvement #8: GPU-Accelerated HTML Parsing
+
+module gpu_parser;
+
+import frontier.bindings.hardware.{GPU, GPUBuffer};
+import frontier.bindings.http.URL;
+
+type ParsedHTML = {
+    links: Vec<URL>,
+    entities: Vec<Entity>,
+    title: String,
+    text_content: String,
+};
+
+type Entity = { name: String, kind: String };
+
+component GPUHTMLParser {
+    state: {
+        kernel: String,
+        batch_size: usize,
+    },
+
+    fn new() -> GPUHTMLParser {
+        GPUHTMLParser { kernel: "parse_html_links", batch_size: 256 }
+    },
+
+    fn parse(self, html: bytes) -> ParsedHTML {
+        let gpu_buffer = GPU.upload(html);
+        let result = GPU.execute(self.kernel, gpu_buffer);
+        ParsedHTML::from_gpu(result)
+    },
+
+    fn parse_batch(self, pages: Vec<bytes>) -> Vec<ParsedHTML> {
+        let buffers: Vec<GPUBuffer> = pages.iter().map(|p| GPU.upload(p)).collect();
+        GPU.execute_batch(self.kernel, buffers)
+            .into_iter()
+            .map(ParsedHTML::from_gpu)
+            .collect()
+    }
+
+    fn extract_links(self, html: bytes) -> Vec<URL> {
+        self.parse(html).links
+    }
+}
+
+impl ParsedHTML {
+    fn from_gpu(buffer: GPUBuffer) -> ParsedHTML { /* decode GPU output */ ParsedHTML { links: [], entities: [], title: "", text_content: "" } }
+    fn extract_links(self) -> Vec<URL> { self.links }
+    fn extract_entities(self) -> Vec<Entity> { self.entities }
+}

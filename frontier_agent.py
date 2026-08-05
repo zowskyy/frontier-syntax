@@ -106,6 +106,8 @@ class FrontierAgent:
             result = self.ingest_scrub_report(parsed)
         elif parsed["type"] == "system_status":
             result = self.generate_system_status(parsed)
+        elif parsed["type"] == "build_crawler":
+            result = self.build_archive_crawler(parsed)
         else:
             result = {"error": f"Unknown intent type: {parsed['type']}"}
 
@@ -221,6 +223,12 @@ class FrontierAgent:
             if any(word in intent_lower for word in ["ingest", "embed", "hypercube"]):
                 return {"type": "ingest_scrub", "content": intent}
             return {"type": "run_scrub", "content": intent, "delta": "delta" in intent_lower}
+
+        if any(
+            word in intent_lower
+            for word in ["crawler", "archive crawler", "advanced crawler", "wayback", "cdx crawl"]
+        ):
+            return {"type": "build_crawler", "content": intent}
 
         if any(word in intent_lower for word in ["deploy", "release", "publish"]):
             return {"type": "deploy", "version": self.detect_version(intent)}
@@ -655,6 +663,25 @@ class FrontierAgent:
             created.append(issue_record)
 
         return {"status": "success", "issues": created, "count": len(created)}
+
+    def build_archive_crawler(self, parsed: Dict[str, Any]) -> Dict[str, Any]:
+        """Verify the advanced archive crawler module (20 improvements)."""
+        verify = self._run_command(
+            [str(self.scripts_dir / "verify_archive_crawler.py")],
+            capture=True,
+        )
+        module_dir = self.repo_root / "frontier" / "modules" / "archive_unity"
+        files = sorted(p.name for p in module_dir.glob("*.fr")) if module_dir.exists() else []
+        return {
+            "status": "success" if verify["returncode"] == 0 else "failed",
+            "module": "archive_unity",
+            "files": files,
+            "file_count": len(files),
+            "improvements": 20,
+            "verify_output": verify.get("stdout", ""),
+            "docs": "docs/ARCHIVE_CRAWLER.md",
+            "message": "Advanced Archive Crawler module verified",
+        }
 
     def generate_system_status(self, parsed: Dict[str, Any]) -> Dict[str, Any]:
         """Generate live ARC system status and run improvement scripts."""

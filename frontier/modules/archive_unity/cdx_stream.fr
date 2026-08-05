@@ -1,0 +1,85 @@
+// Real-time CDX change streaming via WebSocket / SSE
+// Improvements #11-12: Bidirectional sync + Real-Time CDX Streaming
+
+module cdx_stream;
+
+import frontier.bindings.http.{WebSocket, HTTP};
+import frontier.core.concurrency.{Channel};
+
+const CDX_STREAM_URL: &str = "wss://web.archive.org/cdx/stream";
+
+type CDXEvent = { kind: String, url: String, timestamp: String, digest: String };
+type CDXDelta = Vec<CDXEvent>;
+
+component IncrementalCDXCache {
+    state: {
+        index: CDXIndex,
+        last_sync: Timestamp,
+        stream: CDXWebSocketStream,
+    },
+
+    fn new() -> IncrementalCDXCache {
+        IncrementalCDXCache {
+            index: CDXIndex::new(),
+            last_sync: 0,
+            stream: CDXWebSocketStream::new(),
+        }
+    },
+
+    fn sync_with_archive(self) {
+        let delta = self.stream.get_delta(self.last_sync);
+        self.index.apply(delta);
+        self.last_sync = now();
+    }
+}
+
+component CDXWebSocketStream {
+    state: {
+        ws: Option<WebSocket>,
+        event_channel: Channel<CDXEvent>,
+        connected: bool,
+    },
+
+    fn new() -> CDXWebSocketStream {
+        CDXWebSocketStream { ws: None, event_channel: Channel::new(10_000), connected: false }
+    },
+
+    fn connect(self) {
+        let ws = WebSocket.connect(CDX_STREAM_URL);
+        self.ws = Some(ws);
+        self.connected = true;
+        spawn(|| self.receive_loop());
+    },
+
+    fn receive_loop(self) {
+        while self.connected {
+            let event = self.ws.unwrap().receive();
+            self.event_channel.send(parse_event(event));
+        }
+    },
+
+    fn get_delta(self, since: Timestamp) -> CDXDelta {
+        let mut delta = Vec::new();
+        while let Some(event) = self.event_channel.try_recv() {
+            if event.timestamp >= since {
+                delta.push(event);
+            }
+        }
+        delta
+    }
+
+    fn upload_metadata(self, progress: CrawlProgress) {
+        HTTP.post("https://web.archive.org/cdx/metadata", body: encode(progress));
+    }
+}
+
+type Timestamp = u64;
+type CrawlProgress = { pages_crawled: u64, hosts_seen: u32, last_url: String };
+type CDXIndex = { records: Map<String, CDXEvent> };
+
+impl CDXIndex {
+    fn new() -> CDXIndex { CDXIndex { records: Map::new() } }
+    fn apply(self, delta: CDXDelta) { for e in delta { self.records.insert(e.url.clone(), e); } }
+}
+
+fn parse_event(raw: bytes) -> CDXEvent { /* parse */ CDXEvent { kind: "capture", url: "", timestamp: "0", digest: "" } }

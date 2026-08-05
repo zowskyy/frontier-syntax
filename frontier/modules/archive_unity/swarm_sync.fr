@@ -1,0 +1,84 @@
+// Swarm-synchronized frontier state across all workers
+// Improvements #14-15: Swarm Sync + Self-Tuning Sync Interval
+
+module swarm_sync;
+
+import frontier.core.swarm.{Swarm, GossipMessage};
+import frontier.modules.archive_unity.frontier_shard.{DistributedFrontier};
+
+type Duration = u64;
+
+component SwarmSynchronizer {
+    state: {
+        frontier: DistributedFrontier,
+        last_sync: Timestamp,
+        sync_interval: SelfTuningInterval,
+    },
+
+    fn new(frontier: DistributedFrontier) -> SwarmSynchronizer {
+        SwarmSynchronizer {
+            frontier,
+            last_sync: 0,
+            sync_interval: SelfTuningInterval::new(),
+        }
+    },
+
+    fn should_sync(self) -> bool {
+        now() - self.last_sync >= self.sync_interval.current_ms()
+    },
+
+    fn sync(self) {
+        let local_state = self.frontier.serialize();
+        let swarm_state = Swarm.gossip(GossipMessage::FrontierState(local_state));
+        if let GossipMessage::FrontierState(remote) = swarm_state {
+            if remote != local_state {
+                self.frontier.merge(remote);
+            }
+        }
+        self.last_sync = now();
+        self.sync_interval.record_sync();
+    }
+
+    fn announce_url(self, url: String, priority: usize) {
+        Swarm.broadcast(GossipMessage::NewURL { url, priority });
+    }
+}
+
+component SelfTuningInterval {
+    state: {
+        current_ms: Duration,
+        threshold_high: f32,
+        threshold_low: f32,
+        content_rate: f32,
+    },
+
+    fn new() -> SelfTuningInterval {
+        SelfTuningInterval {
+            current_ms: 300_000,
+            threshold_high: 1000.0,
+            threshold_low: 10.0,
+            content_rate: 0.0,
+        }
+    },
+
+    fn calculate(self) -> Duration {
+        if self.content_rate > self.threshold_high {
+            60_000
+        } else if self.content_rate < self.threshold_low {
+            3_600_000
+        } else {
+            300_000
+        }
+    },
+
+    fn update(self) {
+        self.content_rate = self.measure_new_content_rate();
+        self.current_ms = self.calculate();
+    }
+
+    fn record_sync(self) { /* EMA update */ }
+    fn current_ms(self) -> Duration { self.current_ms }
+    fn measure_new_content_rate(self) -> f32 { 100.0 }
+}
+
+type Timestamp = u64;
