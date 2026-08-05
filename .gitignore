@@ -19,7 +19,10 @@ test_projects/
 __pycache__/
 *.pyc
 .build_truth_*/
+.build_truth_sandbox/
+.verification_cache/
 truth_certificate_*.txt
 truth_certificate_*.txt.sha256
 verification/reports/*.json
 proof/certificates/*.json
+proof/certificates/*.sha256
