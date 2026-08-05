@@ -1,10 +1,38 @@
-# Frontier Syntax
+# Frontier Syntax v2.0
 
-Formally verifiable programming language syntax built under the **A+ Hard Gate Protocol (v1.0)**.
+Formally verifiable programming language — **A+ Hard Gate v2.0** with 7 innovations.
+
+## Quick Start
+
+```bash
+# Full verification (Cycle 1 + Language Hardening + v2.0)
+python3 build/arc_orchestrator.py --verify
+
+# Run Rust tests (17 tests)
+cargo test --lib
+
+# Build WASM parser
+cargo build --release --target wasm32-unknown-unknown
+
+# Generate v2 hashes
+python3 scripts/generate_v2_hashes.py
+```
+
+## v2.0 Innovations
+
+| # | Innovation | Module |
+|---|------------|--------|
+| 1 | Self-mutating grammar | `src/grammar/mutator.rs` |
+| 2 | Proof-carrying code | `src/compiler/proof_generator.rs` |
+| 3 | Post-quantum signatures | `src/pq_signatures.rs` |
+| 4 | ZK-SNARK AST verification | `src/zk/verifier.rs` |
+| 5 | IPFS decentralized imports | `src/ipfs/resolver.rs` |
+| 6 | Neural LSP | `src/neural/completion.rs` |
+| 7 | Decentralized package registry | `src/packages/registry.rs` |
 
 ## Core Language (Hardened)
 
-The standalone Frontier language core lives under `frontier/core/` — parser, type system, memory model, concurrency, error handling, standard library, and compiler backend. Game-specific elements have been stripped.
+The standalone Frontier language core lives under `frontier/core/` — parser, type system, memory model, concurrency, error handling, standard library, and compiler backend.
 
 | Module | Path |
 |--------|------|
@@ -17,17 +45,6 @@ The standalone Frontier language core lives under `frontier/core/` — parser, t
 | Compiler Backend | `frontier/core/compiler.frontier` |
 | Language Reference | `frontier/docs/language_reference.md` |
 
-```bash
-# Verify hardened language
-python3 build/arc_orchestrator.py --verify
-
-# Test core modules
-python3 scripts/frontier test frontier/core/
-
-# Compile a test program
-python3 scripts/frontier compile test_program.frontier
-```
-
 ## Protocol
 
 All syntax artifacts are produced in six audit cycles. Each cycle must pass all ten hard-gate criteria before the next cycle begins.
@@ -35,11 +52,11 @@ All syntax artifacts are produced in six audit cycles. Each cycle must pass all 
 | Cycle | Scope | Primary Artifacts |
 |-------|-------|-------------------|
 | 1 | Lexicon & Tokenization | `syntax/lexicon.ebnf`, `syntax/token_regex_table.json` |
-| 2 | Grammar & Associativity | `syntax/grammar.g4`, `syntax/ast_sample.json` |
-| 3 | Orthogonality & Reachability | `syntax/feature_matrix.json` |
-| 4 | Semantic Resolution | `syntax/resolved_symbols.json`, resolver binary |
-| 5 | Immutable AST & Hashing | `syntax/schema.json`, `syntax/ast_hash.sha3` |
-| 6 | Adversarial Attack Surface | `syntax/wasm_parser.wasm`, `syntax/final_hash.sha3` |
+| 2 | Grammar & Associativity | `syntax/Frontier.g4`, `syntax/ast_sample_v2.json` |
+| 3 | Orthogonality & Reachability | `syntax/feature_matrix_v2.json` |
+| 4 | Semantic Resolution | `src/v2_resolver.rs`, `src/resolver.rs` |
+| 5 | Immutable AST & Hashing | `syntax/schema_v2.json`, `syntax/ast_hash_v2.sha3` |
+| 6 | Adversarial Attack Surface | `syntax/wasm/wasm_parser_v2.wasm`, `syntax/final_hash_v2.sha3` |
 
 ## Toolchain
 

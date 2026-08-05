@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://frontier-lang.dev/schema/ast.v2.schema.json",
+  "title": "Frontier AST Schema v2.0",
+  "description": "Canonical AST format with proof annotations, imports, and versioning",
+  "version": "2.0.0",
+  "type": "object",
+  "properties": {
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+$" },
+    "statements": { "type": "array", "items": { "$ref": "#/$defs/statement" } }
+  },
+  "required": ["statements"],
+  "$defs": {
+    "statement": {
+      "oneOf": [
+        { "$ref": "#/$defs/version_decl" },
+        { "$ref": "#/$defs/let_decl" },
+        { "$ref": "#/$defs/fn_decl" },
+        { "$ref": "#/$defs/import_decl" },
+        { "$ref": "#/$defs/proof_annotation" },
+        { "$ref": "#/$defs/return" },
+        { "$ref": "#/$defs/if" },
+        { "$ref": "#/$defs/while" },
+        { "$ref": "#/$defs/block" },
+        { "$ref": "#/$defs/expr" }
+      ]
+    },
+    "version_decl": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "version_decl" },
+        "version": { "type": "string" }
+      },
+      "required": ["type", "version"],
+      "additionalProperties": false
+    },
+    "import_decl": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "import_decl" },
+        "path": { "type": "string", "pattern": "^ipfs://[A-Za-z0-9]+$" },
+        "alias": { "type": "string" }
+      },
+      "required": ["type", "path", "alias"],
+      "additionalProperties": false
+    },
+    "proof_annotation": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "proof_annotation" },
+        "kind": { "enum": ["requires", "ensures", "invariant"] },
+        "expression": { "type": "string" }
+      },
+      "required": ["type", "kind", "expression"],
+      "additionalProperties": false
+    },
+    "fn_decl": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "fn_decl" },
+        "name": { "type": "string" },
+        "params": { "type": "array" },
+        "return_type": { "type": "object" },
+        "requires": { "type": "string" },
+        "ensures": { "type": "string" },
+        "invariant": { "type": "string" },
+        "body": { "type": "array" }
+      },
+      "required": ["type", "name", "params", "return_type", "body"],
+      "additionalProperties": false
+    },
+    "let_decl": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "let_decl" },
+        "name": { "type": "string" },
+        "type_spec": { "type": "object" },
+        "value": { "type": "object" }
+      },
+      "required": ["type", "name", "type_spec", "value"],
+      "additionalProperties": false
+    },
+    "return": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "return" },
+        "value": {}
+      },
+      "required": ["type"],
+      "additionalProperties": false
+    },
+    "if": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "if" },
+        "condition": { "type": "object" },
+        "then_block": { "type": "array" },
+        "else_block": { "type": "array" }
+      },
+      "required": ["type", "condition", "then_block"],
+      "additionalProperties": false
+    },
+    "while": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "while" },
+        "condition": { "type": "object" },
+        "body": { "type": "array" }
+      },
+      "required": ["type", "condition", "body"],
+      "additionalProperties": false
+    },
+    "block": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "block" },
+        "statements": { "type": "array" }
+      },
+      "required": ["type", "statements"],
+      "additionalProperties": false
+    },
+    "expr": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "expr" },
+        "expression": { "type": "object" }
+      },
+      "required": ["type", "expression"],
+      "additionalProperties": false
+    }
+  }
+}

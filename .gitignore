@@ -1,6 +1,8 @@
 node_modules/
 *.o
 *.wasm
+!syntax/wasm/*.wasm
 target/
 .DS_Store
 *.sha3
+!syntax/*_v2.sha3

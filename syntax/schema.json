@@ -1,0 +1,262 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Frontier AST Schema",
+  "version": "1.0.0",
+  "description": "Canonical AST schema for Frontier Syntax. All expression nodes are strictly binary.",
+  "type": "object",
+  "required": ["statements"],
+  "properties": {
+    "statements": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/statement" }
+    }
+  },
+  "$defs": {
+    "statement": {
+      "oneOf": [
+        { "$ref": "#/$defs/let_decl" },
+        { "$ref": "#/$defs/fn_decl" },
+        { "$ref": "#/$defs/return_stmt" },
+        { "$ref": "#/$defs/if_stmt" },
+        { "$ref": "#/$defs/block_stmt" },
+        { "$ref": "#/$defs/expr_stmt" }
+      ]
+    },
+    "let_decl": {
+      "type": "object",
+      "required": ["type", "name", "type_spec", "value"],
+      "properties": {
+        "type": { "const": "let_decl" },
+        "name": { "type": "string", "pattern": "^[A-Za-z_][A-Za-z0-9_]*$" },
+        "type_spec": { "$ref": "#/$defs/type_spec" },
+        "value": { "$ref": "#/$defs/expression" },
+        "symbol_id": { "type": "integer", "minimum": 1 }
+      },
+      "additionalProperties": false
+    },
+    "fn_decl": {
+      "type": "object",
+      "required": ["type", "name", "params", "return_type", "body"],
+      "properties": {
+        "type": { "const": "fn_decl" },
+        "name": { "type": "string" },
+        "params": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/param" }
+        },
+        "return_type": { "$ref": "#/$defs/type_spec" },
+        "body": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/statement" }
+        },
+        "symbol_id": { "type": "integer", "minimum": 1 }
+      },
+      "additionalProperties": false
+    },
+    "return_stmt": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "return" },
+        "value": { "$ref": "#/$defs/expression" }
+      },
+      "additionalProperties": false
+    },
+    "if_stmt": {
+      "type": "object",
+      "required": ["type", "condition", "then_block"],
+      "properties": {
+        "type": { "const": "if" },
+        "condition": { "$ref": "#/$defs/expression" },
+        "then_block": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/statement" }
+        },
+        "else_block": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/statement" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "block_stmt": {
+      "type": "object",
+      "required": ["type", "statements"],
+      "properties": {
+        "type": { "const": "block" },
+        "statements": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/statement" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "expr_stmt": {
+      "type": "object",
+      "required": ["type", "expr"],
+      "properties": {
+        "type": { "const": "expr" },
+        "expr": { "$ref": "#/$defs/expression" }
+      },
+      "additionalProperties": false
+    },
+    "param": {
+      "type": "object",
+      "required": ["name", "type_spec"],
+      "properties": {
+        "name": { "type": "string" },
+        "type_spec": { "$ref": "#/$defs/type_spec" },
+        "symbol_id": { "type": "integer", "minimum": 1 }
+      },
+      "additionalProperties": false
+    },
+    "type_spec": {
+      "type": "object",
+      "required": ["base", "annotation"],
+      "properties": {
+        "base": { "type": "string" },
+        "annotation": {
+          "type": "string",
+          "enum": ["none", "optional", "required"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "expression": {
+      "oneOf": [
+        { "$ref": "#/$defs/integer_literal" },
+        { "$ref": "#/$defs/float_literal" },
+        { "$ref": "#/$defs/string_literal" },
+        { "$ref": "#/$defs/bool_literal" },
+        { "$ref": "#/$defs/null_literal" },
+        { "$ref": "#/$defs/identifier" },
+        { "$ref": "#/$defs/unary_expr" },
+        { "$ref": "#/$defs/binary_expr" },
+        { "$ref": "#/$defs/call_expr" },
+        { "$ref": "#/$defs/field_access" },
+        { "$ref": "#/$defs/required_expr" },
+        { "$ref": "#/$defs/grouped" }
+      ]
+    },
+    "integer_literal": {
+      "type": "object",
+      "required": ["type", "value"],
+      "properties": {
+        "type": { "const": "integer_literal" },
+        "value": { "type": "integer" }
+      },
+      "additionalProperties": false
+    },
+    "float_literal": {
+      "type": "object",
+      "required": ["type", "value"],
+      "properties": {
+        "type": { "const": "float_literal" },
+        "value": { "type": "number" }
+      },
+      "additionalProperties": false
+    },
+    "string_literal": {
+      "type": "object",
+      "required": ["type", "value"],
+      "properties": {
+        "type": { "const": "string_literal" },
+        "value": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "bool_literal": {
+      "type": "object",
+      "required": ["type", "value"],
+      "properties": {
+        "type": { "const": "bool_literal" },
+        "value": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "null_literal": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "null_literal" }
+      },
+      "additionalProperties": false
+    },
+    "identifier": {
+      "type": "object",
+      "required": ["type", "name"],
+      "properties": {
+        "type": { "const": "identifier" },
+        "name": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "unary_expr": {
+      "type": "object",
+      "required": ["type", "operator", "operand"],
+      "properties": {
+        "type": { "const": "unary_expr" },
+        "operator": { "type": "string", "enum": ["-", "!", "~"] },
+        "operand": { "$ref": "#/$defs/expression" }
+      },
+      "additionalProperties": false
+    },
+    "binary_expr": {
+      "type": "object",
+      "required": ["type", "operator", "left", "right"],
+      "properties": {
+        "type": { "const": "binary_expr" },
+        "operator": {
+          "type": "string",
+          "enum": ["+", "-", "*", "/", "%", "^", "<", ">", "<=", ">=", "==", "!=", "&&", "||"]
+        },
+        "left": { "$ref": "#/$defs/expression" },
+        "right": { "$ref": "#/$defs/expression" }
+      },
+      "additionalProperties": false,
+      "description": "All n-ary operations are desugared to nested binary_expr nodes."
+    },
+    "call_expr": {
+      "type": "object",
+      "required": ["type", "callee", "args"],
+      "properties": {
+        "type": { "const": "call_expr" },
+        "callee": { "$ref": "#/$defs/expression" },
+        "args": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/expression" }
+        }
+      },
+      "additionalProperties": false,
+      "description": "Function-call syntax only. Method-call syntax (obj.method()) is banned."
+    },
+    "field_access": {
+      "type": "object",
+      "required": ["type", "object", "field"],
+      "properties": {
+        "type": { "const": "field_access" },
+        "object": { "$ref": "#/$defs/expression" },
+        "field": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "required_expr": {
+      "type": "object",
+      "required": ["type", "operand"],
+      "properties": {
+        "type": { "const": "required_expr" },
+        "operand": { "$ref": "#/$defs/expression" }
+      },
+      "additionalProperties": false
+    },
+    "grouped": {
+      "type": "object",
+      "required": ["type", "inner"],
+      "properties": {
+        "type": { "const": "grouped" },
+        "inner": { "$ref": "#/$defs/expression" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

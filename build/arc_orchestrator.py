@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""ARC orchestrator for Frontier language hardening patches and verification."""
+"""ARC orchestrator for Frontier language patches and verification."""
 
 import argparse
 import subprocess
@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parent.parent
 CORE_DIR = ROOT / "frontier" / "core"
 DOCS_DIR = ROOT / "frontier" / "docs"
 VERIFY_SCRIPT = ROOT / "scripts" / "verify_language_hardening.py"
+V2_VERIFY_SCRIPT = ROOT / "scripts" / "verify_v2.py"
 CYCLE1_SCRIPT = ROOT / "scripts" / "verify_cycle1.py"
 
 REQUIRED_CORE_FILES = [
@@ -68,6 +69,10 @@ def verify():
     if VERIFY_SCRIPT.exists():
         rc = subprocess.call([sys.executable, str(VERIFY_SCRIPT)])
         results.append(("Language Hardening", rc))
+
+    if V2_VERIFY_SCRIPT.exists():
+        rc = subprocess.call([sys.executable, str(V2_VERIFY_SCRIPT)])
+        results.append(("Frontier v2.0 A+ Hard Gate", rc))
 
     failed = [name for name, rc in results if rc != 0]
     if failed:
