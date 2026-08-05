@@ -18,3 +18,8 @@ dist/
 test_projects/
 __pycache__/
 *.pyc
+.build_truth_*/
+truth_certificate_*.txt
+truth_certificate_*.txt.sha256
+verification/reports/*.json
+proof/certificates/*.json
