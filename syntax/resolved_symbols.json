@@ -1,14 +1,14 @@
 {
   "node_symbols": {
-    "node_1": 1,
-    "node_3": 3,
-    "node_4": 2,
-    "node_7": 4,
-    "node_9": 6,
-    "node_2": 2,
     "node_6": 4,
+    "node_4": 2,
+    "node_8": 5,
+    "node_1": 1,
+    "node_9": 6,
     "node_5": 3,
-    "node_8": 5
+    "node_3": 3,
+    "node_7": 4,
+    "node_2": 2
   },
   "symbol_table": [
     {
