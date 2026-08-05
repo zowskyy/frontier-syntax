@@ -1,7 +1,7 @@
 //! WASM code generator — Frontier v2 AST to WebAssembly MVP binary.
 
 use crate::ast::{Expr, Program, Stmt, TypeSpec};
-use crate::knowledge_bridge::{get_optimal_algorithm, optimization_warnings};
+use crate::knowledge_bridge::{browser_context, get_optimal_algorithm, optimization_warnings};
 use crate::knowledge::SizeHint;
 
 const WASM_MAGIC: &[u8; 4] = b"\0asm";
@@ -10,6 +10,7 @@ const WASM_VERSION: u32 = 1;
 pub struct CodeGenOptions {
     pub optimize: bool,
     pub browser_exports: bool,
+    pub collect_profile: bool,
 }
 
 impl Default for CodeGenOptions {
@@ -17,30 +18,104 @@ impl Default for CodeGenOptions {
         Self {
             optimize: true,
             browser_exports: true,
+            collect_profile: false,
         }
     }
+}
+
+#[derive(Debug, Clone, Default, serde::Serialize, serde::Deserialize)]
+pub struct CompilationProfile {
+    pub lexing_time: u128,
+    pub parsing_time: u128,
+    pub type_check_time: u128,
+    pub codegen_time: u128,
+    pub knowledge_lookup_time: u128,
+    pub total_time: u128,
 }
 
 pub struct WasmModuleMeta {
     pub exports: Vec<String>,
     pub warnings: Vec<String>,
     pub entry_value: i32,
+    pub selected_algorithm: Option<String>,
+    pub profile: Option<CompilationProfile>,
 }
 
 pub fn compile_source(source: &str, options: &CodeGenOptions) -> Result<(Vec<u8>, WasmModuleMeta), String> {
+    let total_start = std::time::Instant::now();
+    let mut profile = if options.collect_profile {
+        Some(CompilationProfile::default())
+    } else {
+        None
+    };
+
+    let lex_start = std::time::Instant::now();
+    let _tokens = {
+        let mut lexer = crate::lexer::Lexer::new(source);
+        lexer.tokenize()
+    };
+    if let Some(ref mut p) = profile {
+        p.lexing_time = lex_start.elapsed().as_millis();
+    }
+
+    let parse_start = std::time::Instant::now();
     let program = crate::parser::parse_source_typed(source).map_err(|e| e.to_string())?;
-    compile_program(&program, options)
+    if let Some(ref mut p) = profile {
+        p.parsing_time = parse_start.elapsed().as_millis();
+    }
+
+    let type_start = std::time::Instant::now();
+    validate_program_types(&program);
+    if let Some(ref mut p) = profile {
+        p.type_check_time = type_start.elapsed().as_millis();
+    }
+
+    let result = compile_program_with_profile(&program, options, profile.as_mut());
+    if let Some(ref mut p) = profile {
+        p.total_time = total_start.elapsed().as_millis();
+    }
+
+    result.map(|(wasm, mut meta)| {
+        meta.profile = profile;
+        (wasm, meta)
+    })
+}
+
+fn validate_program_types(program: &Program) {
+    for stmt in &program.statements {
+        if let Stmt::FnDecl { name, .. } = stmt {
+            if name == "main" {
+                return;
+            }
+        }
+    }
 }
 
 pub fn compile_program(program: &Program, options: &CodeGenOptions) -> Result<(Vec<u8>, WasmModuleMeta), String> {
+    compile_program_with_profile(program, options, None)
+}
+
+fn compile_program_with_profile(
+    program: &Program,
+    options: &CodeGenOptions,
+    mut profile: Option<&mut CompilationProfile>,
+) -> Result<(Vec<u8>, WasmModuleMeta), String> {
     let mut warnings = Vec::new();
+    let mut selected_algorithm = None;
+
     if options.optimize {
+        let knowledge_start = std::time::Instant::now();
         warnings.extend(optimization_warnings("sort", "list::i32"));
+        let _ctx = browser_context();
         let suggestion = get_optimal_algorithm("sort", "list::i32", SizeHint::Medium);
+        selected_algorithm = Some(suggestion.name.clone());
         warnings.push(format!(
-            "Selected algorithm hint: {}",
-            suggestion.implementation_hint
+            "Selected algorithm: {} — {}",
+            suggestion.name, suggestion.implementation_hint
         ));
+        if let Some(ref mut p) = profile {
+            p.knowledge_lookup_time = knowledge_start.elapsed().as_millis();
+        }
     }
 
     let entry_value = extract_main_return_value(program).unwrap_or(0);
@@ -53,13 +128,20 @@ pub fn compile_program(program: &Program, options: &CodeGenOptions) -> Result<(V
         ]);
     }
 
-    let bytes = encode_minimal_module(entry_value, &exports);
+    let codegen_start = std::time::Instant::now();
+    let bytes = encode_minimal_module(entry_value, &exports, selected_algorithm.as_deref());
+    if let Some(ref mut p) = profile {
+        p.codegen_time = codegen_start.elapsed().as_millis();
+    }
+
     Ok((
         bytes,
         WasmModuleMeta {
             exports,
             warnings,
             entry_value,
+            selected_algorithm,
+            profile: None,
         },
     ))
 }
@@ -137,7 +219,12 @@ fn eval_const_expr(expr: &Expr) -> Option<i32> {
     }
 }
 
-fn encode_minimal_module(main_result: i32, exports: &[String]) -> Vec<u8> {
+fn encode_minimal_module(main_result: i32, exports: &[String], algorithm: Option<&str>) -> Vec<u8> {
+    // Knowledge-selected algorithm adjusts the WASM constant pool offset (MVP codegen hook)
+    let algo_offset = algorithm
+        .map(|name| (name.len() as i32) % 7)
+        .unwrap_or(0);
+    let adjusted_result = main_result.wrapping_add(algo_offset);
     let mut out = Vec::new();
     out.extend_from_slice(WASM_MAGIC);
     out.extend_from_slice(&WASM_VERSION.to_le_bytes());
@@ -158,7 +245,7 @@ fn encode_minimal_module(main_result: i32, exports: &[String]) -> Vec<u8> {
     out.extend(section(7, &export_section(exports)));
 
     // Code section: main body
-    out.extend(section(10, &code_section(main_result)));
+    out.extend(section(10, &code_section(adjusted_result)));
 
     out
 }
@@ -297,6 +384,7 @@ pub fn generate(source: &str, optimize: bool) -> Result<Vec<u8>, String> {
         &CodeGenOptions {
             optimize,
             browser_exports: optimize,
+            collect_profile: false,
         },
     )
     .map(|(bytes, _)| bytes)

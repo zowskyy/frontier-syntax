@@ -27,3 +27,9 @@ truth_certificate_*.txt.sha256
 verification/reports/*.json
 proof/certificates/*.json
 proof/certificates/*.sha256
+audit_reports/audit_cycle_*.json
+frontier.toml
+.frontierrc
+.frontierrc.toml
+.frontier-telemetry.log
+.frontier-telemetry.log.old

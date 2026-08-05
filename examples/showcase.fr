@@ -1,0 +1,19 @@
+// Frontier Syntax v2.0 — Live Demo Program
+// Designed for presentations: parses cleanly, compiles to WASM, triggers Knowledge Hypercube.
+
+version: 2.0;
+
+@requires(n >= 0)
+@ensures(result >= n)
+fn fibonacci(n: int) -> int {
+    if (n <= 1) {
+        return n;
+    } else {
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+}
+
+fn main(): int {
+    let answer: int = fibonacci(10);
+    return answer;
+}

@@ -4,13 +4,14 @@ use crate::canonicalize::{canonical_ast_json, sha3_256_hex};
 use crate::knowledge_bridge::{get_ancestors_json, get_optimal_algorithm, get_tradeoffs_json};
 use crate::knowledge::SizeHint;
 use crate::parser;
-use crate::wasm_codegen::{compile_source, CodeGenOptions};
+use crate::wasm_codegen::{compile_source, CodeGenOptions, CompilationProfile};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone)]
 pub struct CompileOptions {
     pub optimize: bool,
     pub browser_compat: bool,
+    pub profile: bool,
 }
 
 impl Default for CompileOptions {
@@ -18,6 +19,7 @@ impl Default for CompileOptions {
         Self {
             optimize: true,
             browser_compat: false,
+            profile: false,
         }
     }
 }
@@ -32,6 +34,8 @@ pub struct CompileResult {
     pub memory_pages: u32,
     pub warnings: Vec<String>,
     pub ast_hash: String,
+    pub selected_algorithm: Option<String>,
+    pub profile: Option<CompilationProfile>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -46,6 +50,7 @@ pub fn compile(source: &str, options: &CompileOptions) -> Result<CompileResult, 
     let codegen_opts = CodeGenOptions {
         optimize: options.optimize,
         browser_exports: options.browser_compat,
+        collect_profile: options.profile,
     };
 
     let (wasm, meta) = compile_source(source, &codegen_opts)?;
@@ -66,6 +71,8 @@ pub fn compile(source: &str, options: &CompileOptions) -> Result<CompileResult, 
         memory_pages: 1,
         warnings: meta.warnings,
         ast_hash,
+        selected_algorithm: meta.selected_algorithm,
+        profile: meta.profile,
     })
 }
 
@@ -73,6 +80,7 @@ pub fn compile_to_wasm(source: &str, optimize: bool) -> Result<Vec<u8>, String> 
     let options = CompileOptions {
         optimize,
         browser_compat: false,
+        profile: false,
     };
     Ok(compile(source, &options)?.wasm)
 }
@@ -181,6 +189,7 @@ mod tests {
             &CompileOptions {
                 optimize: true,
                 browser_compat: true,
+                profile: false,
             },
         )
         .expect("compile");
