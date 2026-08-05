@@ -1,0 +1,82 @@
+// Water Pump Tracker — Lighthouse community app (Frontier-native)
+
+module water_pump_tracker;
+
+import frontier.ui.{Screen, Button, List, Card, TextInput, DatePicker};
+import frontier.storage.{Database, Query, Sync};
+import frontier.hardware.{GPS, Camera, Photo};
+
+type Pump = {
+  id: Int,
+  location: String,
+  gps_coords: (Float, Float),
+  install_date: String,
+  last_service: String,
+  next_service: String,
+  status: PumpStatus,
+  photo: Option<Binary>,
+  notes: String,
+};
+
+enum PumpStatus { Active, NeedsService, Broken, Repaired }
+
+fn main() -> void {
+  let screen = Screen::new("Water Pump Tracker");
+  Screen::set_language(screen, "sw");
+
+  let db = Database::open("pumps.db").expect("Failed to open database");
+  Database::create_table(db, "pumps", [
+    ("id", "INTEGER PRIMARY KEY AUTOINCREMENT"),
+    ("location", "TEXT"),
+    ("status", "TEXT"),
+    ("next_service", "TEXT"),
+  ]).expect("Failed to create table");
+
+  let add_button = Button::new("➕ Add Pump");
+  Button::on_click(add_button, "show_add_pump_form");
+
+  let due_list = List::new("⚠️ Due for Service");
+  let pumps = Database::query(db, "SELECT * FROM pumps WHERE next_service <= date('now') ORDER BY next_service ASC").unwrap_or([]);
+
+  for pump in pumps {
+    let card = Card::new(pump);
+    Card::add_button(card, "✅ Serviced", "mark_serviced");
+    List::add_card(due_list, card);
+  }
+
+  Screen::add_widget(screen, add_button);
+  Screen::add_list(screen, due_list);
+  Screen::render(screen);
+}
+
+fn show_add_pump_form() -> void {
+  let form = Screen::new("Add New Pump");
+  let location = TextInput::new("Location");
+  TextInput::set_placeholder(location, "Pump location (e.g., Village Center Well)");
+  let date = DatePicker::new("Install Date");
+  let save = Button::new("💾 Save");
+  Button::on_click(save, "save_pump");
+  Screen::render(form);
+}
+
+fn take_pump_photo(pump_id: Int) -> Result<(), String> {
+  let photo = Camera::capture()?;
+  let db = Database::open("pumps.db")?;
+  Database::execute(db, "UPDATE pumps SET photo = ? WHERE id = ?", [photo, pump_id.to_string()])?;
+  Ok(())
+}
+
+fn mark_serviced(pump_id: Int) -> Result<(), String> {
+  let today = date_today();
+  let next = calculate_next_service(today);
+  let db = Database::open("pumps.db")?;
+  Database::execute(db, "UPDATE pumps SET last_service = ?, next_service = ?, status = 'Active' WHERE id = ?", [today, next, pump_id.to_string()])?;
+  Ok(())
+}
+
+fn calculate_next_service(last: String) -> String {
+  date_add_days(last, 90)
+}
+
+fn date_today() -> String { "2026-08-05" }
+fn date_add_days(date: String, days: Int) -> String { date }

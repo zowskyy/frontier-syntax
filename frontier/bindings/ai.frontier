@@ -1,0 +1,30 @@
+// frontier.ai — On-device inference via llama.cpp FFI
+// Replaces: WebLLM, LangChain, OpenAI SDK, Transformers.js
+
+module frontier.ai;
+
+type Model = opaque;
+type LocalModel = opaque;
+type ModelWeights = opaque;
+type Inference = opaque;
+type Review = opaque;
+type Embedding = opaque;
+type TensorOps = opaque;
+type Pruning = opaque;
+type Quantization = opaque;
+
+enum QuantizationLevel { Q4, Q8, F16 }
+
+extern fn LocalModel::load(path: &str) -> Result<LocalModel, String>;
+extern fn LocalModel::get() -> Result<LocalModel, String>;
+extern fn LocalModel::infer(model: LocalModel, prompt: &str, system: &str) -> Result<String, String>;
+
+extern fn ModelWeights::load(path: String) -> Result<ModelWeights, String>;
+extern fn ModelWeights::save(model: ModelWeights, path: String) -> Result<(), String>;
+
+extern fn TensorOps::quantize(model: ModelWeights, level: QuantizationLevel) -> Result<ModelWeights, String>;
+
+fn arc_infer(stage: &str, prompt: &str) -> Result<String, String> {
+  let model = LocalModel::get()?;
+  LocalModel::infer(model, prompt, "Lighthouse ARC stage: " + stage)
+}
