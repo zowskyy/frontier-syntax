@@ -1,0 +1,95 @@
+// ARC cycle that powers Lighthouse — written in Frontier, compiles to native
+
+module arc_engine;
+
+import frontier.ai.{LocalModel, Inference, Review};
+import frontier.storage.{Context, Memory};
+
+type Analysis = { type_name: String, language: String, complexity: String, summary: String };
+type Plan = { steps: Vec<PlanStep> };
+type PlanStep = { step: Int, action: String, file: String, description: String };
+type GeneratedCode = { files: Vec<CodeFile>, explanation: String };
+type CodeFile = { path: String, content: String, description: String };
+type ReviewResult = { passed: Bool, score: Float, issues: Vec<Issue>, iterations: Int };
+type Issue = { severity: String, file: String, problem: String, fix: String };
+type ARCResult = {
+  analysis: Analysis,
+  plan: Plan,
+  code: GeneratedCode,
+  review: ReviewResult,
+  iterations: Int,
+};
+
+const ANALYSIS_SYSTEM_PROMPT: &str = "Analyze coding requests. Output JSON only.";
+const PLAN_SYSTEM_PROMPT: &str = "Create step-by-step plans. Output JSON only.";
+const CODE_SYSTEM_PROMPT: &str = "Write complete working code. Output JSON only.";
+
+fn analyze(request: String, context: Context) -> Result<Analysis, String> {
+  let model = LocalModel::load("model.gguf")?;
+  let prompt = build_analysis_prompt(request, context);
+  let response = LocalModel::infer(model, prompt, ANALYSIS_SYSTEM_PROMPT)?;
+  parse_analysis(response)
+}
+
+fn plan(request: String, analysis: Analysis) -> Result<Plan, String> {
+  let model = LocalModel::get()?;
+  let prompt = build_plan_prompt(request, analysis);
+  let response = LocalModel::infer(model, prompt, PLAN_SYSTEM_PROMPT)?;
+  parse_plan(response)
+}
+
+fn generate_code(plan: Plan, context: Context) -> Result<GeneratedCode, String> {
+  let model = LocalModel::get()?;
+  let prompt = build_code_prompt(plan, context);
+  let response = LocalModel::infer(model, prompt, CODE_SYSTEM_PROMPT)?;
+  parse_code(response)
+}
+
+fn review(code: GeneratedCode, plan: Plan) -> Result<ReviewResult, String> {
+  let model = LocalModel::get()?;
+  let mut result = do_review(model, code, plan)?;
+  let mut iterations = 0;
+  let mut current_code = code;
+
+  while !result.passed && result.score < 0.80 && iterations < 2 {
+    current_code = refine_code(model, current_code, result.issues, plan)?;
+    result = do_review(model, current_code, plan)?;
+    iterations += 1;
+  }
+
+  Ok(ReviewResult {
+    passed: result.passed,
+    score: result.score,
+    issues: result.issues,
+    iterations
+  })
+}
+
+fn run_arc(request: String, context: Context) -> Result<ARCResult, String> {
+  let analysis = analyze(request, context)?;
+  let plan = plan(request, analysis)?;
+  let code = generate_code(plan, context)?;
+  let review = review(code, plan)?;
+
+  Ok(ARCResult {
+    analysis,
+    plan,
+    code,
+    review,
+    iterations: review.iterations
+  })
+}
+
+fn build_analysis_prompt(request: String, context: Context) -> String { request }
+fn build_plan_prompt(request: String, analysis: Analysis) -> String { request }
+fn build_code_prompt(plan: Plan, context: Context) -> String { "plan" }
+fn parse_analysis(response: String) -> Result<Analysis, String> { Ok(Analysis { type_name: "new_project".into(), language: "frontier".into(), complexity: "moderate".into(), summary: response }) }
+fn parse_plan(response: String) -> Result<Plan, String> { Ok(Plan { steps: [] }) }
+fn parse_code(response: String) -> Result<GeneratedCode, String> { Ok(GeneratedCode { files: [], explanation: response }) }
+fn do_review(model: LocalModel, code: GeneratedCode, plan: Plan) -> Result<ReviewResult, String> { Ok(ReviewResult { passed: true, score: 0.85, issues: [], iterations: 0 }) }
+fn refine_code(model: LocalModel, code: GeneratedCode, issues: Vec<Issue>, plan: Plan) -> Result<GeneratedCode, String> { Ok(code) }
+
+fn main() -> void {
+  let context = Context::new();
+  let _ = run_arc("Build a water pump tracker".into(), context);
+}

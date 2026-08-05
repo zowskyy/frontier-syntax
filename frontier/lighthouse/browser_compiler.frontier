@@ -1,0 +1,60 @@
+// Browser compiler — compiles Frontier to native binaries IN THE BROWSER
+// Target: wasm32-unknown-unknown → wasm_compiler.wasm
+
+module browser_compiler;
+
+import frontier.wasm.{WasmExports, WasmMemory};
+import frontier.compiler.{Lexer, Parser, CodeGenerator, Optimizer, OptimizationLevel, AST};
+
+#[wasm_export]
+fn compile(source: String, target: String) -> Result<Vec<u8>, String> {
+  let tokens = Lexer::tokenize(source)?;
+  let ast = Parser::parse(tokens)?;
+
+  let code = match target {
+    "x86_64-linux" => CodeGenerator::generate_x86_64_linux(ast),
+    "aarch64-linux" => CodeGenerator::generate_aarch64_linux(ast),
+    "x86_64-windows" => CodeGenerator::generate_x86_64_windows(ast),
+    "x86_64-darwin" => CodeGenerator::generate_x86_64_darwin(ast),
+    "aarch64-darwin" => CodeGenerator::generate_aarch64_darwin(ast),
+    "aarch64-android" => CodeGenerator::generate_aarch64_android(ast),
+    "armv7-android" => CodeGenerator::generate_armv7_android(ast),
+    "aarch64-ios" => CodeGenerator::generate_aarch64_ios(ast),
+    "armv7-linux" => CodeGenerator::generate_armv7_linux(ast),
+    "arm-linux" => CodeGenerator::generate_arm_linux(ast),
+    "riscv64-linux" => CodeGenerator::generate_riscv64_linux(ast),
+    _ => Err("Unknown target: " + target),
+  }?;
+
+  Optimizer::optimize(code, OptimizationLevel::Size)
+}
+
+#[wasm_export]
+fn validate(source: String) -> String {
+  match parse_and_check(source) {
+    Ok(ast) => "{\"valid\": true}",
+    Err(e) => "{\"valid\": false, \"error\": \"" + e + "\"}",
+  }
+}
+
+#[wasm_export]
+fn get_targets() -> String {
+  r#"[
+    {"id": "x86_64-linux", "label": "Linux (x64)", "ext": ""},
+    {"id": "aarch64-linux", "label": "Raspberry Pi 4/5", "ext": ""},
+    {"id": "armv7-linux", "label": "Raspberry Pi 2/3", "ext": ""},
+    {"id": "x86_64-windows", "label": "Windows (.exe)", "ext": ".exe"},
+    {"id": "x86_64-darwin", "label": "macOS Intel", "ext": ""},
+    {"id": "aarch64-darwin", "label": "macOS Apple Silicon", "ext": ""},
+    {"id": "aarch64-android", "label": "Android ARM64", "ext": ".apk"},
+    {"id": "armv7-android", "label": "Android ARMv7", "ext": ".apk"},
+    {"id": "aarch64-ios", "label": "iOS ARM64", "ext": ".ipa"},
+    {"id": "arm-linux", "label": "Raspberry Pi Zero", "ext": ""},
+    {"id": "riscv64-linux", "label": "RISC-V", "ext": ""}
+  ]"#
+}
+
+fn parse_and_check(source: String) -> Result<AST, String> {
+  let tokens = Lexer::tokenize(source)?;
+  Parser::parse(tokens)
+}

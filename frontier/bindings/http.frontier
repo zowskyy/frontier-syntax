@@ -1,0 +1,14 @@
+// frontier.http — Native HTTP server bindings
+
+module frontier.http;
+
+type Server = opaque;
+type Request = opaque;
+type Response = opaque;
+
+extern fn Server::listen(addr: &str) -> Result<Server, String>;
+extern fn Server::route(server: Server, path: &str, handler: &str);
+extern fn Server::run(server: Server) -> Result<(), String>;
+
+extern fn Response::json(body: String) -> Response;
+extern fn Response::file(path: &str) -> Response;

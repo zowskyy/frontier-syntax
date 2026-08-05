@@ -1,0 +1,9 @@
+// frontier.data — Vectors and similarity for discovery engine
+
+module frontier.data;
+
+type Vector = opaque;
+type Similarity = opaque;
+
+extern fn Vector::embed(text: String) -> Result<Vector, String>;
+extern fn Similarity::cosine(a: Vector, b: Vector) -> Float;
