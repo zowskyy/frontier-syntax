@@ -48,8 +48,9 @@ pub fn process_v2_ast(ast_json: &str) -> Result<serde_json::Value, String> {
     let proof_gen = compiler::proof_generator::ProofGenerator::new();
     let obligations = proof_gen.collect_proof_obligations(&ast);
 
-    let zk = zk::verifier::ZkVerifier::new("frontier-v2-vk");
-    let proof = zk.generate_proof(&ast)?;
+    let mut verifier = zk::verifier::ZkVerifier::new();
+    verifier.setup()?;
+    let proof = verifier.generate_proof_json(&ast)?;
 
     Ok(serde_json::json!({
         "status": "processed",

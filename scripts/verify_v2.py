@@ -19,6 +19,8 @@ REQUIRED_SYNTAX = [
 ]
 
 REQUIRED_SRC = [
+    "src/parser/mod.rs",
+    "src/parser/handwritten.rs",
     "src/grammar/mutator.rs",
     "src/compiler/proof_generator.rs",
     "src/pq_signatures.rs",
@@ -71,11 +73,38 @@ def check_cargo_tests():
     return []
 
 
+def check_v2_parser():
+    result = subprocess.run(
+        [
+            "cargo", "run", "--release", "--bin", "frontier", "--",
+            "parse-v2", "examples/v2_parser_test.fr",
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        return [f"v2 parser CLI failed:\n{result.stderr[-1000:]}"]
+    return []
+
+
+def check_coq():
+    script = ROOT / "scripts" / "validate_coq.py"
+    if not script.exists():
+        return []
+    result = subprocess.run([sys.executable, str(script)], cwd=ROOT)
+    if result.returncode != 0:
+        return ["Coq proof validation failed"]
+    return []
+
+
 def main():
     errors = []
     errors.extend(check_files())
     errors.extend(check_feature_matrix())
     errors.extend(check_cargo_tests())
+    errors.extend(check_v2_parser())
+    errors.extend(check_coq())
 
     if errors:
         print("FAIL: Frontier v2.0 verification")

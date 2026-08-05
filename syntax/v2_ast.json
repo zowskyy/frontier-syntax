@@ -1,0 +1,106 @@
+{
+  "statements": [
+    {
+      "type": "version_decl",
+      "version": "2.0"
+    },
+    {
+      "alias": "std",
+      "path": "ipfs://QmXyzExample1234567890",
+      "type": "import_decl"
+    },
+    {
+      "body": [
+        {
+          "type": "return",
+          "value": {
+            "left": {
+              "name": "x",
+              "type": "identifier"
+            },
+            "operator": "*",
+            "right": {
+              "type": "integer_literal",
+              "value": 2
+            },
+            "type": "binary_expr"
+          }
+        }
+      ],
+      "ensures": "result > x",
+      "name": "double",
+      "params": [
+        {
+          "name": "x",
+          "type_spec": {
+            "annotation": "none",
+            "base": "int"
+          }
+        }
+      ],
+      "requires": "x > 0",
+      "return_type": {
+        "annotation": "none",
+        "base": "int"
+      },
+      "type": "fn_decl"
+    },
+    {
+      "body": [
+        {
+          "name": "x",
+          "type": "let_decl",
+          "type_spec": {
+            "annotation": "none",
+            "base": "int"
+          },
+          "value": {
+            "type": "integer_literal",
+            "value": 10
+          }
+        },
+        {
+          "body": [
+            {
+              "expr": {
+                "args": [
+                  {
+                    "name": "x",
+                    "type": "identifier"
+                  }
+                ],
+                "callee": {
+                  "name": "double",
+                  "type": "identifier"
+                },
+                "type": "call_expr"
+              },
+              "type": "expr"
+            }
+          ],
+          "condition": {
+            "left": {
+              "name": "x",
+              "type": "identifier"
+            },
+            "operator": ">",
+            "right": {
+              "type": "integer_literal",
+              "value": 0
+            },
+            "type": "binary_expr"
+          },
+          "type": "while"
+        }
+      ],
+      "name": "main",
+      "params": [],
+      "return_type": {
+        "annotation": "none",
+        "base": "void"
+      },
+      "type": "fn_decl"
+    }
+  ],
+  "version": "2.0"
+}

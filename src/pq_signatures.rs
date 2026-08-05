@@ -1,49 +1,80 @@
-use sha3::{Digest, Sha3_256};
+//! Post-Quantum Signatures with Dilithium3 (NIST PQC finalist)
 
-/// Post-quantum signature interface.
-/// Production deployments use Dilithium/Kyber via pqcrypto crates.
+use pqcrypto_dilithium::dilithium3;
+use pqcrypto_traits::sign::{PublicKey as _, SecretKey as _, SignedMessage as _};
+use serde::{Deserialize, Serialize};
+
+/// Post-quantum cryptographic key pair (Dilithium3)
+#[derive(Clone)]
 pub struct PqCrypto {
-    secret_key: [u8; 32],
-    public_key: [u8; 32],
+    public_key: dilithium3::PublicKey,
+    secret_key: dilithium3::SecretKey,
+}
+
+/// Signature with metadata
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct PQSignature {
+    pub signature: Vec<u8>,
+    pub public_key: Vec<u8>,
+    pub algorithm: String,
 }
 
 impl PqCrypto {
-    pub fn generate_keys(seed: &[u8]) -> Self {
-        let mut hasher = Sha3_256::new();
-        hasher.update(b"frontier-pq-secret:");
-        hasher.update(seed);
-        let secret_key: [u8; 32] = hasher.finalize().into();
-
-        let mut hasher = Sha3_256::new();
-        hasher.update(b"frontier-pq-public:");
-        hasher.update(&secret_key);
-        let public_key: [u8; 32] = hasher.finalize().into();
-
+    /// Generate a new Dilithium3 key pair
+    pub fn generate_keys() -> Self {
+        let (public_key, secret_key) = dilithium3::keypair();
         PqCrypto {
-            secret_key,
             public_key,
+            secret_key,
         }
     }
 
-    pub fn sign(&self, data: &[u8]) -> Vec<u8> {
-        let mut hasher = Sha3_256::new();
-        hasher.update(b"frontier-pq-sign:");
-        hasher.update(&self.secret_key);
-        hasher.update(data);
-        hasher.finalize().to_vec()
+    /// Sign a message with the secret key
+    pub fn sign(&self, message: &[u8]) -> PQSignature {
+        let signed = dilithium3::sign(message, &self.secret_key);
+        PQSignature {
+            signature: signed.as_bytes().to_vec(),
+            public_key: self.public_key.as_bytes().to_vec(),
+            algorithm: "Dilithium3".to_string(),
+        }
     }
 
-    pub fn verify(&self, data: &[u8], signature: &[u8]) -> bool {
-        self.sign(data) == signature
+    /// Verify a signed message
+    pub fn verify(&self, message: &[u8], signature: &PQSignature) -> bool {
+        let Ok(signed) = dilithium3::SignedMessage::from_bytes(&signature.signature) else {
+            return false;
+        };
+        let Ok(opened) = dilithium3::open(&signed, &self.public_key) else {
+            return false;
+        };
+        opened == message
     }
 
-    pub fn public_key(&self) -> [u8; 32] {
-        self.public_key
+    /// Verify using embedded public key in signature
+    pub fn verify_detached(message: &[u8], signature: &PQSignature) -> bool {
+        let Ok(pk) = dilithium3::PublicKey::from_bytes(&signature.public_key) else {
+            return false;
+        };
+        let Ok(signed) = dilithium3::SignedMessage::from_bytes(&signature.signature) else {
+            return false;
+        };
+        dilithium3::open(&signed, &pk)
+            .map(|m| m == message)
+            .unwrap_or(false)
+    }
+
+    pub fn public_key_bytes(&self) -> Vec<u8> {
+        self.public_key.as_bytes().to_vec()
+    }
+
+    pub fn sign_ast(&self, ast: &serde_json::Value) -> PQSignature {
+        let ast_json = serde_json::to_string(ast).unwrap_or_default();
+        self.sign(ast_json.as_bytes())
     }
 }
 
-pub fn sign_artifact(content: &str) -> (String, Vec<u8>) {
-    let crypto = PqCrypto::generate_keys(content.as_bytes());
+pub fn sign_artifact(content: &str) -> (String, PQSignature) {
+    let crypto = PqCrypto::generate_keys();
     let signature = crypto.sign(content.as_bytes());
     let hash = crate::canonicalize::sha3_256_hex(content);
     (hash, signature)
@@ -54,10 +85,22 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_sign_verify() {
-        let crypto = PqCrypto::generate_keys(b"frontier-v2");
-        let data = b"Hello, Frontier v2.0!";
-        let signature = crypto.sign(data);
-        assert!(crypto.verify(data, &signature));
+    fn test_dilithium_sign_verify() {
+        let crypto = PqCrypto::generate_keys();
+        let message = b"Hello, Frontier v2.0 with real Dilithium!";
+        let signature = crypto.sign(message);
+        assert!(crypto.verify(message, &signature));
+    }
+
+    #[test]
+    fn test_ast_signing() {
+        let crypto = PqCrypto::generate_keys();
+        let ast = serde_json::json!({
+            "type": "Program",
+            "statements": [{"type": "LetStatement", "name": "x", "value": 5}]
+        });
+        let signature = crypto.sign_ast(&ast);
+        let ast_json = serde_json::to_string(&ast).unwrap();
+        assert!(crypto.verify(ast_json.as_bytes(), &signature));
     }
 }

@@ -77,19 +77,50 @@ impl Parser {
     }
 
     pub fn parse_program(&mut self) -> Result<Program, FrontierError> {
+        let mut version = None;
         let mut statements = Vec::new();
+        if matches!(self.peek().token, Token::Version) {
+            if let Stmt::VersionDecl { version: v } = self.parse_version_decl()? {
+                version = Some(v.clone());
+                statements.push(Stmt::VersionDecl { version: v });
+            }
+        }
         while !matches!(self.peek().token, Token::Eof) {
             statements.push(self.parse_statement()?);
         }
-        Ok(Program { statements })
+        Ok(Program {
+            version,
+            statements,
+        })
     }
 
     fn parse_statement(&mut self) -> Result<Stmt, FrontierError> {
+        let mut requires = None;
+        let mut ensures = None;
+        let mut invariant = None;
+        while matches!(self.peek().token, Token::At) {
+            let annotation = self.parse_proof_annotation()?;
+            match annotation.0.as_str() {
+                "requires" => requires = Some(annotation.1),
+                "ensures" => ensures = Some(annotation.1),
+                "invariant" => invariant = Some(annotation.1),
+                _ => {}
+            }
+        }
         match &self.peek().token {
+            Token::Version => {
+                if let Stmt::VersionDecl { version } = self.parse_version_decl()? {
+                    Ok(Stmt::VersionDecl { version })
+                } else {
+                    unreachable!()
+                }
+            }
+            Token::Import => self.parse_import(),
             Token::Let => self.parse_let(),
-            Token::Fn => self.parse_fn(),
+            Token::Fn => self.parse_fn_with_proofs(requires, ensures, invariant),
             Token::Return => self.parse_return(),
             Token::If => self.parse_if(),
+            Token::While => self.parse_while(),
             Token::LBrace => {
                 let statements = self.parse_block()?;
                 Ok(Stmt::Block { statements })
@@ -129,7 +160,12 @@ impl Parser {
         })
     }
 
-    fn parse_fn(&mut self) -> Result<Stmt, FrontierError> {
+    fn parse_fn_with_proofs(
+        &mut self,
+        requires: Option<String>,
+        ensures: Option<String>,
+        invariant: Option<String>,
+    ) -> Result<Stmt, FrontierError> {
         self.advance();
         let name = self.expect_ident()?;
         self.expect(Token::LParen)?;
@@ -152,16 +188,129 @@ impl Parser {
             }
         }
         self.expect(Token::RParen)?;
-        self.expect(Token::Colon)?;
-        let return_type = self.parse_type_spec()?;
+        let return_type = self.parse_return_type()?;
         let body = self.parse_block()?;
         Ok(Stmt::FnDecl {
             name,
             params,
             return_type,
             body,
+            requires,
+            ensures,
+            invariant,
             symbol_id: None,
         })
+    }
+
+    fn parse_return_type(&mut self) -> Result<TypeSpec, FrontierError> {
+        match self.peek().token {
+            Token::Colon | Token::Arrow => {
+                self.advance();
+                self.parse_type_spec()
+            }
+            _ => Err(FrontierError::parse(
+                ": or ->",
+                token_name(&self.peek().token),
+                self.peek().line,
+                self.peek().column,
+            )),
+        }
+    }
+
+    fn parse_version_decl(&mut self) -> Result<Stmt, FrontierError> {
+        self.expect(Token::Version)?;
+        self.expect(Token::Colon)?;
+        let version = match &self.current().token {
+            Token::FloatLit(v) => {
+                let s = format!("{:.1}", v);
+                self.advance();
+                s
+            }
+            Token::Integer(v) => {
+                let mut s = v.to_string();
+                self.advance();
+                if matches!(self.peek().token, Token::Dot) {
+                    self.advance();
+                    if let Token::Integer(minor) = self.current().token {
+                        s.push('.');
+                        s.push_str(&minor.to_string());
+                        self.advance();
+                    }
+                }
+                s
+            }
+            Token::Identifier(v) => {
+                let s = v.clone();
+                self.advance();
+                s
+            }
+            _ => {
+                return Err(FrontierError::parse(
+                    "version number",
+                    token_name(&self.current().token),
+                    self.current().line,
+                    self.current().column,
+                ))
+            }
+        };
+        self.expect(Token::Semicolon)?;
+        Ok(Stmt::VersionDecl { version })
+    }
+
+    fn parse_import(&mut self) -> Result<Stmt, FrontierError> {
+        self.advance();
+        let path = match &self.current().token {
+            Token::StringLit(s) => s.clone(),
+            _ => {
+                return Err(FrontierError::parse(
+                    "string literal",
+                    token_name(&self.current().token),
+                    self.current().line,
+                    self.current().column,
+                ))
+            }
+        };
+        self.advance();
+        self.expect(Token::As)?;
+        let alias = self.expect_ident()?;
+        self.expect(Token::Semicolon)?;
+        Ok(Stmt::ImportDecl { path, alias })
+    }
+
+    fn parse_while(&mut self) -> Result<Stmt, FrontierError> {
+        self.advance();
+        self.expect(Token::LParen)?;
+        let condition = Box::new(self.parse_expression()?);
+        self.expect(Token::RParen)?;
+        let body = self.parse_block()?;
+        Ok(Stmt::While { condition, body })
+    }
+
+    fn parse_proof_annotation(&mut self) -> Result<(String, String), FrontierError> {
+        self.expect(Token::At)?;
+        let kind = match &self.peek().token {
+            Token::Requires => "requires",
+            Token::Ensures => "ensures",
+            Token::Invariant => "invariant",
+            _ => {
+                return Err(FrontierError::parse(
+                    "requires|ensures|invariant",
+                    token_name(&self.peek().token),
+                    self.peek().line,
+                    self.peek().column,
+                ))
+            }
+        }
+        .to_string();
+        self.advance();
+        self.expect(Token::LParen)?;
+        let expr = self.parse_expression()?;
+        self.expect(Token::RParen)?;
+        Ok((kind, expr_to_proof_string(&expr)))
+    }
+
+    fn parse_fn(&mut self) -> Result<Stmt, FrontierError> {
+        self.parse_fn_with_proofs(None, None, None)
     }
 
     fn parse_return(&mut self) -> Result<Stmt, FrontierError> {
@@ -512,6 +661,37 @@ impl Parser {
                 cur.column,
             )),
         }
+    }
+}
+
+fn expr_to_proof_string(expr: &Expr) -> String {
+    match expr {
+        Expr::BinaryExpr {
+            operator,
+            left,
+            right,
+        } => format!(
+            "{} {} {}",
+            expr_to_proof_string(left),
+            operator,
+            expr_to_proof_string(right)
+        ),
+        Expr::UnaryExpr { operator, operand } => {
+            format!("{}{}", operator, expr_to_proof_string(operand))
+        }
+        Expr::Identifier { name, .. } => name.clone(),
+        Expr::IntegerLiteral { value, .. } => value.to_string(),
+        Expr::FloatLiteral { value, .. } => value.to_string(),
+        Expr::BoolLiteral { value, .. } => value.to_string(),
+        Expr::CallExpr { callee, args } => {
+            let arg_strs: Vec<_> = args.iter().map(expr_to_proof_string).collect();
+            format!(
+                "{}({})",
+                expr_to_proof_string(callee),
+                arg_strs.join(", ")
+            )
+        }
+        _ => "expr".to_string(),
     }
 }
 

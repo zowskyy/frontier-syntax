@@ -223,6 +223,29 @@ impl Resolver {
             Stmt::Expr { expr } => {
                 self.resolve_expr(expr)?;
             }
+            Stmt::VersionDecl { .. } => {}
+            Stmt::ImportDecl { alias, .. } => {
+                let id = self.declare(
+                    alias,
+                    "imported",
+                    TypeSpec {
+                        base: "module".to_string(),
+                        annotation: TypeAnnotation::None,
+                    },
+                    1,
+                    1,
+                )?;
+                let key = self.node_key();
+                self.node_symbols.insert(key, id);
+            }
+            Stmt::While { condition, body } => {
+                self.resolve_expr(condition)?;
+                self.enter_scope();
+                for s in body {
+                    self.resolve_stmt(s)?;
+                }
+                self.exit_scope();
+            }
         }
         Ok(())
     }

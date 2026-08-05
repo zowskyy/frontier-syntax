@@ -1,0 +1,16 @@
+version: 2.0;
+
+import "ipfs://QmXyzExample1234567890" as std;
+
+@requires(x > 0)
+@ensures(result > x)
+fn double(x: int) -> int {
+    return x * 2;
+}
+
+fn main(): void {
+    let x: int = 10;
+    while (x > 0) {
+        double(x);
+    }
+}

@@ -6,3 +6,7 @@ target/
 .DS_Store
 *.sha3
 !syntax/*_v2.sha3
+*.vo
+*.glob
+*.vok
+*.vos

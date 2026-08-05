@@ -13,6 +13,15 @@ pub enum Token {
     Bool,
     String,
     Void,
+    While,
+    Import,
+    As,
+    Requires,
+    Ensures,
+    Invariant,
+    Version,
+    At,
+    Arrow,
     Identifier(String),
     Integer(i64),
     FloatLit(f64),
@@ -155,6 +164,13 @@ impl<'a> Lexer<'a> {
             "bool" => Token::Bool,
             "string" => Token::String,
             "void" => Token::Void,
+            "while" => Token::While,
+            "import" => Token::Import,
+            "as" => Token::As,
+            "requires" => Token::Requires,
+            "ensures" => Token::Ensures,
+            "invariant" => Token::Invariant,
+            "version" => Token::Version,
             _ => Token::Identifier(text.to_string()),
         }
     }
@@ -344,7 +360,12 @@ impl<'a> Lexer<'a> {
             }
             Some('-') => {
                 self.advance();
-                Token::OpMinus
+                if self.peek() == Some('>') {
+                    self.advance();
+                    Token::Arrow
+                } else {
+                    Token::OpMinus
+                }
             }
             Some('*') => {
                 self.advance();
@@ -402,7 +423,10 @@ impl<'a> Lexer<'a> {
                 self.advance();
                 Token::Dot
             }
-            Some('\'') => Token::Error, // single quotes illegal
+            Some('@') => {
+                self.advance();
+                Token::At
+            }
             _ => {
                 self.advance();
                 Token::Error
