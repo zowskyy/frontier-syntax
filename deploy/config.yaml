@@ -1,0 +1,27 @@
+environment: production
+version: v2.0.0-a-plus
+
+services:
+  - name: frontier-api
+    port: 8080
+    replicas: 3
+  - name: frontier-migration
+    port: 8081
+    replicas: 5
+  - name: frontier-lsp
+    port: 8082
+    replicas: 2
+
+monitoring:
+  - prometheus
+  - grafana
+  - datadog
+
+logging:
+  - elasticsearch
+  - kibana
+  - fluentd
+
+backup:
+  - every 6 hours
+  - retention: 30 days

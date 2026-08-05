@@ -4,8 +4,10 @@ pub mod compiler;
 pub mod error;
 pub mod grammar;
 pub mod ipfs;
+pub mod knowledge;
 pub mod lexer;
 pub mod lsp;
+pub mod migrate;
 pub mod neural;
 pub mod packages;
 pub mod parser;
@@ -19,6 +21,8 @@ pub use canonicalize::{canonical_ast_json, sha3_256_hex};
 pub use error::FrontierError;
 pub use parser::parse_program;
 pub use resolver::resolve_program;
+pub use knowledge::{get_ancestors, get_tradeoffs, hypercube_stats, optimize_hash, optimize_sort};
+pub use knowledge::solver::{SizeHint, SolverContext as KnowledgeContext};
 
 const MAX_NESTING_DEPTH: usize = 64;
 

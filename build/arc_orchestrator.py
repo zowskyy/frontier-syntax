@@ -79,6 +79,11 @@ def verify():
         rc = subprocess.call([sys.executable, str(coq_script)])
         results.append(("Coq Proof Validation", rc))
 
+    knowledge_script = ROOT / "scripts" / "verify_knowledge.py"
+    if knowledge_script.exists():
+        rc = subprocess.call([sys.executable, str(knowledge_script)])
+        results.append(("Knowledge Hypercube", rc))
+
     failed = [name for name, rc in results if rc != 0]
     if failed:
         print(f"\nFAIL: Verification failed for: {', '.join(failed)}")

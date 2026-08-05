@@ -12,3 +12,8 @@ target/
 *.vos
 *.aux
 .lia.cache
+dist/
+*.tar.gz
+test_projects/
+__pycache__/
+*.pyc
