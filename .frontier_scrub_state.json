@@ -1,0 +1,16 @@
+{
+  "runs": [
+    {
+      "at": "2026-08-05T22:24:25.740800Z",
+      "status": "success",
+      "attempt": 1
+    },
+    {
+      "at": "2026-08-05T22:24:42.960852Z",
+      "status": "success",
+      "attempt": 1
+    }
+  ],
+  "last_success": "2026-08-05T22:24:42.960852Z",
+  "failures": 0
+}

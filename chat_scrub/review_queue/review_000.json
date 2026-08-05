@@ -1,0 +1,10 @@
+{
+  "timestamp": "2026-08-05T22:24:42.927207Z",
+  "decision": "architecture_decision",
+  "justification": "frontier_worker.py not in repo; mapped to frontier_agent.py + symbiotic_agents.py as worker targets.",
+  "confidence": 0.92,
+  "cross_refs": [
+    "worker_integration"
+  ],
+  "source": "repository"
+}

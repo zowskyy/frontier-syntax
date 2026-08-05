@@ -100,6 +100,10 @@ class FrontierAgent:
             result = self.run_audit_cycle(parsed)
         elif parsed["type"] == "deploy":
             result = self.deploy(parsed)
+        elif parsed["type"] == "run_scrub":
+            result = self.run_scrub_pipeline(parsed)
+        elif parsed["type"] == "ingest_scrub":
+            result = self.ingest_scrub_report(parsed)
         else:
             result = {"error": f"Unknown intent type: {parsed['type']}"}
 
@@ -204,6 +208,11 @@ class FrontierAgent:
             return {"type": "update_docs", "content": intent}
         if intent_lower.startswith("update doc") or " update doc" in intent_lower:
             return {"type": "update_docs", "content": intent}
+
+        if any(word in intent_lower for word in ["scrub", "knowledge engine", "outperform", "chat scrub"]):
+            if any(word in intent_lower for word in ["ingest", "embed", "hypercube"]):
+                return {"type": "ingest_scrub", "content": intent}
+            return {"type": "run_scrub", "content": intent, "delta": "delta" in intent_lower}
 
         if any(word in intent_lower for word in ["deploy", "release", "publish"]):
             return {"type": "deploy", "version": self.detect_version(intent)}
@@ -509,6 +518,140 @@ class FrontierAgent:
             return False
         result = self._run_command([str(orchestrator), "--verify"])
         return result["returncode"] == 0
+
+    def run_scrub_pipeline(self, parsed: Dict[str, Any]) -> Dict[str, Any]:
+        """Run the self-healing scrub pipeline with ingest, tests, and dashboard."""
+        delta = parsed.get("delta", False)
+        cmd = [str(self.scripts_dir / "scrub_with_retry.py"), "--max-retries", "5"]
+        if delta:
+            cmd.append("--delta")
+
+        scrub = self._run_command(cmd, capture=True)
+        if scrub["returncode"] != 0:
+            return {
+                "status": "failed",
+                "step": "scrub",
+                "error": scrub.get("stderr", "scrub failed"),
+            }
+
+        ingest = self.ingest_scrub_report({"report_path": "chat_scrub/WORKER_REPORT.json"})
+        tests = self._run_command(
+            [
+                str(self.scripts_dir / "generate_tests_from_scrub.py"),
+                "--run",
+            ],
+            capture=True,
+        )
+        dashboard = self._run_command(
+            [str(self.scripts_dir / "generate_scrub_dashboard.py")],
+            capture=True,
+        )
+        issues = self.create_issues_from_gaps()
+
+        return {
+            "status": "success",
+            "delta": delta,
+            "scrub": scrub.get("stdout", "").strip(),
+            "ingest": ingest,
+            "tests_passed": tests["returncode"] == 0,
+            "dashboard": dashboard["returncode"] == 0,
+            "issues": issues,
+            "message": "Scrub pipeline complete — knowledge engine updated",
+        }
+
+    def ingest_scrub_report(self, parsed: Dict[str, Any]) -> Dict[str, Any]:
+        """Ingest WORKER_REPORT.json into the chat knowledge index."""
+        report_rel = parsed.get("report_path", "chat_scrub/WORKER_REPORT.json")
+        report_path = self.repo_root / report_rel
+        if not report_path.exists():
+            return {"status": "failed", "error": f"Report not found: {report_rel}"}
+
+        result = self._run_command(
+            [
+                str(self.scripts_dir / "chat_knowledge_store.py"),
+                "ingest",
+                "--file",
+                report_rel,
+            ],
+            capture=True,
+        )
+        if result["returncode"] != 0:
+            return {
+                "status": "failed",
+                "error": result.get("stderr", "ingest failed"),
+            }
+
+        try:
+            payload = json.loads(result.get("stdout", "{}").splitlines()[-1])
+        except (json.JSONDecodeError, IndexError):
+            payload = {"stdout": result.get("stdout", "")}
+
+        self.state.setdefault("scrub_ingestions", []).append(
+            {
+                "at": datetime.now(timezone.utc).isoformat(),
+                "report": report_rel,
+                "result": payload,
+            }
+        )
+        self.save_state()
+        return {"status": "success", "ingest": payload}
+
+    def create_issues_from_gaps(self) -> Dict[str, Any]:
+        """Create GitHub issues or local issue drafts from WORKER_REPORT gaps."""
+        report_path = self.repo_root / "chat_scrub" / "WORKER_REPORT.json"
+        if not report_path.exists():
+            return {"status": "skipped", "reason": "no report"}
+
+        report = json.loads(report_path.read_text(encoding="utf-8"))
+        gaps = report.get("known_gaps", [])
+        issues_dir = self.repo_root / "chat_scrub" / "issues"
+        issues_dir.mkdir(parents=True, exist_ok=True)
+
+        created: List[Dict[str, Any]] = []
+        gh = shutil_which("gh")
+
+        for gap in gaps:
+            priority = gap.get("priority", "P2")
+            title = f"[{priority}] {gap.get('id', 'gap')}: {gap.get('description', '')[:80]}"
+            body = (
+                f"**Priority:** {priority}\n"
+                f"**Subsystem:** {gap.get('file', 'unknown')}\n\n"
+                f"{gap.get('description', '')}\n\n"
+                f"_Auto-generated from WORKER_REPORT.json by frontier_agent.py_"
+            )
+            draft_path = issues_dir / f"{gap.get('id', 'gap')}.md"
+            draft_path.write_text(f"# {title}\n\n{body}\n", encoding="utf-8")
+
+            issue_record = {
+                "id": gap.get("id"),
+                "priority": priority,
+                "draft": str(draft_path.relative_to(self.repo_root)),
+                "github_created": False,
+            }
+
+            if gh and priority in ("P0", "P1"):
+                label = f"priority-{priority.lower()}"
+                gh_result = self._run_command(
+                    [
+                        "gh",
+                        "issue",
+                        "create",
+                        "--title",
+                        title,
+                        "--body",
+                        body,
+                        "--label",
+                        label,
+                    ],
+                    capture=True,
+                )
+                issue_record["github_created"] = gh_result["returncode"] == 0
+                if gh_result["returncode"] != 0:
+                    issue_record["gh_error"] = gh_result.get("stderr", "")
+
+            created.append(issue_record)
+
+        return {"status": "success", "issues": created, "count": len(created)}
 
     def deploy(self, parsed: Dict[str, Any]) -> Dict[str, Any]:
         """Deploy a new version."""
@@ -847,6 +990,10 @@ def print_usage() -> None:
     print()
     print("5. Update Documentation")
     print("  python3 frontier_agent.py 'Update documentation for the new Decimal type'")
+    print()
+    print("6. Knowledge Engine (Scrub Pipeline)")
+    print("  python3 frontier_agent.py 'Run chat scrub pipeline'")
+    print("  python3 frontier_agent.py 'Ingest scrub report into hypercube'")
 
 
 def main() -> None:
