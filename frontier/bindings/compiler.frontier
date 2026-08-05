@@ -1,0 +1,28 @@
+// frontier.compiler — Lexer, parser, codegen (used by browser_compiler)
+
+module frontier.compiler;
+
+type Lexer = opaque;
+type Parser = opaque;
+type CodeGenerator = opaque;
+type Optimizer = opaque;
+type AST = opaque;
+
+enum OptimizationLevel { None, Size, Speed }
+
+extern fn Lexer::tokenize(source: String) -> Result<Vec<Token>, String>;
+extern fn Parser::parse(tokens: Vec<Token>) -> Result<AST, String>;
+extern fn CodeGenerator::generate_x86_64_linux(ast: AST) -> Result<Vec<u8>, String>;
+extern fn CodeGenerator::generate_aarch64_linux(ast: AST) -> Result<Vec<u8>, String>;
+extern fn CodeGenerator::generate_x86_64_windows(ast: AST) -> Result<Vec<u8>, String>;
+extern fn CodeGenerator::generate_x86_64_darwin(ast: AST) -> Result<Vec<u8>, String>;
+extern fn CodeGenerator::generate_aarch64_darwin(ast: AST) -> Result<Vec<u8>, String>;
+extern fn CodeGenerator::generate_aarch64_android(ast: AST) -> Result<Vec<u8>, String>;
+extern fn CodeGenerator::generate_armv7_android(ast: AST) -> Result<Vec<u8>, String>;
+extern fn CodeGenerator::generate_aarch64_ios(ast: AST) -> Result<Vec<u8>, String>;
+extern fn CodeGenerator::generate_armv7_linux(ast: AST) -> Result<Vec<u8>, String>;
+extern fn CodeGenerator::generate_arm_linux(ast: AST) -> Result<Vec<u8>, String>;
+extern fn CodeGenerator::generate_riscv64_linux(ast: AST) -> Result<Vec<u8>, String>;
+extern fn Optimizer::optimize(code: Vec<u8>, level: OptimizationLevel) -> Result<Vec<u8>, String>;
+
+type Token = { kind: String, text: String, line: Int, column: Int };

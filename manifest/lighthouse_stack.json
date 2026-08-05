@@ -1,0 +1,28 @@
+{
+  "name": "Frontier In-House Lighthouse Stack",
+  "version": "2.0.0",
+  "description": "Complete stack written in Frontier Syntax — zero external dependencies",
+  "modules": {
+    "lighthouse": {
+      "arc_engine": "frontier/lighthouse/arc_engine.frontier",
+      "discovery_engine": "frontier/lighthouse/discovery_engine.frontier",
+      "agent_distiller": "frontier/lighthouse/agent_distiller.frontier",
+      "browser_compiler": "frontier/lighthouse/browser_compiler.frontier"
+    },
+    "bindings": {
+      "ai": "frontier/bindings/ai.frontier",
+      "storage": "frontier/bindings/storage.frontier",
+      "ui": "frontier/bindings/ui.frontier",
+      "hardware": "frontier/bindings/hardware.frontier",
+      "compiler": "frontier/bindings/compiler.frontier",
+      "wasm": "frontier/bindings/wasm.frontier",
+      "data": "frontier/bindings/data.frontier",
+      "http": "frontier/bindings/http.frontier"
+    },
+    "examples": {
+      "water_pump_tracker": "examples/lighthouse/water_pump_tracker.frontier"
+    }
+  },
+  "compile_targets": 11,
+  "zero_dependencies": true
+}

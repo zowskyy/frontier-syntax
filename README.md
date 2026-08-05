@@ -34,6 +34,25 @@ python3 scripts/generate_v2_hashes.py
 
 The standalone Frontier language core lives under `frontier/core/` — parser, type system, memory model, concurrency, error handling, standard library, and compiler backend.
 
+## In-House Lighthouse Stack (100% Frontier)
+
+**Everything is Frontier Syntax.** No JavaScript, Python, npm, or third-party app logic.
+
+| Component | Source |
+|-----------|--------|
+| ARC Engine | `frontier/lighthouse/arc_engine.frontier` |
+| Discovery Engine | `frontier/lighthouse/discovery_engine.frontier` |
+| Agent Distiller | `frontier/lighthouse/agent_distiller.frontier` |
+| Browser Compiler | `frontier/lighthouse/browser_compiler.frontier` → `wasm_compiler.wasm` |
+| FFI Bindings | `frontier/bindings/*.frontier` (ui, storage, ai, hardware, compiler, http) |
+| Community App | `examples/lighthouse/water_pump_tracker.frontier` |
+
+```bash
+python3 scripts/verify_lighthouse_stack.py
+```
+
+See [docs/IN_HOUSE_STACK.md](docs/IN_HOUSE_STACK.md).
+
 | Module | Path |
 |--------|------|
 | Parser (Lexer → AST) | `frontier/core/parser.frontier` |
