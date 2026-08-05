@@ -74,6 +74,11 @@ def verify():
         rc = subprocess.call([sys.executable, str(V2_VERIFY_SCRIPT)])
         results.append(("Frontier v2.0 A+ Hard Gate", rc))
 
+    coq_script = ROOT / "scripts" / "validate_coq.py"
+    if coq_script.exists():
+        rc = subprocess.call([sys.executable, str(coq_script)])
+        results.append(("Coq Proof Validation", rc))
+
     failed = [name for name, rc in results if rc != 0]
     if failed:
         print(f"\nFAIL: Verification failed for: {', '.join(failed)}")

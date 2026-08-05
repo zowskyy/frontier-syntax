@@ -62,8 +62,10 @@ pub fn verify_zk_proof(ast_json: &str, proof_json: &str) -> bool {
     let Ok(ast) = serde_json::from_str::<serde_json::Value>(ast_json) else {
         return false;
     };
-    let verifier = crate::zk::verifier::ZkVerifier::new("frontier-v2-vk");
-    verifier.verify_proof(&ast, proof_json)
+    let Ok(vk) = setup_zk_verifier() else {
+        return false;
+    };
+    vk.verify_proof_json(&ast, proof_json)
 }
 
 #[wasm_bindgen]
@@ -71,10 +73,22 @@ pub fn generate_zk_proof(ast_json: &str) -> String {
     let Ok(ast) = serde_json::from_str::<serde_json::Value>(ast_json) else {
         return r#"{"status":"error","message":"invalid ast"}"#.to_string();
     };
-    let verifier = crate::zk::verifier::ZkVerifier::new("frontier-v2-vk");
+    let Ok(mut verifier) = setup_zk_verifier_mut() else {
+        return r#"{"status":"error","message":"zk setup failed"}"#.to_string();
+    };
     verifier
-        .generate_proof(&ast)
+        .generate_proof_json(&ast)
         .unwrap_or_else(|e| format!(r#"{{"status":"error","message":"{e}"}}"#))
+}
+
+fn setup_zk_verifier_mut() -> Result<crate::zk::verifier::ZkVerifier, String> {
+    let mut verifier = crate::zk::verifier::ZkVerifier::new();
+    verifier.setup()?;
+    Ok(verifier)
+}
+
+fn setup_zk_verifier() -> Result<crate::zk::verifier::ZkVerifier, String> {
+    setup_zk_verifier_mut()
 }
 
 #[wasm_bindgen]

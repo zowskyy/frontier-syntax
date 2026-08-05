@@ -10,9 +10,36 @@ fn main() {
     match cmd {
         "parse" => {
             let path = args.get(2).expect("usage: frontier parse <file.fr>");
+            let output = args.get(3).map(|s| s.as_str());
             let source = fs::read_to_string(path).expect("read file");
             let program = parse_program(&source, 64).expect("parse");
-            println!("{}", serde_json::to_string_pretty(&program).unwrap());
+            let json = serde_json::to_string_pretty(&program).unwrap();
+            if let Some(out) = output {
+                if out == "--output" {
+                    let out_path = args.get(4).expect("usage: frontier parse <file> --output <path>");
+                    fs::write(out_path, &json).expect("write output");
+                    println!("✅ Wrote AST to {out_path}");
+                } else {
+                    println!("{json}");
+                }
+            } else {
+                println!("{json}");
+            }
+        }
+        "parse-v2" => {
+            let path = args.get(2).expect("usage: frontier parse-v2 <file.fr>");
+            let output = args
+                .get(4)
+                .filter(|_| args.get(3).map(|s| s.as_str()) == Some("--output"))
+                .map(|s| s.as_str());
+            let ast = frontier::parser::parse_file(path).expect("parse v2");
+            let json = serde_json::to_string_pretty(&ast).unwrap();
+            if let Some(out_path) = output {
+                fs::write(out_path, &json).expect("write output");
+                println!("✅ Wrote v2 AST to {out_path}");
+            } else {
+                println!("{json}");
+            }
         }
         "resolve" => {
             let path = args.get(2).expect("usage: frontier resolve <file.fr>");
@@ -36,7 +63,7 @@ fn main() {
             run_fuzz(count);
         }
         _ => {
-            eprintln!("Commands: parse, resolve, hash, gen-artifacts, fuzz");
+            eprintln!("Commands: parse, parse-v2, resolve, hash, gen-artifacts, fuzz");
         }
     }
 }

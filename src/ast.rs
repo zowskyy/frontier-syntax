@@ -1,8 +1,22 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct Program {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub version: Option<String>,
+    pub statements: Vec<Stmt>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 #[serde(tag = "type", rename_all = "snake_case")]
 pub enum Stmt {
+    VersionDecl {
+        version: String,
+    },
+    ImportDecl {
+        path: String,
+        alias: String,
+    },
     LetDecl {
         name: String,
         type_spec: TypeSpec,
@@ -16,6 +30,12 @@ pub enum Stmt {
         return_type: TypeSpec,
         body: Vec<Stmt>,
         #[serde(skip_serializing_if = "Option::is_none")]
+        requires: Option<String>,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        ensures: Option<String>,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        invariant: Option<String>,
+        #[serde(skip_serializing_if = "Option::is_none")]
         symbol_id: Option<u32>,
     },
     Return {
@@ -25,6 +45,10 @@ pub enum Stmt {
         condition: Box<Expr>,
         then_block: Vec<Stmt>,
         else_block: Option<Vec<Stmt>>,
+    },
+    While {
+        condition: Box<Expr>,
+        body: Vec<Stmt>,
     },
     Block {
         statements: Vec<Stmt>,
@@ -113,10 +137,6 @@ pub enum Expr {
     },
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
-pub struct Program {
-    pub statements: Vec<Stmt>,
-}
 
 impl Expr {
     pub fn nesting_depth(&self) -> usize {
