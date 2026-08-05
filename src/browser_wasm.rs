@@ -26,6 +26,7 @@ impl BrowserCompiler {
         let options = CompileOptions {
             optimize: self.optimize,
             browser_compat: true,
+            profile: false,
         };
         let result = browser_compiler::compile(source, &options)
             .map_err(|e| JsValue::from_str(&e))?;

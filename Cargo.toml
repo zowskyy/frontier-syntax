@@ -17,6 +17,12 @@ sha3 = "0.10"
 unicode-normalization = "0.1"
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+chrono = { version = "0.4.31", default-features = false, features = ["clock", "std"] }
+colored = "2.0.4"
+notify = "6.1.1"
+rustyline = "14.0.0"
+signal-hook = "0.3"
+toml = "0.8.12"
 ark-bn254 = "0.5"
 ark-ff = "0.5"
 ark-groth16 = "0.5"
