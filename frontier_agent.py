@@ -81,8 +81,11 @@ class FrontierAgent:
         with open(state_file, "w", encoding="utf-8") as handle:
             json.dump(self.state, handle, indent=2)
 
-    def speak_into_existence(self, intent: str) -> Dict[str, Any]:
+    def speak_into_existence(self, intent: str, verify: bool = False) -> Dict[str, Any]:
         """Main entry point — convert natural language intent into code."""
+        if verify:
+            return self.verify_intent(intent)
+
         print(f"Processing: {intent}")
 
         parsed = self.parse_intent(intent)
@@ -107,6 +110,90 @@ class FrontierAgent:
         self.cost_tracker.record_savings(result)
         self.save_state()
         return result
+
+    def process(self, intent: str, verify: bool = False) -> Dict[str, Any]:
+        """Public API for symbiotic tandem integration."""
+        return self.speak_into_existence(intent, verify=verify)
+
+    def learn(self, intent: str, outcome: str) -> None:
+        """Record intent outcome for feedback-loop routing."""
+        learning = self.state.setdefault("learning", {"success": [], "failure": []})
+        entry = {
+            "intent": intent,
+            "outcome": outcome,
+            "at": datetime.now(timezone.utc).isoformat(),
+        }
+        bucket = "success" if outcome == "success" else "failure"
+        learning[bucket].append(entry)
+        self.save_state()
+
+    def verify_intent(
+        self, intent: str, prior_result: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """Cross-verify an intent without mutating repository state."""
+        parsed = self.parse_intent(intent)
+        intent_type = parsed["type"]
+
+        if intent_type == "run_audit":
+            result = self.run_audit_cycle(parsed)
+            status = result.get("status", "failed")
+            return {"status": status, "intent": intent, "mode": "verify", "detail": result}
+
+        if intent_type == "update_docs":
+            doc_path = self.repo_root / "frontier" / "docs" / "language_reference.md"
+            ok = doc_path.exists() and doc_path.stat().st_size > 0
+            return {
+                "status": "success" if ok else "failed",
+                "intent": intent,
+                "mode": "verify",
+                "file": str(doc_path.relative_to(self.repo_root)),
+            }
+
+        if intent_type == "add_feature" and prior_result:
+            files = prior_result.get("files_changed", [])
+            missing = [
+                f for f in files if not (self.repo_root / f).exists()
+            ]
+            ok = not missing
+            return {
+                "status": "success" if ok else "failed",
+                "intent": intent,
+                "mode": "verify",
+                "missing_files": missing,
+            }
+
+        if intent_type == "fix_bug" and prior_result:
+            fixed = prior_result.get("fixed_file")
+            ok = bool(fixed and (self.repo_root / fixed).exists())
+            tests_ok = prior_result.get("tests_passed", False)
+            status = "success" if ok and tests_ok else "partial" if ok else "failed"
+            return {
+                "status": status,
+                "intent": intent,
+                "mode": "verify",
+                "fixed_file": fixed,
+                "tests_passed": tests_ok,
+            }
+
+        if intent_type == "deploy" and prior_result:
+            version = prior_result.get("version", "")
+            cargo = (self.repo_root / "Cargo.toml").read_text(encoding="utf-8")
+            ok = version and f'version = "{version}"' in cargo
+            return {
+                "status": "success" if ok else "failed",
+                "intent": intent,
+                "mode": "verify",
+                "version": version,
+            }
+
+        # Fallback: run lightweight test suite
+        tests = self.run_tests()
+        return {
+            "status": "success" if tests["passed"] else "failed",
+            "intent": intent,
+            "mode": "verify",
+            "tests_passed": tests["passed"],
+        }
 
     def parse_intent(self, intent: str) -> Dict[str, Any]:
         """Parse natural language intent into structured actions."""
