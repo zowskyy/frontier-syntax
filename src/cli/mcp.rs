@@ -44,12 +44,44 @@ pub fn run_mcp(args: &[String]) {
             ));
             println!("Server: python3 {}", server_script.display());
         }
+        "list" => {
+            let root = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+            let config_path = root.join(".cursor/mcp_config.json");
+            if !config_path.exists() {
+                colors::print_error("No MCP config found. Run: frontier mcp register --tool query_chat_knowledge");
+                std::process::exit(1);
+            }
+            let config: serde_json::Value = serde_json::from_str(
+                &fs::read_to_string(&config_path).unwrap_or_else(|e| {
+                    colors::print_error(&format!("Failed to read MCP config: {e}"));
+                    std::process::exit(1);
+                }),
+            )
+            .unwrap_or_else(|e| {
+                colors::print_error(&format!("Invalid MCP config: {e}"));
+                std::process::exit(1);
+            });
+            let tools = config
+                .get("mcpServers")
+                .and_then(|s| s.get("frontier"))
+                .and_then(|f| f.get("tools"))
+                .and_then(|t| t.as_array())
+                .cloned()
+                .unwrap_or_default();
+            colors::print_help_heading("Registered MCP Tools");
+            for tool in tools {
+                if let Some(name) = tool.as_str() {
+                    colors::print_command(name, "frontier MCP server tool");
+                }
+            }
+        }
         _ => {
             colors::print_help_heading("MCP Commands");
             colors::print_command(
                 "register --tool <name>",
                 "Register frontier MCP server with query_chat_knowledge",
             );
+            colors::print_command("list", "List registered MCP tools");
         }
     }
 }
