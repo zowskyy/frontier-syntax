@@ -395,3 +395,15 @@ This skill encodes the complete knowledge of the Frontier project:
 - The Frontier mindset
 
 Every future Cursor AI session can use this skill to understand and continue Frontier development.
+
+---
+
+## Updated State (Autonomous Repair Complete)
+
+- Submodule pin fix prepared locally at `a5e7699` (prjctnxs push blocked — no write access to `prjctnxs` repo).
+- Lighthouse stack landed on `cursor/frontier-syntax-cycle1-e39f` (commit `694dc37`).
+- PRs #19, #15 merged (already); PR #16 merged manually; PR #17 closed as superseded.
+- Merged `frontier-syntax` cursor branches deleted (8 branches).
+- `FOUNDATION.md` and `ROADMAP.md` landed (commit `2c1afbc`).
+- CLI v2 integrated with Unity command preserved in `src/cli/unity_cmd.rs`.
+- `cargo test --lib` passes (36 tests).
