@@ -104,9 +104,15 @@ fn main() {
                 .expect("run failed");
             println!("{msg}");
         }
+        "compile" => {
+            run_compile(&args);
+        }
+        "knowledge" => {
+            run_knowledge(&args);
+        }
         _ => {
             eprintln!(
-                "Commands: parse, parse-v2, resolve, hash, gen-artifacts, fuzz, migrate, verify, run"
+                "Commands: parse, parse-v2, resolve, hash, gen-artifacts, fuzz, migrate, verify, run, compile, knowledge"
             );
         }
     }
@@ -199,4 +205,67 @@ fn run_fuzz(iterations: usize) {
     println!("  Crashes: {}", crashes);
     println!("  Hangs (>100ms): {}", hangs);
     assert_eq!(crashes, 0, "Parser must not crash");
+}
+
+fn run_compile(args: &[String]) {
+    let input = args.get(2).expect("usage: frontier compile <file.fr> [--target wasm] [--browser] [--optimize] [-o out]");
+    let source = fs::read_to_string(input).expect("read input");
+
+    let target_wasm = args.windows(2).any(|w| w[0] == "--target" && w[1] == "wasm")
+        || args.iter().any(|a| a == "--wasm");
+    let browser = args.iter().any(|a| a == "--browser");
+    let optimize = !args.iter().any(|a| a == "--no-optimize");
+
+    let output = args
+        .iter()
+        .position(|a| a == "-o" || a == "--output")
+        .and_then(|i| args.get(i + 1))
+        .map(PathBuf::from)
+        .unwrap_or_else(|| PathBuf::from(input).with_extension("wasm"));
+
+    if target_wasm || browser {
+        let options = frontier::browser_compiler::CompileOptions {
+            optimize,
+            browser_compat: browser,
+        };
+        let result = frontier::browser_compiler::compile(&source, &options).expect("compile failed");
+        fs::write(&output, &result.wasm).expect("write wasm");
+        println!("✅ Compiled to WASM: {}", output.display());
+        if let Some(js) = result.js_glue {
+            let js_path = output.with_extension("js");
+            fs::write(&js_path, js).expect("write js glue");
+            println!("✅ JS glue: {}", js_path.display());
+        }
+        for warning in &result.warnings {
+            println!("  ⚡ {warning}");
+        }
+    } else {
+        eprintln!("Native compilation not yet implemented. Use --target wasm or --browser.");
+        std::process::exit(1);
+    }
+}
+
+fn run_knowledge(args: &[String]) {
+    let sub = args.get(2).map(|s| s.as_str()).unwrap_or("help");
+    match sub {
+        "suggest" => {
+            let operation = args.get(3).expect("usage: frontier knowledge suggest <op> [data_type]");
+            let data_type = args.get(4).map(|s| s.as_str()).unwrap_or("list::i32");
+            let suggestion = frontier::browser_compiler::algorithm_suggestion(operation, data_type);
+            println!("{}", serde_json::to_string_pretty(&suggestion).unwrap());
+        }
+        "ancestry" => {
+            let operation = args.get(3).expect("usage: frontier knowledge ancestry <op>");
+            let ancestors = frontier::browser_compiler::ancestors(operation);
+            println!("{}", serde_json::to_string_pretty(&ancestors).unwrap());
+        }
+        "tradeoffs" => {
+            let operation = args.get(3).expect("usage: frontier knowledge tradeoffs <op>");
+            let tradeoffs = frontier::browser_compiler::tradeoffs(operation);
+            println!("{}", serde_json::to_string_pretty(&tradeoffs).unwrap());
+        }
+        _ => {
+            eprintln!("Usage: frontier knowledge [suggest|ancestry|tradeoffs] ...");
+        }
+    }
 }

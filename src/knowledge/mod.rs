@@ -3,9 +3,9 @@
 pub mod hypercube;
 pub mod solver;
 
-use solver::{hash_operation, ProblemSignature, SizeHint, Solver};
+use solver::{hash_operation, ProblemSignature, Solver};
 
-pub use solver::{Solver as KnowledgeSolver, SolverContext as KnowledgeContext, SizeHint as KnowledgeSizeHint};
+pub use solver::{Solver as KnowledgeSolver, SolverContext as KnowledgeContext, SizeHint};
 
 fn open_solver() -> Solver {
     Solver::new(&solver::default_knowledge_path()).expect("Knowledge hypercube not found")

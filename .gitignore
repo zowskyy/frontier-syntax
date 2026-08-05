@@ -2,6 +2,7 @@ node_modules/
 *.o
 *.wasm
 !syntax/wasm/*.wasm
+!browser/wasm-bindings/*.wasm
 target/
 .DS_Store
 *.sha3

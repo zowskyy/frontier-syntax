@@ -14,6 +14,7 @@ SCRIPTS = [
     "scripts/verify_v2.py",
     "scripts/validate_coq.py",
     "scripts/verify_knowledge.py",
+    "scripts/verify_browser_compiler.py",
 ]
 
 

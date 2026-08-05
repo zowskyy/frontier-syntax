@@ -21,6 +21,9 @@ REQUIRED_CORE_FILES = [
     "errors.frontier",
     "stdlib.frontier",
     "compiler.frontier",
+    "knowledge.frontier",
+    "wasm_codegen.frontier",
+    "browser_compiler.frontier",
 ]
 
 REQUIRED_DOC_FILES = [
@@ -83,6 +86,11 @@ def verify():
     if knowledge_script.exists():
         rc = subprocess.call([sys.executable, str(knowledge_script)])
         results.append(("Knowledge Hypercube", rc))
+
+    browser_script = ROOT / "scripts" / "verify_browser_compiler.py"
+    if browser_script.exists():
+        rc = subprocess.call([sys.executable, str(browser_script)])
+        results.append(("Browser Compiler", rc))
 
     failed = [name for name, rc in results if rc != 0]
     if failed:
