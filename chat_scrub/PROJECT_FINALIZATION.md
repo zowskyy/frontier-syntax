@@ -1,6 +1,6 @@
 # Frontier Syntax — Project Finalization Report
 
-**Generated:** 2026-08-05T22:13:26.791067Z  
+**Generated:** 2026-08-05T22:24:42.927207Z  
 **Scrub Version:** 1.0.0 (Decision Logging + Worker Report)  
 **Foundation ID:** frontier-v2.0.0
 

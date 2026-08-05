@@ -5,6 +5,7 @@ pub mod config;
 pub mod errors;
 pub mod help;
 pub mod knowledge;
+pub mod mcp;
 pub mod profile;
 pub mod repl;
 pub mod telemetry;
@@ -50,6 +51,7 @@ fn dispatch(args: &[String], cmd: &str) -> Result<(), i32> {
         "run" => run_file(args)?,
         "compile" => compile::run_compile(args),
         "knowledge" => knowledge::run_knowledge(args),
+        "mcp" => mcp::run_mcp(args),
         "unity" => unity_cmd::run_unity(args)?,
         "config" => run_config(args)?,
         "shell" => {

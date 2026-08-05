@@ -1,0 +1,9 @@
+{
+  "timestamp": "2026-08-05T22:24:42.927207Z",
+  "decision": "include_doc",
+  "justification": "Changelog synthesized from git history and agent operations log.",
+  "confidence": 0.93,
+  "cross_refs": [],
+  "source": "repository",
+  "file": "CHANGELOG.md"
+}

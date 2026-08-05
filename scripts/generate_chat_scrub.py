@@ -3,10 +3,12 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 import shutil
 import subprocess
 import sys
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -718,8 +720,66 @@ def submit_redis(report: dict) -> str:
     return "fallback_file_only"
 
 
+def write_review_queue() -> int:
+    """Create human review drafts for low-confidence decisions."""
+    review_dir = OUT / "review_queue"
+    review_dir.mkdir(parents=True, exist_ok=True)
+    count = 0
+    for entry in decisions:
+        if entry.get("confidence", 1.0) >= 0.95:
+            continue
+        draft = review_dir / f"review_{count:03d}.json"
+        draft.write_text(json.dumps(entry, indent=2), encoding="utf-8")
+        count += 1
+    return count
+
+
+def record_scrub_metrics(code_count: int, duration_ms: int, status: str) -> None:
+    try:
+        sys.path.insert(0, str(ROOT / "scripts"))
+        from chat_knowledge_store import record_metrics  # noqa: WPS433
+
+        record_metrics(
+            {
+                "at": NOW,
+                "new_entries": code_count,
+                "duration_ms": duration_ms,
+                "status": status,
+                "decisions_logged": len(decisions),
+            }
+        )
+    except ImportError:
+        pass
+
+
+def delta_messages_since_last_run() -> int:
+    state_file = ROOT / ".frontier_scrub_state.json"
+    if not state_file.exists():
+        return 2
+    state = json.loads(state_file.read_text(encoding="utf-8"))
+    last = state.get("last_success")
+    if not last:
+        return 2
+    ops_log = ROOT / "docs" / "agent_operations_log.md"
+    if ops_log.exists():
+        mtime = datetime.fromtimestamp(ops_log.stat().st_mtime, tz=timezone.utc)
+        last_dt = datetime.fromisoformat(last.replace("Z", "+00:00"))
+        if mtime > last_dt:
+            return 1
+    return 0
+
+
 def main() -> int:
+    parser = argparse.ArgumentParser(description="Generate chat scrub artifacts")
+    parser.add_argument("--delta", action="store_true", help="Process only changes since last scrub")
+    args = parser.parse_args()
+
+    start = time.perf_counter()
     OUT.mkdir(parents=True, exist_ok=True)
+
+    if args.delta and delta_messages_since_last_run() == 0:
+        print("Delta scrub: no new changes since last run")
+        return 0
 
     # Log chat message decisions
     log(
@@ -760,10 +820,28 @@ def main() -> int:
     WORKER_REPORT.write_text(json.dumps(report, indent=2), encoding="utf-8")
 
     write_decision_log()
+    review_count = write_review_queue()
+
+    duration_ms = int((time.perf_counter() - start) * 1000)
+    record_scrub_metrics(code_count, duration_ms, "success")
+
+    try:
+        subprocess.run(
+            [sys.executable, str(ROOT / "scripts" / "generate_scrub_dashboard.py")],
+            cwd=ROOT,
+            check=False,
+        )
+    except OSError:
+        pass
+
+    if args.delta:
+        report["messages_processed"] = delta_messages_since_last_run() or 1
+        WORKER_REPORT.write_text(json.dumps(report, indent=2), encoding="utf-8")
 
     print(f"Messages processed: {report['messages_processed']}")
     print(f"Code blocks extracted: {code_count}")
     print(f"Decisions logged: {len(decisions)}")
+    print(f"Review queue drafts: {review_count}")
     print(f"Redis status: {redis_status}")
     print(f"Output directory: {OUT}")
     return 0

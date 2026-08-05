@@ -1,0 +1,760 @@
+{
+  "version": 1,
+  "updated_at": "2026-08-05T22:26:11.146336Z",
+  "source_report": "chat_scrub/WORKER_REPORT.json",
+  "entry_count": 66,
+  "entries": [
+    {
+      "id": "ReDoS_lexer",
+      "category": "attack_vector",
+      "title": "Regular Expression Denial of Service",
+      "content": "Malicious input could cause catastrophic backtracking in lexer regex patterns. Mitigation: re2c v3.1 DFA lexer (O(n)); adversarial inputs tested per token; 0.1s timeout threshold.",
+      "severity": "high",
+      "tags": [
+        "security",
+        "mitigated"
+      ],
+      "source": "scripts/test_redos.py"
+    },
+    {
+      "id": "homoglyph_injection",
+      "category": "attack_vector",
+      "title": "Unicode Homoglyph Identifier Injection",
+      "content": "Unicode lookalike characters in identifiers could bypass keyword checks. Mitigation: ASCII-only identifiers [A-Za-z_][A-Za-z0-9_]*; UTF-8 NFC normalization before lexing.",
+      "severity": "medium",
+      "tags": [
+        "security",
+        "mitigated"
+      ],
+      "source": "syntax/lexicon.ebnf"
+    },
+    {
+      "id": "keyword_prefix_ambiguity",
+      "category": "attack_vector",
+      "title": "Keyword Prefix Ambiguity",
+      "content": "Identifiers like 'iff' or 'ifoo' could be mis-tokenized as keywords. Mitigation: Negative lookahead (?![A-Za-z0-9_]) on all keywords; 'iff' explicitly banned.",
+      "severity": "medium",
+      "tags": [
+        "security",
+        "mitigated"
+      ],
+      "source": "syntax/token_regex_table.json"
+    },
+    {
+      "id": "wasm_parser_adversarial",
+      "category": "attack_vector",
+      "title": "Adversarial WASM Parser Input",
+      "content": "Malformed WASM or oversized inputs to parser could crash or hang runtime. Mitigation: Cycle 6 adversarial attack surface audit; fuzz command (1000 iterations); SHA-3 final hash.",
+      "severity": "high",
+      "tags": [
+        "security",
+        "mitigated"
+      ],
+      "source": "syntax/wasm/wasm_parser_v2.wasm"
+    },
+    {
+      "id": "ipfs_gateway_ssrf",
+      "category": "attack_vector",
+      "title": "IPFS Gateway SSRF",
+      "content": "Malicious import paths could target internal network via IPFS gateway fetch. Mitigation: CID validation; 10s timeout; ipfs:// prefix enforcement; content hash verification.",
+      "severity": "medium",
+      "tags": [
+        "security",
+        "partial"
+      ],
+      "source": "src/ipfs/resolver.rs"
+    },
+    {
+      "id": "pq_signature_forgery",
+      "category": "attack_vector",
+      "title": "Post-Quantum Signature Forgery",
+      "content": "Forged PQ signatures on AST artifacts could bypass integrity checks. Mitigation: Dilithium3 (NIST PQC finalist) sign/verify on canonical AST bytes.",
+      "severity": "high",
+      "tags": [
+        "security",
+        "mitigated"
+      ],
+      "source": "src/pq_signatures.rs"
+    },
+    {
+      "id": "zk_proof_bypass",
+      "category": "attack_vector",
+      "title": "ZK-SNARK Proof Bypass",
+      "content": "Invalid Groth16 proofs could allow unverified AST to pass verification. Mitigation: arkworks Groth16 BN254; AST hash commitment circuit; proof deserialization validation.",
+      "severity": "high",
+      "tags": [
+        "security",
+        "mitigated"
+      ],
+      "source": "src/zk/verifier.rs"
+    },
+    {
+      "id": "grammar_mutation_drift",
+      "category": "attack_vector",
+      "title": "Self-Mutating Grammar Drift",
+      "content": "Runtime grammar mutations could introduce ambiguous or unreachable constructs. Mitigation: Version bumping on mutation; mutation log; feature_matrix_v2.json orthogonality checks.",
+      "severity": "medium",
+      "tags": [
+        "security",
+        "partial"
+      ],
+      "source": "src/grammar/mutator.rs"
+    },
+    {
+      "id": "wasm_codegen_incomplete",
+      "category": "gap",
+      "title": "Only const-folded main() works; let/if/calls/loops missing",
+      "content": "Only const-folded main() works; let/if/calls/loops missing",
+      "severity": "P0",
+      "tags": [
+        "gap",
+        "P0"
+      ],
+      "source": "src/wasm_codegen.rs"
+    },
+    {
+      "id": "knowledge_warnings_only",
+      "category": "gap",
+      "title": "Knowledge suggestions are warnings, not codegen changes",
+      "content": "Knowledge suggestions are warnings, not codegen changes",
+      "severity": "P0",
+      "tags": [
+        "gap",
+        "P0"
+      ],
+      "source": "src/wasm_codegen.rs"
+    },
+    {
+      "id": "self_hosting_zero",
+      "category": "gap",
+      "title": ".frontier spec files not valid v2 source; 0% self-hosting",
+      "content": ".frontier spec files not valid v2 source; 0% self-hosting",
+      "severity": "P0",
+      "tags": [
+        "gap",
+        "P0"
+      ],
+      "source": "frontier/core/"
+    },
+    {
+      "id": "spec_impl_gap",
+      "category": "gap",
+      "title": "Spec vs implementation gap for .frontier core modules",
+      "content": "Spec vs implementation gap for .frontier core modules",
+      "severity": "P1",
+      "tags": [
+        "gap",
+        "P1"
+      ],
+      "source": "frontier/core/"
+    },
+    {
+      "id": "wasm_size_760kb",
+      "category": "gap",
+      "title": "Full WASM build ~760 KB vs <100 KB target",
+      "content": "Full WASM build ~760 KB vs <100 KB target",
+      "severity": "P1",
+      "tags": [
+        "gap",
+        "P1"
+      ],
+      "source": "Cargo.toml"
+    },
+    {
+      "id": "external_launch",
+      "category": "gap",
+      "title": "Website, Discord, social media not live",
+      "content": "Website, Discord, social media not live",
+      "severity": "P2",
+      "tags": [
+        "gap",
+        "P2"
+      ],
+      "source": "LAUNCH_CHECKLIST.md"
+    },
+    {
+      "id": "frontier_worker_missing",
+      "category": "gap",
+      "title": "frontier_worker.py referenced in scrub command but not in repo; use frontier_agent.py + symbiotic_agents.py",
+      "content": "frontier_worker.py referenced in scrub command but not in repo; use frontier_agent.py + symbiotic_agents.py",
+      "severity": "P2",
+      "tags": [
+        "gap",
+        "P2"
+      ],
+      "source": ""
+    },
+    {
+      "id": "redis_unavailable",
+      "category": "gap",
+      "title": "Redis not available in this environment; report written to file only",
+      "content": "Redis not available in this environment; report written to file only",
+      "severity": "P3",
+      "tags": [
+        "gap",
+        "P3"
+      ],
+      "source": "WORKER_REPORT.json"
+    },
+    {
+      "id": "arch_knowledge_hypercube",
+      "category": "architecture",
+      "title": "Knowledge Hypercube",
+      "content": "Status: complete. Path: src/knowledge/hypercube/",
+      "severity": "complete",
+      "tags": [
+        "architecture"
+      ],
+      "source": "src/knowledge/hypercube/"
+    },
+    {
+      "id": "arch_lexer_(re2c)",
+      "category": "architecture",
+      "title": "Lexer (re2c)",
+      "content": "Status: complete. Path: syntax/lexer.re",
+      "severity": "complete",
+      "tags": [
+        "architecture"
+      ],
+      "source": "syntax/lexer.re"
+    },
+    {
+      "id": "arch_parser_(handwritten)",
+      "category": "architecture",
+      "title": "Parser (handwritten)",
+      "content": "Status: complete. Path: src/parser/handwritten.rs",
+      "severity": "complete",
+      "tags": [
+        "architecture"
+      ],
+      "source": "src/parser/handwritten.rs"
+    },
+    {
+      "id": "arch_resolver",
+      "category": "architecture",
+      "title": "Resolver",
+      "content": "Status: complete. Path: src/resolver.rs",
+      "severity": "complete",
+      "tags": [
+        "architecture"
+      ],
+      "source": "src/resolver.rs"
+    },
+    {
+      "id": "arch_v2_resolver",
+      "category": "architecture",
+      "title": "V2 Resolver",
+      "content": "Status: complete. Path: src/v2_resolver.rs",
+      "severity": "complete",
+      "tags": [
+        "architecture"
+      ],
+      "source": "src/v2_resolver.rs"
+    },
+    {
+      "id": "arch_wasm_codegen",
+      "category": "architecture",
+      "title": "WASM Codegen",
+      "content": "Status: in_progress. Path: src/wasm_codegen.rs",
+      "severity": "in_progress",
+      "tags": [
+        "architecture"
+      ],
+      "source": "src/wasm_codegen.rs"
+    },
+    {
+      "id": "arch_unity_module",
+      "category": "architecture",
+      "title": "Unity Module",
+      "content": "Status: complete. Path: src/unity.rs",
+      "severity": "complete",
+      "tags": [
+        "architecture"
+      ],
+      "source": "src/unity.rs"
+    },
+    {
+      "id": "arch_browser_compiler",
+      "category": "architecture",
+      "title": "Browser Compiler",
+      "content": "Status: complete. Path: src/browser_compiler.rs",
+      "severity": "complete",
+      "tags": [
+        "architecture"
+      ],
+      "source": "src/browser_compiler.rs"
+    },
+    {
+      "id": "arch_grammar_mutator",
+      "category": "architecture",
+      "title": "Grammar Mutator",
+      "content": "Status: complete. Path: src/grammar/mutator.rs",
+      "severity": "complete",
+      "tags": [
+        "architecture"
+      ],
+      "source": "src/grammar/mutator.rs"
+    },
+    {
+      "id": "arch_proof_generator",
+      "category": "architecture",
+      "title": "Proof Generator",
+      "content": "Status: complete. Path: src/compiler/proof_generator.rs",
+      "severity": "complete",
+      "tags": [
+        "architecture"
+      ],
+      "source": "src/compiler/proof_generator.rs"
+    },
+    {
+      "id": "arch_pq_signatures",
+      "category": "architecture",
+      "title": "PQ Signatures",
+      "content": "Status: complete. Path: src/pq_signatures.rs",
+      "severity": "complete",
+      "tags": [
+        "architecture"
+      ],
+      "source": "src/pq_signatures.rs"
+    },
+    {
+      "id": "arch_zk_verifier",
+      "category": "architecture",
+      "title": "ZK Verifier",
+      "content": "Status: complete. Path: src/zk/verifier.rs",
+      "severity": "complete",
+      "tags": [
+        "architecture"
+      ],
+      "source": "src/zk/verifier.rs"
+    },
+    {
+      "id": "arch_ipfs_resolver",
+      "category": "architecture",
+      "title": "IPFS Resolver",
+      "content": "Status: complete. Path: src/ipfs/resolver.rs",
+      "severity": "complete",
+      "tags": [
+        "architecture"
+      ],
+      "source": "src/ipfs/resolver.rs"
+    },
+    {
+      "id": "arch_neural_lsp",
+      "category": "architecture",
+      "title": "Neural LSP",
+      "content": "Status: complete. Path: src/neural/completion.rs",
+      "severity": "complete",
+      "tags": [
+        "architecture"
+      ],
+      "source": "src/neural/completion.rs"
+    },
+    {
+      "id": "arch_package_registry",
+      "category": "architecture",
+      "title": "Package Registry",
+      "content": "Status: complete. Path: src/packages/registry.rs",
+      "severity": "complete",
+      "tags": [
+        "architecture"
+      ],
+      "source": "src/packages/registry.rs"
+    },
+    {
+      "id": "arch_frontier_agent",
+      "category": "architecture",
+      "title": "Frontier Agent",
+      "content": "Status: complete. Path: frontier_agent.py",
+      "severity": "complete",
+      "tags": [
+        "architecture"
+      ],
+      "source": "frontier_agent.py"
+    },
+    {
+      "id": "arch_symbiotic_tandem",
+      "category": "architecture",
+      "title": "Symbiotic Tandem",
+      "content": "Status: complete. Path: .cursor/symbiotic_agents.py",
+      "severity": "complete",
+      "tags": [
+        "architecture"
+      ],
+      "source": ".cursor/symbiotic_agents.py"
+    },
+    {
+      "id": "arch_lighthouse_stack",
+      "category": "architecture",
+      "title": "Lighthouse Stack",
+      "content": "Status: complete. Path: frontier/lighthouse/",
+      "severity": "complete",
+      "tags": [
+        "architecture"
+      ],
+      "source": "frontier/lighthouse/"
+    },
+    {
+      "id": "arch_frontier-dex",
+      "category": "architecture",
+      "title": "Frontier-DEX",
+      "content": "Status: complete. Path: frontier-dex/",
+      "severity": "complete",
+      "tags": [
+        "architecture"
+      ],
+      "source": "frontier-dex/"
+    },
+    {
+      "id": "arch_arc_orchestrator",
+      "category": "architecture",
+      "title": "ARC Orchestrator",
+      "content": "Status: complete. Path: build/arc_orchestrator.py",
+      "severity": "complete",
+      "tags": [
+        "architecture"
+      ],
+      "source": "build/arc_orchestrator.py"
+    },
+    {
+      "id": "wasm_codegen_completeness",
+      "category": "performance",
+      "title": "WASM Codegen Feature Coverage",
+      "content": "Current: 20%. Target: 100%. Plan: Extend src/wasm_codegen.rs: let bindings, if/else, function calls, while loops, return expressions.",
+      "severity": "P0",
+      "tags": [
+        "performance",
+        "10x"
+      ],
+      "source": ""
+    },
+    {
+      "id": "slim_wasm_size",
+      "category": "performance",
+      "title": "Browser WASM Binary Size",
+      "content": "Current: ~760 KB. Target: < 100 KB. Plan: Unity Module slim mode (54 bytes demo); feature flag browser-minimal in Cargo.toml.",
+      "severity": "P1",
+      "tags": [
+        "performance",
+        "10x"
+      ],
+      "source": ""
+    },
+    {
+      "id": "knowledge_codegen_integration",
+      "category": "performance",
+      "title": "Knowledge \u2192 WASM Integration",
+      "content": "Current: warnings only. Target: algorithm changes emitted WASM. Plan: Use AlgorithmSuggestion.implementation_hint in wasm_codegen.rs + browser_compiler.rs.",
+      "severity": "P0",
+      "tags": [
+        "performance",
+        "10x"
+      ],
+      "source": ""
+    },
+    {
+      "id": "unity_module_size",
+      "category": "performance",
+      "title": "Unity Module Codebase Size",
+      "content": "Current: 388 lines. Target: 10x smaller, 10x more powerful. Plan: Single facade unifying 6 scattered systems; slim_exports; validate_spec enforcement.",
+      "severity": "P0",
+      "tags": [
+        "performance",
+        "10x"
+      ],
+      "source": ""
+    },
+    {
+      "id": "test_coverage",
+      "category": "performance",
+      "title": "Cargo Unit Tests",
+      "content": "Current: 36+ passing. Target: 100% critical path. Plan: Add wasm_codegen, self-hosting, and integration tests per phase.",
+      "severity": "P1",
+      "tags": [
+        "performance",
+        "10x"
+      ],
+      "source": ""
+    },
+    {
+      "id": "self_hosting",
+      "category": "performance",
+      "title": "Self-Hosting Progress",
+      "content": "Current: 0%. Target: 100%. Plan: Compile frontier/core/*.frontier natively; parser self-hosts; full bootstrap.",
+      "severity": "P0",
+      "tags": [
+        "performance",
+        "10x"
+      ],
+      "source": ""
+    },
+    {
+      "id": "cli_14c4",
+      "category": "cli",
+      "title": "python3 build/arc_orchestrator.py --verify",
+      "content": "Full ARC gate verification",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 build/arc_orchestrator.py --verify"
+    },
+    {
+      "id": "cli_19c7",
+      "category": "cli",
+      "title": "cargo test --lib",
+      "content": "Run Rust unit tests",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "cargo test --lib"
+    },
+    {
+      "id": "cli_ffaa",
+      "category": "cli",
+      "title": "cargo build --release --target wasm32-unknown-unknown",
+      "content": "Build WASM parser",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "cargo build --release --target wasm32-unknown-unknown"
+    },
+    {
+      "id": "cli_80cb",
+      "category": "cli",
+      "title": ".cursor/frontier_agent.sh all",
+      "content": "Master audit + gaps + true verification",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": ".cursor/frontier_agent.sh all"
+    },
+    {
+      "id": "cli_1be2",
+      "category": "cli",
+      "title": ".cursor/frontier_agent.sh gaps",
+      "content": "Honest gap report",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": ".cursor/frontier_agent.sh gaps"
+    },
+    {
+      "id": "cli_46f1",
+      "category": "cli",
+      "title": "python3 frontier_agent.py '<intent>'",
+      "content": "Natural language agent intents",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 frontier_agent.py '<intent>'"
+    },
+    {
+      "id": "cli_6e4",
+      "category": "cli",
+      "title": "python3 .cursor/symbiotic_agents.py --demo",
+      "content": "Symbiotic tandem parallel execution",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 .cursor/symbiotic_agents.py --demo"
+    },
+    {
+      "id": "cli_e2c6",
+      "category": "cli",
+      "title": "cargo run --bin frontier -- unity compile <file>",
+      "content": "Unity module compile",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "cargo run --bin frontier -- unity compile <file>"
+    },
+    {
+      "id": "cli_a91d",
+      "category": "cli",
+      "title": "frontier foundation verify",
+      "content": "Verify project against foundation",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "frontier foundation verify"
+    },
+    {
+      "id": "cli_a071",
+      "category": "cli",
+      "title": "python3 scripts/verify_lighthouse_stack.py",
+      "content": "Verify in-house Lighthouse stack",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 scripts/verify_lighthouse_stack.py"
+    },
+    {
+      "id": "cli_e8fa",
+      "category": "cli",
+      "title": "python3 scripts/generate_v2_hashes.py",
+      "content": "Generate v2 cryptographic hashes",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 scripts/generate_v2_hashes.py"
+    },
+    {
+      "id": "cli_c6ad",
+      "category": "cli",
+      "title": "./deploy/health_check.sh",
+      "content": "Production health check",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "./deploy/health_check.sh"
+    },
+    {
+      "id": "cli_b36b",
+      "category": "cli",
+      "title": "python3 build/arc_orchestrator.py --verify",
+      "content": "Full ARC gate verification",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 build/arc_orchestrator.py --verify"
+    },
+    {
+      "id": "cli_3401",
+      "category": "cli",
+      "title": "cargo test --lib",
+      "content": "Run Rust unit tests",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "cargo test --lib"
+    },
+    {
+      "id": "cli_9730",
+      "category": "cli",
+      "title": "cargo build --release --target wasm32-unknown-unknown",
+      "content": "Build WASM parser",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "cargo build --release --target wasm32-unknown-unknown"
+    },
+    {
+      "id": "cli_aefa",
+      "category": "cli",
+      "title": ".cursor/frontier_agent.sh all",
+      "content": "Master audit + gaps + true verification",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": ".cursor/frontier_agent.sh all"
+    },
+    {
+      "id": "cli_1042",
+      "category": "cli",
+      "title": ".cursor/frontier_agent.sh gaps",
+      "content": "Honest gap report",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": ".cursor/frontier_agent.sh gaps"
+    },
+    {
+      "id": "cli_9328",
+      "category": "cli",
+      "title": "python3 frontier_agent.py '<intent>'",
+      "content": "Natural language agent intents",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 frontier_agent.py '<intent>'"
+    },
+    {
+      "id": "cli_c66d",
+      "category": "cli",
+      "title": "python3 .cursor/symbiotic_agents.py --demo",
+      "content": "Symbiotic tandem parallel execution",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 .cursor/symbiotic_agents.py --demo"
+    },
+    {
+      "id": "cli_d544",
+      "category": "cli",
+      "title": "cargo run --bin frontier -- unity compile <file>",
+      "content": "Unity module compile",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "cargo run --bin frontier -- unity compile <file>"
+    },
+    {
+      "id": "cli_21fa",
+      "category": "cli",
+      "title": "frontier foundation verify",
+      "content": "Verify project against foundation",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "frontier foundation verify"
+    },
+    {
+      "id": "cli_b12b",
+      "category": "cli",
+      "title": "python3 scripts/verify_lighthouse_stack.py",
+      "content": "Verify in-house Lighthouse stack",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 scripts/verify_lighthouse_stack.py"
+    },
+    {
+      "id": "cli_e9a3",
+      "category": "cli",
+      "title": "python3 scripts/generate_v2_hashes.py",
+      "content": "Generate v2 cryptographic hashes",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 scripts/generate_v2_hashes.py"
+    },
+    {
+      "id": "cli_6af3",
+      "category": "cli",
+      "title": "./deploy/health_check.sh",
+      "content": "Production health check",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "./deploy/health_check.sh"
+    }
+  ],
+  "ingested_at": [
+    "2026-08-05T22:24:42.989243Z",
+    "2026-08-05T22:26:11.146336Z"
+  ]
+}
