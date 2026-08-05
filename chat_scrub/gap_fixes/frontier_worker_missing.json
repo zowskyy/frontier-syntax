@@ -1,0 +1,8 @@
+{
+  "id": "frontier_worker_missing",
+  "priority": "P2",
+  "description": "frontier_worker.py referenced in scrub command but not in repo; use frontier_agent.py + symbiotic_agents.py",
+  "recommended_action": "Manual review required",
+  "scaffold_file": null,
+  "created_at": "2026-08-05T22:56:58.169579+00:00"
+}

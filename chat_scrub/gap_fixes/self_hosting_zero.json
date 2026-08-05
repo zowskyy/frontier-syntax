@@ -1,0 +1,8 @@
+{
+  "id": "self_hosting_zero",
+  "priority": "P0",
+  "description": ".frontier spec files not valid v2 source; 0% self-hosting",
+  "recommended_action": "Bootstrap parser from frontier/core/parser.frontier spec alignment",
+  "scaffold_file": "frontier/core/parser.frontier",
+  "created_at": "2026-08-05T22:56:58.143110+00:00"
+}

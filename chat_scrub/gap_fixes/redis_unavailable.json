@@ -1,0 +1,8 @@
+{
+  "id": "redis_unavailable",
+  "priority": "P3",
+  "description": "Redis not available in this environment; report written to file only",
+  "recommended_action": "Manual review required",
+  "scaffold_file": null,
+  "created_at": "2026-08-05T22:56:58.169635+00:00"
+}
