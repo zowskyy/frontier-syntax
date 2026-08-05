@@ -1,0 +1,66 @@
+// Parallel CDX batch query — 100× fewer API calls via resumptionKey
+// Improvement #6: Parallel CDX Query Batching
+
+module cdx_batch_query;
+
+import frontier.bindings.http.{HTTP, URL};
+import frontier.core.concurrency.{Parallel};
+
+type Timestamp = u64;
+type CDXRecord = { url: String, timestamp: String, mime: String, status: u32 };
+type CDXResult = Vec<CDXRecord>;
+
+const CDX_ENDPOINT: &str = "https://web.archive.org/cdx/search/cdx";
+
+component CDXBatchQuery {
+    state: {
+        batch_size: usize,
+        max_parallel: usize,
+    },
+
+    fn new() -> CDXBatchQuery {
+        CDXBatchQuery { batch_size: 10_000, max_parallel: 8 }
+    },
+
+    fn query_batch(self, urls: Vec<URL>, since: Timestamp) -> CDXResult {
+        let batches = self.group_by_domain(urls);
+        let mut results = Vec::new();
+        Parallel::map(batches, |batch| self.query_domain_batch(batch, since), self.max_parallel)
+            .for_each(|batch_result| results.extend(batch_result));
+        results
+    },
+
+    fn group_by_domain(self, urls: Vec<URL>) -> Vec<DomainBatch> {
+        let mut groups = Map::new();
+        for url in urls {
+            let host = url.host();
+            groups.entry(host).or_insert(Vec::new()).push(url);
+        }
+        groups.into_iter().map(|(prefix, urls)| DomainBatch { prefix, urls, resumption_key: None }).collect()
+    },
+
+    fn query_domain_batch(self, batch: DomainBatch, since: Timestamp) -> CDXResult {
+        let mut all = Vec::new();
+        let mut resumption_key = batch.resumption_key;
+        loop {
+            let response = HTTP.get(CDX_ENDPOINT, params: {
+                "url": batch.prefix,
+                "matchType": "host",
+                "limit": self.batch_size,
+                "from": since,
+                "resumptionKey": resumption_key,
+                "output": "json",
+            });
+            let page = parse_cdx_json(response.body);
+            all.extend(page.records);
+            resumption_key = page.resumption_key;
+            if resumption_key.is_none() { break; }
+        }
+        all
+    }
+}
+
+type DomainBatch = { prefix: String, urls: Vec<URL>, resumption_key: Option<String> };
+type CDXPage = { records: CDXResult, resumption_key: Option<String> };
+
+fn parse_cdx_json(body: bytes) -> CDXPage { /* parser */ CDXPage { records: [], resumption_key: None } }

@@ -1,0 +1,128 @@
+// Distributed frontier shard — consistent hashing across crawl nodes
+// Improvement #1: Distributed Frontier
+
+module frontier_shard;
+
+import frontier.core.concurrency.{Channel, Mutex};
+import frontier.bindings.http.{URL, Host};
+
+type ShardID = u32;
+type Priority = usize;
+
+type FrontierEntry = {
+    url: URL,
+    priority: Priority,
+    host: Host,
+    scheduled_at: Timestamp,
+};
+
+component DistributedFrontier {
+    state: {
+        shards: Map<ShardID, FrontierShard>,
+        consistency: ConsistencyHash,
+        shard_count: u32,
+        round_robin_index: u32,
+    },
+
+    fn new(shard_count: u32) -> DistributedFrontier {
+        let mut shards = Map::new();
+        for i in 0..shard_count {
+            shards.insert(i, FrontierShard::new(i));
+        }
+        DistributedFrontier {
+            shards,
+            consistency: ConsistencyHash::new(shard_count),
+            shard_count,
+            round_robin_index: 0,
+        }
+    },
+
+    fn schedule(self, url: URL, priority: Priority) {
+        let shard = self.consistency.get_shard(url.host());
+        self.shards[shard].push(FrontierEntry {
+            url,
+            priority,
+            host: url.host(),
+            scheduled_at: now(),
+        });
+    },
+
+    fn get_next(self) -> Option<URL> {
+        for _ in 0..self.shard_count {
+            let idx = self.round_robin_index % self.shard_count;
+            self.round_robin_index += 1;
+            if let Some(entry) = self.shards[idx].pop() {
+                return Some(entry.url);
+            }
+        }
+        None
+    },
+
+    fn serialize(self) -> bytes {
+        encode(self.shards)
+    },
+
+    fn load(self, data: bytes) {
+        self.shards = decode(data);
+    },
+
+    fn takeover_failed_shard(self, failed: ShardID) {
+        let backup = (failed + 1) % self.shard_count;
+        self.shards[backup].merge(self.shards[failed].drain());
+    }
+}
+
+component FrontierShard {
+    state: {
+        id: ShardID,
+        queue: PriorityQueue<FrontierEntry>,
+        host_locks: Map<Host, Mutex>,
+    },
+
+    fn new(id: ShardID) -> FrontierShard {
+        FrontierShard { id, queue: PriorityQueue::new(), host_locks: Map::new() }
+    },
+
+    fn push(self, entry: FrontierEntry) {
+        self.queue.push(entry.priority, entry);
+    },
+
+    fn pop(self) -> Option<FrontierEntry> {
+        self.queue.pop()
+    },
+
+    fn merge(self, entries: Vec<FrontierEntry>) {
+        for entry in entries {
+            self.push(entry);
+        }
+    }
+
+    fn drain(self) -> Vec<FrontierEntry> {
+        self.queue.drain()
+    }
+}
+
+component ConsistencyHash {
+    state: { ring: Vec<(u64, ShardID)>, shard_count: u32 },
+
+    fn new(shard_count: u32) -> ConsistencyHash {
+        let mut ring = Vec::new();
+        for i in 0..shard_count {
+            ring.push((hash_host(i), i));
+        }
+        ring.sort_by_key(|(h, _)| *h);
+        ConsistencyHash { ring, shard_count }
+    },
+
+    fn get_shard(self, host: Host) -> ShardID {
+        let h = hash_host(host);
+        for (point, shard) in self.ring {
+            if h <= point {
+                return shard;
+            }
+        }
+        self.ring[0].1
+    }
+}
+
+fn hash_host(value: Host) -> u64 { sha3_64(value.as_bytes()) }
