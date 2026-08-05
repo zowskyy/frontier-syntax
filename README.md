@@ -2,6 +2,32 @@
 
 Formally verifiable programming language syntax built under the **A+ Hard Gate Protocol (v1.0)**.
 
+## Core Language (Hardened)
+
+The standalone Frontier language core lives under `frontier/core/` — parser, type system, memory model, concurrency, error handling, standard library, and compiler backend. Game-specific elements have been stripped.
+
+| Module | Path |
+|--------|------|
+| Parser (Lexer → AST) | `frontier/core/parser.frontier` |
+| Type System | `frontier/core/types.frontier` |
+| Memory Model | `frontier/core/memory.frontier` |
+| Concurrency | `frontier/core/concurrency.frontier` |
+| Error Handling | `frontier/core/errors.frontier` |
+| Standard Library | `frontier/core/stdlib.frontier` |
+| Compiler Backend | `frontier/core/compiler.frontier` |
+| Language Reference | `frontier/docs/language_reference.md` |
+
+```bash
+# Verify hardened language
+python3 build/arc_orchestrator.py --verify
+
+# Test core modules
+python3 scripts/frontier test frontier/core/
+
+# Compile a test program
+python3 scripts/frontier compile test_program.frontier
+```
+
 ## Protocol
 
 All syntax artifacts are produced in six audit cycles. Each cycle must pass all ten hard-gate criteria before the next cycle begins.

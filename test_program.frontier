@@ -1,0 +1,16 @@
+/**
+ * Frontier Language Hardening — Test Program
+ * Validates core language constructs (no game-specific elements).
+ */
+
+fn main() {
+    let message = "Hello, Frontier!";
+    print(message);
+
+    let result = add(2, 3);
+    print(result);
+}
+
+fn add(a: i32, b: i32) -> i32 {
+    return a + b;
+}

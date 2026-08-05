@@ -1,0 +1,201 @@
+/**
+ * FRONTIER SYNTAX — TYPE SYSTEM
+ *
+ * This module defines the type system for Frontier, including
+ * static typing, type inference, generics, and traits.
+ *
+ * ARC Gate: Type checking 10,000 lines < 1s
+ */
+
+component TypeSystem {
+    state: {
+        types: [Type],
+        type_aliases: Map<String, Type>,
+        generics: Map<String, Generic>,
+        traits: [Trait],
+        implementations: [Implementation],
+        inference: InferenceEngine,
+    },
+
+    /**
+     * Core types
+     */
+    enum Type {
+        // Primitive types
+        Int8, Int16, Int32, Int64,
+        UInt8, UInt16, UInt32, UInt64,
+        Float32, Float64,
+        Bool,
+        Char,
+        String,
+        // Compound types
+        Array(Type),
+        Slice(Type),
+        Tuple([Type]),
+        Struct(String, [Field]),
+        Enum(String, [Variant]),
+        Function([Type], Type),
+        Option(Type),
+        Result(Type, Type),
+        // Special types
+        Void,
+        Any,
+        Never,
+        Unknown,
+    },
+
+    /**
+     * Type inference — deduce types without explicit annotations
+     */
+    component InferenceEngine {
+        state: {
+            constraints: [Constraint],
+            substitutions: Map<Type, Type>,
+        },
+
+        /**
+         * Infer types for an AST
+         * @param ast AST to analyze
+         * @returns Type map for each expression
+         */
+        infer(ast: AST) -> TypeMap {
+            let map = TypeMap {};
+
+            for node in ast.nodes {
+                let type = this.infer_node(node);
+                map[node.id] = type;
+            }
+
+            return map;
+        },
+
+        /**
+         * Infer type for a single node
+         */
+        infer_node(node: ASTNode) -> Type {
+            match node.type {
+                ASTNodeType.Literal => {
+                    return this.infer_literal(node);
+                },
+                ASTNodeType.Variable => {
+                    return this.infer_variable(node);
+                },
+                ASTNodeType.Binary => {
+                    return this.infer_binary(node);
+                },
+                ASTNodeType.Call => {
+                    return this.infer_call(node);
+                },
+                ASTNodeType.Function => {
+                    return this.infer_function(node);
+                },
+                _ => {
+                    return Type.Unknown;
+                }
+            }
+        },
+
+        /**
+         * Infer literal types
+         */
+        infer_literal(node: ASTNode) -> Type {
+            if node.value.is_integer() {
+                return Type.Int32;
+            } else if node.value.is_float() {
+                return Type.Float32;
+            } else if node.value.is_string() {
+                return Type.String;
+            } else if node.value.is_bool() {
+                return Type.Bool;
+            } else {
+                return Type.Unknown;
+            }
+        },
+
+        /**
+         * Infer binary operation types
+         */
+        infer_binary(node: ASTNode) -> Type {
+            let left = this.infer_node(node.left);
+            let right = this.infer_node(node.right);
+
+            match node.operator {
+                "+" | "-" | "*" | "/" => {
+                    if left == right {
+                        return left;
+                    } else if left.is_numeric() && right.is_numeric() {
+                        // Promote to the larger type
+                        return Type.promote(left, right);
+                    } else {
+                        // Type error
+                        this.add_error("Type mismatch: " + left + " and " + right);
+                        return Type.Unknown;
+                    }
+                },
+                "==" | "!=" | "<" | ">" | "<=" | ">=" => {
+                    // Comparison returns Bool
+                    if left == right || (left.is_numeric() && right.is_numeric()) {
+                        return Type.Bool;
+                    } else {
+                        this.add_error("Cannot compare " + left + " and " + right);
+                        return Type.Unknown;
+                    }
+                },
+                "&&" | "||" => {
+                    if left == Type.Bool && right == Type.Bool {
+                        return Type.Bool;
+                    } else {
+                        this.add_error("Logical operator requires Bool operands");
+                        return Type.Unknown;
+                    }
+                },
+                _ => {
+                    return Type.Unknown;
+                }
+            }
+        }
+    },
+
+    /**
+     * Type checking — verify type correctness
+     */
+    static check(ast: AST) -> bool {
+        let checker = TypeChecker {};
+        let errors = checker.check(ast);
+
+        if errors.len() > 0 {
+            for error in errors {
+                print("Type error: " + error.message);
+            }
+            return false;
+        }
+
+        return true;
+    },
+
+    /**
+     * Generics — parametric polymorphism
+     */
+    component Generic {
+        name: String,
+        bounds: [Trait],
+    },
+
+    /**
+     * Traits — interface definitions
+     */
+    component Trait {
+        name: String,
+        methods: [Function],
+        default_implementations: Map<String, Function>,
+    },
+
+    /**
+     * Implementations — trait implementations for types
+     */
+    component Implementation {
+        trait: Trait,
+        type: Type,
+        methods: [Function],
+    }
+}

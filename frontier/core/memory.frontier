@@ -1,0 +1,141 @@
+/**
+ * FRONTIER SYNTAX — MEMORY MODEL
+ *
+ * This module defines Frontier's memory management model,
+ * including ownership, borrowing, and lifetimes.
+ *
+ * ARC Gate: No memory leaks in test suite
+ */
+
+component MemoryModel {
+    state: {
+        ownership: OwnershipSystem,
+        borrow_checker: BorrowChecker,
+        lifetime_analyzer: LifetimeAnalyzer,
+        allocator: Allocator,
+    },
+
+    /**
+     * Ownership — ensures memory is freed when no longer used
+     */
+    component OwnershipSystem {
+        /**
+         * Track ownership for each variable
+         */
+        state: {
+            owners: Map<Variable, Owner>,
+            references: Map<Variable, [Reference]>,
+            moves: Map<Variable, Variable>,
+        },
+
+        /**
+         * Check ownership rules
+         */
+        check(ast: AST) -> bool {
+            // Each value has exactly one owner
+            // When owner goes out of scope, memory is freed
+            // Values can be moved (transfer ownership)
+            // Values can be borrowed (temporary reference)
+
+            let errors = [];
+
+            for node in ast.nodes {
+                if node.is_assignment() {
+                    if this.owners.contains(node.variable) {
+                        // Move ownership
+                        let old_owner = this.owners[node.variable];
+                        this.owners[node.variable] = node.value;
+                        this.moves[old_owner] = node.variable;
+                    } else {
+                        // New owner
+                        this.owners[node.variable] = node.value;
+                    }
+                }
+
+                if node.is_borrow() {
+                    // Check if owner still exists
+                    if !this.owners.contains(node.variable) {
+                        errors.push("Borrow of moved value: " + node.variable);
+                    }
+                }
+            }
+
+            return errors.len() == 0;
+        }
+    },
+
+    /**
+     * Borrow Checker — prevents use-after-free and data races
+     */
+    component BorrowChecker {
+        state: {
+            borrows: Map<Variable, Borrow>,
+            lifetimes: Map<Variable, Lifetime>,
+        },
+
+        /**
+         * Check borrowing rules
+         */
+        check(ast: AST) -> bool {
+            // At any time, you can have either:
+            // - One mutable reference
+            // - Any number of immutable references
+
+            let errors = [];
+
+            for node in ast.nodes {
+                if node.is_mutable_borrow() {
+                    if this.borrows.contains(node.variable) {
+                        let existing = this.borrows[node.variable];
+                        if existing.is_mutable() {
+                            errors.push("Cannot borrow " + node.variable + " mutably twice");
+                        }
+                    }
+                    this.borrows[node.variable] = Borrow.Mutable;
+                }
+
+                if node.is_immutable_borrow() {
+                    if this.borrows.contains(node.variable) {
+                        let existing = this.borrows[node.variable];
+                        if existing.is_mutable() {
+                            errors.push("Cannot borrow " + node.variable + " immutably while mutable");
+                        }
+                    }
+                    this.borrows[node.variable] = Borrow.Immutable;
+                }
+            }
+
+            return errors.len() == 0;
+        }
+    },
+
+    /**
+     * Lifetime Analyzer — ensures references don't outlive their data
+     */
+    component LifetimeAnalyzer {
+        state: {
+            scopes: [Scope],
+            lifetimes: Map<Variable, Lifetime>,
+        },
+
+        /**
+         * Analyze lifetimes
+         */
+        analyze(ast: AST) -> bool {
+            let errors = [];
+
+            for node in ast.nodes {
+                if node.is_reference() {
+                    let var_lifetime = this.lifetimes[node.variable];
+                    let ref_lifetime = this.lifetimes[node.reference];
+
+                    if ref_lifetime > var_lifetime {
+                        errors.push("Reference " + node.reference + " outlives data " + node.variable);
+                    }
+                }
+            }
+
+            return errors.len() == 0;
+        }
+    }
+}
