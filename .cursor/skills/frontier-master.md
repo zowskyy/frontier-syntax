@@ -236,6 +236,8 @@ commands:
   verify: .cursor/frontier_agent.sh true
   test: cargo test --lib
   agent_py: python3 frontier_agent.py 'Run audit cycle 1'
+  symbiotic: python3 .cursor/symbiotic_agents.py --demo
+  symbiotic_test: python3 .cursor/symbiotic_agents.py --test-intents
   unity_compile: cargo run --bin frontier -- unity compile <file>
   unity_verify: cargo run --bin frontier -- unity verify <file>
   bootstrap: ./scripts/bootstrap.sh
@@ -407,3 +409,11 @@ Every future Cursor AI session can use this skill to understand and continue Fro
 - `FOUNDATION.md` and `ROADMAP.md` landed (commit `2c1afbc`).
 - CLI v2 integrated with Unity command preserved in `src/cli/unity_cmd.rs`.
 - `cargo test --lib` passes (36 tests).
+
+### Symbiotic Tandem (v2.1)
+
+- `.cursor/symbiotic_agents.py` — Master Orchestrator + Worker Agent
+- Parallel intent execution (4 workers via ThreadPoolExecutor)
+- Cross-verification via `agent.verify_intent()`
+- Feedback loop via `agent.learn()`
+- Commands: `python3 .cursor/symbiotic_agents.py --demo` or `--test-intents`
