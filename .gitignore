@@ -15,3 +15,5 @@ target/
 dist/
 *.tar.gz
 test_projects/
+__pycache__/
+*.pyc

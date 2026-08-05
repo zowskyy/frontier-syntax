@@ -13,6 +13,7 @@ SCRIPTS = [
     "scripts/verify_language_hardening.py",
     "scripts/verify_v2.py",
     "scripts/validate_coq.py",
+    "scripts/verify_knowledge.py",
 ]
 
 
