@@ -114,6 +114,10 @@ class FrontierAgent:
             result = self.run_gap_solution(parsed)
         elif parsed["type"] == "swarm_close_gaps":
             result = self.run_swarm_close_gaps(parsed)
+        elif parsed["type"] == "swarm_optimized":
+            result = self.run_swarm_optimized(parsed)
+        elif parsed["type"] == "close_peerless":
+            result = self.run_close_peerless(parsed)
         else:
             result = {"error": f"Unknown intent type: {parsed['type']}"}
 
@@ -247,6 +251,18 @@ class FrontierAgent:
             for word in ["worker swarm", "swarm close", "close gaps", "swarm gap"]
         ):
             return {"type": "swarm_close_gaps", "content": intent}
+
+        if any(
+            word in intent_lower
+            for word in ["20x", "20×", "swarm optimized", "swarm optimization", "swarm 2.0"]
+        ):
+            return {"type": "swarm_optimized", "content": intent}
+
+        if any(
+            word in intent_lower
+            for word in ["peerless", "close peerless", "peerless gaps"]
+        ):
+            return {"type": "close_peerless", "content": intent}
 
         if any(
             word in intent_lower
@@ -732,6 +748,32 @@ class FrontierAgent:
             "log": "swarm_gap_closure.log",
             "output": result.get("stdout", "")[-2000:],
             "message": "Swarm gap closure complete",
+        }
+
+    def run_swarm_optimized(self, parsed: Dict[str, Any]) -> Dict[str, Any]:
+        """Run Swarm 2.0 optimized parallel workers with async process logging."""
+        orchestrator = self.scripts_dir / "swarm_optimized.py"
+        result = self._run_command([str(orchestrator)], capture=True)
+        return {
+            "status": "success" if result["returncode"] == 0 else "partial",
+            "report": "audit_reports/swarm_optimized_report.md",
+            "process_log": "docs/process_log.fr",
+            "manifest": "manifest/swarm_optimized.json",
+            "output": result.get("stdout", "")[-2000:],
+            "message": "Swarm 2.0 optimization complete",
+        }
+
+    def run_close_peerless(self, parsed: Dict[str, Any]) -> Dict[str, Any]:
+        """Close all remaining Peerless readiness gaps (P1–P6)."""
+        closer = self.scripts_dir / "close_peerless_gaps.py"
+        result = self._run_command([str(closer)], capture=True)
+        return {
+            "status": "success" if result["returncode"] == 0 else "partial",
+            "report": "audit_reports/peerless_gaps_report.md",
+            "manifest": "manifest/peerless_gaps.json",
+            "process_log": "docs/process_log.fr",
+            "output": result.get("stdout", "")[-2000:],
+            "message": "Peerless gap closure complete",
         }
 
     def build_archive_crawler(self, parsed: Dict[str, Any]) -> Dict[str, Any]:

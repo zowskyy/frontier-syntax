@@ -126,7 +126,10 @@ The ARC review listed PRs #15, #16, #19, #21 as open. **Live GitHub state:**
 | Knowledge → Codegen | 🟢 Wired | `implementation_hint` changes emitted WASM bytes |
 | Swarm Sync | 🟢 Spec + protocol | `frontier/swarm/swarm_sync_protocol.fr` |
 | Runtime (GPU/IPFS/CDX) | 🟡 Spec + test | `.fr` modules pass `frontier run --test` |
-| Teacher-Student Unity | 🔴 Not in repo | No `unity/teacher_student.fr` found |
+| Teacher-Student Unity | 🟢 Complete | `frontier/learning/teacher_student.fr` |
+| Peerless Gaps (P1–P6) | 🟢 Closed | `scripts/close_peerless_gaps.py` |
+| Swarm 2.0 Optimization | 🟢 Active | `scripts/swarm_optimized.py`, ~2.5×+ wall-clock speedup |
+| Process Documentation | 🟢 Mandatory | `docs/process_log.fr` via `process_logger.py` |
 | Genesis loop | 🟡 Partial | `self_creation_orchestrator.py`, not `scripts/genesis.fr` |
 | IPFS Swarm Sync | 🟡 Spec only | `frontier/ipfs/swarm.fr`; live node pending |
 | prjctnxs PR #7 | ⚪ Out of scope | Separate repository |

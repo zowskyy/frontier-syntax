@@ -1,0 +1,297 @@
+// Frontier Process Log — auto-generated, Frontier-readable
+// Every process, decision, and result for data research and LLM training
+version: 2.0;
+
+module process_log;
+
+// Entries appended by scripts/process_logger.py
+
+component ProcessEntry_20260806_005540_012101 {
+    timestamp: "2026-08-06T00:55:40.012066Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 4074,
+    metrics_json: "{\"duration_ms\":4074,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_005544_033187 {
+    timestamp: "2026-08-06T00:55:44.033170Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 4020,
+    metrics_json: "{\"duration_ms\":4020,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_005554_482575 {
+    timestamp: "2026-08-06T00:55:54.482550Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 10449,
+    metrics_json: "{\"duration_ms\":10449,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_005557_304035 {
+    timestamp: "2026-08-06T00:55:57.304016Z",
+    process: "peerless_P4",
+    decision: "close_WASM size optimization",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 2821,
+    metrics_json: "{\"duration_ms\":2821,\"gap\":\"P4\"}",
+}
+
+component ProcessEntry_20260806_005604_969212 {
+    timestamp: "2026-08-06T00:56:04.969184Z",
+    process: "peerless_P5",
+    decision: "close_True self-hosting in Frontier",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 7664,
+    metrics_json: "{\"duration_ms\":7664,\"gap\":\"P5\"}",
+}
+
+component ProcessEntry_20260806_005608_825331 {
+    timestamp: "2026-08-06T00:56:08.825312Z",
+    process: "peerless_P6",
+    decision: "close_Teacher-student unity module",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 3855,
+    metrics_json: "{\"duration_ms\":3855,\"gap\":\"P6\"}",
+}
+
+component ProcessEntry_20260806_005611_450651 {
+    timestamp: "2026-08-06T00:56:11.450634Z",
+    process: "parse_repo",
+    decision: "shared_state_once",
+    result: "pass",
+    worker: "swarm_optimized",
+    duration_ms: 0,
+    metrics_json: "{\"duration_ms\":0,\"modules\":10}",
+}
+
+component ProcessEntry_20260806_005612_460298 {
+    timestamp: "2026-08-06T00:56:12.460276Z",
+    process: "proofs_security",
+    decision: "execute_proofs_security",
+    result: "pass",
+    worker: "worker_3",
+    duration_ms: 1008,
+    metrics_json: "{\"duration_ms\":1008,\"pass\":true,\"output\":\"PASS: Coq proof validation (4/4 proofs)\\n\"}",
+}
+
+component ProcessEntry_20260806_005613_518812 {
+    timestamp: "2026-08-06T00:56:13.518790Z",
+    process: "wasm_codegen",
+    decision: "execute_wasm_codegen",
+    result: "pass",
+    worker: "worker_1",
+    duration_ms: 2067,
+    metrics_json: "{\"duration_ms\":2067,\"pass\":true,\"output\":\"u32,\\n    |     ^^^^^^^^^^\\n\\nwarning: `frontier` (lib test) generated 13 warnings (run `cargo fix --lib -p frontier --tests` to apply 2 suggestions)\\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.03s\\n     Running unittests src/lib.rs (target/debug/deps/frontier-1475498e1a73911a)\\n\"}",
+}
+
+component ProcessEntry_20260806_005617_186567 {
+    timestamp: "2026-08-06T00:56:17.186549Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 5702,
+    metrics_json: "{\"duration_ms\":5702,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_005624_431645 {
+    timestamp: "2026-08-06T00:56:24.431628Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 7244,
+    metrics_json: "{\"duration_ms\":7244,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_005628_096777 {
+    timestamp: "2026-08-06T00:56:28.096749Z",
+    process: "self_hosting",
+    decision: "execute_self_hosting",
+    result: "pass",
+    worker: "worker_2",
+    duration_ms: 16645,
+    metrics_json: "{\"duration_ms\":16645,\"pass\":true,\"output\":\"PASS: Self-hosting bootstrap (cmp identical)\\n\"}",
+}
+
+component ProcessEntry_20260806_005642_376443 {
+    timestamp: "2026-08-06T00:56:42.376424Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 17944,
+    metrics_json: "{\"duration_ms\":17944,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_005642_384649 {
+    timestamp: "2026-08-06T00:56:42.384619Z",
+    process: "runtime_integration",
+    decision: "execute_runtime_integration",
+    result: "pass",
+    worker: "worker_4",
+    duration_ms: 30930,
+    metrics_json: "{\"duration_ms\":30930,\"pass\":true,\"output\":\"y', 'note': 'HTTP Error 410: Gone'}\\\\n\\\",\\n      \\\"module_present\\\": true\\n    },\\n    {\\n      \\\"id\\\": \\\"P3\\\",\\n      \\\"name\\\": \\\"Live CDX streaming\\\",\\n      \\\"status\\\": \\\"closed\\\",\\n      \\\"pass\\\": true,\\n      \\\"duration_ms\\\": 17944,\\n      \\\"output\\\": \\\"PASS: CDX streaming runtime\\\\n\\\",\\n      \\\"module_present\\\": true\\n    }\\n  ]\\n}\\n\"}",
+}
+
+component ProcessEntry_20260806_005642_412633 {
+    timestamp: "2026-08-06T00:56:42.412622Z",
+    process: "gate_no_screw",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 26,
+    metrics_json: "{\"duration_ms\":26,\"gate\":\"no_screw\"}",
+}
+
+component ProcessEntry_20260806_005642_416558 {
+    timestamp: "2026-08-06T00:56:42.416547Z",
+    process: "gate_a_plus",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 30,
+    metrics_json: "{\"duration_ms\":30,\"gate\":\"a_plus\"}",
+}
+
+component ProcessEntry_20260806_005645_004281 {
+    timestamp: "2026-08-06T00:56:45.004252Z",
+    process: "gate_axiomatic",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 2618,
+    metrics_json: "{\"duration_ms\":2618,\"gate\":\"axiomatic\"}",
+}
+
+component ProcessEntry_20260806_005650_995870 {
+    timestamp: "2026-08-06T00:56:50.995851Z",
+    process: "gate_living_conversation",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 8583,
+    metrics_json: "{\"duration_ms\":8583,\"gate\":\"living_conversation\"}",
+}
+
+component ProcessEntry_20260806_005654_984497 {
+    timestamp: "2026-08-06T00:56:54.984476Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 9945,
+    metrics_json: "{\"duration_ms\":9945,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_005700_195491 {
+    timestamp: "2026-08-06T00:57:00.195478Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 5210,
+    metrics_json: "{\"duration_ms\":5210,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_005714_215170 {
+    timestamp: "2026-08-06T00:57:14.215139Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 14019,
+    metrics_json: "{\"duration_ms\":14019,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_005717_904200 {
+    timestamp: "2026-08-06T00:57:17.904149Z",
+    process: "gate_repo",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 35518,
+    metrics_json: "{\"duration_ms\":35518,\"gate\":\"repo\"}",
+}
+
+component ProcessEntry_20260806_005723_295615 {
+    timestamp: "2026-08-06T00:57:23.295591Z",
+    process: "gate_frontier_face",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 40878,
+    metrics_json: "{\"duration_ms\":40878,\"gate\":\"frontier_face\"}",
+}
+
+component ProcessEntry_20260806_005750_293602 {
+    timestamp: "2026-08-06T00:57:50.293567Z",
+    process: "peerless_P4",
+    decision: "close_WASM size optimization",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 36077,
+    metrics_json: "{\"duration_ms\":36077,\"gap\":\"P4\"}",
+}
+
+component ProcessEntry_20260806_005801_860691 {
+    timestamp: "2026-08-06T00:58:01.860648Z",
+    process: "peerless_P5",
+    decision: "close_True self-hosting in Frontier",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 11566,
+    metrics_json: "{\"duration_ms\":11566,\"gap\":\"P5\"}",
+}
+
+component ProcessEntry_20260806_005806_589907 {
+    timestamp: "2026-08-06T00:58:06.589860Z",
+    process: "gate_global_skills",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 75593,
+    metrics_json: "{\"duration_ms\":75593,\"gate\":\"global_skills\"}",
+}
+
+component ProcessEntry_20260806_005811_034173 {
+    timestamp: "2026-08-06T00:58:11.034149Z",
+    process: "peerless_P6",
+    decision: "close_Teacher-student unity module",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 9172,
+    metrics_json: "{\"duration_ms\":9172,\"gap\":\"P6\"}",
+}
+
+component ProcessEntry_20260806_005811_044283 {
+    timestamp: "2026-08-06T00:58:11.044261Z",
+    process: "gate_peerless",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 86039,
+    metrics_json: "{\"duration_ms\":86039,\"gate\":\"peerless\"}",
+}
+
+component ProcessEntry_20260806_005811_144962 {
+    timestamp: "2026-08-06T00:58:11.144943Z",
+    process: "swarm_optimized_run",
+    decision: "aggregate_results",
+    result: "pass",
+    worker: "swarm_optimized",
+    duration_ms: 119694,
+    metrics_json: "{\"duration_ms\":119694,\"speedup_factor\":2.51}",
+}

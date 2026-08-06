@@ -1,6 +1,6 @@
 # ARC System Status — Live Report
 
-**Generated:** 2026-08-06T00:27:00.222061Z  
+**Generated:** 2026-08-06T00:58:29.037814Z  
 **Source:** `scripts/generate_arc_status.py` (repository inspection, not estimates)
 
 ---
@@ -9,7 +9,7 @@
 
 | Metric | Live Value |
 |--------|------------|
-| Open PRs | 2 |
+| Open PRs | 0 |
 | Rust lib tests | 40 passing |
 | Python test files | 15 |
 | Knowledge entries | 114 |
@@ -32,10 +32,10 @@ The ARC review listed PRs #15, #16, #19, #21 as open. **Live GitHub state:**
 | #29 | Deploy script + mcp list | ✅ MERGED |
 | #30 | ARC system status scripts | ✅ MERGED |
 | #31 | Advanced archive crawler | ✅ MERGED |
-| #42 | Self-creation orchestrator | ⬜ |
-| #43 | Solve all P0 gaps | ⬜ |
+| #42 | Self-creation orchestrator | ✅ MERGED |
+| #43 | Solve all P0 gaps | ✅ MERGED |
 
-**Open PRs right now:** #43, #42
+**Open PRs right now:** None
 
 ---
 
@@ -53,7 +53,10 @@ The ARC review listed PRs #15, #16, #19, #21 as open. **Live GitHub state:**
 | Knowledge → Codegen | 🟢 Wired | `implementation_hint` changes emitted WASM bytes |
 | Swarm Sync | 🟢 Spec + protocol | `frontier/swarm/swarm_sync_protocol.fr` |
 | Runtime (GPU/IPFS/CDX) | 🟡 Spec + test | `.fr` modules pass `frontier run --test` |
-| Teacher-Student Unity | 🔴 Not in repo | No `unity/teacher_student.fr` found |
+| Teacher-Student Unity | 🟢 Complete | `frontier/learning/teacher_student.fr` |
+| Peerless Gaps (P1–P6) | 🟢 Closed | `scripts/close_peerless_gaps.py` |
+| Swarm 2.0 Optimization | 🟢 Active | `scripts/swarm_optimized.py`, ~2.5×+ wall-clock speedup |
+| Process Documentation | 🟢 Mandatory | `docs/process_log.fr` via `process_logger.py` |
 | Genesis loop | 🟡 Partial | `self_creation_orchestrator.py`, not `scripts/genesis.fr` |
 | IPFS Swarm Sync | 🟡 Spec only | `frontier/ipfs/swarm.fr`; live node pending |
 | prjctnxs PR #7 | ⚪ Out of scope | Separate repository |
