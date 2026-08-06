@@ -1,0 +1,466 @@
+# Command: cargo clippy -- -D warnings
+# Started: 2026-08-06T18:19:44Z
+
+   Compiling frontier v2.0.0 (/workspace)
+error: unused import: `serde_json::Value`
+  --> src/parser/mod.rs:13:5
+   |
+13 | use serde_json::Value;
+   |     ^^^^^^^^^^^^^^^^^
+   |
+   = note: `-D unused-imports` implied by `-D warnings`
+   = help: to override `-D warnings` add `#[allow(unused_imports)]`
+
+error: unused import: `std::path::Path`
+  --> src/parser/mod.rs:15:5
+   |
+15 | use std::path::Path;
+   |     ^^^^^^^^^^^^^^^
+
+error: unused import: `SecretKey`
+ --> src/pq_signatures.rs:4:45
+  |
+4 | use pqcrypto_traits::sign::{PublicKey as _, SecretKey as _, SignedMessage as _};
+  |                                             ^^^^^^^^^
+
+error: unused variable: `line`
+   --> src/lexer.rs:178:31
+    |
+178 |     fn read_string(&mut self, line: usize, column: usize) -> Token {
+    |                               ^^^^ help: if this is intentional, prefix it with an underscore: `_line`
+    |
+    = note: `-D unused-variables` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(unused_variables)]`
+
+error: unused variable: `column`
+   --> src/lexer.rs:178:44
+    |
+178 |     fn read_string(&mut self, line: usize, column: usize) -> Token {
+    |                                            ^^^^^^ help: if this is intentional, prefix it with an underscore: `_column`
+
+error: unused variable: `start`
+   --> src/parser/handwritten.rs:147:13
+    |
+147 |         let start = self.current().clone();
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_start`
+
+error: variable does not need to be mutable
+   --> src/wasm_codegen.rs:144:9
+    |
+144 |     let mut codegen = FullModuleCodegen::new(program)?;
+    |         ----^^^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `-D unused-mut` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(unused_mut)]`
+
+error: unused variable: `idx`
+   --> src/wasm_codegen.rs:247:14
+    |
+247 |         for (idx, sig) in fns.into_iter().enumerate() {
+    |              ^^^ help: if this is intentional, prefix it with an underscore: `_idx`
+
+error: unused variable: `main_func_count`
+   --> src/wasm_codegen.rs:578:43
+    |
+578 | fn export_section_multi(names: &[String], main_func_count: usize) -> Vec<u8> {
+    |                                           ^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_main_func_count`
+
+error: field `input` is never read
+  --> src/lexer.rs:67:5
+   |
+66 | pub struct Lexer<'a> {
+   |            ----- field in this struct
+67 |     input: &'a str,
+   |     ^^^^^
+   |
+   = note: `-D dead-code` implied by `-D warnings`
+   = help: to override `-D warnings` add `#[allow(dead_code)]`
+
+error: field `diagnostics` is never read
+   --> src/neural/completion.rs:149:5
+    |
+147 | pub struct NeuralLspServer {
+    |            --------------- field in this struct
+148 |     completion: NeuralCompletion,
+149 |     diagnostics: Vec<JsonValue>,
+    |     ^^^^^^^^^^^
+
+error: method `parse_fn` is never used
+   --> src/parser/handwritten.rs:312:8
+    |
+12  | impl Parser {
+    | ----------- method in this implementation
+...
+312 |     fn parse_fn(&mut self) -> Result<Stmt, FrontierError> {
+    |        ^^^^^^^^
+
+error: method `check_null_safety` is never used
+   --> src/resolver.rs:140:8
+    |
+37  | impl Resolver {
+    | ------------- method in this implementation
+...
+140 |     fn check_null_safety(&self, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {
+    |        ^^^^^^^^^^^^^^^^^
+
+error: you should consider adding a `Default` implementation for `ProofGenerator`
+  --> src/compiler/proof_generator.rs:8:5
+   |
+8  | /     pub fn new() -> Self {
+9  | |         ProofGenerator {
+10 | |             proofs: Vec::new(),
+11 | |         }
+12 | |     }
+   | |_____^
+   |
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#new_without_default
+   = note: `-D clippy::new-without-default` implied by `-D warnings`
+   = help: to override `-D warnings` add `#[allow(clippy::new_without_default)]`
+help: try adding this
+   |
+7  + impl Default for ProofGenerator {
+8  +     fn default() -> Self {
+9  +         Self::new()
+10 +     }
+11 + }
+   |
+
+error: you should consider adding a `Default` implementation for `IpfsImportResolver`
+  --> src/ipfs/resolver.rs:19:5
+   |
+19 | /     pub fn new() -> Self {
+20 | |         let client = Client::builder()
+21 | |             .timeout(Duration::from_secs(10))
+22 | |             .build()
+...  |
+30 | |     }
+   | |_____^
+   |
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#new_without_default
+help: try adding this
+   |
+18 + impl Default for IpfsImportResolver {
+19 +     fn default() -> Self {
+20 +         Self::new()
+21 +     }
+22 + }
+   |
+
+error: this `if` statement can be collapsed
+   --> src/knowledge/solver.rs:234:13
+    |
+234 | /             if matches!(problem.size_hint, SizeHint::Tiny | SizeHint::Small) {
+235 | |                 if entry.name_hash == hash_name("insertion_sort") {
+236 | |                     score -= 0.05;
+237 | |                 }
+238 | |             }
+    | |_____________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#collapsible_if
+    = note: `-D clippy::collapsible-if` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::collapsible_if)]`
+help: collapse nested if block
+    |
+234 ~             if matches!(problem.size_hint, SizeHint::Tiny | SizeHint::Small)
+235 ~                 && entry.name_hash == hash_name("insertion_sort") {
+236 |                     score -= 0.05;
+237 ~                 }
+    |
+
+error: this `if` statement can be collapsed
+   --> src/knowledge/solver.rs:239:13
+    |
+239 | /             if matches!(problem.size_hint, SizeHint::Large | SizeHint::Huge) {
+240 | |                 if entry.name_hash == hash_name("timsort") {
+241 | |                     score -= 0.08;
+242 | |                 }
+243 | |             }
+    | |_____________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#collapsible_if
+help: collapse nested if block
+    |
+239 ~             if matches!(problem.size_hint, SizeHint::Large | SizeHint::Huge)
+240 ~                 && entry.name_hash == hash_name("timsort") {
+241 |                     score -= 0.08;
+242 ~                 }
+    |
+
+error: this `map_or` can be simplified
+   --> src/lexer.rs:227:23
+    |
+227 |                 while self.peek().map_or(false, |c| c.is_ascii_digit()) {
+    |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#unnecessary_map_or
+    = note: `-D clippy::unnecessary-map-or` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::unnecessary_map_or)]`
+help: use is_some_and instead
+    |
+227 -                 while self.peek().map_or(false, |c| c.is_ascii_digit()) {
+227 +                 while self.peek().is_some_and(|c| c.is_ascii_digit()) {
+    |
+
+error: this `map_or` can be simplified
+   --> src/lexer.rs:235:27
+    |
+235 |                     while self.peek().map_or(false, |c| c.is_ascii_digit()) {
+    |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#unnecessary_map_or
+help: use is_some_and instead
+    |
+235 -                     while self.peek().map_or(false, |c| c.is_ascii_digit()) {
+235 +                     while self.peek().is_some_and(|c| c.is_ascii_digit()) {
+    |
+
+error: this `map_or` can be simplified
+   --> src/lexer.rs:244:15
+    |
+244 |         while self.peek().map_or(false, |c| c.is_ascii_digit()) {
+    |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#unnecessary_map_or
+help: use is_some_and instead
+    |
+244 -         while self.peek().map_or(false, |c| c.is_ascii_digit()) {
+244 +         while self.peek().is_some_and(|c| c.is_ascii_digit()) {
+    |
+
+error: this `map_or` can be simplified
+   --> src/lexer.rs:247:40
+    |
+247 |         if self.peek() == Some('.') && self.peek_at(1).map_or(false, |c| c.is_ascii_digit()) {
+    |                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#unnecessary_map_or
+help: use is_some_and instead
+    |
+247 -         if self.peek() == Some('.') && self.peek_at(1).map_or(false, |c| c.is_ascii_digit()) {
+247 +         if self.peek() == Some('.') && self.peek_at(1).is_some_and(|c| c.is_ascii_digit()) {
+    |
+
+error: this `map_or` can be simplified
+   --> src/lexer.rs:249:19
+    |
+249 |             while self.peek().map_or(false, |c| c.is_ascii_digit()) {
+    |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#unnecessary_map_or
+help: use is_some_and instead
+    |
+249 -             while self.peek().map_or(false, |c| c.is_ascii_digit()) {
+249 +             while self.peek().is_some_and(|c| c.is_ascii_digit()) {
+    |
+
+error: this `map_or` can be simplified
+   --> src/lexer.rs:257:23
+    |
+257 |                 while self.peek().map_or(false, |c| c.is_ascii_digit()) {
+    |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#unnecessary_map_or
+help: use is_some_and instead
+    |
+257 -                 while self.peek().map_or(false, |c| c.is_ascii_digit()) {
+257 +                 while self.peek().is_some_and(|c| c.is_ascii_digit()) {
+    |
+
+error: this `map_or` can be simplified
+   --> src/lexer.rs:269:19
+    |
+269 |             while self.peek().map_or(false, |c| c.is_ascii_digit()) {
+    |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#unnecessary_map_or
+help: use is_some_and instead
+    |
+269 -             while self.peek().map_or(false, |c| c.is_ascii_digit()) {
+269 +             while self.peek().is_some_and(|c| c.is_ascii_digit()) {
+    |
+
+error: this `map_or` can be simplified
+   --> src/lexer.rs:282:15
+    |
+282 |         while self.peek().map_or(false, Self::is_id_cont) {
+    |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#unnecessary_map_or
+help: use is_some_and instead
+    |
+282 -         while self.peek().map_or(false, Self::is_id_cont) {
+282 +         while self.peek().is_some_and(Self::is_id_cont) {
+    |
+
+error: this `map_or` can be simplified
+   --> src/lexer.rs:286:12
+    |
+286 |         if self.peek().map_or(false, Self::is_id_cont) {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#unnecessary_map_or
+help: use is_some_and instead
+    |
+286 -         if self.peek().map_or(false, Self::is_id_cont) {
+286 +         if self.peek().is_some_and(Self::is_id_cont) {
+    |
+
+error: you should consider adding a `Default` implementation for `NeuralLspServer`
+  --> src/lsp/neural_server.rs:8:5
+   |
+8  | /     pub fn new() -> Self {
+9  | |         NeuralLspServer {
+10 | |             completion: NeuralCompletion::new(16),
+11 | |         }
+12 | |     }
+   | |_____^
+   |
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#new_without_default
+help: try adding this
+   |
+7  + impl Default for NeuralLspServer {
+8  +     fn default() -> Self {
+9  +         Self::new()
+10 +     }
+11 + }
+   |
+
+error: you should consider adding a `Default` implementation for `NeuralLspServer`
+   --> src/neural/completion.rs:153:5
+    |
+153 | /     pub fn new() -> Self {
+154 | |         NeuralLspServer {
+155 | |             completion: NeuralCompletion::new(16),
+156 | |             diagnostics: Vec::new(),
+157 | |         }
+158 | |     }
+    | |_____^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#new_without_default
+help: try adding this
+    |
+152 + impl Default for NeuralLspServer {
+153 +     fn default() -> Self {
+154 +         Self::new()
+155 +     }
+156 + }
+    |
+
+error: you should consider adding a `Default` implementation for `PackageRegistry`
+  --> src/packages/registry.rs:18:5
+   |
+18 | /     pub fn new() -> Self {
+19 | |         PackageRegistry {
+20 | |             packages: HashMap::new(),
+21 | |         }
+22 | |     }
+   | |_____^
+   |
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#new_without_default
+help: try adding this
+   |
+17 + impl Default for PackageRegistry {
+18 +     fn default() -> Self {
+19 +         Self::new()
+20 +     }
+21 + }
+   |
+
+error: you should consider adding a `Default` implementation for `Resolver`
+  --> src/resolver.rs:38:5
+   |
+38 | /     pub fn new() -> Self {
+39 | |         let root = Scope {
+40 | |             id: 0,
+41 | |             parent: None,
+...  |
+53 | |     }
+   | |_____^
+   |
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#new_without_default
+help: try adding this
+   |
+37 + impl Default for Resolver {
+38 +     fn default() -> Self {
+39 +         Self::new()
+40 +     }
+41 + }
+   |
+
+error: you should consider adding a `Default` implementation for `V2Resolver`
+  --> src/v2_resolver.rs:27:5
+   |
+27 | /     pub fn new() -> Self {
+28 | |         V2Resolver {
+29 | |             symbols: HashMap::new(),
+30 | |             imports: Vec::new(),
+...  |
+34 | |     }
+   | |_____^
+   |
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#new_without_default
+help: try adding this
+   |
+26 + impl Default for V2Resolver {
+27 +     fn default() -> Self {
+28 +         Self::new()
+29 +     }
+30 + }
+   |
+
+error: this `if` statement can be collapsed
+   --> src/unity.rs:171:9
+    |
+171 | /         if lower.contains(pattern) || functions.iter().any(|f| f.contains(pattern)) {
+172 | |             if !ops.iter().any(|o| o == op) {
+173 | |                 ops.push(op.to_string());
+174 | |             }
+175 | |         }
+    | |_________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#collapsible_if
+help: collapse nested if block
+    |
+171 ~         if (lower.contains(pattern) || functions.iter().any(|f| f.contains(pattern))) {
+172 ~             && !ops.iter().any(|o| o == op) {
+173 |                 ops.push(op.to_string());
+174 ~             }
+    |
+
+error: writing `&Vec` instead of `&[_]` involves a new object where a slice will do
+   --> src/unity.rs:313:38
+    |
+313 | fn validate_spec(source: &str, wasm: &Vec<u8>, exports: &[String]) -> bool {
+    |                                      ^^^^^^^^ help: change this to: `&[u8]`
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#ptr_arg
+    = note: `-D clippy::ptr-arg` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::ptr_arg)]`
+
+error: you should consider adding a `Default` implementation for `ZkVerifier`
+  --> src/zk/verifier.rs:67:5
+   |
+67 | /     pub fn new() -> Self {
+68 | |         ZkVerifier {
+69 | |             proving_key: None,
+70 | |             verifying_key: None,
+71 | |         }
+72 | |     }
+   | |_____^
+   |
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#new_without_default
+help: try adding this
+   |
+66 + impl Default for ZkVerifier {
+67 +     fn default() -> Self {
+68 +         Self::new()
+69 +     }
+70 + }
+   |
+
+error: could not compile `frontier` (lib) due to 34 previous errors
+
+# Exit code: 101
+# Finished: 2026-08-06T18:19:45Z

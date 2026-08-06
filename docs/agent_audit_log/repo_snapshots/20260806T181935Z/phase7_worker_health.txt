@@ -1,0 +1,25 @@
+# PHASE 7: Worker health checks
+# Generated: 2026-08-06T18:19:35Z
+
+Testing --help on python scripts in scripts/ matching worker/swarm/orchestrator patterns
+
+--------------------------------------------------------------------------------
+SCRIPT: ./scripts/agent_shadow_worker.py
+--------------------------------------------------------------------------------
+STATUS: PASS
+usage: agent_shadow_worker.py [-h] {run,install-cron} ...
+
+positional arguments:
+  {run,install-cron}
+
+options:
+  -h, --help          show this help message and exit
+
+--------------------------------------------------------------------------------
+SCRIPT: ./scripts/blueprint_phase_swarm.py
+--------------------------------------------------------------------------------
+STATUS: TIMEOUT (10s — script may not support --help)
+
+--------------------------------------------------------------------------------
+SCRIPT: ./scripts/deploy_lexicon_bound_swarm.py
+--------------------------------------------------------------------------------

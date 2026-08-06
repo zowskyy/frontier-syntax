@@ -1,0 +1,44 @@
+# PHASE 4: Test files (*test* in name)
+# Generated: 2026-08-06T18:19:35Z
+
+(no *test*.rs files by filename; inline #[test] modules in src/)
+
+## Inline test modules (grep #[test] in src/)
+  2 tests in ./src/browser_compiler.rs
+  1 tests in ./src/browser_wasm.rs
+  1 tests in ./src/compiler/proof_generator.rs
+  2 tests in ./src/grammar/mod.rs
+  1 tests in ./src/grammar/mutator.rs
+  4 tests in ./src/ipfs/resolver.rs
+  5 tests in ./src/knowledge/mod.rs
+  1 tests in ./src/knowledge_bridge.rs
+  2 tests in ./src/lexer.rs
+  1 tests in ./src/lib.rs
+  1 tests in ./src/lsp/neural_server.rs
+  3 tests in ./src/neural/completion.rs
+  1 tests in ./src/packages/registry.rs
+  1 tests in ./src/parser/mod.rs
+  2 tests in ./src/pq_signatures.rs
+  4 tests in ./src/unity.rs
+  1 tests in ./src/v2_resolver.rs
+  6 tests in ./src/wasm_codegen.rs
+  2 tests in ./src/zk/verifier.rs
+
+## tests/ directory
+     0  ./tests/scrub_generated/__init__.py
+    19  ./tests/scrub_generated/test_build__arc_orchestrator_py.py
+    11  ./tests/scrub_generated/test_deploy__config_yaml.py
+    11  ./tests/scrub_generated/test_deploy__health_check_sh.py
+    19  ./tests/scrub_generated/test_frontier_agent_py.py
+    19  ./tests/scrub_generated/test_scripts__test_redos_py.py
+    19  ./tests/scrub_generated/test_scripts__verify_cycle1_py.py
+    12  ./tests/scrub_generated/test_src__compiler__proof_generator_rs.py
+    12  ./tests/scrub_generated/test_src__grammar__mutator_rs.py
+    12  ./tests/scrub_generated/test_src__ipfs__resolver_rs.py
+    12  ./tests/scrub_generated/test_src__neural__completion_rs.py
+    12  ./tests/scrub_generated/test_src__packages__registry_rs.py
+    12  ./tests/scrub_generated/test_src__pq_signatures_rs.py
+    12  ./tests/scrub_generated/test_src__unity_rs.py
+    12  ./tests/scrub_generated/test_src__wasm_codegen_rs.py
+    12  ./tests/scrub_generated/test_src__zk__verifier_rs.py
+     6  ./tests/test_help.frontier

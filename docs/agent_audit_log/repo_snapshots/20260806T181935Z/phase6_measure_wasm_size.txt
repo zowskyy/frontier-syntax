@@ -1,0 +1,24 @@
+# Command: python3 scripts/measure_wasm_size.py
+# Started: 2026-08-06T18:19:46Z
+
+{
+  "pass": true,
+  "measured_at": "2026-08-06T18:19:48.602112Z",
+  "measurement_script": "scripts/measure_wasm_size.py",
+  "build_command": "cargo build --release --lib --target wasm32-unknown-unknown --no-default-features --features wasm-slim",
+  "build_profile": "wasm-slim",
+  "artifact_path": "target/wasm32-unknown-unknown/release/frontier.opt.wasm",
+  "raw_artifact_path": "target/wasm32-unknown-unknown/release/frontier.wasm",
+  "raw_size_bytes": 150940,
+  "raw_size_kb": 147.4,
+  "wasm_opt_applied": true,
+  "size_bytes": 130495,
+  "size_kb": 127.4,
+  "target_kb": 100,
+  "met": false,
+  "git_sha": "fe5d47e",
+  "note": "wasm-slim build: parser + codegen + compile_frontier_wasm export. Full browser API (BrowserCompiler) requires --features full. Baseline monolithic build was ~885 KB; slim + wasm-opt is measured here."
+}
+
+# Exit code: 0
+# Finished: 2026-08-06T18:19:48Z

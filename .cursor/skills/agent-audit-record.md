@@ -1,18 +1,38 @@
-# Agent Audit Record — mandatory for this repo
+# Agent Audit Log — mandatory (every action)
 
-See `agent-legal-record/.cursor/skills/agent-audit-record.md` for full skill.
-
-After significant actions:
+Log **every** tool call and response turn. No exceptions.
 
 ```bash
-python3 agent-legal-record/scripts/agent_audit_logger.py record \
-  --category tool_call --action "..." --why "..." --command "..." --verified
+python3 scripts/agent_audit_hook.py \
+  --tool <Shell|Read|Grep|Write|...> \
+  --action "<what>" \
+  --command "<exact command or path>" \
+  --exit-code <code> \
+  --verified
 ```
 
-End of turn (cloud agent):
+## Locations
+
+- Actions: `docs/agent_audit_log/sessions/YYYY-MM-DD.jsonl`
+- Repo dump: `docs/agent_audit_log/repo_snapshots/` (see `LATEST.txt`)
+- Ecosystem report: `docs/agent_audit_log/ecosystem_knowledge/ECOSYSTEM_KNOWLEDGE_REPORT.txt`
+- Pipeline logs: `docs/agent_audit_log/pipeline_logs/<run_id>/pipeline.log`
+
+Regenerate ecosystem knowledge:
 
 ```bash
-python3 agent-legal-record/scripts/agent_shadow_worker.py run
+python3 scripts/gather_ecosystem_knowledge.py
 ```
 
-Private record repo: https://github.com/zowskyy/frontier-agent-legal-record
+## End of every turn
+
+```bash
+python3 scripts/agent_shadow_worker.py run
+```
+
+## Rules
+
+1. Log before AND after every tool invocation when possible.
+2. Always include `--omission` for what was not verified.
+3. Never skip logging because an action seems small.
+4. Do not log raw secrets — logger redacts common patterns.

@@ -1,0 +1,1609 @@
+# PHASE 2: Other src files (line count + first 30 lines)
+# Generated: 2026-08-06T18:19:35Z
+
+--------------------------------------------------------------------------------
+FILE: ./src/ast.rs (165 lines)
+--------------------------------------------------------------------------------
+#[cfg(feature = "serde-json")]
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, PartialEq)]
+#[cfg_attr(feature = "serde-json", derive(Serialize, Deserialize))]
+pub struct Program {
+    #[cfg_attr(feature = "serde-json", serde(skip_serializing_if = "Option::is_none"))]
+    pub version: Option<String>,
+    pub statements: Vec<Stmt>,
+}
+
+#[derive(Debug, Clone, PartialEq)]
+#[cfg_attr(feature = "serde-json", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde-json", serde(tag = "type", rename_all = "snake_case"))]
+pub enum Stmt {
+    VersionDecl {
+        version: String,
+    },
+    ImportDecl {
+        path: String,
+        alias: String,
+    },
+    LetDecl {
+        name: String,
+        type_spec: TypeSpec,
+        value: Box<Expr>,
+        #[cfg_attr(feature = "serde-json", serde(skip_serializing_if = "Option::is_none"))]
+        symbol_id: Option<u32>,
+    },
+    FnDecl {
+
+--------------------------------------------------------------------------------
+FILE: ./src/bin/lighthouse.rs (67 lines)
+--------------------------------------------------------------------------------
+//! Frontier Lighthouse — verification and audit service.
+
+use frontier::{parse_and_resolve, sha3_256_hex};
+use std::env;
+use std::fs;
+use std::path::PathBuf;
+
+fn main() {
+    let args: Vec<String> = env::args().collect();
+    let cmd = args.get(1).map(|s| s.as_str()).unwrap_or("audit");
+
+    match cmd {
+        "audit" => run_audit(),
+        "health" => {
+            println!("{{\"status\":\"ok\",\"service\":\"frontier-lighthouse\"}}");
+        }
+        _ => {
+            eprintln!("Usage: lighthouse [audit|health]");
+            std::process::exit(1);
+        }
+    }
+}
+
+fn run_audit() {
+    let root = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+    let mut checks = 0usize;
+    let mut passed = 0usize;
+
+    let samples = [
+        root.join("examples/sample.fr"),
+
+--------------------------------------------------------------------------------
+FILE: ./src/bin/lsp.rs (61 lines)
+--------------------------------------------------------------------------------
+//! Frontier Neural-Symbolic LSP server (stdio JSON-RPC subset).
+
+use frontier::lsp::neural_server::NeuralLspServer;
+use std::io::{self, BufRead, Write};
+
+fn main() {
+    let server = NeuralLspServer::new();
+    let stdin = io::stdin();
+    let mut stdout = io::stdout();
+
+    for line in stdin.lock().lines() {
+        let line = match line {
+            Ok(l) => l,
+            Err(_) => break,
+        };
+        if line.trim().is_empty() {
+            continue;
+        }
+
+        let req: serde_json::Value = match serde_json::from_str(&line) {
+            Ok(v) => v,
+            Err(e) => {
+                let err = serde_json::json!({
+                    "error": format!("invalid json: {e}"),
+                });
+                let _ = writeln!(stdout, "{err}");
+                let _ = stdout.flush();
+                continue;
+            }
+        };
+
+--------------------------------------------------------------------------------
+FILE: ./src/browser_compiler.rs (260 lines)
+--------------------------------------------------------------------------------
+//! Browser compiler — compile Frontier source to WASM + optional JS glue.
+
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+use crate::canonicalize::{canonical_ast_json, sha3_256_hex};
+#[cfg(all(target_arch = "wasm32", feature = "wasm-slim"))]
+use crate::knowledge_bridge_slim::{get_ancestors_json, get_optimal_algorithm, get_tradeoffs_json};
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+use crate::knowledge_bridge::{get_ancestors_json, get_optimal_algorithm, get_tradeoffs_json};
+use crate::SizeHint;
+use crate::parser;
+use crate::wasm_codegen::{compile_source, CodeGenOptions, CompilationProfile};
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone)]
+pub struct CompileOptions {
+    pub optimize: bool,
+    pub browser_compat: bool,
+    pub profile: bool,
+}
+
+impl Default for CompileOptions {
+    fn default() -> Self {
+        Self {
+            optimize: true,
+            browser_compat: false,
+            profile: false,
+        }
+    }
+}
+
+--------------------------------------------------------------------------------
+FILE: ./src/browser_wasm.rs (89 lines)
+--------------------------------------------------------------------------------
+//! WASM-bindgen exports for in-browser Frontier compilation.
+
+use wasm_bindgen::prelude::*;
+
+use crate::browser_compiler::{self, CompileOptions, CompileResult, ValidateResult};
+
+#[wasm_bindgen]
+pub struct BrowserCompiler {
+    optimize: bool,
+}
+
+#[wasm_bindgen]
+impl BrowserCompiler {
+    #[wasm_bindgen(constructor)]
+    pub fn new() -> Self {
+        Self { optimize: true }
+    }
+
+    #[wasm_bindgen]
+    pub fn set_optimize(&mut self, enabled: bool) {
+        self.optimize = enabled;
+    }
+
+    #[wasm_bindgen]
+    pub fn compile(&self, source: &str) -> Result<JsValue, JsValue> {
+        let options = CompileOptions {
+            optimize: self.optimize,
+            browser_compat: true,
+            profile: false,
+        };
+
+--------------------------------------------------------------------------------
+FILE: ./src/browser_wasm_slim.rs (10 lines)
+--------------------------------------------------------------------------------
+//! Minimal wasm-bindgen surface for wasm-slim builds (<100 KB target).
+
+use wasm_bindgen::prelude::*;
+
+use crate::browser_compiler;
+
+#[wasm_bindgen]
+pub fn compile_frontier_wasm(source: &str) -> Result<Vec<u8>, JsValue> {
+    browser_compiler::compile_to_wasm(source, true).map_err(|e| JsValue::from_str(&e))
+}
+
+--------------------------------------------------------------------------------
+FILE: ./src/canonicalize.rs (34 lines)
+--------------------------------------------------------------------------------
+use crate::ast::Program;
+use serde_json::{Map, Value};
+use sha3::{Digest, Sha3_256};
+
+pub fn canonical_value(value: &Value) -> Value {
+    match value {
+        Value::Object(map) => {
+            let mut keys: Vec<&String> = map.keys().collect();
+            keys.sort();
+            let mut sorted = Map::new();
+            for key in keys {
+                if key == "symbol_id" {
+                    continue;
+                }
+                sorted.insert(key.clone(), canonical_value(&map[key]));
+            }
+            Value::Object(sorted)
+        }
+        Value::Array(arr) => Value::Array(arr.iter().map(canonical_value).collect()),
+        other => other.clone(),
+    }
+}
+
+pub fn canonical_ast_json(program: &Program) -> Result<String, serde_json::Error> {
+    let raw = serde_json::to_value(program)?;
+    let canonical = canonical_value(&raw);
+    serde_json::to_string(&canonical)
+}
+
+pub fn sha3_256_hex(data: &str) -> String {
+
+--------------------------------------------------------------------------------
+FILE: ./src/cli/colors.rs (33 lines)
+--------------------------------------------------------------------------------
+use colored::Colorize;
+
+pub fn print_progress(msg: &str) {
+    println!("{}", msg.cyan());
+}
+
+pub fn print_success(msg: &str) {
+    println!("{}", msg.green());
+}
+
+pub fn print_warning(msg: &str) {
+    eprintln!("{}", msg.yellow());
+}
+
+pub fn print_error(msg: &str) {
+    eprintln!("{}", msg.red());
+}
+
+pub fn print_knowledge_suggestion(name: &str, year: u16) {
+    println!(
+        "🧠 {} (discovered {})",
+        name.bold().green(),
+        year.to_string().dimmed()
+    );
+}
+
+pub fn print_help_heading(title: &str) {
+    println!("\n{}", title.bold().underline());
+}
+
+
+--------------------------------------------------------------------------------
+FILE: ./src/cli/compile.rs (161 lines)
+--------------------------------------------------------------------------------
+use super::colors;
+use super::config;
+use super::errors;
+use super::profile;
+use super::telemetry;
+use std::fs;
+use std::os::unix::fs::PermissionsExt;
+use std::path::PathBuf;
+use std::time::Instant;
+
+pub fn run_compile(args: &[String]) {
+    let start = Instant::now();
+    let cfg = config::load_config();
+
+    let input = match args.get(2) {
+        Some(p) => p,
+        None => {
+            errors::print_compile_error(
+                "usage: frontier compile <file.fr> [-t wasm] [--browser] [-O] [--no-optimize] [-o out] [-p]",
+            );
+            std::process::exit(1);
+        }
+    };
+
+    let source = match fs::read_to_string(input) {
+        Ok(s) => s,
+        Err(e) => {
+            errors::print_io_error(&format!("Failed to read {input}"), &e);
+            std::process::exit(1);
+        }
+
+--------------------------------------------------------------------------------
+FILE: ./src/cli/completions.rs (138 lines)
+--------------------------------------------------------------------------------
+const COMMANDS: &[&str] = &[
+    "parse",
+    "parse-v2",
+    "resolve",
+    "hash",
+    "gen-artifacts",
+    "fuzz",
+    "migrate",
+    "verify",
+    "run",
+    "compile",
+    "knowledge",
+    "config",
+    "shell",
+    "watch",
+    "completions",
+    "help",
+    "--help",
+    "-h",
+];
+
+pub fn generate(shell: &str) -> Result<String, String> {
+    match shell {
+        "bash" => Ok(generate_bash()),
+        "zsh" => Ok(generate_zsh()),
+        "fish" => Ok(generate_fish()),
+        other => Err(format!(
+            "Unsupported shell: {other}. Supported: bash, zsh, fish"
+        )),
+    }
+
+--------------------------------------------------------------------------------
+FILE: ./src/cli/config.rs (73 lines)
+--------------------------------------------------------------------------------
+use serde::{Deserialize, Serialize};
+use std::fs;
+use std::path::PathBuf;
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct FrontierConfig {
+    pub optimize: bool,
+    pub target: String,
+    pub telemetry: bool,
+    pub profile: bool,
+    pub browser_compat: bool,
+}
+
+impl Default for FrontierConfig {
+    fn default() -> Self {
+        Self {
+            optimize: true,
+            target: "wasm".to_string(),
+            telemetry: false,
+            profile: false,
+            browser_compat: false,
+        }
+    }
+}
+
+const DEFAULT_CONFIG: &str = r#"# Frontier CLI configuration
+optimize = true
+target = "wasm"
+telemetry = false
+profile = false
+
+--------------------------------------------------------------------------------
+FILE: ./src/cli/errors.rs (35 lines)
+--------------------------------------------------------------------------------
+use super::colors;
+use frontier::FrontierError;
+
+pub fn print_parse_error(err: &FrontierError) {
+    colors::print_error(&format!(
+        "Error [{}] at line {}, column {}",
+        err.code, err.line, err.column
+    ));
+    eprintln!("  {}", err.message);
+    print_contextual_help(&err.code);
+}
+
+pub fn print_io_error(context: &str, err: &std::io::Error) {
+    colors::print_error(&format!("{context}: {err}"));
+}
+
+pub fn print_compile_error(message: &str) {
+    colors::print_error(message);
+    eprintln!("  Hint: run `frontier compile --help` for usage examples");
+}
+
+fn print_contextual_help(code: &str) {
+    match code {
+        "E-PARSE" => {
+            eprintln!("  Help: check syntax against `frontier parse-v2 <file>`");
+        }
+        "E-DEPTH" => {
+            eprintln!("  Help: reduce nesting depth (max 64 levels)");
+        }
+        "E-RESOLVE" => {
+
+--------------------------------------------------------------------------------
+FILE: ./src/cli/help.rs (50 lines)
+--------------------------------------------------------------------------------
+use super::colors;
+use colored::Colorize;
+
+pub fn print_global_help() {
+    println!("{}", "Frontier CLI v2.0".bold().green());
+    println!("Formally verifiable programming language toolchain\n");
+
+    colors::print_help_heading("Core Commands");
+    colors::print_command("parse <file>", "Parse v1 source to AST JSON");
+    colors::print_command("parse-v2 <file>", "Parse v2 source to AST JSON");
+    colors::print_command("resolve <file>", "Parse and resolve symbols");
+    colors::print_command("hash <file>", "Compute canonical AST SHA3-256 hash");
+    colors::print_command("compile <file>", "Compile to WASM (use -t wasm, -O, -p)");
+    colors::print_command("knowledge <sub>", "Knowledge Hypercube queries");
+
+    colors::print_help_heading("Tooling");
+    colors::print_command("shell", "Interactive REPL");
+    colors::print_command("watch [path]", "Watch directory and recompile on change");
+    colors::print_command("config init|show", "Manage frontier.toml configuration");
+    colors::print_command("completions <shell>", "Generate shell completions (bash/zsh/fish)");
+
+    colors::print_help_heading("Project");
+    colors::print_command("migrate --input --output", "Migrate foreign project to Frontier");
+    colors::print_command("verify --input <dir>", "Verify migrated project");
+    colors::print_command("run <file.frontier>", "Run a Frontier file");
+    colors::print_command("gen-artifacts", "Regenerate syntax artifacts");
+    colors::print_command("fuzz [count]", "Fuzz the parser");
+
+    colors::print_help_heading("Examples");
+    println!("  frontier compile examples/v2_parser_test.fr -t wasm -O -p");
+
+--------------------------------------------------------------------------------
+FILE: ./src/cli/knowledge.rs (117 lines)
+--------------------------------------------------------------------------------
+use super::colors;
+use std::env;
+use std::path::PathBuf;
+use std::process::Command;
+
+pub fn run_knowledge(args: &[String]) {
+    let sub = args.get(2).map(|s| s.as_str()).unwrap_or("help");
+    match sub {
+        "suggest" => {
+            let operation = match args.get(3) {
+                Some(op) => op.as_str(),
+                None => {
+                    colors::print_error("usage: frontier knowledge suggest <op> [data_type]");
+                    std::process::exit(1);
+                }
+            };
+            let data_type = args.get(4).map(|s| s.as_str()).unwrap_or("list::i32");
+            let suggestion =
+                frontier::browser_compiler::algorithm_suggestion(operation, data_type);
+            colors::print_knowledge_suggestion(&suggestion.name, suggestion.discovery_year);
+            println!("{}", serde_json::to_string_pretty(&suggestion).unwrap());
+        }
+        "ancestry" => {
+            let operation = match args.get(3) {
+                Some(op) => op.as_str(),
+                None => {
+                    colors::print_error("usage: frontier knowledge ancestry <op>");
+                    std::process::exit(1);
+                }
+            };
+
+--------------------------------------------------------------------------------
+FILE: ./src/cli/mcp.rs (87 lines)
+--------------------------------------------------------------------------------
+use super::colors;
+use std::env;
+use std::fs;
+use std::path::PathBuf;
+
+pub fn run_mcp(args: &[String]) {
+    let sub = args.get(2).map(|s| s.as_str()).unwrap_or("help");
+    match sub {
+        "register" => {
+            let tool = args
+                .iter()
+                .position(|a| a == "--tool")
+                .and_then(|i| args.get(i + 1))
+                .map(|s| s.as_str())
+                .unwrap_or("query_chat_knowledge");
+
+            let root = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+            let server_script = root.join("scripts/frontier_mcp_server.py");
+            let config_dir = root.join(".cursor");
+            fs::create_dir_all(&config_dir).unwrap_or_else(|e| {
+                colors::print_error(&format!("Failed to create .cursor: {e}"));
+                std::process::exit(1);
+            });
+
+            let config_path = config_dir.join("mcp_config.json");
+            let config = serde_json::json!({
+                "mcpServers": {
+                    "frontier": {
+                        "command": "python3",
+                        "args": [server_script.to_string_lossy()],
+
+--------------------------------------------------------------------------------
+FILE: ./src/cli/mod.rs (430 lines)
+--------------------------------------------------------------------------------
+pub mod colors;
+pub mod compile;
+pub mod completions;
+pub mod config;
+pub mod errors;
+pub mod help;
+pub mod knowledge;
+pub mod mcp;
+pub mod profile;
+pub mod repl;
+pub mod telemetry;
+pub mod unity_cmd;
+pub mod watch;
+
+use colors::print_error;
+use frontier::{canonical_ast_json, parse_program, resolve_program, sha3_256_hex};
+use std::env;
+use std::fs;
+use std::path::PathBuf;
+use std::time::Instant;
+
+pub fn run() {
+    let args: Vec<String> = env::args().collect();
+    let start = Instant::now();
+    let cmd = args.get(1).map(|s| s.as_str()).unwrap_or("help");
+
+    let result = dispatch(&args, cmd);
+
+    if let Err(code) = result {
+        std::process::exit(code);
+
+--------------------------------------------------------------------------------
+FILE: ./src/cli/profile.rs (12 lines)
+--------------------------------------------------------------------------------
+use frontier::wasm_codegen::CompilationProfile;
+
+pub fn print_profile(profile: &CompilationProfile) {
+    println!("\n📊 Compilation Profile");
+    println!("  Lexing:            {:>8} ms", profile.lexing_time);
+    println!("  Parsing:           {:>8} ms", profile.parsing_time);
+    println!("  Type checking:     {:>8} ms", profile.type_check_time);
+    println!("  Knowledge lookup:  {:>8} ms", profile.knowledge_lookup_time);
+    println!("  Code generation:   {:>8} ms", profile.codegen_time);
+    println!("  ─────────────────────────────");
+    println!("  Total:             {:>8} ms", profile.total_time);
+}
+
+--------------------------------------------------------------------------------
+FILE: ./src/cli/repl.rs (123 lines)
+--------------------------------------------------------------------------------
+use super::colors;
+use super::compile;
+use super::config;
+use super::knowledge;
+use std::io::{self, Write};
+
+pub fn start_repl() -> Result<(), Box<dyn std::error::Error>> {
+    match try_rustyline_repl() {
+        Ok(()) => Ok(()),
+        Err(e) => {
+            colors::print_warning(&format!(
+                "Advanced REPL unavailable ({e}), using basic mode"
+            ));
+            try_stdin_repl()
+        }
+    }
+}
+
+fn try_rustyline_repl() -> Result<(), Box<dyn std::error::Error>> {
+    use rustyline::error::ReadlineError;
+    use rustyline::DefaultEditor;
+
+    let mut rl = DefaultEditor::new()?;
+    colors::print_success("Frontier REPL v2.0 — type .help for commands, .exit to quit");
+
+    loop {
+        let readline = rl.readline("frontier> ");
+        match readline {
+            Ok(line) => {
+                let _ = rl.add_history_entry(&line);
+
+--------------------------------------------------------------------------------
+FILE: ./src/cli/telemetry.rs (50 lines)
+--------------------------------------------------------------------------------
+use chrono::Utc;
+use serde::Serialize;
+use std::fs::{self, OpenOptions};
+use std::io::Write;
+use std::path::PathBuf;
+
+#[derive(Debug, Serialize)]
+pub struct TelemetryData {
+    pub event: String,
+    pub timestamp: String,
+    pub duration_ms: Option<u128>,
+    pub command: Option<String>,
+}
+
+pub fn is_enabled() -> bool {
+    std::env::var("FRONTIER_TELEMETRY")
+        .map(|v| v == "1" || v.eq_ignore_ascii_case("true"))
+        .unwrap_or(false)
+}
+
+pub fn record_event(data: TelemetryData) {
+    if !is_enabled() {
+        return;
+    }
+
+    let path = PathBuf::from(".frontier-telemetry.log");
+
+    if path.exists() {
+        if let Ok(meta) = path.metadata() {
+            if meta.len() > 1_000_000 {
+
+--------------------------------------------------------------------------------
+FILE: ./src/cli/unity_cmd.rs (87 lines)
+--------------------------------------------------------------------------------
+use super::colors::{print_error, print_success};
+use super::errors;
+use std::fs;
+use std::path::PathBuf;
+
+pub fn run_unity(args: &[String]) -> Result<(), i32> {
+    let sub = args.get(2).map(|s| s.as_str()).unwrap_or("help");
+    match sub {
+        "compile" => {
+            let input = args.get(3).ok_or_else(|| {
+                print_error("usage: frontier unity compile <file.fr> [-o out]");
+                1
+            })?;
+            let source = fs::read_to_string(input).map_err(|e| {
+                errors::print_io_error("Failed to read input", &e);
+                1
+            })?;
+
+            let output = args
+                .iter()
+                .position(|a| a == "-o" || a == "--output")
+                .and_then(|i| args.get(i + 1))
+                .map(PathBuf::from)
+                .unwrap_or_else(|| PathBuf::from(input).with_extension("wasm"));
+
+            let module = frontier::unity_compile(&source).map_err(|e| {
+                print_error(&e);
+                1
+            })?;
+            fs::write(&output, &module.wasm).map_err(|e| {
+
+--------------------------------------------------------------------------------
+FILE: ./src/cli/watch.rs (107 lines)
+--------------------------------------------------------------------------------
+use super::colors;
+use notify::{Config, RecommendedWatcher, RecursiveMode, Watcher};
+use signal_hook::{consts::SIGINT, iterator::Signals};
+use std::path::Path;
+use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::mpsc;
+use std::time::Duration;
+
+static RUNNING: AtomicBool = AtomicBool::new(true);
+
+pub fn start_watch(args: &[String]) -> Result<(), Box<dyn std::error::Error>> {
+    let path = args
+        .get(2)
+        .map(|s| s.as_str())
+        .unwrap_or("examples");
+
+    let watch_path = Path::new(path);
+    if !watch_path.exists() {
+        return Err(format!("Watch path does not exist: {path}").into());
+    }
+
+    setup_signal_handler()?;
+
+    let (tx, rx) = mpsc::channel();
+    let mut watcher = RecommendedWatcher::new(
+        move |res| {
+            if let Ok(event) = res {
+                let _ = tx.send(event);
+            }
+        },
+
+--------------------------------------------------------------------------------
+FILE: ./src/compiler/mod.rs (1 lines)
+--------------------------------------------------------------------------------
+pub mod proof_generator;
+
+--------------------------------------------------------------------------------
+FILE: ./src/compiler/proof_generator.rs (111 lines)
+--------------------------------------------------------------------------------
+use serde_json::Value;
+
+pub struct ProofGenerator {
+    proofs: Vec<String>,
+}
+
+impl ProofGenerator {
+    pub fn new() -> Self {
+        ProofGenerator {
+            proofs: Vec::new(),
+        }
+    }
+
+    pub fn generate_coq(&self, ast: &Value) -> Result<String, String> {
+        let mut output = String::new();
+        output.push_str("(* Generated Coq proofs for Frontier v2.0 *)\n\n");
+        output.push_str("Require Import Arith.\n");
+        output.push_str("Require Import List.\n\n");
+
+        if let Some(body) = ast.get("statements").and_then(|b| b.as_array()) {
+            for stmt in body {
+                if stmt.get("type").and_then(|t| t.as_str()) == Some("fn_decl") {
+                    let name = stmt
+                        .get("name")
+                        .and_then(|n| n.as_str())
+                        .unwrap_or("unknown");
+                    let requires = stmt.get("requires").and_then(|r| r.as_str()).unwrap_or("");
+                    let ensures = stmt.get("ensures").and_then(|e| e.as_str()).unwrap_or("");
+
+                    output.push_str(&format!("Definition {name} (x : nat) : nat.\n"));
+
+--------------------------------------------------------------------------------
+FILE: ./src/error.rs (129 lines)
+--------------------------------------------------------------------------------
+use crate::lexer::Token;
+
+#[derive(Debug, Clone, PartialEq)]
+pub struct FrontierError {
+    pub code: String,
+    pub expected: String,
+    pub found: String,
+    pub line: usize,
+    pub column: usize,
+    pub message: String,
+}
+
+impl FrontierError {
+    pub fn parse(expected: &str, found: &str, line: usize, column: usize) -> Self {
+        let message = format!(
+            "Error [E-PARSE]: Expected {} but found {} at line {}, column {}.",
+            expected, found, line, column
+        );
+        Self {
+            code: "E-PARSE".to_string(),
+            expected: expected.to_string(),
+            found: found.to_string(),
+            line,
+            column,
+            message,
+        }
+    }
+
+    pub fn resolve(code: &str, message: String, line: usize, column: usize) -> Self {
+        let full = format!(
+
+--------------------------------------------------------------------------------
+FILE: ./src/grammar/mod.rs (42 lines)
+--------------------------------------------------------------------------------
+pub mod mutator;
+
+use mutator::GrammarMutator;
+use serde_json::Value;
+use std::fs;
+
+pub fn load_grammar_v2() -> Result<Value, String> {
+    let content = fs::read_to_string("syntax/grammar_v2.json")
+        .map_err(|e| format!("Failed to load grammar_v2.json: {e}"))?;
+    serde_json::from_str(&content).map_err(|e| format!("Invalid grammar JSON: {e}"))
+}
+
+pub fn apply_mutation(name: &str, pattern: Vec<&str>) -> Result<Value, String> {
+    let grammar = load_grammar_v2()?;
+    let mut mutator = GrammarMutator::new(grammar);
+    mutator.add_rule(name, pattern);
+    Ok(mutator.grammar().clone())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_load_grammar_v2() {
+        let grammar = load_grammar_v2().expect("grammar should load");
+        assert_eq!(
+            grammar.get("version").and_then(|v| v.as_str()),
+            Some("2.0")
+        );
+
+--------------------------------------------------------------------------------
+FILE: ./src/grammar/mutator.rs (88 lines)
+--------------------------------------------------------------------------------
+use serde_json::{json, Value};
+
+pub struct GrammarMutator {
+    grammar: Value,
+    version: String,
+    mutations: Vec<String>,
+}
+
+impl GrammarMutator {
+    pub fn new(grammar: Value) -> Self {
+        let version = grammar
+            .get("version")
+            .and_then(|v| v.as_str())
+            .unwrap_or("2.0")
+            .to_string();
+        GrammarMutator {
+            grammar,
+            version,
+            mutations: Vec::new(),
+        }
+    }
+
+    pub fn add_rule(&mut self, name: &str, pattern: Vec<&str>) {
+        let rules = self
+            .grammar
+            .get_mut("rules")
+            .expect("grammar must have rules")
+            .as_object_mut()
+            .expect("rules must be object");
+        rules.insert(name.to_string(), json!(pattern));
+
+--------------------------------------------------------------------------------
+FILE: ./src/ipfs/mod.rs (1 lines)
+--------------------------------------------------------------------------------
+pub mod resolver;
+
+--------------------------------------------------------------------------------
+FILE: ./src/ipfs/resolver.rs (144 lines)
+--------------------------------------------------------------------------------
+//! IPFS import resolution with gateway fetch support
+
+use reqwest::blocking::Client;
+use serde_json::Value;
+use sha3::{Digest, Sha3_256};
+use std::collections::HashMap;
+use std::time::Duration;
+
+const IPFS_PREFIX: &str = "ipfs://";
+
+pub struct IpfsImportResolver {
+    imports: Vec<String>,
+    cache: HashMap<String, Vec<u8>>,
+    client: Client,
+    gateway: String,
+}
+
+impl IpfsImportResolver {
+    pub fn new() -> Self {
+        let client = Client::builder()
+            .timeout(Duration::from_secs(10))
+            .build()
+            .unwrap_or_else(|_| Client::new());
+        IpfsImportResolver {
+            imports: Vec::new(),
+            cache: HashMap::new(),
+            client,
+            gateway: "https://ipfs.io/ipfs/".to_string(),
+        }
+    }
+
+--------------------------------------------------------------------------------
+FILE: ./src/knowledge_bridge.rs (213 lines)
+--------------------------------------------------------------------------------
+//! Bridge between the Rust Knowledge Hypercube and browser/WASM compiler pipeline.
+
+use crate::{get_ancestors, get_tradeoffs, optimize_hash, optimize_sort, SizeHint, KnowledgeContext as SolverContext};
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TradeoffEntry {
+    pub speed: u8,
+    pub memory: u8,
+    pub clarity: u8,
+    pub safety: u8,
+    pub portability: u8,
+    pub energy: u8,
+    pub parallelism: u8,
+    pub realtime: u8,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AlgorithmSuggestion {
+    pub name: String,
+    pub discovery_year: u16,
+    pub paradigm_flags: u8,
+    pub complexity_class: u8,
+    pub tradeoffs: TradeoffEntry,
+    pub implementation_hint: String,
+}
+
+pub fn browser_context() -> SolverContext {
+    SolverContext {
+        speed_weight: 0.6,
+
+--------------------------------------------------------------------------------
+FILE: ./src/knowledge_bridge_slim.rs (85 lines)
+--------------------------------------------------------------------------------
+//! Minimal knowledge bridge for wasm-slim — no serde, no FFI.
+
+use crate::knowledge_slim::SizeHint;
+
+#[derive(Debug, Clone)]
+pub struct TradeoffEntry {
+    pub speed: u8,
+    pub memory: u8,
+    pub clarity: u8,
+    pub safety: u8,
+    pub portability: u8,
+    pub energy: u8,
+    pub parallelism: u8,
+    pub realtime: u8,
+}
+
+#[derive(Debug, Clone)]
+pub struct AlgorithmSuggestion {
+    pub name: String,
+    pub discovery_year: u16,
+    pub paradigm_flags: u8,
+    pub complexity_class: u8,
+    pub tradeoffs: TradeoffEntry,
+    pub implementation_hint: String,
+}
+
+pub fn get_optimal_algorithm(operation: &str, _data_type: &str, _size_hint: SizeHint) -> AlgorithmSuggestion {
+    AlgorithmSuggestion {
+        name: operation.to_string(),
+        discovery_year: 2002,
+
+--------------------------------------------------------------------------------
+FILE: ./src/knowledge/hypercube/mod.rs (175 lines)
+--------------------------------------------------------------------------------
+//! Frontier Knowledge Hypercube — binary format definitions.
+//! All structures are packed for zero-overhead memory mapping.
+
+pub const MAGIC: &[u8; 8] = b"FRONTIER";
+pub const VERSION: u32 = 1;
+
+pub const MASTER_INDEX_SIZE: usize = 124;
+pub const ALGORITHM_ENTRY_SIZE: usize = 48;
+pub const TRADEOFF_ENTRY_SIZE: usize = 8;
+pub const LANGUAGE_ENTRY_SIZE: usize = 36;
+pub const HARDWARE_ENTRY_SIZE: usize = 29;
+
+#[derive(Debug, Clone, Copy)]
+pub struct MasterIndex {
+    pub magic: [u8; 8],
+    pub version: u32,
+    pub num_algorithms: u64,
+    pub num_structures: u64,
+    pub num_optimizations: u64,
+    pub num_languages: u64,
+    pub algorithm_offset: u64,
+    pub structure_offset: u64,
+    pub optimization_offset: u64,
+    pub language_offset: u64,
+    pub tradeoff_offset: u64,
+    pub hardware_offset: u64,
+    pub checksum: [u8; 32],
+}
+
+#[derive(Debug, Clone, Copy)]
+
+--------------------------------------------------------------------------------
+FILE: ./src/knowledge/mod.rs (130 lines)
+--------------------------------------------------------------------------------
+//! Frontier Knowledge Module — dimensional solver integrated into the syntax library.
+
+pub mod hypercube;
+pub mod solver;
+
+use solver::{hash_operation, ProblemSignature, Solver};
+
+pub use solver::{Solver as KnowledgeSolver, SolverContext as KnowledgeContext, SizeHint};
+
+fn open_solver() -> Solver {
+    Solver::new(&solver::default_knowledge_path()).expect("Knowledge hypercube not found")
+}
+
+/// Automatically optimize a sort operation using 70+ years of algorithm history.
+pub fn optimize_sort(data_type: &str, size_hint: SizeHint) -> (u16, u8) {
+    let mut solver = open_solver();
+    let problem = ProblemSignature {
+        operation_type: hash_operation("sort"),
+        data_type: hash_operation(data_type),
+        size_hint,
+        context_flags: 0,
+    };
+
+    if let Some(solution) = solver.solve(problem) {
+        (solution.year, solution.complexity)
+    } else {
+        (1970, 3)
+    }
+}
+
+
+--------------------------------------------------------------------------------
+FILE: ./src/knowledge_slim.rs (52 lines)
+--------------------------------------------------------------------------------
+//! Static knowledge stubs for wasm-slim builds — no hypercube index embedded.
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum SizeHint {
+    Tiny,
+    Small,
+    Medium,
+    Large,
+    Huge,
+    Unknown,
+}
+
+#[derive(Clone)]
+pub struct SolverContext {
+    pub speed_weight: f32,
+    pub memory_weight: f32,
+    pub clarity_weight: f32,
+    pub safety_weight: f32,
+    pub portability_weight: f32,
+    pub energy_weight: f32,
+    pub parallelism_weight: f32,
+    pub realtime_weight: f32,
+    pub target_hardware: Vec<u64>,
+}
+
+pub fn optimize_sort(_data_type: &str, _size_hint: SizeHint) -> (u16, u8) {
+    (2002, 2) // Timsort
+}
+
+pub fn optimize_hash(_data_type: &str) -> (u16, u8) {
+
+--------------------------------------------------------------------------------
+FILE: ./src/knowledge/solver.rs (294 lines)
+--------------------------------------------------------------------------------
+//! Frontier Dimensional Solver Engine — silent, zero-dependency knowledge selection.
+
+use std::collections::HashMap;
+use std::fs;
+use std::path::Path;
+
+use super::hypercube::{
+    hash_name, parse_algorithm_entry, parse_master_index, parse_tradeoff_entry, AlgorithmEntry,
+    MasterIndex, TradeoffEntry, ALGORITHM_ENTRY_SIZE,
+};
+
+#[derive(Clone)]
+pub struct SolverContext {
+    pub speed_weight: f32,
+    pub memory_weight: f32,
+    pub clarity_weight: f32,
+    pub safety_weight: f32,
+    pub portability_weight: f32,
+    pub energy_weight: f32,
+    pub parallelism_weight: f32,
+    pub realtime_weight: f32,
+    pub target_hardware: Vec<u64>,
+}
+
+impl Default for SolverContext {
+    fn default() -> Self {
+        Self {
+            speed_weight: 0.5,
+            memory_weight: 0.5,
+            clarity_weight: 0.5,
+
+--------------------------------------------------------------------------------
+FILE: ./src/lexer.rs (457 lines)
+--------------------------------------------------------------------------------
+#[derive(Debug, Clone, PartialEq)]
+pub enum Token {
+    Let,
+    Fn,
+    Return,
+    If,
+    Else,
+    True,
+    False,
+    Null,
+    Int,
+    Float,
+    Bool,
+    String,
+    Void,
+    While,
+    Import,
+    As,
+    Requires,
+    Ensures,
+    Invariant,
+    Version,
+    At,
+    Arrow,
+    Identifier(String),
+    Integer(i64),
+    FloatLit(f64),
+    StringLit(String),
+    OpExp,
+    OpOr,
+
+--------------------------------------------------------------------------------
+FILE: ./src/lib.rs (147 lines)
+--------------------------------------------------------------------------------
+#[cfg(all(target_arch = "wasm32", feature = "wasm-slim"))]
+#[global_allocator]
+static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
+
+pub mod ast;
+pub mod browser_compiler;
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+pub mod canonicalize;
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+pub mod compiler;
+pub mod error;
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+pub mod grammar;
+#[cfg(not(target_arch = "wasm32"))]
+pub mod ipfs;
+#[cfg(all(target_arch = "wasm32", feature = "wasm-slim"))]
+pub mod knowledge_slim;
+#[cfg(all(target_arch = "wasm32", feature = "wasm-slim"))]
+pub mod knowledge_bridge_slim;
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+pub mod knowledge;
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+pub mod knowledge_bridge;
+pub mod lexer;
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+pub mod lsp;
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+pub mod migrate;
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+pub mod neural;
+
+--------------------------------------------------------------------------------
+FILE: ./src/lsp/mod.rs (1 lines)
+--------------------------------------------------------------------------------
+pub mod neural_server;
+
+--------------------------------------------------------------------------------
+FILE: ./src/lsp/neural_server.rs (38 lines)
+--------------------------------------------------------------------------------
+use crate::neural::completion::NeuralCompletion;
+
+pub struct NeuralLspServer {
+    completion: NeuralCompletion,
+}
+
+impl NeuralLspServer {
+    pub fn new() -> Self {
+        NeuralLspServer {
+            completion: NeuralCompletion::new(16),
+        }
+    }
+
+    pub fn complete(&self, source: &str, line: usize, character: usize) -> Vec<String> {
+        let lines: Vec<&str> = source.lines().collect();
+        let mut offset = 0usize;
+        for (i, l) in lines.iter().enumerate() {
+            if i == line {
+                offset += character.min(l.len());
+                break;
+            }
+            offset += l.len() + 1;
+        }
+        self.completion.suggest(source, offset)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+--------------------------------------------------------------------------------
+FILE: ./src/main.rs (12 lines)
+--------------------------------------------------------------------------------
+#[cfg(not(target_arch = "wasm32"))]
+mod cli;
+
+#[cfg(not(target_arch = "wasm32"))]
+fn main() {
+    cli::run();
+}
+
+#[cfg(target_arch = "wasm32")]
+fn main() {
+    eprintln!("The frontier CLI is not available on wasm32 targets.");
+}
+
+--------------------------------------------------------------------------------
+FILE: ./src/migrate.rs (288 lines)
+--------------------------------------------------------------------------------
+use crate::error::FrontierError;
+use std::fs;
+use std::path::{Path, PathBuf};
+
+#[derive(Debug, Clone)]
+pub struct MigrationReport {
+    pub source_language: String,
+    pub files_scanned: usize,
+    pub files_migrated: usize,
+    pub files_manual: usize,
+    pub output_dir: PathBuf,
+}
+
+pub fn detect_language(input: &Path) -> String {
+    if input.join("Cargo.toml").exists() {
+        return "Rust".into();
+    }
+    for entry in walk_files(input) {
+        let ext = entry
+            .extension()
+            .and_then(|e| e.to_str())
+            .unwrap_or("")
+            .to_lowercase();
+        match ext.as_str() {
+            "py" => return "Python".into(),
+            "java" => return "Java".into(),
+            "js" | "jsx" | "ts" | "tsx" => return "JavaScript".into(),
+            "c" | "h" | "cpp" | "hpp" => return "C/C++".into(),
+            "cob" | "cbl" => return "COBOL".into(),
+            "sol" => return "Solidity".into(),
+
+--------------------------------------------------------------------------------
+FILE: ./src/neural/completion.rs (210 lines)
+--------------------------------------------------------------------------------
+//! Neural-symbolic code completion engine
+//!
+//! Uses heuristic inference with optional ONNX model path support.
+//! When `models/completion.onnx` is unavailable, falls back to rule-based suggestions.
+
+use serde_json::Value as JsonValue;
+use std::path::Path;
+
+pub struct NeuralCompletion {
+    context_window: usize,
+    vocabulary: Vec<String>,
+    model_path: Option<String>,
+}
+
+impl NeuralCompletion {
+    pub fn new(context_window: usize) -> Self {
+        NeuralCompletion {
+            context_window,
+            vocabulary: vec![
+                "let".into(),
+                "fn".into(),
+                "if".into(),
+                "else".into(),
+                "while".into(),
+                "return".into(),
+                "import".into(),
+                "requires".into(),
+                "ensures".into(),
+                "invariant".into(),
+                "true".into(),
+
+--------------------------------------------------------------------------------
+FILE: ./src/neural/mod.rs (1 lines)
+--------------------------------------------------------------------------------
+pub mod completion;
+
+--------------------------------------------------------------------------------
+FILE: ./src/packages/mod.rs (1 lines)
+--------------------------------------------------------------------------------
+pub mod registry;
+
+--------------------------------------------------------------------------------
+FILE: ./src/packages/registry.rs (60 lines)
+--------------------------------------------------------------------------------
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+/// Decentralized package registry backed by IPFS content addressing.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct PackageManifest {
+    pub name: String,
+    pub version: String,
+    pub ipfs_cid: String,
+    pub dependencies: HashMap<String, String>,
+}
+
+pub struct PackageRegistry {
+    packages: HashMap<String, PackageManifest>,
+}
+
+impl PackageRegistry {
+    pub fn new() -> Self {
+        PackageRegistry {
+            packages: HashMap::new(),
+        }
+    }
+
+    pub fn publish(&mut self, manifest: PackageManifest) -> Result<(), String> {
+        if !manifest.ipfs_cid.starts_with("Qm") && !manifest.ipfs_cid.starts_with("ipfs://") {
+            return Err(format!("Invalid CID: {}", manifest.ipfs_cid));
+        }
+        let key = format!("{}@{}", manifest.name, manifest.version);
+        self.packages.insert(key, manifest);
+        Ok(())
+
+--------------------------------------------------------------------------------
+FILE: ./src/parser/handwritten.rs (715 lines)
+--------------------------------------------------------------------------------
+use crate::ast::*;
+use crate::error::{token_name, FrontierError};
+use crate::lexer::{Lexer, Token, TokenInfo};
+
+pub struct Parser {
+    tokens: Vec<TokenInfo>,
+    pos: usize,
+    max_depth: usize,
+    current_depth: usize,
+}
+
+impl Parser {
+    pub fn new(tokens: Vec<TokenInfo>, max_depth: usize) -> Self {
+        Self {
+            tokens,
+            pos: 0,
+            max_depth,
+            current_depth: 0,
+        }
+    }
+
+    fn current(&self) -> &TokenInfo {
+        &self.tokens[self.pos]
+    }
+
+    fn peek(&self) -> &TokenInfo {
+        &self.tokens[self.pos]
+    }
+
+    fn advance(&mut self) -> TokenInfo {
+
+--------------------------------------------------------------------------------
+FILE: ./src/parser/mod.rs (48 lines)
+--------------------------------------------------------------------------------
+//! Frontier v2.0 parser — hand-written Rust implementation
+//! aligned with `syntax/Frontier.g4` (ANTLR v4.13.1 grammar specification).
+//!
+//! The ANTLR grammar at `syntax/Frontier.g4` is the canonical specification.
+//! This module implements that grammar in Rust for production parsing.
+
+pub mod handwritten;
+
+pub use handwritten::parse_program;
+use crate::ast::Program;
+use crate::error::FrontierError;
+#[cfg(feature = "serde-json")]
+use serde_json::Value;
+use std::fs;
+use std::path::Path;
+
+/// Parse Frontier v2.0 source into a JSON AST value.
+#[cfg(feature = "serde-json")]
+pub fn parse_source(source: &str) -> Result<serde_json::Value, String> {
+    let program = parse_program(source, 64).map_err(|e| e.message)?;
+    serde_json::to_value(&program).map_err(|e| e.to_string())
+}
+
+/// Parse a `.fr` source file into JSON AST.
+#[cfg(feature = "serde-json")]
+pub fn parse_file(path: &str) -> Result<serde_json::Value, String> {
+    let source = fs::read_to_string(path)
+        .map_err(|e| format!("Failed to read file: {e}"))?;
+    parse_source(&source)
+}
+
+--------------------------------------------------------------------------------
+FILE: ./src/pq_signatures.rs (106 lines)
+--------------------------------------------------------------------------------
+//! Post-Quantum Signatures with Dilithium3 (NIST PQC finalist)
+
+use pqcrypto_dilithium::dilithium3;
+use pqcrypto_traits::sign::{PublicKey as _, SecretKey as _, SignedMessage as _};
+use serde::{Deserialize, Serialize};
+
+/// Post-quantum cryptographic key pair (Dilithium3)
+#[derive(Clone)]
+pub struct PqCrypto {
+    public_key: dilithium3::PublicKey,
+    secret_key: dilithium3::SecretKey,
+}
+
+/// Signature with metadata
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct PQSignature {
+    pub signature: Vec<u8>,
+    pub public_key: Vec<u8>,
+    pub algorithm: String,
+}
+
+impl PqCrypto {
+    /// Generate a new Dilithium3 key pair
+    pub fn generate_keys() -> Self {
+        let (public_key, secret_key) = dilithium3::keypair();
+        PqCrypto {
+            public_key,
+            secret_key,
+        }
+    }
+
+--------------------------------------------------------------------------------
+FILE: ./src/resolver.rs (283 lines)
+--------------------------------------------------------------------------------
+use crate::ast::*;
+use crate::error::FrontierError;
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ResolveResult {
+    pub node_symbols: HashMap<String, u32>,
+    pub symbol_table: Vec<SymbolEntry>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SymbolEntry {
+    pub id: u32,
+    pub name: String,
+    pub kind: String,
+    pub type_spec: TypeSpec,
+    pub scope_id: u32,
+}
+
+struct Scope {
+    id: u32,
+    parent: Option<u32>,
+    symbols: HashMap<String, u32>,
+}
+
+pub struct Resolver {
+    scopes: Vec<Scope>,
+    symbols: Vec<SymbolEntry>,
+    node_symbols: HashMap<String, u32>,
+
+--------------------------------------------------------------------------------
+FILE: ./src/unity.rs (390 lines)
+--------------------------------------------------------------------------------
+//! FRONTIER UNITY MODULE — single system for WASM codegen, Knowledge integration,
+//! self-hosting, slim WASM, unified glue, and spec enforcement.
+
+use crate::canonicalize::sha3_256_hex;
+use crate::knowledge::SizeHint;
+use crate::knowledge_bridge::{browser_context, get_optimal_algorithm};
+use crate::wasm_codegen::{compile_source, CodeGenOptions};
+use serde::{Deserialize, Serialize};
+use std::collections::HashSet;
+
+const SPEC_PATHS: &[&str] = &[
+    "frontier/core/browser_compiler.frontier",
+    "frontier/core/wasm_codegen.frontier",
+    "frontier/core/knowledge.frontier",
+];
+
+/// Unified representation of a compiled Frontier module.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct UnityModule {
+    pub source: String,
+    pub wasm: Vec<u8>,
+    pub knowledge: Vec<KnowledgeSuggestion>,
+    pub glue: String,
+    pub size: usize,
+    pub entry_value: i32,
+    pub spec_verified: bool,
+}
+
+/// Knowledge suggestion that actually changes the emitted WASM.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+
+--------------------------------------------------------------------------------
+FILE: ./src/v2_resolver.rs (130 lines)
+--------------------------------------------------------------------------------
+use serde_json::{json, Value};
+use std::collections::HashMap;
+
+#[derive(Debug, Clone)]
+pub struct V2Symbol {
+    pub name: String,
+    pub kind: V2SymbolKind,
+    pub proof_requirements: Vec<String>,
+}
+
+#[derive(Debug, Clone, PartialEq)]
+pub enum V2SymbolKind {
+    Variable,
+    Function,
+    Parameter,
+    Imported,
+}
+
+pub struct V2Resolver {
+    symbols: HashMap<String, V2Symbol>,
+    imports: Vec<String>,
+    proofs: Vec<String>,
+    errors: Vec<String>,
+}
+
+impl V2Resolver {
+    pub fn new() -> Self {
+        V2Resolver {
+            symbols: HashMap::new(),
+            imports: Vec::new(),
+
+--------------------------------------------------------------------------------
+FILE: ./src/wasm_codegen.rs (853 lines)
+--------------------------------------------------------------------------------
+//! WASM code generator — Frontier v2 AST to WebAssembly binary.
+//!
+//! Supports `let`, `if`, function `calls`, and `while` loops.
+
+use crate::ast::{Expr, Param, Program, Stmt, TypeSpec};
+#[cfg(all(target_arch = "wasm32", feature = "wasm-slim"))]
+use crate::knowledge_bridge_slim::{browser_context, get_optimal_algorithm, optimization_warnings};
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+use crate::knowledge_bridge::{browser_context, get_optimal_algorithm, optimization_warnings};
+use crate::SizeHint;
+use std::collections::HashMap;
+
+const WASM_MAGIC: &[u8; 4] = b"\0asm";
+const WASM_VERSION: u32 = 1;
+
+const WASM_TYPE_I32: u8 = 0x7F;
+const WASM_TYPE_VOID: u8 = 0x40; // block type empty
+
+#[derive(Clone)]
+pub struct CodeGenOptions {
+    pub optimize: bool,
+    pub browser_exports: bool,
+    pub collect_profile: bool,
+    /// Knowledge Hypercube implementation hint applied to emitted WASM.
+    pub algorithm_hint: Option<String>,
+}
+
+impl Default for CodeGenOptions {
+    fn default() -> Self {
+        Self {
+
+--------------------------------------------------------------------------------
+FILE: ./src/wasm.rs (106 lines)
+--------------------------------------------------------------------------------
+use unicode_normalization::UnicodeNormalization;
+use wasm_bindgen::prelude::*;
+use crate::{canonical_ast_json, parse_program, resolve_program, sha3_256_hex};
+
+#[wasm_bindgen]
+pub struct WasmParseResult {
+    ast_json: String,
+    ast_hash: String,
+    errors: String,
+}
+
+#[wasm_bindgen]
+impl WasmParseResult {
+    #[wasm_bindgen(getter)]
+    pub fn ast_json(&self) -> String {
+        self.ast_json.clone()
+    }
+
+    #[wasm_bindgen(getter)]
+    pub fn ast_hash(&self) -> String {
+        self.ast_hash.clone()
+    }
+
+    #[wasm_bindgen(getter)]
+    pub fn errors(&self) -> String {
+        self.errors.clone()
+    }
+}
+
+#[wasm_bindgen]
+
+--------------------------------------------------------------------------------
+FILE: ./src/zk/mod.rs (1 lines)
+--------------------------------------------------------------------------------
+pub mod verifier;
+
+--------------------------------------------------------------------------------
+FILE: ./src/zk/verifier.rs (170 lines)
+--------------------------------------------------------------------------------
+//! ZK-SNARK AST verification with arkworks Groth16 (BN254)
+
+use ark_bn254::{Bn254, Fr};
+use ark_ff::{BigInteger, PrimeField};
+use ark_groth16::{Groth16, Proof, ProvingKey, VerifyingKey};
+use ark_relations::r1cs::{ConstraintSynthesizer, ConstraintSystemRef, SynthesisError};
+use ark_snark::SNARK;
+use ark_serialize::{CanonicalDeserialize, CanonicalSerialize};
+use ark_std::rand::SeedableRng;
+use rand::rngs::StdRng;
+use serde::{Deserialize, Serialize};
+use serde_json::Value;
+use sha3::{Digest, Sha3_256};
+
+type Groth16Bn254 = Groth16<Bn254>;
+
+/// Circuit proving knowledge of AST bytes matching public hash commitment.
+#[derive(Clone)]
+pub struct AstHashCircuit {
+    pub ast_bytes: Option<Vec<u8>>,
+    pub public_hash: Fr,
+}
+
+impl ConstraintSynthesizer<Fr> for AstHashCircuit {
+    fn generate_constraints(self, cs: ConstraintSystemRef<Fr>) -> Result<(), SynthesisError> {
+        use ark_r1cs_std::prelude::*;
+        use ark_r1cs_std::fields::fp::FpVar;
+
+        let _public = FpVar::new_input(cs.clone(), || Ok(self.public_hash))?;
+        if let Some(bytes) = self.ast_bytes {
+

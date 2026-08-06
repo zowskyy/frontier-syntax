@@ -1,0 +1,22 @@
+{
+  "name": "nuDAWn",
+  "url": "https://github.com/zowskyy/nuDAWn",
+  "description": "",
+  "is_private": true,
+  "language": "C++",
+  "updated_at": "2026-08-06T04:31:37Z",
+  "category": "fork_or_adjacent",
+  "access_status": "inaccessible_private",
+  "readme_excerpt": "(private \u2014 README not fetched)",
+  "top_level_files": [],
+  "claims": [
+    "(no explicit claims extracted from README)"
+  ],
+  "can_do": [
+    "(capabilities not verified \u2014 metadata-only scan)"
+  ],
+  "cannot_do": [
+    "Not part of Frontier blueprint critical path"
+  ],
+  "blueprint_relation": "Upstream fork or unrelated project \u2014 no blueprint phase dependency."
+}

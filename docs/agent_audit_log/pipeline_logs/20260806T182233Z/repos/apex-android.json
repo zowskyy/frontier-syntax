@@ -1,0 +1,22 @@
+{
+  "name": "apex-android",
+  "url": "https://github.com/zowskyy/apex-android",
+  "description": "",
+  "is_private": false,
+  "language": "Python",
+  "updated_at": "2026-08-06T04:29:44Z",
+  "category": "frontier_ecosystem",
+  "access_status": "fetch_failed",
+  "readme_excerpt": "# APEX \u2014 Android Package EXaminer\n\nAPEX is a security-first Android reverse-engineering application with a CLI\nand a private, local web interface. It inspects APK metadata, decodes binary\nAndroid formats, decompiles DEX bytecode, builds editable projects, verifies\nround trips, compares packages, and reports static security signals.\n\n## Install\n\n**Download (no git required):** [GitHub Releases](https://github.com/zowskyy/apex-android/releases) \u2014\nWindows `.zip`, macOS `.zip`, Linux `.tar.gz`, and **APEX Mobile** `.apk` / `.aab`.\n\n```bash\npython -m venv .venv\n. .venv/bin/activate\npip install -e .\n```\n\nThe Python package uses [Androguard](https://github.com/androguard/androguard)\nfor production AXML, ARSC, and Java decompilation. The included\n`apex_zip_reader` and `apex_dex_reader` Rust extensions are used automatically\nwhen installed; otherwise bounded Python/Androguard fallbacks apply.\n\nOptional tools expand rebuild support:\n\n- `apktool`, or `APEX_APKTOOL_JAR=/path/to/apktool.jar`, recompiles edited XML\n  and resources.\n- `apksigner`, or `APEX_APKSIGNER=/path/to/apksigner`, signs build output.\n- `aapt2`, `adb`, and Java are reported by `apex doctor`.\n\nAPEX never labels a missing optional capability as successful. The raw backend\nis a lossless archive project; readable files under `decoded/` are views, and\nedited compiled resources require the apktool backend.\n\n## Use\n\n```bash\napex inspect app.apk\napex analyze app.apk --out report\napex decompile app.apk --out source\napex decode app.apk --out project\napex build project --out rebuilt.apk\napex verify rebuilt.apk\napex roundtrip app.apk --work roundtrip\napex security-scan app.apk\napex diff old.apk new.apk\napex framework-check app.apk\napex doctor\n```\n\nTo open the local interface:\n\n```bash\napex gui\n```\n\n### Use on your phone\n\nInstall **APEX Mobile** (`apex-mobile.apk`) \u2014 full engine on the device, with optional\ndesktop remote in **Settings**. Build: [docs/BUILD_STANDALONE_APK.md](docs/BUILD_STANDALONE_APK.md).\n... (170 more lines)",
+  "top_level_files": [],
+  "claims": [
+    "(no explicit claims extracted from README)"
+  ],
+  "can_do": [
+    "(capabilities not verified \u2014 metadata-only scan)"
+  ],
+  "cannot_do": [
+    "(limitations not probed \u2014 shallow scan only)"
+  ],
+  "blueprint_relation": "Android tooling adjacent to reverse-engineering skills. Not on critical blueprint path; may consume Frontier output later."
+}

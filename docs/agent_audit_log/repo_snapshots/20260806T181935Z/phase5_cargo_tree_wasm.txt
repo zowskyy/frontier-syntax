@@ -1,0 +1,12 @@
+# cargo tree --target wasm32-unknown-unknown --depth 1
+# Generated: 2026-08-06T18:19:35Z
+
+frontier v2.0.0 (/workspace)
+├── getrandom v0.2.17
+├── hex v0.4.3
+├── serde v1.0.229
+├── serde_json v1.0.151
+├── sha3 v0.10.9
+├── unicode-normalization v0.1.25
+└── wasm-bindgen v0.2.126
+    [build-dependencies]

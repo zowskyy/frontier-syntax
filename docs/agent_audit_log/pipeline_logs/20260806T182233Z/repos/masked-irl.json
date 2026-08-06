@@ -1,0 +1,22 @@
+{
+  "name": "masked-irl",
+  "url": "https://github.com/zowskyy/masked-irl",
+  "description": "Official Codebase for \"Masked IRL: LLM-Guided Reward Disambiguation from Demonstrations and Language\".\"",
+  "is_private": false,
+  "language": "Python",
+  "updated_at": "2026-07-11T19:01:39Z",
+  "category": "fork_or_adjacent",
+  "access_status": "fetch_failed",
+  "readme_excerpt": "# Masked IRL: LLM-Guided Reward Disambiguation from Demonstrations and Language\n\nOfficial codebase for **Masked Inverse Reinforcement Learning (Masked IRL)**, a framework that uses large language models (LLMs) to combine demonstrations and natural language instructions for reward learning.\n\n**Accepted to ICRA 2026**\n\n**Paper**: [arXiv:2511.14565](https://arxiv.org/abs/2511.14565v1)  \n**Project Page**: https://mit-clear-lab.github.io/Masked-IRL/\n\n## Overview\n\nMasked IRL addresses the fundamental ambiguity in inverse reinforcement learning by:\n1. Disambiguating ambiguous instructions using demonstration context\n2. Using LLMs to infer state-relevance masks from language instructions\n3. Enforcing invariance to irrelevant state components through a masking loss\n\nThis enables more sample-efficient and generalizable reward learning compared to prior language-conditioned IRL methods.\n\n## Installation\n\n### Dependencies\n\n1. Create a conda environment:\n```bash\nconda create -n maskedirl python=3.10\nconda activate maskedirl\n```\n\n2. Install PyTorch (CUDA 12.4):\n```bash\npip install torch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0 --index-url https://download.pytorch.org/whl/cu124\n```\nInstall cuda toolkit 12.4 with `conda install -c nvidia cuda-toolkit=12.4` or install different version of PyTorch that matches your cuda version.\n\n3. Install remaining dependencies:\n```bash\npip install -r requirements.txt\n```\n\n## Dataset\n\n### Dataset Files\n\nThe codebase uses trajectory datasets stored in `data/traj_sets/`:\n\n- **Simulation datasets**:\n  - `frankarobot_obj20_sg10_persg5.npy` - Main simulation dataset (20 objects, 10 start-goal pairs, 5 trajectories per pair)\n  - `frankarobot_obj20_sg10_persg5_shortest_paths.npy` - Shortest path trajectories for baseline comparison on extracting state relevance masks\n\n- **Real robot datasets**:\n  - `frankarobot_obj100_sg50_persg50.npy` - Real robot dataset (100 objects, 50 start-goal pairs, 50 trajectories per pair)\n  - `frankarobot_obj100_sg50_persg50_dict.npy` - Dictionary format of real robot data\n\n### Generating Trajectories\n\nTo generate new trajectory datasets:\n\n```bash\n# For simulation (set real: False in config)\ncd src\n... (349 more lines)",
+  "top_level_files": [],
+  "claims": [
+    "GitHub description: Official Codebase for \"Masked IRL: LLM-Guided Reward Disambiguation from Demonstrations and Language\".\""
+  ],
+  "can_do": [
+    "(capabilities not verified \u2014 metadata-only scan)"
+  ],
+  "cannot_do": [
+    "Not part of Frontier blueprint critical path"
+  ],
+  "blueprint_relation": "Upstream fork or unrelated project \u2014 no blueprint phase dependency."
+}
