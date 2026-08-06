@@ -1,2 +1,4 @@
 state/
+repo_snapshots/**/gather.log
 *.log
+!pipeline_logs/**/pipeline.log
