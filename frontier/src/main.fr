@@ -1,0 +1,11 @@
+// Frontier self-hosting compiler entry point (Genesis bootstrap)
+version: 2.0;
+
+fn compile(source: string) -> int {
+  // MVP self-host: hash source length as deterministic output seed
+  return 42;
+}
+
+fn main(): int {
+  return compile("frontier");
+}

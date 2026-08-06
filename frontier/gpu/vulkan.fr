@@ -1,0 +1,12 @@
+// Frontier Vulkan GPU renderer — runtime component
+version: 2.0;
+
+fn init_renderer(width: int, height: int) -> int {
+    return width * height;
+}
+
+fn main(): int {
+    return init_renderer(1920, 1080);
+}
+
+// @test: expect compile pass

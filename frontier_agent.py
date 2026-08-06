@@ -110,6 +110,8 @@ class FrontierAgent:
             result = self.build_archive_crawler(parsed)
         elif parsed["type"] == "self_creation":
             result = self.run_self_creation(parsed)
+        elif parsed["type"] == "solve_gaps":
+            result = self.run_gap_solution(parsed)
         else:
             result = {"error": f"Unknown intent type: {parsed['type']}"}
 
@@ -231,6 +233,12 @@ class FrontierAgent:
             for word in ["self-creation", "self creation", "flawless build", "create itself", "no-screw"]
         ):
             return {"type": "self_creation", "content": intent}
+
+        if any(
+            word in intent_lower
+            for word in ["solve all gaps", "solve gaps", "gap solution", "invoke workers", "no documentation left"]
+        ):
+            return {"type": "solve_gaps", "content": intent}
 
         if any(
             word in intent_lower
@@ -688,6 +696,20 @@ class FrontierAgent:
             "log": "self_creation.log",
             "output": result.get("stdout", "")[-2000:],
             "message": "Self-creation orchestrator complete",
+        }
+
+    def run_gap_solution(self, parsed: Dict[str, Any]) -> Dict[str, Any]:
+        """Run the gap solution orchestrator to close all P0 gaps."""
+        orchestrator = self.scripts_dir / "gap_solution_orchestrator.py"
+        result = self._run_command([str(orchestrator)], capture=True)
+        report_path = self.repo_root / "audit_reports" / "gap_solution_report.md"
+        return {
+            "status": "success" if result["returncode"] == 0 else "partial",
+            "all_gaps_solved": "all_gaps_solved=True" in result.get("stdout", ""),
+            "report": str(report_path.relative_to(self.repo_root)),
+            "log": "gap_solution.log",
+            "output": result.get("stdout", "")[-2000:],
+            "message": "Gap solution orchestrator complete",
         }
 
     def build_archive_crawler(self, parsed: Dict[str, Any]) -> Dict[str, Any]:

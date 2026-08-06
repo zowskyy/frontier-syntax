@@ -264,12 +264,54 @@ fn run_verify(args: &[String]) -> Result<(), i32> {
 }
 
 fn run_file(args: &[String]) -> Result<(), i32> {
-    let path = args.get(2).ok_or_else(|| {
-        print_error("usage: frontier run <file.frontier>");
-        1
-    })?;
+    let test_mode = args.iter().any(|a| a == "--test");
+    let path = args
+        .iter()
+        .skip(2)
+        .find(|a| !a.starts_with('-'))
+        .ok_or_else(|| {
+            print_error("usage: frontier run <file> [--test]");
+            1
+        })?;
 
-    let msg = frontier::migrate::run_frontier_file(PathBuf::from(path).as_path()).map_err(|e| {
+    let path_buf = PathBuf::from(path);
+
+    if path.ends_with(".fr") {
+        let source = fs::read_to_string(&path_buf).map_err(|e| {
+            print_error(&format!("Failed to read {path}: {e}"));
+            1
+        })?;
+        let program = frontier::parser::parse_source_typed(&source).map_err(|e| {
+            print_error(&e.to_string());
+            1
+        })?;
+        if test_mode {
+            let options = frontier::wasm_codegen::CodeGenOptions {
+                optimize: false,
+                browser_exports: false,
+                collect_profile: false,
+            };
+            let (wasm, meta) = frontier::wasm_codegen::compile_program(&program, &options).map_err(|e| {
+                print_error(&e);
+                1
+            })?;
+            if !wasm.starts_with(b"\0asm") {
+                print_error("WASM codegen test failed: invalid magic");
+                return Err(1);
+            }
+            colors::print_success(&format!(
+                "✅ PASS: {} ({} bytes, entry={})",
+                path,
+                wasm.len(),
+                meta.entry_value
+            ));
+            return Ok(());
+        }
+        println!("Parsed {} statements from {}", program.statements.len(), path);
+        return Ok(());
+    }
+
+    let msg = frontier::migrate::run_frontier_file(path_buf.as_path()).map_err(|e| {
         print_error(&e.to_string());
         1
     })?;
