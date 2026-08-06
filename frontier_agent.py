@@ -118,6 +118,8 @@ class FrontierAgent:
             result = self.run_swarm_optimized(parsed)
         elif parsed["type"] == "close_peerless":
             result = self.run_close_peerless(parsed)
+        elif parsed["type"] == "ultimate_conclusion":
+            result = self.run_ultimate_conclusion(parsed)
         else:
             result = {"error": f"Unknown intent type: {parsed['type']}"}
 
@@ -263,6 +265,12 @@ class FrontierAgent:
             for word in ["peerless", "close peerless", "peerless gaps"]
         ):
             return {"type": "close_peerless", "content": intent}
+
+        if any(
+            word in intent_lower
+            for word in ["ultimate conclusion", "reach conclusion", "complete everything", "deploy swarms"]
+        ):
+            return {"type": "ultimate_conclusion", "content": intent}
 
         if any(
             word in intent_lower
@@ -774,6 +782,24 @@ class FrontierAgent:
             "process_log": "docs/process_log.fr",
             "output": result.get("stdout", "")[-2000:],
             "message": "Peerless gap closure complete",
+        }
+
+    def run_ultimate_conclusion(self, parsed: Dict[str, Any]) -> Dict[str, Any]:
+        """Deploy worker swarms until ultimate conclusion is reached."""
+        orchestrator = self.scripts_dir / "ultimate_conclusion_orchestrator.py"
+        result = self._run_command([str(orchestrator)], capture=True)
+        manifest_path = self.repo_root / "manifest" / "ultimate_conclusion.json"
+        summary = {}
+        if manifest_path.exists():
+            summary = json.loads(manifest_path.read_text(encoding="utf-8"))
+        return {
+            "status": "success" if summary.get("concluded") else "partial",
+            "concluded": summary.get("concluded", False),
+            "report": "audit_reports/ultimate_conclusion_report.md",
+            "manifest": "manifest/ultimate_conclusion.json",
+            "log": "ultimate_conclusion.log",
+            "output": result.get("stdout", "")[-2000:],
+            "message": "Ultimate conclusion orchestrator complete",
         }
 
     def build_archive_crawler(self, parsed: Dict[str, Any]) -> Dict[str, Any]:

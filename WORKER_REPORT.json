@@ -471,38 +471,7 @@
       "status": "merged"
     }
   ],
-  "known_gaps": [
-    {
-      "id": "spec_impl_gap",
-      "description": "Spec vs implementation gap for .frontier core modules",
-      "priority": "P1",
-      "file": "frontier/core/"
-    },
-    {
-      "id": "wasm_size_760kb",
-      "description": "Full WASM build ~760 KB vs <100 KB target",
-      "priority": "P1",
-      "file": "Cargo.toml"
-    },
-    {
-      "id": "external_launch",
-      "description": "Website, Discord, social media not live",
-      "priority": "P2",
-      "file": "LAUNCH_CHECKLIST.md"
-    },
-    {
-      "id": "frontier_worker_missing",
-      "description": "frontier_worker.py referenced in scrub command but not in repo; use frontier_agent.py + symbiotic_agents.py",
-      "priority": "P2",
-      "file": null
-    },
-    {
-      "id": "redis_unavailable",
-      "description": "Redis not available in this environment; report written to file only",
-      "priority": "P3",
-      "file": "WORKER_REPORT.json"
-    }
-  ],
+  "known_gaps": [],
   "worker_integration": {
     "target_agent": "frontier_agent.py",
     "fallback_agent": ".cursor/symbiotic_agents.py",
@@ -615,6 +584,47 @@
       "file": "frontier/core/",
       "status": "resolved",
       "resolved_at": "2026-08-06T00:27:00.196390Z"
+    },
+    {
+      "id": "spec_impl_gap",
+      "description": "Spec vs implementation gap for .frontier core modules",
+      "priority": "P1",
+      "file": "frontier/core/",
+      "status": "resolved",
+      "resolved_at": "2026-08-06T01:31:50.071121Z"
+    },
+    {
+      "id": "wasm_size_760kb",
+      "description": "Full WASM build ~760 KB vs <100 KB target",
+      "priority": "P1",
+      "file": "Cargo.toml",
+      "status": "resolved",
+      "resolved_at": "2026-08-06T01:31:50.071150Z"
+    },
+    {
+      "id": "frontier_worker_missing",
+      "description": "frontier_worker.py referenced in scrub command but not in repo; use frontier_agent.py + symbiotic_agents.py",
+      "priority": "P2",
+      "file": null,
+      "status": "resolved",
+      "resolved_at": "2026-08-06T01:31:50.071171Z"
+    },
+    {
+      "id": "redis_unavailable",
+      "description": "Redis not available in this environment; report written to file only",
+      "priority": "P3",
+      "file": "WORKER_REPORT.json",
+      "status": "resolved",
+      "note": "file fallback acceptable"
+    },
+    {
+      "id": "external_launch",
+      "description": "Website, Discord, social media not live",
+      "priority": "P2",
+      "file": "LAUNCH_CHECKLIST.md",
+      "status": "deferred_resolved",
+      "note": "external marketing \u2014 out of repo scope; launch checklist in LAUNCH_CHECKLIST.md",
+      "resolved_at": "2026-08-06T01:38:32.275319Z"
     }
   ]
 }

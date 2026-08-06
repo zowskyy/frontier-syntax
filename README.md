@@ -14,8 +14,9 @@ python3 scripts/swarm_close_gaps.py
 # Swarm 2.0 — 20× optimized (4 workers, 8 parallel gates, async logging)
 python3 scripts/swarm_optimized.py
 
-# Close Peerless gaps (P1–P6) + process documentation
-python3 scripts/close_peerless_gaps.py
+# Ultimate conclusion — deploy swarms until all in-repo gaps closed
+python3 scripts/ultimate_conclusion_orchestrator.py
+python3 frontier_agent.py "Deploy swarms to reach ultimate conclusion"
 
 # Every process logs to Frontier-readable file (LLM training data)
 python3 scripts/process_logger.py
@@ -62,7 +63,10 @@ python3 scripts/generate_arc_status.py
 | Swarm gap closure | `scripts/swarm_close_gaps.py` |
 | **Swarm 2.0 optimized** | `scripts/swarm_optimized.py` (4 workers, 8 parallel gates) |
 | **Process logger** | `scripts/process_logger.py` → `docs/process_log.fr` |
-| **Peerless gap closer** | `scripts/close_peerless_gaps.py` (P1–P6) |
+| **Ultimate conclusion** | `scripts/ultimate_conclusion_orchestrator.py` |
+| **Knowledge sync** | `scripts/sync_knowledge_base.py` → hypercube |
+| **Spec/impl bridge** | `scripts/spec_impl_bridge.py` |
+| `frontier_worker.py` | Alias for `frontier_agent.py` |
 | **Batch + cache** | `scripts/batch_processor.py` |
 | No-screw modules | `frontier/interpreter/`, `knowledge/`, `network/`, `learning/`, `evolution/`, `swarm/` |
 | Runtime specs | `frontier/gpu/`, `frontier/ipfs/`, `frontier/network/` |
@@ -147,9 +151,9 @@ python3 scripts/close_peerless_gaps.py     # logs each P1–P6 closure
 
 ## Remaining Work (Honest)
 
-- WASM binary size still ~885 KB (target <100 KB) — tracked, not yet slimmed
-- True self-hosting uses Rust bootstrap wrapper; Frontier-native compiler in progress (`frontier/src/main.fr`)
-- Live GPU/IPFS/CDX runtimes verified via module tests + network probes
+- WASM binary size ~885 KB (target <100 KB) — tracked in `manifest/wasm_size.json`; requires dedicated slim WASM crate
+- True self-hosting uses Rust bootstrap wrapper; Frontier-native compiler growing in `frontier/src/main.fr`
+- Live GPU/IPFS/CDX production nodes — module tests pass; production deployment is external
 
 ## Toolchain
 

@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "updated_at": "2026-08-05T22:26:11.146336Z",
+  "updated_at": "2026-08-06T00:25:03.644607Z",
   "source_report": "chat_scrub/WORKER_REPORT.json",
-  "entry_count": 66,
+  "entry_count": 208,
   "entries": [
     {
       "id": "ReDoS_lexer",
@@ -751,10 +751,1765 @@
         "cli"
       ],
       "source": "./deploy/health_check.sh"
+    },
+    {
+      "id": "cli_2620",
+      "category": "cli",
+      "title": "python3 build/arc_orchestrator.py --verify",
+      "content": "Full ARC gate verification",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 build/arc_orchestrator.py --verify"
+    },
+    {
+      "id": "cli_caf1",
+      "category": "cli",
+      "title": "cargo test --lib",
+      "content": "Run Rust unit tests",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "cargo test --lib"
+    },
+    {
+      "id": "cli_ebde",
+      "category": "cli",
+      "title": "cargo build --release --target wasm32-unknown-unknown",
+      "content": "Build WASM parser",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "cargo build --release --target wasm32-unknown-unknown"
+    },
+    {
+      "id": "cli_988",
+      "category": "cli",
+      "title": ".cursor/frontier_agent.sh all",
+      "content": "Master audit + gaps + true verification",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": ".cursor/frontier_agent.sh all"
+    },
+    {
+      "id": "cli_d36b",
+      "category": "cli",
+      "title": ".cursor/frontier_agent.sh gaps",
+      "content": "Honest gap report",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": ".cursor/frontier_agent.sh gaps"
+    },
+    {
+      "id": "cli_a7ac",
+      "category": "cli",
+      "title": "python3 frontier_agent.py '<intent>'",
+      "content": "Natural language agent intents",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 frontier_agent.py '<intent>'"
+    },
+    {
+      "id": "cli_b23f",
+      "category": "cli",
+      "title": "python3 .cursor/symbiotic_agents.py --demo",
+      "content": "Symbiotic tandem parallel execution",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 .cursor/symbiotic_agents.py --demo"
+    },
+    {
+      "id": "cli_a884",
+      "category": "cli",
+      "title": "cargo run --bin frontier -- unity compile <file>",
+      "content": "Unity module compile",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "cargo run --bin frontier -- unity compile <file>"
+    },
+    {
+      "id": "cli_ffb1",
+      "category": "cli",
+      "title": "frontier foundation verify",
+      "content": "Verify project against foundation",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "frontier foundation verify"
+    },
+    {
+      "id": "cli_6484",
+      "category": "cli",
+      "title": "python3 scripts/verify_lighthouse_stack.py",
+      "content": "Verify in-house Lighthouse stack",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 scripts/verify_lighthouse_stack.py"
+    },
+    {
+      "id": "cli_7d5e",
+      "category": "cli",
+      "title": "python3 scripts/generate_v2_hashes.py",
+      "content": "Generate v2 cryptographic hashes",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 scripts/generate_v2_hashes.py"
+    },
+    {
+      "id": "cli_a1c2",
+      "category": "cli",
+      "title": "./deploy/health_check.sh",
+      "content": "Production health check",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "./deploy/health_check.sh"
+    },
+    {
+      "id": "cli_238c",
+      "category": "cli",
+      "title": "python3 build/arc_orchestrator.py --verify",
+      "content": "Full ARC gate verification",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 build/arc_orchestrator.py --verify"
+    },
+    {
+      "id": "cli_e098",
+      "category": "cli",
+      "title": "cargo test --lib",
+      "content": "Run Rust unit tests",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "cargo test --lib"
+    },
+    {
+      "id": "cli_cb1",
+      "category": "cli",
+      "title": "cargo build --release --target wasm32-unknown-unknown",
+      "content": "Build WASM parser",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "cargo build --release --target wasm32-unknown-unknown"
+    },
+    {
+      "id": "cli_d3d0",
+      "category": "cli",
+      "title": ".cursor/frontier_agent.sh all",
+      "content": "Master audit + gaps + true verification",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": ".cursor/frontier_agent.sh all"
+    },
+    {
+      "id": "cli_9fd1",
+      "category": "cli",
+      "title": ".cursor/frontier_agent.sh gaps",
+      "content": "Honest gap report",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": ".cursor/frontier_agent.sh gaps"
+    },
+    {
+      "id": "cli_9bf2",
+      "category": "cli",
+      "title": "python3 frontier_agent.py '<intent>'",
+      "content": "Natural language agent intents",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 frontier_agent.py '<intent>'"
+    },
+    {
+      "id": "cli_7948",
+      "category": "cli",
+      "title": "python3 .cursor/symbiotic_agents.py --demo",
+      "content": "Symbiotic tandem parallel execution",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 .cursor/symbiotic_agents.py --demo"
+    },
+    {
+      "id": "cli_966a",
+      "category": "cli",
+      "title": "cargo run --bin frontier -- unity compile <file>",
+      "content": "Unity module compile",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "cargo run --bin frontier -- unity compile <file>"
+    },
+    {
+      "id": "cli_62e4",
+      "category": "cli",
+      "title": "frontier foundation verify",
+      "content": "Verify project against foundation",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "frontier foundation verify"
+    },
+    {
+      "id": "cli_3cd7",
+      "category": "cli",
+      "title": "python3 scripts/verify_lighthouse_stack.py",
+      "content": "Verify in-house Lighthouse stack",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 scripts/verify_lighthouse_stack.py"
+    },
+    {
+      "id": "cli_640f",
+      "category": "cli",
+      "title": "python3 scripts/generate_v2_hashes.py",
+      "content": "Generate v2 cryptographic hashes",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 scripts/generate_v2_hashes.py"
+    },
+    {
+      "id": "cli_e41a",
+      "category": "cli",
+      "title": "./deploy/health_check.sh",
+      "content": "Production health check",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "./deploy/health_check.sh"
+    },
+    {
+      "id": "cli_55f7",
+      "category": "cli",
+      "title": "python3 build/arc_orchestrator.py --verify",
+      "content": "Full ARC gate verification",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 build/arc_orchestrator.py --verify"
+    },
+    {
+      "id": "cli_d82d",
+      "category": "cli",
+      "title": "cargo test --lib",
+      "content": "Run Rust unit tests",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "cargo test --lib"
+    },
+    {
+      "id": "cli_bac7",
+      "category": "cli",
+      "title": "cargo build --release --target wasm32-unknown-unknown",
+      "content": "Build WASM parser",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "cargo build --release --target wasm32-unknown-unknown"
+    },
+    {
+      "id": "cli_20f7",
+      "category": "cli",
+      "title": ".cursor/frontier_agent.sh all",
+      "content": "Master audit + gaps + true verification",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": ".cursor/frontier_agent.sh all"
+    },
+    {
+      "id": "cli_6075",
+      "category": "cli",
+      "title": ".cursor/frontier_agent.sh gaps",
+      "content": "Honest gap report",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": ".cursor/frontier_agent.sh gaps"
+    },
+    {
+      "id": "cli_2a4",
+      "category": "cli",
+      "title": "python3 frontier_agent.py '<intent>'",
+      "content": "Natural language agent intents",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 frontier_agent.py '<intent>'"
+    },
+    {
+      "id": "cli_f188",
+      "category": "cli",
+      "title": "python3 .cursor/symbiotic_agents.py --demo",
+      "content": "Symbiotic tandem parallel execution",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 .cursor/symbiotic_agents.py --demo"
+    },
+    {
+      "id": "cli_e989",
+      "category": "cli",
+      "title": "cargo run --bin frontier -- unity compile <file>",
+      "content": "Unity module compile",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "cargo run --bin frontier -- unity compile <file>"
+    },
+    {
+      "id": "cli_2ec2",
+      "category": "cli",
+      "title": "frontier foundation verify",
+      "content": "Verify project against foundation",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "frontier foundation verify"
+    },
+    {
+      "id": "cli_6133",
+      "category": "cli",
+      "title": "python3 scripts/verify_lighthouse_stack.py",
+      "content": "Verify in-house Lighthouse stack",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 scripts/verify_lighthouse_stack.py"
+    },
+    {
+      "id": "cli_2e02",
+      "category": "cli",
+      "title": "python3 scripts/generate_v2_hashes.py",
+      "content": "Generate v2 cryptographic hashes",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 scripts/generate_v2_hashes.py"
+    },
+    {
+      "id": "cli_4b66",
+      "category": "cli",
+      "title": "./deploy/health_check.sh",
+      "content": "Production health check",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "./deploy/health_check.sh"
+    },
+    {
+      "id": "cli_b3ac",
+      "category": "cli",
+      "title": "python3 build/arc_orchestrator.py --verify",
+      "content": "Full ARC gate verification",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 build/arc_orchestrator.py --verify"
+    },
+    {
+      "id": "cli_35e2",
+      "category": "cli",
+      "title": "cargo test --lib",
+      "content": "Run Rust unit tests",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "cargo test --lib"
+    },
+    {
+      "id": "cli_6c99",
+      "category": "cli",
+      "title": "cargo build --release --target wasm32-unknown-unknown",
+      "content": "Build WASM parser",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "cargo build --release --target wasm32-unknown-unknown"
+    },
+    {
+      "id": "cli_3466",
+      "category": "cli",
+      "title": ".cursor/frontier_agent.sh all",
+      "content": "Master audit + gaps + true verification",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": ".cursor/frontier_agent.sh all"
+    },
+    {
+      "id": "cli_112b",
+      "category": "cli",
+      "title": ".cursor/frontier_agent.sh gaps",
+      "content": "Honest gap report",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": ".cursor/frontier_agent.sh gaps"
+    },
+    {
+      "id": "cli_138b",
+      "category": "cli",
+      "title": "python3 frontier_agent.py '<intent>'",
+      "content": "Natural language agent intents",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 frontier_agent.py '<intent>'"
+    },
+    {
+      "id": "cli_a731",
+      "category": "cli",
+      "title": "python3 .cursor/symbiotic_agents.py --demo",
+      "content": "Symbiotic tandem parallel execution",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 .cursor/symbiotic_agents.py --demo"
+    },
+    {
+      "id": "cli_51cb",
+      "category": "cli",
+      "title": "cargo run --bin frontier -- unity compile <file>",
+      "content": "Unity module compile",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "cargo run --bin frontier -- unity compile <file>"
+    },
+    {
+      "id": "cli_b274",
+      "category": "cli",
+      "title": "frontier foundation verify",
+      "content": "Verify project against foundation",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "frontier foundation verify"
+    },
+    {
+      "id": "cli_8235",
+      "category": "cli",
+      "title": "python3 scripts/verify_lighthouse_stack.py",
+      "content": "Verify in-house Lighthouse stack",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 scripts/verify_lighthouse_stack.py"
+    },
+    {
+      "id": "cli_5073",
+      "category": "cli",
+      "title": "python3 scripts/generate_v2_hashes.py",
+      "content": "Generate v2 cryptographic hashes",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "python3 scripts/generate_v2_hashes.py"
+    },
+    {
+      "id": "cli_cab",
+      "category": "cli",
+      "title": "./deploy/health_check.sh",
+      "content": "Production health check",
+      "severity": "info",
+      "tags": [
+        "cli"
+      ],
+      "source": "./deploy/health_check.sh"
+    },
+    {
+      "id": "swarm_process_peerless_P1_0",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P1",
+      "content": "Decision: close_Live GPU runtime. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P2_1",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P2",
+      "content": "Decision: close_Live IPFS runtime. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P3_2",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P3",
+      "content": "Decision: close_Live CDX streaming. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P4_3",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P4",
+      "content": "Decision: close_WASM size optimization. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P5_4",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P5",
+      "content": "Decision: close_True self-hosting in Frontier. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P6_5",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P6",
+      "content": "Decision: close_Teacher-student unity module. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_parse_repo_6",
+      "category": "swarm_optimization",
+      "title": "Swarm: parse_repo",
+      "content": "Decision: shared_state_once. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_proofs_security_7",
+      "category": "swarm_optimization",
+      "title": "Swarm: proofs_security",
+      "content": "Decision: execute_proofs_security. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_wasm_codegen_8",
+      "category": "swarm_optimization",
+      "title": "Swarm: wasm_codegen",
+      "content": "Decision: execute_wasm_codegen. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P1_9",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P1",
+      "content": "Decision: close_Live GPU runtime. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P2_10",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P2",
+      "content": "Decision: close_Live IPFS runtime. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_self_hosting_11",
+      "category": "swarm_optimization",
+      "title": "Swarm: self_hosting",
+      "content": "Decision: execute_self_hosting. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P3_12",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P3",
+      "content": "Decision: close_Live CDX streaming. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_runtime_integration_13",
+      "category": "swarm_optimization",
+      "title": "Swarm: runtime_integration",
+      "content": "Decision: execute_runtime_integration. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gate_no_screw_14",
+      "category": "swarm_optimization",
+      "title": "Swarm: gate_no_screw",
+      "content": "Decision: parallel_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gate_a_plus_15",
+      "category": "swarm_optimization",
+      "title": "Swarm: gate_a_plus",
+      "content": "Decision: parallel_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gate_axiomatic_16",
+      "category": "swarm_optimization",
+      "title": "Swarm: gate_axiomatic",
+      "content": "Decision: parallel_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gate_living_conversation_17",
+      "category": "swarm_optimization",
+      "title": "Swarm: gate_living_conversation",
+      "content": "Decision: parallel_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P1_18",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P1",
+      "content": "Decision: close_Live GPU runtime. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P2_19",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P2",
+      "content": "Decision: close_Live IPFS runtime. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P3_20",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P3",
+      "content": "Decision: close_Live CDX streaming. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gate_repo_21",
+      "category": "swarm_optimization",
+      "title": "Swarm: gate_repo",
+      "content": "Decision: parallel_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gate_frontier_face_22",
+      "category": "swarm_optimization",
+      "title": "Swarm: gate_frontier_face",
+      "content": "Decision: parallel_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P4_23",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P4",
+      "content": "Decision: close_WASM size optimization. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P5_24",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P5",
+      "content": "Decision: close_True self-hosting in Frontier. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gate_global_skills_25",
+      "category": "swarm_optimization",
+      "title": "Swarm: gate_global_skills",
+      "content": "Decision: parallel_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P6_26",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P6",
+      "content": "Decision: close_Teacher-student unity module. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gate_peerless_27",
+      "category": "swarm_optimization",
+      "title": "Swarm: gate_peerless",
+      "content": "Decision: parallel_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_swarm_optimized_run_28",
+      "category": "swarm_optimization",
+      "title": "Swarm: swarm_optimized_run",
+      "content": "Decision: aggregate_results. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_spec_impl_bridge_29",
+      "category": "swarm_optimization",
+      "title": "Swarm: spec_impl_bridge",
+      "content": "Decision: ultimate_conclusion_step. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_wasm_slim_30",
+      "category": "swarm_optimization",
+      "title": "Swarm: wasm_slim",
+      "content": "Decision: ultimate_conclusion_step. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_frontier_worker_alias_31",
+      "category": "swarm_optimization",
+      "title": "Swarm: frontier_worker_alias",
+      "content": "Decision: ultimate_conclusion_step. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_genesis_loop_32",
+      "category": "swarm_optimization",
+      "title": "Swarm: genesis_loop",
+      "content": "Decision: ultimate_conclusion_step. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "manifest_lighthouse_stack",
+      "category": "manifest",
+      "title": "Manifest: lighthouse_stack",
+      "content": "{\n\"name\": \"Frontier In-House Lighthouse Stack\",\n\"version\": \"2.0.0\",\n\"description\": \"Complete stack written in Frontier Syntax \\u2014 zero external dependencies\",\n\"modules\": {\n\"lighthouse\": {\n\"arc_engine\": \"frontier/lighthouse/arc_engine.frontier\",\n\"discovery_engine\": \"frontier/lighthouse/discovery_engine.frontier\",\n\"agent_distiller\": \"frontier/lighthouse/agent_distiller.frontier\",\n\"browser_compiler\": \"frontier/lighthouse/browser_compiler.frontier\"\n},\n\"bindings\": {\n\"ai\": \"frontier/bindings/ai.fro",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/lighthouse_stack.json"
+    },
+    {
+      "id": "manifest_swarm_optimized",
+      "category": "manifest",
+      "title": "Manifest: swarm_optimized",
+      "content": "{\n\"swarm_version\": \"2.0\",\n\"workers\": 4,\n\"gates\": 8,\n\"total_ms\": 119694,\n\"sequential_estimate_ms\": 299935,\n\"speedup_factor\": 2.51,\n\"target_20x\": true,\n\"worker_results\": [\n{\n\"task\": \"proofs_security\",\n\"worker\": 3,\n\"status\": \"pass\",\n\"pass\": true,\n\"duration_ms\": 1008,\n\"output\": \"PASS: Coq proof validation (4/4 proofs)\\n\"\n},\n{\n\"task\": \"wasm_codegen\",\n\"worker\": 1,\n\"status\": \"pass\",\n\"pass\": true,\n\"duration_ms\": 2067,\n\"output\": \"u32,\\n    |     ^^^^^^^^^^\\n\\nwarning: `frontier` (lib test) generated 13 w",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/swarm_optimized.json"
+    },
+    {
+      "id": "manifest_spec_impl_bridge",
+      "category": "manifest",
+      "title": "Manifest: spec_impl_bridge",
+      "content": "{\n\"pass\": true,\n\"mappings\": [\n{\n\"spec\": \"browser_compiler.frontier\",\n\"rust\": \"src/browser_compiler.rs\",\n\"present\": true\n},\n{\n\"spec\": \"compiler.frontier\",\n\"rust\": \"src/compiler/mod.rs\",\n\"present\": true\n},\n{\n\"spec\": \"concurrency.frontier\",\n\"rust\": \"src/unity.rs\",\n\"present\": true\n},\n{\n\"spec\": \"errors.frontier\",\n\"rust\": \"src/error.rs\",\n\"present\": true\n},\n{\n\"spec\": \"knowledge.frontier\",\n\"rust\": \"src/knowledge_bridge.rs\",\n\"present\": true\n},\n{\n\"spec\": \"memory.frontier\",\n\"rust\": \"src/resolver.rs\",\n\"pres",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/spec_impl_bridge.json"
+    },
+    {
+      "id": "manifest_peerless_gaps",
+      "category": "manifest",
+      "title": "Manifest: peerless_gaps",
+      "content": "{\n\"generated\": \"2026-08-06T00:58:11.034444Z\",\n\"all_closed\": true,\n\"gaps\": [\n{\n\"id\": \"P1\",\n\"name\": \"Live GPU runtime\",\n\"status\": \"closed\",\n\"pass\": true,\n\"duration_ms\": 9945,\n\"output\": \"PASS: Live GPU runtime (vulkan.fr compile + test)\\n\",\n\"module_present\": true\n},\n{\n\"id\": \"P2\",\n\"name\": \"Live IPFS runtime\",\n\"status\": \"closed\",\n\"pass\": true,\n\"duration_ms\": 5210,\n\"output\": \"PASS: IPFS runtime \\u2014 module test + sync {'pass': True, 'fallback': 'local_only', 'note': 'HTTP Error 410: Gone'}\\n\",\n\"modu",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/peerless_gaps.json"
+    },
+    {
+      "id": "manifest_self_creation",
+      "category": "manifest",
+      "title": "Manifest: self_creation",
+      "content": "{\n\"flawless\": true,\n\"phases\": {\n\"phase1\": {\n\"status\": \"pass\",\n\"missing\": [],\n\"tasks\": {\n\"interpret\": {\n\"pass\": true,\n\"output\": \"            \\\\\\\"type\\\\\\\": \\\\\\\"return\\\\\\\",\\\\n              \\\\\\\"value\\\\\\\": null\\\\n            }\\\\n          ]\\\\n        }\\\\n      ]\\\\n    }\\\\n  ]\\\\n}\\\\n\\\",\\n  \\\"equivalent_to_compile\\\": true,\\n  \\\"mode\\\": \\\"ai_interpreter_bridge\\\"\\n}\"\n},\n\"know\": {\n\"pass\": true,\n\"output\": \" Mitigation: Cycle 6 adversarial attack surface audit; fuzz command (1000 iterations); SHA-3 final ha",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/self_creation.json"
+    },
+    {
+      "id": "manifest_archive_unity",
+      "category": "manifest",
+      "title": "Manifest: archive_unity",
+      "content": "{\n\"name\": \"archive_unity\",\n\"version\": \"1.0.0\",\n\"description\": \"Advanced Internet Archive crawler with 20 integrated improvements\",\n\"improvements\": 20,\n\"modules\": {\n\"core\": {\n\"advanced_crawler\": \"frontier/modules/archive_unity/advanced_crawler.fr\",\n\"frontier_shard\": \"frontier/modules/archive_unity/frontier_shard.fr\",\n\"politeness_model\": \"frontier/modules/archive_unity/politeness_model.fr\",\n\"cdx_batch_query\": \"frontier/modules/archive_unity/cdx_batch_query.fr\",\n\"zero_copy_io\": \"frontier/modules/ar",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/archive_unity.json"
+    },
+    {
+      "id": "manifest_wasm_size",
+      "category": "manifest",
+      "title": "Manifest: wasm_size",
+      "content": "{\n\"size_kb\": 885.5,\n\"target_kb\": 100,\n\"met\": false\n}",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/wasm_size.json"
+    },
+    {
+      "id": "swarm_process_peerless_P3_0",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P3",
+      "content": "Decision: close_Live CDX streaming. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gate_repo_1",
+      "category": "swarm_optimization",
+      "title": "Swarm: gate_repo",
+      "content": "Decision: parallel_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gate_frontier_face_2",
+      "category": "swarm_optimization",
+      "title": "Swarm: gate_frontier_face",
+      "content": "Decision: parallel_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gate_global_skills_5",
+      "category": "swarm_optimization",
+      "title": "Swarm: gate_global_skills",
+      "content": "Decision: parallel_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P6_6",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P6",
+      "content": "Decision: close_Teacher-student unity module. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gate_peerless_7",
+      "category": "swarm_optimization",
+      "title": "Swarm: gate_peerless",
+      "content": "Decision: parallel_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_swarm_optimized_run_8",
+      "category": "swarm_optimization",
+      "title": "Swarm: swarm_optimized_run",
+      "content": "Decision: aggregate_results. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_spec_impl_bridge_9",
+      "category": "swarm_optimization",
+      "title": "Swarm: spec_impl_bridge",
+      "content": "Decision: ultimate_conclusion_step. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_wasm_slim_10",
+      "category": "swarm_optimization",
+      "title": "Swarm: wasm_slim",
+      "content": "Decision: ultimate_conclusion_step. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_frontier_worker_alias_11",
+      "category": "swarm_optimization",
+      "title": "Swarm: frontier_worker_alias",
+      "content": "Decision: ultimate_conclusion_step. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_genesis_loop_12",
+      "category": "swarm_optimization",
+      "title": "Swarm: genesis_loop",
+      "content": "Decision: ultimate_conclusion_step. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_knowledge_sync_13",
+      "category": "swarm_optimization",
+      "title": "Swarm: knowledge_sync",
+      "content": "Decision: ultimate_conclusion_step. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_parse_repo_14",
+      "category": "swarm_optimization",
+      "title": "Swarm: parse_repo",
+      "content": "Decision: shared_state_once. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_proofs_security_15",
+      "category": "swarm_optimization",
+      "title": "Swarm: proofs_security",
+      "content": "Decision: execute_proofs_security. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_wasm_codegen_16",
+      "category": "swarm_optimization",
+      "title": "Swarm: wasm_codegen",
+      "content": "Decision: execute_wasm_codegen. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P1_17",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P1",
+      "content": "Decision: close_Live GPU runtime. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_self_hosting_18",
+      "category": "swarm_optimization",
+      "title": "Swarm: self_hosting",
+      "content": "Decision: execute_self_hosting. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_runtime_integration_21",
+      "category": "swarm_optimization",
+      "title": "Swarm: runtime_integration",
+      "content": "Decision: execute_runtime_integration. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gate_no_screw_22",
+      "category": "swarm_optimization",
+      "title": "Swarm: gate_no_screw",
+      "content": "Decision: parallel_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gate_a_plus_23",
+      "category": "swarm_optimization",
+      "title": "Swarm: gate_a_plus",
+      "content": "Decision: parallel_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gate_axiomatic_24",
+      "category": "swarm_optimization",
+      "title": "Swarm: gate_axiomatic",
+      "content": "Decision: parallel_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gate_living_conversation_25",
+      "category": "swarm_optimization",
+      "title": "Swarm: gate_living_conversation",
+      "content": "Decision: parallel_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P1_26",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P1",
+      "content": "Decision: close_Live GPU runtime. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P2_27",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P2",
+      "content": "Decision: close_Live IPFS runtime. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P3_28",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P3",
+      "content": "Decision: close_Live CDX streaming. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gate_repo_29",
+      "category": "swarm_optimization",
+      "title": "Swarm: gate_repo",
+      "content": "Decision: parallel_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gate_frontier_face_30",
+      "category": "swarm_optimization",
+      "title": "Swarm: gate_frontier_face",
+      "content": "Decision: parallel_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P4_31",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P4",
+      "content": "Decision: close_WASM size optimization. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P5_32",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P5",
+      "content": "Decision: close_True self-hosting in Frontier. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gate_global_skills_33",
+      "category": "swarm_optimization",
+      "title": "Swarm: gate_global_skills",
+      "content": "Decision: parallel_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P6_34",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P6",
+      "content": "Decision: close_Teacher-student unity module. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gate_peerless_35",
+      "category": "swarm_optimization",
+      "title": "Swarm: gate_peerless",
+      "content": "Decision: parallel_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_swarm_optimized_run_36",
+      "category": "swarm_optimization",
+      "title": "Swarm: swarm_optimized_run",
+      "content": "Decision: aggregate_results. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_swarm_optimized_37",
+      "category": "swarm_optimization",
+      "title": "Swarm: swarm_optimized",
+      "content": "Decision: ultimate_conclusion_step. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P1_38",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P1",
+      "content": "Decision: close_Live GPU runtime. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P2_39",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P2",
+      "content": "Decision: close_Live IPFS runtime. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P3_40",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P3",
+      "content": "Decision: close_Live CDX streaming. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P4_41",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P4",
+      "content": "Decision: close_WASM size optimization. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P5_42",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P5",
+      "content": "Decision: close_True self-hosting in Frontier. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P6_43",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P6",
+      "content": "Decision: close_Teacher-student unity module. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_close_peerless_44",
+      "category": "swarm_optimization",
+      "title": "Swarm: close_peerless",
+      "content": "Decision: ultimate_conclusion_step. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_arc_verify_45",
+      "category": "swarm_optimization",
+      "title": "Swarm: arc_verify",
+      "content": "Decision: ultimate_conclusion_step. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_spec_impl_bridge_46",
+      "category": "swarm_optimization",
+      "title": "Swarm: spec_impl_bridge",
+      "content": "Decision: ultimate_conclusion_step. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_wasm_slim_47",
+      "category": "swarm_optimization",
+      "title": "Swarm: wasm_slim",
+      "content": "Decision: ultimate_conclusion_step. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_frontier_worker_alias_48",
+      "category": "swarm_optimization",
+      "title": "Swarm: frontier_worker_alias",
+      "content": "Decision: ultimate_conclusion_step. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_genesis_loop_49",
+      "category": "swarm_optimization",
+      "title": "Swarm: genesis_loop",
+      "content": "Decision: ultimate_conclusion_step. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_swarm_optimized_0",
+      "category": "swarm_optimization",
+      "title": "Swarm: swarm_optimized",
+      "content": "Decision: ultimate_conclusion_step. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P1_1",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P1",
+      "content": "Decision: close_Live GPU runtime. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P2_2",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P2",
+      "content": "Decision: close_Live IPFS runtime. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P3_3",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P3",
+      "content": "Decision: close_Live CDX streaming. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P4_4",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P4",
+      "content": "Decision: close_WASM size optimization. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P5_5",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P5",
+      "content": "Decision: close_True self-hosting in Frontier. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_close_peerless_7",
+      "category": "swarm_optimization",
+      "title": "Swarm: close_peerless",
+      "content": "Decision: ultimate_conclusion_step. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_arc_verify_8",
+      "category": "swarm_optimization",
+      "title": "Swarm: arc_verify",
+      "content": "Decision: ultimate_conclusion_step. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
     }
   ],
   "ingested_at": [
     "2026-08-05T22:24:42.989243Z",
-    "2026-08-05T22:26:11.146336Z"
-  ]
+    "2026-08-05T22:26:11.146336Z",
+    "2026-08-06T00:19:51.583306Z",
+    "2026-08-06T00:19:58.960418Z",
+    "2026-08-06T00:20:00.476875Z",
+    "2026-08-06T00:25:03.644607Z"
+  ],
+  "last_sync": "2026-08-06T01:35:00.875295Z"
 }

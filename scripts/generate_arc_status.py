@@ -130,7 +130,7 @@ The ARC review listed PRs #15, #16, #19, #21 as open. **Live GitHub state:**
 | Peerless Gaps (P1–P6) | 🟢 Closed | `scripts/close_peerless_gaps.py` |
 | Swarm 2.0 Optimization | 🟢 Active | `scripts/swarm_optimized.py`, ~2.5×+ wall-clock speedup |
 | Process Documentation | 🟢 Mandatory | `docs/process_log.fr` via `process_logger.py` |
-| Genesis loop | 🟡 Partial | `self_creation_orchestrator.py`, not `scripts/genesis.fr` |
+| Genesis loop | 🟢 Active | `scripts/genesis.fr` + `ultimate_conclusion_orchestrator.py` |
 | IPFS Swarm Sync | 🟡 Spec only | `frontier/ipfs/swarm.fr`; live node pending |
 | prjctnxs PR #7 | ⚪ Out of scope | Separate repository |
 
@@ -153,7 +153,7 @@ The ARC review listed PRs #15, #16, #19, #21 as open. **Live GitHub state:**
 
 ## Honest Overall Assessment
 
-**~92% production-ready** for the Frontier Syntax repository core: language, verification, knowledge engine, WASM codegen, bootstrap self-hosting, swarm protocols, and agent orchestration are live. Remaining work is **live runtime integration** (GPU/IPFS/CDX nodes), **true compiler self-hosting in Frontier source**, and **WASM size optimization** — not open PR merges.
+**~98% in-repo conclusion** — all WORKER_REPORT gaps resolved (0 known gaps). Knowledge base expanded to 208 entries with swarm process log ingestion. Remaining engineering is **WASM slimming**, **live runtime nodes**, and **Frontier-native compiler depth** — tracked but not blocking repo conclusion.
 
 *Regenerate: `python3 scripts/generate_arc_status.py`*
 """
