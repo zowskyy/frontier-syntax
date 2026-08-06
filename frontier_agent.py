@@ -124,6 +124,8 @@ class FrontierAgent:
             result = self.run_execute_peerless_plan(parsed)
         elif parsed["type"] == "lexicon_bound":
             result = self.run_lexicon_bound_deploy(parsed)
+        elif parsed["type"] == "resolve_prs":
+            result = self.run_resolve_prs(parsed)
         elif parsed["type"] == "close_peerless":
             result = self.run_close_peerless(parsed)
         elif parsed["type"] == "ultimate_conclusion":
@@ -314,6 +316,19 @@ class FrontierAgent:
             ]
         ):
             return {"type": "lexicon_bound", "content": intent}
+
+        if any(
+            word in intent_lower
+            for word in [
+                "resolve pr",
+                "unresolved pr",
+                "open pull request",
+                "merge pr",
+                "pr swarm",
+                "pull request swarm",
+            ]
+        ):
+            return {"type": "resolve_prs", "content": intent}
 
         if any(
             word in intent_lower
@@ -901,6 +916,25 @@ class FrontierAgent:
             "lexicon_log": "docs/lexicon_log.fr",
             "output": result.get("stdout", "")[-2000:],
             "message": "Lexicon-Bound Worker deployment complete — every action documented",
+        }
+
+    def run_resolve_prs(self, parsed: Dict[str, Any]) -> Dict[str, Any]:
+        """Worker swarm to resolve all open pull requests."""
+        resolver = self.scripts_dir / "swarm_resolve_prs.py"
+        result = self._run_command([str(resolver)], capture=True)
+        manifest_path = self.repo_root / "manifest" / "pr_resolution.json"
+        summary = {}
+        if manifest_path.exists():
+            summary = json.loads(manifest_path.read_text(encoding="utf-8"))
+        return {
+            "status": "success" if summary.get("all_pass") else "partial",
+            "open_prs_found": summary.get("open_prs_found", 0),
+            "all_pass": summary.get("all_pass", False),
+            "base_branch": summary.get("base_branch"),
+            "report": "audit_reports/pr_resolution_report.md",
+            "manifest": "manifest/pr_resolution.json",
+            "output": result.get("stdout", "")[-2000:],
+            "message": "PR resolution swarm complete",
         }
 
     def run_close_peerless(self, parsed: Dict[str, Any]) -> Dict[str, Any]:
