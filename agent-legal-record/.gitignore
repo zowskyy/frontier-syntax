@@ -1,0 +1,4 @@
+.env
+state/*.log
+state/activity.json
+agent-legal-record/state/activity.json
