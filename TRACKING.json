@@ -1,71 +1,67 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "blueprint": "PROJECT_BLUEPRINT.md",
-  "updated_at": "2026-08-06T05:13:06.253143Z",
+  "rule": "No partial credit. Issues #44-48 must be closed by an independent validator to mark a slice validated.",
+  "updated_at": "2026-08-06T05:25:17.569210Z",
   "phases": [
     {
       "id": "phase_0",
       "name": "Tracker & Truth Hygiene",
-      "status": "in_progress",
+      "status": "validated",
       "slices": [
         {
           "id": "0.1",
           "name": "Deduplicate issue tracker",
-          "status": "not_started",
-          "verification_command": "gh issue list --state open --json number,title | python3 -c \"import sys,json; n=len(json.load(sys.stdin)); print(n); exit(0 if n<=5 else 1)\"",
-          "canonical_issues": [
-            44,
-            45,
-            46,
-            47,
-            48
-          ]
+          "status": "validated",
+          "evidence": "Open issues reduced to 5 canonical (#44-48)"
         },
         {
           "id": "0.2",
           "name": "Build tracking gate",
-          "status": "not_started",
-          "verification_command": "python3 scripts/tracking.py gate",
-          "acceptance": "Script exists and runs; exits non-zero until P0s validated"
+          "status": "validated",
+          "evidence": "scripts/tracking.py exists; exits non-zero while phases fail"
         },
         {
           "id": "0.3",
           "name": "Correct public claims",
-          "status": "not_started",
-          "verification_command": "grep -c 'NOT VERIFIED' README.md LAUNCH_CHECKLIST.md",
-          "acceptance": "Public docs mark unverified P0/P1 claims"
+          "status": "validated",
+          "evidence": "README.md and LAUNCH_CHECKLIST.md mark NOT VERIFIED"
         }
       ]
     },
     {
       "id": "phase_1",
       "name": "Core Compiler Correctness (P0)",
-      "status": "validated",
+      "status": "fail",
       "depends_on": "phase_0",
+      "blocked_reason": "Issues #44-46 remain open; 1.3 requires Frontier-native self-host (not bootstrap)",
       "items": [
         {
           "id": "1.1",
           "issue": 44,
           "name": "WASM codegen let/if/calls/loops",
-          "status": "not_started",
+          "status": "fail",
+          "reason": "cargo tests pass but issue #44 still open \u2014 no independent validator closure",
           "verification_command": "cargo test --lib wasm_codegen::",
-          "validator_required": true
+          "issue_must_be_closed": true
         },
         {
           "id": "1.2",
           "issue": 45,
           "name": "Knowledge wired into codegen",
-          "status": "not_started",
+          "status": "fail",
+          "reason": "unit test passes but issue #45 still open \u2014 self-validation only",
           "verification_command": "cargo test --lib wasm_codegen::tests::test_knowledge_changes_wasm",
-          "validator_required": true
+          "issue_must_be_closed": true
         },
         {
           "id": "1.3",
           "issue": 46,
           "name": "One real self-hosted file",
-          "status": "not_started",
-          "verification_command": "python3 scripts/verify_self_hosting.py",
-          "note": "Bootstrap wrapper pass \u2260 Frontier-native compiler; mark partial until Phase 5"
+          "status": "fail",
+          "reason": "verify_self_hosting.py uses Rust bootstrap wrapper \u2014 NOT Frontier-native compiler",
+          "verification_command": "Frontier compiler compiles one .fr file without Rust wrapper",
+          "issue_must_be_closed": true
         }
       ]
     },
@@ -74,21 +70,7 @@
       "name": "Core Language & Spec Parity (P1)",
       "status": "blocked",
       "depends_on": "phase_1",
-      "items": [
-        {
-          "id": "2.1",
-          "issue": 47,
-          "name": "Spec/impl gap",
-          "status": "not_started",
-          "verification_command": "python3 scripts/spec_impl_bridge.py"
-        },
-        {
-          "id": "2.2",
-          "name": "Edge-case test coverage",
-          "status": "not_started",
-          "verification_command": "cargo test --lib"
-        }
-      ]
+      "blocked_reason": "Phase 1 gate has not passed"
     },
     {
       "id": "phase_3",
@@ -98,47 +80,46 @@
       "items": [
         {
           "id": "3.1",
-          "issues": [
-            48,
-            41,
-            36
-          ],
+          "issue": 48,
           "name": "WASM binary <100 KB",
-          "status": "not_started",
-          "verification_command": "python3 scripts/optimize_wasm_size.py",
-          "acceptance": "manifest/wasm_size.json met: true"
+          "status": "fail",
+          "reason": "Authoritative measurement via scripts/measure_wasm_size.py \u2014 target not met",
+          "verification_command": "python3 scripts/measure_wasm_size.py",
+          "authoritative_manifest": "manifest/wasm_size.json"
         }
       ]
     },
     {
       "id": "phase_4",
       "name": "Verification Claims (7 innovations)",
-      "status": "blocked",
-      "depends_on": "phase_3"
+      "status": "frozen",
+      "depends_on": "phase_3",
+      "blocked_reason": "FROZEN \u2014 do not run workers until phase_3 gate passes"
     },
     {
       "id": "phase_5",
       "name": "True Self-Hosting",
-      "status": "blocked",
-      "depends_on": "phase_4"
+      "status": "frozen",
+      "depends_on": "phase_4",
+      "blocked_reason": "FROZEN \u2014 Rust bootstrap pass does NOT satisfy exit condition"
     },
     {
       "id": "phase_6",
       "name": "Independent AI Agent",
-      "status": "blocked",
+      "status": "frozen",
       "depends_on": "phase_5",
-      "note": "Spec required before implementation"
+      "blocked_reason": "FROZEN \u2014 spec draft created prematurely; no work until phase_5 validated"
     },
     {
       "id": "phase_7",
       "name": "Production Hardening",
-      "status": "blocked",
+      "status": "frozen",
       "depends_on": "phase_6"
     },
     {
       "id": "phase_8",
       "name": "Launch",
-      "status": "blocked",
+      "status": "frozen",
       "depends_on": "phase_7"
     }
   ],
@@ -148,5 +129,12 @@
     "46": "self_hosting_zero",
     "47": "spec_impl_gap",
     "48": "wasm_size_760kb"
-  }
+  },
+  "frozen_phases": [
+    "phase_4",
+    "phase_5",
+    "phase_6",
+    "phase_7",
+    "phase_8"
+  ]
 }

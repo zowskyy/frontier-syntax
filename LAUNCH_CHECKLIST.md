@@ -17,7 +17,7 @@
 | #45 Knowledge→codegen | NOT VERIFIED | `test_knowledge_changes_wasm` |
 | #46 Self-hosting | PARTIAL (bootstrap only) | `verify_self_hosting.py` |
 | #47 Spec/impl | NOT VERIFIED | `spec_impl_bridge.py` |
-| #48 WASM size | FAIL (~885 KB) | `manifest/wasm_size.json met: false` |
+| #48 WASM size | **FAIL** (~885 KB authoritative — see `manifest/wasm_size.json`; issue title "760kb" is stale) | `python3 scripts/measure_wasm_size.py` |
 
 ## Business
 

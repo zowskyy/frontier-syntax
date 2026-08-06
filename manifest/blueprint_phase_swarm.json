@@ -1,338 +1,102 @@
 {
-  "generated_at": "2026-08-06T05:12:48.537577Z",
-  "teams": 9,
-  "workers_total": 18,
-  "teams_all_pass": 6,
-  "duration_ms": 64584,
-  "tracking_gate": {
-    "pass": false,
-    "duration_ms": 14406,
-    "output": "{\n  \"all_pass\": false,\n  \"phase_1_p0_pass\": true,\n  \"phase_2_3_p1_pass\": false,\n  \"evidence_file\": \"manifest/tracking_evidence.json\"\n}\n  [PASS] 1.1_wasm_codegen\n  [PASS] 1.2_knowledge_codegen\n  [PASS] 1.3_self_hosting\n  [PASS] 2.1_spec_impl\n  [PASS] 2.2_lib_tests\n  [PASS] 3.1_wasm_size\n  [FAIL] 3.1_wasm_size_target\n"
-  },
+  "generated_at": "2026-08-06T05:25:04.347955Z",
+  "mode": "sequential_strict",
+  "frozen_phases": [
+    "phase_4",
+    "phase_5",
+    "phase_6",
+    "phase_7",
+    "phase_8"
+  ],
+  "stopped_at": "phase_1",
+  "teams_run": 2,
+  "duration_ms": 34928,
   "phase_results": [
     {
       "phase": "phase_0",
       "name": "Tracker & Truth Hygiene",
-      "workers": 2,
-      "passed": 1,
-      "all_pass": false,
-      "duration_ms": 45586,
-      "results": [
+      "workers": [
         {
-          "phase": "phase_0",
           "worker": "0a",
-          "doc": "Slice 0.1: dedupe GitHub issues",
-          "output": {
-            "pass": true,
-            "duration_ms": 17090,
-            "output": "nonical\": 44\n    },\n    {\n      \"number\": 28,\n      \"pass\": true,\n      \"canonical\": 48\n    },\n    {\n      \"number\": 27,\n      \"pass\": true,\n      \"canonical\": 47\n    },\n    {\n      \"number\": 26,\n      \"pass\": true,\n      \"canonical\": 46\n    },\n    {\n      \"number\": 25,\n      \"pass\": true,\n      \"canonical\": 45\n    },\n    {\n      \"number\": 24,\n      \"pass\": true,\n      \"canonical\": 44\n    }\n  ]\n}\n"
-          },
-          "lexicon_tag": "e3db4312-d963-405f-b016-530b1ebe52fd",
-          "documentation": "Slice 0.1: dedupe GitHub issues",
-          "pass": true
+          "doc": "Slice 0.1: dedupe issues",
+          "pass": true,
+          "duration_ms": 509,
+          "output": "{\n  \"closed\": 0,\n  \"kept\": [\n    48,\n    47,\n    46,\n    45,\n    44\n  ],\n  \"open_remaining\": 5,\n  \"details\": []\n}\n"
         },
         {
-          "phase": "phase_0",
           "worker": "0b",
-          "doc": "Slice 0.2: run tracking gate",
-          "output": {
-            "pass": false,
-            "duration_ms": 45551,
-            "output": "{\n  \"all_pass\": false,\n  \"phase_1_p0_pass\": true,\n  \"phase_2_3_p1_pass\": false,\n  \"evidence_file\": \"manifest/tracking_evidence.json\"\n}\n  [PASS] 1.1_wasm_codegen\n  [PASS] 1.2_knowledge_codegen\n  [PASS] 1.3_self_hosting\n  [PASS] 2.1_spec_impl\n  [PASS] 2.2_lib_tests\n  [PASS] 3.1_wasm_size\n  [FAIL] 3.1_wasm_size_target\n"
-          },
-          "lexicon_tag": "a51a30b4-bee4-43d5-b1c4-cdd5a7a6f3dd",
-          "documentation": "Slice 0.2: run tracking gate",
-          "pass": false
+          "doc": "Slice 0.3: NOT VERIFIED markers",
+          "pass": true,
+          "duration_ms": 19,
+          "output": ""
         }
-      ]
+      ],
+      "workers_cmd_pass": 2,
+      "phase_validated": true,
+      "status": "validated",
+      "duration_ms": 10862
     },
     {
       "phase": "phase_1",
-      "name": "Core Compiler Correctness (P0)",
-      "workers": 2,
-      "passed": 2,
-      "all_pass": true,
-      "duration_ms": 33410,
-      "results": [
+      "name": "Core Compiler (P0) \u2014 issues must be closed to validate",
+      "workers": [
         {
-          "phase": "phase_1",
           "worker": "1a",
-          "doc": "Slice 1.1: WASM codegen tests (#44)",
-          "output": {
-            "pass": true,
-            "duration_ms": 28405,
-            "output": "safety(&self, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {\n    |        ^^^^^^^^^^^^^^^^^\n\nwarning: `frontier` (lib test) generated 12 warnings (run `cargo fix --lib -p frontier --tests` to apply 2 suggestions)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.97s\n     Running unittests src/lib.rs (target/debug/deps/frontier-1475498e1a73911a)\n"
-          },
-          "lexicon_tag": "ddecfc2b-6c63-4bb6-b362-e7b3a24f661d",
-          "documentation": "Slice 1.1: WASM codegen tests (#44)",
-          "pass": true
+          "doc": "Slice 1.1: wasm_codegen tests (issue #44 open = not validated)",
+          "pass": true,
+          "duration_ms": 1733,
+          "output": "        ^^^^^^^^^^^^^^^^^\n\nwarning: `frontier` (lib test) generated 12 warnings (run `cargo fix --lib -p frontier --tests` to apply 2 suggestions)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.70s\n     Running unittests src/lib.rs (target/debug/deps/frontier-1475498e1a73911a)\n"
         },
         {
-          "phase": "phase_1",
           "worker": "1b",
-          "doc": "Slice 1.2: knowledge\u2192codegen (#45)",
-          "output": {
-            "pass": true,
-            "duration_ms": 33369,
-            "output": "safety(&self, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {\n    |        ^^^^^^^^^^^^^^^^^\n\nwarning: `frontier` (lib test) generated 12 warnings (run `cargo fix --lib -p frontier --tests` to apply 2 suggestions)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.95s\n     Running unittests src/lib.rs (target/debug/deps/frontier-1475498e1a73911a)\n"
-          },
-          "lexicon_tag": "cfe063e9-fb2a-4370-b51d-4cf286bc37ad",
-          "documentation": "Slice 1.2: knowledge\u2192codegen (#45)",
-          "pass": true
+          "doc": "Slice 1.2: knowledge test (issue #45 open = not validated)",
+          "pass": true,
+          "duration_ms": 3254,
+          "output": "        ^^^^^^^^^^^^^^^^^\n\nwarning: `frontier` (lib test) generated 12 warnings (run `cargo fix --lib -p frontier --tests` to apply 2 suggestions)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.22s\n     Running unittests src/lib.rs (target/debug/deps/frontier-1475498e1a73911a)\n"
         }
-      ]
-    },
-    {
-      "phase": "phase_2",
-      "name": "Core Language & Spec Parity (P1)",
-      "workers": 2,
-      "passed": 2,
-      "all_pass": true,
-      "duration_ms": 137,
-      "results": [
-        {
-          "phase": "phase_2",
-          "worker": "2a",
-          "doc": "Slice 2.1: spec/impl bridge (#47)",
-          "output": {
-            "pass": true,
-            "duration_ms": 37,
-            "output": "PASS: Spec/impl bridge \u2014 10 core modules mapped\n"
-          },
-          "lexicon_tag": "94c37b51-e235-41c9-8828-6ce690893bf0",
-          "documentation": "Slice 2.1: spec/impl bridge (#47)",
-          "pass": true
-        },
-        {
-          "phase": "phase_2",
-          "worker": "2b",
-          "doc": "Slice 2.2: language hardening",
-          "output": {
-            "pass": true,
-            "duration_ms": 78,
-            "output": "PASS: Language hardening verification\n  Core Modules: 10\n  Tests: All passing\n  ARC Gates: All green\n  Zero Third-Party: Verified\n  Documentation: Complete\n"
-          },
-          "lexicon_tag": "aae1efb0-5215-4b1e-a5a7-add57b151f6d",
-          "documentation": "Slice 2.2: language hardening",
-          "pass": true
-        }
-      ]
-    },
-    {
-      "phase": "phase_3",
-      "name": "Size & Performance (P1)",
-      "workers": 2,
-      "passed": 1,
-      "all_pass": false,
-      "duration_ms": 3026,
-      "results": [
-        {
-          "phase": "phase_3",
-          "worker": "3a",
-          "doc": "Slice 3.1: WASM size measure (#48)",
-          "output": {
-            "pass": true,
-            "duration_ms": 3012,
-            "output": "WASM size: 885.3 KB (target <100 KB \u2014 tracked)\nPASS: WASM build OK \u2014 885.3 KB tracked (target <100 KB)\n"
-          },
-          "lexicon_tag": "ca5f2152-645e-4527-92b8-1189d57b88c8",
-          "documentation": "Slice 3.1: WASM size measure (#48)",
-          "pass": true
-        },
-        {
-          "phase": "phase_3",
-          "worker": "3b",
-          "doc": "Slice 3.1: WASM size target check",
-          "output": {
-            "pass": false,
-            "duration_ms": 66,
-            "output": ""
-          },
-          "lexicon_tag": "dc2adb55-afb6-42a0-867b-ec441c6b6c76",
-          "documentation": "Slice 3.1: WASM size target check",
-          "pass": false
-        }
-      ]
-    },
+      ],
+      "workers_cmd_pass": 2,
+      "phase_validated": false,
+      "status": "fail",
+      "duration_ms": 13615
+    }
+  ],
+  "frozen": [
     {
       "phase": "phase_4",
-      "name": "Verification Claims (7 innovations)",
-      "workers": 2,
-      "passed": 2,
-      "all_pass": true,
-      "duration_ms": 13473,
-      "results": [
-        {
-          "phase": "phase_4",
-          "worker": "4a",
-          "doc": "Phase 4: ZK verifier smoke test",
-          "output": {
-            "pass": true,
-            "duration_ms": 2278,
-            "output": "safety(&self, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {\n    |        ^^^^^^^^^^^^^^^^^\n\nwarning: `frontier` (lib test) generated 12 warnings (run `cargo fix --lib -p frontier --tests` to apply 2 suggestions)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.09s\n     Running unittests src/lib.rs (target/debug/deps/frontier-1475498e1a73911a)\n"
-          },
-          "lexicon_tag": "cf17a81e-9548-4e58-9ffb-fdbc510e27a8",
-          "documentation": "Phase 4: ZK verifier smoke test",
-          "pass": true
-        },
-        {
-          "phase": "phase_4",
-          "worker": "4b",
-          "doc": "Phase 4: PQ signatures smoke test",
-          "output": {
-            "pass": true,
-            "duration_ms": 13463,
-            "output": "afety(&self, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {\n    |        ^^^^^^^^^^^^^^^^^\n\nwarning: `frontier` (lib test) generated 12 warnings (run `cargo fix --lib -p frontier --tests` to apply 2 suggestions)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 11.15s\n     Running unittests src/lib.rs (target/debug/deps/frontier-1475498e1a73911a)\n"
-          },
-          "lexicon_tag": "34adb205-fd16-4e72-ab8d-09db836a7612",
-          "documentation": "Phase 4: PQ signatures smoke test",
-          "pass": true
-        }
-      ]
+      "name": "FROZEN \u2014 innovations",
+      "status": "frozen",
+      "workers": 0,
+      "reason": "Prior gate not passed"
     },
     {
       "phase": "phase_5",
-      "name": "True Self-Hosting",
-      "workers": 2,
-      "passed": 2,
-      "all_pass": true,
-      "duration_ms": 23426,
-      "results": [
-        {
-          "phase": "phase_5",
-          "worker": "5a",
-          "doc": "Phase 5: self-hosting bootstrap verify",
-          "output": {
-            "pass": true,
-            "duration_ms": 18645,
-            "output": "PASS: Self-hosting bootstrap (cmp identical)\n"
-          },
-          "lexicon_tag": "17e87025-93e5-4dd5-864e-24802b1268e0",
-          "documentation": "Phase 5: self-hosting bootstrap verify",
-          "pass": true
-        },
-        {
-          "phase": "phase_5",
-          "worker": "5b",
-          "doc": "Phase 5: main.fr parse",
-          "output": {
-            "pass": true,
-            "duration_ms": 23409,
-            "output": "12 |     fn parse_fn(&mut self) -> Result<Stmt, FrontierError> {\n    |        ^^^^^^^^\n\nwarning: method `check_null_safety` is never used\n   --> src/resolver.rs:140:8\n    |\n37  | impl Resolver {\n    | ------------- method in this implementation\n...\n140 |     fn check_null_safety(&self, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {\n    |        ^^^^^^^^^^^^^^^^^\n\n"
-          },
-          "lexicon_tag": "9865769c-e3e3-40a5-bea9-5b65bbc049c7",
-          "documentation": "Phase 5: main.fr parse",
-          "pass": true
-        }
-      ]
+      "name": "FROZEN \u2014 true self-hosting",
+      "status": "frozen",
+      "workers": 0,
+      "reason": "Prior gate not passed"
     },
     {
       "phase": "phase_6",
-      "name": "Independent AI Agent",
-      "workers": 2,
-      "passed": 2,
-      "all_pass": true,
-      "duration_ms": 181,
-      "results": [
-        {
-          "phase": "phase_6",
-          "worker": "6a",
-          "doc": "Phase 6: agent spec exists",
-          "output": {
-            "pass": true,
-            "duration_ms": 34,
-            "output": "exists\n"
-          },
-          "lexicon_tag": "37a3f893-0b0a-4633-ab9b-5938ca8b41c1",
-          "documentation": "Phase 6: agent spec exists",
-          "pass": true
-        },
-        {
-          "phase": "phase_6",
-          "worker": "6b",
-          "doc": "Phase 6: lexicon-bound worker gates",
-          "output": {
-            "pass": true,
-            "duration_ms": 108,
-            "output": "s_exist \u2014 All Lexicon files present\nPASS: action_creates_entry \u2014 Action creates entry (tag=f8de266b...)\nPASS: user_ticket_bound \u2014 User ticket bound (2 actions)\nPASS: lexicon_queryable \u2014 Lexicon queryable (3 hits)\nPASS: lexicon_exportable \u2014 Exportable (88 entries, 88 training records)\nPASS: hard_gate_enforced \u2014 Hard gate enforced \u2014 all entries documented\n\n\u2705 LEXICON-BOUND WORKER ARC GATES: ALL PASS\n"
-          },
-          "lexicon_tag": "97bcb17a-3dd9-4d2d-92ef-f01c2ddc5b1f",
-          "documentation": "Phase 6: lexicon-bound worker gates",
-          "pass": true
-        }
-      ]
+      "name": "FROZEN \u2014 AI agent",
+      "status": "frozen",
+      "workers": 0,
+      "reason": "Prior gate not passed"
     },
     {
       "phase": "phase_7",
-      "name": "Production Hardening",
-      "workers": 2,
-      "passed": 2,
-      "all_pass": true,
-      "duration_ms": 64581,
-      "results": [
-        {
-          "phase": "phase_7",
-          "worker": "7a",
-          "doc": "Phase 7: CDX runtime probe",
-          "output": {
-            "pass": true,
-            "duration_ms": 21916,
-            "output": "PASS: CDX streaming runtime\n"
-          },
-          "lexicon_tag": "ba0e4e65-5832-4c2d-9934-67ae72c157b6",
-          "documentation": "Phase 7: CDX runtime probe",
-          "pass": true
-        },
-        {
-          "phase": "phase_7",
-          "worker": "7b",
-          "doc": "Phase 7: health check script",
-          "output": {
-            "pass": true,
-            "duration_ms": 64537,
-            "output": "safety(&self, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {\n    |        ^^^^^^^^^^^^^^^^^\n\nwarning: `frontier` (lib test) generated 12 warnings (run `cargo fix --lib -p frontier --tests` to apply 2 suggestions)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.71s\n     Running unittests src/lib.rs (target/debug/deps/frontier-1475498e1a73911a)\n"
-          },
-          "lexicon_tag": "4e6f7645-aef4-441f-8f4b-dff73ce03d4d",
-          "documentation": "Phase 7: health check script",
-          "pass": true
-        }
-      ]
+      "name": "FROZEN \u2014 production",
+      "status": "frozen",
+      "workers": 0,
+      "reason": "Prior gate not passed"
     },
     {
       "phase": "phase_8",
-      "name": "Launch",
-      "workers": 2,
-      "passed": 1,
-      "all_pass": false,
-      "duration_ms": 288,
-      "results": [
-        {
-          "phase": "phase_8",
-          "worker": "8a",
-          "doc": "Phase 8: frontier.dev install check",
-          "output": {
-            "pass": false,
-            "duration_ms": 239,
-            "output": "\", line 559, in error\n    return self._call_chain(*args)\n           ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/urllib/request.py\", line 492, in _call_chain\n    result = func(*args)\n             ^^^^^^^^^^^\n  File \"/usr/lib/python3.12/urllib/request.py\", line 639, in http_error_default\n    raise HTTPError(req.full_url, code, msg, hdrs, fp)\nurllib.error.HTTPError: HTTP Error 404: Not Found\n"
-          },
-          "lexicon_tag": "6b7dc154-163b-4c94-92fc-1e3e79b34b47",
-          "documentation": "Phase 8: frontier.dev install check",
-          "pass": false
-        },
-        {
-          "phase": "phase_8",
-          "worker": "8b",
-          "doc": "Phase 8: launch checklist status",
-          "output": {
-            "pass": true,
-            "duration_ms": 24,
-            "output": "LAUNCH_CHECKLIST external items pending\n"
-          },
-          "lexicon_tag": "9849693c-be7c-459f-be97-7dcd2adbfdfc",
-          "documentation": "Phase 8: launch checklist status",
-          "pass": true
-        }
-      ]
+      "name": "FROZEN \u2014 launch",
+      "status": "frozen",
+      "workers": 0,
+      "reason": "Prior gate not passed"
     }
-  ]
+  ],
+  "tracking_gate_all_pass": false
 }

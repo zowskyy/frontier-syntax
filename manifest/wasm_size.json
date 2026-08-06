@@ -1,5 +1,12 @@
 {
+  "measured_at": "2026-08-06T05:22:29.541490Z",
+  "measurement_script": "scripts/measure_wasm_size.py",
+  "build_command": "cargo build --release --lib --target wasm32-unknown-unknown",
+  "artifact_path": "target/wasm32-unknown-unknown/release/frontier.wasm",
+  "size_bytes": 906502,
   "size_kb": 885.3,
   "target_kb": 100,
-  "met": false
+  "met": false,
+  "git_sha": "43c856a",
+  "note": "Historical issue titles cite ~760 KB from an earlier build profile. This manifest is the only authoritative number \u2014 do not cite README or issue text."
 }

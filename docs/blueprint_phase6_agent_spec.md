@@ -1,16 +1,22 @@
-# Phase 6 Agent Spec (Blueprint prerequisite)
+# FROZEN — DO NOT IMPLEMENT
 
-## What the agent does that human + compiler cannot (10x claim)
-- Parallel swarm execution across 24+ lexicon-bound workers with shared knowledge hypercube
-- Autonomous gap closure loops with logged evidence (not self-reported)
+> **This spec was created prematurely during a parallel all-phase swarm run.**
+> Per PROJECT_BLUEPRINT.md: Phase 6 is **blocked until Phase 5 passes**.
+> Phase 5 is **blocked until Phase 4 passes**.
+> Phase 4 is **blocked until Phase 3 passes** (WASM size <100 KB).
+>
+> No agent work may proceed from this document until `python3 scripts/tracking.py gate` reports `phase_3_pass: true`.
 
-## Out of scope for v1
-- Unsandboxed arbitrary code execution on user machines
-- Production frontier.dev deployment
+# Phase 6 Agent Spec (Blueprint prerequisite — NOT ACTIVE)
 
-## Safety boundary
-- All actions logged to docs/lexicon_log.fr with hashed user_id
-- Lexicon Hard Gate requires documentation before action completes
-- Agent intents routed through frontier_agent.py — no direct shell from user input
+## Status: FROZEN / INVALIDATED
 
-## Status: SPEC DRAFT — blocked until Phase 5 gate passes
+## What the agent would need to answer (when unfrozen)
+- What can the agent do that a human + Frontier compiler cannot? (concrete 10x claim)
+- What is out of scope for v1?
+- What is the sandboxing/safety boundary?
+
+## Safety boundary (draft only — not approved)
+- All actions logged to docs/lexicon_log.fr
+- Lexicon Hard Gate requires documentation
+- Intents routed through frontier_agent.py
