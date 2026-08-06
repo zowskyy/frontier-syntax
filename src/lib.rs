@@ -1,8 +1,5 @@
-#[cfg(all(target_arch = "wasm32", feature = "wasm-slim"))]
-#[global_allocator]
-static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
-
 pub mod ast;
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
 pub mod browser_compiler;
 #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
 pub mod canonicalize;
@@ -13,10 +10,6 @@ pub mod error;
 pub mod grammar;
 #[cfg(not(target_arch = "wasm32"))]
 pub mod ipfs;
-#[cfg(all(target_arch = "wasm32", feature = "wasm-slim"))]
-pub mod knowledge_slim;
-#[cfg(all(target_arch = "wasm32", feature = "wasm-slim"))]
-pub mod knowledge_bridge_slim;
 #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
 pub mod knowledge;
 #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
@@ -50,10 +43,6 @@ pub use error::FrontierError;
 pub use parser::parse_program;
 #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
 pub use resolver::resolve_program;
-#[cfg(all(target_arch = "wasm32", feature = "wasm-slim"))]
-pub use knowledge_slim::{get_ancestors, get_tradeoffs, hypercube_stats, optimize_hash, optimize_sort};
-#[cfg(all(target_arch = "wasm32", feature = "wasm-slim"))]
-pub use knowledge_slim::{SizeHint, SolverContext as KnowledgeContext};
 #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
 pub use knowledge::{get_ancestors, get_tradeoffs, hypercube_stats, optimize_hash, optimize_sort};
 #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
