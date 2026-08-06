@@ -120,6 +120,8 @@ class FrontierAgent:
             result = self.run_swarm_kb_optimizer(parsed)
         elif parsed["type"] == "peerless_plan":
             result = self.run_peerless_implementation_plan(parsed)
+        elif parsed["type"] == "execute_plan":
+            result = self.run_execute_peerless_plan(parsed)
         elif parsed["type"] == "close_peerless":
             result = self.run_close_peerless(parsed)
         elif parsed["type"] == "ultimate_conclusion":
@@ -284,6 +286,19 @@ class FrontierAgent:
             ]
         ):
             return {"type": "peerless_plan", "content": intent}
+
+        if any(
+            word in intent_lower
+            for word in [
+                "execute plan",
+                "execute implementation",
+                "merge and execute",
+                "4 teams",
+                "24 worker",
+                "deploy teams",
+            ]
+        ):
+            return {"type": "execute_plan", "content": intent}
 
         if any(
             word in intent_lower
@@ -827,6 +842,26 @@ class FrontierAgent:
             "corpus": "chat_scrub/account_history_corpus.json",
             "output": result.get("stdout", "")[-2000:],
             "message": "Peerless implementation plan generated from account chat history",
+        }
+
+    def run_execute_peerless_plan(self, parsed: Dict[str, Any]) -> Dict[str, Any]:
+        """4 teams × 6 workers merge and execute the Peerless implementation plan."""
+        executor = self.scripts_dir / "execute_peerless_plan.py"
+        result = self._run_command([str(executor)], capture=True)
+        manifest_path = self.repo_root / "manifest" / "peerless_plan_execution.json"
+        summary = {}
+        if manifest_path.exists():
+            summary = json.loads(manifest_path.read_text(encoding="utf-8"))
+        return {
+            "status": "success" if summary.get("all_pass") else "partial",
+            "teams": summary.get("teams", 4),
+            "total_workers": summary.get("total_workers", 24),
+            "workers_passed": summary.get("workers_passed", 0),
+            "plan_items_executed": summary.get("plan_items_executed", 0),
+            "report": "audit_reports/peerless_plan_execution_report.md",
+            "manifest": "manifest/peerless_plan_execution.json",
+            "output": result.get("stdout", "")[-2000:],
+            "message": "4 teams × 6 workers executed Peerless implementation plan",
         }
 
     def run_close_peerless(self, parsed: Dict[str, Any]) -> Dict[str, Any]:

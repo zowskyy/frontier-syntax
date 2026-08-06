@@ -1,6 +1,6 @@
 # ARC System Status — Live Report
 
-**Generated:** 2026-08-06T01:47:19.471150Z  
+**Generated:** 2026-08-06T02:25:09.687430Z  
 **Source:** `scripts/generate_arc_status.py` (repository inspection, not estimates)
 
 ---
@@ -9,10 +9,10 @@
 
 | Metric | Live Value |
 |--------|------------|
-| Open PRs | 0 |
+| Open PRs | 2 |
 | Rust lib tests | 40 passing |
 | Python test files | 15 |
-| Knowledge entries | 428 |
+| Knowledge entries | 502 |
 | Known gaps (WORKER_REPORT) | 0 |
 | Branch | `cursor/frontier-syntax-cycle1-e39f` |
 
@@ -35,7 +35,7 @@ The ARC review listed PRs #15, #16, #19, #21 as open. **Live GitHub state:**
 | #42 | Self-creation orchestrator | ✅ MERGED |
 | #43 | Solve all P0 gaps | ✅ MERGED |
 
-**Open PRs right now:** None
+**Open PRs right now:** #52, #51
 
 ---
 
@@ -44,7 +44,7 @@ The ARC review listed PRs #15, #16, #19, #21 as open. **Live GitHub state:**
 | Component | Status | Evidence |
 |-----------|--------|----------|
 | Frontier Language | 🟢 Core complete | `frontier/core/*.frontier`, `cargo test --lib` |
-| Knowledge Engine | 🟢 Deployed | 428 entries, MCP, dashboard, git hooks |
+| Knowledge Engine | 🟢 Deployed | 502 entries, MCP, dashboard, git hooks |
 | Frontier-DEX | 🟢 Implemented | `frontier-dex/` workspace member |
 | Lighthouse Stack | 🟢 Spec present | `frontier/lighthouse/*.frontier` |
 | Symbiotic Tandem | 🟢 Merged | `.cursor/symbiotic_agents.py`, PR #21 |

@@ -198,7 +198,6 @@ struct CompiledFn {
 
 struct FullModuleCodegen {
     functions: Vec<CompiledFn>,
-    name_to_index: HashMap<String, u32>,
     main_const_result: Option<i32>,
 }
 
@@ -250,7 +249,6 @@ impl FullModuleCodegen {
 
         Ok(Self {
             functions: compiled,
-            name_to_index,
             main_const_result,
         })
     }

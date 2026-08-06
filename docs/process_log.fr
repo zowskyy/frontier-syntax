@@ -2645,3 +2645,383 @@ component ProcessEntry_20260806_015020_632121 {
     duration_ms: 30,
     metrics_json: "{\"items\":13,\"duration_ms\":30}",
 }
+
+component ProcessEntry_20260806_022509_518722 {
+    timestamp: "2026-08-06T02:25:09.518703Z",
+    process: "plan_execution",
+    decision: "start",
+    result: "running",
+    worker: "plan_executor",
+    duration_ms: 0,
+    metrics_json: "{\"teams\":4,\"workers\":24}",
+}
+
+component ProcessEntry_20260806_022509_614141 {
+    timestamp: "2026-08-06T02:25:09.614131Z",
+    process: "team_alpha_A2",
+    decision: "execute_wasm_manifest",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 93,
+    metrics_json: "{\"plan_id\":\"OPT-001\",\"duration_ms\":93}",
+}
+
+component ProcessEntry_20260806_022509_750872 {
+    timestamp: "2026-08-06T02:25:09.750861Z",
+    process: "team_delta_D4",
+    decision: "execute_language_hardening",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 161,
+    metrics_json: "{\"plan_id\":\"OPT-013\",\"duration_ms\":161}",
+}
+
+component ProcessEntry_20260806_022509_775559 {
+    timestamp: "2026-08-06T02:25:09.775550Z",
+    process: "team_gamma_G4",
+    decision: "execute_spec_impl_bridge",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 138,
+    metrics_json: "{\"plan_id\":\"OPT-010\",\"duration_ms\":138}",
+}
+
+component ProcessEntry_20260806_022509_781219 {
+    timestamp: "2026-08-06T02:25:09.781209Z",
+    process: "team_gamma_G6",
+    decision: "execute_redos_tests",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 116,
+    metrics_json: "{\"plan_id\":\"OPT-011\",\"duration_ms\":116}",
+}
+
+component ProcessEntry_20260806_022509_824661 {
+    timestamp: "2026-08-06T02:25:09.824651Z",
+    process: "team_gamma_G3",
+    decision: "execute_sync_knowledge",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 191,
+    metrics_json: "{\"plan_id\":\"OPT-009\",\"duration_ms\":191}",
+}
+
+component ProcessEntry_20260806_022513_960039 {
+    timestamp: "2026-08-06T02:25:13.959996Z",
+    process: "team_alpha_A5",
+    decision: "execute_wasm_codegen_tests",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 4430,
+    metrics_json: "{\"plan_id\":\"OPT-003\",\"duration_ms\":4430}",
+}
+
+component ProcessEntry_20260806_022514_882972 {
+    timestamp: "2026-08-06T02:25:14.882949Z",
+    process: "team_alpha_A1",
+    decision: "execute_wasm_build",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 5362,
+    metrics_json: "{\"plan_id\":\"OPT-001\",\"duration_ms\":5362}",
+}
+
+component ProcessEntry_20260806_022518_490324 {
+    timestamp: "2026-08-06T02:25:18.490293Z",
+    process: "team_beta_B4",
+    decision: "execute_vulkan_module_test",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 8942,
+    metrics_json: "{\"plan_id\":\"OPT-004\",\"duration_ms\":8942}",
+}
+
+component ProcessEntry_20260806_022520_403712 {
+    timestamp: "2026-08-06T02:25:20.403692Z",
+    process: "team_alpha_A6",
+    decision: "execute_unity_wasm_tests",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 10874,
+    metrics_json: "{\"plan_id\":\"OPT-003\",\"duration_ms\":10874}",
+}
+
+component ProcessEntry_20260806_022524_063966 {
+    timestamp: "2026-08-06T02:25:24.063938Z",
+    process: "team_beta_B5",
+    decision: "execute_cdx_module_test",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 14511,
+    metrics_json: "{\"plan_id\":\"OPT-007\",\"duration_ms\":14511}",
+}
+
+component ProcessEntry_20260806_022529_776809 {
+    timestamp: "2026-08-06T02:25:29.776784Z",
+    process: "team_alpha_A4",
+    decision: "execute_main_fr_parse",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 20250,
+    metrics_json: "{\"plan_id\":\"OPT-002\",\"duration_ms\":20250}",
+}
+
+component ProcessEntry_20260806_022533_421016 {
+    timestamp: "2026-08-06T02:25:33.420994Z",
+    process: "team_beta_B1",
+    decision: "execute_gpu_runtime",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 23887,
+    metrics_json: "{\"plan_id\":\"OPT-004\",\"duration_ms\":23887}",
+}
+
+component ProcessEntry_20260806_022535_531744 {
+    timestamp: "2026-08-06T02:25:35.531722Z",
+    process: "team_delta_D2",
+    decision: "execute_lib_tests",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 25962,
+    metrics_json: "{\"plan_id\":\"OPT-013\",\"duration_ms\":25962}",
+}
+
+component ProcessEntry_20260806_022539_134352 {
+    timestamp: "2026-08-06T02:25:39.134329Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 29340,
+    metrics_json: "{\"duration_ms\":29340,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_022540_862306 {
+    timestamp: "2026-08-06T02:25:40.862276Z",
+    process: "team_delta_D1",
+    decision: "execute_arc_status",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 31293,
+    metrics_json: "{\"plan_id\":\"OPT-012\",\"duration_ms\":31293}",
+}
+
+component ProcessEntry_20260806_022544_413492 {
+    timestamp: "2026-08-06T02:25:44.413325Z",
+    process: "team_beta_B6",
+    decision: "execute_ipfs_module_test",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 34847,
+    metrics_json: "{\"plan_id\":\"OPT-008\",\"duration_ms\":34847}",
+}
+
+component ProcessEntry_20260806_022546_580827 {
+    timestamp: "2026-08-06T02:25:46.580792Z",
+    process: "team_gamma_G5",
+    decision: "execute_zk_tests",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 36923,
+    metrics_json: "{\"plan_id\":\"OPT-011\",\"duration_ms\":36923}",
+}
+
+component ProcessEntry_20260806_022550_279143 {
+    timestamp: "2026-08-06T02:25:50.279126Z",
+    process: "team_beta_B3",
+    decision: "execute_ipfs_runtime",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 40737,
+    metrics_json: "{\"plan_id\":\"OPT-008\",\"duration_ms\":40737}",
+}
+
+component ProcessEntry_20260806_022553_519283 {
+    timestamp: "2026-08-06T02:25:53.519248Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 43725,
+    metrics_json: "{\"duration_ms\":43725,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_022555_194214 {
+    timestamp: "2026-08-06T02:25:55.194169Z",
+    process: "team_delta_D5",
+    decision: "execute_knowledge_verify",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 45592,
+    metrics_json: "{\"plan_id\":\"OPT-006\",\"duration_ms\":45592}",
+}
+
+component ProcessEntry_20260806_022606_943300 {
+    timestamp: "2026-08-06T02:26:06.943276Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 27808,
+    metrics_json: "{\"duration_ms\":27808,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_022609_600091 {
+    timestamp: "2026-08-06T02:26:09.600055Z",
+    process: "team_beta_B2",
+    decision: "execute_cdx_runtime",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 60058,
+    metrics_json: "{\"plan_id\":\"OPT-007\",\"duration_ms\":60058}",
+}
+
+component ProcessEntry_20260806_022610_494267 {
+    timestamp: "2026-08-06T02:26:10.494249Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 16974,
+    metrics_json: "{\"duration_ms\":16974,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_022615_658356 {
+    timestamp: "2026-08-06T02:26:15.658332Z",
+    process: "team_alpha_A3",
+    decision: "execute_self_host_verify",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 66137,
+    metrics_json: "{\"plan_id\":\"OPT-002\",\"duration_ms\":66137}",
+}
+
+component ProcessEntry_20260806_022629_230498 {
+    timestamp: "2026-08-06T02:26:29.230464Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 22286,
+    metrics_json: "{\"duration_ms\":22286,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_022632_634701 {
+    timestamp: "2026-08-06T02:26:32.634680Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 22139,
+    metrics_json: "{\"duration_ms\":22139,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_022632_637960 {
+    timestamp: "2026-08-06T02:26:32.637931Z",
+    process: "team_delta_D3",
+    decision: "execute_verify_v2",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 83056,
+    metrics_json: "{\"plan_id\":\"OPT-012\",\"duration_ms\":83056}",
+}
+
+component ProcessEntry_20260806_022636_635397 {
+    timestamp: "2026-08-06T02:26:36.635370Z",
+    process: "peerless_P4",
+    decision: "close_WASM size optimization",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 7404,
+    metrics_json: "{\"duration_ms\":7404,\"gap\":\"P4\"}",
+}
+
+component ProcessEntry_20260806_022638_177203 {
+    timestamp: "2026-08-06T02:26:38.177178Z",
+    process: "team_delta_D6",
+    decision: "execute_arc_verify",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 88567,
+    metrics_json: "{\"plan_id\":\"OPT-005\",\"duration_ms\":88567}",
+}
+
+component ProcessEntry_20260806_022639_074293 {
+    timestamp: "2026-08-06T02:26:39.074272Z",
+    process: "peerless_P4",
+    decision: "close_WASM size optimization",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 6439,
+    metrics_json: "{\"duration_ms\":6439,\"gap\":\"P4\"}",
+}
+
+component ProcessEntry_20260806_022647_884270 {
+    timestamp: "2026-08-06T02:26:47.884246Z",
+    process: "peerless_P5",
+    decision: "close_True self-hosting in Frontier",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 11248,
+    metrics_json: "{\"duration_ms\":11248,\"gap\":\"P5\"}",
+}
+
+component ProcessEntry_20260806_022651_085530 {
+    timestamp: "2026-08-06T02:26:51.085506Z",
+    process: "peerless_P5",
+    decision: "close_True self-hosting in Frontier",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 12010,
+    metrics_json: "{\"duration_ms\":12010,\"gap\":\"P5\"}",
+}
+
+component ProcessEntry_20260806_022654_337869 {
+    timestamp: "2026-08-06T02:26:54.337840Z",
+    process: "peerless_P6",
+    decision: "close_Teacher-student unity module",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 6453,
+    metrics_json: "{\"duration_ms\":6453,\"gap\":\"P6\"}",
+}
+
+component ProcessEntry_20260806_022654_348565 {
+    timestamp: "2026-08-06T02:26:54.348539Z",
+    process: "team_gamma_G2",
+    decision: "execute_peerless_verify",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 104727,
+    metrics_json: "{\"plan_id\":\"OPT-006\",\"duration_ms\":104727}",
+}
+
+component ProcessEntry_20260806_022657_707932 {
+    timestamp: "2026-08-06T02:26:57.707910Z",
+    process: "peerless_P6",
+    decision: "close_Teacher-student unity module",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 6622,
+    metrics_json: "{\"duration_ms\":6622,\"gap\":\"P6\"}",
+}
+
+component ProcessEntry_20260806_022657_717201 {
+    timestamp: "2026-08-06T02:26:57.717180Z",
+    process: "team_gamma_G1",
+    decision: "execute_close_peerless",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 108100,
+    metrics_json: "{\"plan_id\":\"OPT-005\",\"duration_ms\":108100}",
+}
+
+component ProcessEntry_20260806_022657_723177 {
+    timestamp: "2026-08-06T02:26:57.723172Z",
+    process: "plan_execution",
+    decision: "complete",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 108202,
+    metrics_json: "{\"duration_ms\":108202}",
+}

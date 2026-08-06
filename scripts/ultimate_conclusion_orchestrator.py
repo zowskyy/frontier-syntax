@@ -31,6 +31,7 @@ REMAINING_CLOSERS = [
     ("genesis_loop", ["cargo", "run", "--quiet", "--bin", "frontier", "--", "parse", "scripts/genesis.fr"]),
     ("swarm_kb_optimizer", ["python3", "scripts/swarm_kb_optimizer.py"]),
     ("peerless_plan", ["python3", "scripts/generate_peerless_implementation_plan.py", "--workers", "16"]),
+    ("execute_plan", ["python3", "scripts/execute_peerless_plan.py"]),
     ("knowledge_sync", ["python3", "scripts/sync_knowledge_base.py"]),
     ("swarm_optimized", ["python3", "scripts/swarm_optimized.py"]),
     ("close_peerless", ["python3", "scripts/close_peerless_gaps.py"]),
