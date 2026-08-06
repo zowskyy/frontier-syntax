@@ -105,16 +105,19 @@ WORKERS: dict[str, dict[str, Any]] = {
     "W5_WasmSizer": {
         "group": 2,
         "name": "WasmSizer",
-        "role": "Phase 3 — WASM size target (#48)",
+        "role": "Phase 3 — WASM size target (#48); audit history before optimize",
         "scripts": [
+            "scripts/audit_wasm_size_history.py",
             "scripts/measure_wasm_size.py",
             "scripts/optimize_wasm_size.py",
         ],
         "commands": [
+            [sys.executable, "scripts/audit_wasm_size_history.py"],
             [sys.executable, "scripts/measure_wasm_size.py"],
             [sys.executable, "scripts/optimize_wasm_size.py"],
         ],
         "allow_nonzero": True,
+        "audit_first": True,
     },
     "W6_GitHubOps": {
         "group": 3,
@@ -274,6 +277,24 @@ def run_worker(wid: str, *, apply: bool = False, mode: str = "daily") -> dict[st
         cmds = list(spec.get("commands", []))
     if apply and spec.get("apply_commands"):
         cmds.extend(spec["apply_commands"])
+
+  # WasmSizer: owner directive — audit git/chat history before #48 optimize work
+    if wid == "W5_WasmSizer" and spec.get("audit_first"):
+        history_path = REPO / "manifest" / "wasm_size_history.json"
+        block_optimize = False
+        if history_path.exists():
+            try:
+                hist = json.loads(history_path.read_text(encoding="utf-8"))
+                block_optimize = bool(hist.get("block_optimize_until_reconciled"))
+            except json.JSONDecodeError:
+                pass
+        if block_optimize:
+            cmds = [c for c in cmds if "optimize_wasm_size" not in (c[1] if len(c) > 1 else "")]
+            result["audit_gate"] = {
+                "block_optimize": True,
+                "reason": "historical met:true on sibling branch — reconcile before optimize",
+                "manifest": str(history_path.relative_to(REPO)),
+            }
 
     for cmd in cmds:
         # Skip optional scripts that do not exist

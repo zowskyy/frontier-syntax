@@ -30,3 +30,4 @@ Group 1 runs **sequential** in production mode (gate → compiler → audit).
 2. End every turn with shadow worker `--taylor`.
 3. Run `--taylor-mode production` before claiming prod-ready.
 4. Do not wait for owner to re-prompt gates/issues/PRs/README.
+5. **WASM #48:** run `scripts/audit_wasm_size_history.py` before any optimize/remediation — owner believes a prior chat hit sub-100 KB (~98 KB); reconcile `cursor/wasm-size-phase3-f519` (83.8 KB `met:true`) before re-working #48.
