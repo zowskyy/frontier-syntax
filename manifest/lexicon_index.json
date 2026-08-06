@@ -1,0 +1,808 @@
+{
+  "updated_at": "2026-08-06T02:42:37.837023Z",
+  "entry_count": 36,
+  "entries": [
+    {
+      "action_id": "d5bd9446-8596-4a6f-812a-d41f63617745",
+      "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+      "worker_id": "system",
+      "timestamp": "2026-08-06T02:39:28.393922Z",
+      "action_type": "ticket_creation",
+      "input_hash": "1ddb456c920c9f3c073ad908a1763d1bda5a86e7f775c7e0c14695883066c6bf",
+      "output_hash": "a9ca07ef453169a5b66d109b7fbf6d9a27929dbb989e43486ae42f917414b34e",
+      "lexicon_entry": "40d4417cf5b8d1e44a4817421dd175a293739959d62beb470e33acc203a891b6",
+      "parent_action": "",
+      "documentation": "User ticket created for session",
+      "knowledge_delta": {
+        "input_keys": [
+          "user_id"
+        ],
+        "output_keys": [
+          "ticket_id"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "8afd1b03-0400-440a-8385-4ace3cab8282",
+      "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+      "worker_id": "system",
+      "timestamp": "2026-08-06T02:40:48.348454Z",
+      "action_type": "ticket_close",
+      "input_hash": "a9ca07ef453169a5b66d109b7fbf6d9a27929dbb989e43486ae42f917414b34e",
+      "output_hash": "16e4fa66539e1eeee592d7488b056ef56232ce90c8764dc24ccf3402b64d320f",
+      "lexicon_entry": "9c8ee898a2cad490fc623f50118e949e857fbd7c768815da059451a15513c3bf",
+      "parent_action": "c16da218-3812-4711-89e2-f1a3a8c043d4",
+      "documentation": "User ticket closed",
+      "knowledge_delta": {
+        "input_keys": [
+          "ticket_id"
+        ],
+        "output_keys": [
+          "status",
+          "action_count"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "90246f70-198f-48ae-ba9a-2905fc91efa2",
+      "user_id": "f0a7eb27f7925fd4585e1fecc9f32f08b48ca952e17ef9cee4d2adb62ea02473",
+      "worker_id": "arc_gate_tester",
+      "timestamp": "2026-08-06T02:40:48.419521Z",
+      "action_type": "arc_gate_test",
+      "input_hash": "794a191fe719627b0975897bd4349a742550267de1c26ae0949cfac31c520e3e",
+      "output_hash": "092b707f635414a3e538c23c3c3a4232ad7485038065f08484b3ba5ff74a05a5",
+      "lexicon_entry": "05f8e752da0a0158bbf7986c978842290f9763ffd21d01d7b22a7065fb3fa5d9",
+      "parent_action": "",
+      "documentation": "ARC gate: verify action creates Lexicon entry",
+      "knowledge_delta": {
+        "input_keys": [
+          "gate"
+        ],
+        "output_keys": [
+          "pass",
+          "status"
+        ],
+        "changed": true,
+        "confidence": 0.95
+      }
+    },
+    {
+      "action_id": "f874aabd-d432-4cf0-84c8-41ff0807eaec",
+      "user_id": "61db200ff6886f3dea314cab43b80e4c2f3d27668d1a1a60353e57ec6b7b70e1",
+      "worker_id": "system",
+      "timestamp": "2026-08-06T02:40:48.420288Z",
+      "action_type": "ticket_creation",
+      "input_hash": "b8dd05a32d991f1d19e92bd5c54d474fb35b793c9b741f8b927c283a7d3a8bf2",
+      "output_hash": "79489cc0de6b30dacad808373ba236295147a5f9e20ea13224725ab33042ba5c",
+      "lexicon_entry": "9c55b961d9fcfd857443cc24edd022670aefed586680edb1439212674606e808",
+      "parent_action": "",
+      "documentation": "User ticket created for session",
+      "knowledge_delta": {
+        "input_keys": [
+          "user_id"
+        ],
+        "output_keys": [
+          "ticket_id"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "a60a3a5c-f0fd-409a-b374-eac58cbfc0b5",
+      "user_id": "61db200ff6886f3dea314cab43b80e4c2f3d27668d1a1a60353e57ec6b7b70e1",
+      "worker_id": "system",
+      "timestamp": "2026-08-06T02:40:48.420449Z",
+      "action_type": "ticket_close",
+      "input_hash": "79489cc0de6b30dacad808373ba236295147a5f9e20ea13224725ab33042ba5c",
+      "output_hash": "1e2a6d45892a43c0e7190338aacbd12ad09bfe5202e1570e35da2a75066bef66",
+      "lexicon_entry": "e66496a3ac63b735fd2e192179323d298b2107ea5327bca533675b652106061b",
+      "parent_action": "5a635c68-8b21-43ef-8695-288e271698a5",
+      "documentation": "User ticket closed",
+      "knowledge_delta": {
+        "input_keys": [
+          "ticket_id"
+        ],
+        "output_keys": [
+          "status",
+          "action_count"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "024c69eb-8cf4-44e2-af8d-3741f09794f8",
+      "user_id": "cce49f93f0c1043aa9430c906fddff94cf7ec45ffc54824b4a8930d281445222",
+      "worker_id": "arc_query_tester",
+      "timestamp": "2026-08-06T02:40:48.420727Z",
+      "action_type": "query_test_action",
+      "input_hash": "1fd32c2935118e7c8e65c9ed72eb08be45895b8221c317c9be905a14767efe8e",
+      "output_hash": "90c36ec5fe1e5e165e4c6f316e4a330937353ce7db4b40b193ec5acf824e0591",
+      "lexicon_entry": "7c87bca04067ea45dc690360a6faa5057dff4e281a2304a289af6323e682a4a6",
+      "parent_action": "",
+      "documentation": "Queryable test entry",
+      "knowledge_delta": {
+        "input_keys": [
+          "query"
+        ],
+        "output_keys": [
+          "pass"
+        ],
+        "changed": true,
+        "confidence": 0.95
+      }
+    },
+    {
+      "action_id": "d8f88434-2bf2-48fa-a0f1-f81012b6b85a",
+      "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+      "worker_id": "system",
+      "timestamp": "2026-08-06T02:41:38.872251Z",
+      "action_type": "ticket_creation",
+      "input_hash": "1ddb456c920c9f3c073ad908a1763d1bda5a86e7f775c7e0c14695883066c6bf",
+      "output_hash": "0489da40b340d4f9da3dda60cc1728fcdf962056369d701cd5c2237ea71c91ac",
+      "lexicon_entry": "fd3d5fb9ad80529709c336bf611d12be946bca8e774d032646ac4c4297a6e70d",
+      "parent_action": "",
+      "documentation": "User ticket created for session",
+      "knowledge_delta": {
+        "input_keys": [
+          "user_id"
+        ],
+        "output_keys": [
+          "ticket_id"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "a91cc746-4414-45af-96ee-145eb501b1d6",
+      "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+      "worker_id": "lexicon_alpha_A2",
+      "timestamp": "2026-08-06T02:41:38.875270Z",
+      "action_type": "wasm_manifest",
+      "input_hash": "f24d2e51a966159cb01c31412aadae3ecb19e7cb436e79d427f13009985f1658",
+      "output_hash": "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+      "lexicon_entry": "3a8af43665e17210eedd65187206c2150e7e9b59af6371e19df6bf3bba8a82b5",
+      "parent_action": "",
+      "documentation": "Lexicon-bound WASM manifest read",
+      "knowledge_delta": {
+        "input_keys": [
+          "command"
+        ],
+        "output_keys": [
+          "status"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "437032bb-839b-4c7d-96f6-9a0f9882ffec",
+      "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+      "worker_id": "lexicon_alpha_A1",
+      "timestamp": "2026-08-06T02:41:38.874940Z",
+      "action_type": "wasm_build",
+      "input_hash": "9032f40e8d17102a898a6cd6e737cc422b5512bc6d210e39679099ef33885523",
+      "output_hash": "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+      "lexicon_entry": "c1b9f0349c3ff16cf037be05215fe927e5fc1587e537af02fd3774c2001e5671",
+      "parent_action": "",
+      "documentation": "Lexicon-bound WASM size optimization",
+      "knowledge_delta": {
+        "input_keys": [
+          "command"
+        ],
+        "output_keys": [
+          "status"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "dea46bde-d3e4-46b7-ada8-9b09ee18828f",
+      "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+      "worker_id": "lexicon_alpha_A3",
+      "timestamp": "2026-08-06T02:41:38.875823Z",
+      "action_type": "self_host_verify",
+      "input_hash": "2c56a30e4b60675884da33e17cf6d18e26ae3aef0873f97bdcbd09bbb03989ce",
+      "output_hash": "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+      "lexicon_entry": "389c6fbd847c3db1fb1b5d266e952951586503a2928de56bbc38f2d4e157353c",
+      "parent_action": "",
+      "documentation": "Lexicon-bound self-hosting verification",
+      "knowledge_delta": {
+        "input_keys": [
+          "command"
+        ],
+        "output_keys": [
+          "status"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "95529dea-3c3b-4da9-8953-b72369363cac",
+      "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+      "worker_id": "lexicon_delta_D1",
+      "timestamp": "2026-08-06T02:41:38.881912Z",
+      "action_type": "arc_status",
+      "input_hash": "697903bd641cc0b3fff0785a6d49dc48d613395cb46a7632eba35d5afa6ac4b7",
+      "output_hash": "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+      "lexicon_entry": "a76836e60cf0a05412d879f377d9e12db4c09c93c5b6d2ea519179b27aad6937",
+      "parent_action": "",
+      "documentation": "Lexicon-bound ARC status generation",
+      "knowledge_delta": {
+        "input_keys": [
+          "command"
+        ],
+        "output_keys": [
+          "status"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "02161ccf-b262-4174-a1b0-b832c51a4e92",
+      "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+      "worker_id": "lexicon_delta_D4",
+      "timestamp": "2026-08-06T02:41:38.883897Z",
+      "action_type": "lexicon_index_check",
+      "input_hash": "6eccca2aed2aa68f25c8f67cb61f85e81928c8629754096f9da6e049bb5ef877",
+      "output_hash": "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+      "lexicon_entry": "f89017cd2bb066c3319022bcc04243c247b3edde2be402259b2bef4ba7e8fbe3",
+      "parent_action": "",
+      "documentation": "Lexicon-bound index entry count check",
+      "knowledge_delta": {
+        "input_keys": [
+          "command"
+        ],
+        "output_keys": [
+          "status"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "ec7d9e8c-28f4-4b04-b7fd-6bb344a098ea",
+      "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+      "worker_id": "lexicon_delta_D5",
+      "timestamp": "2026-08-06T02:41:38.884500Z",
+      "action_type": "language_hardening",
+      "input_hash": "becd2f991be032d56b64233c6527f519ca983203be053ab0eb0cca458e03539f",
+      "output_hash": "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+      "lexicon_entry": "c78a9193140effa22cbcc5f39867b3701f9793404986c3c4c0153e14f4d30e0a",
+      "parent_action": "",
+      "documentation": "Lexicon-bound language hardening",
+      "knowledge_delta": {
+        "input_keys": [
+          "command"
+        ],
+        "output_keys": [
+          "status"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "2cf76ab2-277a-42dc-ada7-d43fab4436a0",
+      "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+      "worker_id": "lexicon_delta_D6",
+      "timestamp": "2026-08-06T02:41:38.884976Z",
+      "action_type": "arc_verify",
+      "input_hash": "3f0349990fd71d3b1e7171bd8cfc19c8b0ddc5723a304033e034671702935d15",
+      "output_hash": "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+      "lexicon_entry": "fa6c793fcb4620f0d1b10d946c41fe9df5d96018de5e83374458da78f2639754",
+      "parent_action": "",
+      "documentation": "Lexicon-bound full ARC verification",
+      "knowledge_delta": {
+        "input_keys": [
+          "command"
+        ],
+        "output_keys": [
+          "status"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "81e178f5-8627-4d00-9610-5633e46ef7fc",
+      "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+      "worker_id": "lexicon_beta_B4",
+      "timestamp": "2026-08-06T02:41:38.887348Z",
+      "action_type": "tag_fr_verify",
+      "input_hash": "a585b74d19cb917bdf97e690c899cb7510f09ce3093a417dd0f6dbd54021e3d1",
+      "output_hash": "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+      "lexicon_entry": "38c1278604ab650c63c80ba586bff383ffc335645e5c3b0eeb5c0c00dda27cae",
+      "parent_action": "",
+      "documentation": "Lexicon-bound tag.fr verified",
+      "knowledge_delta": {
+        "input_keys": [
+          "command"
+        ],
+        "output_keys": [
+          "status"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "431a229e-3ba3-45fd-b582-e2112b496c58",
+      "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+      "worker_id": "lexicon_beta_B3",
+      "timestamp": "2026-08-06T02:41:38.887922Z",
+      "action_type": "ipfs_runtime",
+      "input_hash": "87211f7f6aca8f510756029f71d667c56020e1ddb10ba41baee876e8cc55b46a",
+      "output_hash": "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+      "lexicon_entry": "da77d22b98ad4e39a932a54867255c9e4a5ca00a23e9ad74180ad72a07dd4d68",
+      "parent_action": "",
+      "documentation": "Lexicon-bound IPFS runtime",
+      "knowledge_delta": {
+        "input_keys": [
+          "command"
+        ],
+        "output_keys": [
+          "status"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "c941770d-6a83-4046-8f2e-4923d56bddbc",
+      "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+      "worker_id": "lexicon_beta_B5",
+      "timestamp": "2026-08-06T02:41:38.888543Z",
+      "action_type": "worker_fr_verify",
+      "input_hash": "c22b983ecabe9b184a54e8d8662432d35d03d158ba49d7bdb16184b770e131d3",
+      "output_hash": "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+      "lexicon_entry": "5463b23ad55b2e4c1568b2da5c3cc9fd67ede9d54a955459737d0c43ccaea053",
+      "parent_action": "",
+      "documentation": "Lexicon-bound worker.fr verified",
+      "knowledge_delta": {
+        "input_keys": [
+          "command"
+        ],
+        "output_keys": [
+          "status"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "0c15e088-2656-4f98-8080-6492aad8ab54",
+      "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+      "worker_id": "lexicon_beta_B6",
+      "timestamp": "2026-08-06T02:41:38.891986Z",
+      "action_type": "hard_gate_verify",
+      "input_hash": "3e19fb91f68e840fd7c18f4294cdf48b30d3f2956ec1d2c87941b99db19d0d7c",
+      "output_hash": "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+      "lexicon_entry": "a69be20d83b2eb830b5a45317e389b997b2b0c7022a3227a2b3de279d28df204",
+      "parent_action": "",
+      "documentation": "Lexicon-bound hard_gate.fr verified",
+      "knowledge_delta": {
+        "input_keys": [
+          "command"
+        ],
+        "output_keys": [
+          "status"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "0c564702-168d-42bf-8015-5fe7e017bd83",
+      "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+      "worker_id": "lexicon_alpha_A6",
+      "timestamp": "2026-08-06T02:41:38.879612Z",
+      "action_type": "lexicon_core_verify",
+      "input_hash": "9336f2bb134b6543311bb8b13c2694d18458deb9d88fa12ed475517a0e5c5e8f",
+      "output_hash": "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+      "lexicon_entry": "f0a5a16a382f83be9092091099f584e182ea372dc91607f25c2ef286fe3a12db",
+      "parent_action": "",
+      "documentation": "Lexicon-bound core.fr verified",
+      "knowledge_delta": {
+        "input_keys": [
+          "command"
+        ],
+        "output_keys": [
+          "status"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "7fe4318e-8524-44be-8ff7-d3cb7cb6ea1c",
+      "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+      "worker_id": "lexicon_delta_D3",
+      "timestamp": "2026-08-06T02:41:38.893035Z",
+      "action_type": "lexicon_export",
+      "input_hash": "c606af863d566ddafe5aa2dd1578ccd1d1d4c12b184d6598954c71e46a52d677",
+      "output_hash": "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+      "lexicon_entry": "707625a2d6218a57d12c916075f74350ca6958cbcdef30d097edfb2ce57c9058",
+      "parent_action": "",
+      "documentation": "Lexicon-bound export for LLM training",
+      "knowledge_delta": {
+        "input_keys": [
+          "command"
+        ],
+        "output_keys": [
+          "status"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "c029ae31-12ce-4ac0-8720-ccbc86e31b1b",
+      "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+      "worker_id": "lexicon_delta_D2",
+      "timestamp": "2026-08-06T02:41:38.882506Z",
+      "action_type": "lib_tests",
+      "input_hash": "11813ad97dcae5e358e6a7b0eadaec45d40b4c06dc76907708dd12bbf054f8a2",
+      "output_hash": "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+      "lexicon_entry": "8e8c8ff2cc26ceda5728850fdaac18bcb8438680e030cae2bab5cf9136c37a57",
+      "parent_action": "",
+      "documentation": "Lexicon-bound lib tests",
+      "knowledge_delta": {
+        "input_keys": [
+          "command"
+        ],
+        "output_keys": [
+          "status"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "2b5a3a7a-b28f-4c2e-b423-02200162981a",
+      "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+      "worker_id": "lexicon_gamma_G5",
+      "timestamp": "2026-08-06T02:41:38.900058Z",
+      "action_type": "zk_tests",
+      "input_hash": "7b243a410ac701e5ced5321c496499d1273d936485449e36ff0260521adc2c68",
+      "output_hash": "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+      "lexicon_entry": "67ad80135d3d7e47715e5eee04860f1d4eea048286bba3529771d05fb5242496",
+      "parent_action": "",
+      "documentation": "Lexicon-bound ZK security tests",
+      "knowledge_delta": {
+        "input_keys": [
+          "command"
+        ],
+        "output_keys": [
+          "status"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "0240d59d-0687-491e-9481-9c575df0553b",
+      "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+      "worker_id": "lexicon_alpha_A4",
+      "timestamp": "2026-08-06T02:41:38.877291Z",
+      "action_type": "main_fr_parse",
+      "input_hash": "abbc34d14571d235c5321cbca40698287267e2cf5cbd7b8bb8acb10e79236ee9",
+      "output_hash": "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+      "lexicon_entry": "d322eed26ab6a6d1a030ffcbc868c9b4b275c147a17486a64dca816b6ae242e2",
+      "parent_action": "",
+      "documentation": "Lexicon-bound main.fr parse",
+      "knowledge_delta": {
+        "input_keys": [
+          "command"
+        ],
+        "output_keys": [
+          "status"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "47dcf4d7-959d-4f0b-9e24-f5c8301368e7",
+      "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+      "worker_id": "lexicon_beta_B1",
+      "timestamp": "2026-08-06T02:41:38.901205Z",
+      "action_type": "gpu_runtime",
+      "input_hash": "4761a612c6674e948b1079ac7cdc8f4c96de0f7ea91ea5b0d5f1cc0fc481efda",
+      "output_hash": "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+      "lexicon_entry": "8798ad3d87df3559b702dc97fd4a703199fbc00471c82bbc61e8bb75a287f612",
+      "parent_action": "",
+      "documentation": "Lexicon-bound GPU runtime",
+      "knowledge_delta": {
+        "input_keys": [
+          "command"
+        ],
+        "output_keys": [
+          "status"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "1969caa5-d8ca-471e-8044-8e6b1634fa36",
+      "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+      "worker_id": "lexicon_beta_B2",
+      "timestamp": "2026-08-06T02:41:38.903185Z",
+      "action_type": "cdx_runtime",
+      "input_hash": "aff95388811aded67e7e34181eede9f6e861b724c532e781151a6f123998d7b8",
+      "output_hash": "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+      "lexicon_entry": "523935a1b920186fe464e28c7d94c1da5cf56a0df1139a94fd784c985e11415e",
+      "parent_action": "",
+      "documentation": "Lexicon-bound CDX runtime",
+      "knowledge_delta": {
+        "input_keys": [
+          "command"
+        ],
+        "output_keys": [
+          "status"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "039340d9-d166-4bf4-99da-2bece170e84e",
+      "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+      "worker_id": "lexicon_gamma_G2",
+      "timestamp": "2026-08-06T02:41:38.903954Z",
+      "action_type": "sync_knowledge",
+      "input_hash": "ec984092c97a2ccb55d1243f4747e12b2b8026943510e3b85c1661e9e1c4b67b",
+      "output_hash": "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+      "lexicon_entry": "97e23cc3f3fcbdeb0a6f03fb124883966784a2f23de037c41bc4c43f03eb634a",
+      "parent_action": "",
+      "documentation": "Lexicon-bound knowledge sync",
+      "knowledge_delta": {
+        "input_keys": [
+          "command"
+        ],
+        "output_keys": [
+          "status"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "0285c8c8-9cac-4f04-9edf-5bc96e9ff83f",
+      "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+      "worker_id": "lexicon_gamma_G4",
+      "timestamp": "2026-08-06T02:41:38.904746Z",
+      "action_type": "spec_impl_bridge",
+      "input_hash": "d6702c128901e00a0db16e1300a2eb288882c95bdcff78476a5cda61a6f61f99",
+      "output_hash": "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+      "lexicon_entry": "46867cc62a13310f68c35da6016ab107c471944cfb59b3f059cea6186602da76",
+      "parent_action": "",
+      "documentation": "Lexicon-bound spec/impl bridge",
+      "knowledge_delta": {
+        "input_keys": [
+          "command"
+        ],
+        "output_keys": [
+          "status"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "7360161e-d33e-48fa-8d25-ef2fd30deaaa",
+      "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+      "worker_id": "lexicon_gamma_G1",
+      "timestamp": "2026-08-06T02:41:38.905531Z",
+      "action_type": "close_peerless",
+      "input_hash": "7073926b1917565f1888646b09f6ad83baa15f46614a275c684de0aef6528b17",
+      "output_hash": "ea58664d756167f526057e4b095f894faf2ccdb74fce87a3eda5796da476139c",
+      "lexicon_entry": "20c07f297aa62e5fc394ee06cae832a72ebd5c20d21eac50ade3d6dc14cf22a7",
+      "parent_action": "",
+      "documentation": "Lexicon-bound peerless gap closure",
+      "knowledge_delta": {
+        "input_keys": [
+          "command"
+        ],
+        "output_keys": [
+          "pass",
+          "duration_ms",
+          "output"
+        ],
+        "changed": true,
+        "confidence": 0.95
+      }
+    },
+    {
+      "action_id": "38ed3d3a-81d2-42ef-b057-4c4e5ef1b8a3",
+      "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+      "worker_id": "lexicon_gamma_G3",
+      "timestamp": "2026-08-06T02:41:38.906211Z",
+      "action_type": "lexicon_ingest",
+      "input_hash": "b811c0dd5b963b836fea1bdb64bb3e32a338c72db2f4b21894e5c5692abafa85",
+      "output_hash": "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+      "lexicon_entry": "ba66306aad5b0e31b1f0af4a1c1bfeba455a748b97c55a3e638eacd3185d17d9",
+      "parent_action": "",
+      "documentation": "Lexicon-bound ingest to hypercube",
+      "knowledge_delta": {
+        "input_keys": [
+          "command"
+        ],
+        "output_keys": [
+          "status"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "08adcb58-1207-454a-a968-d21b525f7b39",
+      "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+      "worker_id": "lexicon_gamma_G6",
+      "timestamp": "2026-08-06T02:41:38.941261Z",
+      "action_type": "user_ticket_verify",
+      "input_hash": "e49f2164c83aada25a5882c6f52875c26326c764c3ae3216ec553081d4310ce4",
+      "output_hash": "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+      "lexicon_entry": "b626029325dc201d6019acb87acb1f987613a65539f27760d06bf809f436d0bb",
+      "parent_action": "",
+      "documentation": "Lexicon-bound user_ticket.fr verified",
+      "knowledge_delta": {
+        "input_keys": [
+          "command"
+        ],
+        "output_keys": [
+          "status"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "951d1d2a-4eee-46d4-86d0-33ac12deed06",
+      "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+      "worker_id": "lexicon_alpha_A5",
+      "timestamp": "2026-08-06T02:41:38.879223Z",
+      "action_type": "wasm_codegen_tests",
+      "input_hash": "e1b5858e7fba77fe49aedb8bf39ac4afa406c3edd286b03ee33a19e0d24baa3e",
+      "output_hash": "1774dc99edd9d32a2c2392f7deece4cbfe3d0f03209f84012470ce3652e73e5c",
+      "lexicon_entry": "346e7693b67517c0ca1e2cfeacc0ae0dfcd04f87f7b284d7edefc6ca402a5d47",
+      "parent_action": "",
+      "documentation": "Lexicon-bound wasm_codegen tests",
+      "knowledge_delta": {
+        "input_keys": [
+          "command"
+        ],
+        "output_keys": [
+          "pass",
+          "duration_ms",
+          "output"
+        ],
+        "changed": true,
+        "confidence": 0.95
+      }
+    },
+    {
+      "action_id": "d212dfae-9660-4b91-86af-1bef57bdb836",
+      "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+      "worker_id": "system",
+      "timestamp": "2026-08-06T02:42:37.759821Z",
+      "action_type": "ticket_close",
+      "input_hash": "0489da40b340d4f9da3dda60cc1728fcdf962056369d701cd5c2237ea71c91ac",
+      "output_hash": "16e4fa66539e1eeee592d7488b056ef56232ce90c8764dc24ccf3402b64d320f",
+      "lexicon_entry": "a3593a0a48a2e0c65761a357d5430db7dbd4c810c2ad6d6017a62720e5682719",
+      "parent_action": "c49f6faa-838d-4f53-8fde-863b55c46c3c",
+      "documentation": "User ticket closed",
+      "knowledge_delta": {
+        "input_keys": [
+          "ticket_id"
+        ],
+        "output_keys": [
+          "status",
+          "action_count"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "af4db8cc-64ff-4ad7-a956-971931daf17f",
+      "user_id": "f0a7eb27f7925fd4585e1fecc9f32f08b48ca952e17ef9cee4d2adb62ea02473",
+      "worker_id": "arc_gate_tester",
+      "timestamp": "2026-08-06T02:42:37.834025Z",
+      "action_type": "arc_gate_test",
+      "input_hash": "794a191fe719627b0975897bd4349a742550267de1c26ae0949cfac31c520e3e",
+      "output_hash": "092b707f635414a3e538c23c3c3a4232ad7485038065f08484b3ba5ff74a05a5",
+      "lexicon_entry": "05f8e752da0a0158bbf7986c978842290f9763ffd21d01d7b22a7065fb3fa5d9",
+      "parent_action": "",
+      "documentation": "ARC gate: verify action creates Lexicon entry",
+      "knowledge_delta": {
+        "input_keys": [
+          "gate"
+        ],
+        "output_keys": [
+          "pass",
+          "status"
+        ],
+        "changed": true,
+        "confidence": 0.95
+      }
+    },
+    {
+      "action_id": "2c882af1-98f1-4612-951a-d9b1ba71e96f",
+      "user_id": "61db200ff6886f3dea314cab43b80e4c2f3d27668d1a1a60353e57ec6b7b70e1",
+      "worker_id": "system",
+      "timestamp": "2026-08-06T02:42:37.835221Z",
+      "action_type": "ticket_creation",
+      "input_hash": "b8dd05a32d991f1d19e92bd5c54d474fb35b793c9b741f8b927c283a7d3a8bf2",
+      "output_hash": "8490b27baf6527ed37a662f0b21d6e984a552b0309764d1e18dbc5fd4153e42e",
+      "lexicon_entry": "f91a43ddf9fcf43485d9dd993716bec8b5fb3072ebe40962286148084c2e4700",
+      "parent_action": "",
+      "documentation": "User ticket created for session",
+      "knowledge_delta": {
+        "input_keys": [
+          "user_id"
+        ],
+        "output_keys": [
+          "ticket_id"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "93852d95-8a75-457c-9ca3-f3d7a3943d35",
+      "user_id": "61db200ff6886f3dea314cab43b80e4c2f3d27668d1a1a60353e57ec6b7b70e1",
+      "worker_id": "system",
+      "timestamp": "2026-08-06T02:42:37.835725Z",
+      "action_type": "ticket_close",
+      "input_hash": "8490b27baf6527ed37a662f0b21d6e984a552b0309764d1e18dbc5fd4153e42e",
+      "output_hash": "1e2a6d45892a43c0e7190338aacbd12ad09bfe5202e1570e35da2a75066bef66",
+      "lexicon_entry": "1a2757742d03d82535cdd7fa20bce4ed3800ced499a1a71bb8681334b79ec716",
+      "parent_action": "e1732f6e-dc64-40cf-8982-67a75e954c32",
+      "documentation": "User ticket closed",
+      "knowledge_delta": {
+        "input_keys": [
+          "ticket_id"
+        ],
+        "output_keys": [
+          "status",
+          "action_count"
+        ],
+        "changed": true,
+        "confidence": 0.7
+      }
+    },
+    {
+      "action_id": "37255684-0a52-4c42-a0b8-377d5d1e805c",
+      "user_id": "cce49f93f0c1043aa9430c906fddff94cf7ec45ffc54824b4a8930d281445222",
+      "worker_id": "arc_query_tester",
+      "timestamp": "2026-08-06T02:42:37.836405Z",
+      "action_type": "query_test_action",
+      "input_hash": "1fd32c2935118e7c8e65c9ed72eb08be45895b8221c317c9be905a14767efe8e",
+      "output_hash": "90c36ec5fe1e5e165e4c6f316e4a330937353ce7db4b40b193ec5acf824e0591",
+      "lexicon_entry": "7c87bca04067ea45dc690360a6faa5057dff4e281a2304a289af6323e682a4a6",
+      "parent_action": "",
+      "documentation": "Queryable test entry",
+      "knowledge_delta": {
+        "input_keys": [
+          "query"
+        ],
+        "output_keys": [
+          "pass"
+        ],
+        "changed": true,
+        "confidence": 0.95
+      }
+    }
+  ]
+}

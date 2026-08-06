@@ -2,7 +2,7 @@
   "version": 1,
   "updated_at": "2026-08-06T00:25:03.644607Z",
   "source_report": "chat_scrub/WORKER_REPORT.json",
-  "entry_count": 499,
+  "entry_count": 638,
   "entries": [
     {
       "id": "ReDoS_lexer",
@@ -6294,6 +6294,1869 @@
       ],
       "severity": "info",
       "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_plan_execution_264",
+      "category": "swarm_optimization",
+      "title": "Swarm: plan_execution",
+      "content": "Decision: start. Result: running.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_team_alpha_A2_265",
+      "category": "swarm_optimization",
+      "title": "Swarm: team_alpha_A2",
+      "content": "Decision: execute_wasm_manifest. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_team_delta_D4_266",
+      "category": "swarm_optimization",
+      "title": "Swarm: team_delta_D4",
+      "content": "Decision: execute_language_hardening. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_team_gamma_G4_267",
+      "category": "swarm_optimization",
+      "title": "Swarm: team_gamma_G4",
+      "content": "Decision: execute_spec_impl_bridge. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_team_gamma_G6_268",
+      "category": "swarm_optimization",
+      "title": "Swarm: team_gamma_G6",
+      "content": "Decision: execute_redos_tests. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_team_gamma_G3_269",
+      "category": "swarm_optimization",
+      "title": "Swarm: team_gamma_G3",
+      "content": "Decision: execute_sync_knowledge. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_team_alpha_A5_270",
+      "category": "swarm_optimization",
+      "title": "Swarm: team_alpha_A5",
+      "content": "Decision: execute_wasm_codegen_tests. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_team_alpha_A1_271",
+      "category": "swarm_optimization",
+      "title": "Swarm: team_alpha_A1",
+      "content": "Decision: execute_wasm_build. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_team_beta_B4_272",
+      "category": "swarm_optimization",
+      "title": "Swarm: team_beta_B4",
+      "content": "Decision: execute_vulkan_module_test. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_team_alpha_A6_273",
+      "category": "swarm_optimization",
+      "title": "Swarm: team_alpha_A6",
+      "content": "Decision: execute_unity_wasm_tests. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_team_beta_B5_274",
+      "category": "swarm_optimization",
+      "title": "Swarm: team_beta_B5",
+      "content": "Decision: execute_cdx_module_test. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_team_alpha_A4_275",
+      "category": "swarm_optimization",
+      "title": "Swarm: team_alpha_A4",
+      "content": "Decision: execute_main_fr_parse. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_team_beta_B1_276",
+      "category": "swarm_optimization",
+      "title": "Swarm: team_beta_B1",
+      "content": "Decision: execute_gpu_runtime. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_team_delta_D2_277",
+      "category": "swarm_optimization",
+      "title": "Swarm: team_delta_D2",
+      "content": "Decision: execute_lib_tests. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P1_278",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P1",
+      "content": "Decision: close_Live GPU runtime. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_team_delta_D1_279",
+      "category": "swarm_optimization",
+      "title": "Swarm: team_delta_D1",
+      "content": "Decision: execute_arc_status. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_team_beta_B6_280",
+      "category": "swarm_optimization",
+      "title": "Swarm: team_beta_B6",
+      "content": "Decision: execute_ipfs_module_test. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_team_gamma_G5_281",
+      "category": "swarm_optimization",
+      "title": "Swarm: team_gamma_G5",
+      "content": "Decision: execute_zk_tests. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_team_beta_B3_282",
+      "category": "swarm_optimization",
+      "title": "Swarm: team_beta_B3",
+      "content": "Decision: execute_ipfs_runtime. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P1_283",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P1",
+      "content": "Decision: close_Live GPU runtime. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_team_delta_D5_284",
+      "category": "swarm_optimization",
+      "title": "Swarm: team_delta_D5",
+      "content": "Decision: execute_knowledge_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P2_285",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P2",
+      "content": "Decision: close_Live IPFS runtime. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_team_beta_B2_286",
+      "category": "swarm_optimization",
+      "title": "Swarm: team_beta_B2",
+      "content": "Decision: execute_cdx_runtime. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P2_287",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P2",
+      "content": "Decision: close_Live IPFS runtime. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_team_alpha_A3_288",
+      "category": "swarm_optimization",
+      "title": "Swarm: team_alpha_A3",
+      "content": "Decision: execute_self_host_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P3_289",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P3",
+      "content": "Decision: close_Live CDX streaming. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P3_290",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P3",
+      "content": "Decision: close_Live CDX streaming. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_team_delta_D3_291",
+      "category": "swarm_optimization",
+      "title": "Swarm: team_delta_D3",
+      "content": "Decision: execute_verify_v2. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P4_292",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P4",
+      "content": "Decision: close_WASM size optimization. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_team_delta_D6_293",
+      "category": "swarm_optimization",
+      "title": "Swarm: team_delta_D6",
+      "content": "Decision: execute_arc_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P4_294",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P4",
+      "content": "Decision: close_WASM size optimization. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P5_295",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P5",
+      "content": "Decision: close_True self-hosting in Frontier. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P5_296",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P5",
+      "content": "Decision: close_True self-hosting in Frontier. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P6_297",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P6",
+      "content": "Decision: close_Teacher-student unity module. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_team_gamma_G2_298",
+      "category": "swarm_optimization",
+      "title": "Swarm: team_gamma_G2",
+      "content": "Decision: execute_peerless_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P6_299",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P6",
+      "content": "Decision: close_Teacher-student unity module. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_team_gamma_G1_300",
+      "category": "swarm_optimization",
+      "title": "Swarm: team_gamma_G1",
+      "content": "Decision: execute_close_peerless. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_plan_execution_301",
+      "category": "swarm_optimization",
+      "title": "Swarm: plan_execution",
+      "content": "Decision: complete. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_lexicon_deploy_302",
+      "category": "swarm_optimization",
+      "title": "Swarm: lexicon_deploy",
+      "content": "Decision: ticket_created. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_lexicon_index_check_303",
+      "category": "swarm_optimization",
+      "title": "Swarm: lexicon_index_check",
+      "content": "Decision: lexicon_bound_delta. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_wasm_manifest_304",
+      "category": "swarm_optimization",
+      "title": "Swarm: wasm_manifest",
+      "content": "Decision: lexicon_bound_alpha. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "manifest_peerless_plan_execution",
+      "category": "manifest",
+      "title": "Manifest: peerless_plan_execution",
+      "content": "{\n\"generated_at\": \"2026-08-06T02:26:57.720796Z\",\n\"teams\": 4,\n\"workers_per_team\": 6,\n\"total_workers\": 24,\n\"workers_passed\": 24,\n\"all_pass\": true,\n\"plan_items\": 13,\n\"plan_items_executed\": 13,\n\"duration_ms\": 108202,\n\"team_results\": [\n{\n\"team\": \"alpha\",\n\"workers\": 6,\n\"passed\": 6,\n\"all_pass\": true,\n\"duration_ms\": 66140,\n\"results\": [\n{\n\"team\": \"alpha\",\n\"worker_id\": \"A1\",\n\"plan_id\": \"OPT-001\",\n\"theme\": \"wasm_optimization\",\n\"label\": \"wasm_build\",\n\"pass\": true,\n\"duration_ms\": 5362,\n\"output\": \"WASM size: ",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/peerless_plan_execution.json"
+    },
+    {
+      "id": "manifest_lexicon_export",
+      "category": "manifest",
+      "title": "Manifest: lexicon_export",
+      "content": "{\n\"exported_at\": \"2026-08-06T02:39:28.527282Z\",\n\"entry_count\": 25,\n\"training_records\": 25,\n\"entries\": [\n{\n\"action_id\": \"d5bd9446-8596-4a6f-812a-d41f63617745\",\n\"user_id\": \"d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784\",\n\"worker_id\": \"system\",\n\"timestamp\": \"2026-08-06T02:39:28.393922Z\",\n\"action_type\": \"ticket_creation\",\n\"input_hash\": \"1ddb456c920c9f3c073ad908a1763d1bda5a86e7f775c7e0c14695883066c6bf\",\n\"output_hash\": \"a9ca07ef453169a5b66d109b7fbf6d9a27929dbb989e43486ae42f917414b34",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/lexicon_export.json"
+    },
+    {
+      "id": "manifest_lexicon_index",
+      "category": "manifest",
+      "title": "Manifest: lexicon_index",
+      "content": "{\n\"updated_at\": \"2026-08-06T02:39:28.545213Z\",\n\"entry_count\": 1,\n\"entries\": [\n{\n\"action_id\": \"f5f36c0d-909b-4a4a-b170-1aa32604919b\",\n\"user_id\": \"d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784\",\n\"worker_id\": \"lexicon_delta_D3\",\n\"timestamp\": \"2026-08-06T02:39:28.406017Z\",\n\"action_type\": \"lexicon_export\",\n\"input_hash\": \"c606af863d566ddafe5aa2dd1578ccd1d1d4c12b184d6598954c71e46a52d677\",\n\"output_hash\": \"8dc74838c6df2b10f4300afe8c2b28463459b717128c915d829e1d66d31a9c3e\",\n\"lexicon_entr",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/lexicon_index.json"
+    },
+    {
+      "id": "lexicon_d5bd9446-8596-4a6f-812a-d41f63617745",
+      "category": "lexicon_bound",
+      "title": "Lexicon: ticket_creation",
+      "content": "Worker system. User d32af40335eb... Doc: User ticket created for session. Entry: 40d4417cf5b8d1e4...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "ticket_creation"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_75c6d3e7-0bef-499e-89c5-282453fe6ec9",
+      "category": "lexicon_bound",
+      "title": "Lexicon: wasm_build",
+      "content": "Worker lexicon_alpha_A1. User d32af40335eb... Doc: Lexicon-bound WASM size optimization. Entry: c1b9f0349c3ff16c...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "wasm_build"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_bb81efd4-4c60-402d-b46b-0fbe1857e816",
+      "category": "lexicon_bound",
+      "title": "Lexicon: self_host_verify",
+      "content": "Worker lexicon_alpha_A3. User d32af40335eb... Doc: Lexicon-bound self-hosting verification. Entry: 389c6fbd847c3db1...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "self_host_verify"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_5f3e1d54-e494-43f7-82e6-7b4fc3a21d25",
+      "category": "lexicon_bound",
+      "title": "Lexicon: wasm_codegen_tests",
+      "content": "Worker lexicon_alpha_A5. User d32af40335eb... Doc: Lexicon-bound wasm_codegen tests. Entry: 346e7693b67517c0...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "wasm_codegen_tests"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_40c736c4-b0d3-4bb3-960c-ba9b6257191b",
+      "category": "lexicon_bound",
+      "title": "Lexicon: lexicon_core_parse",
+      "content": "Worker lexicon_alpha_A6. User d32af40335eb... Doc: Lexicon-bound core.fr parse. Entry: 0994846af096f418...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "lexicon_core_parse"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_fb236b64-ca7c-44a5-9470-cc7989bba547",
+      "category": "lexicon_bound",
+      "title": "Lexicon: arc_status",
+      "content": "Worker lexicon_delta_D1. User d32af40335eb... Doc: Lexicon-bound ARC status generation. Entry: a76836e60cf0a054...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "arc_status"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_69de7bd8-5867-40a9-a381-c0cdd94fb7be",
+      "category": "lexicon_bound",
+      "title": "Lexicon: lib_tests",
+      "content": "Worker lexicon_delta_D2. User d32af40335eb... Doc: Lexicon-bound lib tests. Entry: 8e8c8ff2cc26ceda...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "lib_tests"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_735d8bb1-b26b-4dfb-87f5-b386d91e70c2",
+      "category": "lexicon_bound",
+      "title": "Lexicon: wasm_manifest",
+      "content": "Worker lexicon_alpha_A2. User d32af40335eb... Doc: Lexicon-bound WASM manifest read. Entry: 3a8af43665e17210...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "wasm_manifest"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_f5f36c0d-909b-4a4a-b170-1aa32604919b",
+      "category": "lexicon_bound",
+      "title": "Lexicon: lexicon_export",
+      "content": "Worker lexicon_delta_D3. User d32af40335eb... Doc: Lexicon-bound export for LLM training. Entry: 707625a2d6218a57...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "lexicon_export"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_97ade052-0a22-480a-b633-75f530dbe688",
+      "category": "lexicon_bound",
+      "title": "Lexicon: lexicon_index_check",
+      "content": "Worker lexicon_delta_D4. User d32af40335eb... Doc: Lexicon-bound index entry count check. Entry: f89017cd2bb066c3...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "lexicon_index_check"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_ed63f41c-d262-4d5c-a090-a6da2323dc1f",
+      "category": "lexicon_bound",
+      "title": "Lexicon: main_fr_parse",
+      "content": "Worker lexicon_alpha_A4. User d32af40335eb... Doc: Lexicon-bound main.fr parse. Entry: d322eed26ab6a6d1...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "main_fr_parse"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_68527942-98ff-443e-b80f-a81487cb6133",
+      "category": "lexicon_bound",
+      "title": "Lexicon: language_hardening",
+      "content": "Worker lexicon_delta_D5. User d32af40335eb... Doc: Lexicon-bound language hardening. Entry: c78a9193140effa2...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "language_hardening"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_0158d411-08fe-4e1c-87fc-50bdb9223ed7",
+      "category": "lexicon_bound",
+      "title": "Lexicon: gpu_runtime",
+      "content": "Worker lexicon_beta_B1. User d32af40335eb... Doc: Lexicon-bound GPU runtime. Entry: 8798ad3d87df3559...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "gpu_runtime"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_0ef796e3-8812-495c-8c18-cbe313a4c3ca",
+      "category": "lexicon_bound",
+      "title": "Lexicon: cdx_runtime",
+      "content": "Worker lexicon_beta_B2. User d32af40335eb... Doc: Lexicon-bound CDX runtime. Entry: 523935a1b920186f...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "cdx_runtime"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_3d70d1f2-0d7d-45a9-943c-856442895c34",
+      "category": "lexicon_bound",
+      "title": "Lexicon: ipfs_runtime",
+      "content": "Worker lexicon_beta_B3. User d32af40335eb... Doc: Lexicon-bound IPFS runtime. Entry: da77d22b98ad4e39...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "ipfs_runtime"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_1687afa3-3c63-4a5d-bbd8-a9acd2c84c0c",
+      "category": "lexicon_bound",
+      "title": "Lexicon: tag_fr_parse",
+      "content": "Worker lexicon_beta_B4. User d32af40335eb... Doc: Lexicon-bound tag.fr parse. Entry: 3193ea920e89875b...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "tag_fr_parse"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_71eae28e-2aab-4acf-9196-027026ca6e56",
+      "category": "lexicon_bound",
+      "title": "Lexicon: arc_verify",
+      "content": "Worker lexicon_delta_D6. User d32af40335eb... Doc: Lexicon-bound full ARC verification. Entry: fa6c793fcb4620f0...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "arc_verify"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_3bd521a0-048f-49e4-b5b4-ea3233da1931",
+      "category": "lexicon_bound",
+      "title": "Lexicon: worker_fr_parse",
+      "content": "Worker lexicon_beta_B5. User d32af40335eb... Doc: Lexicon-bound worker.fr parse. Entry: 39433230447cbc26...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "worker_fr_parse"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_e89091fa-d216-4484-8107-d9d4ab9bb1da",
+      "category": "lexicon_bound",
+      "title": "Lexicon: hard_gate_parse",
+      "content": "Worker lexicon_beta_B6. User d32af40335eb... Doc: Lexicon-bound hard_gate.fr parse. Entry: 5db59fd9a4eacca5...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "hard_gate_parse"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_2bfb3050-9e06-49a2-8c65-5aff12df3c71",
+      "category": "lexicon_bound",
+      "title": "Lexicon: close_peerless",
+      "content": "Worker lexicon_gamma_G1. User d32af40335eb... Doc: Lexicon-bound peerless gap closure. Entry: 20c07f297aa62e5f...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "close_peerless"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_a4f374fb-29fb-49bc-bd13-a09d8796cbdb",
+      "category": "lexicon_bound",
+      "title": "Lexicon: lexicon_ingest",
+      "content": "Worker lexicon_gamma_G3. User d32af40335eb... Doc: Lexicon-bound ingest to hypercube. Entry: ba66306aad5b0e31...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "lexicon_ingest"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_12020045-1008-4929-a113-f567dfb5327a",
+      "category": "lexicon_bound",
+      "title": "Lexicon: sync_knowledge",
+      "content": "Worker lexicon_gamma_G2. User d32af40335eb... Doc: Lexicon-bound knowledge sync. Entry: 97e23cc3f3fcbdeb...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "sync_knowledge"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_b4aede0c-a28a-4ea9-bf7b-4e259d729695",
+      "category": "lexicon_bound",
+      "title": "Lexicon: spec_impl_bridge",
+      "content": "Worker lexicon_gamma_G4. User d32af40335eb... Doc: Lexicon-bound spec/impl bridge. Entry: 46867cc62a13310f...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "spec_impl_bridge"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_4fe4d738-3ab7-401d-9c86-95afb46ae691",
+      "category": "lexicon_bound",
+      "title": "Lexicon: zk_tests",
+      "content": "Worker lexicon_gamma_G5. User d32af40335eb... Doc: Lexicon-bound ZK security tests. Entry: 67ad80135d3d7e47...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "zk_tests"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_f94787c8-dce3-4603-b846-379b8421a4a8",
+      "category": "lexicon_bound",
+      "title": "Lexicon: user_ticket_parse",
+      "content": "Worker lexicon_gamma_G6. User d32af40335eb... Doc: Lexicon-bound user_ticket.fr parse. Entry: b2417b5aee47b33f...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "user_ticket_parse"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_8afd1b03-0400-440a-8385-4ace3cab8282",
+      "category": "lexicon_bound",
+      "title": "Lexicon: ticket_close",
+      "content": "Worker system. User d32af40335eb... Doc: User ticket closed. Entry: 9c8ee898a2cad490...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "ticket_close"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "swarm_process_lexicon_export_305",
+      "category": "swarm_optimization",
+      "title": "Swarm: lexicon_export",
+      "content": "Decision: lexicon_bound_delta. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_lexicon_ingest_306",
+      "category": "swarm_optimization",
+      "title": "Swarm: lexicon_ingest",
+      "content": "Decision: lexicon_bound_gamma. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_spec_impl_bridge_307",
+      "category": "swarm_optimization",
+      "title": "Swarm: spec_impl_bridge",
+      "content": "Decision: lexicon_bound_gamma. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_language_hardening_308",
+      "category": "swarm_optimization",
+      "title": "Swarm: language_hardening",
+      "content": "Decision: lexicon_bound_delta. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_sync_knowledge_309",
+      "category": "swarm_optimization",
+      "title": "Swarm: sync_knowledge",
+      "content": "Decision: lexicon_bound_gamma. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_wasm_build_310",
+      "category": "swarm_optimization",
+      "title": "Swarm: wasm_build",
+      "content": "Decision: lexicon_bound_alpha. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_fr_parse_311",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_fr_parse",
+      "content": "Decision: lexicon_bound_beta. Result: fail.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_lexicon_core_parse_312",
+      "category": "swarm_optimization",
+      "title": "Swarm: lexicon_core_parse",
+      "content": "Decision: lexicon_bound_alpha. Result: fail.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_ipfs_runtime_313",
+      "category": "swarm_optimization",
+      "title": "Swarm: ipfs_runtime",
+      "content": "Decision: lexicon_bound_beta. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_main_fr_parse_314",
+      "category": "swarm_optimization",
+      "title": "Swarm: main_fr_parse",
+      "content": "Decision: lexicon_bound_alpha. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_wasm_codegen_tests_315",
+      "category": "swarm_optimization",
+      "title": "Swarm: wasm_codegen_tests",
+      "content": "Decision: lexicon_bound_alpha. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_lib_tests_316",
+      "category": "swarm_optimization",
+      "title": "Swarm: lib_tests",
+      "content": "Decision: lexicon_bound_delta. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_tag_fr_parse_317",
+      "category": "swarm_optimization",
+      "title": "Swarm: tag_fr_parse",
+      "content": "Decision: lexicon_bound_beta. Result: fail.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_arc_status_318",
+      "category": "swarm_optimization",
+      "title": "Swarm: arc_status",
+      "content": "Decision: lexicon_bound_delta. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_hard_gate_parse_319",
+      "category": "swarm_optimization",
+      "title": "Swarm: hard_gate_parse",
+      "content": "Decision: lexicon_bound_beta. Result: fail.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_zk_tests_320",
+      "category": "swarm_optimization",
+      "title": "Swarm: zk_tests",
+      "content": "Decision: lexicon_bound_gamma. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_cdx_runtime_321",
+      "category": "swarm_optimization",
+      "title": "Swarm: cdx_runtime",
+      "content": "Decision: lexicon_bound_beta. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gpu_runtime_322",
+      "category": "swarm_optimization",
+      "title": "Swarm: gpu_runtime",
+      "content": "Decision: lexicon_bound_beta. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_user_ticket_parse_323",
+      "category": "swarm_optimization",
+      "title": "Swarm: user_ticket_parse",
+      "content": "Decision: lexicon_bound_gamma. Result: fail.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P1_324",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P1",
+      "content": "Decision: close_Live GPU runtime. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_self_host_verify_325",
+      "category": "swarm_optimization",
+      "title": "Swarm: self_host_verify",
+      "content": "Decision: lexicon_bound_alpha. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P2_326",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P2",
+      "content": "Decision: close_Live IPFS runtime. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_arc_verify_327",
+      "category": "swarm_optimization",
+      "title": "Swarm: arc_verify",
+      "content": "Decision: lexicon_bound_delta. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P3_328",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P3",
+      "content": "Decision: close_Live CDX streaming. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P4_329",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P4",
+      "content": "Decision: close_WASM size optimization. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P5_330",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P5",
+      "content": "Decision: close_True self-hosting in Frontier. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P6_331",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P6",
+      "content": "Decision: close_Teacher-student unity module. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_close_peerless_332",
+      "category": "swarm_optimization",
+      "title": "Swarm: close_peerless",
+      "content": "Decision: lexicon_bound_gamma. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_lexicon_deploy_333",
+      "category": "swarm_optimization",
+      "title": "Swarm: lexicon_deploy",
+      "content": "Decision: complete. Result: partial.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_lexicon_deploy_334",
+      "category": "swarm_optimization",
+      "title": "Swarm: lexicon_deploy",
+      "content": "Decision: ticket_created. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_wasm_manifest_335",
+      "category": "swarm_optimization",
+      "title": "Swarm: wasm_manifest",
+      "content": "Decision: lexicon_bound_alpha. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_lexicon_index_check_336",
+      "category": "swarm_optimization",
+      "title": "Swarm: lexicon_index_check",
+      "content": "Decision: lexicon_bound_delta. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_hard_gate_verify_337",
+      "category": "swarm_optimization",
+      "title": "Swarm: hard_gate_verify",
+      "content": "Decision: lexicon_bound_beta. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_fr_verify_338",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_fr_verify",
+      "content": "Decision: lexicon_bound_beta. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_language_hardening_339",
+      "category": "swarm_optimization",
+      "title": "Swarm: language_hardening",
+      "content": "Decision: lexicon_bound_delta. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_tag_fr_verify_340",
+      "category": "swarm_optimization",
+      "title": "Swarm: tag_fr_verify",
+      "content": "Decision: lexicon_bound_beta. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "manifest_lexicon_bound_deployment",
+      "category": "manifest",
+      "title": "Manifest: lexicon_bound_deployment",
+      "content": "{\n\"generated_at\": \"2026-08-06T02:40:48.446572Z\",\n\"protocol\": \"lexicon_bound_worker\",\n\"teams\": 4,\n\"workers_per_team\": 6,\n\"total_workers\": 24,\n\"workers_passed\": 19,\n\"all_pass\": false,\n\"lexicon_entries\": 6,\n\"ticket_id\": \"c16da218-3812-4711-89e2-f1a3a8c043d4\",\n\"user_id_hash\": \"d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784\",\n\"duration_ms\": 80052,\n\"team_results\": [\n{\n\"team\": \"alpha\",\n\"workers\": 6,\n\"passed\": 5,\n\"all_pass\": false,\n\"lexicon_tags\": [\n\"75c6d3e7-0bef-499e-89c5-282453fe6ec",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/lexicon_bound_deployment.json"
+    },
+    {
+      "id": "manifest_lexicon_user_tickets",
+      "category": "manifest",
+      "title": "Manifest: lexicon_user_tickets",
+      "content": "[\n{\n\"ticket_id\": \"c16da218-3812-4711-89e2-f1a3a8c043d4\",\n\"user_id\": \"d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784\",\n\"session_id\": \"9e09ca217d8820aa\",\n\"actions\": [\n\"d5bd9446-8596-4a6f-812a-d41f63617745\",\n\"97ade052-0a22-480a-b633-75f530dbe688\",\n\"735d8bb1-b26b-4dfb-87f5-b386d91e70c2\",\n\"f5f36c0d-909b-4a4a-b170-1aa32604919b\",\n\"a4f374fb-29fb-49bc-bd13-a09d8796cbdb\",\n\"b4aede0c-a28a-4ea9-bf7b-4e259d729695\",\n\"68527942-98ff-443e-b80f-a81487cb6133\",\n\"12020045-1008-4929-a113-f567dfb5327a",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/lexicon_user_tickets.json"
+    },
+    {
+      "id": "manifest_lexicon_bound_arc",
+      "category": "manifest",
+      "title": "Manifest: lexicon_bound_arc",
+      "content": "{\n\"all_pass\": true,\n\"gates\": [\n{\n\"gate\": \"files_exist\",\n\"pass\": true,\n\"message\": \"All Lexicon files present\"\n},\n{\n\"gate\": \"action_creates_entry\",\n\"pass\": true,\n\"message\": \"Action creates entry (tag=90246f70...)\"\n},\n{\n\"gate\": \"user_ticket_bound\",\n\"pass\": true,\n\"message\": \"User ticket bound (2 actions)\"\n},\n{\n\"gate\": \"lexicon_queryable\",\n\"pass\": true,\n\"message\": \"Lexicon queryable (1 hits)\"\n},\n{\n\"gate\": \"lexicon_exportable\",\n\"pass\": true,\n\"message\": \"Exportable (30 entries, 30 training records)\"\n},",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/lexicon_bound_arc.json"
+    },
+    {
+      "id": "lexicon_90246f70-198f-48ae-ba9a-2905fc91efa2",
+      "category": "lexicon_bound",
+      "title": "Lexicon: arc_gate_test",
+      "content": "Worker arc_gate_tester. User f0a7eb27f792... Doc: ARC gate: verify action creates Lexicon entry. Entry: 05f8e752da0a0158...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "arc_gate_test"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_f874aabd-d432-4cf0-84c8-41ff0807eaec",
+      "category": "lexicon_bound",
+      "title": "Lexicon: ticket_creation",
+      "content": "Worker system. User 61db200ff688... Doc: User ticket created for session. Entry: 9c55b961d9fcfd85...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "ticket_creation"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_a60a3a5c-f0fd-409a-b374-eac58cbfc0b5",
+      "category": "lexicon_bound",
+      "title": "Lexicon: ticket_close",
+      "content": "Worker system. User 61db200ff688... Doc: User ticket closed. Entry: e66496a3ac63b735...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "ticket_close"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_024c69eb-8cf4-44e2-af8d-3741f09794f8",
+      "category": "lexicon_bound",
+      "title": "Lexicon: query_test_action",
+      "content": "Worker arc_query_tester. User cce49f93f0c1... Doc: Queryable test entry. Entry: 7c87bca04067ea45...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "query_test_action"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_d8f88434-2bf2-48fa-a0f1-f81012b6b85a",
+      "category": "lexicon_bound",
+      "title": "Lexicon: ticket_creation",
+      "content": "Worker system. User d32af40335eb... Doc: User ticket created for session. Entry: fd3d5fb9ad805297...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "ticket_creation"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_a91cc746-4414-45af-96ee-145eb501b1d6",
+      "category": "lexicon_bound",
+      "title": "Lexicon: wasm_manifest",
+      "content": "Worker lexicon_alpha_A2. User d32af40335eb... Doc: Lexicon-bound WASM manifest read. Entry: 3a8af43665e17210...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "wasm_manifest"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_437032bb-839b-4c7d-96f6-9a0f9882ffec",
+      "category": "lexicon_bound",
+      "title": "Lexicon: wasm_build",
+      "content": "Worker lexicon_alpha_A1. User d32af40335eb... Doc: Lexicon-bound WASM size optimization. Entry: c1b9f0349c3ff16c...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "wasm_build"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_dea46bde-d3e4-46b7-ada8-9b09ee18828f",
+      "category": "lexicon_bound",
+      "title": "Lexicon: self_host_verify",
+      "content": "Worker lexicon_alpha_A3. User d32af40335eb... Doc: Lexicon-bound self-hosting verification. Entry: 389c6fbd847c3db1...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "self_host_verify"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_0240d59d-0687-491e-9481-9c575df0553b",
+      "category": "lexicon_bound",
+      "title": "Lexicon: main_fr_parse",
+      "content": "Worker lexicon_alpha_A4. User d32af40335eb... Doc: Lexicon-bound main.fr parse. Entry: d322eed26ab6a6d1...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "main_fr_parse"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_951d1d2a-4eee-46d4-86d0-33ac12deed06",
+      "category": "lexicon_bound",
+      "title": "Lexicon: wasm_codegen_tests",
+      "content": "Worker lexicon_alpha_A5. User d32af40335eb... Doc: Lexicon-bound wasm_codegen tests. Entry: 346e7693b67517c0...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "wasm_codegen_tests"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_0c564702-168d-42bf-8015-5fe7e017bd83",
+      "category": "lexicon_bound",
+      "title": "Lexicon: lexicon_core_verify",
+      "content": "Worker lexicon_alpha_A6. User d32af40335eb... Doc: Lexicon-bound core.fr verified. Entry: f0a5a16a382f83be...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "lexicon_core_verify"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_95529dea-3c3b-4da9-8953-b72369363cac",
+      "category": "lexicon_bound",
+      "title": "Lexicon: arc_status",
+      "content": "Worker lexicon_delta_D1. User d32af40335eb... Doc: Lexicon-bound ARC status generation. Entry: a76836e60cf0a054...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "arc_status"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_c029ae31-12ce-4ac0-8720-ccbc86e31b1b",
+      "category": "lexicon_bound",
+      "title": "Lexicon: lib_tests",
+      "content": "Worker lexicon_delta_D2. User d32af40335eb... Doc: Lexicon-bound lib tests. Entry: 8e8c8ff2cc26ceda...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "lib_tests"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_02161ccf-b262-4174-a1b0-b832c51a4e92",
+      "category": "lexicon_bound",
+      "title": "Lexicon: lexicon_index_check",
+      "content": "Worker lexicon_delta_D4. User d32af40335eb... Doc: Lexicon-bound index entry count check. Entry: f89017cd2bb066c3...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "lexicon_index_check"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_ec7d9e8c-28f4-4b04-b7fd-6bb344a098ea",
+      "category": "lexicon_bound",
+      "title": "Lexicon: language_hardening",
+      "content": "Worker lexicon_delta_D5. User d32af40335eb... Doc: Lexicon-bound language hardening. Entry: c78a9193140effa2...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "language_hardening"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_2cf76ab2-277a-42dc-ada7-d43fab4436a0",
+      "category": "lexicon_bound",
+      "title": "Lexicon: arc_verify",
+      "content": "Worker lexicon_delta_D6. User d32af40335eb... Doc: Lexicon-bound full ARC verification. Entry: fa6c793fcb4620f0...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "arc_verify"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_81e178f5-8627-4d00-9610-5633e46ef7fc",
+      "category": "lexicon_bound",
+      "title": "Lexicon: tag_fr_verify",
+      "content": "Worker lexicon_beta_B4. User d32af40335eb... Doc: Lexicon-bound tag.fr verified. Entry: 38c1278604ab650c...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "tag_fr_verify"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_431a229e-3ba3-45fd-b582-e2112b496c58",
+      "category": "lexicon_bound",
+      "title": "Lexicon: ipfs_runtime",
+      "content": "Worker lexicon_beta_B3. User d32af40335eb... Doc: Lexicon-bound IPFS runtime. Entry: da77d22b98ad4e39...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "ipfs_runtime"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_c941770d-6a83-4046-8f2e-4923d56bddbc",
+      "category": "lexicon_bound",
+      "title": "Lexicon: worker_fr_verify",
+      "content": "Worker lexicon_beta_B5. User d32af40335eb... Doc: Lexicon-bound worker.fr verified. Entry: 5463b23ad55b2e4c...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "worker_fr_verify"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_0c15e088-2656-4f98-8080-6492aad8ab54",
+      "category": "lexicon_bound",
+      "title": "Lexicon: hard_gate_verify",
+      "content": "Worker lexicon_beta_B6. User d32af40335eb... Doc: Lexicon-bound hard_gate.fr verified. Entry: a69be20d83b2eb83...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "hard_gate_verify"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_7fe4318e-8524-44be-8ff7-d3cb7cb6ea1c",
+      "category": "lexicon_bound",
+      "title": "Lexicon: lexicon_export",
+      "content": "Worker lexicon_delta_D3. User d32af40335eb... Doc: Lexicon-bound export for LLM training. Entry: 707625a2d6218a57...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "lexicon_export"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_2b5a3a7a-b28f-4c2e-b423-02200162981a",
+      "category": "lexicon_bound",
+      "title": "Lexicon: zk_tests",
+      "content": "Worker lexicon_gamma_G5. User d32af40335eb... Doc: Lexicon-bound ZK security tests. Entry: 67ad80135d3d7e47...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "zk_tests"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_47dcf4d7-959d-4f0b-9e24-f5c8301368e7",
+      "category": "lexicon_bound",
+      "title": "Lexicon: gpu_runtime",
+      "content": "Worker lexicon_beta_B1. User d32af40335eb... Doc: Lexicon-bound GPU runtime. Entry: 8798ad3d87df3559...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "gpu_runtime"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_1969caa5-d8ca-471e-8044-8e6b1634fa36",
+      "category": "lexicon_bound",
+      "title": "Lexicon: cdx_runtime",
+      "content": "Worker lexicon_beta_B2. User d32af40335eb... Doc: Lexicon-bound CDX runtime. Entry: 523935a1b920186f...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "cdx_runtime"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_039340d9-d166-4bf4-99da-2bece170e84e",
+      "category": "lexicon_bound",
+      "title": "Lexicon: sync_knowledge",
+      "content": "Worker lexicon_gamma_G2. User d32af40335eb... Doc: Lexicon-bound knowledge sync. Entry: 97e23cc3f3fcbdeb...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "sync_knowledge"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_0285c8c8-9cac-4f04-9edf-5bc96e9ff83f",
+      "category": "lexicon_bound",
+      "title": "Lexicon: spec_impl_bridge",
+      "content": "Worker lexicon_gamma_G4. User d32af40335eb... Doc: Lexicon-bound spec/impl bridge. Entry: 46867cc62a13310f...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "spec_impl_bridge"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_7360161e-d33e-48fa-8d25-ef2fd30deaaa",
+      "category": "lexicon_bound",
+      "title": "Lexicon: close_peerless",
+      "content": "Worker lexicon_gamma_G1. User d32af40335eb... Doc: Lexicon-bound peerless gap closure. Entry: 20c07f297aa62e5f...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "close_peerless"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_38ed3d3a-81d2-42ef-b057-4c4e5ef1b8a3",
+      "category": "lexicon_bound",
+      "title": "Lexicon: lexicon_ingest",
+      "content": "Worker lexicon_gamma_G3. User d32af40335eb... Doc: Lexicon-bound ingest to hypercube. Entry: ba66306aad5b0e31...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "lexicon_ingest"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_08adcb58-1207-454a-a968-d21b525f7b39",
+      "category": "lexicon_bound",
+      "title": "Lexicon: user_ticket_verify",
+      "content": "Worker lexicon_gamma_G6. User d32af40335eb... Doc: Lexicon-bound user_ticket.fr verified. Entry: b626029325dc201d...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "user_ticket_verify"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "lexicon_d212dfae-9660-4b91-86af-1bef57bdb836",
+      "category": "lexicon_bound",
+      "title": "Lexicon: ticket_close",
+      "content": "Worker system. User d32af40335eb... Doc: User ticket closed. Entry: a3593a0a48a2e0c6...",
+      "tags": [
+        "lexicon",
+        "bound",
+        "worker",
+        "ticket_close"
+      ],
+      "severity": "info",
+      "source": "docs/lexicon_log.fr"
     }
   ],
   "ingested_at": [
@@ -6304,5 +8167,5 @@
     "2026-08-06T00:20:00.476875Z",
     "2026-08-06T00:25:03.644607Z"
   ],
-  "last_sync": "2026-08-06T01:50:20.658472Z"
+  "last_sync": "2026-08-06T02:42:37.781663Z"
 }

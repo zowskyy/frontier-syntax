@@ -1,0 +1,35 @@
+{
+  "all_pass": true,
+  "gates": [
+    {
+      "gate": "files_exist",
+      "pass": true,
+      "message": "All Lexicon files present"
+    },
+    {
+      "gate": "action_creates_entry",
+      "pass": true,
+      "message": "Action creates entry (tag=af4db8cc...)"
+    },
+    {
+      "gate": "user_ticket_bound",
+      "pass": true,
+      "message": "User ticket bound (2 actions)"
+    },
+    {
+      "gate": "lexicon_queryable",
+      "pass": true,
+      "message": "Lexicon queryable (2 hits)"
+    },
+    {
+      "gate": "lexicon_exportable",
+      "pass": true,
+      "message": "Exportable (60 entries, 60 training records)"
+    },
+    {
+      "gate": "hard_gate_enforced",
+      "pass": true,
+      "message": "Hard gate enforced \u2014 all entries documented"
+    }
+  ]
+}

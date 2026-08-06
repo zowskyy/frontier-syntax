@@ -1,0 +1,309 @@
+{
+  "generated_at": "2026-08-06T02:42:37.862870Z",
+  "protocol": "lexicon_bound_worker",
+  "teams": 4,
+  "workers_per_team": 6,
+  "total_workers": 24,
+  "workers_passed": 24,
+  "all_pass": true,
+  "lexicon_entries": 36,
+  "ticket_id": "c49f6faa-838d-4f53-8fde-863b55c46c3c",
+  "user_id_hash": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+  "duration_ms": 58990,
+  "team_results": [
+    {
+      "team": "alpha",
+      "workers": 6,
+      "passed": 6,
+      "all_pass": true,
+      "lexicon_tags": [
+        "437032bb-839b-4c7d-96f6-9a0f9882ffec",
+        "a91cc746-4414-45af-96ee-145eb501b1d6",
+        "dea46bde-d3e4-46b7-ada8-9b09ee18828f",
+        "0240d59d-0687-491e-9481-9c575df0553b",
+        "951d1d2a-4eee-46d4-86d0-33ac12deed06",
+        "0c564702-168d-42bf-8015-5fe7e017bd83"
+      ],
+      "duration_ms": 37535,
+      "results": [
+        {
+          "team": "alpha",
+          "worker_id": "A1",
+          "action": "wasm_build",
+          "lexicon_tag": "437032bb-839b-4c7d-96f6-9a0f9882ffec",
+          "pass": true,
+          "duration_ms": 3074
+        },
+        {
+          "team": "alpha",
+          "worker_id": "A2",
+          "action": "wasm_manifest",
+          "lexicon_tag": "a91cc746-4414-45af-96ee-145eb501b1d6",
+          "pass": true,
+          "duration_ms": 33
+        },
+        {
+          "team": "alpha",
+          "worker_id": "A3",
+          "action": "self_host_verify",
+          "lexicon_tag": "dea46bde-d3e4-46b7-ada8-9b09ee18828f",
+          "pass": true,
+          "duration_ms": 24505
+        },
+        {
+          "team": "alpha",
+          "worker_id": "A4",
+          "action": "main_fr_parse",
+          "lexicon_tag": "0240d59d-0687-491e-9481-9c575df0553b",
+          "pass": true,
+          "duration_ms": 32605
+        },
+        {
+          "team": "alpha",
+          "worker_id": "A5",
+          "action": "wasm_codegen_tests",
+          "lexicon_tag": "951d1d2a-4eee-46d4-86d0-33ac12deed06",
+          "pass": true,
+          "duration_ms": 37452
+        },
+        {
+          "team": "alpha",
+          "worker_id": "A6",
+          "action": "lexicon_core_verify",
+          "lexicon_tag": "0c564702-168d-42bf-8015-5fe7e017bd83",
+          "pass": true,
+          "duration_ms": 128
+        }
+      ]
+    },
+    {
+      "team": "beta",
+      "workers": 6,
+      "passed": 6,
+      "all_pass": true,
+      "lexicon_tags": [
+        "47dcf4d7-959d-4f0b-9e24-f5c8301368e7",
+        "1969caa5-d8ca-471e-8044-8e6b1634fa36",
+        "431a229e-3ba3-45fd-b582-e2112b496c58",
+        "81e178f5-8627-4d00-9610-5633e46ef7fc",
+        "c941770d-6a83-4046-8f2e-4923d56bddbc",
+        "0c15e088-2656-4f98-8080-6492aad8ab54"
+      ],
+      "duration_ms": 23406,
+      "results": [
+        {
+          "team": "beta",
+          "worker_id": "B1",
+          "action": "gpu_runtime",
+          "lexicon_tag": "47dcf4d7-959d-4f0b-9e24-f5c8301368e7",
+          "pass": true,
+          "duration_ms": 8449
+        },
+        {
+          "team": "beta",
+          "worker_id": "B2",
+          "action": "cdx_runtime",
+          "lexicon_tag": "1969caa5-d8ca-471e-8044-8e6b1634fa36",
+          "pass": true,
+          "duration_ms": 23373
+        },
+        {
+          "team": "beta",
+          "worker_id": "B3",
+          "action": "ipfs_runtime",
+          "lexicon_tag": "431a229e-3ba3-45fd-b582-e2112b496c58",
+          "pass": true,
+          "duration_ms": 16396
+        },
+        {
+          "team": "beta",
+          "worker_id": "B4",
+          "action": "tag_fr_verify",
+          "lexicon_tag": "81e178f5-8627-4d00-9610-5633e46ef7fc",
+          "pass": true,
+          "duration_ms": 99
+        },
+        {
+          "team": "beta",
+          "worker_id": "B5",
+          "action": "worker_fr_verify",
+          "lexicon_tag": "c941770d-6a83-4046-8f2e-4923d56bddbc",
+          "pass": true,
+          "duration_ms": 64
+        },
+        {
+          "team": "beta",
+          "worker_id": "B6",
+          "action": "hard_gate_verify",
+          "lexicon_tag": "0c15e088-2656-4f98-8080-6492aad8ab54",
+          "pass": true,
+          "duration_ms": 61
+        }
+      ]
+    },
+    {
+      "team": "delta",
+      "workers": 6,
+      "passed": 6,
+      "all_pass": true,
+      "lexicon_tags": [
+        "95529dea-3c3b-4da9-8953-b72369363cac",
+        "c029ae31-12ce-4ac0-8720-ccbc86e31b1b",
+        "7fe4318e-8524-44be-8ff7-d3cb7cb6ea1c",
+        "02161ccf-b262-4174-a1b0-b832c51a4e92",
+        "ec7d9e8c-28f4-4b04-b7fd-6bb344a098ea",
+        "2cf76ab2-277a-42dc-ada7-d43fab4436a0"
+      ],
+      "duration_ms": 48961,
+      "results": [
+        {
+          "team": "delta",
+          "worker_id": "D1",
+          "action": "arc_status",
+          "lexicon_tag": "95529dea-3c3b-4da9-8953-b72369363cac",
+          "pass": true,
+          "duration_ms": 21228
+        },
+        {
+          "team": "delta",
+          "worker_id": "D2",
+          "action": "lib_tests",
+          "lexicon_tag": "c029ae31-12ce-4ac0-8720-ccbc86e31b1b",
+          "pass": true,
+          "duration_ms": 5510
+        },
+        {
+          "team": "delta",
+          "worker_id": "D3",
+          "action": "lexicon_export",
+          "lexicon_tag": "7fe4318e-8524-44be-8ff7-d3cb7cb6ea1c",
+          "pass": true,
+          "duration_ms": 126
+        },
+        {
+          "team": "delta",
+          "worker_id": "D4",
+          "action": "lexicon_index_check",
+          "lexicon_tag": "02161ccf-b262-4174-a1b0-b832c51a4e92",
+          "pass": true,
+          "duration_ms": 53
+        },
+        {
+          "team": "delta",
+          "worker_id": "D5",
+          "action": "language_hardening",
+          "lexicon_tag": "ec7d9e8c-28f4-4b04-b7fd-6bb344a098ea",
+          "pass": true,
+          "duration_ms": 89
+        },
+        {
+          "team": "delta",
+          "worker_id": "D6",
+          "action": "arc_verify",
+          "lexicon_tag": "2cf76ab2-277a-42dc-ada7-d43fab4436a0",
+          "pass": true,
+          "duration_ms": 48945
+        }
+      ]
+    },
+    {
+      "team": "gamma",
+      "workers": 6,
+      "passed": 6,
+      "all_pass": true,
+      "lexicon_tags": [
+        "7360161e-d33e-48fa-8d25-ef2fd30deaaa",
+        "039340d9-d166-4bf4-99da-2bece170e84e",
+        "38ed3d3a-81d2-42ef-b057-4c4e5ef1b8a3",
+        "0285c8c8-9cac-4f04-9edf-5bc96e9ff83f",
+        "2b5a3a7a-b28f-4c2e-b423-02200162981a",
+        "08adcb58-1207-454a-a968-d21b525f7b39"
+      ],
+      "duration_ms": 58885,
+      "results": [
+        {
+          "team": "gamma",
+          "worker_id": "G1",
+          "action": "close_peerless",
+          "lexicon_tag": "7360161e-d33e-48fa-8d25-ef2fd30deaaa",
+          "pass": true,
+          "duration_ms": 58850
+        },
+        {
+          "team": "gamma",
+          "worker_id": "G2",
+          "action": "sync_knowledge",
+          "lexicon_tag": "039340d9-d166-4bf4-99da-2bece170e84e",
+          "pass": true,
+          "duration_ms": 121
+        },
+        {
+          "team": "gamma",
+          "worker_id": "G3",
+          "action": "lexicon_ingest",
+          "lexicon_tag": "38ed3d3a-81d2-42ef-b057-4c4e5ef1b8a3",
+          "pass": true,
+          "duration_ms": 133
+        },
+        {
+          "team": "gamma",
+          "worker_id": "G4",
+          "action": "spec_impl_bridge",
+          "lexicon_tag": "0285c8c8-9cac-4f04-9edf-5bc96e9ff83f",
+          "pass": true,
+          "duration_ms": 117
+        },
+        {
+          "team": "gamma",
+          "worker_id": "G5",
+          "action": "zk_tests",
+          "lexicon_tag": "2b5a3a7a-b28f-4c2e-b423-02200162981a",
+          "pass": true,
+          "duration_ms": 26220
+        },
+        {
+          "team": "gamma",
+          "worker_id": "G6",
+          "action": "user_ticket_verify",
+          "lexicon_tag": "08adcb58-1207-454a-a968-d21b525f7b39",
+          "pass": true,
+          "duration_ms": 87
+        }
+      ]
+    }
+  ],
+  "arc_gates": [
+    {
+      "gate": "files_exist",
+      "pass": true,
+      "message": "All Lexicon files present"
+    },
+    {
+      "gate": "action_creates_entry",
+      "pass": true,
+      "message": "Action creates entry (tag=af4db8cc...)"
+    },
+    {
+      "gate": "user_ticket_bound",
+      "pass": true,
+      "message": "User ticket bound (2 actions)"
+    },
+    {
+      "gate": "lexicon_queryable",
+      "pass": true,
+      "message": "Lexicon queryable (2 hits)"
+    },
+    {
+      "gate": "lexicon_exportable",
+      "pass": true,
+      "message": "Exportable (60 entries, 60 training records)"
+    },
+    {
+      "gate": "hard_gate_enforced",
+      "pass": true,
+      "message": "Hard gate enforced \u2014 all entries documented"
+    }
+  ],
+  "arc_all_pass": true,
+  "report": "audit_reports/lexicon_bound_deployment_report.md"
+}

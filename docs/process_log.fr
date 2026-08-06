@@ -3025,3 +3025,643 @@ component ProcessEntry_20260806_022657_723177 {
     duration_ms: 108202,
     metrics_json: "{\"duration_ms\":108202}",
 }
+
+component ProcessEntry_20260806_023928_394096 {
+    timestamp: "2026-08-06T02:39:28.394093Z",
+    process: "lexicon_deploy",
+    decision: "ticket_created",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"ticket_id\":\"c16da218-3812-4711-89e2-f1a3a8c043d4\"}",
+}
+
+component ProcessEntry_20260806_023928_439047 {
+    timestamp: "2026-08-06T02:39:28.439041Z",
+    process: "lexicon_index_check",
+    decision: "lexicon_bound_delta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"97ade052-0a22-480a-b633-75f530dbe688\",\"team\":\"delta\",\"worker\":\"D4\"}",
+}
+
+component ProcessEntry_20260806_023928_453156 {
+    timestamp: "2026-08-06T02:39:28.453151Z",
+    process: "wasm_manifest",
+    decision: "lexicon_bound_alpha",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"735d8bb1-b26b-4dfb-87f5-b386d91e70c2\",\"team\":\"alpha\",\"worker\":\"A2\"}",
+}
+
+component ProcessEntry_20260806_023928_545346 {
+    timestamp: "2026-08-06T02:39:28.545342Z",
+    process: "lexicon_export",
+    decision: "lexicon_bound_delta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"f5f36c0d-909b-4a4a-b170-1aa32604919b\",\"team\":\"delta\",\"worker\":\"D3\"}",
+}
+
+component ProcessEntry_20260806_023928_556488 {
+    timestamp: "2026-08-06T02:39:28.556483Z",
+    process: "lexicon_ingest",
+    decision: "lexicon_bound_gamma",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"a4f374fb-29fb-49bc-bd13-a09d8796cbdb\",\"team\":\"gamma\",\"worker\":\"G3\"}",
+}
+
+component ProcessEntry_20260806_023928_558409 {
+    timestamp: "2026-08-06T02:39:28.558404Z",
+    process: "spec_impl_bridge",
+    decision: "lexicon_bound_gamma",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"b4aede0c-a28a-4ea9-bf7b-4e259d729695\",\"team\":\"gamma\",\"worker\":\"G4\"}",
+}
+
+component ProcessEntry_20260806_023928_558715 {
+    timestamp: "2026-08-06T02:39:28.558712Z",
+    process: "language_hardening",
+    decision: "lexicon_bound_delta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"68527942-98ff-443e-b80f-a81487cb6133\",\"team\":\"delta\",\"worker\":\"D5\"}",
+}
+
+component ProcessEntry_20260806_023928_564120 {
+    timestamp: "2026-08-06T02:39:28.564116Z",
+    process: "sync_knowledge",
+    decision: "lexicon_bound_gamma",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"12020045-1008-4929-a113-f567dfb5327a\",\"team\":\"gamma\",\"worker\":\"G2\"}",
+}
+
+component ProcessEntry_20260806_023932_542700 {
+    timestamp: "2026-08-06T02:39:32.542695Z",
+    process: "wasm_build",
+    decision: "lexicon_bound_alpha",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"75c6d3e7-0bef-499e-89c5-282453fe6ec9\",\"team\":\"alpha\",\"worker\":\"A1\"}",
+}
+
+component ProcessEntry_20260806_023933_047028 {
+    timestamp: "2026-08-06T02:39:33.047022Z",
+    process: "worker_fr_parse",
+    decision: "lexicon_bound_beta",
+    result: "fail",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"3bd521a0-048f-49e4-b5b4-ea3233da1931\",\"team\":\"beta\",\"worker\":\"B5\"}",
+}
+
+component ProcessEntry_20260806_023936_198035 {
+    timestamp: "2026-08-06T02:39:36.198029Z",
+    process: "lexicon_core_parse",
+    decision: "lexicon_bound_alpha",
+    result: "fail",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"40c736c4-b0d3-4bb3-960c-ba9b6257191b\",\"team\":\"alpha\",\"worker\":\"A6\"}",
+}
+
+component ProcessEntry_20260806_023939_305737 {
+    timestamp: "2026-08-06T02:39:39.305733Z",
+    process: "ipfs_runtime",
+    decision: "lexicon_bound_beta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"3d70d1f2-0d7d-45a9-943c-856442895c34\",\"team\":\"beta\",\"worker\":\"B3\"}",
+}
+
+component ProcessEntry_20260806_023944_090149 {
+    timestamp: "2026-08-06T02:39:44.090144Z",
+    process: "main_fr_parse",
+    decision: "lexicon_bound_alpha",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"ed63f41c-d262-4d5c-a090-a6da2323dc1f\",\"team\":\"alpha\",\"worker\":\"A4\"}",
+}
+
+component ProcessEntry_20260806_023945_605296 {
+    timestamp: "2026-08-06T02:39:45.605291Z",
+    process: "wasm_codegen_tests",
+    decision: "lexicon_bound_alpha",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"5f3e1d54-e494-43f7-82e6-7b4fc3a21d25\",\"team\":\"alpha\",\"worker\":\"A5\"}",
+}
+
+component ProcessEntry_20260806_023947_370629 {
+    timestamp: "2026-08-06T02:39:47.370622Z",
+    process: "lib_tests",
+    decision: "lexicon_bound_delta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"69de7bd8-5867-40a9-a381-c0cdd94fb7be\",\"team\":\"delta\",\"worker\":\"D2\"}",
+}
+
+component ProcessEntry_20260806_023950_339156 {
+    timestamp: "2026-08-06T02:39:50.339151Z",
+    process: "tag_fr_parse",
+    decision: "lexicon_bound_beta",
+    result: "fail",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"1687afa3-3c63-4a5d-bbd8-a9acd2c84c0c\",\"team\":\"beta\",\"worker\":\"B4\"}",
+}
+
+component ProcessEntry_20260806_023955_097504 {
+    timestamp: "2026-08-06T02:39:55.097498Z",
+    process: "arc_status",
+    decision: "lexicon_bound_delta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"fb236b64-ca7c-44a5-9470-cc7989bba547\",\"team\":\"delta\",\"worker\":\"D1\"}",
+}
+
+component ProcessEntry_20260806_023958_266241 {
+    timestamp: "2026-08-06T02:39:58.266236Z",
+    process: "hard_gate_parse",
+    decision: "lexicon_bound_beta",
+    result: "fail",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"e89091fa-d216-4484-8107-d9d4ab9bb1da\",\"team\":\"beta\",\"worker\":\"B6\"}",
+}
+
+component ProcessEntry_20260806_023959_975870 {
+    timestamp: "2026-08-06T02:39:59.975865Z",
+    process: "zk_tests",
+    decision: "lexicon_bound_gamma",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"4fe4d738-3ab7-401d-9c86-95afb46ae691\",\"team\":\"gamma\",\"worker\":\"G5\"}",
+}
+
+component ProcessEntry_20260806_024003_730726 {
+    timestamp: "2026-08-06T02:40:03.730718Z",
+    process: "cdx_runtime",
+    decision: "lexicon_bound_beta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"0ef796e3-8812-495c-8c18-cbe313a4c3ca\",\"team\":\"beta\",\"worker\":\"B2\"}",
+}
+
+component ProcessEntry_20260806_024006_145777 {
+    timestamp: "2026-08-06T02:40:06.145772Z",
+    process: "gpu_runtime",
+    decision: "lexicon_bound_beta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"0158d411-08fe-4e1c-87fc-50bdb9223ed7\",\"team\":\"beta\",\"worker\":\"B1\"}",
+}
+
+component ProcessEntry_20260806_024009_414972 {
+    timestamp: "2026-08-06T02:40:09.414967Z",
+    process: "user_ticket_parse",
+    decision: "lexicon_bound_gamma",
+    result: "fail",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"f94787c8-dce3-4603-b846-379b8421a4a8\",\"team\":\"gamma\",\"worker\":\"G6\"}",
+}
+
+component ProcessEntry_20260806_024012_576733 {
+    timestamp: "2026-08-06T02:40:12.576712Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 44002,
+    metrics_json: "{\"duration_ms\":44002,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_024015_728834 {
+    timestamp: "2026-08-06T02:40:15.728829Z",
+    process: "self_host_verify",
+    decision: "lexicon_bound_alpha",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"bb81efd4-4c60-402d-b46b-0fbe1857e816\",\"team\":\"alpha\",\"worker\":\"A3\"}",
+}
+
+component ProcessEntry_20260806_024020_498502 {
+    timestamp: "2026-08-06T02:40:20.498487Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 7921,
+    metrics_json: "{\"duration_ms\":7921,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_024028_716539 {
+    timestamp: "2026-08-06T02:40:28.716533Z",
+    process: "arc_verify",
+    decision: "lexicon_bound_delta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"71eae28e-2aab-4acf-9196-027026ca6e56\",\"team\":\"delta\",\"worker\":\"D6\"}",
+}
+
+component ProcessEntry_20260806_024035_597282 {
+    timestamp: "2026-08-06T02:40:35.597270Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 15098,
+    metrics_json: "{\"duration_ms\":15098,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_024038_140312 {
+    timestamp: "2026-08-06T02:40:38.140298Z",
+    process: "peerless_P4",
+    decision: "close_WASM size optimization",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 2542,
+    metrics_json: "{\"duration_ms\":2542,\"gap\":\"P4\"}",
+}
+
+component ProcessEntry_20260806_024044_977261 {
+    timestamp: "2026-08-06T02:40:44.977244Z",
+    process: "peerless_P5",
+    decision: "close_True self-hosting in Frontier",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 6836,
+    metrics_json: "{\"duration_ms\":6836,\"gap\":\"P5\"}",
+}
+
+component ProcessEntry_20260806_024048_337744 {
+    timestamp: "2026-08-06T02:40:48.337727Z",
+    process: "peerless_P6",
+    decision: "close_Teacher-student unity module",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 3360,
+    metrics_json: "{\"duration_ms\":3360,\"gap\":\"P6\"}",
+}
+
+component ProcessEntry_20260806_024048_346895 {
+    timestamp: "2026-08-06T02:40:48.346890Z",
+    process: "close_peerless",
+    decision: "lexicon_bound_gamma",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"2bfb3050-9e06-49a2-8c65-5aff12df3c71\",\"team\":\"gamma\",\"worker\":\"G1\"}",
+}
+
+component ProcessEntry_20260806_024048_447141 {
+    timestamp: "2026-08-06T02:40:48.447138Z",
+    process: "lexicon_deploy",
+    decision: "complete",
+    result: "partial",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"entries\":6}",
+}
+
+component ProcessEntry_20260806_024138_872551 {
+    timestamp: "2026-08-06T02:41:38.872548Z",
+    process: "lexicon_deploy",
+    decision: "ticket_created",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"ticket_id\":\"c49f6faa-838d-4f53-8fde-863b55c46c3c\"}",
+}
+
+component ProcessEntry_20260806_024138_945513 {
+    timestamp: "2026-08-06T02:41:38.945508Z",
+    process: "wasm_manifest",
+    decision: "lexicon_bound_alpha",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"a91cc746-4414-45af-96ee-145eb501b1d6\",\"team\":\"alpha\",\"worker\":\"A2\"}",
+}
+
+component ProcessEntry_20260806_024138_946052 {
+    timestamp: "2026-08-06T02:41:38.946048Z",
+    process: "lexicon_index_check",
+    decision: "lexicon_bound_delta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"02161ccf-b262-4174-a1b0-b832c51a4e92\",\"team\":\"delta\",\"worker\":\"D4\"}",
+}
+
+component ProcessEntry_20260806_024138_954286 {
+    timestamp: "2026-08-06T02:41:38.954282Z",
+    process: "hard_gate_verify",
+    decision: "lexicon_bound_beta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"0c15e088-2656-4f98-8080-6492aad8ab54\",\"team\":\"beta\",\"worker\":\"B6\"}",
+}
+
+component ProcessEntry_20260806_024138_954872 {
+    timestamp: "2026-08-06T02:41:38.954869Z",
+    process: "worker_fr_verify",
+    decision: "lexicon_bound_beta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"c941770d-6a83-4046-8f2e-4923d56bddbc\",\"team\":\"beta\",\"worker\":\"B5\"}",
+}
+
+component ProcessEntry_20260806_024138_974898 {
+    timestamp: "2026-08-06T02:41:38.974894Z",
+    process: "language_hardening",
+    decision: "lexicon_bound_delta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"ec7d9e8c-28f4-4b04-b7fd-6bb344a098ea\",\"team\":\"delta\",\"worker\":\"D5\"}",
+}
+
+component ProcessEntry_20260806_024138_987730 {
+    timestamp: "2026-08-06T02:41:38.987725Z",
+    process: "tag_fr_verify",
+    decision: "lexicon_bound_beta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"81e178f5-8627-4d00-9610-5633e46ef7fc\",\"team\":\"beta\",\"worker\":\"B4\"}",
+}
+
+component ProcessEntry_20260806_024139_020305 {
+    timestamp: "2026-08-06T02:41:39.020301Z",
+    process: "lexicon_export",
+    decision: "lexicon_bound_delta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"7fe4318e-8524-44be-8ff7-d3cb7cb6ea1c\",\"team\":\"delta\",\"worker\":\"D3\"}",
+}
+
+component ProcessEntry_20260806_024139_022462 {
+    timestamp: "2026-08-06T02:41:39.022454Z",
+    process: "lexicon_core_verify",
+    decision: "lexicon_bound_alpha",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"0c564702-168d-42bf-8015-5fe7e017bd83\",\"team\":\"alpha\",\"worker\":\"A6\"}",
+}
+
+component ProcessEntry_20260806_024139_023114 {
+    timestamp: "2026-08-06T02:41:39.023111Z",
+    process: "spec_impl_bridge",
+    decision: "lexicon_bound_gamma",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"0285c8c8-9cac-4f04-9edf-5bc96e9ff83f\",\"team\":\"gamma\",\"worker\":\"G4\"}",
+}
+
+component ProcessEntry_20260806_024139_027079 {
+    timestamp: "2026-08-06T02:41:39.027074Z",
+    process: "sync_knowledge",
+    decision: "lexicon_bound_gamma",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"039340d9-d166-4bf4-99da-2bece170e84e\",\"team\":\"gamma\",\"worker\":\"G2\"}",
+}
+
+component ProcessEntry_20260806_024139_029911 {
+    timestamp: "2026-08-06T02:41:39.029906Z",
+    process: "user_ticket_verify",
+    decision: "lexicon_bound_gamma",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"08adcb58-1207-454a-a968-d21b525f7b39\",\"team\":\"gamma\",\"worker\":\"G6\"}",
+}
+
+component ProcessEntry_20260806_024139_040643 {
+    timestamp: "2026-08-06T02:41:39.040638Z",
+    process: "lexicon_ingest",
+    decision: "lexicon_bound_gamma",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"38ed3d3a-81d2-42ef-b057-4c4e5ef1b8a3\",\"team\":\"gamma\",\"worker\":\"G3\"}",
+}
+
+component ProcessEntry_20260806_024141_953902 {
+    timestamp: "2026-08-06T02:41:41.953897Z",
+    process: "wasm_build",
+    decision: "lexicon_bound_alpha",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"437032bb-839b-4c7d-96f6-9a0f9882ffec\",\"team\":\"alpha\",\"worker\":\"A1\"}",
+}
+
+component ProcessEntry_20260806_024144_405261 {
+    timestamp: "2026-08-06T02:41:44.405256Z",
+    process: "lib_tests",
+    decision: "lexicon_bound_delta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"c029ae31-12ce-4ac0-8720-ccbc86e31b1b\",\"team\":\"delta\",\"worker\":\"D2\"}",
+}
+
+component ProcessEntry_20260806_024147_351751 {
+    timestamp: "2026-08-06T02:41:47.351747Z",
+    process: "gpu_runtime",
+    decision: "lexicon_bound_beta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"47dcf4d7-959d-4f0b-9e24-f5c8301368e7\",\"team\":\"beta\",\"worker\":\"B1\"}",
+}
+
+component ProcessEntry_20260806_024155_286184 {
+    timestamp: "2026-08-06T02:41:55.286179Z",
+    process: "ipfs_runtime",
+    decision: "lexicon_bound_beta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"431a229e-3ba3-45fd-b582-e2112b496c58\",\"team\":\"beta\",\"worker\":\"B3\"}",
+}
+
+component ProcessEntry_20260806_024158_490941 {
+    timestamp: "2026-08-06T02:41:58.490910Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 19453,
+    metrics_json: "{\"duration_ms\":19453,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_024200_111746 {
+    timestamp: "2026-08-06T02:42:00.111741Z",
+    process: "arc_status",
+    decision: "lexicon_bound_delta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"95529dea-3c3b-4da9-8953-b72369363cac\",\"team\":\"delta\",\"worker\":\"D1\"}",
+}
+
+component ProcessEntry_20260806_024202_277913 {
+    timestamp: "2026-08-06T02:42:02.277908Z",
+    process: "cdx_runtime",
+    decision: "lexicon_bound_beta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"1969caa5-d8ca-471e-8044-8e6b1634fa36\",\"team\":\"beta\",\"worker\":\"B2\"}",
+}
+
+component ProcessEntry_20260806_024203_387712 {
+    timestamp: "2026-08-06T02:42:03.387707Z",
+    process: "self_host_verify",
+    decision: "lexicon_bound_alpha",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"dea46bde-d3e4-46b7-ada8-9b09ee18828f\",\"team\":\"alpha\",\"worker\":\"A3\"}",
+}
+
+component ProcessEntry_20260806_024205_122179 {
+    timestamp: "2026-08-06T02:42:05.122174Z",
+    process: "zk_tests",
+    decision: "lexicon_bound_gamma",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"2b5a3a7a-b28f-4c2e-b423-02200162981a\",\"team\":\"gamma\",\"worker\":\"G5\"}",
+}
+
+component ProcessEntry_20260806_024208_359615 {
+    timestamp: "2026-08-06T02:42:08.359600Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 9868,
+    metrics_json: "{\"duration_ms\":9868,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_024211_508887 {
+    timestamp: "2026-08-06T02:42:11.508882Z",
+    process: "main_fr_parse",
+    decision: "lexicon_bound_alpha",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"0240d59d-0687-491e-9481-9c575df0553b\",\"team\":\"alpha\",\"worker\":\"A4\"}",
+}
+
+component ProcessEntry_20260806_024216_407770 {
+    timestamp: "2026-08-06T02:42:16.407764Z",
+    process: "wasm_codegen_tests",
+    decision: "lexicon_bound_alpha",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"951d1d2a-4eee-46d4-86d0-33ac12deed06\",\"team\":\"alpha\",\"worker\":\"A5\"}",
+}
+
+component ProcessEntry_20260806_024224_961651 {
+    timestamp: "2026-08-06T02:42:24.961636Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 16601,
+    metrics_json: "{\"duration_ms\":16601,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_024227_522184 {
+    timestamp: "2026-08-06T02:42:27.522166Z",
+    process: "peerless_P4",
+    decision: "close_WASM size optimization",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 2560,
+    metrics_json: "{\"duration_ms\":2560,\"gap\":\"P4\"}",
+}
+
+component ProcessEntry_20260806_024227_834035 {
+    timestamp: "2026-08-06T02:42:27.834030Z",
+    process: "arc_verify",
+    decision: "lexicon_bound_delta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"2cf76ab2-277a-42dc-ada7-d43fab4436a0\",\"team\":\"delta\",\"worker\":\"D6\"}",
+}
+
+component ProcessEntry_20260806_024234_372843 {
+    timestamp: "2026-08-06T02:42:34.372826Z",
+    process: "peerless_P5",
+    decision: "close_True self-hosting in Frontier",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 6850,
+    metrics_json: "{\"duration_ms\":6850,\"gap\":\"P5\"}",
+}
+
+component ProcessEntry_20260806_024237_748240 {
+    timestamp: "2026-08-06T02:42:37.748221Z",
+    process: "peerless_P6",
+    decision: "close_Teacher-student unity module",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 3375,
+    metrics_json: "{\"duration_ms\":3375,\"gap\":\"P6\"}",
+}
+
+component ProcessEntry_20260806_024237_757454 {
+    timestamp: "2026-08-06T02:42:37.757448Z",
+    process: "close_peerless",
+    decision: "lexicon_bound_gamma",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"7360161e-d33e-48fa-8d25-ef2fd30deaaa\",\"team\":\"gamma\",\"worker\":\"G1\"}",
+}
+
+component ProcessEntry_20260806_024237_863379 {
+    timestamp: "2026-08-06T02:42:37.863373Z",
+    process: "lexicon_deploy",
+    decision: "complete",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"entries\":36}",
+}

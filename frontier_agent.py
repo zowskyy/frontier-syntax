@@ -122,6 +122,8 @@ class FrontierAgent:
             result = self.run_peerless_implementation_plan(parsed)
         elif parsed["type"] == "execute_plan":
             result = self.run_execute_peerless_plan(parsed)
+        elif parsed["type"] == "lexicon_bound":
+            result = self.run_lexicon_bound_deploy(parsed)
         elif parsed["type"] == "close_peerless":
             result = self.run_close_peerless(parsed)
         elif parsed["type"] == "ultimate_conclusion":
@@ -299,6 +301,19 @@ class FrontierAgent:
             ]
         ):
             return {"type": "execute_plan", "content": intent}
+
+        if any(
+            word in intent_lower
+            for word in [
+                "lexicon bound",
+                "lexicon-bound",
+                "lexicon bound worker",
+                "every action documented",
+                "lexicon tag",
+                "lexicon hard gate",
+            ]
+        ):
+            return {"type": "lexicon_bound", "content": intent}
 
         if any(
             word in intent_lower
@@ -862,6 +877,30 @@ class FrontierAgent:
             "manifest": "manifest/peerless_plan_execution.json",
             "output": result.get("stdout", "")[-2000:],
             "message": "4 teams × 6 workers executed Peerless implementation plan",
+        }
+
+    def run_lexicon_bound_deploy(self, parsed: Dict[str, Any]) -> Dict[str, Any]:
+        """Deploy 4×6 Lexicon-Bound Worker swarm — every action documented and tagged."""
+        deployer = self.scripts_dir / "deploy_lexicon_bound_swarm.py"
+        result = self._run_command([str(deployer)], capture=True)
+        manifest_path = self.repo_root / "manifest" / "lexicon_bound_deployment.json"
+        summary = {}
+        if manifest_path.exists():
+            summary = json.loads(manifest_path.read_text(encoding="utf-8"))
+        return {
+            "status": "success" if summary.get("all_pass") else "partial",
+            "protocol": "lexicon_bound_worker",
+            "teams": summary.get("teams", 4),
+            "total_workers": summary.get("total_workers", 24),
+            "workers_passed": summary.get("workers_passed", 0),
+            "lexicon_entries": summary.get("lexicon_entries", 0),
+            "ticket_id": summary.get("ticket_id"),
+            "arc_all_pass": summary.get("arc_all_pass", False),
+            "report": "audit_reports/lexicon_bound_deployment_report.md",
+            "manifest": "manifest/lexicon_bound_deployment.json",
+            "lexicon_log": "docs/lexicon_log.fr",
+            "output": result.get("stdout", "")[-2000:],
+            "message": "Lexicon-Bound Worker deployment complete — every action documented",
         }
 
     def run_close_peerless(self, parsed: Dict[str, Any]) -> Dict[str, Any]:

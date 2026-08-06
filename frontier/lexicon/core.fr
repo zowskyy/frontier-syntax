@@ -1,0 +1,23 @@
+// frontier/lexicon/core.fr
+// The Living Lexicon — every action, worker, and user documented here
+version: 2.0;
+
+component LexiconCore {
+    state: {
+        entries: int,
+        tags: int,
+        growth_rate: int,
+    }
+
+    fn create_entry(action: string, user_id: string, worker_id: string) -> int {
+        return 1;
+    }
+
+    fn query(term: string) -> int {
+        return 0;
+    }
+
+    fn export_knowledge() -> int {
+        return 1;
+    }
+}

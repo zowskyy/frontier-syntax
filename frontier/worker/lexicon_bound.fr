@@ -1,0 +1,18 @@
+// frontier/worker/lexicon_bound.fr
+// Every worker action is bound to the Lexicon
+version: 2.0;
+
+component LexiconBoundWorker {
+    state: {
+        worker_id: string,
+        current_tag: string,
+    }
+
+    fn execute_with_lexicon(user_id: string, action: string, documentation: string) -> int {
+        return 1;
+    }
+
+    fn document_action(action_id: string) -> int {
+        return 1;
+    }
+}

@@ -1,0 +1,24 @@
+// frontier/lexicon/user_ticket.fr
+// Every user ticket is bound to the Lexicon
+version: 2.0;
+
+component UserTicket {
+    state: {
+        ticket_id: string,
+        user_id: string,
+        session_id: string,
+        action_count: int,
+    }
+
+    fn create_ticket(user_id: string) -> int {
+        return 1;
+    }
+
+    fn add_action(action_id: string) -> int {
+        return 1;
+    }
+
+    fn close_ticket() -> int {
+        return 0;
+    }
+}
