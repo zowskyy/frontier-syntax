@@ -33,3 +33,6 @@ frontier.toml
 .frontierrc.toml
 .frontier-telemetry.log
 .frontier-telemetry.log.old
+.env
+.cursor/gate-logs/
+.cursor/gate-cache/

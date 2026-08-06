@@ -141,6 +141,34 @@ All syntax artifacts are produced in six audit cycles. Each cycle must pass all 
 | 5 | Immutable AST & Hashing | `syntax/schema_v2.json`, `syntax/ast_hash_v2.sha3` |
 | 6 | Adversarial Attack Surface | `syntax/wasm/wasm_parser_v2.wasm`, `syntax/final_hash_v2.sha3` |
 
+## Cursor Gate (Agent Policy)
+
+Code changes are reviewed by dual gate scripts before merge. Bootstrapped from the Schema kit:
+
+```bash
+# Re-bootstrap from Schema (optional)
+SCHEMA_ROOT=/path/to/schema bash scripts/bootstrap-repo.sh .
+
+# Install gate reviewers + agent policy on this machine / CI
+bash scripts/install-agent-environment.sh
+
+# Gate a single file (both reviewers must PASS)
+bash scripts/gate-file.sh --file samples/hello_passing.py
+
+# Gate all changed files vs main
+bash scripts/gate-all-changed.sh
+```
+
+| Artifact | Role |
+|----------|------|
+| `cursor_gate.py` / `cursor_gate_fastest.py` | Dual reviewers (15 gates each) |
+| `AGENTS.md` | Agent completion policy |
+| `.cursor/rules/*.mdc` | Quarterback/worker delegation rules |
+| `.github/workflows/gate-check.yml` | CI gate on pull requests |
+| `samples/hello_passing.py` | Smoke-test fixture that passes all gates |
+
+See `AGENTS.md` for the full agent workflow.
+
 ## Documentation Hard Gate
 
 Every process **must** log to `docs/process_log.fr` (Frontier-readable format for data research and LLM training):

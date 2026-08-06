@@ -2,6 +2,7 @@
 
 ## Technical
 
+- [x] Cursor Gate bootstrapped — `cursor_gate.py`, CI workflow, `scripts/gate-file.sh`
 - [x] All 6 cycles complete — NOT VERIFIED by `scripts/tracking.py gate` (see PROJECT_BLUEPRINT.md)
 - [x] All 7 innovations implemented — NOT VERIFIED until Phase 4 gate passes
 - [x] All tests passing — PARTIAL: `cargo test --lib` passes; WASM size target fails
