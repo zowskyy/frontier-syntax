@@ -929,3 +929,311 @@ component LexiconEntry_f9500de5_754e_4a94_87a1_17e8d02ed975 {
     documentation: "Merge PR stack tip into base branch",
     knowledge_delta: "{\"input_keys\":[\"stack\"],\"output_keys\":[\"status\"],\"changed\":true,\"confidence\":0.7}",
 }
+
+component LexiconEntry_cf17a81e_9548_4e58_9ffb_fdbc510e27a8 {
+    action_id: "cf17a81e-9548-4e58-9ffb-fdbc510e27a8",
+    user_id: "cce49f93f0c1043aa9430c906fddff94cf7ec45ffc54824b4a8930d281445222",
+    worker_id: "blueprint_phase_4_4a",
+    timestamp: "2026-08-06T05:11:29.550442Z",
+    action_type: "Phase 4: ZK verifier smoke test",
+    input_hash: "7b243a410ac701e5ced5321c496499d1273d936485449e36ff0260521adc2c68",
+    output_hash: "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+    lexicon_entry: "67ad80135d3d7e47715e5eee04860f1d4eea048286bba3529771d05fb5242496",
+    parent_action: "",
+    documentation: "Phase 4: ZK verifier smoke test",
+    knowledge_delta: "{\"input_keys\":[\"command\"],\"output_keys\":[\"status\"],\"changed\":true,\"confidence\":0.7}",
+}
+
+component LexiconEntry_34adb205_fd16_4e72_ab8d_09db836a7612 {
+    action_id: "34adb205-fd16-4e72-ab8d-09db836a7612",
+    user_id: "cce49f93f0c1043aa9430c906fddff94cf7ec45ffc54824b4a8930d281445222",
+    worker_id: "blueprint_phase_4_4b",
+    timestamp: "2026-08-06T05:11:29.551141Z",
+    action_type: "Phase 4: PQ signatures smoke test",
+    input_hash: "a703a9371f18f6ca857efceaaa8b946e4df51903cd5395af4f6239d0d4f43044",
+    output_hash: "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+    lexicon_entry: "45060434210a42d2744b170e112849493b22a065e3c529384643e33e96e8d94b",
+    parent_action: "",
+    documentation: "Phase 4: PQ signatures smoke test",
+    knowledge_delta: "{\"input_keys\":[\"command\"],\"output_keys\":[\"status\"],\"changed\":true,\"confidence\":0.7}",
+}
+
+component LexiconEntry_17e87025_93e5_4dd5_864e_24802b1268e0 {
+    action_id: "17e87025-93e5-4dd5-864e-24802b1268e0",
+    user_id: "cce49f93f0c1043aa9430c906fddff94cf7ec45ffc54824b4a8930d281445222",
+    worker_id: "blueprint_phase_5_5a",
+    timestamp: "2026-08-06T05:11:29.553866Z",
+    action_type: "Phase 5: self-hosting bootstrap verify",
+    input_hash: "2c56a30e4b60675884da33e17cf6d18e26ae3aef0873f97bdcbd09bbb03989ce",
+    output_hash: "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+    lexicon_entry: "389c6fbd847c3db1fb1b5d266e952951586503a2928de56bbc38f2d4e157353c",
+    parent_action: "",
+    documentation: "Phase 5: self-hosting bootstrap verify",
+    knowledge_delta: "{\"input_keys\":[\"command\"],\"output_keys\":[\"status\"],\"changed\":true,\"confidence\":0.7}",
+}
+
+component LexiconEntry_9865769c_e3e3_40a5_bea9_5b65bbc049c7 {
+    action_id: "9865769c-e3e3-40a5-bea9-5b65bbc049c7",
+    user_id: "cce49f93f0c1043aa9430c906fddff94cf7ec45ffc54824b4a8930d281445222",
+    worker_id: "blueprint_phase_5_5b",
+    timestamp: "2026-08-06T05:11:29.554350Z",
+    action_type: "Phase 5: main.fr parse",
+    input_hash: "abbc34d14571d235c5321cbca40698287267e2cf5cbd7b8bb8acb10e79236ee9",
+    output_hash: "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+    lexicon_entry: "d322eed26ab6a6d1a030ffcbc868c9b4b275c147a17486a64dca816b6ae242e2",
+    parent_action: "",
+    documentation: "Phase 5: main.fr parse",
+    knowledge_delta: "{\"input_keys\":[\"command\"],\"output_keys\":[\"status\"],\"changed\":true,\"confidence\":0.7}",
+}
+
+component LexiconEntry_37a3f893_0b0a_4633_ab9b_5938ca8b41c1 {
+    action_id: "37a3f893-0b0a-4633-ab9b-5938ca8b41c1",
+    user_id: "cce49f93f0c1043aa9430c906fddff94cf7ec45ffc54824b4a8930d281445222",
+    worker_id: "blueprint_phase_6_6a",
+    timestamp: "2026-08-06T05:11:29.556530Z",
+    action_type: "Phase 6: agent spec exists",
+    input_hash: "1fcd837518e068c77c87dbd1be2d2fca79305bc62c2afef2ed3a3aeac4d2059a",
+    output_hash: "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+    lexicon_entry: "473c211b5bb65a4d3f47433019bd88450fc6e8c2280811dd0fd0ca1c6126a6bb",
+    parent_action: "",
+    documentation: "Phase 6: agent spec exists",
+    knowledge_delta: "{\"input_keys\":[\"command\"],\"output_keys\":[\"status\"],\"changed\":true,\"confidence\":0.7}",
+}
+
+component LexiconEntry_ca5f2152_645e_4527_92b8_1189d57b88c8 {
+    action_id: "ca5f2152-645e-4527-92b8-1189d57b88c8",
+    user_id: "cce49f93f0c1043aa9430c906fddff94cf7ec45ffc54824b4a8930d281445222",
+    worker_id: "blueprint_phase_3_3a",
+    timestamp: "2026-08-06T05:11:29.559033Z",
+    action_type: "Slice 3.1: WASM size measure (#48)",
+    input_hash: "9032f40e8d17102a898a6cd6e737cc422b5512bc6d210e39679099ef33885523",
+    output_hash: "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+    lexicon_entry: "c1b9f0349c3ff16cf037be05215fe927e5fc1587e537af02fd3774c2001e5671",
+    parent_action: "",
+    documentation: "Slice 3.1: WASM size measure (#48)",
+    knowledge_delta: "{\"input_keys\":[\"command\"],\"output_keys\":[\"status\"],\"changed\":true,\"confidence\":0.7}",
+}
+
+component LexiconEntry_9849693c_be7c_459f_be97_7dcd2adbfdfc {
+    action_id: "9849693c-be7c-459f-be97-7dcd2adbfdfc",
+    user_id: "cce49f93f0c1043aa9430c906fddff94cf7ec45ffc54824b4a8930d281445222",
+    worker_id: "blueprint_phase_8_8b",
+    timestamp: "2026-08-06T05:11:29.565025Z",
+    action_type: "Phase 8: launch checklist status",
+    input_hash: "15a499f29e0dbb814c29d990583054645750efdf5a5470e4e4962afc784d64b9",
+    output_hash: "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+    lexicon_entry: "edece4f7771d138a1f187ffe595e833f5cab9b42afc30327467a98063a058c4a",
+    parent_action: "",
+    documentation: "Phase 8: launch checklist status",
+    knowledge_delta: "{\"input_keys\":[\"command\"],\"output_keys\":[\"status\"],\"changed\":true,\"confidence\":0.7}",
+}
+
+component LexiconEntry_ddecfc2b_6c63_4bb6_b362_e7b3a24f661d {
+    action_id: "ddecfc2b-6c63-4bb6-b362-e7b3a24f661d",
+    user_id: "cce49f93f0c1043aa9430c906fddff94cf7ec45ffc54824b4a8930d281445222",
+    worker_id: "blueprint_phase_1_1a",
+    timestamp: "2026-08-06T05:11:29.566360Z",
+    action_type: "Slice 1.1: WASM codegen tests (#44)",
+    input_hash: "e1b5858e7fba77fe49aedb8bf39ac4afa406c3edd286b03ee33a19e0d24baa3e",
+    output_hash: "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+    lexicon_entry: "346e7693b67517c0ca1e2cfeacc0ae0dfcd04f87f7b284d7edefc6ca402a5d47",
+    parent_action: "",
+    documentation: "Slice 1.1: WASM codegen tests (#44)",
+    knowledge_delta: "{\"input_keys\":[\"command\"],\"output_keys\":[\"status\"],\"changed\":true,\"confidence\":0.7}",
+}
+
+component LexiconEntry_e3db4312_d963_405f_b016_530b1ebe52fd {
+    action_id: "e3db4312-d963-405f-b016-530b1ebe52fd",
+    user_id: "cce49f93f0c1043aa9430c906fddff94cf7ec45ffc54824b4a8930d281445222",
+    worker_id: "blueprint_phase_0_0a",
+    timestamp: "2026-08-06T05:11:29.572012Z",
+    action_type: "Slice 0.1: dedupe GitHub issues",
+    input_hash: "c13287c873728132b6cde34e122332c740a999ff6e26ade5e4e2e289cda80575",
+    output_hash: "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+    lexicon_entry: "8e840d2d774d632b93a1610c419a21ae2b6ae4a251403fb03b46b7cdb81b52d7",
+    parent_action: "",
+    documentation: "Slice 0.1: dedupe GitHub issues",
+    knowledge_delta: "{\"input_keys\":[\"command\"],\"output_keys\":[\"status\"],\"changed\":true,\"confidence\":0.7}",
+}
+
+component LexiconEntry_a51a30b4_bee4_43d5_b1c4_cdd5a7a6f3dd {
+    action_id: "a51a30b4-bee4-43d5-b1c4-cdd5a7a6f3dd",
+    user_id: "cce49f93f0c1043aa9430c906fddff94cf7ec45ffc54824b4a8930d281445222",
+    worker_id: "blueprint_phase_0_0b",
+    timestamp: "2026-08-06T05:11:29.576011Z",
+    action_type: "Slice 0.2: run tracking gate",
+    input_hash: "e4147fd49d056366ac91c053c7763d336cdaa1c696a6e002dd27657ffb4a3735",
+    output_hash: "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+    lexicon_entry: "94c34ed7137de611c376c6403f94b84a2a913720806ac40ef9c152e95dc88f18",
+    parent_action: "",
+    documentation: "Slice 0.2: run tracking gate",
+    knowledge_delta: "{\"input_keys\":[\"command\"],\"output_keys\":[\"status\"],\"changed\":true,\"confidence\":0.7}",
+}
+
+component LexiconEntry_94c37b51_e235_41c9_8828_6ce690893bf0 {
+    action_id: "94c37b51-e235-41c9-8828-6ce690893bf0",
+    user_id: "cce49f93f0c1043aa9430c906fddff94cf7ec45ffc54824b4a8930d281445222",
+    worker_id: "blueprint_phase_2_2a",
+    timestamp: "2026-08-06T05:11:29.580535Z",
+    action_type: "Slice 2.1: spec/impl bridge (#47)",
+    input_hash: "d6702c128901e00a0db16e1300a2eb288882c95bdcff78476a5cda61a6f61f99",
+    output_hash: "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+    lexicon_entry: "46867cc62a13310f68c35da6016ab107c471944cfb59b3f059cea6186602da76",
+    parent_action: "",
+    documentation: "Slice 2.1: spec/impl bridge (#47)",
+    knowledge_delta: "{\"input_keys\":[\"command\"],\"output_keys\":[\"status\"],\"changed\":true,\"confidence\":0.7}",
+}
+
+component LexiconEntry_97bcb17a_3dd9_4d2d_92ef_f01c2ddc5b1f {
+    action_id: "97bcb17a-3dd9-4d2d-92ef-f01c2ddc5b1f",
+    user_id: "cce49f93f0c1043aa9430c906fddff94cf7ec45ffc54824b4a8930d281445222",
+    worker_id: "blueprint_phase_6_6b",
+    timestamp: "2026-08-06T05:11:29.580126Z",
+    action_type: "Phase 6: lexicon-bound worker gates",
+    input_hash: "8c9dcd2104b0c58ebf612dd6be456d3f34745bc19a802c54a885e781ae5fc3e2",
+    output_hash: "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+    lexicon_entry: "d6175c02a730b73c1dc8fdd1ef0c26aed58347890f215cf5fa42164de521a5ea",
+    parent_action: "",
+    documentation: "Phase 6: lexicon-bound worker gates",
+    knowledge_delta: "{\"input_keys\":[\"command\"],\"output_keys\":[\"status\"],\"changed\":true,\"confidence\":0.7}",
+}
+
+component LexiconEntry_aae1efb0_5215_4b1e_a5a7_add57b151f6d {
+    action_id: "aae1efb0-5215-4b1e-a5a7-add57b151f6d",
+    user_id: "cce49f93f0c1043aa9430c906fddff94cf7ec45ffc54824b4a8930d281445222",
+    worker_id: "blueprint_phase_2_2b",
+    timestamp: "2026-08-06T05:11:29.584854Z",
+    action_type: "Slice 2.2: language hardening",
+    input_hash: "becd2f991be032d56b64233c6527f519ca983203be053ab0eb0cca458e03539f",
+    output_hash: "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+    lexicon_entry: "c78a9193140effa22cbcc5f39867b3701f9793404986c3c4c0153e14f4d30e0a",
+    parent_action: "",
+    documentation: "Slice 2.2: language hardening",
+    knowledge_delta: "{\"input_keys\":[\"command\"],\"output_keys\":[\"status\"],\"changed\":true,\"confidence\":0.7}",
+}
+
+component LexiconEntry_cfe063e9_fb2a_4370_b51d_4cf286bc37ad {
+    action_id: "cfe063e9-fb2a-4370-b51d-4cf286bc37ad",
+    user_id: "cce49f93f0c1043aa9430c906fddff94cf7ec45ffc54824b4a8930d281445222",
+    worker_id: "blueprint_phase_1_1b",
+    timestamp: "2026-08-06T05:11:29.585482Z",
+    action_type: "Slice 1.2: knowledge→codegen (#45)",
+    input_hash: "e53fff770c653aa55776055205f37a2c73838cd7ca3cbf361f4c0d6975c05a17",
+    output_hash: "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+    lexicon_entry: "32eea8f81d2b0f1a4592ea9b125076a74baf667d0f5195186e7b335cb08b121f",
+    parent_action: "",
+    documentation: "Slice 1.2: knowledge→codegen (#45)",
+    knowledge_delta: "{\"input_keys\":[\"command\"],\"output_keys\":[\"status\"],\"changed\":true,\"confidence\":0.7}",
+}
+
+component LexiconEntry_6b7dc154_163b_4c94_92fc_1e3e79b34b47 {
+    action_id: "6b7dc154-163b-4c94-92fc-1e3e79b34b47",
+    user_id: "cce49f93f0c1043aa9430c906fddff94cf7ec45ffc54824b4a8930d281445222",
+    worker_id: "blueprint_phase_8_8a",
+    timestamp: "2026-08-06T05:11:29.586361Z",
+    action_type: "Phase 8: frontier.dev install check",
+    input_hash: "f2d87fab7751aecffc45fb9bd13515c7afc0d788c9bdd4613cffa4133deb309c",
+    output_hash: "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+    lexicon_entry: "9da69b90965dc8b7ed81352d6e6c60b5c29d617392ed6570ae4b5a0271355571",
+    parent_action: "",
+    documentation: "Phase 8: frontier.dev install check",
+    knowledge_delta: "{\"input_keys\":[\"command\"],\"output_keys\":[\"status\"],\"changed\":true,\"confidence\":0.7}",
+}
+
+component LexiconEntry_4e6f7645_aef4_441f_8f4b_dff73ce03d4d {
+    action_id: "4e6f7645-aef4-441f-8f4b-dff73ce03d4d",
+    user_id: "cce49f93f0c1043aa9430c906fddff94cf7ec45ffc54824b4a8930d281445222",
+    worker_id: "blueprint_phase_7_7b",
+    timestamp: "2026-08-06T05:11:29.586812Z",
+    action_type: "Phase 7: health check script",
+    input_hash: "a31c038dcee007ca8a11bd8799a4335c97e80dd946fda3bd215b46eb71ef6a8b",
+    output_hash: "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+    lexicon_entry: "969b96fea442fcb46b4bc971006c0ca59d45fd1094f47a73205ef6d054a7f63a",
+    parent_action: "",
+    documentation: "Phase 7: health check script",
+    knowledge_delta: "{\"input_keys\":[\"command\"],\"output_keys\":[\"status\"],\"changed\":true,\"confidence\":0.7}",
+}
+
+component LexiconEntry_dc2adb55_afb6_42a0_867b_ec441c6b6c76 {
+    action_id: "dc2adb55-afb6-42a0-867b-ec441c6b6c76",
+    user_id: "cce49f93f0c1043aa9430c906fddff94cf7ec45ffc54824b4a8930d281445222",
+    worker_id: "blueprint_phase_3_3b",
+    timestamp: "2026-08-06T05:11:29.591350Z",
+    action_type: "Slice 3.1: WASM size target check",
+    input_hash: "9ceb63a89432ddfbed1a0f3f812949aa8617758234cf406066633bba7e62fa28",
+    output_hash: "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+    lexicon_entry: "c110695c1b813cb9665ee9690ae8e6c1990648b7f093959e29690333c9f90ac9",
+    parent_action: "",
+    documentation: "Slice 3.1: WASM size target check",
+    knowledge_delta: "{\"input_keys\":[\"command\"],\"output_keys\":[\"status\"],\"changed\":true,\"confidence\":0.7}",
+}
+
+component LexiconEntry_ba0e4e65_5832_4c2d_9934_67ae72c157b6 {
+    action_id: "ba0e4e65-5832-4c2d-9934-67ae72c157b6",
+    user_id: "cce49f93f0c1043aa9430c906fddff94cf7ec45ffc54824b4a8930d281445222",
+    worker_id: "blueprint_phase_7_7a",
+    timestamp: "2026-08-06T05:11:29.593203Z",
+    action_type: "Phase 7: CDX runtime probe",
+    input_hash: "aff95388811aded67e7e34181eede9f6e861b724c532e781151a6f123998d7b8",
+    output_hash: "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+    lexicon_entry: "523935a1b920186fe464e28c7d94c1da5cf56a0df1139a94fd784c985e11415e",
+    parent_action: "",
+    documentation: "Phase 7: CDX runtime probe",
+    knowledge_delta: "{\"input_keys\":[\"command\"],\"output_keys\":[\"status\"],\"changed\":true,\"confidence\":0.7}",
+}
+
+component LexiconEntry_f8de266b_f771_485a_acc9_d71ce3fa88e0 {
+    action_id: "f8de266b-f771-485a-acc9-d71ce3fa88e0",
+    user_id: "f0a7eb27f7925fd4585e1fecc9f32f08b48ca952e17ef9cee4d2adb62ea02473",
+    worker_id: "arc_gate_tester",
+    timestamp: "2026-08-06T05:11:29.682827Z",
+    action_type: "arc_gate_test",
+    input_hash: "794a191fe719627b0975897bd4349a742550267de1c26ae0949cfac31c520e3e",
+    output_hash: "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+    lexicon_entry: "05f8e752da0a0158bbf7986c978842290f9763ffd21d01d7b22a7065fb3fa5d9",
+    parent_action: "",
+    documentation: "ARC gate: verify action creates Lexicon entry",
+    knowledge_delta: "{\"input_keys\":[\"gate\"],\"output_keys\":[\"status\"],\"changed\":true,\"confidence\":0.7}",
+}
+
+component LexiconEntry_0bf5c87e_696b_4a45_8e7b_db230fde99c5 {
+    action_id: "0bf5c87e-696b-4a45-8e7b-db230fde99c5",
+    user_id: "61db200ff6886f3dea314cab43b80e4c2f3d27668d1a1a60353e57ec6b7b70e1",
+    worker_id: "system",
+    timestamp: "2026-08-06T05:11:29.685649Z",
+    action_type: "ticket_creation",
+    input_hash: "b8dd05a32d991f1d19e92bd5c54d474fb35b793c9b741f8b927c283a7d3a8bf2",
+    output_hash: "21026b17a10a135cf2213d976b8b8fa4d3c63f7c255a13eea03dfc37ea7e02cb",
+    lexicon_entry: "14aa2b428cc9ba78d1f05cccf66e4c162c68241b47fac6675389fb86e1e40001",
+    parent_action: "",
+    documentation: "User ticket created for session",
+    knowledge_delta: "{\"input_keys\":[\"user_id\"],\"output_keys\":[\"ticket_id\"],\"changed\":true,\"confidence\":0.7}",
+}
+
+component LexiconEntry_a5eca7ee_7bce_4b16_8950_ebc5b43eae27 {
+    action_id: "a5eca7ee-7bce-4b16-8950-ebc5b43eae27",
+    user_id: "61db200ff6886f3dea314cab43b80e4c2f3d27668d1a1a60353e57ec6b7b70e1",
+    worker_id: "system",
+    timestamp: "2026-08-06T05:11:29.686551Z",
+    action_type: "ticket_close",
+    input_hash: "21026b17a10a135cf2213d976b8b8fa4d3c63f7c255a13eea03dfc37ea7e02cb",
+    output_hash: "1e2a6d45892a43c0e7190338aacbd12ad09bfe5202e1570e35da2a75066bef66",
+    lexicon_entry: "ffa3d3a4a093d711354fcb3e875b05b5fa87ef64be377bfb149abd61aa6fecce",
+    parent_action: "4117f317-ef70-48db-a96b-467fb08920d4",
+    documentation: "User ticket closed",
+    knowledge_delta: "{\"input_keys\":[\"ticket_id\"],\"output_keys\":[\"status\",\"action_count\"],\"changed\":true,\"confidence\":0.7}",
+}
+
+component LexiconEntry_76d42c76_0817_4ee9_97b1_5558cb355212 {
+    action_id: "76d42c76-0817-4ee9-97b1-5558cb355212",
+    user_id: "cce49f93f0c1043aa9430c906fddff94cf7ec45ffc54824b4a8930d281445222",
+    worker_id: "arc_query_tester",
+    timestamp: "2026-08-06T05:11:29.687601Z",
+    action_type: "query_test_action",
+    input_hash: "1fd32c2935118e7c8e65c9ed72eb08be45895b8221c317c9be905a14767efe8e",
+    output_hash: "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+    lexicon_entry: "7c87bca04067ea45dc690360a6faa5057dff4e281a2304a289af6323e682a4a6",
+    parent_action: "",
+    documentation: "Queryable test entry",
+    knowledge_delta: "{\"input_keys\":[\"query\"],\"output_keys\":[\"status\"],\"changed\":true,\"confidence\":0.7}",
+}

@@ -1,0 +1,60 @@
+{
+  "generated_at": "2026-08-06T05:13:06.253143Z",
+  "phase_0_ready": true,
+  "phase_1_p0_pass": true,
+  "phase_2_3_p1_pass": false,
+  "all_pass": false,
+  "evidence": [
+    {
+      "check": "1.1_wasm_codegen",
+      "ref": "issue_44",
+      "pass": true,
+      "output": "     ^^^^^^^^\n\nwarning: method `check_null_safety` is never used\n   --> src/resolver.rs:140:8\n    |\n37  | impl Resolver {\n    | ------------- method in this implementation\n...\n140 |     fn check_null_safety(&self, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {\n    |        ^^^^^^^^^^^^^^^^^\n\nwarning: `frontier` (lib test) generated 12 warnings (run `cargo fix --lib -p frontier --tests` to apply 2 suggestions)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.66s\n     Running unittests src/lib.rs (target/debug/deps/frontier-1475498e1a73911a)\n",
+      "command": "cargo test --lib wasm_codegen::"
+    },
+    {
+      "check": "1.2_knowledge_codegen",
+      "ref": "issue_45",
+      "pass": true,
+      "output": "     ^^^^^^^^\n\nwarning: method `check_null_safety` is never used\n   --> src/resolver.rs:140:8\n    |\n37  | impl Resolver {\n    | ------------- method in this implementation\n...\n140 |     fn check_null_safety(&self, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {\n    |        ^^^^^^^^^^^^^^^^^\n\nwarning: `frontier` (lib test) generated 12 warnings (run `cargo fix --lib -p frontier --tests` to apply 2 suggestions)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.64s\n     Running unittests src/lib.rs (target/debug/deps/frontier-1475498e1a73911a)\n",
+      "command": "cargo test --lib wasm_codegen::tests::test_knowledge_changes_wasm"
+    },
+    {
+      "check": "1.3_self_hosting",
+      "ref": "issue_46",
+      "pass": true,
+      "output": "PASS: Self-hosting bootstrap (cmp identical)\n",
+      "command": "python3 scripts/verify_self_hosting.py",
+      "status": "partial",
+      "note": "Bootstrap wrapper pass \u2014 Frontier-native compiler not validated (Phase 5)"
+    },
+    {
+      "check": "2.1_spec_impl",
+      "ref": "issue_47",
+      "pass": true,
+      "output": "PASS: Spec/impl bridge \u2014 10 core modules mapped\n",
+      "command": "python3 scripts/spec_impl_bridge.py"
+    },
+    {
+      "check": "2.2_lib_tests",
+      "ref": "coverage",
+      "pass": true,
+      "output": "     ^^^^^^^^\n\nwarning: method `check_null_safety` is never used\n   --> src/resolver.rs:140:8\n    |\n37  | impl Resolver {\n    | ------------- method in this implementation\n...\n140 |     fn check_null_safety(&self, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {\n    |        ^^^^^^^^^^^^^^^^^\n\nwarning: `frontier` (lib test) generated 12 warnings (run `cargo fix --lib -p frontier --tests` to apply 2 suggestions)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.66s\n     Running unittests src/lib.rs (target/debug/deps/frontier-1475498e1a73911a)\n",
+      "command": "cargo test --lib"
+    },
+    {
+      "check": "3.1_wasm_size",
+      "ref": "issue_48",
+      "pass": true,
+      "output": "WASM size: 885.3 KB (target <100 KB \u2014 tracked)\nPASS: WASM build OK \u2014 885.3 KB tracked (target <100 KB)\n",
+      "command": "python3 scripts/optimize_wasm_size.py"
+    },
+    {
+      "check": "3.1_wasm_size_target",
+      "ref": "issue_48",
+      "pass": false,
+      "size_kb": 885.3,
+      "target_kb": 100
+    }
+  ]
+}

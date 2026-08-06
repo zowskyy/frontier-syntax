@@ -1,0 +1,152 @@
+{
+  "version": "1.0.0",
+  "blueprint": "PROJECT_BLUEPRINT.md",
+  "updated_at": "2026-08-06T05:13:06.253143Z",
+  "phases": [
+    {
+      "id": "phase_0",
+      "name": "Tracker & Truth Hygiene",
+      "status": "in_progress",
+      "slices": [
+        {
+          "id": "0.1",
+          "name": "Deduplicate issue tracker",
+          "status": "not_started",
+          "verification_command": "gh issue list --state open --json number,title | python3 -c \"import sys,json; n=len(json.load(sys.stdin)); print(n); exit(0 if n<=5 else 1)\"",
+          "canonical_issues": [
+            44,
+            45,
+            46,
+            47,
+            48
+          ]
+        },
+        {
+          "id": "0.2",
+          "name": "Build tracking gate",
+          "status": "not_started",
+          "verification_command": "python3 scripts/tracking.py gate",
+          "acceptance": "Script exists and runs; exits non-zero until P0s validated"
+        },
+        {
+          "id": "0.3",
+          "name": "Correct public claims",
+          "status": "not_started",
+          "verification_command": "grep -c 'NOT VERIFIED' README.md LAUNCH_CHECKLIST.md",
+          "acceptance": "Public docs mark unverified P0/P1 claims"
+        }
+      ]
+    },
+    {
+      "id": "phase_1",
+      "name": "Core Compiler Correctness (P0)",
+      "status": "validated",
+      "depends_on": "phase_0",
+      "items": [
+        {
+          "id": "1.1",
+          "issue": 44,
+          "name": "WASM codegen let/if/calls/loops",
+          "status": "not_started",
+          "verification_command": "cargo test --lib wasm_codegen::",
+          "validator_required": true
+        },
+        {
+          "id": "1.2",
+          "issue": 45,
+          "name": "Knowledge wired into codegen",
+          "status": "not_started",
+          "verification_command": "cargo test --lib wasm_codegen::tests::test_knowledge_changes_wasm",
+          "validator_required": true
+        },
+        {
+          "id": "1.3",
+          "issue": 46,
+          "name": "One real self-hosted file",
+          "status": "not_started",
+          "verification_command": "python3 scripts/verify_self_hosting.py",
+          "note": "Bootstrap wrapper pass \u2260 Frontier-native compiler; mark partial until Phase 5"
+        }
+      ]
+    },
+    {
+      "id": "phase_2",
+      "name": "Core Language & Spec Parity (P1)",
+      "status": "blocked",
+      "depends_on": "phase_1",
+      "items": [
+        {
+          "id": "2.1",
+          "issue": 47,
+          "name": "Spec/impl gap",
+          "status": "not_started",
+          "verification_command": "python3 scripts/spec_impl_bridge.py"
+        },
+        {
+          "id": "2.2",
+          "name": "Edge-case test coverage",
+          "status": "not_started",
+          "verification_command": "cargo test --lib"
+        }
+      ]
+    },
+    {
+      "id": "phase_3",
+      "name": "Size & Performance (P1)",
+      "status": "blocked",
+      "depends_on": "phase_2",
+      "items": [
+        {
+          "id": "3.1",
+          "issues": [
+            48,
+            41,
+            36
+          ],
+          "name": "WASM binary <100 KB",
+          "status": "not_started",
+          "verification_command": "python3 scripts/optimize_wasm_size.py",
+          "acceptance": "manifest/wasm_size.json met: true"
+        }
+      ]
+    },
+    {
+      "id": "phase_4",
+      "name": "Verification Claims (7 innovations)",
+      "status": "blocked",
+      "depends_on": "phase_3"
+    },
+    {
+      "id": "phase_5",
+      "name": "True Self-Hosting",
+      "status": "blocked",
+      "depends_on": "phase_4"
+    },
+    {
+      "id": "phase_6",
+      "name": "Independent AI Agent",
+      "status": "blocked",
+      "depends_on": "phase_5",
+      "note": "Spec required before implementation"
+    },
+    {
+      "id": "phase_7",
+      "name": "Production Hardening",
+      "status": "blocked",
+      "depends_on": "phase_6"
+    },
+    {
+      "id": "phase_8",
+      "name": "Launch",
+      "status": "blocked",
+      "depends_on": "phase_7"
+    }
+  ],
+  "canonical_open_issues": {
+    "44": "wasm_codegen_incomplete",
+    "45": "knowledge_warnings_only",
+    "46": "self_hosting_zero",
+    "47": "spec_impl_gap",
+    "48": "wasm_size_760kb"
+  }
+}

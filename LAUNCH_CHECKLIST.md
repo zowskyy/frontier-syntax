@@ -2,12 +2,22 @@
 
 ## Technical
 
-- [x] All 6 cycles complete
-- [x] All 7 innovations implemented
-- [x] All tests passing
-- [x] All proofs validated
+- [x] All 6 cycles complete — NOT VERIFIED by `scripts/tracking.py gate` (see PROJECT_BLUEPRINT.md)
+- [x] All 7 innovations implemented — NOT VERIFIED until Phase 4 gate passes
+- [x] All tests passing — PARTIAL: `cargo test --lib` passes; WASM size target fails
+- [x] All proofs validated — NOT VERIFIED independently
 - [x] All hashes verified
 - [x] PR #6 merged
+
+## P0 tracker (canonical GitHub issues)
+
+| Issue | Status | Gate |
+|-------|--------|------|
+| #44 WASM codegen | NOT VERIFIED (closed in tracker) | `cargo test --lib wasm_codegen::` |
+| #45 Knowledge→codegen | NOT VERIFIED | `test_knowledge_changes_wasm` |
+| #46 Self-hosting | PARTIAL (bootstrap only) | `verify_self_hosting.py` |
+| #47 Spec/impl | NOT VERIFIED | `spec_impl_bridge.py` |
+| #48 WASM size | FAIL (~885 KB) | `manifest/wasm_size.json met: false` |
 
 ## Business
 
