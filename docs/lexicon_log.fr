@@ -845,3 +845,87 @@ component LexiconEntry_37255684_0a52_4c42_a0b8_377d5d1e805c {
     documentation: "Queryable test entry",
     knowledge_delta: "{\"input_keys\":[\"query\"],\"output_keys\":[\"status\"],\"changed\":true,\"confidence\":0.7}",
 }
+
+component LexiconEntry_932f9e0b_2c96_47c2_9756_66aff520ce20 {
+    action_id: "932f9e0b-2c96-47c2-9756-66aff520ce20",
+    user_id: "cce49f93f0c1043aa9430c906fddff94cf7ec45ffc54824b4a8930d281445222",
+    worker_id: "audit_w0",
+    timestamp: "2026-08-06T04:38:31.064077Z",
+    action_type: "pr_audit_54",
+    input_hash: "164be5bc4cc4bf8025af808ad8d57694eeb01cfbac3be0ee67a778ecf3859669",
+    output_hash: "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+    lexicon_entry: "772c5845655d19d45355ebcd290278fb6a377fd04c5bc497de04f2a5ab9aae07",
+    parent_action: "",
+    documentation: "Audit PR #54 mergeability",
+    knowledge_delta: "{\"input_keys\":[\"pr\",\"branch\"],\"output_keys\":[\"status\"],\"changed\":true,\"confidence\":0.7}",
+}
+
+component LexiconEntry_f805a632_2778_4617_af6b_56de3071acce {
+    action_id: "f805a632-2778-4617-af6b-56de3071acce",
+    user_id: "cce49f93f0c1043aa9430c906fddff94cf7ec45ffc54824b4a8930d281445222",
+    worker_id: "audit_w1",
+    timestamp: "2026-08-06T04:38:31.064890Z",
+    action_type: "pr_audit_53",
+    input_hash: "5a8ac1df1cd4b0f3c48826116e5f26e686ca3383dcaab1f9f589d0c41b114418",
+    output_hash: "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+    lexicon_entry: "13ced4fb9a282778e8155467e8f2133b1551a9110c94637b6fed33ec6f8735c6",
+    parent_action: "",
+    documentation: "Audit PR #53 mergeability",
+    knowledge_delta: "{\"input_keys\":[\"pr\",\"branch\"],\"output_keys\":[\"status\"],\"changed\":true,\"confidence\":0.7}",
+}
+
+component LexiconEntry_c407c53d_9c45_471a_a81e_0948f40bb2e7 {
+    action_id: "c407c53d-9c45-471a-a81e-0948f40bb2e7",
+    user_id: "cce49f93f0c1043aa9430c906fddff94cf7ec45ffc54824b4a8930d281445222",
+    worker_id: "audit_w2",
+    timestamp: "2026-08-06T04:38:31.066803Z",
+    action_type: "pr_audit_52",
+    input_hash: "c5f1a35f77912f01f66444a0cc4e13489dddd49dfa0722f03def65c6a780f589",
+    output_hash: "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+    lexicon_entry: "0aff0484fbe21d6c7c6edde5fb406369cb80e0f1a020aa9fcbfc63fbd2c179ce",
+    parent_action: "",
+    documentation: "Audit PR #52 mergeability",
+    knowledge_delta: "{\"input_keys\":[\"pr\",\"branch\"],\"output_keys\":[\"status\"],\"changed\":true,\"confidence\":0.7}",
+}
+
+component LexiconEntry_d406d9f8_adfd_4898_805b_6bfadb310398 {
+    action_id: "d406d9f8-adfd-4898-805b-6bfadb310398",
+    user_id: "cce49f93f0c1043aa9430c906fddff94cf7ec45ffc54824b4a8930d281445222",
+    worker_id: "audit_w3",
+    timestamp: "2026-08-06T04:38:31.068297Z",
+    action_type: "pr_audit_51",
+    input_hash: "922175d42002deb3cb601c4dcc601d0fda18f5a003748385ce81b1008c94bfdd",
+    output_hash: "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+    lexicon_entry: "81be2940ba8ac9ffbb1df573bf396098c55c51e28d26c4bd9ecaae80be9052a1",
+    parent_action: "",
+    documentation: "Audit PR #51 mergeability",
+    knowledge_delta: "{\"input_keys\":[\"pr\",\"branch\"],\"output_keys\":[\"status\"],\"changed\":true,\"confidence\":0.7}",
+}
+
+component LexiconEntry_20c606f2_ca13_4966_a343_96809a1b13da {
+    action_id: "20c606f2-ca13-4966-a343-96809a1b13da",
+    user_id: "cce49f93f0c1043aa9430c906fddff94cf7ec45ffc54824b4a8930d281445222",
+    worker_id: "verify_tip",
+    timestamp: "2026-08-06T04:38:31.665579Z",
+    action_type: "pr_verify_51",
+    input_hash: "922175d42002deb3cb601c4dcc601d0fda18f5a003748385ce81b1008c94bfdd",
+    output_hash: "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+    lexicon_entry: "81be2940ba8ac9ffbb1df573bf396098c55c51e28d26c4bd9ecaae80be9052a1",
+    parent_action: "",
+    documentation: "Verify PR #51 branch tests",
+    knowledge_delta: "{\"input_keys\":[\"pr\",\"branch\"],\"output_keys\":[\"status\"],\"changed\":true,\"confidence\":0.7}",
+}
+
+component LexiconEntry_f9500de5_754e_4a94_87a1_17e8d02ed975 {
+    action_id: "f9500de5-754e-4a94-87a1-17e8d02ed975",
+    user_id: "cce49f93f0c1043aa9430c906fddff94cf7ec45ffc54824b4a8930d281445222",
+    worker_id: "merge_worker",
+    timestamp: "2026-08-06T04:38:34.390685Z",
+    action_type: "merge_pr_stack",
+    input_hash: "f9d603cd1ff5400a53a255e93425293751e093578eb2ede58de53b745843d0e6",
+    output_hash: "116294c6352d3f9f316529b55b7444f798110f01a2ee552f4f19e9f46b09c527",
+    lexicon_entry: "b202fce5a3b12a4cf5fa48bba34b1605010f7237e6c1add690aac1f19d2d19cb",
+    parent_action: "",
+    documentation: "Merge PR stack tip into base branch",
+    knowledge_delta: "{\"input_keys\":[\"stack\"],\"output_keys\":[\"status\"],\"changed\":true,\"confidence\":0.7}",
+}

@@ -1,0 +1,96 @@
+{
+  "generated_at": "2026-08-06T04:38:35.014705Z",
+  "open_prs_found": 4,
+  "pr_stack": [
+    {
+      "number": 51,
+      "branch": "cursor/worker-swarm-kb-optimization-f519",
+      "title": "Swarm KB optimizer"
+    },
+    {
+      "number": 52,
+      "branch": "cursor/peerless-chat-swarm-f519",
+      "title": "Peerless chat swarm"
+    },
+    {
+      "number": 53,
+      "branch": "cursor/execute-peerless-plan-f519",
+      "title": "Execute Peerless plan"
+    },
+    {
+      "number": 54,
+      "branch": "cursor/lexicon-bound-worker-f519",
+      "title": "Lexicon-Bound Worker"
+    }
+  ],
+  "base_branch": "cursor/frontier-syntax-cycle1-e39f",
+  "all_pass": false,
+  "duration_ms": 4284,
+  "worker_results": [
+    {
+      "worker": "audit_51",
+      "pr": 51,
+      "branch": "cursor/worker-swarm-kb-optimization-f519",
+      "mergeable": true,
+      "pass": true,
+      "lexicon_tag": "d406d9f8-adfd-4898-805b-6bfadb310398"
+    },
+    {
+      "worker": "audit_52",
+      "pr": 52,
+      "branch": "cursor/peerless-chat-swarm-f519",
+      "mergeable": true,
+      "pass": true,
+      "lexicon_tag": "c407c53d-9c45-471a-a81e-0948f40bb2e7"
+    },
+    {
+      "worker": "audit_53",
+      "pr": 53,
+      "branch": "cursor/execute-peerless-plan-f519",
+      "mergeable": true,
+      "pass": true,
+      "lexicon_tag": "f805a632-2778-4617-af6b-56de3071acce"
+    },
+    {
+      "worker": "audit_54",
+      "pr": 54,
+      "branch": "cursor/lexicon-bound-worker-f519",
+      "mergeable": true,
+      "pass": true,
+      "lexicon_tag": "932f9e0b-2c96-47c2-9756-66aff520ce20"
+    },
+    {
+      "worker": "verify_51",
+      "pr": 51,
+      "pass": true,
+      "lexicon_tag": "20c606f2-ca13-4966-a343-96809a1b13da"
+    },
+    {
+      "worker": "merge_stack",
+      "pass": false,
+      "lexicon_tag": "f9500de5-754e-4a94-87a1-17e8d02ed975",
+      "output": {
+        "pass": false,
+        "steps": [
+          {
+            "step": "checkout_base",
+            "pass": false,
+            "duration_ms": 3,
+            "output": "error: Your local changes to the following files would be overwritten by checkout:\n\tdocs/lexicon_log.fr\n\tdocs/process_log.fr\n\tmanifest/lexicon_index.json\nPlease commit your changes or stash them before you switch branches.\nAborting\n",
+            "command": "git checkout cursor/frontier-syntax-cycle1-e39f"
+          }
+        ]
+      }
+    },
+    {
+      "worker": "close_superseded",
+      "pass": false,
+      "skipped": "merge failed"
+    },
+    {
+      "worker": "arc_verify",
+      "pass": false,
+      "skipped": "merge failed"
+    }
+  ]
+}
