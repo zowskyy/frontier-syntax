@@ -1,0 +1,28 @@
+{
+  "version": "1.0.0",
+  "target": "production_ready",
+  "blueprint": "PROJECT_BLUEPRINT.md",
+  "phases_required": ["phase_0", "phase_1", "phase_2", "phase_3", "phase_7"],
+  "current_blockers": {
+    "phase_1": ["#44 wasm_codegen", "#45 knowledge_codegen", "#46 self_hosting"],
+    "phase_3": ["#48 wasm_size 127.4KB vs 100KB target"],
+    "phase_7": ["CI present", "audit hash chain", "independent validator closure"]
+  },
+  "team_layout": {
+    "group_1_FOUNDATION": {
+      "blueprint_phases": [0, 1],
+      "workers": ["W1_GateKeeper", "W2_CompilerCore", "W3_AuditGuardian"],
+      "order": "sequential"
+    },
+    "group_2_BUILD": {
+      "blueprint_phases": [2, 3],
+      "workers": ["W4_SpecParity", "W5_WasmSizer"],
+      "order": "parallel"
+    },
+    "group_3_SHIP": {
+      "blueprint_phases": [7, 8],
+      "workers": ["W6_GitHubOps", "W7_LaunchContinuity"],
+      "order": "parallel"
+    }
+  }
+}

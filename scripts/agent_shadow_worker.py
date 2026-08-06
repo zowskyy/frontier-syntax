@@ -190,10 +190,10 @@ def cmd_install_cron(args: argparse.Namespace) -> int:
     )
     print("# Add to crontab -e (heartbeat + README refresh every 5 min):")
     print(line)
-    print("# Full weekly refresh:")
+    print("# Weekly production pipeline:")
     print(
         f"0 6 * * 0 cd {REPO} && python3 scripts/agent_shadow_worker.py run "
-        f"--ecosystem --snapshot >> docs/agent_audit_log/state/shadow_worker.log 2>&1"
+        f"--taylor --taylor-mode production >> docs/agent_audit_log/state/shadow_worker.log 2>&1"
     )
     return 0
 
@@ -213,7 +213,7 @@ def main() -> int:
     r.add_argument(
         "--taylor-mode",
         default="end-of-turn",
-        choices=["end-of-turn", "daily", "full"],
+        choices=["end-of-turn", "daily", "production", "full"],
         help="Taylor mode when --taylor is set (default: end-of-turn)",
     )
     r.set_defaults(func=cmd_run)

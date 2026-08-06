@@ -1,0 +1,44 @@
+{
+  "name": "Schema",
+  "url": "https://github.com/zowskyy/Schema",
+  "description": "",
+  "is_private": false,
+  "language": "Python",
+  "updated_at": "2026-08-06T23:28:30Z",
+  "category": "fork_or_adjacent",
+  "access_status": "ok",
+  "readme_excerpt": "# Cursor Gate \u2014 15-Gate Review System\n\nA modular Python script that runs 15 quality gates on code before it ships in Cursor or VS Code.\n\n## Agent completion policy\n\nEvery cloud agent environment bootstraps this policy via `.cursor/environment.json`:\n\n- **`.cursor/rules/ship-finished-work.mdc`** \u2014 always-on project rule\n- **`AGENTS.md`** \u2014 agent instructions at repo root\n- **`scripts/install-agent-environment.sh`** \u2014 installs gate scripts to `~/.cursor/` on every VM\n\n**Global (all projects):** paste `docs/USER_RULES_PASTE.md` into Cursor \u2192 Customize \u2192 Rules \u2192 User Rules.\n\nAgents must loop write \u2192 gate \u2192 fix until both reviewers PASS. No iteration caps. No partial deliveries.\n\n## Quarterback / worker delegation\n\nThe main agent (quarterback) decomposes work and delegates heavy tasks to Task subagents (workers). Workers implement and gate their own changes but never message the user. After merging worker output, the quarterback **re-runs both gate reviewers on every changed file** before delivery.\n\nSee [`.cursor/rules/quarterback-worker.mdc`](.cursor/rules/quarterback-worker.mdc) for roles, delegation heuristics, and re-gate requirements.\n\n## Gate scripts\n\nRun both reviewers (`cursor_gate_fastest.py` + `cursor_gate.py`) on one file:\n\n```bash\nbash scripts/gate-file.sh --file path/to/file.py\n```\n\nGate all changed `.py`/`.ts`/`.js` files (from `git diff HEAD`), or explicit paths:\n\n```bash\nbash scripts/gate-all-changed.sh              # changed files only\nbash scripts/gate-all-changed.sh src/foo.py   # specific files\n```\n\nEither script exits non-zero if either reviewer returns `FAIL`.\n\n## Sample fixtures\n\n| File | Purpose |\n|------|---------|\n| [`samples/hello_passing.py`](samples/hello_passing.py) | Reference \u2014 passes all 15 gates in both reviewers |\n| [`samples/hello.py`](samples/hello.py) | Minimal example \u2014 intentionally fails several gates |\n\n```bash\nbash scripts/gate-file.sh --file samples/hello_passing.py  # expect PASS\nbash scripts/gate-file.sh --file samples/hello.py          # expect FAIL\n```\n\n## CI gate-check\n\n[`.github/workflows/gate-check.yml`](.github/workflows/gate-check.yml) runs on every pull request: installs deps, bootstraps the agent environment, then gates `samples/hello_passing.py` via `gate-file.sh`.\n\n## Quick Start\n\n### Option A: Fastest CLI (recommended \u2014 fail-fast, ~0.3\u20130.8s)\n\n```bash\n... (118 more lines)",
+  "top_level_files": [
+    ".cursor",
+    ".cursorrules",
+    ".env.example",
+    ".github",
+    ".gitignore",
+    "AGENTS.md",
+    "CHANGELOG.md",
+    "Dockerfile",
+    "LICENSE",
+    "README.md",
+    "cursor_gate.py",
+    "cursor_gate_fastest.py",
+    "docker-compose.yml",
+    "docs",
+    "extension",
+    "releases",
+    "requirements.txt",
+    "samples",
+    "scripts"
+  ],
+  "claims": [
+    "(no explicit claims extracted from README)"
+  ],
+  "can_do": [
+    "Top-level structure visible (19 entries): .cursor, .cursorrules, .env.example, .github, .gitignore, AGENTS.md, CHANGELOG.md, Dockerfile",
+    "Python project indicators present"
+  ],
+  "cannot_do": [
+    "No .github/workflows at repo root (CI not confirmed)",
+    "Not part of Frontier blueprint critical path"
+  ],
+  "blueprint_relation": "Upstream fork or unrelated project \u2014 no blueprint phase dependency."
+}

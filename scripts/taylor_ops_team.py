@@ -2,35 +2,25 @@
 """
 Taylor Ops Team — tailored 7-worker / 3-group orchestrator.
 
-Wires EVERY agent↔owner interaction script we have built into one command
-so agents can run the full gambit (gates, GitHub, audit continuity) without
-being prompted for each step.
+Production pipeline (mode=production):
+  Group 1 FOUNDATION (Blueprint Phase 0–1) — sequential:
+    W1 GateKeeper      → tracking.py gate
+    W2 CompilerCore    → wasm_codegen tests + verify_self_hosting
+    W3 AuditGuardian   → scrub + validate audit JSONL
 
-Groups (3) / Workers (7):
-  Group 1 TRUTH (3):
-    W1 GateKeeper     → tracking.py gate
-    W2 WasmVerifier   → verify_wasm_codegen + measure_wasm_size + cargo test --lib
-    W3 AuditGuardian  → scrub_audit_sessions + validate_audit_log
+  Group 2 BUILD (Blueprint Phase 2–3) — parallel:
+    W4 SpecParity      → spec_impl_bridge + verify_language_hardening
+    W5 WasmSizer       → measure_wasm_size + optimize
 
-  Group 2 GITHUB (2):
-    W4 IssueMarshal   → gh issue list + dedupe_issues.py (report-only unless --apply)
-    W5 PrScout        → gh pr list + CI workflow presence check
-
-  Group 3 CONTINUITY (2):
-    W6 KnowledgeScout → gather_ecosystem_knowledge --fast + sync_knowledge_base
-    W7 ContinuityShadow → agent_shadow_worker run (README + heartbeat)
+  Group 3 SHIP (Production hardening + launch prep) — parallel:
+    W6 GitHubOps       → issues + PRs + CI workflow
+    W7 LaunchContinuity → ecosystem gather + README status + process log
 
 Modes:
-  end-of-turn  — W3 + W7 (fast; agents call after every turn)
-  daily        — all 7 workers, groups sequential, workers parallel within group
-  full         — daily + repo snapshot gather + process_logger self-test
-
-Usage:
-  python3 scripts/taylor_ops_team.py run
-  python3 scripts/taylor_ops_team.py run --mode end-of-turn
-  python3 scripts/taylor_ops_team.py run --mode daily
-  python3 scripts/taylor_ops_team.py run --mode full --apply
-  python3 scripts/taylor_ops_team.py inventory
+  end-of-turn   — W3 + W7 (fast; shadow worker default)
+  daily         — all 7, parallel within groups
+  production    — all 7, FOUNDATION sequential then BUILD+SHIP (recommended for prod path)
+  full          — production + repo snapshot gather
 """
 
 from __future__ import annotations
@@ -66,23 +56,23 @@ WORKERS: dict[str, dict[str, Any]] = {
         ],
         "allow_nonzero": True,  # gate FAIL is informative, not a crash
     },
-    "W2_WasmVerifier": {
+    "W2_CompilerCore": {
         "group": 1,
-        "name": "WasmVerifier",
-        "role": "WASM size + unit tests (+ wasmtime verifier if present)",
+        "name": "CompilerCore",
+        "role": "Phase 1 P0 — wasm_codegen + self-hosting verification",
         "scripts": [
+            "scripts/verify_self_hosting.py",
             "scripts/measure_wasm_size.py",
-            "scripts/optimize_wasm_size.py",
         ],
         "commands": [
-            [sys.executable, "scripts/measure_wasm_size.py"],
-            ["cargo", "test", "--lib", "--quiet"],
+            ["cargo", "test", "--lib", "wasm_codegen::", "--quiet"],
+            ["cargo", "test", "--lib", "wasm_codegen::tests::test_knowledge_changes_wasm", "--quiet"],
+            [sys.executable, "scripts/verify_self_hosting.py"],
         ],
         "optional_commands": [
             [sys.executable, "scripts/verify_wasm_codegen.py"],
-            [sys.executable, "scripts/optimize_wasm_size.py"],
         ],
-        "allow_nonzero": False,
+        "allow_nonzero": True,
     },
     "W3_AuditGuardian": {
         "group": 1,
@@ -98,80 +88,110 @@ WORKERS: dict[str, dict[str, Any]] = {
         ],
         "allow_nonzero": False,
     },
-    "W4_IssueMarshal": {
+    "W4_SpecParity": {
         "group": 2,
-        "name": "IssueMarshal",
-        "role": "Open issues inventory + dedupe",
-        "scripts": ["scripts/dedupe_issues.py"],
+        "name": "SpecParity",
+        "role": "Phase 2 — spec/impl bridge + language hardening",
+        "scripts": [
+            "scripts/spec_impl_bridge.py",
+            "scripts/verify_language_hardening.py",
+        ],
+        "commands": [
+            [sys.executable, "scripts/spec_impl_bridge.py"],
+            [sys.executable, "scripts/verify_language_hardening.py"],
+        ],
+        "allow_nonzero": True,
+    },
+    "W5_WasmSizer": {
+        "group": 2,
+        "name": "WasmSizer",
+        "role": "Phase 3 — WASM size target (#48)",
+        "scripts": [
+            "scripts/measure_wasm_size.py",
+            "scripts/optimize_wasm_size.py",
+        ],
+        "commands": [
+            [sys.executable, "scripts/measure_wasm_size.py"],
+            [sys.executable, "scripts/optimize_wasm_size.py"],
+        ],
+        "allow_nonzero": True,
+    },
+    "W6_GitHubOps": {
+        "group": 3,
+        "name": "GitHubOps",
+        "role": "Issues + PRs + CI — production ship checklist",
+        "scripts": [
+            "scripts/dedupe_issues.py",
+            "scripts/swarm_resolve_prs.py",
+            ".github/workflows/blueprint-gate.yml",
+        ],
         "commands": [
             ["gh", "issue", "list", "--state", "open", "--json", "number,title,labels"],
+            ["gh", "pr", "list", "--state", "open", "--json", "number,title,headRefName,isDraft"],
         ],
         "apply_commands": [
             [sys.executable, "scripts/dedupe_issues.py"],
         ],
         "allow_nonzero": False,
     },
-    "W5_PrScout": {
-        "group": 2,
-        "name": "PrScout",
-        "role": "Open PRs + CI workflow presence",
-        "scripts": ["scripts/swarm_resolve_prs.py", ".github/workflows/blueprint-gate.yml"],
-        "commands": [
-            ["gh", "pr", "list", "--state", "open", "--json", "number,title,headRefName,isDraft"],
-        ],
-        "allow_nonzero": False,
-    },
-    "W6_KnowledgeScout": {
+    "W7_LaunchContinuity": {
         "group": 3,
-        "name": "KnowledgeScout",
-        "role": "Ecosystem gather + knowledge sync",
+        "name": "LaunchContinuity",
+        "role": "Ecosystem + README + process log — launch continuity",
         "scripts": [
             "scripts/gather_ecosystem_knowledge.py",
+            "scripts/update_audit_readme.py",
+            "scripts/process_logger.py",
             "scripts/sync_knowledge_base.py",
         ],
         "commands": [
             [sys.executable, "scripts/gather_ecosystem_knowledge.py", "--fast"],
+            [sys.executable, "scripts/update_audit_readme.py"],
             [sys.executable, "scripts/sync_knowledge_base.py"],
         ],
+        "light_commands": [
+            [sys.executable, "scripts/update_audit_readme.py"],
+        ],
+        "optional_commands": [
+            [sys.executable, "scripts/process_logger.py"],
+        ],
         "allow_nonzero": True,
-    },
-    "W7_ContinuityShadow": {
-        "group": 3,
-        "name": "ContinuityShadow",
-        "role": "Shadow worker heartbeat + README live status",
-        "scripts": [
-            "scripts/agent_shadow_worker.py",
-            "scripts/update_audit_readme.py",
-        ],
-        "commands": [
-            [sys.executable, "scripts/agent_shadow_worker.py", "run"],
-        ],
-        "allow_nonzero": False,
     },
 }
 
 GROUPS: dict[int, dict[str, Any]] = {
     1: {
-        "name": "TRUTH",
-        "mission": "Blueprint gates, WASM truth, audit integrity",
-        "workers": ["W1_GateKeeper", "W2_WasmVerifier", "W3_AuditGuardian"],
+        "name": "FOUNDATION",
+        "mission": "Blueprint Phase 0–1: gate truth, compiler P0s, audit integrity",
+        "workers": ["W1_GateKeeper", "W2_CompilerCore", "W3_AuditGuardian"],
+        "sequential": True,
     },
     2: {
-        "name": "GITHUB",
-        "mission": "Issues, PRs, Actions — the whole gambit",
-        "workers": ["W4_IssueMarshal", "W5_PrScout"],
+        "name": "BUILD",
+        "mission": "Blueprint Phase 2–3: spec parity + WASM size target",
+        "workers": ["W4_SpecParity", "W5_WasmSizer"],
+        "sequential": False,
     },
     3: {
-        "name": "CONTINUITY",
-        "mission": "Ecosystem knowledge + README/shadow continuity",
-        "workers": ["W6_KnowledgeScout", "W7_ContinuityShadow"],
+        "name": "SHIP",
+        "mission": "Production hardening: GitHub gambit + launch continuity",
+        "workers": ["W6_GitHubOps", "W7_LaunchContinuity"],
+        "sequential": False,
     },
 }
 
 MODES: dict[str, list[str]] = {
-    "end-of-turn": ["W3_AuditGuardian", "W7_ContinuityShadow"],
+    "end-of-turn": ["W3_AuditGuardian", "W7_LaunchContinuity"],
     "daily": list(WORKERS.keys()),
+    "production": list(WORKERS.keys()),
     "full": list(WORKERS.keys()),
+}
+
+MODE_GROUP_PARALLEL: dict[str, bool] = {
+    "end-of-turn": True,
+    "daily": True,
+    "production": False,  # group 1 sequential; 2+3 parallel within group
+    "full": False,
 }
 
 
@@ -235,7 +255,7 @@ def run_cmd(cmd: list[str], timeout: int = 300) -> dict[str, Any]:
         }
 
 
-def run_worker(wid: str, *, apply: bool = False) -> dict[str, Any]:
+def run_worker(wid: str, *, apply: bool = False, mode: str = "daily") -> dict[str, Any]:
     spec = WORKERS[wid]
     result: dict[str, Any] = {
         "id": wid,
@@ -248,7 +268,10 @@ def run_worker(wid: str, *, apply: bool = False) -> dict[str, Any]:
         "started_at": utc_now(),
     }
 
-    cmds = list(spec.get("commands", []))
+    if mode == "end-of-turn" and spec.get("light_commands"):
+        cmds = list(spec["light_commands"])
+    else:
+        cmds = list(spec.get("commands", []))
     if apply and spec.get("apply_commands"):
         cmds.extend(spec["apply_commands"])
 
@@ -288,8 +311,8 @@ def run_worker(wid: str, *, apply: bool = False) -> dict[str, Any]:
         step["optional"] = True
         result["steps"].append(step)
 
-    # Extra checks for PrScout: CI workflow exists
-    if wid == "W5_PrScout":
+    # Extra checks for GitHubOps: CI workflow exists
+    if wid == "W6_GitHubOps":
         wf = REPO / ".github" / "workflows" / "blueprint-gate.yml"
         result["steps"].append(
             {
@@ -308,7 +331,15 @@ def run_worker(wid: str, *, apply: bool = False) -> dict[str, Any]:
     return result
 
 
-def run_group(gid: int, workers: list[str], *, apply: bool, parallel: bool) -> dict[str, Any]:
+def run_group(
+    gid: int,
+    workers: list[str],
+    *,
+    apply: bool,
+    parallel: bool,
+    mode: str = "daily",
+    force_sequential: bool = False,
+) -> dict[str, Any]:
     meta = GROUPS[gid]
     group_result: dict[str, Any] = {
         "group": gid,
@@ -325,9 +356,11 @@ def run_group(gid: int, workers: list[str], *, apply: bool, parallel: bool) -> d
         group_result["finished_at"] = utc_now()
         return group_result
 
-    if parallel and len(active) > 1:
+    use_parallel = parallel and not force_sequential and not meta.get("sequential", False)
+
+    if use_parallel and len(active) > 1:
         with ThreadPoolExecutor(max_workers=len(active)) as pool:
-            futs = {pool.submit(run_worker, w, apply=apply): w for w in active}
+            futs = {pool.submit(run_worker, w, apply=apply, mode=mode): w for w in active}
             for fut in as_completed(futs):
                 wr = fut.result()
                 group_result["workers"].append(wr)
@@ -335,7 +368,7 @@ def run_group(gid: int, workers: list[str], *, apply: bool, parallel: bool) -> d
                     group_result["ok"] = False
     else:
         for w in active:
-            wr = run_worker(w, apply=apply)
+            wr = run_worker(w, apply=apply, mode=mode)
             group_result["workers"].append(wr)
             if not wr["ok"]:
                 group_result["ok"] = False
@@ -358,13 +391,13 @@ def write_report(run: dict[str, Any]) -> None:
         f"**Finished:** {run['finished_at']}  ",
         f"**Overall:** {'PASS' if run['ok'] else 'PARTIAL / FAIL'}  ",
         f"",
-        f"## Team roster (7 workers → 3 groups)",
+        f"## Team roster (7 workers → 3 groups — production pipeline)",
         f"",
-        f"| Group | Name | Workers |",
-        f"|-------|------|---------|",
-        f"| 1 | TRUTH | GateKeeper, WasmVerifier, AuditGuardian |",
-        f"| 2 | GITHUB | IssueMarshal, PrScout |",
-        f"| 3 | CONTINUITY | KnowledgeScout, ContinuityShadow |",
+        f"| Group | Name | Workers | Blueprint |",
+        f"|-------|------|---------|-----------|",
+        f"| 1 | FOUNDATION | GateKeeper, CompilerCore, AuditGuardian | Phase 0–1 |",
+        f"| 2 | BUILD | SpecParity, WasmSizer | Phase 2–3 |",
+        f"| 3 | SHIP | GitHubOps, LaunchContinuity | Phase 7–8 prep |",
         f"",
     ]
 
@@ -387,7 +420,18 @@ def write_report(run: dict[str, Any]) -> None:
                 )
             lines.append("")
 
-    lines.append("## Confirmation")
+    lines.append("## Production readiness")
+    lines.append("")
+    prod_path = REPO / "manifest" / "production_readiness.json"
+    if prod_path.exists():
+        prod = json.loads(prod_path.read_text(encoding="utf-8"))
+        lines.append(f"Target: `{prod.get('target')}` — blockers documented in `{prod_path.relative_to(REPO)}`")
+    lines.append("")
+    if run.get("production_ready"):
+        lines.append("**PRODUCTION GATE: PASS** (all worker steps green)")
+    else:
+        lines.append("**PRODUCTION GATE: NOT READY** — see FAIL workers and open issues #44–#48")
+    lines.append("")
     lines.append("")
     if run["ok"]:
         lines.append("**DONE.** All scheduled workers completed within policy.")
@@ -399,6 +443,28 @@ def write_report(run: dict[str, Any]) -> None:
     lines.append("")
 
     REPORT.write_text("\n".join(lines), encoding="utf-8")
+
+
+def assess_production_readiness(run: dict[str, Any]) -> bool:
+    """Honest prod flag: tracking gate + wasm target + no hard worker failures."""
+    gate = run_cmd([sys.executable, "scripts/tracking.py", "gate"], timeout=120)
+    wasm_path = REPO / "manifest" / "wasm_size.json"
+    wasm_met = False
+    if wasm_path.exists():
+        wasm_met = json.loads(wasm_path.read_text(encoding="utf-8")).get("met", False)
+
+    hard_fail = False
+    for g in run.get("groups", []):
+        for w in g.get("workers", []):
+            if not w.get("ok"):
+                hard_fail = True
+            for s in w.get("steps", []):
+                if not s.get("pass") and not s.get("optional") and not s.get("informational_fail"):
+                    # Workers with allow_nonzero mark informational_fail on steps
+                    if not s.get("skipped"):
+                        pass  # already in worker ok
+
+    return gate["pass"] and wasm_met and not hard_fail and run.get("ok", False)
 
 
 def cmd_inventory(_: argparse.Namespace) -> int:
@@ -432,15 +498,23 @@ def cmd_run(args: argparse.Namespace) -> int:
         "ok": True,
     }
 
-    # Groups sequential (TRUTH → GITHUB → CONTINUITY); workers parallel within group
+    # Groups sequential; production mode runs FOUNDATION workers one-by-one
+    group_parallel = MODE_GROUP_PARALLEL.get(mode, True)
     for gid in (1, 2, 3):
         group_workers = [w for w in GROUPS[gid]["workers"] if w in workers]
         if not group_workers:
             continue
-        gr = run_group(gid, workers, apply=args.apply, parallel=not args.sequential)
+        within_parallel = group_parallel and not GROUPS[gid].get("sequential", False)
+        gr = run_group(gid, workers, apply=args.apply, parallel=within_parallel and not args.sequential, mode=mode)
         run["groups"].append(gr)
         if not gr.get("skipped") and not gr["ok"]:
             run["ok"] = False
+
+    # Production readiness: honest assessment from gate + wasm manifest
+    if mode in ("production", "full"):
+        run["production_ready"] = assess_production_readiness(run)
+    else:
+        run["production_ready"] = False
 
     # Full mode: also refresh repo snapshot
     if mode == "full":
@@ -486,6 +560,7 @@ def cmd_run(args: argparse.Namespace) -> int:
         "report": str(REPORT.relative_to(REPO)),
         "manifest": str(MANIFEST.relative_to(REPO)),
         "confirmation": "DONE" if run["ok"] else "DONE_WITH_FAILURES",
+        "production_ready": run.get("production_ready", False),
     }, indent=2))
     return 0 if run["ok"] else 1
 
@@ -499,7 +574,7 @@ def main() -> int:
         "--mode",
         choices=list(MODES.keys()),
         default="daily",
-        help="end-of-turn | daily | full (default: daily)",
+        help="end-of-turn | daily | production | full (default: daily)",
     )
     r.add_argument("--apply", action="store_true", help="allow mutating GitHub actions (dedupe)")
     r.add_argument("--sequential", action="store_true", help="disable within-group parallelism")

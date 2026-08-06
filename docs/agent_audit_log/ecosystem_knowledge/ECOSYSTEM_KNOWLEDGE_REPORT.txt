@@ -2,11 +2,11 @@
 ZOWSKYY ECOSYSTEM KNOWLEDGE REPORT
 ##############################################################################
 
-Generated:     2026-08-06T19:57:11Z
-Run ID:        20260806T195700Z
+Generated:     2026-08-06T23:29:51Z
+Run ID:        20260806T232938Z
 Canonical repo: zowskyy/frontier-syntax
 Blueprint:     PROJECT_BLUEPRINT.md + TRACKING.json
-Pipeline log:  docs/agent_audit_log/pipeline_logs/20260806T195700Z/pipeline.log
+Pipeline log:  docs/agent_audit_log/pipeline_logs/20260806T232938Z/pipeline.log
 Audit sessions: docs/agent_audit_log/sessions/
 
 ==============================================================================
@@ -1314,19 +1314,80 @@ REPO 22: zowskyy/Schema
 ## WHAT IT IS
   URL:        https://github.com/zowskyy/Schema
   Visibility: public
-  Language:   (none detected)
+  Language:   Python
   Category:   fork_or_adjacent
-  Updated:    2026-08-06T18:46:24Z
+  Updated:    2026-08-06T23:28:30Z
   Access:     ok
 
 ## WHAT IT CLAIMS
   • (no explicit claims extracted from README)
 
 ## README EXCERPT
-  # Schema
+  # Cursor Gate — 15-Gate Review System
+
+  A modular Python script that runs 15 quality gates on code before it ships in Cursor or VS Code.
+
+  ## Agent completion policy
+
+  Every cloud agent environment bootstraps this policy via `.cursor/environment.json`:
+
+  - **`.cursor/rules/ship-finished-work.mdc`** — always-on project rule
+  - **`AGENTS.md`** — agent instructions at repo root
+  - **`scripts/install-agent-environment.sh`** — installs gate scripts to `~/.cursor/` on every VM
+
+  **Global (all projects):** paste `docs/USER_RULES_PASTE.md` into Cursor → Customize → Rules → User Rules.
+
+  Agents must loop write → gate → fix until both reviewers PASS. No iteration caps. No partial deliveries.
+
+  ## Quarterback / worker delegation
+
+  The main agent (quarterback) decomposes work and delegates heavy tasks to Task subagents (workers). Workers implement and gate their own changes but never message the user. After merging worker output, the quarterback **re-runs both gate reviewers on every changed file** before delivery.
+
+  See [`.cursor/rules/quarterback-worker.mdc`](.cursor/rules/quarterback-worker.mdc) for roles, delegation heuristics, and re-gate requirements.
+
+  ## Gate scripts
+
+  Run both reviewers (`cursor_gate_fastest.py` + `cursor_gate.py`) on one file:
+
+  ```bash
+  bash scripts/gate-file.sh --file path/to/file.py
+  ```
+
+  Gate all changed `.py`/`.ts`/`.js` files (from `git diff HEAD`), or explicit paths:
+
+  ```bash
+  bash scripts/gate-all-changed.sh              # changed files only
+  bash scripts/gate-all-changed.sh src/foo.py   # specific files
+  ```
+
+  Either script exits non-zero if either reviewer returns `FAIL`.
+
+  ## Sample fixtures
+
+  | File | Purpose |
+  |------|---------|
+  | [`samples/hello_passing.py`](samples/hello_passing.py) | Reference — passes all 15 gates in both reviewers |
+  | [`samples/hello.py`](samples/hello.py) | Minimal example — intentionally fails several gates |
+
+  ```bash
+  bash scripts/gate-file.sh --file samples/hello_passing.py  # expect PASS
+  bash scripts/gate-file.sh --file samples/hello.py          # expect FAIL
+  ```
+
+  ## CI gate-check
+
+  [`.github/workflows/gate-check.yml`](.github/workflows/gate-check.yml) runs on every pull request: installs deps, bootstraps the agent environment, then gates `samples/hello_passing.py` via `gate-file.sh`.
+
+  ## Quick Start
+
+  ### Option A: Fastest CLI (recommended — fail-fast, ~0.3–0.8s)
+
+  ```bash
+  ... (118 more lines)
 
 ## VERIFIED — CAN DO (this scan)
-  ✓ Top-level structure visible (1 entries): README.md
+  ✓ Top-level structure visible (19 entries): .cursor, .cursorrules, .env.example, .github, .gitignore, AGENTS.md, CHANGELOG.md, Dockerfile
+  ✓ Python project indicators present
 
 ## CANNOT DO / NOT VERIFIED / LIMITATIONS
   ✗ No .github/workflows at repo root (CI not confirmed)
