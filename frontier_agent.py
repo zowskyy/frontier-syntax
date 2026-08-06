@@ -118,6 +118,8 @@ class FrontierAgent:
             result = self.run_swarm_optimized(parsed)
         elif parsed["type"] == "swarm_kb_optimizer":
             result = self.run_swarm_kb_optimizer(parsed)
+        elif parsed["type"] == "peerless_plan":
+            result = self.run_peerless_implementation_plan(parsed)
         elif parsed["type"] == "close_peerless":
             result = self.run_close_peerless(parsed)
         elif parsed["type"] == "ultimate_conclusion":
@@ -267,6 +269,21 @@ class FrontierAgent:
             for word in ["kb optimizer", "knowledge optimizer", "knowledge base", "enrich knowledge"]
         ):
             return {"type": "swarm_kb_optimizer", "content": intent}
+
+        if any(
+            word in intent_lower
+            for word in [
+                "peerless plan",
+                "peerless implementation",
+                "chat history",
+                "account logs",
+                "16 worker",
+                "16 swarm",
+                "optimization plan",
+                "maintenance plan",
+            ]
+        ):
+            return {"type": "peerless_plan", "content": intent}
 
         if any(
             word in intent_lower
@@ -790,6 +807,26 @@ class FrontierAgent:
             "process_log": "docs/process_log.fr",
             "output": result.get("stdout", "")[-2000:],
             "message": "Swarm KB optimizer complete",
+        }
+
+    def run_peerless_implementation_plan(self, parsed: Dict[str, Any]) -> Dict[str, Any]:
+        """16-worker swarm analyzes full account chat history → Peerless implementation plan."""
+        orchestrator = self.scripts_dir / "generate_peerless_implementation_plan.py"
+        result = self._run_command([str(orchestrator), "--workers", "16"], capture=True)
+        manifest_path = self.repo_root / "manifest" / "peerless_implementation_plan.json"
+        summary = {}
+        if manifest_path.exists():
+            summary = json.loads(manifest_path.read_text(encoding="utf-8"))
+        return {
+            "status": "success" if result["returncode"] == 0 else "partial",
+            "workers": 16,
+            "optimization_items": summary.get("optimization_items", 0),
+            "corpus_records": summary.get("corpus_records", 0),
+            "report": "audit_reports/peerless_implementation_plan.md",
+            "manifest": "manifest/peerless_implementation_plan.json",
+            "corpus": "chat_scrub/account_history_corpus.json",
+            "output": result.get("stdout", "")[-2000:],
+            "message": "Peerless implementation plan generated from account chat history",
         }
 
     def run_close_peerless(self, parsed: Dict[str, Any]) -> Dict[str, Any]:

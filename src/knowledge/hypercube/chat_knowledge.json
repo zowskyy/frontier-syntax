@@ -2,7 +2,7 @@
   "version": 1,
   "updated_at": "2026-08-06T00:25:03.644607Z",
   "source_report": "chat_scrub/WORKER_REPORT.json",
-  "entry_count": 428,
+  "entry_count": 499,
   "entries": [
     {
       "id": "ReDoS_lexer",
@@ -5371,6 +5371,929 @@
       ],
       "severity": "info",
       "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_knowledge_sync_194",
+      "category": "swarm_optimization",
+      "title": "Swarm: knowledge_sync",
+      "content": "Decision: ultimate_conclusion_step. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_parse_repo_195",
+      "category": "swarm_optimization",
+      "title": "Swarm: parse_repo",
+      "content": "Decision: shared_state_once. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_proofs_security_196",
+      "category": "swarm_optimization",
+      "title": "Swarm: proofs_security",
+      "content": "Decision: execute_proofs_security. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_wasm_codegen_197",
+      "category": "swarm_optimization",
+      "title": "Swarm: wasm_codegen",
+      "content": "Decision: execute_wasm_codegen. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P1_198",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P1",
+      "content": "Decision: close_Live GPU runtime. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_self_hosting_199",
+      "category": "swarm_optimization",
+      "title": "Swarm: self_hosting",
+      "content": "Decision: execute_self_hosting. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P2_200",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P2",
+      "content": "Decision: close_Live IPFS runtime. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P3_201",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P3",
+      "content": "Decision: close_Live CDX streaming. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_runtime_integration_202",
+      "category": "swarm_optimization",
+      "title": "Swarm: runtime_integration",
+      "content": "Decision: execute_runtime_integration. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gate_no_screw_203",
+      "category": "swarm_optimization",
+      "title": "Swarm: gate_no_screw",
+      "content": "Decision: parallel_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gate_a_plus_204",
+      "category": "swarm_optimization",
+      "title": "Swarm: gate_a_plus",
+      "content": "Decision: parallel_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gate_axiomatic_205",
+      "category": "swarm_optimization",
+      "title": "Swarm: gate_axiomatic",
+      "content": "Decision: parallel_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gate_living_conversation_206",
+      "category": "swarm_optimization",
+      "title": "Swarm: gate_living_conversation",
+      "content": "Decision: parallel_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P1_207",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P1",
+      "content": "Decision: close_Live GPU runtime. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gate_frontier_face_208",
+      "category": "swarm_optimization",
+      "title": "Swarm: gate_frontier_face",
+      "content": "Decision: parallel_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P2_209",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P2",
+      "content": "Decision: close_Live IPFS runtime. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P3_210",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P3",
+      "content": "Decision: close_Live CDX streaming. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gate_repo_211",
+      "category": "swarm_optimization",
+      "title": "Swarm: gate_repo",
+      "content": "Decision: parallel_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P4_212",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P4",
+      "content": "Decision: close_WASM size optimization. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P5_213",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P5",
+      "content": "Decision: close_True self-hosting in Frontier. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gate_global_skills_214",
+      "category": "swarm_optimization",
+      "title": "Swarm: gate_global_skills",
+      "content": "Decision: parallel_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P6_215",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P6",
+      "content": "Decision: close_Teacher-student unity module. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gate_peerless_216",
+      "category": "swarm_optimization",
+      "title": "Swarm: gate_peerless",
+      "content": "Decision: parallel_verify. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_swarm_optimized_run_217",
+      "category": "swarm_optimization",
+      "title": "Swarm: swarm_optimized_run",
+      "content": "Decision: aggregate_results. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_swarm_optimized_218",
+      "category": "swarm_optimization",
+      "title": "Swarm: swarm_optimized",
+      "content": "Decision: ultimate_conclusion_step. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P1_219",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P1",
+      "content": "Decision: close_Live GPU runtime. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P2_220",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P2",
+      "content": "Decision: close_Live IPFS runtime. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P3_221",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P3",
+      "content": "Decision: close_Live CDX streaming. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P4_222",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P4",
+      "content": "Decision: close_WASM size optimization. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P5_223",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P5",
+      "content": "Decision: close_True self-hosting in Frontier. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P6_224",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P6",
+      "content": "Decision: close_Teacher-student unity module. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_close_peerless_225",
+      "category": "swarm_optimization",
+      "title": "Swarm: close_peerless",
+      "content": "Decision: ultimate_conclusion_step. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_arc_verify_226",
+      "category": "swarm_optimization",
+      "title": "Swarm: arc_verify",
+      "content": "Decision: ultimate_conclusion_step. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_ultimate_conclusion_227",
+      "category": "swarm_optimization",
+      "title": "Swarm: ultimate_conclusion",
+      "content": "Decision: final_status. Result: concluded.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_ingest_228",
+      "category": "swarm_optimization",
+      "title": "Swarm: ingest",
+      "content": "Decision: build_corpus. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_4_229",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_4",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_5_230",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_5",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_11_231",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_11",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_10_232",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_10",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_14_233",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_14",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_2_234",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_2",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_1_235",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_1",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_9_236",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_9",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_8_237",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_8",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_15_238",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_15",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_12_239",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_12",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_7_240",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_7",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_3_241",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_3",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_13_242",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_13",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_6_243",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_6",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_16_244",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_16",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_plan_245",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_plan",
+      "content": "Decision: complete. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "manifest_peerless_implementation_plan",
+      "category": "manifest",
+      "title": "Manifest: peerless_implementation_plan",
+      "content": "{\n\"generated_at\": \"2026-08-06T01:50:17.569786Z\",\n\"swarm_workers\": 16,\n\"corpus_records\": 813,\n\"corpus_sources\": [\n\"chat_knowledge\",\n\"decision_log\",\n\"gap_fixes\",\n\"gap_solution.log\",\n\"git_history\",\n\"issues\",\n\"process_log.fr\",\n\"self_creation.log\",\n\"swarm_gap_closure.log\",\n\"ultimate_conclusion.log\",\n\"worker_report_architecture\",\n\"worker_report_attack_vector\",\n\"worker_report_performance\",\n\"worker_report_resolved_gap\"\n],\n\"time_range\": {\n\"earliest\": \"2026-08-04T23:51:19-07:00\",\n\"latest\": \"2026-08-06T01:",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/peerless_implementation_plan.json"
+    },
+    {
+      "id": "swarm_process_ingest_246",
+      "category": "swarm_optimization",
+      "title": "Swarm: ingest",
+      "content": "Decision: build_corpus. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_1_247",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_1",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_7_248",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_7",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_3_249",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_3",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_6_250",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_6",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_4_251",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_4",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_8_252",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_8",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_5_253",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_5",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_2_254",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_2",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_13_255",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_13",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_12_256",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_12",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_11_257",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_11",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_10_258",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_10",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_14_259",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_14",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_9_260",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_9",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_15_261",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_15",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_worker_16_262",
+      "category": "swarm_optimization",
+      "title": "Swarm: worker_16",
+      "content": "Decision: analyze_shard. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_plan_263",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_plan",
+      "content": "Decision: complete. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
     }
   ],
   "ingested_at": [
@@ -5381,5 +6304,5 @@
     "2026-08-06T00:20:00.476875Z",
     "2026-08-06T00:25:03.644607Z"
   ],
-  "last_sync": "2026-08-06T01:44:22.418077Z"
+  "last_sync": "2026-08-06T01:50:20.658472Z"
 }
