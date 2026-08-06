@@ -1,0 +1,36 @@
+{
+  "name": "etrnL",
+  "url": "https://github.com/zowskyy/etrnL",
+  "description": "Identity Continuity Infrastructure \u2014 Multimodal digital presence preservation",
+  "is_private": false,
+  "language": "Shell",
+  "updated_at": "2026-07-12T05:59:21Z",
+  "category": "fork_or_adjacent",
+  "access_status": "no_readme",
+  "readme_excerpt": "(no README or access denied)",
+  "top_level_files": [
+    ".gitignore",
+    ".vscode",
+    "NEXT_STEPS.md",
+    "build.sh",
+    "build_all.sh",
+    "dailyworkflow.txt",
+    "etrnl",
+    "etrnl.egg-info",
+    "pyproject.toml",
+    "tests",
+    "update.sh"
+  ],
+  "claims": [
+    "GitHub description: Identity Continuity Infrastructure \u2014 Multimodal digital presence preservation"
+  ],
+  "can_do": [
+    "Top-level structure visible (11 entries): .gitignore, .vscode, NEXT_STEPS.md, build.sh, build_all.sh, dailyworkflow.txt, etrnl, etrnl.egg-info",
+    "Python project indicators present"
+  ],
+  "cannot_do": [
+    "No .github/workflows at repo root (CI not confirmed)",
+    "Not part of Frontier blueprint critical path"
+  ],
+  "blueprint_relation": "Upstream fork or unrelated project \u2014 no blueprint phase dependency."
+}

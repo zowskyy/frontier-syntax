@@ -1,0 +1,24 @@
+{
+  "name": "repurpose-engine",
+  "url": "https://github.com/zowskyy/repurpose-engine",
+  "description": "",
+  "is_private": false,
+  "language": "Python",
+  "updated_at": "2026-07-17T02:54:10Z",
+  "category": "frontier_ecosystem",
+  "access_status": "no_readme",
+  "readme_excerpt": "(no README or access denied)",
+  "top_level_files": [
+    "repurpose.py"
+  ],
+  "claims": [
+    "(no explicit claims extracted from README)"
+  ],
+  "can_do": [
+    "Top-level structure visible (1 entries): repurpose.py"
+  ],
+  "cannot_do": [
+    "No .github/workflows at repo root (CI not confirmed)"
+  ],
+  "blueprint_relation": "Automation / worker scripts; may invoke frontier-syntax tooling."
+}

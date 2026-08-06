@@ -2,18 +2,18 @@
 
 <!-- SHADOW_WORKER_STATUS:BEGIN -->
 
-_Auto-updated by `scripts/agent_shadow_worker.py` — 2026-08-06 19:39:13 UTC_
+_Auto-updated by `scripts/agent_shadow_worker.py` — 2026-08-06 19:57:00 UTC_
 
 ## Live status
 
 | Signal | Value |
 |--------|-------|
-| Last agent activity | `2026-08-06T19:39:13.558878Z` |
-| Session entries (index) | 19 |
+| Last agent activity | `2026-08-06T19:57:00.555956Z` |
+| Session entries (index) | 43 |
 | Latest repo snapshot | `20260806T181935Z` |
-| Latest ecosystem run | `20260806T183100Z` |
+| Latest ecosystem run | `20260806T193913Z` |
 | Ecosystem repos scanned | 27 |
-| Ecosystem gather time | 21.123477931992966s (SLA met: True) |
+| Ecosystem gather time | 12.527680610997777s (SLA met: True) |
 | WASM size | 127.4 KB (target met: False) |
 | Blueprint Phase 0 | PASS |
 | Blueprint Phase 1 | FAIL |
