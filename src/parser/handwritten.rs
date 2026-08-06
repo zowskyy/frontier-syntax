@@ -79,6 +79,7 @@ impl Parser {
     pub fn parse_program(&mut self) -> Result<Program, FrontierError> {
         let mut version = None;
         let mut statements = Vec::new();
+        #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
         if matches!(self.peek().token, Token::Version) {
             if let Stmt::VersionDecl { version: v } = self.parse_version_decl()? {
                 version = Some(v.clone());
@@ -95,9 +96,21 @@ impl Parser {
     }
 
     fn parse_statement(&mut self) -> Result<Stmt, FrontierError> {
+        #[cfg(all(target_arch = "wasm32", feature = "wasm-slim"))]
+        if matches!(self.peek().token, Token::At) {
+            let cur = self.current().clone();
+            return Err(FrontierError::parse(
+                "statement",
+                "@",
+                cur.line,
+                cur.column,
+            ));
+        }
+
         let mut requires = None;
         let mut ensures = None;
         let mut invariant = None;
+        #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
         while matches!(self.peek().token, Token::At) {
             let annotation = self.parse_proof_annotation()?;
             match annotation.0.as_str() {
@@ -109,13 +122,31 @@ impl Parser {
         }
         match &self.peek().token {
             Token::Version => {
-                if let Stmt::VersionDecl { version } = self.parse_version_decl()? {
-                    Ok(Stmt::VersionDecl { version })
-                } else {
-                    unreachable!()
+                #[cfg(all(target_arch = "wasm32", feature = "wasm-slim"))]
+                {
+                    let cur = self.current().clone();
+                    Err(FrontierError::parse("statement", "version", cur.line, cur.column))
+                }
+                #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+                {
+                    if let Stmt::VersionDecl { version } = self.parse_version_decl()? {
+                        Ok(Stmt::VersionDecl { version })
+                    } else {
+                        unreachable!()
+                    }
                 }
             }
-            Token::Import => self.parse_import(),
+            Token::Import => {
+                #[cfg(all(target_arch = "wasm32", feature = "wasm-slim"))]
+                {
+                    let cur = self.current().clone();
+                    Err(FrontierError::parse("statement", "import", cur.line, cur.column))
+                }
+                #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+                {
+                    self.parse_import()
+                }
+            }
             Token::Let => self.parse_let(),
             Token::Fn => self.parse_fn_with_proofs(requires, ensures, invariant),
             Token::Return => self.parse_return(),
@@ -257,6 +288,7 @@ impl Parser {
         Ok(Stmt::VersionDecl { version })
     }
 
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
     fn parse_import(&mut self) -> Result<Stmt, FrontierError> {
         self.advance();
         let path = match &self.current().token {
@@ -286,6 +318,7 @@ impl Parser {
         Ok(Stmt::While { condition, body })
     }
 
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
     fn parse_proof_annotation(&mut self) -> Result<(String, String), FrontierError> {
         self.expect(Token::At)?;
         let kind = match &self.peek().token {
@@ -306,7 +339,11 @@ impl Parser {
         self.expect(Token::LParen)?;
         let expr = self.parse_expression()?;
         self.expect(Token::RParen)?;
-        Ok((kind, expr_to_proof_string(&expr)))
+        #[cfg(all(target_arch = "wasm32", feature = "wasm-slim"))]
+        let proof = String::new();
+        #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+        let proof = expr_to_proof_string(&expr);
+        Ok((kind, proof))
     }
 
     fn parse_fn(&mut self) -> Result<Stmt, FrontierError> {
@@ -664,6 +701,7 @@ impl Parser {
     }
 }
 
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
 fn expr_to_proof_string(expr: &Expr) -> String {
     match expr {
         Expr::BinaryExpr {
