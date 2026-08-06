@@ -1,6 +1,6 @@
 # ARC System Status — Live Report
 
-**Generated:** 2026-08-06T01:38:42.769582Z  
+**Generated:** 2026-08-06T01:47:19.471150Z  
 **Source:** `scripts/generate_arc_status.py` (repository inspection, not estimates)
 
 ---
@@ -12,7 +12,7 @@
 | Open PRs | 0 |
 | Rust lib tests | 40 passing |
 | Python test files | 15 |
-| Knowledge entries | 208 |
+| Knowledge entries | 428 |
 | Known gaps (WORKER_REPORT) | 0 |
 | Branch | `cursor/frontier-syntax-cycle1-e39f` |
 
@@ -44,7 +44,7 @@ The ARC review listed PRs #15, #16, #19, #21 as open. **Live GitHub state:**
 | Component | Status | Evidence |
 |-----------|--------|----------|
 | Frontier Language | 🟢 Core complete | `frontier/core/*.frontier`, `cargo test --lib` |
-| Knowledge Engine | 🟢 Deployed | 208 entries, MCP, dashboard, git hooks |
+| Knowledge Engine | 🟢 Deployed | 428 entries, MCP, dashboard, git hooks |
 | Frontier-DEX | 🟢 Implemented | `frontier-dex/` workspace member |
 | Lighthouse Stack | 🟢 Spec present | `frontier/lighthouse/*.frontier` |
 | Symbiotic Tandem | 🟢 Merged | `.cursor/symbiotic_agents.py`, PR #21 |

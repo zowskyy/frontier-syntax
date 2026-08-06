@@ -239,7 +239,7 @@ impl FullModuleCodegen {
 
         let mut compiled = Vec::new();
         for (idx, sig) in fns.into_iter().enumerate() {
-            let mut gen = FunctionCodegen::new(&sig, idx as u32, &name_to_index);
+            let mut gen = FunctionCodegen::new(&sig, &name_to_index);
             gen.emit_body(&sig.body)?;
             compiled.push(CompiledFn {
                 sig,
@@ -343,13 +343,12 @@ struct FunctionCodegen {
     locals: HashMap<String, u32>,
     local_decl: Vec<(u32, u8)>,
     next_local: u32,
-    func_index: u32,
     name_to_index: HashMap<String, u32>,
     return_is_i32: bool,
 }
 
 impl FunctionCodegen {
-    fn new(sig: &FnSig, func_index: u32, name_to_index: &HashMap<String, u32>) -> Self {
+    fn new(sig: &FnSig, name_to_index: &HashMap<String, u32>) -> Self {
         let mut locals = HashMap::new();
         for (i, p) in sig.params.iter().enumerate() {
             locals.insert(p.name.clone(), i as u32);
@@ -359,7 +358,6 @@ impl FunctionCodegen {
             locals,
             local_decl: Vec::new(),
             next_local: sig.params.len() as u32,
-            func_index,
             name_to_index: name_to_index.clone(),
             return_is_i32: type_returns_i32(&sig.return_type),
         }

@@ -116,6 +116,8 @@ class FrontierAgent:
             result = self.run_swarm_close_gaps(parsed)
         elif parsed["type"] == "swarm_optimized":
             result = self.run_swarm_optimized(parsed)
+        elif parsed["type"] == "swarm_kb_optimizer":
+            result = self.run_swarm_kb_optimizer(parsed)
         elif parsed["type"] == "close_peerless":
             result = self.run_close_peerless(parsed)
         elif parsed["type"] == "ultimate_conclusion":
@@ -259,6 +261,12 @@ class FrontierAgent:
             for word in ["20x", "20×", "swarm optimized", "swarm optimization", "swarm 2.0"]
         ):
             return {"type": "swarm_optimized", "content": intent}
+
+        if any(
+            word in intent_lower
+            for word in ["kb optimizer", "knowledge optimizer", "knowledge base", "enrich knowledge"]
+        ):
+            return {"type": "swarm_kb_optimizer", "content": intent}
 
         if any(
             word in intent_lower
@@ -769,6 +777,19 @@ class FrontierAgent:
             "manifest": "manifest/swarm_optimized.json",
             "output": result.get("stdout", "")[-2000:],
             "message": "Swarm 2.0 optimization complete",
+        }
+
+    def run_swarm_kb_optimizer(self, parsed: Dict[str, Any]) -> Dict[str, Any]:
+        """Parallel workers enrich the Frontier knowledge hypercube."""
+        orchestrator = self.scripts_dir / "swarm_kb_optimizer.py"
+        result = self._run_command([str(orchestrator)], capture=True)
+        return {
+            "status": "success" if result["returncode"] == 0 else "partial",
+            "report": "audit_reports/swarm_kb_optimizer_report.md",
+            "manifest": "manifest/swarm_kb_optimizer.json",
+            "process_log": "docs/process_log.fr",
+            "output": result.get("stdout", "")[-2000:],
+            "message": "Swarm KB optimizer complete",
         }
 
     def run_close_peerless(self, parsed: Dict[str, Any]) -> Dict[str, Any]:

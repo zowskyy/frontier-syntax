@@ -1,8 +1,76 @@
 {
   "concluded": true,
-  "iterations": 3,
+  "iterations": 1,
+  "steps": [
+    {
+      "step": "spec_impl_bridge",
+      "pass": true,
+      "duration_ms": 20,
+      "output": "PASS: Spec/impl bridge \u2014 10 core modules mapped\n"
+    },
+    {
+      "step": "wasm_slim",
+      "pass": true,
+      "duration_ms": 2646,
+      "output": "WASM size: 885.5 KB (target <100 KB \u2014 tracked)\nPASS: WASM build OK \u2014 885.5 KB tracked (target <100 KB)\n"
+    },
+    {
+      "step": "frontier_worker_alias",
+      "pass": true,
+      "duration_ms": 37,
+      "output": "ok\n"
+    },
+    {
+      "step": "genesis_loop",
+      "pass": true,
+      "duration_ms": 3782,
+      "output": "   |\n199 | struct FullModuleCodegen {\n    |        ----------------- field in this struct\n200 |     functions: Vec<CompiledFn>,\n201 |     name_to_index: HashMap<String, u32>,\n    |     ^^^^^^^^^^^^^\n\n"
+    },
+    {
+      "step": "swarm_kb_optimizer",
+      "pass": true,
+      "duration_ms": 82,
+      "output": "      \"pass\": true,\n      \"added\": 1,\n      \"duration_ms\": 11\n    },\n    {\n      \"worker\": \"core_specs\",\n      \"pass\": true,\n      \"added\": 10,\n      \"duration_ms\": 16\n    }\n  ],\n  \"all_pass\": true\n}\n"
+    },
+    {
+      "step": "knowledge_sync",
+      "pass": true,
+      "duration_ms": 24,
+      "output": "{\n  \"pass\": true,\n  \"entries\": 428,\n  \"ingested_log\": true\n}\n"
+    },
+    {
+      "step": "swarm_optimized",
+      "pass": true,
+      "duration_ms": 108449,
+      "output": "ion_ms\": 73530\n    },\n    {\n      \"gate\": \"peerless\",\n      \"pass\": true,\n      \"duration_ms\": 78143\n    }\n  ],\n  \"all_pass\": true,\n  \"shared_state\": {\n    \"core_modules\": 10,\n    \"scripts\": 47\n  }\n}\n"
+    },
+    {
+      "step": "close_peerless",
+      "pass": true,
+      "duration_ms": 27261,
+      "output": "eacher-student unity module\",\n      \"status\": \"closed\",\n      \"pass\": true,\n      \"duration_ms\": 3251,\n      \"output\": \"PASS: Teacher-student unity module\\n\",\n      \"module_present\": true\n    }\n  ]\n}\n"
+    },
+    {
+      "step": "arc_verify",
+      "pass": true,
+      "duration_ms": 41311,
+      "output": "ec<CompiledFn>,\n201 |     name_to_index: HashMap<String, u32>,\n    |     ^^^^^^^^^^^^^\n\n\u26a1 Knowledge Hypercube: using timsort (2002) \u2014 complexity class 3\n\u26a1 Algorithm applied to codegen: sort \u2014 timsort\n"
+    }
+  ],
+  "gap_resolution": [
+    {
+      "file": "WORKER_REPORT.json",
+      "resolved": 0,
+      "remaining": 0
+    },
+    {
+      "file": "WORKER_REPORT.json",
+      "resolved": 0,
+      "remaining": 0
+    }
+  ],
+  "report": "audit_reports/ultimate_conclusion_report.md",
+  "knowledge_entries": 428,
   "known_gaps_remaining": 0,
-  "knowledge_entries": 208,
-  "in_repo_gaps_closed": true,
-  "report": "audit_reports/ultimate_conclusion_report.md"
+  "in_repo_gaps_closed": true
 }

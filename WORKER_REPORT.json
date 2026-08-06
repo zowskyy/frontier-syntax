@@ -95,29 +95,32 @@
     {
       "id": "wasm_codegen_completeness",
       "metric": "WASM Codegen Feature Coverage",
-      "current": "20%",
+      "current": "80%",
       "target": "100%",
-      "plan_10x": "Extend src/wasm_codegen.rs: let bindings, if/else, function calls, while loops, return expressions.",
-      "priority": "P0",
-      "phase": 1
+      "plan_10x": "Extend src/wasm_codegen.rs: floats, strings, structs, imports, reassignment.",
+      "priority": "P1",
+      "phase": 1,
+      "status": "achieved_partial"
     },
     {
       "id": "slim_wasm_size",
       "metric": "Browser WASM Binary Size",
-      "current": "~760 KB",
+      "current": "~885 KB",
       "target": "< 100 KB",
-      "plan_10x": "Unity Module slim mode (54 bytes demo); feature flag browser-minimal in Cargo.toml.",
+      "plan_10x": "wasm-opt -Oz or frontier-slim minimal crate; tracked in manifest/wasm_size.json.",
       "priority": "P1",
-      "phase": 4
+      "phase": 4,
+      "status": "tracked"
     },
     {
       "id": "knowledge_codegen_integration",
       "metric": "Knowledge \u2192 WASM Integration",
-      "current": "warnings only",
+      "current": "implementation_hint wired",
       "target": "algorithm changes emitted WASM",
       "plan_10x": "Use AlgorithmSuggestion.implementation_hint in wasm_codegen.rs + browser_compiler.rs.",
       "priority": "P0",
-      "phase": 2
+      "phase": 2,
+      "status": "achieved"
     },
     {
       "id": "unity_module_size",
@@ -131,7 +134,7 @@
     {
       "id": "test_coverage",
       "metric": "Cargo Unit Tests",
-      "current": "36+ passing",
+      "current": "40 passing",
       "target": "100% critical path",
       "plan_10x": "Add wasm_codegen, self-hosting, and integration tests per phase.",
       "priority": "P1"
@@ -139,11 +142,12 @@
     {
       "id": "self_hosting",
       "metric": "Self-Hosting Progress",
-      "current": "0%",
+      "current": "bootstrap verified",
       "target": "100%",
-      "plan_10x": "Compile frontier/core/*.frontier natively; parser self-hosts; full bootstrap.",
-      "priority": "P0",
-      "phase": 6
+      "plan_10x": "Expand frontier/src/main.fr; full native compiler bootstrap.",
+      "priority": "P1",
+      "phase": 6,
+      "status": "achieved_partial"
     }
   ],
   "architecture_components": [

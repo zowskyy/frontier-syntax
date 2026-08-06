@@ -1,43 +1,13 @@
 {
-  "gaps": 8,
+  "gaps": 5,
   "plans": [
-    {
-      "id": "wasm_codegen_incomplete",
-      "priority": "P0",
-      "description": "Only const-folded main() works; let/if/calls/loops missing",
-      "recommended_action": "Extend src/wasm_codegen.rs with let/if/calls/loops/return",
-      "scaffold_file": "src/wasm_codegen.rs",
-      "created_at": "2026-08-05T22:56:54.409702+00:00",
-      "verify_passed": true,
-      "verify_output": " wasm_codegen::tests::test_wasm_magic ... ok\ntest wasm_codegen::tests::test_compile_simple_main ... ok\n\ntest result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 34 filtered out; finished in 0.00s\n\n"
-    },
-    {
-      "id": "knowledge_warnings_only",
-      "priority": "P0",
-      "description": "Knowledge suggestions are warnings, not codegen changes",
-      "recommended_action": "Wire AlgorithmSuggestion.implementation_hint into wasm_codegen.rs",
-      "scaffold_file": "src/knowledge_bridge.rs",
-      "created_at": "2026-08-05T22:56:56.242066+00:00",
-      "verify_passed": true,
-      "verify_output": "y::tests::test_unity_compile_simple ... ok\ntest unity::tests::test_unity_knowledge_changes_wasm ... ok\n\ntest result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 32 filtered out; finished in 0.00s\n\n"
-    },
-    {
-      "id": "self_hosting_zero",
-      "priority": "P0",
-      "description": ".frontier spec files not valid v2 source; 0% self-hosting",
-      "recommended_action": "Bootstrap parser from frontier/core/parser.frontier spec alignment",
-      "scaffold_file": "frontier/core/parser.frontier",
-      "created_at": "2026-08-05T22:56:58.143110+00:00",
-      "verify_passed": false,
-      "verify_output": "FAIL: Language hardening verification\n  - Expected 7 core modules, found 10\n"
-    },
     {
       "id": "spec_impl_gap",
       "priority": "P1",
       "description": "Spec vs implementation gap for .frontier core modules",
       "recommended_action": "Manual review required",
       "scaffold_file": null,
-      "created_at": "2026-08-05T22:56:58.169165+00:00"
+      "created_at": "2026-08-06T00:27:02.257675+00:00"
     },
     {
       "id": "wasm_size_760kb",
@@ -45,7 +15,7 @@
       "description": "Full WASM build ~760 KB vs <100 KB target",
       "recommended_action": "Manual review required",
       "scaffold_file": null,
-      "created_at": "2026-08-05T22:56:58.169339+00:00"
+      "created_at": "2026-08-06T00:27:02.257815+00:00"
     },
     {
       "id": "external_launch",
@@ -53,7 +23,7 @@
       "description": "Website, Discord, social media not live",
       "recommended_action": "Manual review required",
       "scaffold_file": null,
-      "created_at": "2026-08-05T22:56:58.169424+00:00"
+      "created_at": "2026-08-06T00:27:02.257887+00:00"
     },
     {
       "id": "frontier_worker_missing",
@@ -61,7 +31,7 @@
       "description": "frontier_worker.py referenced in scrub command but not in repo; use frontier_agent.py + symbiotic_agents.py",
       "recommended_action": "Manual review required",
       "scaffold_file": null,
-      "created_at": "2026-08-05T22:56:58.169579+00:00"
+      "created_at": "2026-08-06T00:27:02.257944+00:00"
     },
     {
       "id": "redis_unavailable",
@@ -69,7 +39,7 @@
       "description": "Redis not available in this environment; report written to file only",
       "recommended_action": "Manual review required",
       "scaffold_file": null,
-      "created_at": "2026-08-05T22:56:58.169635+00:00"
+      "created_at": "2026-08-06T00:27:02.258036+00:00"
     }
   ]
 }

@@ -42,7 +42,6 @@ export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembl
 
 export interface InitOutput {
     readonly memory: WebAssembly.Memory;
-    readonly main: (a: number, b: number) => number;
     readonly knowledge_solver_get_optimal_algorithm: (a: number, b: number, c: number, d: number, e: number, f: number, g: number) => number;
     readonly knowledge_solver_get_ancestors: (a: number, b: number) => number;
     readonly knowledge_solver_get_tradeoffs: (a: number, b: number) => number;

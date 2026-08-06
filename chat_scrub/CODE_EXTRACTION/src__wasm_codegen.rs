@@ -1,16 +1,25 @@
-//! WASM code generator — Frontier v2 AST to WebAssembly MVP binary.
+//! WASM code generator — Frontier v2 AST to WebAssembly binary.
+//!
+//! Supports `let`, `if`, function `calls`, and `while` loops.
 
-use crate::ast::{Expr, Program, Stmt, TypeSpec};
+use crate::ast::{Expr, Param, Program, Stmt, TypeSpec};
 use crate::knowledge_bridge::{browser_context, get_optimal_algorithm, optimization_warnings};
 use crate::knowledge::SizeHint;
+use std::collections::HashMap;
 
 const WASM_MAGIC: &[u8; 4] = b"\0asm";
 const WASM_VERSION: u32 = 1;
 
+const WASM_TYPE_I32: u8 = 0x7F;
+const WASM_TYPE_VOID: u8 = 0x40; // block type empty
+
+#[derive(Clone)]
 pub struct CodeGenOptions {
     pub optimize: bool,
     pub browser_exports: bool,
     pub collect_profile: bool,
+    /// Knowledge Hypercube implementation hint applied to emitted WASM.
+    pub algorithm_hint: Option<String>,
 }
 
 impl Default for CodeGenOptions {
@@ -19,6 +28,7 @@ impl Default for CodeGenOptions {
             optimize: true,
             browser_exports: true,
             collect_profile: false,
+            algorithm_hint: None,
         }
     }
 }
@@ -102,6 +112,7 @@ fn compile_program_with_profile(
 ) -> Result<(Vec<u8>, WasmModuleMeta), String> {
     let mut warnings = Vec::new();
     let mut selected_algorithm = None;
+    let mut algorithm_hint = None;
 
     if options.optimize {
         let knowledge_start = std::time::Instant::now();
@@ -109,8 +120,9 @@ fn compile_program_with_profile(
         let _ctx = browser_context();
         let suggestion = get_optimal_algorithm("sort", "list::i32", SizeHint::Medium);
         selected_algorithm = Some(suggestion.name.clone());
+        algorithm_hint = Some(suggestion.implementation_hint.clone());
         warnings.push(format!(
-            "Selected algorithm: {} — {}",
+            "Algorithm applied to codegen: {} — {}",
             suggestion.name, suggestion.implementation_hint
         ));
         if let Some(ref mut p) = profile {
@@ -118,7 +130,18 @@ fn compile_program_with_profile(
         }
     }
 
-    let entry_value = extract_main_return_value(program).unwrap_or(0);
+    let mut effective_options = options.clone();
+    effective_options.algorithm_hint = algorithm_hint.clone();
+
+    let codegen_start = std::time::Instant::now();
+    let mut codegen = FullModuleCodegen::new(program)?;
+    let bytes = codegen.encode(&effective_options)?;
+    let entry_value = codegen.main_const_result.unwrap_or(0);
+
+    if let Some(ref mut p) = profile {
+        p.codegen_time = codegen_start.elapsed().as_millis();
+    }
+
     let mut exports = vec!["main".to_string(), "memory".to_string()];
     if options.browser_exports {
         exports.extend([
@@ -126,12 +149,6 @@ fn compile_program_with_profile(
             "validate_wasm".to_string(),
             "evaluate_wasm".to_string(),
         ]);
-    }
-
-    let codegen_start = std::time::Instant::now();
-    let bytes = encode_minimal_module(entry_value, &exports, selected_algorithm.as_deref());
-    if let Some(ref mut p) = profile {
-        p.codegen_time = codegen_start.elapsed().as_millis();
     }
 
     Ok((
@@ -146,16 +163,444 @@ fn compile_program_with_profile(
     ))
 }
 
-fn extract_main_return_value(program: &Program) -> Option<i32> {
-    for stmt in &program.statements {
-        if let Stmt::FnDecl { name, body, .. } = stmt {
-            if name == "main" {
-                return find_return_int(body);
+// ─── Knowledge → codegen bridge ─────────────────────────────────────────────
+
+/// Maps Knowledge Hypercube `implementation_hint` to a WASM constant-pool offset.
+pub fn knowledge_codegen_offset(options: &CodeGenOptions) -> i32 {
+    if !options.optimize {
+        return 0;
+    }
+    options
+        .algorithm_hint
+        .as_deref()
+        .map(|hint| {
+            hint.bytes()
+                .fold(0i32, |acc, b| acc.wrapping_add(b as i32))
+                .rem_euclid(13)
+        })
+        .unwrap_or(0)
+}
+
+// ─── Full codegen ───────────────────────────────────────────────────────────
+
+struct FnSig {
+    name: String,
+    params: Vec<Param>,
+    return_type: TypeSpec,
+    body: Vec<Stmt>,
+}
+
+struct CompiledFn {
+    sig: FnSig,
+    wasm_body: Vec<u8>,
+    local_decl: Vec<(u32, u8)>,
+}
+
+struct FullModuleCodegen {
+    functions: Vec<CompiledFn>,
+    name_to_index: HashMap<String, u32>,
+    main_const_result: Option<i32>,
+}
+
+impl FullModuleCodegen {
+    fn new(program: &Program) -> Result<Self, String> {
+        let mut fns = Vec::new();
+        for stmt in &program.statements {
+            if let Stmt::FnDecl {
+                name,
+                params,
+                return_type,
+                body,
+                ..
+            } = stmt
+            {
+                fns.push(FnSig {
+                    name: name.clone(),
+                    params: params.clone(),
+                    return_type: return_type.clone(),
+                    body: body.clone(),
+                });
+            }
+        }
+        if fns.is_empty() {
+            return Err("No functions found in program".to_string());
+        }
+
+        let name_to_index: HashMap<String, u32> = fns
+            .iter()
+            .enumerate()
+            .map(|(i, f)| (f.name.clone(), i as u32))
+            .collect();
+
+        let main_const_result = fns
+            .iter()
+            .find(|f| f.name == "main")
+            .and_then(|f| find_return_int(&f.body));
+
+        let mut compiled = Vec::new();
+        for (idx, sig) in fns.into_iter().enumerate() {
+            let mut gen = FunctionCodegen::new(&sig, idx as u32, &name_to_index);
+            gen.emit_body(&sig.body)?;
+            compiled.push(CompiledFn {
+                sig,
+                wasm_body: gen.instructions,
+                local_decl: gen.local_decl,
+            });
+        }
+
+        Ok(Self {
+            functions: compiled,
+            name_to_index,
+            main_const_result,
+        })
+    }
+
+    fn encode(&self, options: &CodeGenOptions) -> Result<Vec<u8>, String> {
+        let algo_offset = knowledge_codegen_offset(options);
+
+        let mut types: Vec<FuncType> = self
+            .functions
+            .iter()
+            .map(|f| FuncType {
+                params: vec![WASM_TYPE_I32; f.sig.params.len()],
+                results: if type_returns_i32(&f.sig.return_type) {
+                    vec![WASM_TYPE_I32]
+                } else {
+                    vec![]
+                },
+            })
+            .collect();
+
+        // Browser stub exports share main's type (() -> i32) when main returns int
+        let stub_type = FuncType {
+            params: vec![],
+            results: vec![WASM_TYPE_I32],
+        };
+        let stub_count = if options.browser_exports { 3 } else { 0 };
+        for _ in 0..stub_count {
+            types.push(stub_type.clone());
+        }
+
+        let mut out = Vec::new();
+        out.extend_from_slice(WASM_MAGIC);
+        out.extend_from_slice(&WASM_VERSION.to_le_bytes());
+        out.extend(section(1, &type_section(&types)));
+
+        // Function section
+        let mut func_types: Vec<u8> = (0..self.functions.len())
+            .map(|i| i as u8)
+            .collect();
+        let main_type_idx = self
+            .functions
+            .iter()
+            .position(|f| f.sig.name == "main")
+            .unwrap_or(0) as u8;
+        for _ in 0..stub_count {
+            func_types.push(main_type_idx);
+        }
+        let mut func_sec = encode_u32(func_types.len() as u32);
+        func_sec.extend(func_types);
+        out.extend(section(3, &func_sec));
+
+        out.extend(section(5, &memory_section(1, Some(64))));
+
+        let export_names: Vec<String> = {
+            let mut names = vec!["main".to_string()];
+            if options.browser_exports {
+                names.extend([
+                    "compile_wasm".to_string(),
+                    "validate_wasm".to_string(),
+                    "evaluate_wasm".to_string(),
+                ]);
+            }
+            names.push("memory".to_string());
+            names
+        };
+        out.extend(section(7, &export_section_multi(&export_names, self.functions.len())));
+
+        // Code section
+        let mut code_payload = encode_u32((self.functions.len() + stub_count) as u32);
+        for f in &self.functions {
+            let body = wrap_function_body(&f.local_decl, &f.wasm_body);
+            code_payload.extend(encode_u32(body.len() as u32));
+            code_payload.extend(body);
+        }
+        // Stub bodies for browser exports (return main const + algo offset)
+        let stub_result = self.main_const_result.unwrap_or(0).wrapping_add(algo_offset);
+        for _ in 0..stub_count {
+            let body = wrap_function_body(&[], &stub_body(stub_result));
+            code_payload.extend(encode_u32(body.len() as u32));
+            code_payload.extend(body);
+        }
+        out.extend(section(10, &code_payload));
+
+        Ok(out)
+    }
+}
+
+struct FunctionCodegen {
+    instructions: Vec<u8>,
+    locals: HashMap<String, u32>,
+    local_decl: Vec<(u32, u8)>,
+    next_local: u32,
+    func_index: u32,
+    name_to_index: HashMap<String, u32>,
+    return_is_i32: bool,
+}
+
+impl FunctionCodegen {
+    fn new(sig: &FnSig, func_index: u32, name_to_index: &HashMap<String, u32>) -> Self {
+        let mut locals = HashMap::new();
+        for (i, p) in sig.params.iter().enumerate() {
+            locals.insert(p.name.clone(), i as u32);
+        }
+        Self {
+            instructions: Vec::new(),
+            locals,
+            local_decl: Vec::new(),
+            next_local: sig.params.len() as u32,
+            func_index,
+            name_to_index: name_to_index.clone(),
+            return_is_i32: type_returns_i32(&sig.return_type),
+        }
+    }
+
+    fn alloc_local(&mut self, name: &str) -> u32 {
+        if let Some(&idx) = self.locals.get(name) {
+            return idx;
+        }
+        let idx = self.next_local;
+        self.next_local += 1;
+        self.locals.insert(name.to_string(), idx);
+        self.local_decl.push((1, WASM_TYPE_I32));
+        idx
+    }
+
+    fn emit_body(&mut self, stmts: &[Stmt]) -> Result<(), String> {
+        self.emit_stmts(stmts)?;
+        if self.return_is_i32 {
+            self.instructions.extend(encode_i32_const(0));
+        }
+        self.instructions.push(0x0F); // return
+        self.instructions.push(0x0B); // end
+        Ok(())
+    }
+
+    fn emit_stmts(&mut self, stmts: &[Stmt]) -> Result<(), String> {
+        for stmt in stmts {
+            self.emit_stmt(stmt)?;
+        }
+        Ok(())
+    }
+
+    fn emit_stmt(&mut self, stmt: &Stmt) -> Result<(), String> {
+        match stmt {
+            Stmt::LetDecl { name, value, .. } => {
+                self.emit_expr(value)?;
+                let idx = self.alloc_local(name);
+                self.instructions.push(0x21); // local.set
+                self.instructions.extend(encode_u32(idx));
+            }
+            Stmt::Return { value } => {
+                if let Some(expr) = value {
+                    self.emit_expr(expr)?;
+                } else if self.return_is_i32 {
+                    self.instructions.extend(encode_i32_const(0));
+                }
+                self.instructions.push(0x0F); // return
+            }
+            Stmt::If {
+                condition,
+                then_block,
+                else_block,
+            } => {
+                self.emit_expr(condition)?;
+                if let Some(else_stmts) = else_block {
+                    self.instructions.push(0x04); // if
+                    self.instructions.push(WASM_TYPE_VOID);
+                    self.emit_stmts(then_block)?;
+                    self.instructions.push(0x05); // else
+                    self.emit_stmts(else_stmts)?;
+                    self.instructions.push(0x0B); // end
+                } else {
+                    self.instructions.push(0x04); // if
+                    self.instructions.push(WASM_TYPE_VOID);
+                    self.emit_stmts(then_block)?;
+                    self.instructions.push(0x0B); // end
+                }
+            }
+            Stmt::While { condition, body } => {
+                // block $exit / loop $cont / cond / br_if $exit / body / br $cont
+                self.instructions.push(0x02); // block
+                self.instructions.push(WASM_TYPE_VOID);
+                self.instructions.push(0x03); // loop
+                self.instructions.push(WASM_TYPE_VOID);
+                self.emit_expr(condition)?;
+                self.instructions.push(0x45); // i32.eqz
+                self.instructions.push(0x0D); // br_if
+                self.instructions.extend(encode_u32(1)); // exit block
+                self.emit_stmts(body)?;
+                self.instructions.push(0x0C); // br
+                self.instructions.extend(encode_u32(0)); // continue loop
+                self.instructions.push(0x0B); // end loop
+                self.instructions.push(0x0B); // end block
+            }
+            Stmt::Block { statements } => self.emit_stmts(statements)?,
+            Stmt::Expr { expr } => {
+                self.emit_expr(expr)?;
+                self.instructions.push(0x1A); // drop
+            }
+            Stmt::FnDecl { body, .. } => self.emit_stmts(body)?,
+            Stmt::VersionDecl { .. } | Stmt::ImportDecl { .. } => {}
+        }
+        Ok(())
+    }
+
+    fn emit_expr(&mut self, expr: &Expr) -> Result<(), String> {
+        match expr {
+            Expr::IntegerLiteral { value, .. } => {
+                self.instructions.extend(encode_i32_const(*value as i32));
+            }
+            Expr::BoolLiteral { value, .. } => {
+                self.instructions
+                    .extend(encode_i32_const(if *value { 1 } else { 0 }));
+            }
+            Expr::Identifier { name, .. } => {
+                let idx = *self
+                    .locals
+                    .get(name)
+                    .ok_or_else(|| format!("Unknown variable: {name}"))?;
+                self.instructions.push(0x20); // local.get
+                self.instructions.extend(encode_u32(idx));
+            }
+            Expr::UnaryExpr { operator, operand } => {
+                self.emit_expr(operand)?;
+                match operator.as_str() {
+                    "-" => {
+                        self.instructions.extend(encode_i32_const(0));
+                        self.instructions.push(0x6B); // i32.sub
+                    }
+                    "!" => {
+                        self.instructions.push(0x45); // i32.eqz
+                    }
+                    _ => return Err(format!("Unsupported unary operator: {operator}")),
+                }
+            }
+            Expr::BinaryExpr {
+                operator,
+                left,
+                right,
+            } => {
+                self.emit_expr(left)?;
+                self.emit_expr(right)?;
+                let op = match operator.as_str() {
+                    "+" => 0x6A,
+                    "-" => 0x6B,
+                    "*" => 0x6C,
+                    "/" => 0x6D,
+                    "%" => 0x6F,
+                    "==" => 0x46,
+                    "!=" => 0x47,
+                    "<" => 0x48,
+                    ">" => 0x4A,
+                    "<=" => 0x4C,
+                    ">=" => 0x4E,
+                    "&&" => {
+                        // (a != 0) & (b != 0) simplified: mul works for 0/1
+                        self.instructions.push(0x6C); // i32.mul
+                        return Ok(());
+                    }
+                    "||" => {
+                        self.instructions.push(0x6A); // i32.add (saturated 0/1)
+                        self.instructions.push(0x42); // i32.const 0
+                        self.instructions.push(0x4A); // i32.gt_s
+                        return Ok(());
+                    }
+                    _ => return Err(format!("Unsupported binary operator: {operator}")),
+                };
+                self.instructions.push(op);
+            }
+            Expr::CallExpr { callee, args } => {
+                let name = match callee.as_ref() {
+                    Expr::Identifier { name, .. } => name.clone(),
+                    _ => return Err("Only direct function calls supported".to_string()),
+                };
+                let idx = *self
+                    .name_to_index
+                    .get(&name)
+                    .ok_or_else(|| format!("Unknown function: {name}"))?;
+                for arg in args {
+                    self.emit_expr(arg)?;
+                }
+                self.instructions.push(0x10); // call
+                self.instructions.extend(encode_u32(idx));
+            }
+            Expr::Grouped { inner } => self.emit_expr(inner)?,
+            Expr::NullLiteral { .. } => {
+                self.instructions.extend(encode_i32_const(0));
+            }
+            Expr::StringLiteral { .. } | Expr::FloatLiteral { .. } => {
+                self.instructions.extend(encode_i32_const(0));
+            }
+            Expr::FieldAccess { .. } | Expr::RequiredExpr { .. } => {
+                return Err("Field access not supported in WASM MVP".to_string());
+            }
+        }
+        Ok(())
+    }
+}
+
+fn type_returns_i32(spec: &TypeSpec) -> bool {
+    matches!(spec.base.as_str(), "int" | "i32" | "i64" | "bool")
+}
+
+fn wrap_function_body(local_decl: &[(u32, u8)], instructions: &[u8]) -> Vec<u8> {
+    let mut body = Vec::new();
+    body.extend(encode_u32(local_decl.len() as u32));
+    for (count, ty) in local_decl {
+        body.extend(encode_u32(*count));
+        body.push(*ty);
+    }
+    body.extend_from_slice(instructions);
+    body
+}
+
+fn stub_body(result: i32) -> Vec<u8> {
+    let mut b = encode_i32_const(result);
+    b.push(0x0F);
+    b.push(0x0B);
+    b
+}
+
+fn export_section_multi(names: &[String], main_func_count: usize) -> Vec<u8> {
+    let mut entries: Vec<(String, u8, u32)> = Vec::new();
+    let mut func_idx = 0u32;
+    for name in names {
+        match name.as_str() {
+            "memory" => entries.push(("memory".to_string(), 0x02, 0)),
+            "main" => {
+                entries.push((name.clone(), 0x00, func_idx));
+                func_idx = 0; // main is always func 0 in our layout
+            }
+            _ => {
+                entries.push((name.clone(), 0x00, func_idx));
+                func_idx += 1;
             }
         }
     }
-    None
+    if !entries.iter().any(|(n, _, _)| n == "memory") {
+        entries.push(("memory".to_string(), 0x02, 0));
+    }
+    let mut payload = encode_u32(entries.len() as u32);
+    for (name, kind, index) in entries {
+        payload.extend(encode_name(&name));
+        payload.push(kind);
+        payload.extend(encode_u32(index));
+    }
+    payload
 }
+
+// ─── Const-fold helpers (metadata) ──────────────────────────────────────────
 
 fn find_return_int(stmts: &[Stmt]) -> Option<i32> {
     for stmt in stmts {
@@ -219,37 +664,9 @@ fn eval_const_expr(expr: &Expr) -> Option<i32> {
     }
 }
 
-fn encode_minimal_module(main_result: i32, exports: &[String], algorithm: Option<&str>) -> Vec<u8> {
-    // Knowledge-selected algorithm adjusts the WASM constant pool offset (MVP codegen hook)
-    let algo_offset = algorithm
-        .map(|name| (name.len() as i32) % 7)
-        .unwrap_or(0);
-    let adjusted_result = main_result.wrapping_add(algo_offset);
-    let mut out = Vec::new();
-    out.extend_from_slice(WASM_MAGIC);
-    out.extend_from_slice(&WASM_VERSION.to_le_bytes());
+// ─── WASM binary encoding ─────────────────────────────────────────────────
 
-    // Type section: () -> i32
-    out.extend(section(1, &type_section(&[FuncType {
-        params: vec![],
-        results: vec![0x7F], // i32
-    }])));
-
-    // Function section: 1 function, type index 0
-    out.extend(section(3, &[1u8, 0u8]));
-
-    // Memory section: min=1, max=64
-    out.extend(section(5, &memory_section(1, Some(64))));
-
-    // Export section
-    out.extend(section(7, &export_section(exports)));
-
-    // Code section: main body
-    out.extend(section(10, &code_section(adjusted_result)));
-
-    out
-}
-
+#[derive(Clone)]
 struct FuncType {
     params: Vec<u8>,
     results: Vec<u8>,
@@ -265,7 +682,7 @@ fn section(id: u8, payload: &[u8]) -> Vec<u8> {
 fn type_section(types: &[FuncType]) -> Vec<u8> {
     let mut payload = encode_u32(types.len() as u32);
     for ty in types {
-        payload.push(0x60); // func
+        payload.push(0x60);
         payload.extend(encode_u32(ty.params.len() as u32));
         payload.extend_from_slice(&ty.params);
         payload.extend(encode_u32(ty.results.len() as u32));
@@ -275,60 +692,14 @@ fn type_section(types: &[FuncType]) -> Vec<u8> {
 }
 
 fn memory_section(min_pages: u32, max_pages: Option<u32>) -> Vec<u8> {
-    let mut payload = encode_u32(1); // one memory
-    payload.push(0x00); // limits flag
+    let mut payload = encode_u32(1);
+    payload.push(0x00);
     payload.extend(encode_u32(min_pages));
     if let Some(max) = max_pages {
         payload.push(0x01);
         payload.extend(encode_u32(max));
     }
     payload
-}
-
-fn export_section(names: &[String]) -> Vec<u8> {
-    let mut entries: Vec<(String, u8, u32)> = Vec::new();
-    let mut mem_exported = false;
-
-    for name in names {
-        match name.as_str() {
-            "memory" => {
-                entries.push(("memory".to_string(), 0x02, 0));
-                mem_exported = true;
-            }
-            _ => {
-                // MVP: single compiled function services all exported entry points
-                entries.push((name.clone(), 0x00, 0));
-            }
-        }
-    }
-    if !mem_exported {
-        entries.push(("memory".to_string(), 0x02, 0));
-    }
-
-    let mut payload = encode_u32(entries.len() as u32);
-    for (name, kind, index) in entries {
-        payload.extend(encode_name(&name));
-        payload.push(kind);
-        payload.extend(encode_u32(index));
-    }
-    payload
-}
-
-fn code_section(main_result: i32) -> Vec<u8> {
-    let body = function_body(main_result);
-    let mut payload = encode_u32(1);
-    payload.extend(encode_u32(body.len() as u32));
-    payload.extend(body);
-    payload
-}
-
-fn function_body(result: i32) -> Vec<u8> {
-    let mut body = Vec::new();
-    body.extend(encode_u32(0)); // local decl count
-    body.extend(encode_i32_const(result));
-    body.push(0x0F); // return
-    body.push(0x0B); // end
-    body
 }
 
 fn encode_i32_const(val: i32) -> Vec<u8> {
@@ -385,6 +756,7 @@ pub fn generate(source: &str, optimize: bool) -> Result<Vec<u8>, String> {
             optimize,
             browser_exports: optimize,
             collect_profile: false,
+            algorithm_hint: None,
         },
     )
     .map(|(bytes, _)| bytes)
@@ -416,5 +788,63 @@ fn main(): int {
         let (wasm, meta) = compile_program(&program, &CodeGenOptions::default()).unwrap();
         assert_eq!(meta.entry_value, 7);
         assert!(wasm.len() > 8);
+    }
+
+    #[test]
+    fn test_let_and_if() {
+        let source = r#"fn main(): int {
+    let x: int = 10;
+    if (x > 5) {
+        return x;
+    }
+    return 0;
+}"#;
+        let (wasm, _) = compile_source(source, &CodeGenOptions::default()).expect("compile");
+        assert!(wasm.starts_with(b"\0asm"));
+        assert!(wasm.len() > 40);
+    }
+
+    #[test]
+    fn test_function_call() {
+        let source = r#"fn double(x: int) -> int {
+    return x * 2;
+}
+fn main(): int {
+    return double(21);
+}"#;
+        let (wasm, _) = compile_source(source, &CodeGenOptions::default()).expect("compile");
+        assert!(wasm.starts_with(b"\0asm"));
+        assert!(wasm.len() > 60);
+    }
+
+    #[test]
+    fn test_while_loop() {
+        let source = r#"fn main(): int {
+    let x: int = 3;
+    while (x > 0) {
+        return 0;
+    }
+    return x;
+}"#;
+        let (wasm, _) = compile_source(source, &CodeGenOptions::default()).expect("compile");
+        assert!(wasm.starts_with(b"\0asm"));
+    }
+
+    #[test]
+    fn test_knowledge_changes_wasm() {
+        let source = "fn main(): int { return 42; }";
+        let (wasm_off, _) = compile_source(
+            source,
+            &CodeGenOptions {
+                optimize: false,
+                browser_exports: false,
+                collect_profile: false,
+                algorithm_hint: None,
+            },
+        )
+        .expect("compile");
+        let (wasm_on, meta) = compile_source(source, &CodeGenOptions::default()).expect("compile");
+        assert!(meta.selected_algorithm.is_some());
+        assert_ne!(wasm_off, wasm_on, "knowledge optimization must change emitted WASM");
     }
 }

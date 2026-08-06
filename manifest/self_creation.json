@@ -34,7 +34,7 @@
       "status": "pass",
       "coq": true,
       "zk": true,
-      "coq_out": "WARN: coqc not installed \u2014 skipping Coq validation"
+      "coq_out": "PASS: Coq proof validation (4/4 proofs)"
     },
     "phase4": {
       "status": "pass",

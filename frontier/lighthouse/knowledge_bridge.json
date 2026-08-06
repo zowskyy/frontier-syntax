@@ -20,7 +20,7 @@
           "mitigated"
         ],
         "source": "syntax/wasm/wasm_parser_v2.wasm",
-        "score": 0.2464
+        "score": 0.2539
       },
       {
         "id": "grammar_mutation_drift",
@@ -33,7 +33,7 @@
           "partial"
         ],
         "source": "src/grammar/mutator.rs",
-        "score": 0.1274
+        "score": 0.1322
       },
       {
         "id": "ipfs_gateway_ssrf",
@@ -46,7 +46,7 @@
           "partial"
         ],
         "source": "src/ipfs/resolver.rs",
-        "score": 0.1227
+        "score": 0.1273
       },
       {
         "id": "pq_signature_forgery",
@@ -59,7 +59,7 @@
           "mitigated"
         ],
         "source": "src/pq_signatures.rs",
-        "score": 0.1227
+        "score": 0.1273
       },
       {
         "id": "zk_proof_bypass",
@@ -72,7 +72,7 @@
           "mitigated"
         ],
         "source": "src/zk/verifier.rs",
-        "score": 0.1227
+        "score": 0.1273
       }
     ],
     "WASM codegen gap": [
@@ -86,7 +86,7 @@
           "architecture"
         ],
         "source": "src/wasm_codegen.rs",
-        "score": 0.8042
+        "score": 0.822
       },
       {
         "id": "knowledge_warnings_only",
@@ -99,7 +99,7 @@
           "P0"
         ],
         "source": "src/wasm_codegen.rs",
-        "score": 0.6997
+        "score": 0.7183
       },
       {
         "id": "spec_impl_gap",
@@ -112,7 +112,7 @@
           "P1"
         ],
         "source": "frontier/core/",
-        "score": 0.491
+        "score": 0.4993
       },
       {
         "id": "wasm_size_760kb",
@@ -125,7 +125,7 @@
           "P1"
         ],
         "source": "Cargo.toml",
-        "score": 0.4586
+        "score": 0.4648
       },
       {
         "id": "cli_1be2",
@@ -137,7 +137,7 @@
           "cli"
         ],
         "source": ".cursor/frontier_agent.sh gaps",
-        "score": 0.3682
+        "score": 0.3745
       }
     ],
     "architecture component": [
@@ -151,7 +151,7 @@
           "architecture"
         ],
         "source": "src/resolver.rs",
-        "score": 0.3083
+        "score": 0.3238
       },
       {
         "id": "arch_frontier_agent",
@@ -163,7 +163,7 @@
           "architecture"
         ],
         "source": "frontier_agent.py",
-        "score": 0.3083
+        "score": 0.3238
       },
       {
         "id": "arch_lighthouse_stack",
@@ -175,7 +175,7 @@
           "architecture"
         ],
         "source": "frontier/lighthouse/",
-        "score": 0.3083
+        "score": 0.3238
       },
       {
         "id": "arch_frontier-dex",
@@ -187,7 +187,7 @@
           "architecture"
         ],
         "source": "frontier-dex/",
-        "score": 0.3083
+        "score": 0.3238
       },
       {
         "id": "arch_knowledge_hypercube",
@@ -199,7 +199,7 @@
           "architecture"
         ],
         "source": "src/knowledge/hypercube/",
-        "score": 0.274
+        "score": 0.2878
       }
     ],
     "self-hosting": [
@@ -214,7 +214,7 @@
           "P0"
         ],
         "source": "frontier/core/",
-        "score": 0.7296
+        "score": 0.7522
       },
       {
         "id": "self_hosting",
@@ -227,7 +227,7 @@
           "10x"
         ],
         "source": "",
-        "score": 0.5964
+        "score": 0.615
       },
       {
         "id": "test_coverage",
@@ -240,7 +240,7 @@
           "10x"
         ],
         "source": "",
-        "score": 0.3648
+        "score": 0.3761
       },
       {
         "id": "grammar_mutation_drift",
@@ -253,7 +253,7 @@
           "partial"
         ],
         "source": "src/grammar/mutator.rs",
-        "score": 0.1501
+        "score": 0.1548
       }
     ],
     "IPFS import": [
@@ -267,7 +267,7 @@
           "architecture"
         ],
         "source": "src/ipfs/resolver.rs",
-        "score": 0.8824
+        "score": 0.9072
       },
       {
         "id": "ipfs_gateway_ssrf",
@@ -280,7 +280,7 @@
           "partial"
         ],
         "source": "src/ipfs/resolver.rs",
-        "score": 0.6687
+        "score": 0.687
       }
     ]
   }

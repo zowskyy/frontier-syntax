@@ -29,6 +29,7 @@ REMAINING_CLOSERS = [
     ("wasm_slim", ["python3", "scripts/optimize_wasm_size.py"]),
     ("frontier_worker_alias", ["python3", "-c", "import frontier_worker; print('ok')"]),
     ("genesis_loop", ["cargo", "run", "--quiet", "--bin", "frontier", "--", "parse", "scripts/genesis.fr"]),
+    ("swarm_kb_optimizer", ["python3", "scripts/swarm_kb_optimizer.py"]),
     ("knowledge_sync", ["python3", "scripts/sync_knowledge_base.py"]),
     ("swarm_optimized", ["python3", "scripts/swarm_optimized.py"]),
     ("close_peerless", ["python3", "scripts/close_peerless_gaps.py"]),
@@ -184,6 +185,13 @@ def main() -> int:
         "gap_resolution": gap_resolution,
         "report": str(REPORT.relative_to(ROOT)),
     }
+    # Record knowledge base size at conclusion
+    kb_path = ROOT / "src" / "knowledge" / "hypercube" / "chat_knowledge.json"
+    if kb_path.exists():
+        kb = json.loads(kb_path.read_text(encoding="utf-8"))
+        summary["knowledge_entries"] = kb.get("entry_count", len(kb.get("entries", [])))
+    summary["known_gaps_remaining"] = max((r.get("remaining", 0) for r in gap_resolution), default=0)
+    summary["in_repo_gaps_closed"] = summary["known_gaps_remaining"] == 0
     MANIFEST.write_text(json.dumps(summary, indent=2), encoding="utf-8")
     plog.log("ultimate_conclusion", "final_status", "concluded" if concluded else "partial", summary)
     print(json.dumps(summary, indent=2))

@@ -1,7 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
 export const memory: WebAssembly.Memory;
-export const main: (a: number, b: number) => number;
 export const knowledge_solver_get_optimal_algorithm: (a: number, b: number, c: number, d: number, e: number, f: number, g: number) => number;
 export const knowledge_solver_get_ancestors: (a: number, b: number) => number;
 export const knowledge_solver_get_tradeoffs: (a: number, b: number) => number;

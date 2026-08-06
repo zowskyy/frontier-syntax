@@ -42,7 +42,7 @@ def sync_knowledge() -> dict:
     # Ingest process log
     if PROCESS_LOG.exists():
         log_entries = parse_process_entries(PROCESS_LOG.read_text(encoding="utf-8"))
-        for i, le in enumerate(log_entries[-50:]):  # last 50 swarm decisions
+        for i, le in enumerate(log_entries):  # full process log history
             eid = f"swarm_process_{le.get('process', i)}_{i}"
             if any(e.get("id") == eid for e in entries):
                 continue
