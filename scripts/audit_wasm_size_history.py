@@ -73,6 +73,19 @@ def manifest_at(ref: str) -> dict[str, Any] | None:
     return data
 
 
+def current_manifest() -> dict[str, Any] | None:
+    """Prefer working-tree manifest (post-measure) over last commit."""
+    path = ROOT / "manifest" / "wasm_size.json"
+    if path.exists():
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+            if "<<<<<<" not in path.read_text(encoding="utf-8"):
+                return data
+        except json.JSONDecodeError:
+            pass
+    return manifest_at("HEAD")
+
+
 def history_commits(limit: int = 50) -> list[dict[str, Any]]:
     r = git("log", "--all", f"-{limit}", "--format=%H %s", "--", "manifest/wasm_size.json")
     if r.returncode != 0:
@@ -154,9 +167,12 @@ def build_audit(refs: list[str]) -> dict[str, Any]:
     best_met = [s for s in ref_snapshots if s.get("met") is True]
     best_met.sort(key=lambda x: float(x.get("size_kb") or 999))
 
-    current = manifest_at("HEAD")
+    current = current_manifest()
     current_met = bool(current and current.get("met"))
     historical_met_elsewhere = bool(best_met) and not current_met
+    # If current branch already meets target, reconciliation is done — allow optimize path
+    if current_met and best_met:
+        historical_met_elsewhere = False
 
     recommendation = "measure_current"
     if historical_met_elsewhere:

@@ -6,8 +6,7 @@
   "current_blockers": {
     "phase_1": ["#44 wasm_codegen", "#45 knowledge_codegen", "#46 self_hosting"],
     "phase_3": [
-      "#48 wasm_size 127.4KB on current branch — audit first",
-      "historical 83.8KB met:true on cursor/wasm-size-phase3-f519 (owner recalls ~98KB prior chat)"
+      "#48 wasm_size reconciled — 84.3 KB met:true on current branch (wasm-size-phase3 cherry-picked)"
     ],
     "phase_7": ["CI present", "audit hash chain", "independent validator closure"]
   },

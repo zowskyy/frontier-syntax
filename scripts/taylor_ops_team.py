@@ -278,23 +278,29 @@ def run_worker(wid: str, *, apply: bool = False, mode: str = "daily") -> dict[st
     if apply and spec.get("apply_commands"):
         cmds.extend(spec["apply_commands"])
 
-  # WasmSizer: owner directive — audit git/chat history before #48 optimize work
+    # WasmSizer: run audit first, then decide whether to skip optimize
+    audit_block_optimize = False
     if wid == "W5_WasmSizer" and spec.get("audit_first"):
+        audit_cmd = [sys.executable, "scripts/audit_wasm_size_history.py"]
+        audit_step = run_cmd(audit_cmd)
+        result["steps"].append(audit_step)
         history_path = REPO / "manifest" / "wasm_size_history.json"
-        block_optimize = False
         if history_path.exists():
             try:
                 hist = json.loads(history_path.read_text(encoding="utf-8"))
-                block_optimize = bool(hist.get("block_optimize_until_reconciled"))
+                audit_block_optimize = bool(hist.get("block_optimize_until_reconciled"))
             except json.JSONDecodeError:
                 pass
-        if block_optimize:
+        if audit_block_optimize:
+            cmds = [c for c in cmds if "audit_wasm_size_history" not in (c[1] if len(c) > 1 else "")]
             cmds = [c for c in cmds if "optimize_wasm_size" not in (c[1] if len(c) > 1 else "")]
             result["audit_gate"] = {
                 "block_optimize": True,
                 "reason": "historical met:true on sibling branch — reconcile before optimize",
                 "manifest": str(history_path.relative_to(REPO)),
             }
+        else:
+            cmds = [c for c in cmds if "audit_wasm_size_history" not in (c[1] if len(c) > 1 else "")]
 
     for cmd in cmds:
         # Skip optional scripts that do not exist

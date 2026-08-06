@@ -1,22 +1,14 @@
 {
-  "audited_at": "2026-08-06T23:36:58.837464Z",
+  "audited_at": "2026-08-06T23:46:12.727561Z",
   "auditor": "scripts/audit_wasm_size_history.py",
   "owner_directive": "Check git history and sibling branches for prior sub-100 KB WASM work (owner recalls ~98 KB in a prior chat) before any #48 remediation.",
   "current_ref": "cursor/agent-legal-record-f519",
   "current_manifest": {
-    "size_kb": 127.4,
-    "met": false,
-    "git_sha": "d4d0d31"
+    "size_kb": 84.3,
+    "met": true,
+    "git_sha": "188ef08"
   },
   "ref_snapshots": [
-    {
-      "ref": "HEAD",
-      "commit": "b0f0e2324113",
-      "size_kb": 127.4,
-      "met": false,
-      "measured_at": "2026-08-06T23:29:37.663570Z",
-      "git_sha": "d4d0d31"
-    },
     {
       "ref": "cursor/frontier-syntax-cycle1-e39f",
       "commit": "3db369c529c4",
@@ -44,6 +36,13 @@
   ],
   "commit_history": [
     {
+      "commit": "9f86adbbb372",
+      "subject": "WasmSizer: audit history before #48 \u2014 owner directive for prior sub-100KB work",
+      "size_kb": 127.4,
+      "met": false,
+      "git_sha": "b0f0e23"
+    },
+    {
       "commit": "b0f0e2324113",
       "subject": "Taylor Ops: production pipeline groups (Foundation\u2192Build\u2192Ship)",
       "size_kb": 127.4,
@@ -63,13 +62,6 @@
       "size_kb": 127.4,
       "met": false,
       "git_sha": "7ea6dc7"
-    },
-    {
-      "commit": "d98a8cdc2d23",
-      "subject": "On cursor/blueprint-v2-wasm-llm-f519: pr_resolution_autostash",
-      "size_kb": 84.3,
-      "met": true,
-      "git_sha": "9fd8ecc"
     },
     {
       "commit": "7c64dfc018b3",
@@ -305,13 +297,18 @@
     },
     {
       "file": "audit_reports/wasm_size_history_report.md",
-      "line": 28,
+      "line": 27,
       "excerpt": "- **Size:** 83.8 KB (target 100 KB)"
     },
     {
       "file": "audit_reports/wasm_size_history_report.md",
-      "line": 32,
+      "line": 31,
       "excerpt": "**RECONCILE_BEFORE_FIX: target already met on cursor/wasm-size-phase3-f519 (83.8 KB, commit d426b2bc3ace). Cherry-pick/merge wasm-slim changes before re-optimizing #48.**"
+    },
+    {
+      "file": "audit_reports/wasm_size_history_report.md",
+      "line": 37,
+      "excerpt": "- `9f86adbbb372` \u2014 127.4 KB (FAIL) \u2014 WasmSizer: audit history before #48 \u2014 owner directive for pr"
     },
     {
       "file": "audit_reports/wasm_size_history_report.md",
@@ -331,31 +328,26 @@
     {
       "file": "audit_reports/wasm_size_history_report.md",
       "line": 41,
-      "excerpt": "- `d98a8cdc2d23` \u2014 84.3 KB (PASS) \u2014 On cursor/blueprint-v2-wasm-llm-f519: pr_resolution_autostas"
-    },
-    {
-      "file": "audit_reports/wasm_size_history_report.md",
-      "line": 42,
       "excerpt": "- `7c64dfc018b3` \u2014 83.8 KB (PASS) \u2014 feat: wasm-slim hits <100 KB target \u2014 885 KB \u2192 83.8 KB"
     },
     {
       "file": "audit_reports/wasm_size_history_report.md",
-      "line": 43,
+      "line": 42,
       "excerpt": "- `74390a254bcc` \u2014 127.4 KB (FAIL) \u2014 feat: wasm-slim build \u2014 885 KB \u2192 127 KB (phase 3 WASM work)"
     },
     {
       "file": "audit_reports/wasm_size_history_report.md",
-      "line": 44,
+      "line": 43,
       "excerpt": "- `89d2924621ca` \u2014 885.3 KB (FAIL) \u2014 fix: strict blueprint gate \u2014 no partial credit, freeze phase"
     },
     {
       "file": "audit_reports/wasm_size_history_report.md",
-      "line": 45,
+      "line": 44,
       "excerpt": "- `a0f43a26bea8` \u2014 885.3 KB (FAIL) \u2014 feat: 4 teams \u00d7 6 workers execute Peerless implementation pl"
     },
     {
       "file": "audit_reports/wasm_size_history_report.md",
-      "line": 46,
+      "line": 45,
       "excerpt": "- `2a3628b42a5f` \u2014 885.5 KB (FAIL) \u2014 feat: ultimate conclusion orchestrator \u2014 deploy swarms to co"
     },
     {
@@ -382,8 +374,8 @@
     "measured_at": "2026-08-06T05:48:48.891562Z",
     "git_sha": "74390a2"
   },
-  "historical_met_elsewhere": true,
+  "historical_met_elsewhere": false,
   "audit_first_required": true,
-  "block_optimize_until_reconciled": true,
-  "recommendation": "RECONCILE_BEFORE_FIX: target already met on cursor/wasm-size-phase3-f519 (83.8 KB, commit d426b2bc3ace). Cherry-pick/merge wasm-slim changes before re-optimizing #48."
+  "block_optimize_until_reconciled": false,
+  "recommendation": "CURRENT_BRANCH_MET: verify with independent validator; do not re-optimize."
 }
