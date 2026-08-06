@@ -23,6 +23,7 @@ LOGGER = REPO / "scripts" / "agent_audit_logger.py"
 GATHER = REPO / "scripts" / "gather_for_review.sh"
 ECOSYSTEM = REPO / "scripts" / "gather_ecosystem_knowledge.py"
 README_UPDATER = REPO / "scripts" / "update_audit_readme.py"
+TAYLOR = REPO / "scripts" / "taylor_ops_team.py"
 IDLE_SECONDS = 300
 
 
@@ -161,6 +162,23 @@ def cmd_run(args: argparse.Namespace) -> int:
             refresh_readmes()
             actions.append("readme:post-ecosystem")
 
+    if args.taylor:
+        r = subprocess.run(
+            [sys.executable, str(TAYLOR), "run", "--mode", args.taylor_mode],
+            cwd=REPO,
+            capture_output=True,
+            text=True,
+        )
+        log_record(
+            category="tool_call",
+            action=f"Taylor Ops Team mode={args.taylor_mode} exit={r.returncode}",
+            why="Owner policy: 7-worker/3-group team handles gates+GitHub+continuity without per-step prompts",
+            omissions="" if r.returncode == 0 else "see audit_reports/taylor_ops_team_report.md",
+        )
+        actions.append(f"taylor:{args.taylor_mode}:{r.returncode}")
+        if r.stdout:
+            print(r.stdout[-2000:])
+
     print(json.dumps({"idle_seconds": idle, "actions": actions, "utc": utc_now()}, indent=2))
     return 0
 
@@ -187,6 +205,17 @@ def main() -> int:
     r.add_argument("--snapshot", action="store_true", help="run gather_for_review.sh")
     r.add_argument("--ecosystem", action="store_true", help="run gather_ecosystem_knowledge.py --fast")
     r.add_argument("--no-readme", action="store_true", help="skip README live-status refresh")
+    r.add_argument(
+        "--taylor",
+        action="store_true",
+        help="run Taylor Ops Team (7 workers / 3 groups)",
+    )
+    r.add_argument(
+        "--taylor-mode",
+        default="end-of-turn",
+        choices=["end-of-turn", "daily", "full"],
+        help="Taylor mode when --taylor is set (default: end-of-turn)",
+    )
     r.set_defaults(func=cmd_run)
     c = sub.add_parser("install-cron")
     c.set_defaults(func=cmd_install_cron)

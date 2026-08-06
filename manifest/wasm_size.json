@@ -1,5 +1,5 @@
 {
-  "measured_at": "2026-08-06T05:37:51.653162Z",
+  "measured_at": "2026-08-06T19:39:06.080629Z",
   "measurement_script": "scripts/measure_wasm_size.py",
   "build_command": "cargo build --release --lib --target wasm32-unknown-unknown --no-default-features --features wasm-slim",
   "build_profile": "wasm-slim",
@@ -12,6 +12,6 @@
   "size_kb": 127.4,
   "target_kb": 100,
   "met": false,
-  "git_sha": "89d2924",
+  "git_sha": "7ea6dc7",
   "note": "wasm-slim build: parser + codegen + compile_frontier_wasm export. Full browser API (BrowserCompiler) requires --features full. Baseline monolithic build was ~885 KB; slim + wasm-opt is measured here."
 }

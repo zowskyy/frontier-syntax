@@ -4,7 +4,7 @@ Formally verifiable programming language — **A+ Hard Gate v2.0** with 7 innova
 
 <!-- SHADOW_WORKER_STATUS:BEGIN -->
 
-**Live audit & blueprint status** — _auto-updated 2026-08-06 18:51:27 UTC_
+**Live audit & blueprint status** — _auto-updated 2026-08-06 19:39:13 UTC_
 
 | | |
 |---|---|
@@ -116,6 +116,7 @@ python3 scripts/generate_arc_status.py
 | `build/arc_orchestrator.py` | ARC gate verification |
 | **`scripts/agent_shadow_worker.py`** | **Heartbeat + auto README refresh (every turn / cron)** |
 | `scripts/update_audit_readme.py` | Writes live-status blocks in README files |
+| **`scripts/taylor_ops_team.py`** | **Taylor Ops Team — 7 workers / 3 groups (gates + GitHub + continuity)** |
 
 ## Core Language (Hardened)
 

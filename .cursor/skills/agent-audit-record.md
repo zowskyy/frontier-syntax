@@ -1,6 +1,34 @@
-# Agent Audit Log — mandatory (every action)
+# Agent Audit Log + Taylor Ops Team — mandatory
 
-Log **every** tool call and response turn. No exceptions.
+Log **every** tool call. Then let the **Taylor Ops Team** handle the gambit.
+
+## One command (preferred — end of every turn)
+
+```bash
+python3 scripts/agent_shadow_worker.py run --taylor
+# or directly:
+python3 scripts/taylor_ops_team.py run --mode end-of-turn
+```
+
+## Daily / full autonomous run
+
+```bash
+python3 scripts/taylor_ops_team.py run --mode daily
+python3 scripts/taylor_ops_team.py run --mode full
+python3 scripts/taylor_ops_team.py inventory
+```
+
+## Team of 7 → 3 groups
+
+| Group | Name | Workers |
+|-------|------|---------|
+| 1 | TRUTH | GateKeeper, WasmVerifier, AuditGuardian |
+| 2 | GITHUB | IssueMarshal, PrScout |
+| 3 | CONTINUITY | KnowledgeScout, ContinuityShadow |
+
+Inventory of all interaction scripts: `manifest/interaction_script_inventory.json`
+
+## Log a single tool call
 
 ```bash
 python3 scripts/agent_audit_hook.py \
@@ -11,41 +39,11 @@ python3 scripts/agent_audit_hook.py \
   --verified
 ```
 
-## Locations
-
-- Actions: `docs/agent_audit_log/sessions/YYYY-MM-DD.jsonl`
-- Repo dump: `docs/agent_audit_log/repo_snapshots/` (see `LATEST.txt`)
-- Ecosystem report: `docs/agent_audit_log/ecosystem_knowledge/ECOSYSTEM_KNOWLEDGE_REPORT.txt`
-- Pipeline logs: `docs/agent_audit_log/pipeline_logs/<run_id>/pipeline.log`
-
-Regenerate ecosystem knowledge:
-
-```bash
-python3 scripts/gather_ecosystem_knowledge.py
-```
-
-## End of every turn (required)
-
-Shadow worker **always** refreshes README live-status blocks:
-
-```bash
-python3 scripts/agent_shadow_worker.py run
-```
-
-Optional full refresh:
-
-```bash
-python3 scripts/agent_shadow_worker.py run --ecosystem --snapshot
-python3 scripts/agent_shadow_worker.py install-cron   # every 5 min on your machine
-```
-
-README markers updated: root `README.md` + `docs/agent_audit_log/README.md`  
-(script: `scripts/update_audit_readme.py`)
-
 ## Rules
 
 1. Log before AND after every tool invocation when possible.
 2. Always include `--omission` for what was not verified.
 3. Never skip logging because an action seems small.
 4. Do not log raw secrets — logger redacts common patterns.
-5. **Always run shadow worker at end of turn** — keeps README + audit continuity current.
+5. **End of every turn:** `python3 scripts/agent_shadow_worker.py run --taylor`
+6. Do **not** wait for the owner to re-prompt gates / issues / PRs / README — Taylor Ops Team covers it.

@@ -2,11 +2,11 @@
 ZOWSKYY ECOSYSTEM KNOWLEDGE REPORT
 ##############################################################################
 
-Generated:     2026-08-06T18:31:21Z
-Run ID:        20260806T183100Z
+Generated:     2026-08-06T19:39:26Z
+Run ID:        20260806T193913Z
 Canonical repo: zowskyy/frontier-syntax
 Blueprint:     PROJECT_BLUEPRINT.md + TRACKING.json
-Pipeline log:  docs/agent_audit_log/pipeline_logs/20260806T183100Z/pipeline.log
+Pipeline log:  docs/agent_audit_log/pipeline_logs/20260806T193913Z/pipeline.log
 Audit sessions: docs/agent_audit_log/sessions/
 
 ==============================================================================
@@ -20,36 +20,7 @@ Phase 3 (WASM size P1):     FAIL — 127.4 KB measured, target 100 KB, met=False
 Phases 4–8:                 FROZEN until prior gates pass
 
 Gate command output (tail):
-  {
-    "all_pass": false,
-    "phase_0_pass": true,
-    "phase_1_pass": false,
-    "phase_2_pass": false,
-    "phase_3_pass": false,
-    "phases_4_8": "frozen",
-    "open_issues": [
-      44,
-      45,
-      46,
-      47,
-      48
-    ],
-    "evidence_file": "manifest/tracking_evidence.json"
-  }
-    [PASS] 0.1_issue_dedupe
-    [PASS] 0.2_gate_exists
-    [PASS] 0.3_public_claims
-    [FAIL] 1.1_wasm_codegen — issue #44 still open
-    [FAIL] 1.2_knowledge_codegen — issue #45 still open — self-validation insufficient
-    [FAIL] 1.3_self_hosting — Bootstrap Rust wrapper ≠ Frontier-native compiler (blueprint Phase 1.3 / Phase 5 exit)
-    [FAIL] phase_2 — phase_1 not validated
-    [FAIL] phase_3 — phase_2 not validated
-    [FROZEN] phase_4
-    [FROZEN] phase_5
-    [FROZEN] phase_6
-    [FROZEN] phase_7
-    [FROZEN] phase_8
-
+  skipped (--fast)
 
 Repos scanned: 27
   frontier_core:      1
@@ -1345,19 +1316,20 @@ REPO 22: zowskyy/Schema
   Visibility: public
   Language:   (none detected)
   Category:   fork_or_adjacent
-  Updated:    2026-08-03T17:37:46Z
-  Access:     no_readme
+  Updated:    2026-08-06T18:46:24Z
+  Access:     ok
 
 ## WHAT IT CLAIMS
   • (no explicit claims extracted from README)
 
 ## README EXCERPT
-  (no README or access denied)
+  # Schema
 
 ## VERIFIED — CAN DO (this scan)
-  ✓ (capabilities not verified — metadata-only scan)
+  ✓ Top-level structure visible (1 entries): README.md
 
 ## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ No .github/workflows at repo root (CI not confirmed)
   ✗ Not part of Frontier blueprint critical path
 
 ## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)

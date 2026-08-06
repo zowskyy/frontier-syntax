@@ -1,0 +1,87 @@
+{
+  "version": "1.0.0",
+  "generated_for": "taylor_ops_team",
+  "note": "All scripts written during agent↔owner interaction across frontier-syntax — not just audit-era. Categorized for the 7-worker / 3-group ops team.",
+  "categories": {
+    "audit_continuity": [
+      "scripts/agent_audit_logger.py",
+      "scripts/agent_audit_hook.py",
+      "scripts/agent_shadow_worker.py",
+      "scripts/update_audit_readme.py",
+      "scripts/validate_audit_log.py",
+      "scripts/scrub_audit_sessions.py",
+      "scripts/audit_log_retention.py",
+      "scripts/gather_ecosystem_knowledge.py",
+      "scripts/gather_for_review.sh"
+    ],
+    "blueprint_gates": [
+      "scripts/tracking.py",
+      "scripts/dedupe_issues.py",
+      "scripts/blueprint_phase_swarm.py",
+      "scripts/measure_wasm_size.py",
+      "scripts/optimize_wasm_size.py",
+      "scripts/verify_self_hosting.py",
+      "scripts/verify_wasm_codegen.py"
+    ],
+    "github_gambit": [
+      "scripts/swarm_resolve_prs.py",
+      "scripts/dedupe_issues.py",
+      "scripts/generate_arc_status.py"
+    ],
+    "swarm_orchestrators": [
+      "scripts/swarm_optimized.py",
+      "scripts/swarm_close_gaps.py",
+      "scripts/swarm_kb_optimizer.py",
+      "scripts/swarm_chat_history_analyzer.py",
+      "scripts/gap_solution_orchestrator.py",
+      "scripts/ultimate_conclusion_orchestrator.py",
+      "scripts/self_creation_orchestrator.py",
+      "scripts/execute_peerless_plan.py",
+      "scripts/close_peerless_gaps.py",
+      "scripts/deploy_lexicon_bound_swarm.py",
+      "scripts/lexicon_bound_worker.py",
+      "scripts/batch_processor.py",
+      ".cursor/symbiotic_agents.py"
+    ],
+    "knowledge_scrub": [
+      "scripts/process_logger.py",
+      "scripts/sync_knowledge_base.py",
+      "scripts/chat_knowledge_store.py",
+      "scripts/ingest_account_chat_history.py",
+      "scripts/generate_chat_scrub.py",
+      "scripts/parallel_scrub.py",
+      "scripts/scrub_with_retry.py",
+      "scripts/scrub_daemon.py",
+      "scripts/self_heal_from_knowledge.py",
+      "scripts/lexicon_export.py",
+      "scripts/lexicon_ingest.py",
+      "scripts/lighthouse_knowledge_bridge.py"
+    ],
+    "verification": [
+      "scripts/verify_all.py",
+      "scripts/verify_v2.py",
+      "scripts/verify_cycle1.py",
+      "scripts/verify_browser_compiler.py",
+      "scripts/verify_language_hardening.py",
+      "scripts/verify_knowledge.py",
+      "scripts/verify_lighthouse_stack.py",
+      "scripts/verify_lexicon_bound.py",
+      "scripts/verify_archive_crawler.py",
+      "scripts/validate_coq.py",
+      "scripts/spec_impl_bridge.py",
+      "scripts/auto_fix_gaps.py"
+    ],
+    "agent_entrypoints": [
+      "frontier_agent.py",
+      "frontier_worker.py",
+      ".cursor/skills/agent-audit-record.md",
+      ".cursor/skills/frontier-master.md"
+    ]
+  },
+  "team": {
+    "name": "Taylor Ops Team",
+    "size": 7,
+    "groups": 3,
+    "orchestrator": "scripts/taylor_ops_team.py"
+  }
+}
