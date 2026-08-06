@@ -112,6 +112,8 @@ class FrontierAgent:
             result = self.run_self_creation(parsed)
         elif parsed["type"] == "solve_gaps":
             result = self.run_gap_solution(parsed)
+        elif parsed["type"] == "swarm_close_gaps":
+            result = self.run_swarm_close_gaps(parsed)
         else:
             result = {"error": f"Unknown intent type: {parsed['type']}"}
 
@@ -239,6 +241,12 @@ class FrontierAgent:
             for word in ["solve all gaps", "solve gaps", "gap solution", "invoke workers", "no documentation left"]
         ):
             return {"type": "solve_gaps", "content": intent}
+
+        if any(
+            word in intent_lower
+            for word in ["worker swarm", "swarm close", "close gaps", "swarm gap"]
+        ):
+            return {"type": "swarm_close_gaps", "content": intent}
 
         if any(
             word in intent_lower
@@ -710,6 +718,20 @@ class FrontierAgent:
             "log": "gap_solution.log",
             "output": result.get("stdout", "")[-2000:],
             "message": "Gap solution orchestrator complete",
+        }
+
+    def run_swarm_close_gaps(self, parsed: Dict[str, Any]) -> Dict[str, Any]:
+        """Invoke symbiotic worker swarm to close all gaps in parallel."""
+        orchestrator = self.scripts_dir / "swarm_close_gaps.py"
+        result = self._run_command([str(orchestrator)], capture=True)
+        report_path = self.repo_root / "audit_reports" / "swarm_gap_closure_report.md"
+        return {
+            "status": "success" if result["returncode"] == 0 else "partial",
+            "all_gaps_closed": "all_gaps_closed=True" in result.get("stdout", ""),
+            "report": str(report_path.relative_to(self.repo_root)),
+            "log": "swarm_gap_closure.log",
+            "output": result.get("stdout", "")[-2000:],
+            "message": "Swarm gap closure complete",
         }
 
     def build_archive_crawler(self, parsed: Dict[str, Any]) -> Dict[str, Any]:

@@ -51,6 +51,7 @@ pub fn compile(source: &str, options: &CompileOptions) -> Result<CompileResult, 
         optimize: options.optimize,
         browser_exports: options.browser_compat,
         collect_profile: options.profile,
+        algorithm_hint: None,
     };
 
     let (wasm, meta) = compile_source(source, &codegen_opts)?;

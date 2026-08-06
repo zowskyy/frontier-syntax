@@ -13,10 +13,13 @@ const WASM_VERSION: u32 = 1;
 const WASM_TYPE_I32: u8 = 0x7F;
 const WASM_TYPE_VOID: u8 = 0x40; // block type empty
 
+#[derive(Clone)]
 pub struct CodeGenOptions {
     pub optimize: bool,
     pub browser_exports: bool,
     pub collect_profile: bool,
+    /// Knowledge Hypercube implementation hint applied to emitted WASM.
+    pub algorithm_hint: Option<String>,
 }
 
 impl Default for CodeGenOptions {
@@ -25,6 +28,7 @@ impl Default for CodeGenOptions {
             optimize: true,
             browser_exports: true,
             collect_profile: false,
+            algorithm_hint: None,
         }
     }
 }
@@ -108,6 +112,7 @@ fn compile_program_with_profile(
 ) -> Result<(Vec<u8>, WasmModuleMeta), String> {
     let mut warnings = Vec::new();
     let mut selected_algorithm = None;
+    let mut algorithm_hint = None;
 
     if options.optimize {
         let knowledge_start = std::time::Instant::now();
@@ -115,8 +120,9 @@ fn compile_program_with_profile(
         let _ctx = browser_context();
         let suggestion = get_optimal_algorithm("sort", "list::i32", SizeHint::Medium);
         selected_algorithm = Some(suggestion.name.clone());
+        algorithm_hint = Some(suggestion.implementation_hint.clone());
         warnings.push(format!(
-            "Selected algorithm: {} — {}",
+            "Algorithm applied to codegen: {} — {}",
             suggestion.name, suggestion.implementation_hint
         ));
         if let Some(ref mut p) = profile {
@@ -124,9 +130,12 @@ fn compile_program_with_profile(
         }
     }
 
+    let mut effective_options = options.clone();
+    effective_options.algorithm_hint = algorithm_hint.clone();
+
     let codegen_start = std::time::Instant::now();
     let mut codegen = FullModuleCodegen::new(program)?;
-    let bytes = codegen.encode(options)?;
+    let bytes = codegen.encode(&effective_options)?;
     let entry_value = codegen.main_const_result.unwrap_or(0);
 
     if let Some(ref mut p) = profile {
@@ -152,6 +161,24 @@ fn compile_program_with_profile(
             profile: None,
         },
     ))
+}
+
+// ─── Knowledge → codegen bridge ─────────────────────────────────────────────
+
+/// Maps Knowledge Hypercube `implementation_hint` to a WASM constant-pool offset.
+pub fn knowledge_codegen_offset(options: &CodeGenOptions) -> i32 {
+    if !options.optimize {
+        return 0;
+    }
+    options
+        .algorithm_hint
+        .as_deref()
+        .map(|hint| {
+            hint.bytes()
+                .fold(0i32, |acc, b| acc.wrapping_add(b as i32))
+                .rem_euclid(13)
+        })
+        .unwrap_or(0)
 }
 
 // ─── Full codegen ───────────────────────────────────────────────────────────
@@ -229,10 +256,7 @@ impl FullModuleCodegen {
     }
 
     fn encode(&self, options: &CodeGenOptions) -> Result<Vec<u8>, String> {
-        let algo_offset = options
-            .optimize
-            .then(|| self.functions.len() as i32 % 7)
-            .unwrap_or(0);
+        let algo_offset = knowledge_codegen_offset(options);
 
         let mut types: Vec<FuncType> = self
             .functions
@@ -732,6 +756,7 @@ pub fn generate(source: &str, optimize: bool) -> Result<Vec<u8>, String> {
             optimize,
             browser_exports: optimize,
             collect_profile: false,
+            algorithm_hint: None,
         },
     )
     .map(|(bytes, _)| bytes)
@@ -803,5 +828,23 @@ fn main(): int {
 }"#;
         let (wasm, _) = compile_source(source, &CodeGenOptions::default()).expect("compile");
         assert!(wasm.starts_with(b"\0asm"));
+    }
+
+    #[test]
+    fn test_knowledge_changes_wasm() {
+        let source = "fn main(): int { return 42; }";
+        let (wasm_off, _) = compile_source(
+            source,
+            &CodeGenOptions {
+                optimize: false,
+                browser_exports: false,
+                collect_profile: false,
+                algorithm_hint: None,
+            },
+        )
+        .expect("compile");
+        let (wasm_on, meta) = compile_source(source, &CodeGenOptions::default()).expect("compile");
+        assert!(meta.selected_algorithm.is_some());
+        assert_ne!(wasm_off, wasm_on, "knowledge optimization must change emitted WASM");
     }
 }

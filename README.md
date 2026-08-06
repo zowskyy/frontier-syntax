@@ -1,22 +1,57 @@
 # Frontier Syntax v2.0
 
-Formally verifiable programming language — **A+ Hard Gate v2.0** with 7 innovations.
+Formally verifiable programming language — **A+ Hard Gate v2.0** with 7 innovations, autonomous worker swarm, and self-creation orchestration.
 
 ## Quick Start
 
 ```bash
-# Full verification (Cycle 1 + Language Hardening + v2.0)
+# Full ARC verification (all gates)
 python3 build/arc_orchestrator.py --verify
 
-# Run Rust tests (17 tests)
+# Close all gaps via worker swarm
+python3 scripts/swarm_close_gaps.py
+
+# Self-creation flawless build loop
+python3 scripts/self_creation_orchestrator.py
+
+# Frontier agent (natural language)
+python3 frontier_agent.py "Solve all gaps"
+python3 frontier_agent.py "Frontier self-creation flawless build"
+
+# Symbiotic worker swarm (parallel agents)
+python3 .cursor/symbiotic_agents.py --demo --workers 4
+
+# Compile to WASM (let/if/calls/loops supported)
+cargo run --bin frontier -- compile examples/v2_parser_test.fr -t wasm -O -p
+
+# Genesis self-hosting bootstrap
+cargo run --bin frontier -- compile frontier/src/main.fr --bootstrap -o bootstrap
+python3 scripts/verify_self_hosting.py
+
+# Runtime component tests
+cargo run --bin frontier -- run frontier/gpu/vulkan.fr --test
+
+# Rust tests
 cargo test --lib
 
-# Build WASM parser
-cargo build --release --target wasm32-unknown-unknown
-
-# Generate v2 hashes
-python3 scripts/generate_v2_hashes.py
+# Live system status
+python3 scripts/generate_arc_status.py
 ```
+
+## What's New (Merged)
+
+| Feature | Location |
+|---------|----------|
+| WASM codegen (let/if/calls/loops) | `src/wasm_codegen.rs` |
+| Knowledge → codegen wiring | `implementation_hint` changes emitted WASM |
+| Genesis self-hosting bootstrap | `--bootstrap` flag, `frontier/src/main.fr` |
+| Coq proofs (4/4) | `proofs/*.v` |
+| Self-creation orchestrator | `scripts/self_creation_orchestrator.py` |
+| Gap solution orchestrator | `scripts/gap_solution_orchestrator.py` |
+| Swarm gap closure | `scripts/swarm_close_gaps.py` |
+| No-screw modules | `frontier/interpreter/`, `knowledge/`, `network/`, `learning/`, `evolution/`, `swarm/` |
+| Runtime specs | `frontier/gpu/`, `frontier/ipfs/`, `frontier/network/` |
+| Tutorials + accessibility | `docs/tutorials/`, `docs/accessibility.md` |
 
 ## v2.0 Innovations
 
@@ -30,39 +65,44 @@ python3 scripts/generate_v2_hashes.py
 | 6 | Neural LSP | `src/neural/completion.rs` |
 | 7 | Decentralized package registry | `src/packages/registry.rs` |
 
+## Worker System
+
+| Component | Role |
+|-----------|------|
+| `frontier_agent.py` | Natural-language intent router |
+| `.cursor/symbiotic_agents.py` | Parallel worker swarm (Master + Workers) |
+| `scripts/swarm_close_gaps.py` | Swarm-driven gap closure pipeline |
+| `scripts/self_creation_orchestrator.py` | 6-phase flawless build loop |
+| `scripts/gap_solution_orchestrator.py` | P0 gap verification suite |
+| `build/arc_orchestrator.py` | ARC gate verification |
+
 ## Core Language (Hardened)
 
-The standalone Frontier language core lives under `frontier/core/` — parser, type system, memory model, concurrency, error handling, standard library, and compiler backend.
+10 core modules under `frontier/core/` — parser, types, memory, concurrency, errors, stdlib, compiler, knowledge, wasm_codegen, browser_compiler.
 
-## In-House Lighthouse Stack (100% Frontier)
+```bash
+python3 scripts/verify_language_hardening.py   # 10 modules
+python3 scripts/verify_browser_compiler.py     # WASM + wasm-bindgen
+```
 
-**Everything is Frontier Syntax.** No JavaScript, Python, npm, or third-party app logic.
+## Knowledge Engine
 
-| Component | Source |
-|-----------|--------|
-| ARC Engine | `frontier/lighthouse/arc_engine.frontier` |
-| Discovery Engine | `frontier/lighthouse/discovery_engine.frontier` |
-| Agent Distiller | `frontier/lighthouse/agent_distiller.frontier` |
-| Browser Compiler | `frontier/lighthouse/browser_compiler.frontier` → `wasm_compiler.wasm` |
-| FFI Bindings | `frontier/bindings/*.frontier` (ui, storage, ai, hardware, compiler, http) |
-| Community App | `examples/lighthouse/water_pump_tracker.frontier` |
+```bash
+bash scripts/deploy_knowledge_engine.sh
+cargo run --bin frontier -- knowledge query "ReDoS attack vector"
+cargo run --bin frontier -- mcp list
+python3 frontier_agent.py "Run chat scrub pipeline"
+```
+
+See `docs/tutorials/knowledge_engine.md` and `docs/ARC_SYSTEM_STATUS.md`.
+
+## In-House Lighthouse Stack
 
 ```bash
 python3 scripts/verify_lighthouse_stack.py
 ```
 
 See [docs/IN_HOUSE_STACK.md](docs/IN_HOUSE_STACK.md).
-
-| Module | Path |
-|--------|------|
-| Parser (Lexer → AST) | `frontier/core/parser.frontier` |
-| Type System | `frontier/core/types.frontier` |
-| Memory Model | `frontier/core/memory.frontier` |
-| Concurrency | `frontier/core/concurrency.frontier` |
-| Error Handling | `frontier/core/errors.frontier` |
-| Standard Library | `frontier/core/stdlib.frontier` |
-| Compiler Backend | `frontier/core/compiler.frontier` |
-| Language Reference | `frontier/docs/language_reference.md` |
 
 ## Protocol
 
@@ -77,6 +117,13 @@ All syntax artifacts are produced in six audit cycles. Each cycle must pass all 
 | 5 | Immutable AST & Hashing | `syntax/schema_v2.json`, `syntax/ast_hash_v2.sha3` |
 | 6 | Adversarial Attack Surface | `syntax/wasm/wasm_parser_v2.wasm`, `syntax/final_hash_v2.sha3` |
 
+## Remaining Work (Honest)
+
+- Live GPU/IPFS/CDX runtime nodes (specs pass `frontier run --test`)
+- True self-hosting: compiler written in Frontier, not Rust bootstrap wrapper
+- WASM binary size optimization (~760 KB vs <100 KB target)
+- Teacher-student unity module
+
 ## Toolchain
 
 | Component | Tool | Version |
@@ -85,7 +132,8 @@ All syntax artifacts are produced in six audit cycles. Each cycle must pass all 
 | Parser | ANTLR | 4.13.1 |
 | Resolver | Rust | 1.75+ |
 | Hash | SHA-3-256 | NIST FIPS 202 |
-| WASM | wasm-pack | 0.12+ |
+| WASM | wasm-bindgen | 0.2+ |
+| Proofs | Coq | 8.18+ |
 
 ## Encoding
 

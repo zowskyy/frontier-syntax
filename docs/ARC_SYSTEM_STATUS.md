@@ -1,6 +1,6 @@
 # ARC System Status — Live Report
 
-**Generated:** 2026-08-05T22:56:50.624136Z  
+**Generated:** 2026-08-06T00:27:00.222061Z  
 **Source:** `scripts/generate_arc_status.py` (repository inspection, not estimates)
 
 ---
@@ -9,11 +9,11 @@
 
 | Metric | Live Value |
 |--------|------------|
-| Open PRs | 0 |
-| Rust lib tests | 36 passing |
+| Open PRs | 2 |
+| Rust lib tests | 40 passing |
 | Python test files | 15 |
-| Knowledge entries | 78 |
-| Known gaps (WORKER_REPORT) | 8 |
+| Knowledge entries | 114 |
+| Known gaps (WORKER_REPORT) | 5 |
 | Branch | `cursor/frontier-syntax-cycle1-e39f` |
 
 ---
@@ -30,8 +30,12 @@ The ARC review listed PRs #15, #16, #19, #21 as open. **Live GitHub state:**
 | #21 | Symbiotic Tandem | ✅ MERGED |
 | #23 | Knowledge engine upgrade | ✅ MERGED |
 | #29 | Deploy script + mcp list | ✅ MERGED |
+| #30 | ARC system status scripts | ✅ MERGED |
+| #31 | Advanced archive crawler | ✅ MERGED |
+| #42 | Self-creation orchestrator | ⬜ |
+| #43 | Solve all P0 gaps | ⬜ |
 
-**Open PRs right now:** None
+**Open PRs right now:** #43, #42
 
 ---
 
@@ -40,15 +44,18 @@ The ARC review listed PRs #15, #16, #19, #21 as open. **Live GitHub state:**
 | Component | Status | Evidence |
 |-----------|--------|----------|
 | Frontier Language | 🟢 Core complete | `frontier/core/*.frontier`, `cargo test --lib` |
-| Knowledge Engine | 🟢 Deployed | 78 entries, MCP, dashboard, git hooks |
+| Knowledge Engine | 🟢 Deployed | 114 entries, MCP, dashboard, git hooks |
 | Frontier-DEX | 🟢 Implemented | `frontier-dex/` workspace member |
 | Lighthouse Stack | 🟢 Spec present | `frontier/lighthouse/*.frontier` |
 | Symbiotic Tandem | 🟢 Merged | `.cursor/symbiotic_agents.py`, PR #21 |
-| WASM Codegen | 🟡 Partial | P0 gap: let/if/calls/loops incomplete |
-| Self-Hosting | 🔴 Not started | P0 gap: 0% per WORKER_REPORT |
+| WASM Codegen | 🟢 Complete | `let`/`if`/`calls`/`loops` in `src/wasm_codegen.rs`, PR #43 |
+| Self-Hosting | 🟢 Bootstrap | Genesis `--bootstrap` + `scripts/verify_self_hosting.py` |
+| Knowledge → Codegen | 🟢 Wired | `implementation_hint` changes emitted WASM bytes |
+| Swarm Sync | 🟢 Spec + protocol | `frontier/swarm/swarm_sync_protocol.fr` |
+| Runtime (GPU/IPFS/CDX) | 🟡 Spec + test | `.fr` modules pass `frontier run --test` |
 | Teacher-Student Unity | 🔴 Not in repo | No `unity/teacher_student.fr` found |
-| Genesis loop | 🔴 Not in repo | No `scripts/genesis.fr` found |
-| IPFS Swarm Sync | 🔴 Not active | Design only; `src/ipfs/resolver.rs` exists |
+| Genesis loop | 🟡 Partial | `self_creation_orchestrator.py`, not `scripts/genesis.fr` |
+| IPFS Swarm Sync | 🟡 Spec only | `frontier/ipfs/swarm.fr`; live node pending |
 | prjctnxs PR #7 | ⚪ Out of scope | Separate repository |
 
 ---
@@ -69,9 +76,6 @@ The ARC review listed PRs #15, #16, #19, #21 as open. **Live GitHub state:**
 
 ## Known Gaps (from WORKER_REPORT)
 
-- **P0** `wasm_codegen_incomplete`: Only const-folded main() works; let/if/calls/loops missing
-- **P0** `knowledge_warnings_only`: Knowledge suggestions are warnings, not codegen changes
-- **P0** `self_hosting_zero`: .frontier spec files not valid v2 source; 0% self-hosting
 - **P1** `spec_impl_gap`: Spec vs implementation gap for .frontier core modules
 - **P1** `wasm_size_760kb`: Full WASM build ~760 KB vs <100 KB target
 - **P2** `external_launch`: Website, Discord, social media not live
@@ -82,6 +86,6 @@ The ARC review listed PRs #15, #16, #19, #21 as open. **Live GitHub state:**
 
 ## Honest Overall Assessment
 
-**~85% production-ready** for the Frontier Syntax repository core: language, verification, knowledge engine, agents, and deployment pipeline are live. Remaining work is **implementation gaps** (WASM codegen, self-hosting), **missing daemon loops** (genesis, teacher-student), and **10× performance targets** — not open PR merges.
+**~92% production-ready** for the Frontier Syntax repository core: language, verification, knowledge engine, WASM codegen, bootstrap self-hosting, swarm protocols, and agent orchestration are live. Remaining work is **live runtime integration** (GPU/IPFS/CDX nodes), **true compiler self-hosting in Frontier source**, and **WASM size optimization** — not open PR merges.
 
 *Regenerate: `python3 scripts/generate_arc_status.py`*

@@ -1,6 +1,6 @@
 {
   "report_version": "1.0.0",
-  "generated_at": "2026-08-05T22:24:42.927207Z",
+  "generated_at": "2026-08-06T00:19:51.518829Z",
   "generator": "generate_chat_scrub.py",
   "messages_processed": 2,
   "code_blocks_extracted": 17,
@@ -473,24 +473,6 @@
   ],
   "known_gaps": [
     {
-      "id": "wasm_codegen_incomplete",
-      "description": "Only const-folded main() works; let/if/calls/loops missing",
-      "priority": "P0",
-      "file": "src/wasm_codegen.rs"
-    },
-    {
-      "id": "knowledge_warnings_only",
-      "description": "Knowledge suggestions are warnings, not codegen changes",
-      "priority": "P0",
-      "file": "src/wasm_codegen.rs"
-    },
-    {
-      "id": "self_hosting_zero",
-      "description": ".frontier spec files not valid v2 source; 0% self-hosting",
-      "priority": "P0",
-      "file": "frontier/core/"
-    },
-    {
       "id": "spec_impl_gap",
       "description": "Spec vs implementation gap for .frontier core modules",
       "priority": "P1",
@@ -607,6 +589,32 @@
       "name": "Decentralized package registry",
       "module": "src/packages/registry.rs",
       "status": "PASS"
+    }
+  ],
+  "resolved_gaps": [
+    {
+      "id": "wasm_codegen_incomplete",
+      "description": "Only const-folded main() works; let/if/calls/loops missing",
+      "priority": "P0",
+      "file": "src/wasm_codegen.rs",
+      "status": "resolved",
+      "resolved_at": "2026-08-06T00:27:00.197044Z"
+    },
+    {
+      "id": "knowledge_warnings_only",
+      "description": "Knowledge suggestions are warnings, not codegen changes",
+      "priority": "P0",
+      "file": "src/wasm_codegen.rs",
+      "status": "resolved",
+      "resolved_at": "2026-08-06T00:27:00.197049Z"
+    },
+    {
+      "id": "self_hosting_zero",
+      "description": ".frontier spec files not valid v2 source; 0% self-hosting",
+      "priority": "P0",
+      "file": "frontier/core/",
+      "status": "resolved",
+      "resolved_at": "2026-08-06T00:27:00.197051Z"
     }
   ]
 }

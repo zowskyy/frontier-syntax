@@ -64,6 +64,7 @@ impl UnityCompiler {
                 optimize: true,
                 browser_exports: false, // slim: no browser-only exports
                 collect_profile: false,
+                algorithm_hint: None,
             },
         )?;
 

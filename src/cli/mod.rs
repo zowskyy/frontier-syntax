@@ -290,6 +290,7 @@ fn run_file(args: &[String]) -> Result<(), i32> {
                 optimize: false,
                 browser_exports: false,
                 collect_profile: false,
+                algorithm_hint: None,
             };
             let (wasm, meta) = frontier::wasm_codegen::compile_program(&program, &options).map_err(|e| {
                 print_error(&e);
