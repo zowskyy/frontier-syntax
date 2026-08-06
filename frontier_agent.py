@@ -126,6 +126,8 @@ class FrontierAgent:
             result = self.run_lexicon_bound_deploy(parsed)
         elif parsed["type"] == "resolve_prs":
             result = self.run_resolve_prs(parsed)
+        elif parsed["type"] == "blueprint_phases":
+            result = self.run_blueprint_phase_swarm(parsed)
         elif parsed["type"] == "close_peerless":
             result = self.run_close_peerless(parsed)
         elif parsed["type"] == "ultimate_conclusion":
@@ -329,6 +331,12 @@ class FrontierAgent:
             ]
         ):
             return {"type": "resolve_prs", "content": intent}
+
+        if any(
+            word in intent_lower
+            for word in ["blueprint phase", "project blueprint", "phase swarm", "teams of 2"]
+        ):
+            return {"type": "blueprint_phases", "content": intent}
 
         if any(
             word in intent_lower
@@ -935,6 +943,25 @@ class FrontierAgent:
             "manifest": "manifest/pr_resolution.json",
             "output": result.get("stdout", "")[-2000:],
             "message": "PR resolution swarm complete",
+        }
+
+    def run_blueprint_phase_swarm(self, parsed: Dict[str, Any]) -> Dict[str, Any]:
+        """Teams of 2 workers per blueprint phase (0–8)."""
+        orchestrator = self.scripts_dir / "blueprint_phase_swarm.py"
+        result = self._run_command([str(orchestrator)], capture=True)
+        manifest_path = self.repo_root / "manifest" / "blueprint_phase_swarm.json"
+        summary = {}
+        if manifest_path.exists():
+            summary = json.loads(manifest_path.read_text(encoding="utf-8"))
+        return {
+            "status": "success" if summary.get("teams_all_pass", 0) >= 6 else "partial",
+            "teams": summary.get("teams", 9),
+            "teams_all_pass": summary.get("teams_all_pass", 0),
+            "tracking_gate_pass": summary.get("tracking_gate", {}).get("pass", False),
+            "report": "audit_reports/blueprint_phase_swarm_report.md",
+            "manifest": "manifest/blueprint_phase_swarm.json",
+            "output": result.get("stdout", "")[-2000:],
+            "message": "Blueprint phase swarm report complete",
         }
 
     def run_close_peerless(self, parsed: Dict[str, Any]) -> Dict[str, Any]:

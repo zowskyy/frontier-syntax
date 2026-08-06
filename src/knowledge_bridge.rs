@@ -1,7 +1,6 @@
 //! Bridge between the Rust Knowledge Hypercube and browser/WASM compiler pipeline.
 
-use crate::knowledge::{get_ancestors, get_tradeoffs, optimize_hash, optimize_sort, SizeHint};
-use crate::knowledge::solver::SolverContext;
+use crate::{get_ancestors, get_tradeoffs, optimize_hash, optimize_sort, SizeHint, KnowledgeContext as SolverContext};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -132,6 +131,7 @@ pub fn optimization_warnings(operation: &str, data_type: &str) -> Vec<String> {
     )]
 }
 
+#[cfg(not(all(target_arch = "wasm32", feature = "wasm-slim")))]
 fn read_str(ptr: *const u8, len: u32) -> &'static str {
     if ptr.is_null() || len == 0 {
         return "";
@@ -141,12 +141,14 @@ fn read_str(ptr: *const u8, len: u32) -> &'static str {
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", feature = "wasm-slim")))]
 fn leak_json<T: Serialize>(value: &T) -> *const u8 {
     let json = serde_json::to_string(value).unwrap_or_else(|_| "{}".to_string());
     Box::leak(json.into_bytes().into_boxed_slice()).as_ptr()
 }
 
 /// FFI entry point for `knowledge.frontier` — optimal algorithm lookup.
+#[cfg(not(all(target_arch = "wasm32", feature = "wasm-slim")))]
 #[no_mangle]
 pub extern "C" fn knowledge_solver_get_optimal_algorithm(
     operation_ptr: *const u8,
@@ -171,6 +173,7 @@ pub extern "C" fn knowledge_solver_get_optimal_algorithm(
     leak_json(&suggestion)
 }
 
+#[cfg(not(all(target_arch = "wasm32", feature = "wasm-slim")))]
 #[no_mangle]
 pub extern "C" fn knowledge_solver_get_ancestors(
     operation_ptr: *const u8,
@@ -181,6 +184,7 @@ pub extern "C" fn knowledge_solver_get_ancestors(
     leak_json(&ancestors)
 }
 
+#[cfg(not(all(target_arch = "wasm32", feature = "wasm-slim")))]
 #[no_mangle]
 pub extern "C" fn knowledge_solver_get_tradeoffs(
     operation_ptr: *const u8,
@@ -191,6 +195,7 @@ pub extern "C" fn knowledge_solver_get_tradeoffs(
     leak_json(&tradeoffs)
 }
 
+#[cfg(not(all(target_arch = "wasm32", feature = "wasm-slim")))]
 #[no_mangle]
 pub extern "C" fn knowledge_solver_free(_ptr: *const u8) {
     // Leaked JSON buffers are process-lifetime for MVP FFI bridge.

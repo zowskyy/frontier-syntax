@@ -52,11 +52,13 @@ python3 scripts/generate_arc_status.py
 
 ## What's New (Merged)
 
-| Feature | Location |
-|---------|----------|
-| WASM codegen (let/if/calls/loops) | `src/wasm_codegen.rs` |
-| Knowledge → codegen wiring | `implementation_hint` changes emitted WASM |
-| Genesis self-hosting bootstrap | `--bootstrap` flag, `frontier/src/main.fr` |
+> **Blueprint note:** Run `python3 scripts/tracking.py gate` for validated status. Items marked NOT VERIFIED below fail the independent gate or remain open on GitHub (#44–#48).
+
+| Feature | Location | Gate status |
+|---------|----------|-------------|
+| WASM codegen (let/if/calls/loops) | `src/wasm_codegen.rs` | Tests pass — NOT VERIFIED (#44 open) |
+| Knowledge → codegen wiring | `implementation_hint` | Test passes — NOT VERIFIED (#45 open) |
+| Genesis self-hosting bootstrap | `--bootstrap`, `frontier/src/main.fr` | PARTIAL bootstrap — NOT VERIFIED (#46) |
 | Coq proofs (4/4) | `proofs/*.v` |
 | Self-creation orchestrator | `scripts/self_creation_orchestrator.py` |
 | Gap solution orchestrator | `scripts/gap_solution_orchestrator.py` |
