@@ -1,7 +1,32 @@
 # Agent audit log — in-repo record of every agent action + repo snapshots
 
 <!-- SHADOW_WORKER_STATUS:BEGIN -->
-ok
+
+_Auto-updated by `scripts/agent_shadow_worker.py` — 2026-08-06 18:51:27 UTC_
+
+## Live status
+
+| Signal | Value |
+|--------|-------|
+| Last agent activity | `2026-08-06T18:51:00.756231Z` |
+| Session entries (index) | 16 |
+| Latest repo snapshot | `20260806T181935Z` |
+| Latest ecosystem run | `20260806T183100Z` |
+| Ecosystem repos scanned | 27 |
+| Ecosystem gather time | 21.123477931992966s (SLA met: True) |
+| WASM size | 127.4 KB (target met: False) |
+| Blueprint Phase 0 | PASS |
+| Blueprint Phase 1 | FAIL |
+| Open issues | [44, 45, 46, 47, 48] |
+
+**Shadow worker (run every turn / cron):**
+
+```bash
+python3 scripts/agent_shadow_worker.py run    # heartbeat + README refresh
+python3 scripts/agent_shadow_worker.py run --ecosystem --snapshot  # full refresh
+python3 scripts/agent_shadow_worker.py install-cron
+```
+
 <!-- SHADOW_WORKER_STATUS:END -->
 
 ## Where everything lives

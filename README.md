@@ -3,7 +3,18 @@
 Formally verifiable programming language — **A+ Hard Gate v2.0** with 7 innovations, autonomous worker swarm, and self-creation orchestration.
 
 <!-- SHADOW_WORKER_STATUS:BEGIN -->
-ok
+
+**Live audit & blueprint status** — _auto-updated 2026-08-06 18:51:27 UTC_
+
+| | |
+|---|---|
+| Agent audit log | [`docs/agent_audit_log/`](docs/agent_audit_log/) |
+| Latest ecosystem report | run `20260806T183100Z` |
+| Blueprint gate | Phase 0: **PASS** · Phase 1: **FAIL** · open: [44, 45, 46, 47, 48] |
+| WASM | 127.4 KB (target &lt;100 KB met: False) |
+
+End of every agent turn: `python3 scripts/agent_shadow_worker.py run`
+
 <!-- SHADOW_WORKER_STATUS:END -->
 
 ## Quick Start

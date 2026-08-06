@@ -49,29 +49,40 @@ class ReadmeUpdaterTests(unittest.TestCase):
             self.assertIn("new status", text)
             self.assertNotIn("old\n<!--", text)
 
-    @mock.patch.object(updater, "collect_status")
-    def test_update_readmes_returns_file_map(self, mock_collect) -> None:
-        mock_collect.return_value = {
-            "updated_at": "2026-08-06",
-            "last_activity_utc": "t",
-            "session_entry_count": 1,
-            "repo_snapshot_id": "snap",
-            "ecosystem_run_id": "eco",
-            "ecosystem_repos": {"repo_count": 27},
-            "benchmark": {"timings_s": {"total_s": 21}, "sla_met": {"total_under_cap": True}},
-            "wasm_size_kb": 127.4,
-            "wasm_target_met": False,
-            "gate": {"phase_0": "PASS", "phase_1": "FAIL", "open_issues": [44]},
-        }
+    def test_update_readmes_returns_file_map(self) -> None:
         with tempfile.TemporaryDirectory() as td:
             audit_readme = Path(td) / "audit_README.md"
+            root_readme = Path(td) / "root_README.md"
             audit_readme.write_text(
                 "<!-- SHADOW_WORKER_STATUS:BEGIN -->\nx\n<!-- SHADOW_WORKER_STATUS:END -->\n",
                 encoding="utf-8",
             )
-            with mock.patch.object(updater, "TARGETS", [audit_readme]):
-                with mock.patch.object(updater, "format_audit_readme_block", return_value="<!-- SHADOW_WORKER_STATUS:BEGIN -->\nok\n<!-- SHADOW_WORKER_STATUS:END -->\n"):
-                    with mock.patch.object(updater, "format_root_readme_block", return_value="<!-- SHADOW_WORKER_STATUS:BEGIN -->\nok\n<!-- SHADOW_WORKER_STATUS:END -->\n"):
+            root_readme.write_text(
+                "<!-- SHADOW_WORKER_STATUS:BEGIN -->\nx\n<!-- SHADOW_WORKER_STATUS:END -->\n",
+                encoding="utf-8",
+            )
+            status = {
+                "updated_at": "2026-08-06",
+                "last_activity_utc": "t",
+                "session_entry_count": 1,
+                "repo_snapshot_id": "snap",
+                "ecosystem_run_id": "eco",
+                "ecosystem_repos": {"repo_count": 27},
+                "benchmark": {"timings_s": {"total_s": 21}, "sla_met": {"total_under_cap": True}},
+                "wasm_size_kb": 127.4,
+                "wasm_target_met": False,
+                "gate": {"phase_0": "PASS", "phase_1": "FAIL", "open_issues": [44]},
+            }
+            with mock.patch.object(updater, "AUDIT", Path(td)):
+                with mock.patch.object(updater, "REPO", Path(td)):
+                    with mock.patch.object(updater, "collect_status", return_value=status):
+                        updater.AUDIT = Path(td)
+                        updater.REPO = Path(td)
+                        (Path(td) / "docs" / "agent_audit_log").mkdir(parents=True)
+                        real_audit = Path(td) / "docs" / "agent_audit_log" / "README.md"
+                        real_audit.write_text(audit_readme.read_text(encoding="utf-8"), encoding="utf-8")
+                        root_readme.write_text(root_readme.read_text(encoding="utf-8"), encoding="utf-8")
+                        (Path(td) / "README.md").write_text(root_readme.read_text(encoding="utf-8"), encoding="utf-8")
                         result = updater.update_readmes()
             self.assertIn("files", result)
 
