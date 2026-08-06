@@ -1,0 +1,5 @@
+[2026-08-06T18:30:56Z] [START] ecosystem gather run_id=20260806T183056Z dry_run=True
+[2026-08-06T18:30:56Z] [LIST] gh repo list zowskyy
+[2026-08-06T18:30:56Z] [LIST] found 1 repos
+[2026-08-06T18:30:56Z] [LOCAL] load frontier-syntax status
+[2026-08-06T18:30:56Z] [SCAN] [1/1] frontier-syntax

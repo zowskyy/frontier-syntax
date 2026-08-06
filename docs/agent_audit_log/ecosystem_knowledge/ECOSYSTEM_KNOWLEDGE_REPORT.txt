@@ -2,11 +2,11 @@
 ZOWSKYY ECOSYSTEM KNOWLEDGE REPORT
 ##############################################################################
 
-Generated:     2026-08-06T18:23:59Z
-Run ID:        20260806T182334Z
+Generated:     2026-08-06T18:31:21Z
+Run ID:        20260806T183100Z
 Canonical repo: zowskyy/frontier-syntax
 Blueprint:     PROJECT_BLUEPRINT.md + TRACKING.json
-Pipeline log:  docs/agent_audit_log/pipeline_logs/20260806T182334Z/pipeline.log
+Pipeline log:  docs/agent_audit_log/pipeline_logs/20260806T183100Z/pipeline.log
 Audit sessions: docs/agent_audit_log/sessions/
 
 ==============================================================================
@@ -689,7 +689,6 @@ REPO 10: zowskyy/frontier-syntax
   ... (117 more lines)
 
 ## VERIFIED — CAN DO (this scan)
-  ✓ cargo test --lib passes (40 unit tests at last run)
 
 ## CANNOT DO / NOT VERIFIED / LIMITATIONS
   ✗ WASM size target NOT met: 127.4 KB vs 100 KB
@@ -1634,6 +1633,15 @@ REPO 27: zowskyy/Voice-Of-the-Star
 
 
 ##############################################################################
+THIRD-PARTY CONTENT NOTICE
+##############################################################################
+README excerpts are reproduced for internal ecosystem inventory only.
+Each upstream repo retains its own license. See upstream LICENSE files.
+SPDX identifiers not auto-detected in this scan — verify before redistribution.
+
+##############################################################################
 END OF REPORT — regenerate with:
   python3 scripts/gather_ecosystem_knowledge.py
+  python3 scripts/gather_ecosystem_knowledge.py --fast   # skip cargo rebuild
+  python3 scripts/gather_ecosystem_knowledge.py --dry-run  # no writes
 ##############################################################################

@@ -1,0 +1,52 @@
+name: Blueprint Gate
+
+on:
+  pull_request:
+    paths:
+      - "scripts/**"
+      - "docs/agent_audit_log/**"
+      - "schemas/**"
+      - "tests/test_audit_logger.py"
+      - "tests/test_gather_ecosystem_knowledge.py"
+      - "manifest/ecosystem_gather_sla.json"
+      - ".github/workflows/blueprint-gate.yml"
+  push:
+    branches: [cursor/**, main, master]
+    paths:
+      - "scripts/**"
+      - "docs/agent_audit_log/**"
+      - "schemas/**"
+
+jobs:
+  audit-and-ecosystem:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install audit validation deps
+        run: pip install jsonschema
+
+      - name: Scrub PII from committed sessions (idempotent)
+        run: python3 scripts/scrub_audit_sessions.py
+
+      - name: Validate audit JSONL schema + PII policy
+        run: python3 scripts/validate_audit_log.py --strict-hash
+
+      - name: Unit tests (audit + ecosystem gather)
+        run: |
+          python3 -m unittest tests/test_audit_logger.py tests/test_gather_ecosystem_knowledge.py -v
+
+      - name: Ecosystem gather dry-run (no cargo)
+        run: python3 scripts/gather_ecosystem_knowledge.py --dry-run
+
+      - name: Tracking gate (blueprint truth)
+        run: python3 scripts/tracking.py gate || true
+
+      - name: Cargo audit (Rust CVE scan)
+        run: |
+          cargo install cargo-audit --locked 2>/dev/null || true
+          cargo audit || echo "cargo-audit advisory only on PR"

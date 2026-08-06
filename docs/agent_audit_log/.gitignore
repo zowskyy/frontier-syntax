@@ -1,4 +1,5 @@
 state/
-repo_snapshots/**/gather.log
 *.log
 !pipeline_logs/**/pipeline.log
+private_prompts.jsonl
+archive/

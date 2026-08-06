@@ -143,7 +143,8 @@ def main() -> int:
     r.set_defaults(func=cmd_run)
     c = sub.add_parser("install-cron")
     c.set_defaults(func=cmd_install_cron)
-    return p.parse_args().func(p.parse_args())
+    args = p.parse_args()
+    return args.func(args)
 
 
 if __name__ == "__main__":

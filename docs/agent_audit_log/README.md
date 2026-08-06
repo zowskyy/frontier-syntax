@@ -80,4 +80,13 @@ python3 scripts/agent_audit_hook.py --tool Shell --action "cargo test" --command
 
 - **Every action** is logged — no "significant only" filter.
 - Secrets redacted automatically (`ghp_*`, tokens, etc.).
+- **PII policy:** see `DATA_CLASSIFICATION.md` — prompts never in committed sessions.
+- **Architecture:** see `ARCHITECTURE_RATIONALE.md` for research citations.
 - `state/` is local-only (gitignored); `sessions/`, `repo_snapshots/`, `ecosystem_knowledge/`, and `pipeline_logs/` are committed for your review.
+
+## Validate & scrub
+
+```bash
+python3 scripts/scrub_audit_sessions.py      # idempotent PII scrub + hash chain
+python3 scripts/validate_audit_log.py --strict-hash
+```

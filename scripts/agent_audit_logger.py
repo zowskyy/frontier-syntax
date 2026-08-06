@@ -2,7 +2,11 @@
 """
 Append-only agent audit log — EVERY action, in-repo at docs/agent_audit_log/.
 
-Required per entry: action, why, how_to_repeat, honesty (verified / omissions).
+PII policy: user prompts NEVER committed to sessions/*.jsonl.
+  - Optional --user-prompt writes SHA256 to public log
+  - Full text goes to state/private_prompts.jsonl (gitignored)
+
+Integrity: each entry includes prev_hash + entry_hash (SHA-256 chain).
 """
 
 from __future__ import annotations
@@ -23,6 +27,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 AUDIT_ROOT = REPO_ROOT / "docs" / "agent_audit_log"
 SESSIONS = AUDIT_ROOT / "sessions"
 STATE_DIR = AUDIT_ROOT / "state"
+PRIVATE_PROMPTS = STATE_DIR / "private_prompts.jsonl"
 INDEX = AUDIT_ROOT / "index.json"
 MAX_ENTRY_BYTES = 8192
 
@@ -48,6 +53,39 @@ def redact(text: str) -> str:
     for pat in SECRET_PATTERNS:
         out = pat.sub("[REDACTED]", out)
     return out
+
+
+def compute_entry_hash(entry: dict) -> str:
+    payload = {k: v for k, v in entry.items() if k != "entry_hash"}
+    blob = json.dumps(payload, sort_keys=True, ensure_ascii=False)
+    return hashlib.sha256(blob.encode("utf-8")).hexdigest()
+
+
+def last_entry_hash(path: Path) -> str | None:
+    if not path.exists():
+        return None
+    lines = [ln for ln in path.read_text(encoding="utf-8").splitlines() if ln.strip()]
+    if not lines:
+        return None
+    try:
+        last = json.loads(lines[-1])
+        return last.get("entry_hash")
+    except json.JSONDecodeError:
+        return None
+
+
+def store_private_prompt(entry_id: str, prompt: str) -> str:
+    STATE_DIR.mkdir(parents=True, exist_ok=True)
+    sha = hashlib.sha256(prompt.encode("utf-8")).hexdigest()
+    record = {
+        "entry_id": entry_id,
+        "timestamp_utc": utc_now(),
+        "sha256": sha,
+        "excerpt": redact(prompt[:2000]),
+    }
+    with PRIVATE_PROMPTS.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(record, ensure_ascii=False) + "\n")
+    return sha
 
 
 def git_info() -> dict[str, str]:
@@ -95,7 +133,10 @@ def update_index(session_id: str, entry_id: str, action: str) -> None:
     s["last_action"] = action
     idx["updated_at"] = utc_now()
     idx["repo_root"] = str(REPO_ROOT)
-    idx["audit_root"] = str(AUDIT_ROOT.relative_to(REPO_ROOT))
+    try:
+        idx["audit_root"] = str(AUDIT_ROOT.relative_to(REPO_ROOT))
+    except ValueError:
+        idx["audit_root"] = str(AUDIT_ROOT)
     INDEX.write_text(json.dumps(idx, indent=2), encoding="utf-8")
 
 
@@ -123,6 +164,8 @@ def record(
 ) -> dict[str, Any]:
     entry_id = str(uuid.uuid4())
     gi = git_info()
+    path = session_path(session_id)
+    prev_hash = last_entry_hash(path)
 
     safe_inputs = json.loads(redact(json.dumps(inputs or {}, default=str)))
     safe_outputs = json.loads(redact(json.dumps(outputs or {}, default=str)))
@@ -159,16 +202,26 @@ def record(
             "omissions": omissions or [],
             "cannot_verify": cannot_verify or [],
         },
-        "user_prompt_excerpt": redact(user_prompt_excerpt[:500]),
         "parent_id": parent_id,
     }
 
+    if prev_hash:
+        entry["prev_hash"] = prev_hash
+
+    if user_prompt_excerpt:
+        entry["user_prompt_sha256"] = store_private_prompt(entry_id, user_prompt_excerpt)
+
+    entry["entry_hash"] = compute_entry_hash(entry)
+
     line = json.dumps(entry, ensure_ascii=False)
     if len(line.encode("utf-8")) > MAX_ENTRY_BYTES:
-        entry["outputs"] = {"truncated": True, "sha256": hashlib.sha256(line.encode()).hexdigest()}
+        entry["outputs"] = {
+            "truncated": True,
+            "sha256": hashlib.sha256(line.encode()).hexdigest(),
+        }
+        entry["entry_hash"] = compute_entry_hash(entry)
         line = json.dumps(entry, ensure_ascii=False)
 
-    path = session_path(session_id)
     with path.open("a", encoding="utf-8") as f:
         f.write(line + "\n")
 
@@ -188,7 +241,7 @@ def cmd_record(args: argparse.Namespace) -> int:
         action=args.action,
         why=args.why,
         command=args.command or "",
-        script=args.script or "",
+        script=args.script or "agent-audit-record",
         skill=args.skill or "agent-audit-record",
         tool=args.tool or "",
         extension_hook=args.extension_hook or "",
@@ -238,7 +291,7 @@ def main() -> int:
     r.add_argument("--verified", action="store_true")
     r.add_argument("--omission", action="append", default=[])
     r.add_argument("--cannot-verify", action="append", default=[])
-    r.add_argument("--user-prompt", default="")
+    r.add_argument("--user-prompt", default="", help="stored in gitignored state/ only")
     r.add_argument("--exit-code", type=int, default=None)
     r.set_defaults(func=cmd_record)
 

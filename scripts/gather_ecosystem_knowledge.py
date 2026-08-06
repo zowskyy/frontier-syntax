@@ -14,6 +14,7 @@ import re
 import subprocess
 import sys
 import textwrap
+import time
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
@@ -25,6 +26,10 @@ ECO_ROOT = AUDIT_ROOT / "ecosystem_knowledge"
 PIPELINE_ROOT = AUDIT_ROOT / "pipeline_logs"
 LOGGER = REPO_ROOT / "scripts" / "agent_audit_logger.py"
 OWNER = "zowskyy"
+SLA_PATH = REPO_ROOT / "manifest" / "ecosystem_gather_sla.json"
+BENCHMARK_PATH = REPO_ROOT / "manifest" / "ecosystem_gather_benchmark.json"
+GH_RETRIES = 3
+GH_BACKOFF_S = 1.5
 
 # Repos with direct blueprint / Frontier ecosystem relevance
 FRONTIER_CORE = {"frontier-syntax"}
@@ -122,21 +127,43 @@ def audit_record(
     subprocess.run(cmd, cwd=REPO_ROOT, check=False)
 
 
+def gh_run(args: list[str], timeout: int = 60) -> tuple[int, str, str]:
+    """Run gh with exponential backoff on transient failures."""
+    last_err = ""
+    for attempt in range(GH_RETRIES):
+        try:
+            r = subprocess.run(
+                ["gh"] + args,
+                capture_output=True,
+                text=True,
+                timeout=timeout,
+            )
+            if r.returncode == 0:
+                return 0, r.stdout, r.stderr
+            if r.returncode in (429, 502, 503) or "rate limit" in (r.stderr or "").lower():
+                time.sleep(GH_BACKOFF_S * (2**attempt))
+                last_err = r.stderr
+                continue
+            return r.returncode, r.stdout, r.stderr
+        except subprocess.TimeoutExpired:
+            time.sleep(GH_BACKOFF_S * (2**attempt))
+            last_err = "timeout"
+    return 1, "", last_err
+
+
 def gh_json(args: list[str], timeout: int = 60) -> Any:
-    cmd = ["gh"] + args
+    code, out, _ = gh_run(args, timeout=timeout)
+    if code != 0:
+        return None
     try:
-        out = subprocess.check_output(cmd, text=True, timeout=timeout, stderr=subprocess.PIPE)
         return json.loads(out) if out.strip() else None
-    except (subprocess.CalledProcessError, subprocess.TimeoutExpired, json.JSONDecodeError):
+    except json.JSONDecodeError:
         return None
 
 
 def gh_text(args: list[str], timeout: int = 30) -> str | None:
-    cmd = ["gh"] + args
-    try:
-        return subprocess.check_output(cmd, text=True, timeout=timeout, stderr=subprocess.PIPE).strip()
-    except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
-        return None
+    code, out, _ = gh_run(args, timeout=timeout)
+    return out.strip() if code == 0 else None
 
 
 def classify_repo(name: str) -> str:
@@ -182,7 +209,7 @@ def blueprint_relation(name: str, category: str) -> str:
     return "No direct blueprint dependency identified."
 
 
-def load_frontier_syntax_status() -> dict[str, Any]:
+def load_frontier_syntax_status(*, fast: bool = False) -> dict[str, Any]:
     status: dict[str, Any] = {"local": True, "checks": {}}
 
     tracking_path = REPO_ROOT / "TRACKING.json"
@@ -192,6 +219,10 @@ def load_frontier_syntax_status() -> dict[str, Any]:
     wasm_manifest = REPO_ROOT / "manifest" / "wasm_size.json"
     if wasm_manifest.exists():
         status["wasm_size"] = json.loads(wasm_manifest.read_text(encoding="utf-8"))
+
+    if fast and BENCHMARK_PATH.exists():
+        status["checks"]["tracking_gate"] = {"exit": 1, "output": "skipped (--fast)"}
+        return status
 
     try:
         gate_out = subprocess.check_output(
@@ -207,6 +238,9 @@ def load_frontier_syntax_status() -> dict[str, Any]:
             "exit": e.returncode,
             "output": (e.output or "")[-4000:],
         }
+
+    if fast:
+        return status
 
     for label, cmd in [
         ("cargo_test_lib", ["cargo", "test", "--lib", "--quiet"]),
@@ -469,8 +503,17 @@ Private repos without token scope show access limitations.
     footer = textwrap.dedent(
         f"""
         {'#' * 78}
+        THIRD-PARTY CONTENT NOTICE
+        {'#' * 78}
+        README excerpts are reproduced for internal ecosystem inventory only.
+        Each upstream repo retains its own license. See upstream LICENSE files.
+        SPDX identifiers not auto-detected in this scan — verify before redistribution.
+
+        {'#' * 78}
         END OF REPORT — regenerate with:
           python3 scripts/gather_ecosystem_knowledge.py
+          python3 scripts/gather_ecosystem_knowledge.py --fast   # skip cargo rebuild
+          python3 scripts/gather_ecosystem_knowledge.py --dry-run  # no writes
         {'#' * 78}
         """
     ).strip()
@@ -508,12 +551,45 @@ Private repos without token scope show access limitations.
     return report_path, manifest_path
 
 
+def write_benchmark(run: str, timings: dict[str, float], repo_count: int, sla: dict) -> None:
+    BENCHMARK_PATH.parent.mkdir(parents=True, exist_ok=True)
+    total = timings.get("total_s", 0)
+    record = {
+        "run_id": run,
+        "measured_at": utc_now(),
+        "repo_count": repo_count,
+        "timings_s": timings,
+        "sla": sla,
+        "sla_met": {
+            "total_under_cap": total <= sla.get("max_total_seconds", 60),
+            "per_repo_under_cap": (
+                (total / max(repo_count, 1)) <= sla.get("max_seconds_per_repo", 5)
+            ),
+        },
+    }
+    BENCHMARK_PATH.write_text(json.dumps(record, indent=2), encoding="utf-8")
+
+
 def main() -> int:
+    import argparse
+
+    ap = argparse.ArgumentParser(description="Gather zowskyy ecosystem knowledge")
+    ap.add_argument("--dry-run", action="store_true", help="scan only; no report writes")
+    ap.add_argument("--fast", action="store_true", help="skip cargo/wasm rebuild checks")
+    args = ap.parse_args()
+
+    t0 = time.monotonic()
+    phase_times: dict[str, float] = {}
     run = run_id()
     pipe_dir = PIPELINE_ROOT / run
     pipe_dir.mkdir(parents=True, exist_ok=True)
 
-    log_pipeline(pipe_dir, "START", f"ecosystem gather run_id={run}")
+    sla = json.loads(SLA_PATH.read_text(encoding="utf-8")) if SLA_PATH.exists() else {
+        "max_total_seconds": 60,
+        "max_seconds_per_repo": 5,
+    }
+
+    log_pipeline(pipe_dir, "START", f"ecosystem gather run_id={run} dry_run={args.dry_run}")
     audit_record(
         category="pipeline",
         action="ecosystem_knowledge_gather_start",
@@ -557,11 +633,16 @@ def main() -> int:
         verified=True,
     )
 
+    phase_times["list_repos_s"] = time.monotonic() - t0
+
     log_pipeline(pipe_dir, "LOCAL", "load frontier-syntax status")
-    frontier_status = load_frontier_syntax_status()
-    (pipe_dir / "frontier_syntax_status.json").write_text(
-        json.dumps(frontier_status, indent=2, default=str), encoding="utf-8"
-    )
+    t_local = time.monotonic()
+    frontier_status = load_frontier_syntax_status(fast=args.fast)
+    phase_times["local_checks_s"] = time.monotonic() - t_local
+    if not args.dry_run:
+        (pipe_dir / "frontier_syntax_status.json").write_text(
+            json.dumps(frontier_status, indent=2, default=str), encoding="utf-8"
+        )
     audit_record(
         category="pipeline",
         action="frontier_syntax_local_checks",
@@ -572,6 +653,7 @@ def main() -> int:
         omissions=["clippy not run in this pipeline"],
     )
 
+    t_scan = time.monotonic()
     profiles: list[RepoProfile] = []
     for i, meta in enumerate(sorted(repos_raw, key=lambda x: x["name"].lower()), 1):
         name = meta["name"]
@@ -610,12 +692,23 @@ def main() -> int:
         )
         profiles.append(profile)
 
-        per_repo = pipe_dir / "repos" / f"{name}.json"
-        per_repo.parent.mkdir(parents=True, exist_ok=True)
-        per_repo.write_text(json.dumps(asdict(profile), indent=2), encoding="utf-8")
+        if not args.dry_run:
+            per_repo = pipe_dir / "repos" / f"{name}.json"
+            per_repo.parent.mkdir(parents=True, exist_ok=True)
+            per_repo.write_text(json.dumps(asdict(profile), indent=2), encoding="utf-8")
+
+    phase_times["scan_repos_s"] = time.monotonic() - t_scan
+
+    if args.dry_run:
+        phase_times["total_s"] = time.monotonic() - t0
+        print(json.dumps({"dry_run": True, "repos": len(profiles), "timings_s": phase_times}, indent=2))
+        return 0
 
     log_pipeline(pipe_dir, "WRITE", "consolidated report")
     report_path, manifest_path = write_report(profiles, frontier_status, run, pipe_dir)
+
+    phase_times["total_s"] = time.monotonic() - t0
+    write_benchmark(run, phase_times, len(profiles), sla)
 
     audit_record(
         category="pipeline",
