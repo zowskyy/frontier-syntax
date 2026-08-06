@@ -120,8 +120,17 @@ def worker_merge_stack(lbw: LexiconBoundWorker) -> dict:
 
         # Checkout base and merge tip of stack (contains all commits)
         tip = PR_STACK[-1]["branch"]
+        swarm_branch = "cursor/swarm-resolve-prs-f519"
+        if _run(["git", "fetch", "origin", swarm_branch])["pass"]:
+            tip = swarm_branch
+
         checkout = _run(["git", "checkout", BASE_BRANCH])
         steps.append({"step": "checkout_base", **checkout})
+        if not checkout["pass"]:
+            stash = _run(["git", "stash", "push", "-m", "pr_resolution_autostash"])
+            steps.append({"step": "stash", **stash})
+            checkout = _run(["git", "checkout", BASE_BRANCH])
+            steps.append({"step": "checkout_base_retry", **checkout})
         if not checkout["pass"]:
             return {"pass": False, "steps": steps}
 
