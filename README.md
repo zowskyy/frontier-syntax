@@ -24,6 +24,12 @@ python3 scripts/process_logger.py
 # Self-creation flawless build loop
 python3 scripts/self_creation_orchestrator.py
 
+# Frontier universal — 15-gate review, intent-to-code, philosophy (zero deps)
+python3 frontier_universal.py --file my_app.py
+python3 frontier_universal.py --intent "Build a chat app"
+python3 frontier_universal.py --philosophy
+python3 frontier_universal.py --self-test
+
 # Frontier agent (natural language)
 python3 frontier_agent.py "Solve all gaps"
 python3 frontier_agent.py "Frontier self-creation flawless build"
