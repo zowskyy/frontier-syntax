@@ -13,12 +13,21 @@ build = "build.rs"
 [lib]
 crate-type = ["cdylib", "rlib"]
 
+[features]
+default = ["cli", "serde-json", "sha3-hash", "unicode-normalization"]
+cli = []
+wasm-slim = ["dep:wee_alloc"]
+full = ["serde-wasm-bindgen", "unicode-normalization", "serde-json", "sha3-hash"]
+serde-json = ["dep:serde_json", "dep:serde"]
+sha3-hash = ["dep:sha3"]
+unicode-normalization = ["dep:unicode-normalization"]
+
 [dependencies]
 hex = "0.4"
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-sha3 = "0.10"
-unicode-normalization = "0.1"
+serde = { version = "1.0", features = ["derive"], optional = true }
+serde_json = { version = "1.0", optional = true }
+sha3 = { version = "0.10", optional = true }
+unicode-normalization = { version = "0.1", optional = true }
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 chrono = { version = "0.4.31", default-features = false, features = ["clock", "std"] }
@@ -43,14 +52,16 @@ reqwest = { version = "0.12", default-features = false, features = ["blocking", 
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
 wasm-bindgen = "0.2"
-serde-wasm-bindgen = "0.6"
+serde-wasm-bindgen = { version = "0.6", optional = true }
 getrandom = { version = "0.2", features = ["js"] }
+wee_alloc = { version = "0.4", optional = true }
 
 [dev-dependencies]
 
 [[bin]]
 name = "frontier"
 path = "src/main.rs"
+required-features = ["cli"]
 
 [[bin]]
 name = "lighthouse"
@@ -64,3 +75,5 @@ path = "src/bin/lsp.rs"
 opt-level = "z"
 lto = true
 codegen-units = 1
+strip = true
+panic = "abort"

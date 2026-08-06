@@ -1,14 +1,17 @@
+#[cfg(feature = "serde-json")]
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+#[derive(Debug, Clone, PartialEq)]
+#[cfg_attr(feature = "serde-json", derive(Serialize, Deserialize))]
 pub struct Program {
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "serde-json", serde(skip_serializing_if = "Option::is_none"))]
     pub version: Option<String>,
     pub statements: Vec<Stmt>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
-#[serde(tag = "type", rename_all = "snake_case")]
+#[derive(Debug, Clone, PartialEq)]
+#[cfg_attr(feature = "serde-json", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde-json", serde(tag = "type", rename_all = "snake_case"))]
 pub enum Stmt {
     VersionDecl {
         version: String,
@@ -21,7 +24,7 @@ pub enum Stmt {
         name: String,
         type_spec: TypeSpec,
         value: Box<Expr>,
-        #[serde(skip_serializing_if = "Option::is_none")]
+        #[cfg_attr(feature = "serde-json", serde(skip_serializing_if = "Option::is_none"))]
         symbol_id: Option<u32>,
     },
     FnDecl {
@@ -29,13 +32,13 @@ pub enum Stmt {
         params: Vec<Param>,
         return_type: TypeSpec,
         body: Vec<Stmt>,
-        #[serde(skip_serializing_if = "Option::is_none")]
+        #[cfg_attr(feature = "serde-json", serde(skip_serializing_if = "Option::is_none"))]
         requires: Option<String>,
-        #[serde(skip_serializing_if = "Option::is_none")]
+        #[cfg_attr(feature = "serde-json", serde(skip_serializing_if = "Option::is_none"))]
         ensures: Option<String>,
-        #[serde(skip_serializing_if = "Option::is_none")]
+        #[cfg_attr(feature = "serde-json", serde(skip_serializing_if = "Option::is_none"))]
         invariant: Option<String>,
-        #[serde(skip_serializing_if = "Option::is_none")]
+        #[cfg_attr(feature = "serde-json", serde(skip_serializing_if = "Option::is_none"))]
         symbol_id: Option<u32>,
     },
     Return {
@@ -58,58 +61,62 @@ pub enum Stmt {
     },
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+#[derive(Debug, Clone, PartialEq)]
+#[cfg_attr(feature = "serde-json", derive(Serialize, Deserialize))]
 pub struct Param {
     pub name: String,
     pub type_spec: TypeSpec,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "serde-json", serde(skip_serializing_if = "Option::is_none"))]
     pub symbol_id: Option<u32>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+#[derive(Debug, Clone, PartialEq)]
+#[cfg_attr(feature = "serde-json", derive(Serialize, Deserialize))]
 pub struct TypeSpec {
     pub base: String,
     pub annotation: TypeAnnotation,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
-#[serde(rename_all = "snake_case")]
+#[derive(Debug, Clone, PartialEq)]
+#[cfg_attr(feature = "serde-json", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde-json", serde(rename_all = "snake_case"))]
 pub enum TypeAnnotation {
     None,
     Optional,
     Required,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
-#[serde(tag = "type", rename_all = "snake_case")]
+#[derive(Debug, Clone, PartialEq)]
+#[cfg_attr(feature = "serde-json", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde-json", serde(tag = "type", rename_all = "snake_case"))]
 pub enum Expr {
     IntegerLiteral {
         value: i64,
-        #[serde(skip_serializing_if = "Option::is_none")]
+        #[cfg_attr(feature = "serde-json", serde(skip_serializing_if = "Option::is_none"))]
         symbol_id: Option<u32>,
     },
     FloatLiteral {
         value: f64,
-        #[serde(skip_serializing_if = "Option::is_none")]
+        #[cfg_attr(feature = "serde-json", serde(skip_serializing_if = "Option::is_none"))]
         symbol_id: Option<u32>,
     },
     StringLiteral {
         value: String,
-        #[serde(skip_serializing_if = "Option::is_none")]
+        #[cfg_attr(feature = "serde-json", serde(skip_serializing_if = "Option::is_none"))]
         symbol_id: Option<u32>,
     },
     BoolLiteral {
         value: bool,
-        #[serde(skip_serializing_if = "Option::is_none")]
+        #[cfg_attr(feature = "serde-json", serde(skip_serializing_if = "Option::is_none"))]
         symbol_id: Option<u32>,
     },
     NullLiteral {
-        #[serde(skip_serializing_if = "Option::is_none")]
+        #[cfg_attr(feature = "serde-json", serde(skip_serializing_if = "Option::is_none"))]
         symbol_id: Option<u32>,
     },
     Identifier {
         name: String,
-        #[serde(skip_serializing_if = "Option::is_none")]
+        #[cfg_attr(feature = "serde-json", serde(skip_serializing_if = "Option::is_none"))]
         symbol_id: Option<u32>,
     },
     UnaryExpr {
@@ -136,7 +143,6 @@ pub enum Expr {
         inner: Box<Expr>,
     },
 }
-
 
 impl Expr {
     pub fn nesting_depth(&self) -> usize {

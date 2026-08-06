@@ -3,8 +3,11 @@
 //! Supports `let`, `if`, function `calls`, and `while` loops.
 
 use crate::ast::{Expr, Param, Program, Stmt, TypeSpec};
+#[cfg(all(target_arch = "wasm32", feature = "wasm-slim"))]
+use crate::knowledge_bridge_slim::{browser_context, get_optimal_algorithm, optimization_warnings};
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
 use crate::knowledge_bridge::{browser_context, get_optimal_algorithm, optimization_warnings};
-use crate::knowledge::SizeHint;
+use crate::SizeHint;
 use std::collections::HashMap;
 
 const WASM_MAGIC: &[u8; 4] = b"\0asm";
@@ -33,7 +36,8 @@ impl Default for CodeGenOptions {
     }
 }
 
-#[derive(Debug, Clone, Default, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, Default)]
+#[cfg_attr(feature = "serde-json", derive(serde::Serialize, serde::Deserialize))]
 pub struct CompilationProfile {
     pub lexing_time: u128,
     pub parsing_time: u128,
@@ -115,18 +119,21 @@ fn compile_program_with_profile(
     let mut algorithm_hint = None;
 
     if options.optimize {
-        let knowledge_start = std::time::Instant::now();
-        warnings.extend(optimization_warnings("sort", "list::i32"));
-        let _ctx = browser_context();
-        let suggestion = get_optimal_algorithm("sort", "list::i32", SizeHint::Medium);
-        selected_algorithm = Some(suggestion.name.clone());
-        algorithm_hint = Some(suggestion.implementation_hint.clone());
-        warnings.push(format!(
-            "Algorithm applied to codegen: {} — {}",
-            suggestion.name, suggestion.implementation_hint
-        ));
-        if let Some(ref mut p) = profile {
-            p.knowledge_lookup_time = knowledge_start.elapsed().as_millis();
+        #[cfg(not(all(target_arch = "wasm32", feature = "wasm-slim")))]
+        {
+            let knowledge_start = std::time::Instant::now();
+            warnings.extend(optimization_warnings("sort", "list::i32"));
+            let _ctx = browser_context();
+            let suggestion = get_optimal_algorithm("sort", "list::i32", SizeHint::Medium);
+            selected_algorithm = Some(suggestion.name.clone());
+            algorithm_hint = Some(suggestion.implementation_hint.clone());
+            warnings.push(format!(
+                "Algorithm applied to codegen: {} — {}",
+                suggestion.name, suggestion.implementation_hint
+            ));
+            if let Some(ref mut p) = profile {
+                p.knowledge_lookup_time = knowledge_start.elapsed().as_millis();
+            }
         }
     }
 

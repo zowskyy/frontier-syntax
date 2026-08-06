@@ -9,18 +9,21 @@ pub mod handwritten;
 pub use handwritten::parse_program;
 use crate::ast::Program;
 use crate::error::FrontierError;
+#[cfg(feature = "serde-json")]
 use serde_json::Value;
 use std::fs;
 use std::path::Path;
 
 /// Parse Frontier v2.0 source into a JSON AST value.
-pub fn parse_source(source: &str) -> Result<Value, String> {
+#[cfg(feature = "serde-json")]
+pub fn parse_source(source: &str) -> Result<serde_json::Value, String> {
     let program = parse_program(source, 64).map_err(|e| e.message)?;
     serde_json::to_value(&program).map_err(|e| e.to_string())
 }
 
 /// Parse a `.fr` source file into JSON AST.
-pub fn parse_file(path: &str) -> Result<Value, String> {
+#[cfg(feature = "serde-json")]
+pub fn parse_file(path: &str) -> Result<serde_json::Value, String> {
     let source = fs::read_to_string(path)
         .map_err(|e| format!("Failed to read file: {e}"))?;
     parse_source(&source)
@@ -32,6 +35,7 @@ pub fn parse_source_typed(source: &str) -> Result<Program, FrontierError> {
 }
 
 #[cfg(test)]
+#[cfg(feature = "serde-json")]
 mod tests {
     use super::*;
 
