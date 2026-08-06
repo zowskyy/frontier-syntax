@@ -24,11 +24,23 @@ Regenerate ecosystem knowledge:
 python3 scripts/gather_ecosystem_knowledge.py
 ```
 
-## End of every turn
+## End of every turn (required)
+
+Shadow worker **always** refreshes README live-status blocks:
 
 ```bash
 python3 scripts/agent_shadow_worker.py run
 ```
+
+Optional full refresh:
+
+```bash
+python3 scripts/agent_shadow_worker.py run --ecosystem --snapshot
+python3 scripts/agent_shadow_worker.py install-cron   # every 5 min on your machine
+```
+
+README markers updated: root `README.md` + `docs/agent_audit_log/README.md`  
+(script: `scripts/update_audit_readme.py`)
 
 ## Rules
 
@@ -36,3 +48,4 @@ python3 scripts/agent_shadow_worker.py run
 2. Always include `--omission` for what was not verified.
 3. Never skip logging because an action seems small.
 4. Do not log raw secrets — logger redacts common patterns.
+5. **Always run shadow worker at end of turn** — keeps README + audit continuity current.

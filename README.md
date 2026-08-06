@@ -2,6 +2,10 @@
 
 Formally verifiable programming language — **A+ Hard Gate v2.0** with 7 innovations, autonomous worker swarm, and self-creation orchestration.
 
+<!-- SHADOW_WORKER_STATUS:BEGIN -->
+ok
+<!-- SHADOW_WORKER_STATUS:END -->
+
 ## Quick Start
 
 ```bash
@@ -99,6 +103,8 @@ python3 scripts/generate_arc_status.py
 | `scripts/self_creation_orchestrator.py` | 6-phase flawless build loop |
 | `scripts/gap_solution_orchestrator.py` | P0 gap verification suite |
 | `build/arc_orchestrator.py` | ARC gate verification |
+| **`scripts/agent_shadow_worker.py`** | **Heartbeat + auto README refresh (every turn / cron)** |
+| `scripts/update_audit_readme.py` | Writes live-status blocks in README files |
 
 ## Core Language (Hardened)
 

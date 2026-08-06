@@ -38,7 +38,10 @@ jobs:
 
       - name: Unit tests (audit + ecosystem gather)
         run: |
-          python3 -m unittest tests/test_audit_logger.py tests/test_gather_ecosystem_knowledge.py -v
+          python3 -m unittest tests/test_audit_logger.py tests/test_gather_ecosystem_knowledge.py tests/test_update_audit_readme.py -v
+
+      - name: Shadow worker README refresh (dry)
+        run: python3 scripts/update_audit_readme.py
 
       - name: Ecosystem gather dry-run (no cargo)
         run: python3 scripts/gather_ecosystem_knowledge.py --dry-run

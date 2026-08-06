@@ -1,5 +1,9 @@
 # Agent audit log — in-repo record of every agent action + repo snapshots
 
+<!-- SHADOW_WORKER_STATUS:BEGIN -->
+ok
+<!-- SHADOW_WORKER_STATUS:END -->
+
 ## Where everything lives
 
 | What | Path |
