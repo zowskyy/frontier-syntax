@@ -259,6 +259,12 @@ impl FullModuleCodegen {
             return Err("No functions found in program".to_string());
         }
 
+        // WASM export convention: `main` is always function index 0.
+        if let Some(pos) = fns.iter().position(|f| f.name == "main") {
+            let main_fn = fns.remove(pos);
+            fns.insert(0, main_fn);
+        }
+
         let name_to_index: HashMap<String, u32> = fns
             .iter()
             .enumerate()
@@ -722,11 +728,13 @@ fn type_section(types: &[FuncType]) -> Vec<u8> {
 
 fn memory_section(min_pages: u32, max_pages: Option<u32>) -> Vec<u8> {
     let mut payload = encode_u32(1);
-    payload.push(0x00);
-    payload.extend(encode_u32(min_pages));
     if let Some(max) = max_pages {
         payload.push(0x01);
+        payload.extend(encode_u32(min_pages));
         payload.extend(encode_u32(max));
+    } else {
+        payload.push(0x00);
+        payload.extend(encode_u32(min_pages));
     }
     payload
 }

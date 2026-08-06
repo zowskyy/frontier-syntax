@@ -71,12 +71,15 @@ def phase_1_checks(open_set: set[int]) -> tuple[bool, list[dict]]:
     all_ok = True
 
     r11 = run_cmd(["cargo", "test", "--lib", "wasm_codegen::"])
+    r11_exec = run_cmd(["python3", "scripts/verify_wasm_codegen.py"])
     issue_open = 44 in open_set
-    ok = r11["pass"] and not issue_open
+    ok = r11["pass"] and r11_exec["pass"] and not issue_open
     evidence.append({
         "check": "1.1_wasm_codegen",
         "ref": "issue_44",
         "tests_pass": r11["pass"],
+        "wasmtime_exec_pass": r11_exec["pass"],
+        "wasmtime_manifest": "manifest/wasm_codegen_verify.json",
         "issue_closed": not issue_open,
         "pass": ok,
         "status": "fail" if not ok else "validated",
