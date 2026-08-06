@@ -4,7 +4,6 @@ examples/sample.o
 build.log
 target/
 pkg/
-pkg/
 *.o
 .DS_Store
 /tmp/
@@ -15,3 +14,34 @@ pkg/
 # syntax/ast_hash.sha3
 # syntax/final_hash.sha3
 # syntax/wasm_parser.wasm
+*.sha3
+!syntax/*_v2.sha3
+*.vo
+*.glob
+*.vok
+*.vos
+*.aux
+.lia.cache
+dist/
+*.tar.gz
+test_projects/
+__pycache__/
+*.pyc
+.frontier_state.json
+.build_truth_*/
+.build_truth_sandbox/
+.verification_cache/
+truth_certificate_*.txt
+truth_certificate_*.txt.sha256
+verification/reports/*.json
+proof/certificates/*.json
+proof/certificates/*.sha256
+audit_reports/audit_cycle_*.json
+frontier.toml
+.frontierrc
+.frontierrc.toml
+.frontier-telemetry.log
+.frontier-telemetry.log.old
+.env
+.cursor/gate-logs/
+.cursor/gate-cache/
