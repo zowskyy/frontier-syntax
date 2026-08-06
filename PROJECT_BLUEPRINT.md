@@ -1,8 +1,19 @@
 # PROJECT_BLUEPRINT.md — Frontier Syntax → Production
 **Repo:** zowskyy/frontier-syntax
-**Blueprint version:** 1.0 (supersedes all prior "A+ Hard Gate" / "REPOSITORY READY" claims)
-**Basis:** Live audit of README, LAUNCH_CHECKLIST.md, and open issues #35–#48 — not the repo's self-reported status.
+**Blueprint version:** 2.0 (supersedes v1.0; WASM reaffirmed as primary compilation target)
+**Basis:** Live audit of README, LAUNCH_CHECKLIST.md, open issues #35–#48, and gate evidence in `manifest/` — not the repo's self-reported status.
 **Rule:** This document is the single source of truth. If code, README, or a script disagrees with this file, this file wins until updated with evidence.
+
+---
+
+## 0. Compilation target policy (v2.0)
+
+| Target | Status | Canonical path | Notes |
+|--------|--------|----------------|-------|
+| **WASM** | **Primary** | `src/wasm_codegen.rs` → `frontier compile -t wasm` | Execution verified via `wasmtime` (`scripts/verify_wasm_codegen.py`). Slim browser build measured in `manifest/wasm_size.json`. |
+| **Native** | Optional / deferred | `frontier compile --bootstrap` (Rust wrapper) | Not a Phase 1–3 gate criterion. True Frontier-native codegen is Phase 5 exit, not a prerequisite for WASM correctness or the Phase 6 LLM. |
+
+**Implication:** All acceptance criteria for “does the program run?” mean **compile to WASM and execute in wasmtime** unless a slice explicitly says otherwise. Do not block WASM work on native bootstrap progress.
 
 ---
 
@@ -11,10 +22,10 @@
 | Claim in repo | Verified status |
 |---|---|
 | "All 6 cycles complete," "All tests passing," LAUNCH_CHECKLIST all technical boxes checked | **Unverified.** Contradicted by open P0 issues on the same functionality. |
-| WASM codegen: let/if/calls/loops supported | **False.** Issue #44 (P0): only const-folded `main()` works. |
-| Knowledge → codegen wiring | **False.** Issue #45 (P0): suggestions are warnings only, never reach codegen. |
+| WASM codegen: let/if/calls/loops supported | **Partially verified, not closed.** Unit tests + `scripts/verify_wasm_codegen.py` (wasmtime wast, 4/4) pass; issue #44 still open — no independent validator closure. |
+| Knowledge → codegen wiring | **Tests pass, not closed.** `test_knowledge_changes_wasm` passes; issue #45 still open. |
 | Genesis self-hosting bootstrap | **False.** Issue #46 (P0): `.frontier` spec files are not valid v2 source. 0% self-hosting. |
-| WASM binary size | **Off target.** Issue #48/#41/#36 (P1): ~760–885 KB vs. <100 KB target. |
+| WASM binary size | **Target met (measurement).** `manifest/wasm_size.json`: 83.8 KB (`met: true`); issue #48 still open until validator closes. |
 | Spec/impl parity for core modules | **Gap confirmed.** Issue #47/#40/#35 (P1). |
 | Issue tracker itself | **Unreliable.** Issues #35–48 are 4 duplicate filings of the same 5 root problems — the swarm re-discovers and re-files instead of closing. No independent validator has ever closed a P0. |
 
@@ -63,7 +74,7 @@
   2. `if` with both branches compiles and both branches are reachable/tested.
   3. A user-defined function call compiles and returns the correct value.
   4. A `while`/`for` loop compiles and terminates with the correct accumulated result.
-- Verification: `cargo run --bin frontier -- compile examples/v2_parser_test.fr -t wasm -O -p` then execute the WASM output (via `wasmtime` or Node) and assert output values, not just "compiles without error."
+- Verification: `cargo test --lib wasm_codegen::` **and** `python3 scripts/verify_wasm_codegen.py` (wasmtime wast execution, not compile-only).
 - Validator: someone/something other than the agent that wrote the codegen must run step above from a clean checkout.
 
 **SLICE 1.2 — Wire knowledge suggestions into codegen** (closes #45)
@@ -123,15 +134,44 @@ For **each** of: self-mutating grammar, proof-carrying code, PQ signatures, ZK-S
 
 ---
 
-## 8. Phase 6 — The Actual End Goal: Independent AI Agent on Its Own Coding System
-*Blocked until Phase 5 gate passes. Do not start this phase early — it's the most exciting part and the most likely place to repeat the exact mistake that produced issues #35–48 (building the exciting layer before the foundation works).*
+## 8. Phase 6 — Independent AI Agent on Its Own Coding System
+*Blocked until Phase 5 gate passes for **agent runtime and deployment**. Corpus generation (Slice 6.1) is additionally gated on Phase 1 exit — see below.*
 
-Before writing any code here, produce a plain-language spec (per your own Phase 1 architecture rule) answering:
+### Why not “train a Frontier LLM from scratch” (decision record)
+
+| Approach | Solo-founder viability | Blocker |
+|----------|------------------------|---------|
+| **From-scratch pretrain** | Not viable | Competent code models need hundreds of billions to trillions of tokens and low-to-mid six figures in compute minimum (seven figures for genuinely capable). |
+| **Corpus scarcity** | Hard blocker (not budget) | Frontier has ~0 real-world programs. No GitHub corpus exists. You cannot pretrain on a language nobody has written yet. |
+| **Synthetic pretrain now** | Wasted work | Compiler semantics still moving (#44 open; P0 fixes invalidate training labels). |
+| **LoRA fine-tune (1–7B open code model)** | **Buildable solo** | Tens to low hundreds of USD GPU rental, days not months. Gets correct Frontier **syntax** for a Phase 6 coding agent. |
+
+**Hard dependency (both paths):** training data quality = compiler ground truth. Generate the synthetic corpus **after** issues #44, #45, and #46 close so labels match settled semantics.
+
+Before writing agent runtime code, produce a plain-language spec (per your own Phase 1 architecture rule) answering:
 - What can the agent do that a human + the Frontier compiler couldn't? (the 10x claim, stated concretely)
 - What is explicitly out of scope for v1 of this agent?
 - What is the sandboxing/safety boundary for an agent that can write and execute its own code? (This needs its own security-gate pass — self-modifying, self-executing agents are exactly the "dangerous execution" and "prompt/tool injection" categories your Phase 3 security gate already flags.)
 
-Only after that spec exists and is stress-tested on paper do you scope Salami slices for it. Scoping this now, on top of an unverified compiler, is how you get five more duplicate P0 issues in a month.
+**SLICE 6.1 — Synthetic Frontier training corpus** (prep work; **gated on Phase 1 exit**)
+- **Do not start** until `scripts/tracking.py gate` reports `phase_1_pass: true` (issues #44, #45, #46 closed by independent validator).
+- **Input sources:** `syntax/feature_matrix_v2.json`, `frontier/docs/language_reference.md`, `examples/*.fr`, `cargo test --lib wasm_codegen::` cases, `scripts/verify_wasm_codegen.py` cases, passing `spec_impl_bridge` fixtures (post Phase 2).
+- **Generation:** template + mutation scripts emit `.fr` snippets; each sample validated by compile → wasmtime execution (same pipeline as Slice 1.1).
+- **Output:** `manifest/training_corpus/` (JSONL: `prompt`, `completion`, `source_spec`, `wasmtime_pass`, `git_sha`).
+- **Verification:** ≥1,000 samples; 100% compile; ≥95% wasmtime pass on generated `main()` programs; zero samples from pre-Phase-1 compiler SHA.
+- **Full plan:** `docs/phase6_synthetic_training_plan.md`
+
+**SLICE 6.2 — LoRA fine-tune** (gated on 6.1 corpus validated)
+- Base model: open code model in 1–7B class (e.g. StarCoder2-3B, CodeLlama-7B, Qwen2.5-Coder-3B).
+- Method: LoRA/QLoRA on completion pairs from 6.1; no full pretrain.
+- Acceptance: held-out Frontier syntax benchmark ≥90% parse+compile; human spot-check 20 samples.
+- Budget envelope: document actual GPU cost; target tens–low hundreds USD.
+
+**SLICE 6.3 — Agent runtime** (gated on Phase 5 + 6.2)
+- Wire fine-tuned model into agent loop with WASM sandbox execution only (wasmtime, not native shell).
+- All generated code must pass `verify_wasm_codegen.py`-equivalent pipeline before merge proposals.
+
+Only after Slice 6.1 spec is validated on paper and Phase 5 passes do you scope remaining Salami slices for deployment. Scoping agent runtime on top of an unverified compiler is how you get five more duplicate P0 issues in a month.
 
 ---
 
