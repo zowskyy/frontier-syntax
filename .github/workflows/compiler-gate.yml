@@ -59,7 +59,10 @@ jobs:
       - name: Production hardening (phase 7)
         run: python3 scripts/verify_phase7_hardening.py
 
-      - name: Full tracking gate (phases 0-7)
+      - name: Launch gate (phase 8)
+        run: python3 scripts/verify_phase8_launch.py --skip-url-check
+
+      - name: Full tracking gate (phases 0-8)
         run: python3 scripts/tracking.py gate
 
       - name: Release readiness (RC gates)

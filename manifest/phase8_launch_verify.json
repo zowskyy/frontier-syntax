@@ -1,0 +1,10 @@
+{
+  "verified_at": "2026-08-07T18:19:46.664237Z",
+  "script": "scripts/verify_phase8_launch.py",
+  "manifest": "manifest\\launch_status.json",
+  "checklist_ok": true,
+  "pending_checklist_items": [],
+  "missing_manifest_fields": [],
+  "url_checks": {},
+  "pass": true
+}

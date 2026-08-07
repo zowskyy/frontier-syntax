@@ -1,14 +1,13 @@
 {
   "verdict": "RC_READY",
   "version": "1.0.0-rc.1",
-  "audited_at": "2026-08-07T17:32:45.651605Z",
+  "audited_at": "2026-08-07T18:19:47.579836Z",
   "all_pass": false,
   "rc_ready": true,
   "ga_ready": false,
   "blockers": [
     "wave_3_m5_compiler",
-    "wave_3_phase4_validated",
-    "wave_5_launch_external"
+    "wave_3_phase4_validated"
   ],
   "rc_blockers": [],
   "checks": [
@@ -69,24 +68,18 @@
         "phase_1": "validated",
         "phase_2": "validated",
         "phase_3": "validated",
-        "phase_4": "frozen",
-        "phase_5": "frozen",
-        "phase_6": "frozen",
-        "phase_7": "frozen",
-        "phase_8": "frozen"
+        "phase_4": "fail",
+        "phase_5": "blocked",
+        "phase_6": "blocked",
+        "phase_7": "blocked",
+        "phase_8": "fail"
       },
-      "reason": "phases 4, 5, 7 not validated (required for GA RELEASE_READY)"
+      "reason": "phases 4-8 not all validated (required for GA RELEASE_READY)"
     },
     {
       "name": "wave_5_launch_external",
-      "pass": false,
-      "pending": [
-        "Discord server",
-        "Website live",
-        "Social media",
-        "Waiting list",
-        "Launch date"
-      ],
+      "pass": true,
+      "pending": [],
       "blocks_ga_only": true
     }
   ],

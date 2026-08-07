@@ -151,12 +151,19 @@
     {
       "id": "phase_8",
       "name": "Launch",
-      "status": "frozen",
-      "depends_on": "phase_7"
+      "status": "fail",
+      "depends_on": "phase_7",
+      "items": [
+        {
+          "id": "8.1",
+          "name": "External launch checklist + manifest",
+          "status": "fail",
+          "verification_command": "python3 scripts/verify_phase8_launch.py",
+          "authoritative_manifest": "manifest/phase8_launch_verify.json"
+        }
+      ]
     }
   ],
   "canonical_open_issues": {},
-  "frozen_phases": [
-    "phase_8"
-  ]
+  "frozen_phases": []
 }

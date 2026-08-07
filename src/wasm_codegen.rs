@@ -919,7 +919,7 @@ fn main(): int {
 
     #[test]
     fn test_import_decl_rejected() {
-        let source = r#"import foo from "bar";
+        let source = r#"import "bar" as foo;
 fn main(): int { return 0; }"#;
         let err = compile_source(source, &CodeGenOptions::default()).unwrap_err();
         assert!(err.contains("Import declarations"));

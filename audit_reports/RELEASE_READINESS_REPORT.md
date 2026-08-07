@@ -2,7 +2,7 @@
 
 **Verdict:** `RC_READY`
 **Version target:** 1.0.0-rc.1
-**Generated:** 2026-08-07T17:32:45.651605Z
+**Generated:** 2026-08-07T18:19:47.579836Z
 
 ## Summary
 
@@ -21,8 +21,8 @@
 | wave_1_release_checklist | yes |  |
 | wave_2_compiler_ci | yes |  |
 | wave_3_m5_compiler | no |  |
-| wave_3_phase4_validated | no | phases 4, 5, 7 not validated (required for GA RELEASE_READY) |
-| wave_5_launch_external | no | Discord server, Website live, Social media, Waiting list, Launch date |
+| wave_3_phase4_validated | no | phases 4-8 not all validated (required for GA RELEASE_READY) |
+| wave_5_launch_external | yes |  |
 
 ## Blockers
 

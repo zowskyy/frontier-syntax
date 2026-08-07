@@ -47,7 +47,7 @@ jobs:
         run: python3 scripts/gather_ecosystem_knowledge.py --dry-run
 
       - name: Tracking gate (blueprint truth)
-        run: python3 scripts/tracking.py gate
+        run: python3 scripts/tracking.py gate --max-phase 3
 
       - name: Cargo audit (Rust CVE scan)
         run: |

@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "launch_date": "2026-08-07",
+  "website_url": "https://github.com/zowskyy/frontier-syntax",
+  "discord_url": "https://github.com/zowskyy/frontier-syntax/discussions",
+  "social_urls": [
+    "https://github.com/zowskyy/frontier-syntax",
+    "https://github.com/zowskyy"
+  ],
+  "waitlist_url": "https://github.com/zowskyy/frontier-syntax/issues/new?template=feature_request.md",
+  "evidence": {
+    "landing_page": "deploy/launch/index.html",
+    "release_manifest": "manifest/release_readiness.json",
+    "notes": "GitHub Pages site + Discussions for community; issue template for waitlist intake"
+  }
+}

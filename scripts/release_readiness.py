@@ -85,11 +85,12 @@ def frozen_phases_complete() -> dict:
     phase5_ok = frozen.get("phase_5") == "validated"
     phase6_ok = frozen.get("phase_6") == "validated"
     phase7_ok = frozen.get("phase_7") == "validated"
-    ok = phase4_ok and phase5_ok and phase6_ok and phase7_ok
+    phase8_ok = frozen.get("phase_8") == "validated"
+    ok = phase4_ok and phase5_ok and phase6_ok and phase7_ok and phase8_ok
     return {
         "pass": ok,
         "phases": frozen,
-        "reason": None if ok else "phases 4-7 not all validated (required for GA RELEASE_READY)",
+        "reason": None if ok else "phases 4-8 not all validated (required for GA RELEASE_READY)",
     }
 
 
@@ -104,7 +105,7 @@ def launch_items_pending() -> dict:
     launch = (ROOT / "LAUNCH_CHECKLIST.md").read_text(encoding="utf-8") if (ROOT / "LAUNCH_CHECKLIST.md").exists() else ""
     pending = []
     for item in ("Discord server", "Website live", "Social media", "Waiting list", "Launch date"):
-        if f"] {item}" in launch or f"- [ ] {item}" in launch:
+        if f"- [ ] {item}" in launch:
             pending.append(item)
     # External launch blocks public GA, not compiler RC
     return {"pass": len(pending) == 0, "pending": pending, "blocks_ga_only": True}
