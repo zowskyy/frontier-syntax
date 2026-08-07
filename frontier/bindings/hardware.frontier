@@ -1,0 +1,15 @@
+// frontier.hardware — Device sensors
+
+module frontier.hardware;
+
+type GPS = opaque;
+type Camera = opaque;
+type Barcode = opaque;
+type Photo = opaque;
+type GpsReading = { latitude: Float, longitude: Float };
+type BarcodeData = { data: String };
+
+extern fn GPS::current() -> Result<GpsReading, String>;
+extern fn Camera::capture() -> Result<Photo, String>;
+extern fn Camera::compress(photo: Photo, quality: &str) -> Result<Binary, String>;
+extern fn Barcode::scan() -> Result<BarcodeData, String>;

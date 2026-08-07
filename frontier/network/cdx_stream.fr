@@ -1,0 +1,15 @@
+// Frontier CDX streaming — on-demand archive fetch
+version: 2.0;
+
+fn stream_events(batch_size: int) -> int {
+    while (batch_size > 0) {
+        return batch_size;
+    }
+    return 0;
+}
+
+fn main(): int {
+    return stream_events(10);
+}
+
+// @test: expect compile pass

@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "description": "Cross-repo registry for the Get Help system",
+  "repos": [
+    {
+      "id": "frontier-syntax",
+      "name": "Frontier Syntax",
+      "path": ".",
+      "github": "zowskyy/frontier-syntax",
+      "notes": "Path is relative to clone location; updated on register"
+    }
+  ]
+}

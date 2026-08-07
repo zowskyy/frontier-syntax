@@ -1,17 +1,22 @@
-// FRONTIER SYNTAX — PARSER GRAMMAR (Audit Cycle 2)
-// ANTLR v4.13.1
-// Imports token definitions from syntax/lexicon.ebnf via token_regex_table.json
-// Parser emits raw AST only. No name resolution in parser.
+/**
+ * FRONTIER SYNTAX v2.0 — ENHANCED PARSER GRAMMAR
+ * ANTLR v4.13.1
+ * Adds: grammar versioning, IPFS imports, proof annotations, while loops
+ */
 
 grammar Frontier;
 
 @header {
-// ANTLR v4.13.1 — Frontier Syntax Parser
+// ANTLR v4.13.1 — Frontier Syntax Parser v2.0
 // Max nesting depth enforced at parse time: 64
 }
 
 program
-    : statement* EOF
+    : versionDecl? statement* EOF
+    ;
+
+versionDecl
+    : GRAMMAR_VERSION SEMICOLON
     ;
 
 statement
@@ -19,16 +24,19 @@ statement
     | fnDecl
     | returnStmt
     | ifStmt
+    | whileStmt
+    | importStmt
+    | proofStmt
     | block
     | exprStmt
     ;
 
-    letDecl
+letDecl
     : LET IDENTIFIER COLON typeSpec OP_ASSIGN expression SEMICOLON
     ;
 
 fnDecl
-    : FN IDENTIFIER LPAREN paramList? RPAREN COLON typeSpec block
+    : proofAnnotation* FN IDENTIFIER LPAREN paramList? RPAREN COLON typeSpec block
     ;
 
 paramList
@@ -47,6 +55,24 @@ ifStmt
     : IF LPAREN expression RPAREN block (ELSE block)?
     ;
 
+whileStmt
+    : WHILE LPAREN expression RPAREN block
+    ;
+
+importStmt
+    : IMPORT STRING_LITERAL AS IDENTIFIER SEMICOLON
+    ;
+
+proofStmt
+    : proofAnnotation SEMICOLON
+    ;
+
+proofAnnotation
+    : AT REQUIRES LPAREN expression RPAREN
+    | AT ENSURES LPAREN expression RPAREN
+    | AT INVARIANT LPAREN expression RPAREN
+    ;
+
 block
     : LBRACE statement* RBRACE
     ;
@@ -55,7 +81,6 @@ exprStmt
     : expression SEMICOLON
     ;
 
-// Precedence level 8: Logical OR (left-associative)
 expression
     : logicalOr
     ;
@@ -64,43 +89,35 @@ logicalOr
     : logicalAnd (OP_LOGICAL_OR logicalAnd)*
     ;
 
-// Precedence level 7: Logical AND (left-associative)
 logicalAnd
     : equality (OP_LOGICAL_AND equality)*
     ;
 
-// Precedence level 6: Equality (left-associative)
 equality
     : relational ((OP_EQUAL | OP_NOT_EQUAL) relational)*
     ;
 
-// Precedence level 5: Relational (left-associative)
 relational
     : additive ((OP_LESS | OP_GREATER | OP_LESS_EQUAL | OP_GREATER_EQUAL) additive)*
     ;
 
-// Precedence level 4: Additive (left-associative)
 additive
     : exponent ((OP_PLUS | OP_MINUS) exponent)*
     ;
 
-// Exponentiation: right-associative (exception to left-assoc rule)
 exponent
     : multiplicative (OP_EXPONENT exponent)?
     ;
 
-// Precedence level 3: Multiplicative (left-associative)
 multiplicative
     : unary ((OP_MULTIPLY | OP_DIVIDE | OP_MODULO) unary)*
     ;
 
-// Precedence level 2: Unary (right-associative)
 unary
     : (OP_MINUS | OP_BANG | OP_TILDE) unary
     | postfix
     ;
 
-// Precedence level 1: Primary + postfix (function call, field access, required annot)
 postfix
     : primary (LPAREN argList? RPAREN | DOT IDENTIFIER | OP_BANG)*
     ;
@@ -133,13 +150,19 @@ baseType
     | IDENTIFIER
     ;
 
-// --- Lexer rules (mirror syntax/token_regex_table.json) ---
-
+GRAMMAR_VERSION : 'version:' [0-9]+ '.' [0-9]+ ;
 LET     : 'let' ;
 FN      : 'fn' ;
 RETURN  : 'return' ;
 IF      : 'if' ;
 ELSE    : 'else' ;
+WHILE   : 'while' ;
+IMPORT  : 'import' ;
+AS      : 'as' ;
+AT      : '@' ;
+REQUIRES: 'requires' ;
+ENSURES : 'ensures' ;
+INVARIANT: 'invariant' ;
 KW_TRUE  : 'true' ;
 KW_FALSE : 'false' ;
 KW_NULL  : 'null' ;

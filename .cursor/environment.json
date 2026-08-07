@@ -1,3 +1,4 @@
 {
-  "install": "bash scripts/install-agent-environment.sh"
+  "name": "Frontier Syntax",
+  "install": "bash .cursor/install.sh"
 }

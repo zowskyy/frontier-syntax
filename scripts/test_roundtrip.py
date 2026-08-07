@@ -21,7 +21,7 @@ def main():
     source = SAMPLE.read_text()
 
     result = subprocess.run(
-        ["cargo", "run", "--release", "--bin", "frontier", "--", "hash", str(SAMPLE)],
+        ["cargo", "run", "--release", "--", "hash", str(SAMPLE)],
         cwd=ROOT,
         capture_output=True,
         text=True,

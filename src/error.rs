@@ -12,10 +12,23 @@ pub struct FrontierError {
 
 impl FrontierError {
     pub fn parse(expected: &str, found: &str, line: usize, column: usize) -> Self {
+        #[cfg(all(target_arch = "wasm32", feature = "wasm-slim"))]
+        {
+            return Self {
+                code: "E-PARSE".to_string(),
+                expected: expected.to_string(),
+                found: found.to_string(),
+                line,
+                column,
+                message: "parse error".to_string(),
+            };
+        }
+        #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
         let message = format!(
             "Error [E-PARSE]: Expected {} but found {} at line {}, column {}.",
             expected, found, line, column
         );
+        #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
         Self {
             code: "E-PARSE".to_string(),
             expected: expected.to_string(),
@@ -49,10 +62,23 @@ impl FrontierError {
             column,
         )
     }
+
+    pub fn internal(message: String) -> Self {
+        Self::resolve("E-INTERNAL", message, 0, 0)
+    }
+}
+
+impl From<std::io::Error> for FrontierError {
+    fn from(e: std::io::Error) -> Self {
+        FrontierError::internal(e.to_string())
+    }
 }
 
 impl std::fmt::Display for FrontierError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        #[cfg(all(target_arch = "wasm32", feature = "wasm-slim"))]
+        return f.write_str("error");
+        #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
         write!(f, "{}", self.message)
     }
 }
@@ -74,6 +100,15 @@ pub fn token_name(tok: &Token) -> &'static str {
         Token::Bool => "bool",
         Token::String => "string",
         Token::Void => "void",
+        Token::While => "while",
+        Token::Import => "import",
+        Token::As => "as",
+        Token::Requires => "requires",
+        Token::Ensures => "ensures",
+        Token::Invariant => "invariant",
+        Token::Version => "version",
+        Token::At => "@",
+        Token::Arrow => "->",
         Token::Identifier(_) => "identifier",
         Token::Integer(_) => "integer literal",
         Token::FloatLit(_) => "float literal",

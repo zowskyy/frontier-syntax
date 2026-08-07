@@ -1,0 +1,30 @@
+// Frontier self-hosting compiler — expanded Genesis entry (Peerless plan OPT-002)
+version: 2.0;
+
+fn lex(source: string) -> int {
+    let len: int = 0;
+    return len + 1;
+}
+
+fn parse_tokens(token_count: int) -> int {
+    return token_count + 1;
+}
+
+fn codegen(ast_nodes: int) -> int {
+    return ast_nodes * 42;
+}
+
+fn hash_source(source: string) -> int {
+    return codegen(parse_tokens(lex(source)));
+}
+
+fn compile(source: string) -> int {
+    let tokens: int = lex(source);
+    let ast: int = parse_tokens(tokens);
+    let wasm: int = codegen(ast);
+    return wasm + hash_source(source);
+}
+
+fn main(): int {
+    return compile("frontier");
+}

@@ -1,0 +1,42 @@
+// Zero-copy I/O — network stream directly to storage
+// Improvement #7: Asynchronous I/O with Zero-Copy
+
+module zero_copy_io;
+
+import frontier.bindings.http.{HTTP, URL, Proxy};
+import frontier.bindings.storage.{StoragePath, open, splice};
+
+component ZeroCopyIO {
+    state: {
+        buffer_pool: BufferPool,
+        async_runtime: AsyncRuntime,
+    },
+
+    fn new() -> ZeroCopyIO {
+        ZeroCopyIO { buffer_pool: BufferPool::new(64), async_runtime: AsyncRuntime::new() }
+    },
+
+    fn stream_from_network(self, socket_fd: i32, to_storage: StoragePath) -> Result<(), String> {
+        let fd = open(to_storage, flags: O_WRONLY | O_CREAT)?;
+        splice(socket_fd, fd, length: MAX_CHUNK)?;
+        Ok(())
+    },
+
+    fn fetch(self, url: URL, proxy: Proxy) -> Result<bytes, String> {
+        let socket = HTTP.connect_stream(url, proxy)?;
+        let path = StoragePath::temp();
+        self.stream_from_network(socket, path)?;
+        Ok(path.read_all())
+    }
+
+    fn fetch_async(self, url: URL, proxy: Proxy) -> Future<bytes> {
+        self.async_runtime.spawn(|| self.fetch(url, proxy))
+    }
+}
+
+component BufferPool {
+    state: { buffers: Vec<bytes> },
+    fn new(count: usize) -> BufferPool { BufferPool { buffers: vec![bytes::with_capacity(64 * 1024); count] } }
+}
+
+const MAX_CHUNK: usize = 1_048_576;

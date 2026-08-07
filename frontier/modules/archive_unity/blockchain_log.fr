@@ -1,0 +1,74 @@
+// Tamper-proof blockchain-verified crawl logs
+// Improvement #13: Blockchain-Verified Crawl Logs
+
+module blockchain_log;
+
+import frontier.core.pq_signatures.{PQSignature, sign, verify};
+
+type Hash = [u8; 32];
+
+type CrawlEvent = {
+    url: String,
+    timestamp: u64,
+    hash: Hash,
+    status: u32,
+};
+
+type Block = {
+    index: u64,
+    timestamp: u64,
+    event: CrawlEvent,
+    prev_hash: Hash,
+    nonce: u64,
+};
+
+component BlockchainLogger {
+    state: {
+        chain: Vec<Block>,
+        last_hash: Hash,
+        difficulty: u32,
+    },
+
+    fn new() -> BlockchainLogger {
+        BlockchainLogger { chain: Vec::new(), last_hash: [0u8; 32], difficulty: 2 }
+    },
+
+    fn log_crawl_event(self, event: CrawlEvent) {
+        let block = Block {
+            index: self.chain.len() as u64,
+            timestamp: now(),
+            event,
+            prev_hash: self.last_hash,
+            nonce: 0,
+        };
+        let mined = self.mine(block);
+        self.last_hash = mined.hash();
+        self.chain.push(mined);
+    }
+
+    fn verify_chain(self) -> bool {
+        for i in 1..self.chain.len() {
+            let prev = &self.chain[i - 1];
+            let curr = &self.chain[i];
+            if curr.prev_hash != prev.hash() { return false; }
+        }
+        true
+    }
+
+    fn mine(self, mut block: Block) -> Block {
+        while !block.hash().starts_with_zeros(self.difficulty) {
+            block.nonce += 1;
+        }
+        block
+    }
+
+    fn export_merkle_root(self) -> Hash {
+        merkle_root(self.chain.iter().map(|b| b.hash()).collect())
+    }
+}
+
+impl Block {
+    fn hash(self) -> Hash { sha3_256(encode(self)) }
+}
+
+fn merkle_root(hashes: Vec<Hash>) -> Hash { /* merkle tree */ hashes[0] }

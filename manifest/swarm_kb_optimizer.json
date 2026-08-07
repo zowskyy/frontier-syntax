@@ -1,0 +1,33 @@
+{
+  "workers": 4,
+  "total_added": 200,
+  "knowledge_entries": 426,
+  "duration_ms": 44,
+  "worker_results": [
+    {
+      "worker": "process_log",
+      "pass": true,
+      "added": 188,
+      "duration_ms": 8
+    },
+    {
+      "worker": "audit_reports",
+      "pass": true,
+      "added": 1,
+      "duration_ms": 12
+    },
+    {
+      "worker": "optimization_manifests",
+      "pass": true,
+      "added": 1,
+      "duration_ms": 11
+    },
+    {
+      "worker": "core_specs",
+      "pass": true,
+      "added": 10,
+      "duration_ms": 16
+    }
+  ],
+  "all_pass": true
+}

@@ -1,0 +1,80 @@
+// Knowledge self-correction — detect and resolve contradictions
+// Phase 5.2: Knowledge self-correction
+
+module knowledge_self_correction;
+
+import frontier.knowledge.just_in_time.{JITKnowledge, KnowledgeAnswer};
+import frontier.core.knowledge_hypercube.KnowledgeHypercube;
+
+type Contradiction = {
+    topic_a: String,
+    topic_b: String,
+    conflict: String,
+};
+
+type CorrectionResult = {
+    detected: u32,
+    resolved: u32,
+    remaining: u32,
+};
+
+component KnowledgeSelfCorrection {
+    state: {
+        jit: JITKnowledge,
+        hypercube: KnowledgeHypercube,
+        corrections: Vec<String>,
+    },
+
+    fn new() -> KnowledgeSelfCorrection {
+        KnowledgeSelfCorrection {
+            jit: JITKnowledge::new(),
+            hypercube: KnowledgeHypercube::load(),
+            corrections: Vec::new(),
+        }
+    }
+
+    fn detect_contradictions(self, answers: Vec<KnowledgeAnswer>) -> Vec<Contradiction> {
+        let mut conflicts = Vec::new();
+        for i in 0..answers.len() {
+            for j in (i + 1)..answers.len() {
+                if self.conflicts(&answers[i], &answers[j]) {
+                    conflicts.push(Contradiction {
+                        topic_a: answers[i].topic.clone(),
+                        topic_b: answers[j].topic.clone(),
+                        conflict: format!("{} vs {}", answers[i].answer, answers[j].answer),
+                    });
+                }
+            }
+        }
+        conflicts
+    }
+
+    fn conflicts(self, a: &KnowledgeAnswer, b: &KnowledgeAnswer) -> bool {
+        a.topic != b.topic && semantic_opposite(a.answer.as_str(), b.answer.as_str())
+    }
+
+    fn resolve(self, contradiction: Contradiction) -> String {
+        let merged = self.jit.know(format!(
+            "Resolve contradiction between {} and {}: {}",
+            contradiction.topic_a, contradiction.topic_b, contradiction.conflict
+        )).expect("resolve");
+        self.corrections.push(merged.answer.clone());
+        self.hypercube.update(contradiction.topic_a, merged.answer);
+        merged.answer
+    }
+
+    fn auto_correct(self, answers: Vec<KnowledgeAnswer>) -> CorrectionResult {
+        let contradictions = self.detect_contradictions(answers);
+        let detected = contradictions.len() as u32;
+        let mut resolved = 0;
+        for c in contradictions {
+            self.resolve(c);
+            resolved += 1;
+        }
+        CorrectionResult { detected, resolved, remaining: detected - resolved }
+    }
+}
+
+fn semantic_opposite(a: &str, b: &str) -> bool {
+    (a.contains("unsafe") && b.contains("safe")) || (a.contains("fail") && b.contains("pass"))
+}

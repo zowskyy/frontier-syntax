@@ -1,0 +1,287 @@
+{
+  "version": "1.0.0",
+  "source": "chat_knowledge_store",
+  "lighthouse_modules": [
+    "agent_distiller.frontier",
+    "arc_engine.frontier",
+    "browser_compiler.frontier",
+    "discovery_engine.frontier"
+  ],
+  "knowledge_context": {
+    "attack vector security": [
+      {
+        "id": "wasm_parser_adversarial",
+        "category": "attack_vector",
+        "title": "Adversarial WASM Parser Input",
+        "content": "Malformed WASM or oversized inputs to parser could crash or hang runtime. Mitigation: Cycle 6 adversarial attack surface audit; fuzz command (1000 iterations); SHA-3 final hash.",
+        "severity": "high",
+        "tags": [
+          "security",
+          "mitigated"
+        ],
+        "source": "syntax/wasm/wasm_parser_v2.wasm",
+        "score": 0.2539
+      },
+      {
+        "id": "grammar_mutation_drift",
+        "category": "attack_vector",
+        "title": "Self-Mutating Grammar Drift",
+        "content": "Runtime grammar mutations could introduce ambiguous or unreachable constructs. Mitigation: Version bumping on mutation; mutation log; feature_matrix_v2.json orthogonality checks.",
+        "severity": "medium",
+        "tags": [
+          "security",
+          "partial"
+        ],
+        "source": "src/grammar/mutator.rs",
+        "score": 0.1322
+      },
+      {
+        "id": "ipfs_gateway_ssrf",
+        "category": "attack_vector",
+        "title": "IPFS Gateway SSRF",
+        "content": "Malicious import paths could target internal network via IPFS gateway fetch. Mitigation: CID validation; 10s timeout; ipfs:// prefix enforcement; content hash verification.",
+        "severity": "medium",
+        "tags": [
+          "security",
+          "partial"
+        ],
+        "source": "src/ipfs/resolver.rs",
+        "score": 0.1273
+      },
+      {
+        "id": "pq_signature_forgery",
+        "category": "attack_vector",
+        "title": "Post-Quantum Signature Forgery",
+        "content": "Forged PQ signatures on AST artifacts could bypass integrity checks. Mitigation: Dilithium3 (NIST PQC finalist) sign/verify on canonical AST bytes.",
+        "severity": "high",
+        "tags": [
+          "security",
+          "mitigated"
+        ],
+        "source": "src/pq_signatures.rs",
+        "score": 0.1273
+      },
+      {
+        "id": "zk_proof_bypass",
+        "category": "attack_vector",
+        "title": "ZK-SNARK Proof Bypass",
+        "content": "Invalid Groth16 proofs could allow unverified AST to pass verification. Mitigation: arkworks Groth16 BN254; AST hash commitment circuit; proof deserialization validation.",
+        "severity": "high",
+        "tags": [
+          "security",
+          "mitigated"
+        ],
+        "source": "src/zk/verifier.rs",
+        "score": 0.1273
+      }
+    ],
+    "WASM codegen gap": [
+      {
+        "id": "arch_wasm_codegen",
+        "category": "architecture",
+        "title": "WASM Codegen",
+        "content": "Status: in_progress. Path: src/wasm_codegen.rs",
+        "severity": "in_progress",
+        "tags": [
+          "architecture"
+        ],
+        "source": "src/wasm_codegen.rs",
+        "score": 0.822
+      },
+      {
+        "id": "knowledge_warnings_only",
+        "category": "gap",
+        "title": "Knowledge suggestions are warnings, not codegen changes",
+        "content": "Knowledge suggestions are warnings, not codegen changes",
+        "severity": "P0",
+        "tags": [
+          "gap",
+          "P0"
+        ],
+        "source": "src/wasm_codegen.rs",
+        "score": 0.7183
+      },
+      {
+        "id": "spec_impl_gap",
+        "category": "gap",
+        "title": "Spec vs implementation gap for .frontier core modules",
+        "content": "Spec vs implementation gap for .frontier core modules",
+        "severity": "P1",
+        "tags": [
+          "gap",
+          "P1"
+        ],
+        "source": "frontier/core/",
+        "score": 0.4993
+      },
+      {
+        "id": "wasm_size_760kb",
+        "category": "gap",
+        "title": "Full WASM build ~760 KB vs <100 KB target",
+        "content": "Full WASM build ~760 KB vs <100 KB target",
+        "severity": "P1",
+        "tags": [
+          "gap",
+          "P1"
+        ],
+        "source": "Cargo.toml",
+        "score": 0.4648
+      },
+      {
+        "id": "cli_1be2",
+        "category": "cli",
+        "title": ".cursor/frontier_agent.sh gaps",
+        "content": "Honest gap report",
+        "severity": "info",
+        "tags": [
+          "cli"
+        ],
+        "source": ".cursor/frontier_agent.sh gaps",
+        "score": 0.3745
+      }
+    ],
+    "architecture component": [
+      {
+        "id": "arch_resolver",
+        "category": "architecture",
+        "title": "Resolver",
+        "content": "Status: complete. Path: src/resolver.rs",
+        "severity": "complete",
+        "tags": [
+          "architecture"
+        ],
+        "source": "src/resolver.rs",
+        "score": 0.3238
+      },
+      {
+        "id": "arch_frontier_agent",
+        "category": "architecture",
+        "title": "Frontier Agent",
+        "content": "Status: complete. Path: frontier_agent.py",
+        "severity": "complete",
+        "tags": [
+          "architecture"
+        ],
+        "source": "frontier_agent.py",
+        "score": 0.3238
+      },
+      {
+        "id": "arch_lighthouse_stack",
+        "category": "architecture",
+        "title": "Lighthouse Stack",
+        "content": "Status: complete. Path: frontier/lighthouse/",
+        "severity": "complete",
+        "tags": [
+          "architecture"
+        ],
+        "source": "frontier/lighthouse/",
+        "score": 0.3238
+      },
+      {
+        "id": "arch_frontier-dex",
+        "category": "architecture",
+        "title": "Frontier-DEX",
+        "content": "Status: complete. Path: frontier-dex/",
+        "severity": "complete",
+        "tags": [
+          "architecture"
+        ],
+        "source": "frontier-dex/",
+        "score": 0.3238
+      },
+      {
+        "id": "arch_knowledge_hypercube",
+        "category": "architecture",
+        "title": "Knowledge Hypercube",
+        "content": "Status: complete. Path: src/knowledge/hypercube/",
+        "severity": "complete",
+        "tags": [
+          "architecture"
+        ],
+        "source": "src/knowledge/hypercube/",
+        "score": 0.2878
+      }
+    ],
+    "self-hosting": [
+      {
+        "id": "self_hosting_zero",
+        "category": "gap",
+        "title": ".frontier spec files not valid v2 source; 0% self-hosting",
+        "content": ".frontier spec files not valid v2 source; 0% self-hosting",
+        "severity": "P0",
+        "tags": [
+          "gap",
+          "P0"
+        ],
+        "source": "frontier/core/",
+        "score": 0.7522
+      },
+      {
+        "id": "self_hosting",
+        "category": "performance",
+        "title": "Self-Hosting Progress",
+        "content": "Current: 0%. Target: 100%. Plan: Compile frontier/core/*.frontier natively; parser self-hosts; full bootstrap.",
+        "severity": "P0",
+        "tags": [
+          "performance",
+          "10x"
+        ],
+        "source": "",
+        "score": 0.615
+      },
+      {
+        "id": "test_coverage",
+        "category": "performance",
+        "title": "Cargo Unit Tests",
+        "content": "Current: 36+ passing. Target: 100% critical path. Plan: Add wasm_codegen, self-hosting, and integration tests per phase.",
+        "severity": "P1",
+        "tags": [
+          "performance",
+          "10x"
+        ],
+        "source": "",
+        "score": 0.3761
+      },
+      {
+        "id": "grammar_mutation_drift",
+        "category": "attack_vector",
+        "title": "Self-Mutating Grammar Drift",
+        "content": "Runtime grammar mutations could introduce ambiguous or unreachable constructs. Mitigation: Version bumping on mutation; mutation log; feature_matrix_v2.json orthogonality checks.",
+        "severity": "medium",
+        "tags": [
+          "security",
+          "partial"
+        ],
+        "source": "src/grammar/mutator.rs",
+        "score": 0.1548
+      }
+    ],
+    "IPFS import": [
+      {
+        "id": "arch_ipfs_resolver",
+        "category": "architecture",
+        "title": "IPFS Resolver",
+        "content": "Status: complete. Path: src/ipfs/resolver.rs",
+        "severity": "complete",
+        "tags": [
+          "architecture"
+        ],
+        "source": "src/ipfs/resolver.rs",
+        "score": 0.9072
+      },
+      {
+        "id": "ipfs_gateway_ssrf",
+        "category": "attack_vector",
+        "title": "IPFS Gateway SSRF",
+        "content": "Malicious import paths could target internal network via IPFS gateway fetch. Mitigation: CID validation; 10s timeout; ipfs:// prefix enforcement; content hash verification.",
+        "severity": "medium",
+        "tags": [
+          "security",
+          "partial"
+        ],
+        "source": "src/ipfs/resolver.rs",
+        "score": 0.687
+      }
+    ]
+  }
+}

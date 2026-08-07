@@ -1,0 +1,38 @@
+{
+  "version": "2.0",
+  "rules": {
+    "program": ["versionDecl?", "statement*", "EOF"],
+    "statement": [
+      "letDeclaration",
+      "expressionStatement",
+      "ifStatement",
+      "whileStatement",
+      "returnStatement",
+      "importStatement",
+      "proofAnnotation"
+    ],
+    "letDeclaration": ["let", "IDENTIFIER", ":", "typeSpec", "=", "expression", ";"],
+    "functionDef": ["fn", "IDENTIFIER", "(", "parameterList?", ")", "block"],
+    "importStatement": ["import", "STRING", "as", "IDENTIFIER", ";"],
+    "proofAnnotation": ["@requires", "expression", "@ensures", "expression", "@invariant", "expression"]
+  },
+  "precedence": {
+    "1": ["primary"],
+    "2": ["unary"],
+    "3": ["multiplicative"],
+    "4": ["additive"],
+    "5": ["relational"],
+    "6": ["equality"],
+    "7": ["logicalAnd"],
+    "8": ["logicalOr"]
+  },
+  "associativity": {
+    "left": ["+", "-", "*", "/", "%", "==", "!=", "<", ">", "<=", ">=", "&&", "||"],
+    "right": ["^"]
+  },
+  "keywords": [
+    "let", "fn", "if", "else", "while", "return", "import", "as",
+    "requires", "ensures", "invariant", "version"
+  ],
+  "mutations": []
+}

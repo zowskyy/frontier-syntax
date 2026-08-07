@@ -1,0 +1,87 @@
+// Git-like versioned page storage with delta compression
+// Improvements #16, #18-19: Hierarchical storage + versioned pages
+
+module versioned_storage;
+
+import frontier.bindings.storage.{Storage, SSD, HDD, MemoryCache};
+
+type URI = String;
+type Timestamp = u64;
+type Hash = [u8; 32];
+
+component HierarchicalStorage {
+    state: {
+        l1_cache: MemoryCache,
+        l2_ssd: SSD,
+        l3_hdd: HDD,
+        access_counts: Map<URI, u64>,
+    },
+
+    fn new() -> HierarchicalStorage {
+        HierarchicalStorage {
+            l1_cache: MemoryCache::new(1_000_000_000),
+            l2_ssd: SSD::new(),
+            l3_hdd: HDD::new(),
+            access_counts: Map::new(),
+        }
+    },
+
+    fn store(self, uri: URI, content: bytes) {
+        let tier = self.select_tier(content.len(), self.access_counts.get(uri).unwrap_or(0));
+        match tier {
+            StorageTier::L1 => self.l1_cache.put(uri, content),
+            StorageTier::L2 => self.l2_ssd.put(uri, content),
+            StorageTier::L3 => self.l3_hdd.put(uri, content),
+        }
+    }
+
+    fn select_tier(self, size: usize, frequency: u64) -> StorageTier {
+        if frequency > 100 { StorageTier::L1 }
+        else if frequency > 10 || size < 1_000_000 { StorageTier::L2 }
+        else { StorageTier::L3 }
+    }
+}
+
+enum StorageTier { L1, L2, L3 }
+
+component VersionedPageStorage {
+    state: {
+        storage: HierarchicalStorage,
+        deltas: Map<URI, Vec<PageDelta>>,
+    },
+
+    fn new() -> VersionedPageStorage {
+        VersionedPageStorage { storage: HierarchicalStorage::new(), deltas: Map::new() }
+    },
+
+    fn store_version(self, uri: URI, content: bytes) {
+        let diff = self.diff(uri, content);
+        self.deltas.entry(uri).or_insert(Vec::new()).push(diff);
+        self.storage.store(uri, content);
+    }
+
+    fn get_version(self, uri: URI, timestamp: Timestamp) -> bytes {
+        self.reconstruct(uri, timestamp)
+    }
+
+    fn diff(self, uri: URI, content: bytes) -> PageDelta {
+        let prev = self.storage.get(uri).unwrap_or(bytes::empty());
+        PageDelta { timestamp: now(), patch: binary_diff(prev, content), full_hash: sha3_256(&content) }
+    }
+
+    fn reconstruct(self, uri: URI, timestamp: Timestamp) -> bytes {
+        let deltas = self.deltas.get(uri).unwrap_or(&vec![]);
+        let mut content = bytes::empty();
+        for d in deltas {
+            if d.timestamp <= timestamp {
+                content = apply_patch(content, d.patch);
+            }
+        }
+        content
+    }
+}
+
+type PageDelta = { timestamp: Timestamp, patch: bytes, full_hash: Hash };
+
+fn binary_diff(a: bytes, b: bytes) -> bytes { /* diff */ b }
+fn apply_patch(base: bytes, patch: bytes) -> bytes { patch }

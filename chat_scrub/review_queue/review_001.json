@@ -1,0 +1,9 @@
+{
+  "timestamp": "2026-08-06T00:19:51.518829Z",
+  "decision": "include_doc",
+  "justification": "Deployment checklist consolidated from launch and deploy configs.",
+  "confidence": 0.94,
+  "cross_refs": [],
+  "source": "repository",
+  "file": "DEPLOYMENT_CHECKLIST.md"
+}

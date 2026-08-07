@@ -1,0 +1,9 @@
+// frontier.wasm — WASM export helpers for browser_compiler
+
+module frontier.wasm;
+
+type WasmExports = opaque;
+type WasmMemory = opaque;
+
+extern fn WasmMemory::buffer() -> Vec<u8>;
+extern fn WasmExports::register(name: &str, func: &str);

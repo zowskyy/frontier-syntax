@@ -1,0 +1,68 @@
+{
+  "version": "2.0",
+  "statements": [
+    {
+      "type": "version_decl",
+      "version": "2.0"
+    },
+    {
+      "type": "import_decl",
+      "path": "ipfs://QmExampleHash1234567890",
+      "alias": "math_utils"
+    },
+    {
+      "type": "fn_decl",
+      "name": "double",
+      "params": [
+        { "name": "x", "type_spec": { "base": "int", "annotation": "none" } }
+      ],
+      "return_type": { "base": "int", "annotation": "none" },
+      "requires": "x > 0",
+      "ensures": "result > x",
+      "body": [
+        {
+          "type": "return",
+          "value": {
+            "type": "binary_expr",
+            "operator": "*",
+            "left": { "type": "identifier", "name": "x" },
+            "right": { "type": "integer_literal", "value": 2 }
+          }
+        }
+      ]
+    },
+    {
+      "type": "fn_decl",
+      "name": "main",
+      "params": [],
+      "return_type": { "base": "void", "annotation": "none" },
+      "body": [
+        {
+          "type": "let_decl",
+          "name": "x",
+          "type_spec": { "base": "int", "annotation": "none" },
+          "value": { "type": "integer_literal", "value": 10 }
+        },
+        {
+          "type": "while",
+          "condition": {
+            "type": "binary_expr",
+            "operator": ">",
+            "left": { "type": "identifier", "name": "x" },
+            "right": { "type": "integer_literal", "value": 0 }
+          },
+          "body": [
+            {
+              "type": "expr",
+              "expression": {
+                "type": "call_expr",
+                "callee": { "type": "identifier", "name": "double" },
+                "arguments": [{ "type": "identifier", "name": "x" }]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

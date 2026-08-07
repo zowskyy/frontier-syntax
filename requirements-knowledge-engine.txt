@@ -1,0 +1,4 @@
+# Optional dependencies for the Frontier Knowledge Engine
+redis>=5.0.0
+aiofiles>=23.0.0
+schedule>=1.2.0

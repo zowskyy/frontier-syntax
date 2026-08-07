@@ -1,0 +1,56 @@
+{
+  "pass": true,
+  "mappings": [
+    {
+      "spec": "browser_compiler.frontier",
+      "rust": "src/browser_compiler.rs",
+      "present": true
+    },
+    {
+      "spec": "compiler.frontier",
+      "rust": "src/compiler/mod.rs",
+      "present": true
+    },
+    {
+      "spec": "concurrency.frontier",
+      "rust": "src/unity.rs",
+      "present": true
+    },
+    {
+      "spec": "errors.frontier",
+      "rust": "src/error.rs",
+      "present": true
+    },
+    {
+      "spec": "knowledge.frontier",
+      "rust": "src/knowledge_bridge.rs",
+      "present": true
+    },
+    {
+      "spec": "memory.frontier",
+      "rust": "src/resolver.rs",
+      "present": true
+    },
+    {
+      "spec": "parser.frontier",
+      "rust": "src/parser/mod.rs",
+      "present": true
+    },
+    {
+      "spec": "stdlib.frontier",
+      "rust": "src/lib.rs",
+      "present": true
+    },
+    {
+      "spec": "types.frontier",
+      "rust": "src/resolver.rs",
+      "present": true
+    },
+    {
+      "spec": "wasm_codegen.frontier",
+      "rust": "src/wasm_codegen.rs",
+      "present": true
+    }
+  ],
+  "count": 10
+}

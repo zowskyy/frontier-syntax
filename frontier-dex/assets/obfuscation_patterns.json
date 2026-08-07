@@ -1,0 +1,22 @@
+[
+  {
+    "name": "short_names",
+    "score": 0.15,
+    "strategy": "rename_locals"
+  },
+  {
+    "name": "string_encryption",
+    "score": 0.25,
+    "strategy": "unwrap_strings"
+  },
+  {
+    "name": "control_flow_flattening",
+    "score": 0.35,
+    "strategy": "restructure_cfg"
+  },
+  {
+    "name": "reflection_hide",
+    "score": 0.2,
+    "strategy": "resolve_reflection"
+  }
+]

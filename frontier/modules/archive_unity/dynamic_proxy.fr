@@ -1,0 +1,67 @@
+// Dynamic proxy pool with health scoring
+// Improvement #9: Dynamic Proxy Pool with Health Scoring
+
+module dynamic_proxy;
+
+import frontier.bindings.http.{Proxy, HTTPResponse};
+
+type HealthScore = f32;
+
+component DynamicProxyPool {
+    state: {
+        proxies: Map<Proxy, ProxyHealth>,
+        min_score: f32,
+    },
+
+    fn new(proxies: Vec<Proxy>) -> DynamicProxyPool {
+        let mut map = Map::new();
+        for p in proxies {
+            map.insert(p, ProxyHealth::new());
+        }
+        DynamicProxyPool { proxies: map, min_score: 0.2 }
+    },
+
+    fn get_best_proxy(self) -> Proxy {
+        self.proxies
+            .iter()
+            .max_by(|(_, a), (_, b)| a.score.partial_cmp(&b.score))
+            .map(|(p, _)| *p)
+            .unwrap_or(Proxy::direct())
+    },
+
+    fn update_health(self, proxy: Proxy, response: HTTPResponse) {
+        if let Some(health) = self.proxies.get_mut(proxy) {
+            health.update(response);
+        }
+    }
+
+    fn deprioritize(self, proxy: Proxy) {
+        if let Some(health) = self.proxies.get_mut(proxy) {
+            health.score = self.min_score;
+        }
+    }
+}
+
+component ProxyHealth {
+    state: {
+        score: HealthScore,
+        successes: u32,
+        failures: u32,
+        avg_latency_ms: f32,
+    },
+
+    fn new() -> ProxyHealth {
+        ProxyHealth { score: 1.0, successes: 0, failures: 0, avg_latency_ms: 0.0 }
+    },
+
+    fn update(self, response: HTTPResponse) {
+        if response.status < 400 {
+            self.successes += 1;
+            self.score = min(1.0, self.score + 0.05);
+        } else {
+            self.failures += 1;
+            self.score = max(0.0, self.score - 0.15);
+        }
+        self.avg_latency_ms = (self.avg_latency_ms * 0.8) + (response.latency_ms as f32 * 0.2);
+    }
+}

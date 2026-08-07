@@ -1,0 +1,33 @@
+/* tslint:disable */
+/* eslint-disable */
+export const memory: WebAssembly.Memory;
+export const knowledge_solver_get_optimal_algorithm: (a: number, b: number, c: number, d: number, e: number, f: number, g: number) => number;
+export const knowledge_solver_get_ancestors: (a: number, b: number) => number;
+export const knowledge_solver_get_tradeoffs: (a: number, b: number) => number;
+export const knowledge_solver_free: (a: number) => void;
+export const __wbg_wasmparseresult_free: (a: number, b: number) => void;
+export const wasmparseresult_ast_json: (a: number) => [number, number];
+export const wasmparseresult_ast_hash: (a: number) => [number, number];
+export const wasmparseresult_errors: (a: number) => [number, number];
+export const parse_source: (a: number, b: number) => number;
+export const hash_ast: (a: number, b: number) => [number, number];
+export const verify_zk_proof: (a: number, b: number, c: number, d: number) => number;
+export const generate_zk_proof: (a: number, b: number) => [number, number];
+export const parse_source_with_resolve: (a: number, b: number) => number;
+export const __wbg_browsercompiler_free: (a: number, b: number) => void;
+export const browsercompiler_new: () => number;
+export const browsercompiler_set_optimize: (a: number, b: number) => void;
+export const browsercompiler_compile: (a: number, b: number, c: number) => [number, number, number];
+export const browsercompiler_compile_to_wasm: (a: number, b: number, c: number) => [number, number, number, number];
+export const browsercompiler_validate: (a: number, b: number, c: number) => [number, number, number];
+export const browsercompiler_get_algorithm_suggestion: (a: number, b: number, c: number, d: number, e: number) => [number, number, number];
+export const browsercompiler_get_ancestors: (a: number, b: number, c: number) => [number, number, number];
+export const compile_frontier: (a: number, b: number) => [number, number, number];
+export const compile_frontier_wasm: (a: number, b: number) => [number, number, number, number];
+export const validate_frontier: (a: number, b: number) => [number, number, number];
+export const __wbindgen_malloc: (a: number, b: number) => number;
+export const __wbindgen_realloc: (a: number, b: number, c: number, d: number) => number;
+export const __wbindgen_externrefs: WebAssembly.Table;
+export const __externref_table_dealloc: (a: number) => void;
+export const __wbindgen_free: (a: number, b: number, c: number) => void;
+export const __wbindgen_start: () => void;

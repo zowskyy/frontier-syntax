@@ -1,0 +1,12 @@
+// Frontier IPFS swarm sync — runtime component
+version: 2.0;
+
+fn sync_knowledge(block_count: int) -> int {
+    return block_count + 1;
+}
+
+fn main(): int {
+    return sync_knowledge(42);
+}
+
+// @test: expect compile pass

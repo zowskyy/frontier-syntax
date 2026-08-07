@@ -1,0 +1,162 @@
+// Discovery engine — surfaces connections users don't know to ask about
+
+module discovery_engine;
+
+import frontier.ai.{LocalModel, Inference, Embedding};
+import frontier.storage.{KnowledgeGraph, PatternDB};
+import frontier.data.{Vector, Similarity};
+
+type DiscoveryResult = {
+  direct_answer: String,
+  connections: Vec<Connection>,
+  stories: Vec<Story>,
+  paths: PathMap,
+  principles: Vec<String>,
+};
+
+type Connection = {
+  what: String,
+  why: String,
+  category: ConnectionCategory,
+  optional: Bool,
+};
+
+enum ConnectionCategory {
+  AdjacentProblem,
+  Enabler,
+  ScalingPath,
+  AvailableResource,
+}
+
+type Story = {
+  who: String,
+  problem: String,
+  solution: String,
+  outcome: String,
+  location: String,
+};
+
+type PathMap = {
+  immediate: Vec<String>,
+  this_week: Vec<String>,
+  this_month: Vec<String>,
+  long_term: Vec<String>,
+};
+
+type CoreNeed = { underlying_need: String, desired_outcome: String, domain: String };
+type UserContext = { region: String, language: String, connectivity: String };
+
+fn discover(request: String, context: UserContext) -> Result<DiscoveryResult, String> {
+  let core_need = understand_core_need(request, context)?;
+  let connections = find_connections(core_need, context)?;
+  let stories = find_stories(core_need, context)?;
+  let paths = map_paths(core_need, connections, context)?;
+
+  Ok(DiscoveryResult {
+    direct_answer: format_direct_response(core_need),
+    connections,
+    stories,
+    paths,
+    principles: get_principles(),
+  })
+}
+
+fn understand_core_need(request: String, context: UserContext) -> Result<CoreNeed, String> {
+  let model = LocalModel::get()?;
+  let prompt = "Someone asked: '" + request + "'\nWhat problem are they really trying to solve?";
+  let response = LocalModel::infer(model, prompt, "You understand human needs. Output JSON.")?;
+  parse_core_need(response)
+}
+
+fn find_connections(need: CoreNeed, context: UserContext) -> Result<Vec<Connection>, String> {
+  let graph = KnowledgeGraph::load("connections.db")?;
+  let mut connections = Vec::new();
+
+  let adjacent = KnowledgeGraph::query_adjacent(graph, need.underlying_need)?;
+  for pattern in adjacent {
+    connections.push(Connection {
+      what: pattern.description,
+      why: pattern.rationale,
+      category: ConnectionCategory::AdjacentProblem,
+      optional: true,
+    });
+  }
+
+  let enablers = KnowledgeGraph::query_enablers(graph, need.domain)?;
+  for enabler in enablers {
+    connections.push(Connection {
+      what: enabler.description,
+      why: enabler.impact_story,
+      category: ConnectionCategory::Enabler,
+      optional: true,
+    });
+  }
+
+  let scaling = KnowledgeGraph::query_scaling(graph, need.domain, context.region)?;
+  for path in scaling {
+    connections.push(Connection {
+      what: path.description,
+      why: path.why_now,
+      category: ConnectionCategory::ScalingPath,
+      optional: true,
+    });
+  }
+
+  Ok(connections)
+}
+
+fn find_stories(need: CoreNeed, context: UserContext) -> Result<Vec<Story>, String> {
+  let db = PatternDB::load("impact.db")?;
+  let similar = PatternDB::query_similar(db, need.underlying_need, context.region, context.language, 3)?;
+
+  Ok(similar.iter().map(|s| Story {
+    who: s.person,
+    problem: s.problem_solved,
+    solution: s.solution_built,
+    outcome: s.outcome_achieved,
+    location: s.community,
+  }).collect())
+}
+
+fn map_paths(need: CoreNeed, connections: Vec<Connection>, context: UserContext) -> Result<PathMap, String> {
+  Ok(PathMap {
+    immediate: vec![
+      "Build your app now — takes about 2 minutes",
+      "Test it on your device",
+      "Share with 2-3 people you work with",
+    ],
+    this_week: connections.filter(|c| c.category == ConnectionCategory::Enabler).map(|c| c.what).collect(),
+    this_month: connections.filter(|c| c.category == ConnectionCategory::ScalingPath).map(|c| c.what).collect(),
+    long_term: vec![
+      "Train others in neighboring communities",
+      "Connect with regional programs",
+      "Become a Lighthouse Navigator",
+    ],
+  })
+}
+
+fn get_principles() -> Vec<String> {
+  vec![
+    "Everything shown is optional. You choose what to explore.",
+    "No information is hidden. Ask about anything.",
+    "These connections come from real people who solved similar problems.",
+    "Your data stays on your device. Nothing is tracked or sold.",
+  ]
+}
+
+fn format_direct_response(need: CoreNeed) -> String {
+  "I'll help you with: " + need.underlying_need
+}
+
+fn parse_core_need(response: String) -> Result<CoreNeed, String> {
+  Ok(CoreNeed {
+    underlying_need: "community_improvement".into(),
+    desired_outcome: response,
+    domain: "general".into(),
+  })
+}
+
+fn main() -> void {
+  let ctx = UserContext { region: "east-africa".into(), language: "sw".into(), connectivity: "offline-first".into() };
+  let _ = discover("Build a water pump tracker".into(), ctx);
+}

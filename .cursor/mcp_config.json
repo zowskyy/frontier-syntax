@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "frontier": {
+      "args": [
+        "/workspace/scripts/frontier_mcp_server.py"
+      ],
+      "command": "python3",
+      "tools": [
+        "query_chat_knowledge",
+        "submit_help_request",
+        "get_help_status",
+        "list_stalled_work"
+      ]
+    }
+  }
+}

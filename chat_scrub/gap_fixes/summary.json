@@ -1,0 +1,45 @@
+{
+  "gaps": 5,
+  "plans": [
+    {
+      "id": "spec_impl_gap",
+      "priority": "P1",
+      "description": "Spec vs implementation gap for .frontier core modules",
+      "recommended_action": "Manual review required",
+      "scaffold_file": null,
+      "created_at": "2026-08-06T00:27:02.257675+00:00"
+    },
+    {
+      "id": "wasm_size_760kb",
+      "priority": "P1",
+      "description": "Full WASM build ~760 KB vs <100 KB target",
+      "recommended_action": "Manual review required",
+      "scaffold_file": null,
+      "created_at": "2026-08-06T00:27:02.257815+00:00"
+    },
+    {
+      "id": "external_launch",
+      "priority": "P2",
+      "description": "Website, Discord, social media not live",
+      "recommended_action": "Manual review required",
+      "scaffold_file": null,
+      "created_at": "2026-08-06T00:27:02.257887+00:00"
+    },
+    {
+      "id": "frontier_worker_missing",
+      "priority": "P2",
+      "description": "frontier_worker.py referenced in scrub command but not in repo; use frontier_agent.py + symbiotic_agents.py",
+      "recommended_action": "Manual review required",
+      "scaffold_file": null,
+      "created_at": "2026-08-06T00:27:02.257944+00:00"
+    },
+    {
+      "id": "redis_unavailable",
+      "priority": "P3",
+      "description": "Redis not available in this environment; report written to file only",
+      "recommended_action": "Manual review required",
+      "scaffold_file": null,
+      "created_at": "2026-08-06T00:27:02.258036+00:00"
+    }
+  ]
+}

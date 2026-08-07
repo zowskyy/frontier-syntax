@@ -1,0 +1,51 @@
+# Command: python3 scripts/verify_wasm_codegen.py
+# Started: 2026-08-06T15:42:29Z
+
+{
+  "pass": true,
+  "verified_at": "2026-08-06T15:42:49.916908Z",
+  "script": "scripts/verify_wasm_codegen.py",
+  "wasmtime": "/usr/local/cargo/bin/wasmtime",
+  "all_pass": true,
+  "cases": [
+    {
+      "name": "const_return",
+      "pass": true,
+      "expected": 42,
+      "actual": 42,
+      "compile_ok": true,
+      "run_ok": true,
+      "output": "ok"
+    },
+    {
+      "name": "let_if",
+      "pass": true,
+      "expected": 10,
+      "actual": 10,
+      "compile_ok": true,
+      "run_ok": true,
+      "output": "ok"
+    },
+    {
+      "name": "while_loop",
+      "pass": true,
+      "expected": 13,
+      "actual": 13,
+      "compile_ok": true,
+      "run_ok": true,
+      "output": "ok"
+    },
+    {
+      "name": "function_call",
+      "pass": true,
+      "expected": 42,
+      "actual": 42,
+      "compile_ok": true,
+      "run_ok": true,
+      "output": "ok"
+    }
+  ]
+}
+
+# Exit code: 0
+# Finished: 2026-08-06T15:42:49Z

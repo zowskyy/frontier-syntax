@@ -1,0 +1,63 @@
+// On-Demand Fetcher — live network fetch, no pre-indexed cache required
+// Phase 1.3 / 2.3: Replace crawler cache with on-demand protocol fetch
+
+module on_demand_fetcher;
+
+import frontier.bindings.http.{HTTP, URL, Proxy};
+import frontier.modules.archive_unity.zero_copy_io.{ZeroCopyIO};
+import frontier.modules.archive_unity.dynamic_proxy.{DynamicProxyPool};
+import frontier.modules.archive_unity.politeness_model.{AdaptivePoliteness};
+
+type FetchResult = {
+    url: String,
+    status: u32,
+    content: bytes,
+    fetched_at: u64,
+    from_cache: bool,
+};
+
+component OnDemandFetcher {
+    state: {
+        io: ZeroCopyIO,
+        proxies: DynamicProxyPool,
+        politeness: AdaptivePoliteness,
+        allow_cache: bool,
+    },
+
+    fn new(proxies: Vec<Proxy>) -> OnDemandFetcher {
+        OnDemandFetcher {
+            io: ZeroCopyIO::new(),
+            proxies: DynamicProxyPool::new(proxies),
+            politeness: AdaptivePoliteness::new(),
+            allow_cache: false,
+        }
+    },
+
+    fn fetch(self, url: URL) -> Result<FetchResult, String> {
+        let proxy = self.proxies.get_best_proxy();
+        let delay = self.politeness.get_delay(url.host());
+        sleep(delay);
+
+        let content = self.io.fetch(url, proxy)?;
+        Ok(FetchResult {
+            url: url.to_string(),
+            status: 200,
+            content,
+            fetched_at: now(),
+            from_cache: false,
+        })
+    }
+
+    fn fetch_live(self, url_string: String) -> Result<FetchResult, String> {
+        let url = URL::parse(url_string)?;
+        self.fetch(url)
+    }
+}
+
+fn main() {
+    let url = env::arg(1);
+    let fetcher = OnDemandFetcher::new(vec![]);
+    let result = fetcher.fetch_live(url).expect("fetch failed");
+    assert(!result.from_cache, "must not use pre-indexed cache");
+    print(result.content);
+}

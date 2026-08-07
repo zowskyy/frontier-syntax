@@ -1,7 +1,8 @@
 node_modules/
-examples/sample
-examples/sample.o
-build.log
+*.o
+*.wasm
+!syntax/wasm/*.wasm
+!browser/wasm-bindings/*.wasm
 target/
 pkg/
 *.o
@@ -42,6 +43,4 @@ frontier.toml
 .frontierrc.toml
 .frontier-telemetry.log
 .frontier-telemetry.log.old
-.env
-.cursor/gate-logs/
-.cursor/gate-cache/
+manifest/help_requests.jsonl

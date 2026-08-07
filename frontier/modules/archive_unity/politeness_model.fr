@@ -1,0 +1,71 @@
+// ML-based adaptive politeness — learns optimal crawl rate per host
+// Improvement #2: Adaptive Politeness
+
+module politeness_model;
+
+import frontier.bindings.http.{Host, HTTPResponse};
+
+type Duration = u64;
+
+component AdaptivePoliteness {
+    state: {
+        host_models: Map<Host, PolitenessModel>,
+        default_delay_ms: u64,
+    },
+
+    fn new() -> AdaptivePoliteness {
+        AdaptivePoliteness { host_models: Map::new(), default_delay_ms: 1000 }
+    },
+
+    fn update(self, host: Host, response: HTTPResponse) {
+        let model = self.host_models.get_or_insert(host, PolitenessModel::new());
+        model.observe(response);
+        model.adjust_rate();
+    },
+
+    fn get_delay(self, host: Host) -> Duration {
+        match self.host_models.get(host) {
+            Some(m) => m.optimal_delay_ms,
+            None => self.default_delay_ms,
+        }
+    }
+}
+
+component PolitenessModel {
+    state: {
+        optimal_delay_ms: u64,
+        samples: u32,
+        error_rate: f32,
+        avg_latency_ms: f32,
+        throttle_signals: u32,
+    },
+
+    fn new() -> PolitenessModel {
+        PolitenessModel {
+            optimal_delay_ms: 1000,
+            samples: 0,
+            error_rate: 0.0,
+            avg_latency_ms: 0.0,
+            throttle_signals: 0,
+        }
+    },
+
+    fn observe(self, response: HTTPResponse) {
+        self.samples += 1;
+        self.avg_latency_ms = (self.avg_latency_ms * 0.9) + (response.latency_ms as f32 * 0.1);
+        if response.status >= 429 || response.status >= 500 {
+            self.error_rate = (self.error_rate * 0.9) + 0.1;
+            self.throttle_signals += 1;
+        } else {
+            self.error_rate *= 0.95;
+        }
+    },
+
+    fn adjust_rate(self) {
+        if self.throttle_signals > 3 || self.error_rate > 0.2 {
+            self.optimal_delay_ms = min(self.optimal_delay_ms * 2, 60_000);
+        } else if self.avg_latency_ms < 200.0 && self.error_rate < 0.05 {
+            self.optimal_delay_ms = max(self.optimal_delay_ms / 2, 100);
+        }
+    }
+}

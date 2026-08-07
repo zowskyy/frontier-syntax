@@ -1,0 +1,9 @@
+// Frontier — auto-optimized sort example
+// The Knowledge Hypercube silently selects optimal algorithms from 70+ years of history.
+
+version: 2.0;
+
+fn main(): void {
+    // sort(data) would invoke optimize_sort() in the compiler pipeline
+    // get_sort_ancestry() exposes chosen algorithm lineage
+}

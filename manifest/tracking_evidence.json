@@ -1,0 +1,120 @@
+{
+  "generated_at": "2026-08-06T06:01:51.198347Z",
+  "phase_0_pass": true,
+  "phase_1_pass": false,
+  "phase_2_pass": false,
+  "phase_3_pass": false,
+  "phases_4_8": "frozen",
+  "all_pass": false,
+  "open_issues": [
+    44,
+    45,
+    46,
+    47,
+    48
+  ],
+  "no_partial_credit": true,
+  "evidence": [
+    {
+      "check": "0.1_issue_dedupe",
+      "pass": true,
+      "open_issues": [
+        44,
+        45,
+        46,
+        47,
+        48
+      ],
+      "expected": [
+        44,
+        45,
+        46,
+        47,
+        48
+      ]
+    },
+    {
+      "check": "0.2_gate_exists",
+      "pass": true
+    },
+    {
+      "check": "0.3_public_claims",
+      "pass": true
+    },
+    {
+      "check": "1.1_wasm_codegen",
+      "ref": "issue_44",
+      "tests_pass": true,
+      "wasmtime_exec_pass": true,
+      "wasmtime_manifest": "manifest/wasm_codegen_verify.json",
+      "issue_closed": false,
+      "pass": false,
+      "status": "fail",
+      "reason": "issue #44 still open",
+      "output": "lf, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {\n    |        ^^^^^^^^^^^^^^^^^\n\nwarning: function `export_section_multi` is never used\n   --> src/wasm_codegen.rs:633:4\n    |\n633 | fn export_section_multi(names: &[String], main_func_count: usize) -> Vec<u8> {\n    |    ^^^^^^^^^^^^^^^^^^^^\n\nwarning: `frontier` (lib test) generated 13 warnings (run `cargo fix --lib -p frontier --tests` to apply 3 suggestions)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.66s\n     Running unittests src/lib.rs (target/debug/deps/frontier-e00f0b8578b5dda0)\n",
+      "command": "cargo test --lib wasm_codegen::"
+    },
+    {
+      "check": "1.2_knowledge_codegen",
+      "ref": "issue_45",
+      "tests_pass": true,
+      "issue_closed": false,
+      "pass": false,
+      "status": "fail",
+      "reason": "issue #45 still open \u2014 self-validation insufficient",
+      "output": "lf, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {\n    |        ^^^^^^^^^^^^^^^^^\n\nwarning: function `export_section_multi` is never used\n   --> src/wasm_codegen.rs:633:4\n    |\n633 | fn export_section_multi(names: &[String], main_func_count: usize) -> Vec<u8> {\n    |    ^^^^^^^^^^^^^^^^^^^^\n\nwarning: `frontier` (lib test) generated 13 warnings (run `cargo fix --lib -p frontier --tests` to apply 3 suggestions)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.65s\n     Running unittests src/lib.rs (target/debug/deps/frontier-e00f0b8578b5dda0)\n",
+      "command": "cargo test --lib wasm_codegen::tests::test_knowledge_changes_wasm"
+    },
+    {
+      "check": "1.3_self_hosting",
+      "ref": "issue_46",
+      "bootstrap_script_pass": true,
+      "issue_closed": false,
+      "pass": false,
+      "status": "fail",
+      "reason": "Bootstrap Rust wrapper \u2260 Frontier-native compiler (blueprint Phase 1.3 / Phase 5 exit)"
+    },
+    {
+      "check": "phase_2",
+      "pass": false,
+      "status": "blocked",
+      "reason": "phase_1 not validated"
+    },
+    {
+      "check": "phase_3",
+      "pass": false,
+      "status": "blocked",
+      "reason": "phase_2 not validated"
+    },
+    {
+      "check": "phase_4",
+      "pass": false,
+      "status": "frozen",
+      "reason": "FROZEN until phase_3 gate passes"
+    },
+    {
+      "check": "phase_5",
+      "pass": false,
+      "status": "frozen",
+      "reason": "FROZEN until phase_4 gate passes"
+    },
+    {
+      "check": "phase_6",
+      "pass": false,
+      "status": "frozen",
+      "reason": "FROZEN until phase_5 gate passes"
+    },
+    {
+      "check": "phase_7",
+      "pass": false,
+      "status": "frozen",
+      "reason": "FROZEN until phase_6 gate passes"
+    },
+    {
+      "check": "phase_8",
+      "pass": false,
+      "status": "frozen",
+      "reason": "FROZEN until phase_7 gate passes"
+    }
+  ]
+}

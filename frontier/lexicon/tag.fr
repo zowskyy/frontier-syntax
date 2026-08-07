@@ -1,0 +1,19 @@
+// frontier/lexicon/tag.fr
+// Every action is tagged with this structure — Lexicon-Bound Worker protocol
+version: 2.0;
+
+component LexiconTag {
+    state: {
+        action_id: string,
+        user_id: string,
+        worker_id: string,
+        timestamp: string,
+        action_type: string,
+        input_hash: string,
+        output_hash: string,
+        lexicon_entry: string,
+        parent_action: string,
+        documentation: string,
+        knowledge_delta: string,
+    }
+}

@@ -1,0 +1,5 @@
+[target.wasm32-unknown-unknown]
+rustflags = [
+    "-C", "panic=abort",
+    "-C", "link-arg=--strip-all",
+]

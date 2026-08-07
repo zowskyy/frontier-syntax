@@ -1,0 +1,102 @@
+{
+  "generated_at": "2026-08-06T05:25:04.347955Z",
+  "mode": "sequential_strict",
+  "frozen_phases": [
+    "phase_4",
+    "phase_5",
+    "phase_6",
+    "phase_7",
+    "phase_8"
+  ],
+  "stopped_at": "phase_1",
+  "teams_run": 2,
+  "duration_ms": 34928,
+  "phase_results": [
+    {
+      "phase": "phase_0",
+      "name": "Tracker & Truth Hygiene",
+      "workers": [
+        {
+          "worker": "0a",
+          "doc": "Slice 0.1: dedupe issues",
+          "pass": true,
+          "duration_ms": 509,
+          "output": "{\n  \"closed\": 0,\n  \"kept\": [\n    48,\n    47,\n    46,\n    45,\n    44\n  ],\n  \"open_remaining\": 5,\n  \"details\": []\n}\n"
+        },
+        {
+          "worker": "0b",
+          "doc": "Slice 0.3: NOT VERIFIED markers",
+          "pass": true,
+          "duration_ms": 19,
+          "output": ""
+        }
+      ],
+      "workers_cmd_pass": 2,
+      "phase_validated": true,
+      "status": "validated",
+      "duration_ms": 10862
+    },
+    {
+      "phase": "phase_1",
+      "name": "Core Compiler (P0) \u2014 issues must be closed to validate",
+      "workers": [
+        {
+          "worker": "1a",
+          "doc": "Slice 1.1: wasm_codegen tests (issue #44 open = not validated)",
+          "pass": true,
+          "duration_ms": 1733,
+          "output": "        ^^^^^^^^^^^^^^^^^\n\nwarning: `frontier` (lib test) generated 12 warnings (run `cargo fix --lib -p frontier --tests` to apply 2 suggestions)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.70s\n     Running unittests src/lib.rs (target/debug/deps/frontier-1475498e1a73911a)\n"
+        },
+        {
+          "worker": "1b",
+          "doc": "Slice 1.2: knowledge test (issue #45 open = not validated)",
+          "pass": true,
+          "duration_ms": 3254,
+          "output": "        ^^^^^^^^^^^^^^^^^\n\nwarning: `frontier` (lib test) generated 12 warnings (run `cargo fix --lib -p frontier --tests` to apply 2 suggestions)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.22s\n     Running unittests src/lib.rs (target/debug/deps/frontier-1475498e1a73911a)\n"
+        }
+      ],
+      "workers_cmd_pass": 2,
+      "phase_validated": false,
+      "status": "fail",
+      "duration_ms": 13615
+    }
+  ],
+  "frozen": [
+    {
+      "phase": "phase_4",
+      "name": "FROZEN \u2014 innovations",
+      "status": "frozen",
+      "workers": 0,
+      "reason": "Prior gate not passed"
+    },
+    {
+      "phase": "phase_5",
+      "name": "FROZEN \u2014 true self-hosting",
+      "status": "frozen",
+      "workers": 0,
+      "reason": "Prior gate not passed"
+    },
+    {
+      "phase": "phase_6",
+      "name": "FROZEN \u2014 AI agent",
+      "status": "frozen",
+      "workers": 0,
+      "reason": "Prior gate not passed"
+    },
+    {
+      "phase": "phase_7",
+      "name": "FROZEN \u2014 production",
+      "status": "frozen",
+      "workers": 0,
+      "reason": "Prior gate not passed"
+    },
+    {
+      "phase": "phase_8",
+      "name": "FROZEN \u2014 launch",
+      "status": "frozen",
+      "workers": 0,
+      "reason": "Prior gate not passed"
+    }
+  ],
+  "tracking_gate_all_pass": false
+}

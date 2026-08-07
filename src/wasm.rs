@@ -53,6 +53,33 @@ pub fn parse_source(source: &str) -> WasmParseResult {
 }
 
 #[wasm_bindgen]
+pub fn hash_ast(ast_json: &str) -> String {
+    sha3_256_hex(ast_json)
+}
+
+#[wasm_bindgen]
+pub fn verify_zk_proof(_ast_json: &str, _proof_json: &str) -> bool {
+    false
+}
+
+#[wasm_bindgen]
+pub fn generate_zk_proof(_ast_json: &str) -> String {
+    r#"{"status":"error","message":"zk unavailable on browser wasm build"}"#.to_string()
+}
+
+/*
+fn setup_zk_verifier_mut() -> Result<crate::zk::verifier::ZkVerifier, String> {
+    let mut verifier = crate::zk::verifier::ZkVerifier::new();
+    verifier.setup()?;
+    Ok(verifier)
+}
+
+fn setup_zk_verifier() -> Result<crate::zk::verifier::ZkVerifier, String> {
+    setup_zk_verifier_mut()
+}
+*/
+
+#[wasm_bindgen]
 pub fn parse_source_with_resolve(source: &str) -> WasmParseResult {
     let normalized: String = source.nfc().collect();
 

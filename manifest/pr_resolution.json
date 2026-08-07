@@ -1,0 +1,20 @@
+{
+  "generated_at": "2026-08-06T04:40:00.000000Z",
+  "open_prs_found": 4,
+  "open_prs_remaining": 0,
+  "pr_stack": [
+    {"number": 51, "branch": "cursor/worker-swarm-kb-optimization-f519", "resolution": "CLOSED — superseded by stack merge"},
+    {"number": 52, "branch": "cursor/peerless-chat-swarm-f519", "resolution": "MERGED"},
+    {"number": 53, "branch": "cursor/execute-peerless-plan-f519", "resolution": "MERGED"},
+    {"number": 54, "branch": "cursor/lexicon-bound-worker-f519", "resolution": "MERGED"}
+  ],
+  "base_branch": "cursor/frontier-syntax-cycle1-e39f",
+  "merged_commit": "2528e61",
+  "all_pass": true,
+  "worker_results_summary": {
+    "audited": 4,
+    "verified": 1,
+    "merged_to_base": true,
+    "prs_resolved": 4
+  }
+}

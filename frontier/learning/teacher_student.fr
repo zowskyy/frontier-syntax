@@ -1,0 +1,24 @@
+// Teacher-Student Unity — symbiotic learning without hierarchy
+version: 2.0;
+
+fn exchange_knowledge(teacher_fact: int, student_fact: int) -> int {
+    return teacher_fact + student_fact;
+}
+
+fn Teacher_teach(topic: int) -> int {
+    return topic * 2;
+}
+
+fn Student_learn(from_teacher: int) -> int {
+    return from_teacher + 1;
+}
+
+fn symbiotic_session() -> int {
+    let taught: int = Teacher_teach(10);
+    let learned: int = Student_learn(taught);
+    return exchange_knowledge(taught, learned);
+}
+
+fn main(): int {
+    return symbiotic_session();
+}

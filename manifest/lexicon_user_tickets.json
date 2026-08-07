@@ -1,0 +1,36 @@
+[
+  {
+    "ticket_id": "c49f6faa-838d-4f53-8fde-863b55c46c3c",
+    "user_id": "d32af40335ebac2d33674c31c533d3aa12e7f49cda1692efa7cfdb6f5d210784",
+    "session_id": "8cf9315766d39634",
+    "actions": [
+      "d8f88434-2bf2-48fa-a0f1-f81012b6b85a",
+      "a91cc746-4414-45af-96ee-145eb501b1d6",
+      "02161ccf-b262-4174-a1b0-b832c51a4e92",
+      "0c15e088-2656-4f98-8080-6492aad8ab54",
+      "c941770d-6a83-4046-8f2e-4923d56bddbc",
+      "ec7d9e8c-28f4-4b04-b7fd-6bb344a098ea",
+      "81e178f5-8627-4d00-9610-5633e46ef7fc",
+      "7fe4318e-8524-44be-8ff7-d3cb7cb6ea1c",
+      "0c564702-168d-42bf-8015-5fe7e017bd83",
+      "0285c8c8-9cac-4f04-9edf-5bc96e9ff83f",
+      "039340d9-d166-4bf4-99da-2bece170e84e",
+      "08adcb58-1207-454a-a968-d21b525f7b39",
+      "38ed3d3a-81d2-42ef-b057-4c4e5ef1b8a3",
+      "437032bb-839b-4c7d-96f6-9a0f9882ffec",
+      "c029ae31-12ce-4ac0-8720-ccbc86e31b1b",
+      "47dcf4d7-959d-4f0b-9e24-f5c8301368e7",
+      "431a229e-3ba3-45fd-b582-e2112b496c58",
+      "95529dea-3c3b-4da9-8953-b72369363cac",
+      "1969caa5-d8ca-471e-8044-8e6b1634fa36",
+      "dea46bde-d3e4-46b7-ada8-9b09ee18828f",
+      "2b5a3a7a-b28f-4c2e-b423-02200162981a",
+      "0240d59d-0687-491e-9481-9c575df0553b",
+      "951d1d2a-4eee-46d4-86d0-33ac12deed06",
+      "2cf76ab2-277a-42dc-ada7-d43fab4436a0",
+      "7360161e-d33e-48fa-8d25-ef2fd30deaaa",
+      "d212dfae-9660-4b91-86af-1bef57bdb836"
+    ],
+    "closed": true
+  }
+]

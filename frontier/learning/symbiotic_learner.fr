@@ -1,0 +1,77 @@
+// Symbiotic Learner — peer-to-peer knowledge exchange, no teacher-student hierarchy
+// Phase 1.4 / 2.4: Replace hierarchy with symbiotic learning
+
+module symbiotic_learner;
+
+import frontier.core.swarm.{Swarm, GossipMessage};
+import frontier.knowledge.just_in_time.{JITKnowledge, KnowledgeAnswer};
+
+type LearnedFact = {
+    id: String,
+    content: String,
+    learned_at: u64,
+    source_peer: String,
+};
+
+component SymbioticLearner {
+    state: {
+        local_facts: Map<String, LearnedFact>,
+        peer_id: String,
+        jit: JITKnowledge,
+    },
+
+    fn new(peer_id: String) -> SymbioticLearner {
+        SymbioticLearner {
+            local_facts: Map::new(),
+            peer_id,
+            jit: JITKnowledge::new(),
+        }
+    },
+
+    fn learn(self, topic: String) -> LearnedFact {
+        let answer = self.jit.know(topic).expect("know");
+        let fact = LearnedFact {
+            id: sha3_256(topic.as_bytes()),
+            content: answer.answer,
+            learned_at: now(),
+            source_peer: self.peer_id,
+        };
+        self.local_facts.insert(fact.id.clone(), fact.clone());
+        Swarm.broadcast(GossipMessage::LearnedFact(fact.clone()));
+        fact
+    }
+
+    fn exchange(self, other: SymbioticLearner) -> Vec<LearnedFact> {
+        let mut exchanged = Vec::new();
+        for (_, fact) in other.local_facts {
+            if !self.local_facts.contains(fact.id) {
+                self.local_facts.insert(fact.id.clone(), fact.clone());
+                exchanged.push(fact);
+            }
+        }
+        for (_, fact) in self.local_facts {
+            if !other.local_facts.contains(fact.id) {
+                other.local_facts.insert(fact.id.clone(), fact.clone());
+                exchanged.push(fact);
+            }
+        }
+        exchanged
+    }
+
+    fn receive_gossip(self, msg: GossipMessage) {
+        if let GossipMessage::LearnedFact(fact) = msg {
+            if fact.source_peer != self.peer_id {
+                self.local_facts.insert(fact.id.clone(), fact);
+            }
+        }
+    }
+}
+
+fn demo_symbiotic_exchange() -> bool {
+    let a = SymbioticLearner::new("peer-a");
+    let b = SymbioticLearner::new("peer-b");
+    a.learn("ReDoS mitigation");
+    b.learn("WASM codegen patterns");
+    let exchanged = a.exchange(b);
+    exchanged.len() >= 2
+}

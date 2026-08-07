@@ -1,0 +1,83 @@
+// AI Interpreter — replaces static compiler with conversational execution
+// Phase 1.1 / 2.1: Eliminate compiler screw, interpret on demand
+
+module ai_interpreter;
+
+import frontier.lighthouse.arc_engine.{run_arc, ARCResult};
+import frontier.core.knowledge_hypercube.KnowledgeHypercube;
+import frontier.bindings.ai.{LocalModel, Inference};
+
+type InterpretResult = {
+    source: String,
+    output: String,
+    ast_hash: String,
+    equivalent_to_compile: bool,
+};
+
+component AIInterpreter {
+    state: {
+        model: LocalModel,
+        knowledge: KnowledgeHypercube,
+        cache: Map<String, InterpretResult>,
+    },
+
+    fn new() -> AIInterpreter {
+        AIInterpreter {
+            model: LocalModel::load("model.gguf"),
+            knowledge: KnowledgeHypercube::load(),
+            cache: Map::new(),
+        }
+    },
+
+    fn interpret(self, source: String) -> Result<InterpretResult, String> {
+        if let Some(cached) = self.cache.get(source) {
+            return Ok(cached);
+        }
+
+        let prompt = build_interpret_prompt(source);
+        let response = LocalModel::infer(self.model, prompt, INTERPRET_SYSTEM)?;
+        let compile_equiv = self.verify_equivalent_to_compile(source, response)?;
+
+        let result = InterpretResult {
+            source: source.clone(),
+            output: response,
+            ast_hash: sha3_256(source.as_bytes()),
+            equivalent_to_compile: compile_equiv,
+        };
+        self.cache.insert(source, result.clone());
+        Ok(result)
+    },
+
+    fn verify_equivalent_to_compile(self, source: String, interpreted: String) -> Result<bool, String> {
+        let compiled = CompilerBackend::compile(source)?;
+        let interpreted_val = Evaluator::eval(interpreted)?;
+        Ok(compiled.entry_value == interpreted_val)
+    }
+
+    fn interpret_file(self, path: String) -> Result<InterpretResult, String> {
+        let source = Storage.read(path)?;
+        self.interpret(source)
+    }
+}
+
+const INTERPRET_SYSTEM: &str = "You are the Frontier AI Interpreter. Execute Frontier source and return the computed result as JSON.";
+
+fn build_interpret_prompt(source: String) -> String {
+    format!("Interpret and execute:\n{}", source)
+}
+
+component CompilerBackend {
+    fn compile(source: String) -> Result<CompiledModule, String> {
+        UnityCompiler::compile(source)
+    }
+}
+
+type CompiledModule = { wasm: bytes, entry_value: i32 };
+
+fn main() {
+    let args = env::args();
+    let path = args.get(1).expect("usage: frontier interpret <file.fr>");
+    let interpreter = AIInterpreter::new();
+    let result = interpreter.interpret_file(path).expect("interpret failed");
+    print(result.output);
+}

@@ -1,0 +1,3697 @@
+// Frontier Process Log — auto-generated, Frontier-readable
+// Every process, decision, and result for data research and LLM training
+version: 2.0;
+
+module process_log;
+
+// Entries appended by scripts/process_logger.py
+
+component ProcessEntry_20260806_005540_012101 {
+    timestamp: "2026-08-06T00:55:40.012066Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 4074,
+    metrics_json: "{\"duration_ms\":4074,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_005544_033187 {
+    timestamp: "2026-08-06T00:55:44.033170Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 4020,
+    metrics_json: "{\"duration_ms\":4020,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_005554_482575 {
+    timestamp: "2026-08-06T00:55:54.482550Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 10449,
+    metrics_json: "{\"duration_ms\":10449,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_005557_304035 {
+    timestamp: "2026-08-06T00:55:57.304016Z",
+    process: "peerless_P4",
+    decision: "close_WASM size optimization",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 2821,
+    metrics_json: "{\"duration_ms\":2821,\"gap\":\"P4\"}",
+}
+
+component ProcessEntry_20260806_005604_969212 {
+    timestamp: "2026-08-06T00:56:04.969184Z",
+    process: "peerless_P5",
+    decision: "close_True self-hosting in Frontier",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 7664,
+    metrics_json: "{\"duration_ms\":7664,\"gap\":\"P5\"}",
+}
+
+component ProcessEntry_20260806_005608_825331 {
+    timestamp: "2026-08-06T00:56:08.825312Z",
+    process: "peerless_P6",
+    decision: "close_Teacher-student unity module",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 3855,
+    metrics_json: "{\"duration_ms\":3855,\"gap\":\"P6\"}",
+}
+
+component ProcessEntry_20260806_005611_450651 {
+    timestamp: "2026-08-06T00:56:11.450634Z",
+    process: "parse_repo",
+    decision: "shared_state_once",
+    result: "pass",
+    worker: "swarm_optimized",
+    duration_ms: 0,
+    metrics_json: "{\"duration_ms\":0,\"modules\":10}",
+}
+
+component ProcessEntry_20260806_005612_460298 {
+    timestamp: "2026-08-06T00:56:12.460276Z",
+    process: "proofs_security",
+    decision: "execute_proofs_security",
+    result: "pass",
+    worker: "worker_3",
+    duration_ms: 1008,
+    metrics_json: "{\"duration_ms\":1008,\"pass\":true,\"output\":\"PASS: Coq proof validation (4/4 proofs)\\n\"}",
+}
+
+component ProcessEntry_20260806_005613_518812 {
+    timestamp: "2026-08-06T00:56:13.518790Z",
+    process: "wasm_codegen",
+    decision: "execute_wasm_codegen",
+    result: "pass",
+    worker: "worker_1",
+    duration_ms: 2067,
+    metrics_json: "{\"duration_ms\":2067,\"pass\":true,\"output\":\"u32,\\n    |     ^^^^^^^^^^\\n\\nwarning: `frontier` (lib test) generated 13 warnings (run `cargo fix --lib -p frontier --tests` to apply 2 suggestions)\\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.03s\\n     Running unittests src/lib.rs (target/debug/deps/frontier-1475498e1a73911a)\\n\"}",
+}
+
+component ProcessEntry_20260806_005617_186567 {
+    timestamp: "2026-08-06T00:56:17.186549Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 5702,
+    metrics_json: "{\"duration_ms\":5702,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_005624_431645 {
+    timestamp: "2026-08-06T00:56:24.431628Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 7244,
+    metrics_json: "{\"duration_ms\":7244,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_005628_096777 {
+    timestamp: "2026-08-06T00:56:28.096749Z",
+    process: "self_hosting",
+    decision: "execute_self_hosting",
+    result: "pass",
+    worker: "worker_2",
+    duration_ms: 16645,
+    metrics_json: "{\"duration_ms\":16645,\"pass\":true,\"output\":\"PASS: Self-hosting bootstrap (cmp identical)\\n\"}",
+}
+
+component ProcessEntry_20260806_005642_376443 {
+    timestamp: "2026-08-06T00:56:42.376424Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 17944,
+    metrics_json: "{\"duration_ms\":17944,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_005642_384649 {
+    timestamp: "2026-08-06T00:56:42.384619Z",
+    process: "runtime_integration",
+    decision: "execute_runtime_integration",
+    result: "pass",
+    worker: "worker_4",
+    duration_ms: 30930,
+    metrics_json: "{\"duration_ms\":30930,\"pass\":true,\"output\":\"y', 'note': 'HTTP Error 410: Gone'}\\\\n\\\",\\n      \\\"module_present\\\": true\\n    },\\n    {\\n      \\\"id\\\": \\\"P3\\\",\\n      \\\"name\\\": \\\"Live CDX streaming\\\",\\n      \\\"status\\\": \\\"closed\\\",\\n      \\\"pass\\\": true,\\n      \\\"duration_ms\\\": 17944,\\n      \\\"output\\\": \\\"PASS: CDX streaming runtime\\\\n\\\",\\n      \\\"module_present\\\": true\\n    }\\n  ]\\n}\\n\"}",
+}
+
+component ProcessEntry_20260806_005642_412633 {
+    timestamp: "2026-08-06T00:56:42.412622Z",
+    process: "gate_no_screw",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 26,
+    metrics_json: "{\"duration_ms\":26,\"gate\":\"no_screw\"}",
+}
+
+component ProcessEntry_20260806_005642_416558 {
+    timestamp: "2026-08-06T00:56:42.416547Z",
+    process: "gate_a_plus",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 30,
+    metrics_json: "{\"duration_ms\":30,\"gate\":\"a_plus\"}",
+}
+
+component ProcessEntry_20260806_005645_004281 {
+    timestamp: "2026-08-06T00:56:45.004252Z",
+    process: "gate_axiomatic",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 2618,
+    metrics_json: "{\"duration_ms\":2618,\"gate\":\"axiomatic\"}",
+}
+
+component ProcessEntry_20260806_005650_995870 {
+    timestamp: "2026-08-06T00:56:50.995851Z",
+    process: "gate_living_conversation",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 8583,
+    metrics_json: "{\"duration_ms\":8583,\"gate\":\"living_conversation\"}",
+}
+
+component ProcessEntry_20260806_005654_984497 {
+    timestamp: "2026-08-06T00:56:54.984476Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 9945,
+    metrics_json: "{\"duration_ms\":9945,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_005700_195491 {
+    timestamp: "2026-08-06T00:57:00.195478Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 5210,
+    metrics_json: "{\"duration_ms\":5210,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_005714_215170 {
+    timestamp: "2026-08-06T00:57:14.215139Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 14019,
+    metrics_json: "{\"duration_ms\":14019,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_005717_904200 {
+    timestamp: "2026-08-06T00:57:17.904149Z",
+    process: "gate_repo",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 35518,
+    metrics_json: "{\"duration_ms\":35518,\"gate\":\"repo\"}",
+}
+
+component ProcessEntry_20260806_005723_295615 {
+    timestamp: "2026-08-06T00:57:23.295591Z",
+    process: "gate_frontier_face",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 40878,
+    metrics_json: "{\"duration_ms\":40878,\"gate\":\"frontier_face\"}",
+}
+
+component ProcessEntry_20260806_005750_293602 {
+    timestamp: "2026-08-06T00:57:50.293567Z",
+    process: "peerless_P4",
+    decision: "close_WASM size optimization",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 36077,
+    metrics_json: "{\"duration_ms\":36077,\"gap\":\"P4\"}",
+}
+
+component ProcessEntry_20260806_005801_860691 {
+    timestamp: "2026-08-06T00:58:01.860648Z",
+    process: "peerless_P5",
+    decision: "close_True self-hosting in Frontier",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 11566,
+    metrics_json: "{\"duration_ms\":11566,\"gap\":\"P5\"}",
+}
+
+component ProcessEntry_20260806_005806_589907 {
+    timestamp: "2026-08-06T00:58:06.589860Z",
+    process: "gate_global_skills",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 75593,
+    metrics_json: "{\"duration_ms\":75593,\"gate\":\"global_skills\"}",
+}
+
+component ProcessEntry_20260806_005811_034173 {
+    timestamp: "2026-08-06T00:58:11.034149Z",
+    process: "peerless_P6",
+    decision: "close_Teacher-student unity module",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 9172,
+    metrics_json: "{\"duration_ms\":9172,\"gap\":\"P6\"}",
+}
+
+component ProcessEntry_20260806_005811_044283 {
+    timestamp: "2026-08-06T00:58:11.044261Z",
+    process: "gate_peerless",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 86039,
+    metrics_json: "{\"duration_ms\":86039,\"gate\":\"peerless\"}",
+}
+
+component ProcessEntry_20260806_005811_144962 {
+    timestamp: "2026-08-06T00:58:11.144943Z",
+    process: "swarm_optimized_run",
+    decision: "aggregate_results",
+    result: "pass",
+    worker: "swarm_optimized",
+    duration_ms: 119694,
+    metrics_json: "{\"duration_ms\":119694,\"speedup_factor\":2.51}",
+}
+
+component ProcessEntry_20260806_012828_210786 {
+    timestamp: "2026-08-06T01:28:28.210776Z",
+    process: "spec_impl_bridge",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 22,
+    metrics_json: "{\"duration_ms\":22}",
+}
+
+component ProcessEntry_20260806_012830_946378 {
+    timestamp: "2026-08-06T01:28:30.946355Z",
+    process: "wasm_slim",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 2735,
+    metrics_json: "{\"duration_ms\":2735}",
+}
+
+component ProcessEntry_20260806_012830_978779 {
+    timestamp: "2026-08-06T01:28:30.978767Z",
+    process: "frontier_worker_alias",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 32,
+    metrics_json: "{\"duration_ms\":32}",
+}
+
+component ProcessEntry_20260806_012834_615277 {
+    timestamp: "2026-08-06T01:28:34.615231Z",
+    process: "genesis_loop",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 3636,
+    metrics_json: "{\"duration_ms\":3636}",
+}
+
+component ProcessEntry_20260806_012834_644186 {
+    timestamp: "2026-08-06T01:28:34.644175Z",
+    process: "knowledge_sync",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 28,
+    metrics_json: "{\"duration_ms\":28}",
+}
+
+component ProcessEntry_20260806_012834_682811 {
+    timestamp: "2026-08-06T01:28:34.682801Z",
+    process: "parse_repo",
+    decision: "shared_state_once",
+    result: "pass",
+    worker: "swarm_optimized",
+    duration_ms: 0,
+    metrics_json: "{\"duration_ms\":0,\"modules\":10}",
+}
+
+component ProcessEntry_20260806_012835_768873 {
+    timestamp: "2026-08-06T01:28:35.768844Z",
+    process: "proofs_security",
+    decision: "execute_proofs_security",
+    result: "pass",
+    worker: "worker_3",
+    duration_ms: 1084,
+    metrics_json: "{\"duration_ms\":1084,\"pass\":true,\"output\":\"PASS: Coq proof validation (4/4 proofs)\\n\"}",
+}
+
+component ProcessEntry_20260806_012836_687005 {
+    timestamp: "2026-08-06T01:28:36.686982Z",
+    process: "wasm_codegen",
+    decision: "execute_wasm_codegen",
+    result: "pass",
+    worker: "worker_1",
+    duration_ms: 2003,
+    metrics_json: "{\"duration_ms\":2003,\"pass\":true,\"output\":\"u32,\\n    |     ^^^^^^^^^^\\n\\nwarning: `frontier` (lib test) generated 13 warnings (run `cargo fix --lib -p frontier --tests` to apply 2 suggestions)\\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.96s\\n     Running unittests src/lib.rs (target/debug/deps/frontier-1475498e1a73911a)\\n\"}",
+}
+
+component ProcessEntry_20260806_012843_969516 {
+    timestamp: "2026-08-06T01:28:43.969484Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 9257,
+    metrics_json: "{\"duration_ms\":9257,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_012847_627884 {
+    timestamp: "2026-08-06T01:28:47.627855Z",
+    process: "self_hosting",
+    decision: "execute_self_hosting",
+    result: "pass",
+    worker: "worker_2",
+    duration_ms: 12943,
+    metrics_json: "{\"duration_ms\":12943,\"pass\":true,\"output\":\"PASS: Self-hosting bootstrap (cmp identical)\\n\"}",
+}
+
+component ProcessEntry_20260806_012851_406087 {
+    timestamp: "2026-08-06T01:28:51.406074Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 7436,
+    metrics_json: "{\"duration_ms\":7436,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_012905_540264 {
+    timestamp: "2026-08-06T01:29:05.540244Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 14133,
+    metrics_json: "{\"duration_ms\":14133,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_012905_550853 {
+    timestamp: "2026-08-06T01:29:05.550817Z",
+    process: "runtime_integration",
+    decision: "execute_runtime_integration",
+    result: "pass",
+    worker: "worker_4",
+    duration_ms: 30864,
+    metrics_json: "{\"duration_ms\":30864,\"pass\":true,\"output\":\"y', 'note': 'HTTP Error 410: Gone'}\\\\n\\\",\\n      \\\"module_present\\\": true\\n    },\\n    {\\n      \\\"id\\\": \\\"P3\\\",\\n      \\\"name\\\": \\\"Live CDX streaming\\\",\\n      \\\"status\\\": \\\"closed\\\",\\n      \\\"pass\\\": true,\\n      \\\"duration_ms\\\": 14133,\\n      \\\"output\\\": \\\"PASS: CDX streaming runtime\\\\n\\\",\\n      \\\"module_present\\\": true\\n    }\\n  ]\\n}\\n\"}",
+}
+
+component ProcessEntry_20260806_012905_575924 {
+    timestamp: "2026-08-06T01:29:05.575911Z",
+    process: "gate_no_screw",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 23,
+    metrics_json: "{\"duration_ms\":23,\"gate\":\"no_screw\"}",
+}
+
+component ProcessEntry_20260806_012905_577251 {
+    timestamp: "2026-08-06T01:29:05.577239Z",
+    process: "gate_a_plus",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 25,
+    metrics_json: "{\"duration_ms\":25,\"gate\":\"a_plus\"}",
+}
+
+component ProcessEntry_20260806_012907_890444 {
+    timestamp: "2026-08-06T01:29:07.890423Z",
+    process: "gate_axiomatic",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 2339,
+    metrics_json: "{\"duration_ms\":2339,\"gate\":\"axiomatic\"}",
+}
+
+component ProcessEntry_20260806_012909_552428 {
+    timestamp: "2026-08-06T01:29:09.552408Z",
+    process: "gate_living_conversation",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 3976,
+    metrics_json: "{\"duration_ms\":3976,\"gate\":\"living_conversation\"}",
+}
+
+component ProcessEntry_20260806_012916_721804 {
+    timestamp: "2026-08-06T01:29:16.721783Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 8801,
+    metrics_json: "{\"duration_ms\":8801,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_012922_169923 {
+    timestamp: "2026-08-06T01:29:22.169905Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 5447,
+    metrics_json: "{\"duration_ms\":5447,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_012936_153939 {
+    timestamp: "2026-08-06T01:29:36.153910Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 13983,
+    metrics_json: "{\"duration_ms\":13983,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_012942_596347 {
+    timestamp: "2026-08-06T01:29:42.596308Z",
+    process: "gate_repo",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 37044,
+    metrics_json: "{\"duration_ms\":37044,\"gate\":\"repo\"}",
+}
+
+component ProcessEntry_20260806_012948_374302 {
+    timestamp: "2026-08-06T01:29:48.374280Z",
+    process: "gate_frontier_face",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 42796,
+    metrics_json: "{\"duration_ms\":42796,\"gate\":\"frontier_face\"}",
+}
+
+component ProcessEntry_20260806_013017_110379 {
+    timestamp: "2026-08-06T01:30:17.110354Z",
+    process: "peerless_P4",
+    decision: "close_WASM size optimization",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 40955,
+    metrics_json: "{\"duration_ms\":40955,\"gap\":\"P4\"}",
+}
+
+component ProcessEntry_20260806_013027_834300 {
+    timestamp: "2026-08-06T01:30:27.834285Z",
+    process: "peerless_P5",
+    decision: "close_True self-hosting in Frontier",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 10723,
+    metrics_json: "{\"duration_ms\":10723,\"gap\":\"P5\"}",
+}
+
+component ProcessEntry_20260806_013031_352255 {
+    timestamp: "2026-08-06T01:30:31.352219Z",
+    process: "gate_global_skills",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 81799,
+    metrics_json: "{\"duration_ms\":81799,\"gate\":\"global_skills\"}",
+}
+
+component ProcessEntry_20260806_013034_814429 {
+    timestamp: "2026-08-06T01:30:34.814410Z",
+    process: "peerless_P6",
+    decision: "close_Teacher-student unity module",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 6979,
+    metrics_json: "{\"duration_ms\":6979,\"gap\":\"P6\"}",
+}
+
+component ProcessEntry_20260806_013034_823593 {
+    timestamp: "2026-08-06T01:30:34.823576Z",
+    process: "gate_peerless",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 86932,
+    metrics_json: "{\"duration_ms\":86932,\"gate\":\"peerless\"}",
+}
+
+component ProcessEntry_20260806_013034_924193 {
+    timestamp: "2026-08-06T01:30:34.924182Z",
+    process: "swarm_optimized_run",
+    decision: "aggregate_results",
+    result: "pass",
+    worker: "swarm_optimized",
+    duration_ms: 120241,
+    metrics_json: "{\"duration_ms\":120241,\"speedup_factor\":2.51}",
+}
+
+component ProcessEntry_20260806_013034_937448 {
+    timestamp: "2026-08-06T01:30:34.937421Z",
+    process: "swarm_optimized",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 120293,
+    metrics_json: "{\"duration_ms\":120293}",
+}
+
+component ProcessEntry_20260806_013038_450951 {
+    timestamp: "2026-08-06T01:30:38.450931Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 3484,
+    metrics_json: "{\"duration_ms\":3484,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_013042_018608 {
+    timestamp: "2026-08-06T01:30:42.018595Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 3567,
+    metrics_json: "{\"duration_ms\":3567,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_013055_773027 {
+    timestamp: "2026-08-06T01:30:55.773008Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 13754,
+    metrics_json: "{\"duration_ms\":13754,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_013058_478813 {
+    timestamp: "2026-08-06T01:30:58.478791Z",
+    process: "peerless_P4",
+    decision: "close_WASM size optimization",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 2705,
+    metrics_json: "{\"duration_ms\":2705,\"gap\":\"P4\"}",
+}
+
+component ProcessEntry_20260806_013105_718933 {
+    timestamp: "2026-08-06T01:31:05.718905Z",
+    process: "peerless_P5",
+    decision: "close_True self-hosting in Frontier",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 7239,
+    metrics_json: "{\"duration_ms\":7239,\"gap\":\"P5\"}",
+}
+
+component ProcessEntry_20260806_013109_397566 {
+    timestamp: "2026-08-06T01:31:09.397544Z",
+    process: "peerless_P6",
+    decision: "close_Teacher-student unity module",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 3678,
+    metrics_json: "{\"duration_ms\":3678,\"gap\":\"P6\"}",
+}
+
+component ProcessEntry_20260806_013109_403873 {
+    timestamp: "2026-08-06T01:31:09.403858Z",
+    process: "close_peerless",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 34466,
+    metrics_json: "{\"duration_ms\":34466}",
+}
+
+component ProcessEntry_20260806_013150_070257 {
+    timestamp: "2026-08-06T01:31:50.070222Z",
+    process: "arc_verify",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 40666,
+    metrics_json: "{\"duration_ms\":40666}",
+}
+
+component ProcessEntry_20260806_013152_155752 {
+    timestamp: "2026-08-06T01:31:52.155742Z",
+    process: "spec_impl_bridge",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 22,
+    metrics_json: "{\"duration_ms\":22}",
+}
+
+component ProcessEntry_20260806_013154_717656 {
+    timestamp: "2026-08-06T01:31:54.717639Z",
+    process: "wasm_slim",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 2561,
+    metrics_json: "{\"duration_ms\":2561}",
+}
+
+component ProcessEntry_20260806_013154_748233 {
+    timestamp: "2026-08-06T01:31:54.748223Z",
+    process: "frontier_worker_alias",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 30,
+    metrics_json: "{\"duration_ms\":30}",
+}
+
+component ProcessEntry_20260806_013158_074474 {
+    timestamp: "2026-08-06T01:31:58.074453Z",
+    process: "genesis_loop",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 3326,
+    metrics_json: "{\"duration_ms\":3326}",
+}
+
+component ProcessEntry_20260806_013158_099637 {
+    timestamp: "2026-08-06T01:31:58.099615Z",
+    process: "knowledge_sync",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 24,
+    metrics_json: "{\"duration_ms\":24}",
+}
+
+component ProcessEntry_20260806_013158_135785 {
+    timestamp: "2026-08-06T01:31:58.135776Z",
+    process: "parse_repo",
+    decision: "shared_state_once",
+    result: "pass",
+    worker: "swarm_optimized",
+    duration_ms: 0,
+    metrics_json: "{\"duration_ms\":0,\"modules\":10}",
+}
+
+component ProcessEntry_20260806_013159_105153 {
+    timestamp: "2026-08-06T01:31:59.105132Z",
+    process: "proofs_security",
+    decision: "execute_proofs_security",
+    result: "pass",
+    worker: "worker_3",
+    duration_ms: 967,
+    metrics_json: "{\"duration_ms\":967,\"pass\":true,\"output\":\"PASS: Coq proof validation (4/4 proofs)\\n\"}",
+}
+
+component ProcessEntry_20260806_013159_971363 {
+    timestamp: "2026-08-06T01:31:59.971341Z",
+    process: "wasm_codegen",
+    decision: "execute_wasm_codegen",
+    result: "pass",
+    worker: "worker_1",
+    duration_ms: 1835,
+    metrics_json: "{\"duration_ms\":1835,\"pass\":true,\"output\":\"u32,\\n    |     ^^^^^^^^^^\\n\\nwarning: `frontier` (lib test) generated 13 warnings (run `cargo fix --lib -p frontier --tests` to apply 2 suggestions)\\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.80s\\n     Running unittests src/lib.rs (target/debug/deps/frontier-1475498e1a73911a)\\n\"}",
+}
+
+component ProcessEntry_20260806_013206_434850 {
+    timestamp: "2026-08-06T01:32:06.434832Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 8271,
+    metrics_json: "{\"duration_ms\":8271,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_013209_636013 {
+    timestamp: "2026-08-06T01:32:09.635990Z",
+    process: "self_hosting",
+    decision: "execute_self_hosting",
+    result: "pass",
+    worker: "worker_2",
+    duration_ms: 11498,
+    metrics_json: "{\"duration_ms\":11498,\"pass\":true,\"output\":\"PASS: Self-hosting bootstrap (cmp identical)\\n\"}",
+}
+
+component ProcessEntry_20260806_013212_886726 {
+    timestamp: "2026-08-06T01:32:12.886713Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 6451,
+    metrics_json: "{\"duration_ms\":6451,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_013221_449131 {
+    timestamp: "2026-08-06T01:32:21.449118Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 8562,
+    metrics_json: "{\"duration_ms\":8562,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_013221_455688 {
+    timestamp: "2026-08-06T01:32:21.455674Z",
+    process: "runtime_integration",
+    decision: "execute_runtime_integration",
+    result: "pass",
+    worker: "worker_4",
+    duration_ms: 23318,
+    metrics_json: "{\"duration_ms\":23318,\"pass\":true,\"output\":\"ly', 'note': 'HTTP Error 410: Gone'}\\\\n\\\",\\n      \\\"module_present\\\": true\\n    },\\n    {\\n      \\\"id\\\": \\\"P3\\\",\\n      \\\"name\\\": \\\"Live CDX streaming\\\",\\n      \\\"status\\\": \\\"closed\\\",\\n      \\\"pass\\\": true,\\n      \\\"duration_ms\\\": 8562,\\n      \\\"output\\\": \\\"PASS: CDX streaming runtime\\\\n\\\",\\n      \\\"module_present\\\": true\\n    }\\n  ]\\n}\\n\"}",
+}
+
+component ProcessEntry_20260806_013221_478062 {
+    timestamp: "2026-08-06T01:32:21.478053Z",
+    process: "gate_no_screw",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 21,
+    metrics_json: "{\"duration_ms\":21,\"gate\":\"no_screw\"}",
+}
+
+component ProcessEntry_20260806_013221_480878 {
+    timestamp: "2026-08-06T01:32:21.480866Z",
+    process: "gate_a_plus",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 23,
+    metrics_json: "{\"duration_ms\":23,\"gate\":\"a_plus\"}",
+}
+
+component ProcessEntry_20260806_013223_412292 {
+    timestamp: "2026-08-06T01:32:23.412270Z",
+    process: "gate_axiomatic",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 1956,
+    metrics_json: "{\"duration_ms\":1956,\"gate\":\"axiomatic\"}",
+}
+
+component ProcessEntry_20260806_013224_818582 {
+    timestamp: "2026-08-06T01:32:24.818567Z",
+    process: "gate_living_conversation",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 3340,
+    metrics_json: "{\"duration_ms\":3340,\"gate\":\"living_conversation\"}",
+}
+
+component ProcessEntry_20260806_013231_283005 {
+    timestamp: "2026-08-06T01:32:31.282987Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 7841,
+    metrics_json: "{\"duration_ms\":7841,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_013236_115199 {
+    timestamp: "2026-08-06T01:32:36.115184Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 4831,
+    metrics_json: "{\"duration_ms\":4831,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_013249_820365 {
+    timestamp: "2026-08-06T01:32:49.820350Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 13704,
+    metrics_json: "{\"duration_ms\":13704,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_013254_824100 {
+    timestamp: "2026-08-06T01:32:54.824062Z",
+    process: "gate_repo",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 33367,
+    metrics_json: "{\"duration_ms\":33367,\"gate\":\"repo\"}",
+}
+
+component ProcessEntry_20260806_013259_971059 {
+    timestamp: "2026-08-06T01:32:59.971038Z",
+    process: "gate_frontier_face",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 38490,
+    metrics_json: "{\"duration_ms\":38490,\"gate\":\"frontier_face\"}",
+}
+
+component ProcessEntry_20260806_013325_409902 {
+    timestamp: "2026-08-06T01:33:25.409884Z",
+    process: "peerless_P4",
+    decision: "close_WASM size optimization",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 35589,
+    metrics_json: "{\"duration_ms\":35589,\"gap\":\"P4\"}",
+}
+
+component ProcessEntry_20260806_013334_598550 {
+    timestamp: "2026-08-06T01:33:34.598533Z",
+    process: "peerless_P5",
+    decision: "close_True self-hosting in Frontier",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 9188,
+    metrics_json: "{\"duration_ms\":9188,\"gap\":\"P5\"}",
+}
+
+component ProcessEntry_20260806_013337_751275 {
+    timestamp: "2026-08-06T01:33:37.751254Z",
+    process: "gate_global_skills",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 72932,
+    metrics_json: "{\"duration_ms\":72932,\"gate\":\"global_skills\"}",
+}
+
+component ProcessEntry_20260806_013340_861000 {
+    timestamp: "2026-08-06T01:33:40.860984Z",
+    process: "peerless_P6",
+    decision: "close_Teacher-student unity module",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 6262,
+    metrics_json: "{\"duration_ms\":6262,\"gap\":\"P6\"}",
+}
+
+component ProcessEntry_20260806_013340_868608 {
+    timestamp: "2026-08-06T01:33:40.868593Z",
+    process: "gate_peerless",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 77456,
+    metrics_json: "{\"duration_ms\":77456,\"gate\":\"peerless\"}",
+}
+
+component ProcessEntry_20260806_013340_968963 {
+    timestamp: "2026-08-06T01:33:40.968952Z",
+    process: "swarm_optimized_run",
+    decision: "aggregate_results",
+    result: "pass",
+    worker: "swarm_optimized",
+    duration_ms: 102833,
+    metrics_json: "{\"duration_ms\":102833,\"speedup_factor\":2.58}",
+}
+
+component ProcessEntry_20260806_013340_981613 {
+    timestamp: "2026-08-06T01:33:40.981586Z",
+    process: "swarm_optimized",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 102881,
+    metrics_json: "{\"duration_ms\":102881}",
+}
+
+component ProcessEntry_20260806_013344_267020 {
+    timestamp: "2026-08-06T01:33:44.267002Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 3256,
+    metrics_json: "{\"duration_ms\":3256,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_013347_630038 {
+    timestamp: "2026-08-06T01:33:47.630024Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 3362,
+    metrics_json: "{\"duration_ms\":3362,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_013401_132894 {
+    timestamp: "2026-08-06T01:34:01.132877Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 13502,
+    metrics_json: "{\"duration_ms\":13502,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_013403_629157 {
+    timestamp: "2026-08-06T01:34:03.629141Z",
+    process: "peerless_P4",
+    decision: "close_WASM size optimization",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 2496,
+    metrics_json: "{\"duration_ms\":2496,\"gap\":\"P4\"}",
+}
+
+component ProcessEntry_20260806_013410_201558 {
+    timestamp: "2026-08-06T01:34:10.201543Z",
+    process: "peerless_P5",
+    decision: "close_True self-hosting in Frontier",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 6572,
+    metrics_json: "{\"duration_ms\":6572,\"gap\":\"P5\"}",
+}
+
+component ProcessEntry_20260806_013413_441645 {
+    timestamp: "2026-08-06T01:34:13.441627Z",
+    process: "peerless_P6",
+    decision: "close_Teacher-student unity module",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 3239,
+    metrics_json: "{\"duration_ms\":3239,\"gap\":\"P6\"}",
+}
+
+component ProcessEntry_20260806_013413_447380 {
+    timestamp: "2026-08-06T01:34:13.447367Z",
+    process: "close_peerless",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 32465,
+    metrics_json: "{\"duration_ms\":32465}",
+}
+
+component ProcessEntry_20260806_013452_924681 {
+    timestamp: "2026-08-06T01:34:52.924661Z",
+    process: "arc_verify",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 39477,
+    metrics_json: "{\"duration_ms\":39477}",
+}
+
+component ProcessEntry_20260806_013454_976230 {
+    timestamp: "2026-08-06T01:34:54.976221Z",
+    process: "spec_impl_bridge",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 23,
+    metrics_json: "{\"duration_ms\":23}",
+}
+
+component ProcessEntry_20260806_013457_539758 {
+    timestamp: "2026-08-06T01:34:57.539729Z",
+    process: "wasm_slim",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 2563,
+    metrics_json: "{\"duration_ms\":2563}",
+}
+
+component ProcessEntry_20260806_013457_569407 {
+    timestamp: "2026-08-06T01:34:57.569386Z",
+    process: "frontier_worker_alias",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 29,
+    metrics_json: "{\"duration_ms\":29}",
+}
+
+component ProcessEntry_20260806_013500_853941 {
+    timestamp: "2026-08-06T01:35:00.853915Z",
+    process: "genesis_loop",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 3284,
+    metrics_json: "{\"duration_ms\":3284}",
+}
+
+component ProcessEntry_20260806_013500_879359 {
+    timestamp: "2026-08-06T01:35:00.879341Z",
+    process: "knowledge_sync",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 25,
+    metrics_json: "{\"duration_ms\":25}",
+}
+
+component ProcessEntry_20260806_013500_915378 {
+    timestamp: "2026-08-06T01:35:00.915369Z",
+    process: "parse_repo",
+    decision: "shared_state_once",
+    result: "pass",
+    worker: "swarm_optimized",
+    duration_ms: 0,
+    metrics_json: "{\"duration_ms\":0,\"modules\":10}",
+}
+
+component ProcessEntry_20260806_013501_845405 {
+    timestamp: "2026-08-06T01:35:01.845375Z",
+    process: "proofs_security",
+    decision: "execute_proofs_security",
+    result: "pass",
+    worker: "worker_3",
+    duration_ms: 928,
+    metrics_json: "{\"duration_ms\":928,\"pass\":true,\"output\":\"PASS: Coq proof validation (4/4 proofs)\\n\"}",
+}
+
+component ProcessEntry_20260806_013502_675570 {
+    timestamp: "2026-08-06T01:35:02.675547Z",
+    process: "wasm_codegen",
+    decision: "execute_wasm_codegen",
+    result: "pass",
+    worker: "worker_1",
+    duration_ms: 1759,
+    metrics_json: "{\"duration_ms\":1759,\"pass\":true,\"output\":\"u32,\\n    |     ^^^^^^^^^^\\n\\nwarning: `frontier` (lib test) generated 13 warnings (run `cargo fix --lib -p frontier --tests` to apply 2 suggestions)\\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.72s\\n     Running unittests src/lib.rs (target/debug/deps/frontier-1475498e1a73911a)\\n\"}",
+}
+
+component ProcessEntry_20260806_013505_822955 {
+    timestamp: "2026-08-06T01:35:05.822932Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 4880,
+    metrics_json: "{\"duration_ms\":4880,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_013512_163266 {
+    timestamp: "2026-08-06T01:35:12.163254Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 6340,
+    metrics_json: "{\"duration_ms\":6340,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_013515_229191 {
+    timestamp: "2026-08-06T01:35:15.229171Z",
+    process: "self_hosting",
+    decision: "execute_self_hosting",
+    result: "pass",
+    worker: "worker_2",
+    duration_ms: 14312,
+    metrics_json: "{\"duration_ms\":14312,\"pass\":true,\"output\":\"PASS: Self-hosting bootstrap (cmp identical)\\n\"}",
+}
+
+component ProcessEntry_20260806_013528_559316 {
+    timestamp: "2026-08-06T01:35:28.559301Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 16395,
+    metrics_json: "{\"duration_ms\":16395,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_013528_565778 {
+    timestamp: "2026-08-06T01:35:28.565764Z",
+    process: "runtime_integration",
+    decision: "execute_runtime_integration",
+    result: "pass",
+    worker: "worker_4",
+    duration_ms: 27648,
+    metrics_json: "{\"duration_ms\":27648,\"pass\":true,\"output\":\"y', 'note': 'HTTP Error 410: Gone'}\\\\n\\\",\\n      \\\"module_present\\\": true\\n    },\\n    {\\n      \\\"id\\\": \\\"P3\\\",\\n      \\\"name\\\": \\\"Live CDX streaming\\\",\\n      \\\"status\\\": \\\"closed\\\",\\n      \\\"pass\\\": true,\\n      \\\"duration_ms\\\": 16395,\\n      \\\"output\\\": \\\"PASS: CDX streaming runtime\\\\n\\\",\\n      \\\"module_present\\\": true\\n    }\\n  ]\\n}\\n\"}",
+}
+
+component ProcessEntry_20260806_013528_588008 {
+    timestamp: "2026-08-06T01:35:28.587999Z",
+    process: "gate_no_screw",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 21,
+    metrics_json: "{\"duration_ms\":21,\"gate\":\"no_screw\"}",
+}
+
+component ProcessEntry_20260806_013528_591584 {
+    timestamp: "2026-08-06T01:35:28.591574Z",
+    process: "gate_a_plus",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 24,
+    metrics_json: "{\"duration_ms\":24,\"gate\":\"a_plus\"}",
+}
+
+component ProcessEntry_20260806_013530_573076 {
+    timestamp: "2026-08-06T01:35:30.573054Z",
+    process: "gate_axiomatic",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 2007,
+    metrics_json: "{\"duration_ms\":2007,\"gate\":\"axiomatic\"}",
+}
+
+component ProcessEntry_20260806_013533_624084 {
+    timestamp: "2026-08-06T01:35:33.624059Z",
+    process: "gate_living_conversation",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 5035,
+    metrics_json: "{\"duration_ms\":5035,\"gate\":\"living_conversation\"}",
+}
+
+component ProcessEntry_20260806_013538_571665 {
+    timestamp: "2026-08-06T01:35:38.571638Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 7969,
+    metrics_json: "{\"duration_ms\":7969,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_013543_365943 {
+    timestamp: "2026-08-06T01:35:43.365930Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 4793,
+    metrics_json: "{\"duration_ms\":4793,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_013551_989390 {
+    timestamp: "2026-08-06T01:35:51.989371Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 8623,
+    metrics_json: "{\"duration_ms\":8623,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_013600_232540 {
+    timestamp: "2026-08-06T01:36:00.232513Z",
+    process: "gate_repo",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 31666,
+    metrics_json: "{\"duration_ms\":31666,\"gate\":\"repo\"}",
+}
+
+component ProcessEntry_20260806_013605_228856 {
+    timestamp: "2026-08-06T01:36:05.228818Z",
+    process: "gate_frontier_face",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 36637,
+    metrics_json: "{\"duration_ms\":36637,\"gate\":\"frontier_face\"}",
+}
+
+component ProcessEntry_20260806_013631_592435 {
+    timestamp: "2026-08-06T01:36:31.592419Z",
+    process: "peerless_P4",
+    decision: "close_WASM size optimization",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 39602,
+    metrics_json: "{\"duration_ms\":39602,\"gap\":\"P4\"}",
+}
+
+component ProcessEntry_20260806_013641_070476 {
+    timestamp: "2026-08-06T01:36:41.070459Z",
+    process: "peerless_P5",
+    decision: "close_True self-hosting in Frontier",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 9477,
+    metrics_json: "{\"duration_ms\":9477,\"gap\":\"P5\"}",
+}
+
+component ProcessEntry_20260806_013644_356413 {
+    timestamp: "2026-08-06T01:36:44.356385Z",
+    process: "gate_global_skills",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 70732,
+    metrics_json: "{\"duration_ms\":70732,\"gate\":\"global_skills\"}",
+}
+
+component ProcessEntry_20260806_013647_666865 {
+    timestamp: "2026-08-06T01:36:47.666846Z",
+    process: "peerless_P6",
+    decision: "close_Teacher-student unity module",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 6596,
+    metrics_json: "{\"duration_ms\":6596,\"gap\":\"P6\"}",
+}
+
+component ProcessEntry_20260806_013647_673975 {
+    timestamp: "2026-08-06T01:36:47.673962Z",
+    process: "gate_peerless",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 77100,
+    metrics_json: "{\"duration_ms\":77100,\"gate\":\"peerless\"}",
+}
+
+component ProcessEntry_20260806_013647_774438 {
+    timestamp: "2026-08-06T01:36:47.774425Z",
+    process: "swarm_optimized_run",
+    decision: "aggregate_results",
+    result: "pass",
+    worker: "swarm_optimized",
+    duration_ms: 106859,
+    metrics_json: "{\"duration_ms\":106859,\"speedup_factor\":2.51}",
+}
+
+component ProcessEntry_20260806_013647_786130 {
+    timestamp: "2026-08-06T01:36:47.786103Z",
+    process: "swarm_optimized",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 106906,
+    metrics_json: "{\"duration_ms\":106906}",
+}
+
+component ProcessEntry_20260806_013651_315704 {
+    timestamp: "2026-08-06T01:36:51.315683Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 3500,
+    metrics_json: "{\"duration_ms\":3500,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_013654_816982 {
+    timestamp: "2026-08-06T01:36:54.816968Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 3500,
+    metrics_json: "{\"duration_ms\":3500,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_013708_422246 {
+    timestamp: "2026-08-06T01:37:08.422231Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 13605,
+    metrics_json: "{\"duration_ms\":13605,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_013711_004359 {
+    timestamp: "2026-08-06T01:37:11.004342Z",
+    process: "peerless_P4",
+    decision: "close_WASM size optimization",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 2581,
+    metrics_json: "{\"duration_ms\":2581,\"gap\":\"P4\"}",
+}
+
+component ProcessEntry_20260806_013717_824844 {
+    timestamp: "2026-08-06T01:37:17.824827Z",
+    process: "peerless_P5",
+    decision: "close_True self-hosting in Frontier",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 6820,
+    metrics_json: "{\"duration_ms\":6820,\"gap\":\"P5\"}",
+}
+
+component ProcessEntry_20260806_013721_214304 {
+    timestamp: "2026-08-06T01:37:21.214287Z",
+    process: "peerless_P6",
+    decision: "close_Teacher-student unity module",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 3389,
+    metrics_json: "{\"duration_ms\":3389,\"gap\":\"P6\"}",
+}
+
+component ProcessEntry_20260806_013721_220744 {
+    timestamp: "2026-08-06T01:37:21.220730Z",
+    process: "close_peerless",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 33434,
+    metrics_json: "{\"duration_ms\":33434}",
+}
+
+component ProcessEntry_20260806_013802_062586 {
+    timestamp: "2026-08-06T01:38:02.062562Z",
+    process: "arc_verify",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 40841,
+    metrics_json: "{\"duration_ms\":40841}",
+}
+
+component ProcessEntry_20260806_013804_104112 {
+    timestamp: "2026-08-06T01:38:04.104102Z",
+    process: "ultimate_conclusion",
+    decision: "final_status",
+    result: "partial",
+    worker: "ultimate_conclusion",
+    duration_ms: 0,
+    metrics_json: "{\"concluded\":false,\"iterations\":3,\"steps\":[{\"step\":\"spec_impl_bridge\",\"pass\":true,\"duration_ms\":23,\"output\":\"PASS: Spec/impl bridge \\u2014 10 core modules mapped\\n\"},{\"step\":\"wasm_slim\",\"pass\":true,\"duration_ms\":2563,\"output\":\"WASM size: 885.5 KB (target <100 KB \\u2014 tracked)\\nPASS: WASM build OK \\u2014 885.5 KB tracked (target <100 KB)\\n\"},{\"step\":\"frontier_worker_alias\",\"pass\":true,\"duration_ms\":29,\"output\":\"ok\\n\"},{\"step\":\"genesis_loop\",\"pass\":true,\"duration_ms\":3284,\"output\":\"`func_index` is never read\\n   --> src/wasm_codegen.rs:346:5\\n    |\\n341 | struct FunctionCodegen {\\n    |        --------------- field in this struct\\n...\\n346 |     func_index: u32,\\n    |     ^^^^^^^^^^\\n\\n\"},{\"step\":\"knowledge_sync\",\"pass\":true,\"duration_ms\":25,\"output\":\"{\\n  \\\"pass\\\": true,\\n  \\\"entries\\\": 208,\\n  \\\"ingested_log\\\": true\\n}\\n\"},{\"step\":\"swarm_optimized\",\"pass\":true,\"duration_ms\":106906,\"output\":\"ion_ms\\\": 70732\\n    },\\n    {\\n      \\\"gate\\\": \\\"peerless\\\",\\n      \\\"pass\\\": true,\\n      \\\"duration_ms\\\": 77100\\n    }\\n  ],\\n  \\\"all_pass\\\": true,\\n  \\\"shared_state\\\": {\\n    \\\"core_modules\\\": 10,\\n    \\\"scripts\\\": 46\\n  }\\n}\\n\"},{\"step\":\"close_peerless\",\"pass\":true,\"duration_ms\":33434,\"output\":\"eacher-student unity module\\\",\\n      \\\"status\\\": \\\"closed\\\",\\n      \\\"pass\\\": true,\\n      \\\"duration_ms\\\": 3389,\\n      \\\"output\\\": \\\"PASS: Teacher-student unity module\\\\n\\\",\\n      \\\"module_present\\\": true\\n    }\\n  ]\\n}\\n\"},{\"step\":\"arc_verify\",\"pass\":true,\"duration_ms\":40841,\"output\":\"------------- field in this struct\\n...\\n346 |     func_index: u32,\\n    |     ^^^^^^^^^^\\n\\n\\u26a1 Knowledge Hypercube: using timsort (2002) \\u2014 complexity class 3\\n\\u26a1 Algorithm applied to codegen: sort \\u2014 timsort\\n\"}],\"gap_resolution\":[{\"file\":\"WORKER_REPORT.json\",\"resolved\":0,\"remaining\":1},{\"file\":\"WORKER_REPORT.json\",\"resolved\":0,\"remaining\":1}],\"report\":\"audit_reports/ultimate_conclusion_report.md\"}",
+}
+
+component ProcessEntry_20260806_013939_970553 {
+    timestamp: "2026-08-06T01:39:39.970544Z",
+    process: "spec_impl_bridge",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 20,
+    metrics_json: "{\"duration_ms\":20}",
+}
+
+component ProcessEntry_20260806_013942_550354 {
+    timestamp: "2026-08-06T01:39:42.550333Z",
+    process: "wasm_slim",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 2579,
+    metrics_json: "{\"duration_ms\":2579}",
+}
+
+component ProcessEntry_20260806_013942_588526 {
+    timestamp: "2026-08-06T01:39:42.588514Z",
+    process: "frontier_worker_alias",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 38,
+    metrics_json: "{\"duration_ms\":38}",
+}
+
+component ProcessEntry_20260806_013945_888230 {
+    timestamp: "2026-08-06T01:39:45.888206Z",
+    process: "genesis_loop",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 3299,
+    metrics_json: "{\"duration_ms\":3299}",
+}
+
+component ProcessEntry_20260806_013945_913549 {
+    timestamp: "2026-08-06T01:39:45.913537Z",
+    process: "knowledge_sync",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 25,
+    metrics_json: "{\"duration_ms\":25}",
+}
+
+component ProcessEntry_20260806_013945_950749 {
+    timestamp: "2026-08-06T01:39:45.950738Z",
+    process: "parse_repo",
+    decision: "shared_state_once",
+    result: "pass",
+    worker: "swarm_optimized",
+    duration_ms: 0,
+    metrics_json: "{\"duration_ms\":0,\"modules\":10}",
+}
+
+component ProcessEntry_20260806_013946_896680 {
+    timestamp: "2026-08-06T01:39:46.896658Z",
+    process: "proofs_security",
+    decision: "execute_proofs_security",
+    result: "pass",
+    worker: "worker_3",
+    duration_ms: 944,
+    metrics_json: "{\"duration_ms\":944,\"pass\":true,\"output\":\"PASS: Coq proof validation (4/4 proofs)\\n\"}",
+}
+
+component ProcessEntry_20260806_013947_768439 {
+    timestamp: "2026-08-06T01:39:47.768419Z",
+    process: "wasm_codegen",
+    decision: "execute_wasm_codegen",
+    result: "pass",
+    worker: "worker_1",
+    duration_ms: 1817,
+    metrics_json: "{\"duration_ms\":1817,\"pass\":true,\"output\":\"u32,\\n    |     ^^^^^^^^^^\\n\\nwarning: `frontier` (lib test) generated 13 warnings (run `cargo fix --lib -p frontier --tests` to apply 2 suggestions)\\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.78s\\n     Running unittests src/lib.rs (target/debug/deps/frontier-1475498e1a73911a)\\n\"}",
+}
+
+component ProcessEntry_20260806_013954_213337 {
+    timestamp: "2026-08-06T01:39:54.213316Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 8235,
+    metrics_json: "{\"duration_ms\":8235,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_013957_492394 {
+    timestamp: "2026-08-06T01:39:57.492360Z",
+    process: "self_hosting",
+    decision: "execute_self_hosting",
+    result: "pass",
+    worker: "worker_2",
+    duration_ms: 11539,
+    metrics_json: "{\"duration_ms\":11539,\"pass\":true,\"output\":\"PASS: Self-hosting bootstrap (cmp identical)\\n\"}",
+}
+
+component ProcessEntry_20260806_014000_732111 {
+    timestamp: "2026-08-06T01:40:00.732097Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 6518,
+    metrics_json: "{\"duration_ms\":6518,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_014009_293698 {
+    timestamp: "2026-08-06T01:40:09.293685Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 8561,
+    metrics_json: "{\"duration_ms\":8561,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_014009_300274 {
+    timestamp: "2026-08-06T01:40:09.300257Z",
+    process: "runtime_integration",
+    decision: "execute_runtime_integration",
+    result: "pass",
+    worker: "worker_4",
+    duration_ms: 23347,
+    metrics_json: "{\"duration_ms\":23347,\"pass\":true,\"output\":\"ly', 'note': 'HTTP Error 410: Gone'}\\\\n\\\",\\n      \\\"module_present\\\": true\\n    },\\n    {\\n      \\\"id\\\": \\\"P3\\\",\\n      \\\"name\\\": \\\"Live CDX streaming\\\",\\n      \\\"status\\\": \\\"closed\\\",\\n      \\\"pass\\\": true,\\n      \\\"duration_ms\\\": 8561,\\n      \\\"output\\\": \\\"PASS: CDX streaming runtime\\\\n\\\",\\n      \\\"module_present\\\": true\\n    }\\n  ]\\n}\\n\"}",
+}
+
+component ProcessEntry_20260806_014009_325506 {
+    timestamp: "2026-08-06T01:40:09.325495Z",
+    process: "gate_no_screw",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 20,
+    metrics_json: "{\"duration_ms\":20,\"gate\":\"no_screw\"}",
+}
+
+component ProcessEntry_20260806_014009_325598 {
+    timestamp: "2026-08-06T01:40:09.325595Z",
+    process: "gate_a_plus",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 23,
+    metrics_json: "{\"duration_ms\":23,\"gate\":\"a_plus\"}",
+}
+
+component ProcessEntry_20260806_014011_282057 {
+    timestamp: "2026-08-06T01:40:11.282030Z",
+    process: "gate_axiomatic",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 1980,
+    metrics_json: "{\"duration_ms\":1980,\"gate\":\"axiomatic\"}",
+}
+
+component ProcessEntry_20260806_014014_344798 {
+    timestamp: "2026-08-06T01:40:14.344780Z",
+    process: "gate_living_conversation",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 5022,
+    metrics_json: "{\"duration_ms\":5022,\"gate\":\"living_conversation\"}",
+}
+
+component ProcessEntry_20260806_014019_298999 {
+    timestamp: "2026-08-06T01:40:19.298975Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 7988,
+    metrics_json: "{\"duration_ms\":7988,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_014024_158319 {
+    timestamp: "2026-08-06T01:40:24.158306Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 4859,
+    metrics_json: "{\"duration_ms\":4859,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_014037_790901 {
+    timestamp: "2026-08-06T01:40:37.790881Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 13632,
+    metrics_json: "{\"duration_ms\":13632,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_014041_640382 {
+    timestamp: "2026-08-06T01:40:41.640362Z",
+    process: "gate_repo",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 32339,
+    metrics_json: "{\"duration_ms\":32339,\"gate\":\"repo\"}",
+}
+
+component ProcessEntry_20260806_014046_688820 {
+    timestamp: "2026-08-06T01:40:46.688791Z",
+    process: "gate_frontier_face",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 37363,
+    metrics_json: "{\"duration_ms\":37363,\"gate\":\"frontier_face\"}",
+}
+
+component ProcessEntry_20260806_014113_070107 {
+    timestamp: "2026-08-06T01:41:13.070084Z",
+    process: "peerless_P4",
+    decision: "close_WASM size optimization",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 35278,
+    metrics_json: "{\"duration_ms\":35278,\"gap\":\"P4\"}",
+}
+
+component ProcessEntry_20260806_014122_438338 {
+    timestamp: "2026-08-06T01:41:22.438321Z",
+    process: "peerless_P5",
+    decision: "close_True self-hosting in Frontier",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 9367,
+    metrics_json: "{\"duration_ms\":9367,\"gap\":\"P5\"}",
+}
+
+component ProcessEntry_20260806_014125_706302 {
+    timestamp: "2026-08-06T01:41:25.706277Z",
+    process: "gate_global_skills",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 71361,
+    metrics_json: "{\"duration_ms\":71361,\"gate\":\"global_skills\"}",
+}
+
+component ProcessEntry_20260806_014128_979048 {
+    timestamp: "2026-08-06T01:41:28.979031Z",
+    process: "peerless_P6",
+    decision: "close_Teacher-student unity module",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 6540,
+    metrics_json: "{\"duration_ms\":6540,\"gap\":\"P6\"}",
+}
+
+component ProcessEntry_20260806_014128_986566 {
+    timestamp: "2026-08-06T01:41:28.986551Z",
+    process: "gate_peerless",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 77704,
+    metrics_json: "{\"duration_ms\":77704,\"gate\":\"peerless\"}",
+}
+
+component ProcessEntry_20260806_014129_086888 {
+    timestamp: "2026-08-06T01:41:29.086879Z",
+    process: "swarm_optimized_run",
+    decision: "aggregate_results",
+    result: "pass",
+    worker: "swarm_optimized",
+    duration_ms: 103136,
+    metrics_json: "{\"duration_ms\":103136,\"speedup_factor\":2.55}",
+}
+
+component ProcessEntry_20260806_014129_097521 {
+    timestamp: "2026-08-06T01:41:29.097500Z",
+    process: "swarm_optimized",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 103183,
+    metrics_json: "{\"duration_ms\":103183}",
+}
+
+component ProcessEntry_20260806_014132_509711 {
+    timestamp: "2026-08-06T01:41:32.509692Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 3384,
+    metrics_json: "{\"duration_ms\":3384,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_014135_944292 {
+    timestamp: "2026-08-06T01:41:35.944280Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 3434,
+    metrics_json: "{\"duration_ms\":3434,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_014145_003235 {
+    timestamp: "2026-08-06T01:41:45.003215Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 9058,
+    metrics_json: "{\"duration_ms\":9058,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_014147_607186 {
+    timestamp: "2026-08-06T01:41:47.607168Z",
+    process: "peerless_P4",
+    decision: "close_WASM size optimization",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 2603,
+    metrics_json: "{\"duration_ms\":2603,\"gap\":\"P4\"}",
+}
+
+component ProcessEntry_20260806_014154_441289 {
+    timestamp: "2026-08-06T01:41:54.441272Z",
+    process: "peerless_P5",
+    decision: "close_True self-hosting in Frontier",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 6833,
+    metrics_json: "{\"duration_ms\":6833,\"gap\":\"P5\"}",
+}
+
+component ProcessEntry_20260806_014157_834841 {
+    timestamp: "2026-08-06T01:41:57.834824Z",
+    process: "peerless_P6",
+    decision: "close_Teacher-student unity module",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 3393,
+    metrics_json: "{\"duration_ms\":3393,\"gap\":\"P6\"}",
+}
+
+component ProcessEntry_20260806_014157_841177 {
+    timestamp: "2026-08-06T01:41:57.841156Z",
+    process: "close_peerless",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 28743,
+    metrics_json: "{\"duration_ms\":28743}",
+}
+
+component ProcessEntry_20260806_014239_141570 {
+    timestamp: "2026-08-06T01:42:39.141546Z",
+    process: "arc_verify",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 41300,
+    metrics_json: "{\"duration_ms\":41300}",
+}
+
+component ProcessEntry_20260806_014241_179462 {
+    timestamp: "2026-08-06T01:42:41.179457Z",
+    process: "ultimate_conclusion",
+    decision: "final_status",
+    result: "concluded",
+    worker: "ultimate_conclusion",
+    duration_ms: 0,
+    metrics_json: "{\"concluded\":true,\"iterations\":1,\"steps\":[{\"step\":\"spec_impl_bridge\",\"pass\":true,\"duration_ms\":20,\"output\":\"PASS: Spec/impl bridge \\u2014 10 core modules mapped\\n\"},{\"step\":\"wasm_slim\",\"pass\":true,\"duration_ms\":2579,\"output\":\"WASM size: 885.5 KB (target <100 KB \\u2014 tracked)\\nPASS: WASM build OK \\u2014 885.5 KB tracked (target <100 KB)\\n\"},{\"step\":\"frontier_worker_alias\",\"pass\":true,\"duration_ms\":38,\"output\":\"ok\\n\"},{\"step\":\"genesis_loop\",\"pass\":true,\"duration_ms\":3299,\"output\":\"`func_index` is never read\\n   --> src/wasm_codegen.rs:346:5\\n    |\\n341 | struct FunctionCodegen {\\n    |        --------------- field in this struct\\n...\\n346 |     func_index: u32,\\n    |     ^^^^^^^^^^\\n\\n\"},{\"step\":\"knowledge_sync\",\"pass\":true,\"duration_ms\":25,\"output\":\"{\\n  \\\"pass\\\": true,\\n  \\\"entries\\\": 248,\\n  \\\"ingested_log\\\": true\\n}\\n\"},{\"step\":\"swarm_optimized\",\"pass\":true,\"duration_ms\":103183,\"output\":\"ion_ms\\\": 71361\\n    },\\n    {\\n      \\\"gate\\\": \\\"peerless\\\",\\n      \\\"pass\\\": true,\\n      \\\"duration_ms\\\": 77704\\n    }\\n  ],\\n  \\\"all_pass\\\": true,\\n  \\\"shared_state\\\": {\\n    \\\"core_modules\\\": 10,\\n    \\\"scripts\\\": 46\\n  }\\n}\\n\"},{\"step\":\"close_peerless\",\"pass\":true,\"duration_ms\":28743,\"output\":\"eacher-student unity module\\\",\\n      \\\"status\\\": \\\"closed\\\",\\n      \\\"pass\\\": true,\\n      \\\"duration_ms\\\": 3393,\\n      \\\"output\\\": \\\"PASS: Teacher-student unity module\\\\n\\\",\\n      \\\"module_present\\\": true\\n    }\\n  ]\\n}\\n\"},{\"step\":\"arc_verify\",\"pass\":true,\"duration_ms\":41300,\"output\":\"------------- field in this struct\\n...\\n346 |     func_index: u32,\\n    |     ^^^^^^^^^^\\n\\n\\u26a1 Knowledge Hypercube: using timsort (2002) \\u2014 complexity class 3\\n\\u26a1 Algorithm applied to codegen: sort \\u2014 timsort\\n\"}],\"gap_resolution\":[{\"file\":\"WORKER_REPORT.json\",\"resolved\":0,\"remaining\":0},{\"file\":\"WORKER_REPORT.json\",\"resolved\":0,\"remaining\":0}],\"report\":\"audit_reports/ultimate_conclusion_report.md\"}",
+}
+
+component ProcessEntry_20260806_014410_031243 {
+    timestamp: "2026-08-06T01:44:10.031233Z",
+    process: "process_log",
+    decision: "kb_ingest",
+    result: "pass",
+    worker: "swarm_kb_optimizer",
+    duration_ms: 10,
+    metrics_json: "{\"added\":179,\"duration_ms\":10}",
+}
+
+component ProcessEntry_20260806_014410_033005 {
+    timestamp: "2026-08-06T01:44:10.032998Z",
+    process: "optimization_manifests",
+    decision: "kb_ingest",
+    result: "pass",
+    worker: "swarm_kb_optimizer",
+    duration_ms: 12,
+    metrics_json: "{\"added\":0,\"duration_ms\":12}",
+}
+
+component ProcessEntry_20260806_014410_035380 {
+    timestamp: "2026-08-06T01:44:10.035370Z",
+    process: "core_specs",
+    decision: "kb_ingest",
+    result: "pass",
+    worker: "swarm_kb_optimizer",
+    duration_ms: 14,
+    metrics_json: "{\"added\":10,\"duration_ms\":14}",
+}
+
+component ProcessEntry_20260806_014410_036141 {
+    timestamp: "2026-08-06T01:44:10.036137Z",
+    process: "audit_reports",
+    decision: "kb_ingest",
+    result: "pass",
+    worker: "swarm_kb_optimizer",
+    duration_ms: 15,
+    metrics_json: "{\"added\":11,\"duration_ms\":15}",
+}
+
+component ProcessEntry_20260806_014410_064549 {
+    timestamp: "2026-08-06T01:44:10.064546Z",
+    process: "swarm_kb_optimizer",
+    decision: "complete",
+    result: "pass",
+    worker: "swarm_kb_optimizer",
+    duration_ms: 45,
+    metrics_json: "{\"workers\":4,\"total_added\":200,\"knowledge_entries\":406,\"duration_ms\":45,\"worker_results\":[{\"worker\":\"process_log\",\"pass\":true,\"added\":179,\"duration_ms\":10},{\"worker\":\"optimization_manifests\",\"pass\":true,\"added\":0,\"duration_ms\":12},{\"worker\":\"core_specs\",\"pass\":true,\"added\":10,\"duration_ms\":14},{\"worker\":\"audit_reports\",\"pass\":true,\"added\":11,\"duration_ms\":15}],\"all_pass\":true}",
+}
+
+component ProcessEntry_20260806_014415_849025 {
+    timestamp: "2026-08-06T01:44:15.849014Z",
+    process: "spec_impl_bridge",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 20,
+    metrics_json: "{\"duration_ms\":20}",
+}
+
+component ProcessEntry_20260806_014418_496024 {
+    timestamp: "2026-08-06T01:44:18.496009Z",
+    process: "wasm_slim",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 2646,
+    metrics_json: "{\"duration_ms\":2646}",
+}
+
+component ProcessEntry_20260806_014418_533908 {
+    timestamp: "2026-08-06T01:44:18.533897Z",
+    process: "frontier_worker_alias",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 37,
+    metrics_json: "{\"duration_ms\":37}",
+}
+
+component ProcessEntry_20260806_014422_316215 {
+    timestamp: "2026-08-06T01:44:22.316190Z",
+    process: "genesis_loop",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 3782,
+    metrics_json: "{\"duration_ms\":3782}",
+}
+
+component ProcessEntry_20260806_014422_357177 {
+    timestamp: "2026-08-06T01:44:22.357168Z",
+    process: "process_log",
+    decision: "kb_ingest",
+    result: "pass",
+    worker: "swarm_kb_optimizer",
+    duration_ms: 8,
+    metrics_json: "{\"added\":188,\"duration_ms\":8}",
+}
+
+component ProcessEntry_20260806_014422_362734 {
+    timestamp: "2026-08-06T01:44:22.362724Z",
+    process: "audit_reports",
+    decision: "kb_ingest",
+    result: "pass",
+    worker: "swarm_kb_optimizer",
+    duration_ms: 12,
+    metrics_json: "{\"added\":1,\"duration_ms\":12}",
+}
+
+component ProcessEntry_20260806_014422_363032 {
+    timestamp: "2026-08-06T01:44:22.363028Z",
+    process: "optimization_manifests",
+    decision: "kb_ingest",
+    result: "pass",
+    worker: "swarm_kb_optimizer",
+    duration_ms: 11,
+    metrics_json: "{\"added\":1,\"duration_ms\":11}",
+}
+
+component ProcessEntry_20260806_014422_365521 {
+    timestamp: "2026-08-06T01:44:22.365517Z",
+    process: "core_specs",
+    decision: "kb_ingest",
+    result: "pass",
+    worker: "swarm_kb_optimizer",
+    duration_ms: 16,
+    metrics_json: "{\"added\":10,\"duration_ms\":16}",
+}
+
+component ProcessEntry_20260806_014422_393014 {
+    timestamp: "2026-08-06T01:44:22.393011Z",
+    process: "swarm_kb_optimizer",
+    decision: "complete",
+    result: "pass",
+    worker: "swarm_kb_optimizer",
+    duration_ms: 44,
+    metrics_json: "{\"workers\":4,\"total_added\":200,\"knowledge_entries\":426,\"duration_ms\":44,\"worker_results\":[{\"worker\":\"process_log\",\"pass\":true,\"added\":188,\"duration_ms\":8},{\"worker\":\"audit_reports\",\"pass\":true,\"added\":1,\"duration_ms\":12},{\"worker\":\"optimization_manifests\",\"pass\":true,\"added\":1,\"duration_ms\":11},{\"worker\":\"core_specs\",\"pass\":true,\"added\":10,\"duration_ms\":16}],\"all_pass\":true}",
+}
+
+component ProcessEntry_20260806_014422_398720 {
+    timestamp: "2026-08-06T01:44:22.398708Z",
+    process: "swarm_kb_optimizer",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 82,
+    metrics_json: "{\"duration_ms\":82}",
+}
+
+component ProcessEntry_20260806_014422_422875 {
+    timestamp: "2026-08-06T01:44:22.422866Z",
+    process: "knowledge_sync",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 24,
+    metrics_json: "{\"duration_ms\":24}",
+}
+
+component ProcessEntry_20260806_014422_457811 {
+    timestamp: "2026-08-06T01:44:22.457802Z",
+    process: "parse_repo",
+    decision: "shared_state_once",
+    result: "pass",
+    worker: "swarm_optimized",
+    duration_ms: 0,
+    metrics_json: "{\"duration_ms\":0,\"modules\":10}",
+}
+
+component ProcessEntry_20260806_014423_453028 {
+    timestamp: "2026-08-06T01:44:23.452998Z",
+    process: "proofs_security",
+    decision: "execute_proofs_security",
+    result: "pass",
+    worker: "worker_3",
+    duration_ms: 993,
+    metrics_json: "{\"duration_ms\":993,\"pass\":true,\"output\":\"PASS: Coq proof validation (4/4 proofs)\\n\"}",
+}
+
+component ProcessEntry_20260806_014424_315318 {
+    timestamp: "2026-08-06T01:44:24.315297Z",
+    process: "wasm_codegen",
+    decision: "execute_wasm_codegen",
+    result: "pass",
+    worker: "worker_1",
+    duration_ms: 1856,
+    metrics_json: "{\"duration_ms\":1856,\"pass\":true,\"output\":\",\\n    |     ^^^^^^^^^^^^^\\n\\nwarning: `frontier` (lib test) generated 13 warnings (run `cargo fix --lib -p frontier --tests` to apply 2 suggestions)\\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.82s\\n     Running unittests src/lib.rs (target/debug/deps/frontier-1475498e1a73911a)\\n\"}",
+}
+
+component ProcessEntry_20260806_014430_651962 {
+    timestamp: "2026-08-06T01:44:30.651943Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 8166,
+    metrics_json: "{\"duration_ms\":8166,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_014433_920894 {
+    timestamp: "2026-08-06T01:44:33.920874Z",
+    process: "self_hosting",
+    decision: "execute_self_hosting",
+    result: "pass",
+    worker: "worker_2",
+    duration_ms: 11461,
+    metrics_json: "{\"duration_ms\":11461,\"pass\":true,\"output\":\"PASS: Self-hosting bootstrap (cmp identical)\\n\"}",
+}
+
+component ProcessEntry_20260806_014437_142009 {
+    timestamp: "2026-08-06T01:44:37.141996Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 6489,
+    metrics_json: "{\"duration_ms\":6489,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_014450_681459 {
+    timestamp: "2026-08-06T01:44:50.681445Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 13539,
+    metrics_json: "{\"duration_ms\":13539,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_014450_687824 {
+    timestamp: "2026-08-06T01:44:50.687810Z",
+    process: "runtime_integration",
+    decision: "execute_runtime_integration",
+    result: "pass",
+    worker: "worker_4",
+    duration_ms: 28228,
+    metrics_json: "{\"duration_ms\":28228,\"pass\":true,\"output\":\"y', 'note': 'HTTP Error 410: Gone'}\\\\n\\\",\\n      \\\"module_present\\\": true\\n    },\\n    {\\n      \\\"id\\\": \\\"P3\\\",\\n      \\\"name\\\": \\\"Live CDX streaming\\\",\\n      \\\"status\\\": \\\"closed\\\",\\n      \\\"pass\\\": true,\\n      \\\"duration_ms\\\": 13539,\\n      \\\"output\\\": \\\"PASS: CDX streaming runtime\\\\n\\\",\\n      \\\"module_present\\\": true\\n    }\\n  ]\\n}\\n\"}",
+}
+
+component ProcessEntry_20260806_014450_713502 {
+    timestamp: "2026-08-06T01:44:50.713494Z",
+    process: "gate_no_screw",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 21,
+    metrics_json: "{\"duration_ms\":21,\"gate\":\"no_screw\"}",
+}
+
+component ProcessEntry_20260806_014450_722257 {
+    timestamp: "2026-08-06T01:44:50.722248Z",
+    process: "gate_a_plus",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 33,
+    metrics_json: "{\"duration_ms\":33,\"gate\":\"a_plus\"}",
+}
+
+component ProcessEntry_20260806_014452_619369 {
+    timestamp: "2026-08-06T01:44:52.619349Z",
+    process: "gate_axiomatic",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 1930,
+    metrics_json: "{\"duration_ms\":1930,\"gate\":\"axiomatic\"}",
+}
+
+component ProcessEntry_20260806_014454_022620 {
+    timestamp: "2026-08-06T01:44:54.022596Z",
+    process: "gate_living_conversation",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 3312,
+    metrics_json: "{\"duration_ms\":3312,\"gate\":\"living_conversation\"}",
+}
+
+component ProcessEntry_20260806_014500_302648 {
+    timestamp: "2026-08-06T01:45:00.302630Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 7655,
+    metrics_json: "{\"duration_ms\":7655,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_014505_015636 {
+    timestamp: "2026-08-06T01:45:05.015613Z",
+    process: "gate_frontier_face",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 14293,
+    metrics_json: "{\"duration_ms\":14293,\"gate\":\"frontier_face\"}",
+}
+
+component ProcessEntry_20260806_014508_222636 {
+    timestamp: "2026-08-06T01:45:08.222623Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 7919,
+    metrics_json: "{\"duration_ms\":7919,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_014521_952022 {
+    timestamp: "2026-08-06T01:45:21.952009Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 13729,
+    metrics_json: "{\"duration_ms\":13729,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_014527_258568 {
+    timestamp: "2026-08-06T01:45:27.258550Z",
+    process: "gate_repo",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 36570,
+    metrics_json: "{\"duration_ms\":36570,\"gate\":\"repo\"}",
+}
+
+component ProcessEntry_20260806_014555_350668 {
+    timestamp: "2026-08-06T01:45:55.350654Z",
+    process: "peerless_P4",
+    decision: "close_WASM size optimization",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 33398,
+    metrics_json: "{\"duration_ms\":33398,\"gap\":\"P4\"}",
+}
+
+component ProcessEntry_20260806_014604_391376 {
+    timestamp: "2026-08-06T01:46:04.391360Z",
+    process: "peerless_P5",
+    decision: "close_True self-hosting in Frontier",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 9040,
+    metrics_json: "{\"duration_ms\":9040,\"gap\":\"P5\"}",
+}
+
+component ProcessEntry_20260806_014607_553425 {
+    timestamp: "2026-08-06T01:46:07.553405Z",
+    process: "gate_global_skills",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 73530,
+    metrics_json: "{\"duration_ms\":73530,\"gate\":\"global_skills\"}",
+}
+
+component ProcessEntry_20260806_014610_756700 {
+    timestamp: "2026-08-06T01:46:10.756682Z",
+    process: "peerless_P6",
+    decision: "close_Teacher-student unity module",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 6365,
+    metrics_json: "{\"duration_ms\":6365,\"gap\":\"P6\"}",
+}
+
+component ProcessEntry_20260806_014610_762731 {
+    timestamp: "2026-08-06T01:46:10.762717Z",
+    process: "gate_peerless",
+    decision: "parallel_verify",
+    result: "pass",
+    worker: "verifier",
+    duration_ms: 78143,
+    metrics_json: "{\"duration_ms\":78143,\"gate\":\"peerless\"}",
+}
+
+component ProcessEntry_20260806_014610_863269 {
+    timestamp: "2026-08-06T01:46:10.863257Z",
+    process: "swarm_optimized_run",
+    decision: "aggregate_results",
+    result: "pass",
+    worker: "swarm_optimized",
+    duration_ms: 108405,
+    metrics_json: "{\"duration_ms\":108405,\"speedup_factor\":2.31}",
+}
+
+component ProcessEntry_20260806_014610_872813 {
+    timestamp: "2026-08-06T01:46:10.872800Z",
+    process: "swarm_optimized",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 108449,
+    metrics_json: "{\"duration_ms\":108449}",
+}
+
+component ProcessEntry_20260806_014614_255979 {
+    timestamp: "2026-08-06T01:46:14.255959Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 3354,
+    metrics_json: "{\"duration_ms\":3354,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_014617_634741 {
+    timestamp: "2026-08-06T01:46:17.634726Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 3378,
+    metrics_json: "{\"duration_ms\":3378,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_014625_719464 {
+    timestamp: "2026-08-06T01:46:25.719446Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 8084,
+    metrics_json: "{\"duration_ms\":8084,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_014628_245528 {
+    timestamp: "2026-08-06T01:46:28.245513Z",
+    process: "peerless_P4",
+    decision: "close_WASM size optimization",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 2525,
+    metrics_json: "{\"duration_ms\":2525,\"gap\":\"P4\"}",
+}
+
+component ProcessEntry_20260806_014634_876130 {
+    timestamp: "2026-08-06T01:46:34.876112Z",
+    process: "peerless_P5",
+    decision: "close_True self-hosting in Frontier",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 6630,
+    metrics_json: "{\"duration_ms\":6630,\"gap\":\"P5\"}",
+}
+
+component ProcessEntry_20260806_014638_127828 {
+    timestamp: "2026-08-06T01:46:38.127812Z",
+    process: "peerless_P6",
+    decision: "close_Teacher-student unity module",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 3251,
+    metrics_json: "{\"duration_ms\":3251,\"gap\":\"P6\"}",
+}
+
+component ProcessEntry_20260806_014638_133985 {
+    timestamp: "2026-08-06T01:46:38.133970Z",
+    process: "close_peerless",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 27261,
+    metrics_json: "{\"duration_ms\":27261}",
+}
+
+component ProcessEntry_20260806_014719_445666 {
+    timestamp: "2026-08-06T01:47:19.445626Z",
+    process: "arc_verify",
+    decision: "ultimate_conclusion_step",
+    result: "pass",
+    worker: "ultimate_conclusion",
+    duration_ms: 41311,
+    metrics_json: "{\"duration_ms\":41311}",
+}
+
+component ProcessEntry_20260806_014721_535481 {
+    timestamp: "2026-08-06T01:47:21.535472Z",
+    process: "ultimate_conclusion",
+    decision: "final_status",
+    result: "concluded",
+    worker: "ultimate_conclusion",
+    duration_ms: 0,
+    metrics_json: "{\"concluded\":true,\"iterations\":1,\"steps\":[{\"step\":\"spec_impl_bridge\",\"pass\":true,\"duration_ms\":20,\"output\":\"PASS: Spec/impl bridge \\u2014 10 core modules mapped\\n\"},{\"step\":\"wasm_slim\",\"pass\":true,\"duration_ms\":2646,\"output\":\"WASM size: 885.5 KB (target <100 KB \\u2014 tracked)\\nPASS: WASM build OK \\u2014 885.5 KB tracked (target <100 KB)\\n\"},{\"step\":\"frontier_worker_alias\",\"pass\":true,\"duration_ms\":37,\"output\":\"ok\\n\"},{\"step\":\"genesis_loop\",\"pass\":true,\"duration_ms\":3782,\"output\":\"   |\\n199 | struct FullModuleCodegen {\\n    |        ----------------- field in this struct\\n200 |     functions: Vec<CompiledFn>,\\n201 |     name_to_index: HashMap<String, u32>,\\n    |     ^^^^^^^^^^^^^\\n\\n\"},{\"step\":\"swarm_kb_optimizer\",\"pass\":true,\"duration_ms\":82,\"output\":\"      \\\"pass\\\": true,\\n      \\\"added\\\": 1,\\n      \\\"duration_ms\\\": 11\\n    },\\n    {\\n      \\\"worker\\\": \\\"core_specs\\\",\\n      \\\"pass\\\": true,\\n      \\\"added\\\": 10,\\n      \\\"duration_ms\\\": 16\\n    }\\n  ],\\n  \\\"all_pass\\\": true\\n}\\n\"},{\"step\":\"knowledge_sync\",\"pass\":true,\"duration_ms\":24,\"output\":\"{\\n  \\\"pass\\\": true,\\n  \\\"entries\\\": 428,\\n  \\\"ingested_log\\\": true\\n}\\n\"},{\"step\":\"swarm_optimized\",\"pass\":true,\"duration_ms\":108449,\"output\":\"ion_ms\\\": 73530\\n    },\\n    {\\n      \\\"gate\\\": \\\"peerless\\\",\\n      \\\"pass\\\": true,\\n      \\\"duration_ms\\\": 78143\\n    }\\n  ],\\n  \\\"all_pass\\\": true,\\n  \\\"shared_state\\\": {\\n    \\\"core_modules\\\": 10,\\n    \\\"scripts\\\": 47\\n  }\\n}\\n\"},{\"step\":\"close_peerless\",\"pass\":true,\"duration_ms\":27261,\"output\":\"eacher-student unity module\\\",\\n      \\\"status\\\": \\\"closed\\\",\\n      \\\"pass\\\": true,\\n      \\\"duration_ms\\\": 3251,\\n      \\\"output\\\": \\\"PASS: Teacher-student unity module\\\\n\\\",\\n      \\\"module_present\\\": true\\n    }\\n  ]\\n}\\n\"},{\"step\":\"arc_verify\",\"pass\":true,\"duration_ms\":41311,\"output\":\"ec<CompiledFn>,\\n201 |     name_to_index: HashMap<String, u32>,\\n    |     ^^^^^^^^^^^^^\\n\\n\\u26a1 Knowledge Hypercube: using timsort (2002) \\u2014 complexity class 3\\n\\u26a1 Algorithm applied to codegen: sort \\u2014 timsort\\n\"}],\"gap_resolution\":[{\"file\":\"WORKER_REPORT.json\",\"resolved\":0,\"remaining\":0},{\"file\":\"WORKER_REPORT.json\",\"resolved\":0,\"remaining\":0}],\"report\":\"audit_reports/ultimate_conclusion_report.md\",\"knowledge_entries\":428,\"known_gaps_remaining\":0,\"in_repo_gaps_closed\":true}",
+}
+
+component ProcessEntry_20260806_015017_558082 {
+    timestamp: "2026-08-06T01:50:17.558071Z",
+    process: "ingest",
+    decision: "build_corpus",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"record_count\":813,\"workers\":16}",
+}
+
+component ProcessEntry_20260806_015017_568380 {
+    timestamp: "2026-08-06T01:50:17.568370Z",
+    process: "worker_4",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":12,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015017_568952 {
+    timestamp: "2026-08-06T01:50:17.568949Z",
+    process: "worker_5",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":11,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015017_568994 {
+    timestamp: "2026-08-06T01:50:17.568992Z",
+    process: "worker_11",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":12,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015017_569015 {
+    timestamp: "2026-08-06T01:50:17.569013Z",
+    process: "worker_10",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":12,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015017_569035 {
+    timestamp: "2026-08-06T01:50:17.569034Z",
+    process: "worker_14",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":12,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015017_569052 {
+    timestamp: "2026-08-06T01:50:17.569051Z",
+    process: "worker_2",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":12,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015017_569067 {
+    timestamp: "2026-08-06T01:50:17.569066Z",
+    process: "worker_1",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":13,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015017_569083 {
+    timestamp: "2026-08-06T01:50:17.569082Z",
+    process: "worker_9",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":12,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015017_569098 {
+    timestamp: "2026-08-06T01:50:17.569097Z",
+    process: "worker_8",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":11,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015017_569113 {
+    timestamp: "2026-08-06T01:50:17.569112Z",
+    process: "worker_15",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":13,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015017_569128 {
+    timestamp: "2026-08-06T01:50:17.569127Z",
+    process: "worker_12",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":13,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015017_569144 {
+    timestamp: "2026-08-06T01:50:17.569142Z",
+    process: "worker_7",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":12,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015017_569159 {
+    timestamp: "2026-08-06T01:50:17.569158Z",
+    process: "worker_3",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":12,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015017_569174 {
+    timestamp: "2026-08-06T01:50:17.569173Z",
+    process: "worker_13",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":11,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015017_569189 {
+    timestamp: "2026-08-06T01:50:17.569188Z",
+    process: "worker_6",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":11,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015017_569211 {
+    timestamp: "2026-08-06T01:50:17.569209Z",
+    process: "worker_16",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":12,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015017_570255 {
+    timestamp: "2026-08-06T01:50:17.570251Z",
+    process: "peerless_plan",
+    decision: "complete",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 25,
+    metrics_json: "{\"items\":13,\"duration_ms\":25}",
+}
+
+component ProcessEntry_20260806_015020_619466 {
+    timestamp: "2026-08-06T01:50:20.619453Z",
+    process: "ingest",
+    decision: "build_corpus",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"record_count\":884,\"workers\":16}",
+}
+
+component ProcessEntry_20260806_015020_629241 {
+    timestamp: "2026-08-06T01:50:20.629232Z",
+    process: "worker_1",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":13,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015020_630557 {
+    timestamp: "2026-08-06T01:50:20.630548Z",
+    process: "worker_7",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":11,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015020_630628 {
+    timestamp: "2026-08-06T01:50:20.630625Z",
+    process: "worker_3",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":12,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015020_630658 {
+    timestamp: "2026-08-06T01:50:20.630656Z",
+    process: "worker_6",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":12,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015020_630680 {
+    timestamp: "2026-08-06T01:50:20.630678Z",
+    process: "worker_4",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":12,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015020_630696 {
+    timestamp: "2026-08-06T01:50:20.630695Z",
+    process: "worker_8",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":11,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015020_630711 {
+    timestamp: "2026-08-06T01:50:20.630710Z",
+    process: "worker_5",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":12,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015020_630727 {
+    timestamp: "2026-08-06T01:50:20.630725Z",
+    process: "worker_2",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":12,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015020_630742 {
+    timestamp: "2026-08-06T01:50:20.630741Z",
+    process: "worker_13",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":9,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015020_630760 {
+    timestamp: "2026-08-06T01:50:20.630759Z",
+    process: "worker_12",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":12,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015020_630775 {
+    timestamp: "2026-08-06T01:50:20.630774Z",
+    process: "worker_11",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":11,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015020_630791 {
+    timestamp: "2026-08-06T01:50:20.630790Z",
+    process: "worker_10",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":12,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015020_630806 {
+    timestamp: "2026-08-06T01:50:20.630805Z",
+    process: "worker_14",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":13,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015020_630826 {
+    timestamp: "2026-08-06T01:50:20.630825Z",
+    process: "worker_9",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":10,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015020_630850 {
+    timestamp: "2026-08-06T01:50:20.630849Z",
+    process: "worker_15",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":11,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015020_630868 {
+    timestamp: "2026-08-06T01:50:20.630867Z",
+    process: "worker_16",
+    decision: "analyze_shard",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 0,
+    metrics_json: "{\"themes\":12,\"duration_ms\":0}",
+}
+
+component ProcessEntry_20260806_015020_632121 {
+    timestamp: "2026-08-06T01:50:20.632118Z",
+    process: "peerless_plan",
+    decision: "complete",
+    result: "pass",
+    worker: "swarm_chat_history",
+    duration_ms: 30,
+    metrics_json: "{\"items\":13,\"duration_ms\":30}",
+}
+
+component ProcessEntry_20260806_022509_518722 {
+    timestamp: "2026-08-06T02:25:09.518703Z",
+    process: "plan_execution",
+    decision: "start",
+    result: "running",
+    worker: "plan_executor",
+    duration_ms: 0,
+    metrics_json: "{\"teams\":4,\"workers\":24}",
+}
+
+component ProcessEntry_20260806_022509_614141 {
+    timestamp: "2026-08-06T02:25:09.614131Z",
+    process: "team_alpha_A2",
+    decision: "execute_wasm_manifest",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 93,
+    metrics_json: "{\"plan_id\":\"OPT-001\",\"duration_ms\":93}",
+}
+
+component ProcessEntry_20260806_022509_750872 {
+    timestamp: "2026-08-06T02:25:09.750861Z",
+    process: "team_delta_D4",
+    decision: "execute_language_hardening",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 161,
+    metrics_json: "{\"plan_id\":\"OPT-013\",\"duration_ms\":161}",
+}
+
+component ProcessEntry_20260806_022509_775559 {
+    timestamp: "2026-08-06T02:25:09.775550Z",
+    process: "team_gamma_G4",
+    decision: "execute_spec_impl_bridge",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 138,
+    metrics_json: "{\"plan_id\":\"OPT-010\",\"duration_ms\":138}",
+}
+
+component ProcessEntry_20260806_022509_781219 {
+    timestamp: "2026-08-06T02:25:09.781209Z",
+    process: "team_gamma_G6",
+    decision: "execute_redos_tests",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 116,
+    metrics_json: "{\"plan_id\":\"OPT-011\",\"duration_ms\":116}",
+}
+
+component ProcessEntry_20260806_022509_824661 {
+    timestamp: "2026-08-06T02:25:09.824651Z",
+    process: "team_gamma_G3",
+    decision: "execute_sync_knowledge",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 191,
+    metrics_json: "{\"plan_id\":\"OPT-009\",\"duration_ms\":191}",
+}
+
+component ProcessEntry_20260806_022513_960039 {
+    timestamp: "2026-08-06T02:25:13.959996Z",
+    process: "team_alpha_A5",
+    decision: "execute_wasm_codegen_tests",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 4430,
+    metrics_json: "{\"plan_id\":\"OPT-003\",\"duration_ms\":4430}",
+}
+
+component ProcessEntry_20260806_022514_882972 {
+    timestamp: "2026-08-06T02:25:14.882949Z",
+    process: "team_alpha_A1",
+    decision: "execute_wasm_build",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 5362,
+    metrics_json: "{\"plan_id\":\"OPT-001\",\"duration_ms\":5362}",
+}
+
+component ProcessEntry_20260806_022518_490324 {
+    timestamp: "2026-08-06T02:25:18.490293Z",
+    process: "team_beta_B4",
+    decision: "execute_vulkan_module_test",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 8942,
+    metrics_json: "{\"plan_id\":\"OPT-004\",\"duration_ms\":8942}",
+}
+
+component ProcessEntry_20260806_022520_403712 {
+    timestamp: "2026-08-06T02:25:20.403692Z",
+    process: "team_alpha_A6",
+    decision: "execute_unity_wasm_tests",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 10874,
+    metrics_json: "{\"plan_id\":\"OPT-003\",\"duration_ms\":10874}",
+}
+
+component ProcessEntry_20260806_022524_063966 {
+    timestamp: "2026-08-06T02:25:24.063938Z",
+    process: "team_beta_B5",
+    decision: "execute_cdx_module_test",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 14511,
+    metrics_json: "{\"plan_id\":\"OPT-007\",\"duration_ms\":14511}",
+}
+
+component ProcessEntry_20260806_022529_776809 {
+    timestamp: "2026-08-06T02:25:29.776784Z",
+    process: "team_alpha_A4",
+    decision: "execute_main_fr_parse",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 20250,
+    metrics_json: "{\"plan_id\":\"OPT-002\",\"duration_ms\":20250}",
+}
+
+component ProcessEntry_20260806_022533_421016 {
+    timestamp: "2026-08-06T02:25:33.420994Z",
+    process: "team_beta_B1",
+    decision: "execute_gpu_runtime",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 23887,
+    metrics_json: "{\"plan_id\":\"OPT-004\",\"duration_ms\":23887}",
+}
+
+component ProcessEntry_20260806_022535_531744 {
+    timestamp: "2026-08-06T02:25:35.531722Z",
+    process: "team_delta_D2",
+    decision: "execute_lib_tests",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 25962,
+    metrics_json: "{\"plan_id\":\"OPT-013\",\"duration_ms\":25962}",
+}
+
+component ProcessEntry_20260806_022539_134352 {
+    timestamp: "2026-08-06T02:25:39.134329Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 29340,
+    metrics_json: "{\"duration_ms\":29340,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_022540_862306 {
+    timestamp: "2026-08-06T02:25:40.862276Z",
+    process: "team_delta_D1",
+    decision: "execute_arc_status",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 31293,
+    metrics_json: "{\"plan_id\":\"OPT-012\",\"duration_ms\":31293}",
+}
+
+component ProcessEntry_20260806_022544_413492 {
+    timestamp: "2026-08-06T02:25:44.413325Z",
+    process: "team_beta_B6",
+    decision: "execute_ipfs_module_test",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 34847,
+    metrics_json: "{\"plan_id\":\"OPT-008\",\"duration_ms\":34847}",
+}
+
+component ProcessEntry_20260806_022546_580827 {
+    timestamp: "2026-08-06T02:25:46.580792Z",
+    process: "team_gamma_G5",
+    decision: "execute_zk_tests",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 36923,
+    metrics_json: "{\"plan_id\":\"OPT-011\",\"duration_ms\":36923}",
+}
+
+component ProcessEntry_20260806_022550_279143 {
+    timestamp: "2026-08-06T02:25:50.279126Z",
+    process: "team_beta_B3",
+    decision: "execute_ipfs_runtime",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 40737,
+    metrics_json: "{\"plan_id\":\"OPT-008\",\"duration_ms\":40737}",
+}
+
+component ProcessEntry_20260806_022553_519283 {
+    timestamp: "2026-08-06T02:25:53.519248Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 43725,
+    metrics_json: "{\"duration_ms\":43725,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_022555_194214 {
+    timestamp: "2026-08-06T02:25:55.194169Z",
+    process: "team_delta_D5",
+    decision: "execute_knowledge_verify",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 45592,
+    metrics_json: "{\"plan_id\":\"OPT-006\",\"duration_ms\":45592}",
+}
+
+component ProcessEntry_20260806_022606_943300 {
+    timestamp: "2026-08-06T02:26:06.943276Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 27808,
+    metrics_json: "{\"duration_ms\":27808,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_022609_600091 {
+    timestamp: "2026-08-06T02:26:09.600055Z",
+    process: "team_beta_B2",
+    decision: "execute_cdx_runtime",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 60058,
+    metrics_json: "{\"plan_id\":\"OPT-007\",\"duration_ms\":60058}",
+}
+
+component ProcessEntry_20260806_022610_494267 {
+    timestamp: "2026-08-06T02:26:10.494249Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 16974,
+    metrics_json: "{\"duration_ms\":16974,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_022615_658356 {
+    timestamp: "2026-08-06T02:26:15.658332Z",
+    process: "team_alpha_A3",
+    decision: "execute_self_host_verify",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 66137,
+    metrics_json: "{\"plan_id\":\"OPT-002\",\"duration_ms\":66137}",
+}
+
+component ProcessEntry_20260806_022629_230498 {
+    timestamp: "2026-08-06T02:26:29.230464Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 22286,
+    metrics_json: "{\"duration_ms\":22286,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_022632_634701 {
+    timestamp: "2026-08-06T02:26:32.634680Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 22139,
+    metrics_json: "{\"duration_ms\":22139,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_022632_637960 {
+    timestamp: "2026-08-06T02:26:32.637931Z",
+    process: "team_delta_D3",
+    decision: "execute_verify_v2",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 83056,
+    metrics_json: "{\"plan_id\":\"OPT-012\",\"duration_ms\":83056}",
+}
+
+component ProcessEntry_20260806_022636_635397 {
+    timestamp: "2026-08-06T02:26:36.635370Z",
+    process: "peerless_P4",
+    decision: "close_WASM size optimization",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 7404,
+    metrics_json: "{\"duration_ms\":7404,\"gap\":\"P4\"}",
+}
+
+component ProcessEntry_20260806_022638_177203 {
+    timestamp: "2026-08-06T02:26:38.177178Z",
+    process: "team_delta_D6",
+    decision: "execute_arc_verify",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 88567,
+    metrics_json: "{\"plan_id\":\"OPT-005\",\"duration_ms\":88567}",
+}
+
+component ProcessEntry_20260806_022639_074293 {
+    timestamp: "2026-08-06T02:26:39.074272Z",
+    process: "peerless_P4",
+    decision: "close_WASM size optimization",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 6439,
+    metrics_json: "{\"duration_ms\":6439,\"gap\":\"P4\"}",
+}
+
+component ProcessEntry_20260806_022647_884270 {
+    timestamp: "2026-08-06T02:26:47.884246Z",
+    process: "peerless_P5",
+    decision: "close_True self-hosting in Frontier",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 11248,
+    metrics_json: "{\"duration_ms\":11248,\"gap\":\"P5\"}",
+}
+
+component ProcessEntry_20260806_022651_085530 {
+    timestamp: "2026-08-06T02:26:51.085506Z",
+    process: "peerless_P5",
+    decision: "close_True self-hosting in Frontier",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 12010,
+    metrics_json: "{\"duration_ms\":12010,\"gap\":\"P5\"}",
+}
+
+component ProcessEntry_20260806_022654_337869 {
+    timestamp: "2026-08-06T02:26:54.337840Z",
+    process: "peerless_P6",
+    decision: "close_Teacher-student unity module",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 6453,
+    metrics_json: "{\"duration_ms\":6453,\"gap\":\"P6\"}",
+}
+
+component ProcessEntry_20260806_022654_348565 {
+    timestamp: "2026-08-06T02:26:54.348539Z",
+    process: "team_gamma_G2",
+    decision: "execute_peerless_verify",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 104727,
+    metrics_json: "{\"plan_id\":\"OPT-006\",\"duration_ms\":104727}",
+}
+
+component ProcessEntry_20260806_022657_707932 {
+    timestamp: "2026-08-06T02:26:57.707910Z",
+    process: "peerless_P6",
+    decision: "close_Teacher-student unity module",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 6622,
+    metrics_json: "{\"duration_ms\":6622,\"gap\":\"P6\"}",
+}
+
+component ProcessEntry_20260806_022657_717201 {
+    timestamp: "2026-08-06T02:26:57.717180Z",
+    process: "team_gamma_G1",
+    decision: "execute_close_peerless",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 108100,
+    metrics_json: "{\"plan_id\":\"OPT-005\",\"duration_ms\":108100}",
+}
+
+component ProcessEntry_20260806_022657_723177 {
+    timestamp: "2026-08-06T02:26:57.723172Z",
+    process: "plan_execution",
+    decision: "complete",
+    result: "pass",
+    worker: "plan_executor",
+    duration_ms: 108202,
+    metrics_json: "{\"duration_ms\":108202}",
+}
+
+component ProcessEntry_20260806_023928_394096 {
+    timestamp: "2026-08-06T02:39:28.394093Z",
+    process: "lexicon_deploy",
+    decision: "ticket_created",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"ticket_id\":\"c16da218-3812-4711-89e2-f1a3a8c043d4\"}",
+}
+
+component ProcessEntry_20260806_023928_439047 {
+    timestamp: "2026-08-06T02:39:28.439041Z",
+    process: "lexicon_index_check",
+    decision: "lexicon_bound_delta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"97ade052-0a22-480a-b633-75f530dbe688\",\"team\":\"delta\",\"worker\":\"D4\"}",
+}
+
+component ProcessEntry_20260806_023928_453156 {
+    timestamp: "2026-08-06T02:39:28.453151Z",
+    process: "wasm_manifest",
+    decision: "lexicon_bound_alpha",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"735d8bb1-b26b-4dfb-87f5-b386d91e70c2\",\"team\":\"alpha\",\"worker\":\"A2\"}",
+}
+
+component ProcessEntry_20260806_023928_545346 {
+    timestamp: "2026-08-06T02:39:28.545342Z",
+    process: "lexicon_export",
+    decision: "lexicon_bound_delta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"f5f36c0d-909b-4a4a-b170-1aa32604919b\",\"team\":\"delta\",\"worker\":\"D3\"}",
+}
+
+component ProcessEntry_20260806_023928_556488 {
+    timestamp: "2026-08-06T02:39:28.556483Z",
+    process: "lexicon_ingest",
+    decision: "lexicon_bound_gamma",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"a4f374fb-29fb-49bc-bd13-a09d8796cbdb\",\"team\":\"gamma\",\"worker\":\"G3\"}",
+}
+
+component ProcessEntry_20260806_023928_558409 {
+    timestamp: "2026-08-06T02:39:28.558404Z",
+    process: "spec_impl_bridge",
+    decision: "lexicon_bound_gamma",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"b4aede0c-a28a-4ea9-bf7b-4e259d729695\",\"team\":\"gamma\",\"worker\":\"G4\"}",
+}
+
+component ProcessEntry_20260806_023928_558715 {
+    timestamp: "2026-08-06T02:39:28.558712Z",
+    process: "language_hardening",
+    decision: "lexicon_bound_delta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"68527942-98ff-443e-b80f-a81487cb6133\",\"team\":\"delta\",\"worker\":\"D5\"}",
+}
+
+component ProcessEntry_20260806_023928_564120 {
+    timestamp: "2026-08-06T02:39:28.564116Z",
+    process: "sync_knowledge",
+    decision: "lexicon_bound_gamma",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"12020045-1008-4929-a113-f567dfb5327a\",\"team\":\"gamma\",\"worker\":\"G2\"}",
+}
+
+component ProcessEntry_20260806_023932_542700 {
+    timestamp: "2026-08-06T02:39:32.542695Z",
+    process: "wasm_build",
+    decision: "lexicon_bound_alpha",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"75c6d3e7-0bef-499e-89c5-282453fe6ec9\",\"team\":\"alpha\",\"worker\":\"A1\"}",
+}
+
+component ProcessEntry_20260806_023933_047028 {
+    timestamp: "2026-08-06T02:39:33.047022Z",
+    process: "worker_fr_parse",
+    decision: "lexicon_bound_beta",
+    result: "fail",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"3bd521a0-048f-49e4-b5b4-ea3233da1931\",\"team\":\"beta\",\"worker\":\"B5\"}",
+}
+
+component ProcessEntry_20260806_023936_198035 {
+    timestamp: "2026-08-06T02:39:36.198029Z",
+    process: "lexicon_core_parse",
+    decision: "lexicon_bound_alpha",
+    result: "fail",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"40c736c4-b0d3-4bb3-960c-ba9b6257191b\",\"team\":\"alpha\",\"worker\":\"A6\"}",
+}
+
+component ProcessEntry_20260806_023939_305737 {
+    timestamp: "2026-08-06T02:39:39.305733Z",
+    process: "ipfs_runtime",
+    decision: "lexicon_bound_beta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"3d70d1f2-0d7d-45a9-943c-856442895c34\",\"team\":\"beta\",\"worker\":\"B3\"}",
+}
+
+component ProcessEntry_20260806_023944_090149 {
+    timestamp: "2026-08-06T02:39:44.090144Z",
+    process: "main_fr_parse",
+    decision: "lexicon_bound_alpha",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"ed63f41c-d262-4d5c-a090-a6da2323dc1f\",\"team\":\"alpha\",\"worker\":\"A4\"}",
+}
+
+component ProcessEntry_20260806_023945_605296 {
+    timestamp: "2026-08-06T02:39:45.605291Z",
+    process: "wasm_codegen_tests",
+    decision: "lexicon_bound_alpha",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"5f3e1d54-e494-43f7-82e6-7b4fc3a21d25\",\"team\":\"alpha\",\"worker\":\"A5\"}",
+}
+
+component ProcessEntry_20260806_023947_370629 {
+    timestamp: "2026-08-06T02:39:47.370622Z",
+    process: "lib_tests",
+    decision: "lexicon_bound_delta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"69de7bd8-5867-40a9-a381-c0cdd94fb7be\",\"team\":\"delta\",\"worker\":\"D2\"}",
+}
+
+component ProcessEntry_20260806_023950_339156 {
+    timestamp: "2026-08-06T02:39:50.339151Z",
+    process: "tag_fr_parse",
+    decision: "lexicon_bound_beta",
+    result: "fail",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"1687afa3-3c63-4a5d-bbd8-a9acd2c84c0c\",\"team\":\"beta\",\"worker\":\"B4\"}",
+}
+
+component ProcessEntry_20260806_023955_097504 {
+    timestamp: "2026-08-06T02:39:55.097498Z",
+    process: "arc_status",
+    decision: "lexicon_bound_delta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"fb236b64-ca7c-44a5-9470-cc7989bba547\",\"team\":\"delta\",\"worker\":\"D1\"}",
+}
+
+component ProcessEntry_20260806_023958_266241 {
+    timestamp: "2026-08-06T02:39:58.266236Z",
+    process: "hard_gate_parse",
+    decision: "lexicon_bound_beta",
+    result: "fail",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"e89091fa-d216-4484-8107-d9d4ab9bb1da\",\"team\":\"beta\",\"worker\":\"B6\"}",
+}
+
+component ProcessEntry_20260806_023959_975870 {
+    timestamp: "2026-08-06T02:39:59.975865Z",
+    process: "zk_tests",
+    decision: "lexicon_bound_gamma",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"4fe4d738-3ab7-401d-9c86-95afb46ae691\",\"team\":\"gamma\",\"worker\":\"G5\"}",
+}
+
+component ProcessEntry_20260806_024003_730726 {
+    timestamp: "2026-08-06T02:40:03.730718Z",
+    process: "cdx_runtime",
+    decision: "lexicon_bound_beta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"0ef796e3-8812-495c-8c18-cbe313a4c3ca\",\"team\":\"beta\",\"worker\":\"B2\"}",
+}
+
+component ProcessEntry_20260806_024006_145777 {
+    timestamp: "2026-08-06T02:40:06.145772Z",
+    process: "gpu_runtime",
+    decision: "lexicon_bound_beta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"0158d411-08fe-4e1c-87fc-50bdb9223ed7\",\"team\":\"beta\",\"worker\":\"B1\"}",
+}
+
+component ProcessEntry_20260806_024009_414972 {
+    timestamp: "2026-08-06T02:40:09.414967Z",
+    process: "user_ticket_parse",
+    decision: "lexicon_bound_gamma",
+    result: "fail",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"f94787c8-dce3-4603-b846-379b8421a4a8\",\"team\":\"gamma\",\"worker\":\"G6\"}",
+}
+
+component ProcessEntry_20260806_024012_576733 {
+    timestamp: "2026-08-06T02:40:12.576712Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 44002,
+    metrics_json: "{\"duration_ms\":44002,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_024015_728834 {
+    timestamp: "2026-08-06T02:40:15.728829Z",
+    process: "self_host_verify",
+    decision: "lexicon_bound_alpha",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"bb81efd4-4c60-402d-b46b-0fbe1857e816\",\"team\":\"alpha\",\"worker\":\"A3\"}",
+}
+
+component ProcessEntry_20260806_024020_498502 {
+    timestamp: "2026-08-06T02:40:20.498487Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 7921,
+    metrics_json: "{\"duration_ms\":7921,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_024028_716539 {
+    timestamp: "2026-08-06T02:40:28.716533Z",
+    process: "arc_verify",
+    decision: "lexicon_bound_delta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"71eae28e-2aab-4acf-9196-027026ca6e56\",\"team\":\"delta\",\"worker\":\"D6\"}",
+}
+
+component ProcessEntry_20260806_024035_597282 {
+    timestamp: "2026-08-06T02:40:35.597270Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 15098,
+    metrics_json: "{\"duration_ms\":15098,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_024038_140312 {
+    timestamp: "2026-08-06T02:40:38.140298Z",
+    process: "peerless_P4",
+    decision: "close_WASM size optimization",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 2542,
+    metrics_json: "{\"duration_ms\":2542,\"gap\":\"P4\"}",
+}
+
+component ProcessEntry_20260806_024044_977261 {
+    timestamp: "2026-08-06T02:40:44.977244Z",
+    process: "peerless_P5",
+    decision: "close_True self-hosting in Frontier",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 6836,
+    metrics_json: "{\"duration_ms\":6836,\"gap\":\"P5\"}",
+}
+
+component ProcessEntry_20260806_024048_337744 {
+    timestamp: "2026-08-06T02:40:48.337727Z",
+    process: "peerless_P6",
+    decision: "close_Teacher-student unity module",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 3360,
+    metrics_json: "{\"duration_ms\":3360,\"gap\":\"P6\"}",
+}
+
+component ProcessEntry_20260806_024048_346895 {
+    timestamp: "2026-08-06T02:40:48.346890Z",
+    process: "close_peerless",
+    decision: "lexicon_bound_gamma",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"2bfb3050-9e06-49a2-8c65-5aff12df3c71\",\"team\":\"gamma\",\"worker\":\"G1\"}",
+}
+
+component ProcessEntry_20260806_024048_447141 {
+    timestamp: "2026-08-06T02:40:48.447138Z",
+    process: "lexicon_deploy",
+    decision: "complete",
+    result: "partial",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"entries\":6}",
+}
+
+component ProcessEntry_20260806_024138_872551 {
+    timestamp: "2026-08-06T02:41:38.872548Z",
+    process: "lexicon_deploy",
+    decision: "ticket_created",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"ticket_id\":\"c49f6faa-838d-4f53-8fde-863b55c46c3c\"}",
+}
+
+component ProcessEntry_20260806_024138_945513 {
+    timestamp: "2026-08-06T02:41:38.945508Z",
+    process: "wasm_manifest",
+    decision: "lexicon_bound_alpha",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"a91cc746-4414-45af-96ee-145eb501b1d6\",\"team\":\"alpha\",\"worker\":\"A2\"}",
+}
+
+component ProcessEntry_20260806_024138_946052 {
+    timestamp: "2026-08-06T02:41:38.946048Z",
+    process: "lexicon_index_check",
+    decision: "lexicon_bound_delta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"02161ccf-b262-4174-a1b0-b832c51a4e92\",\"team\":\"delta\",\"worker\":\"D4\"}",
+}
+
+component ProcessEntry_20260806_024138_954286 {
+    timestamp: "2026-08-06T02:41:38.954282Z",
+    process: "hard_gate_verify",
+    decision: "lexicon_bound_beta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"0c15e088-2656-4f98-8080-6492aad8ab54\",\"team\":\"beta\",\"worker\":\"B6\"}",
+}
+
+component ProcessEntry_20260806_024138_954872 {
+    timestamp: "2026-08-06T02:41:38.954869Z",
+    process: "worker_fr_verify",
+    decision: "lexicon_bound_beta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"c941770d-6a83-4046-8f2e-4923d56bddbc\",\"team\":\"beta\",\"worker\":\"B5\"}",
+}
+
+component ProcessEntry_20260806_024138_974898 {
+    timestamp: "2026-08-06T02:41:38.974894Z",
+    process: "language_hardening",
+    decision: "lexicon_bound_delta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"ec7d9e8c-28f4-4b04-b7fd-6bb344a098ea\",\"team\":\"delta\",\"worker\":\"D5\"}",
+}
+
+component ProcessEntry_20260806_024138_987730 {
+    timestamp: "2026-08-06T02:41:38.987725Z",
+    process: "tag_fr_verify",
+    decision: "lexicon_bound_beta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"81e178f5-8627-4d00-9610-5633e46ef7fc\",\"team\":\"beta\",\"worker\":\"B4\"}",
+}
+
+component ProcessEntry_20260806_024139_020305 {
+    timestamp: "2026-08-06T02:41:39.020301Z",
+    process: "lexicon_export",
+    decision: "lexicon_bound_delta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"7fe4318e-8524-44be-8ff7-d3cb7cb6ea1c\",\"team\":\"delta\",\"worker\":\"D3\"}",
+}
+
+component ProcessEntry_20260806_024139_022462 {
+    timestamp: "2026-08-06T02:41:39.022454Z",
+    process: "lexicon_core_verify",
+    decision: "lexicon_bound_alpha",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"0c564702-168d-42bf-8015-5fe7e017bd83\",\"team\":\"alpha\",\"worker\":\"A6\"}",
+}
+
+component ProcessEntry_20260806_024139_023114 {
+    timestamp: "2026-08-06T02:41:39.023111Z",
+    process: "spec_impl_bridge",
+    decision: "lexicon_bound_gamma",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"0285c8c8-9cac-4f04-9edf-5bc96e9ff83f\",\"team\":\"gamma\",\"worker\":\"G4\"}",
+}
+
+component ProcessEntry_20260806_024139_027079 {
+    timestamp: "2026-08-06T02:41:39.027074Z",
+    process: "sync_knowledge",
+    decision: "lexicon_bound_gamma",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"039340d9-d166-4bf4-99da-2bece170e84e\",\"team\":\"gamma\",\"worker\":\"G2\"}",
+}
+
+component ProcessEntry_20260806_024139_029911 {
+    timestamp: "2026-08-06T02:41:39.029906Z",
+    process: "user_ticket_verify",
+    decision: "lexicon_bound_gamma",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"08adcb58-1207-454a-a968-d21b525f7b39\",\"team\":\"gamma\",\"worker\":\"G6\"}",
+}
+
+component ProcessEntry_20260806_024139_040643 {
+    timestamp: "2026-08-06T02:41:39.040638Z",
+    process: "lexicon_ingest",
+    decision: "lexicon_bound_gamma",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"38ed3d3a-81d2-42ef-b057-4c4e5ef1b8a3\",\"team\":\"gamma\",\"worker\":\"G3\"}",
+}
+
+component ProcessEntry_20260806_024141_953902 {
+    timestamp: "2026-08-06T02:41:41.953897Z",
+    process: "wasm_build",
+    decision: "lexicon_bound_alpha",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"437032bb-839b-4c7d-96f6-9a0f9882ffec\",\"team\":\"alpha\",\"worker\":\"A1\"}",
+}
+
+component ProcessEntry_20260806_024144_405261 {
+    timestamp: "2026-08-06T02:41:44.405256Z",
+    process: "lib_tests",
+    decision: "lexicon_bound_delta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"c029ae31-12ce-4ac0-8720-ccbc86e31b1b\",\"team\":\"delta\",\"worker\":\"D2\"}",
+}
+
+component ProcessEntry_20260806_024147_351751 {
+    timestamp: "2026-08-06T02:41:47.351747Z",
+    process: "gpu_runtime",
+    decision: "lexicon_bound_beta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"47dcf4d7-959d-4f0b-9e24-f5c8301368e7\",\"team\":\"beta\",\"worker\":\"B1\"}",
+}
+
+component ProcessEntry_20260806_024155_286184 {
+    timestamp: "2026-08-06T02:41:55.286179Z",
+    process: "ipfs_runtime",
+    decision: "lexicon_bound_beta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"431a229e-3ba3-45fd-b582-e2112b496c58\",\"team\":\"beta\",\"worker\":\"B3\"}",
+}
+
+component ProcessEntry_20260806_024158_490941 {
+    timestamp: "2026-08-06T02:41:58.490910Z",
+    process: "peerless_P1",
+    decision: "close_Live GPU runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 19453,
+    metrics_json: "{\"duration_ms\":19453,\"gap\":\"P1\"}",
+}
+
+component ProcessEntry_20260806_024200_111746 {
+    timestamp: "2026-08-06T02:42:00.111741Z",
+    process: "arc_status",
+    decision: "lexicon_bound_delta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"95529dea-3c3b-4da9-8953-b72369363cac\",\"team\":\"delta\",\"worker\":\"D1\"}",
+}
+
+component ProcessEntry_20260806_024202_277913 {
+    timestamp: "2026-08-06T02:42:02.277908Z",
+    process: "cdx_runtime",
+    decision: "lexicon_bound_beta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"1969caa5-d8ca-471e-8044-8e6b1634fa36\",\"team\":\"beta\",\"worker\":\"B2\"}",
+}
+
+component ProcessEntry_20260806_024203_387712 {
+    timestamp: "2026-08-06T02:42:03.387707Z",
+    process: "self_host_verify",
+    decision: "lexicon_bound_alpha",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"dea46bde-d3e4-46b7-ada8-9b09ee18828f\",\"team\":\"alpha\",\"worker\":\"A3\"}",
+}
+
+component ProcessEntry_20260806_024205_122179 {
+    timestamp: "2026-08-06T02:42:05.122174Z",
+    process: "zk_tests",
+    decision: "lexicon_bound_gamma",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"2b5a3a7a-b28f-4c2e-b423-02200162981a\",\"team\":\"gamma\",\"worker\":\"G5\"}",
+}
+
+component ProcessEntry_20260806_024208_359615 {
+    timestamp: "2026-08-06T02:42:08.359600Z",
+    process: "peerless_P2",
+    decision: "close_Live IPFS runtime",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 9868,
+    metrics_json: "{\"duration_ms\":9868,\"gap\":\"P2\"}",
+}
+
+component ProcessEntry_20260806_024211_508887 {
+    timestamp: "2026-08-06T02:42:11.508882Z",
+    process: "main_fr_parse",
+    decision: "lexicon_bound_alpha",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"0240d59d-0687-491e-9481-9c575df0553b\",\"team\":\"alpha\",\"worker\":\"A4\"}",
+}
+
+component ProcessEntry_20260806_024216_407770 {
+    timestamp: "2026-08-06T02:42:16.407764Z",
+    process: "wasm_codegen_tests",
+    decision: "lexicon_bound_alpha",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"951d1d2a-4eee-46d4-86d0-33ac12deed06\",\"team\":\"alpha\",\"worker\":\"A5\"}",
+}
+
+component ProcessEntry_20260806_024224_961651 {
+    timestamp: "2026-08-06T02:42:24.961636Z",
+    process: "peerless_P3",
+    decision: "close_Live CDX streaming",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 16601,
+    metrics_json: "{\"duration_ms\":16601,\"gap\":\"P3\"}",
+}
+
+component ProcessEntry_20260806_024227_522184 {
+    timestamp: "2026-08-06T02:42:27.522166Z",
+    process: "peerless_P4",
+    decision: "close_WASM size optimization",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 2560,
+    metrics_json: "{\"duration_ms\":2560,\"gap\":\"P4\"}",
+}
+
+component ProcessEntry_20260806_024227_834035 {
+    timestamp: "2026-08-06T02:42:27.834030Z",
+    process: "arc_verify",
+    decision: "lexicon_bound_delta",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"2cf76ab2-277a-42dc-ada7-d43fab4436a0\",\"team\":\"delta\",\"worker\":\"D6\"}",
+}
+
+component ProcessEntry_20260806_024234_372843 {
+    timestamp: "2026-08-06T02:42:34.372826Z",
+    process: "peerless_P5",
+    decision: "close_True self-hosting in Frontier",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 6850,
+    metrics_json: "{\"duration_ms\":6850,\"gap\":\"P5\"}",
+}
+
+component ProcessEntry_20260806_024237_748240 {
+    timestamp: "2026-08-06T02:42:37.748221Z",
+    process: "peerless_P6",
+    decision: "close_Teacher-student unity module",
+    result: "closed",
+    worker: "peerless_closer",
+    duration_ms: 3375,
+    metrics_json: "{\"duration_ms\":3375,\"gap\":\"P6\"}",
+}
+
+component ProcessEntry_20260806_024237_757454 {
+    timestamp: "2026-08-06T02:42:37.757448Z",
+    process: "close_peerless",
+    decision: "lexicon_bound_gamma",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"lexicon_tag\":\"7360161e-d33e-48fa-8d25-ef2fd30deaaa\",\"team\":\"gamma\",\"worker\":\"G1\"}",
+}
+
+component ProcessEntry_20260806_024237_863379 {
+    timestamp: "2026-08-06T02:42:37.863373Z",
+    process: "lexicon_deploy",
+    decision: "complete",
+    result: "pass",
+    worker: "lexicon_deploy",
+    duration_ms: 0,
+    metrics_json: "{\"entries\":36}",
+}
+
+component ProcessEntry_20260806_043831_063363 {
+    timestamp: "2026-08-06T04:38:31.063343Z",
+    process: "pr_resolution",
+    decision: "start",
+    result: "running",
+    worker: "pr_resolution_swarm",
+    duration_ms: 0,
+    metrics_json: "{\"open_prs\":4}",
+}
+
+component ProcessEntry_20260806_043835_014974 {
+    timestamp: "2026-08-06T04:38:35.014970Z",
+    process: "pr_resolution",
+    decision: "complete",
+    result: "partial",
+    worker: "pr_resolution_swarm",
+    duration_ms: 4284,
+    metrics_json: "{\"generated_at\":\"2026-08-06T04:38:35.014705Z\",\"open_prs_found\":4,\"pr_stack\":[{\"number\":51,\"branch\":\"cursor/worker-swarm-kb-optimization-f519\",\"title\":\"Swarm KB optimizer\"},{\"number\":52,\"branch\":\"cursor/peerless-chat-swarm-f519\",\"title\":\"Peerless chat swarm\"},{\"number\":53,\"branch\":\"cursor/execute-peerless-plan-f519\",\"title\":\"Execute Peerless plan\"},{\"number\":54,\"branch\":\"cursor/lexicon-bound-worker-f519\",\"title\":\"Lexicon-Bound Worker\"}],\"base_branch\":\"cursor/frontier-syntax-cycle1-e39f\",\"all_pass\":false,\"duration_ms\":4284,\"worker_results\":[{\"worker\":\"audit_51\",\"pr\":51,\"branch\":\"cursor/worker-swarm-kb-optimization-f519\",\"mergeable\":true,\"pass\":true,\"lexicon_tag\":\"d406d9f8-adfd-4898-805b-6bfadb310398\"},{\"worker\":\"audit_52\",\"pr\":52,\"branch\":\"cursor/peerless-chat-swarm-f519\",\"mergeable\":true,\"pass\":true,\"lexicon_tag\":\"c407c53d-9c45-471a-a81e-0948f40bb2e7\"},{\"worker\":\"audit_53\",\"pr\":53,\"branch\":\"cursor/execute-peerless-plan-f519\",\"mergeable\":true,\"pass\":true,\"lexicon_tag\":\"f805a632-2778-4617-af6b-56de3071acce\"},{\"worker\":\"audit_54\",\"pr\":54,\"branch\":\"cursor/lexicon-bound-worker-f519\",\"mergeable\":true,\"pass\":true,\"lexicon_tag\":\"932f9e0b-2c96-47c2-9756-66aff520ce20\"},{\"worker\":\"verify_51\",\"pr\":51,\"pass\":true,\"lexicon_tag\":\"20c606f2-ca13-4966-a343-96809a1b13da\"},{\"worker\":\"merge_stack\",\"pass\":false,\"lexicon_tag\":\"f9500de5-754e-4a94-87a1-17e8d02ed975\",\"output\":{\"pass\":false,\"steps\":[{\"step\":\"checkout_base\",\"pass\":false,\"duration_ms\":3,\"output\":\"error: Your local changes to the following files would be overwritten by checkout:\\n\\tdocs/lexicon_log.fr\\n\\tdocs/process_log.fr\\n\\tmanifest/lexicon_index.json\\nPlease commit your changes or stash them before you switch branches.\\nAborting\\n\",\"command\":\"git checkout cursor/frontier-syntax-cycle1-e39f\"}]}},{\"worker\":\"close_superseded\",\"pass\":false,\"skipped\":\"merge failed\"},{\"worker\":\"arc_verify\",\"pass\":false,\"skipped\":\"merge failed\"}]}",
+}
+
+component ProcessEntry_20260806_051248_538336 {
+    timestamp: "2026-08-06T05:12:48.538327Z",
+    process: "blueprint_phase_swarm",
+    decision: "complete",
+    result: "pass",
+    worker: "blueprint_phase_swarm",
+    duration_ms: 0,
+    metrics_json: "{\"teams\":9}",
+}

@@ -1,0 +1,39 @@
+/**
+ * FRONTIER SYNTAX — BROWSER COMPILER
+ *
+ * Browser-targeted compilation layer with JS glue generation.
+ * Rust implementation: src/browser_compiler.rs
+ *
+ * ARC Gate: Browser compile < 1s
+ */
+
+module browser_compiler {
+    use core::compiler::{Compiler, Target}
+    use core::wasm_codegen::{generate, encode}
+    use core::knowledge::{browser_context}
+
+    struct CompiledBrowserModule {
+        wasm_bytes: [u8],
+        js_glue: String,
+        exports: [String],
+        entry_point: String,
+    }
+
+    static compile_for_browser(source: String, optimize: bool) -> CompiledBrowserModule {
+        let ast = Compiler.parse(source)
+        let validated = Compiler.validate(ast)
+        let module = generate(validated, optimize)
+        let wasm_bytes = encode(module)
+
+        return CompiledBrowserModule {
+            wasm_bytes: wasm_bytes,
+            js_glue: generate_js_glue(module),
+            exports: ["main", "memory", "compile_wasm", "validate_wasm"],
+            entry_point: "main",
+        }
+    }
+
+    static generate_js_glue(module: WasmModule) -> String {
+        return "// Frontier Browser Runtime\nexport function instantiate(wasmBytes) { ... }"
+    }
+}
