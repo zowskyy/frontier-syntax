@@ -47,6 +47,22 @@ Anonymous Internet Archive CDX dataset collector for Frontier Syntax. Polls the 
 | `live` | Shadow mirror + incremental watchers |
 | `full` | Backfill then live |
 
+## Taylor Ops Team integration
+
+The archive collector mirrors the Taylor crew pattern (3 supervisors × 7 workers) and hooks into production continuity:
+
+| Hook | Command |
+|------|---------|
+| Taylor W7 continuity | Run `python3 scripts/archive_collector_daemon.py once` after Taylor daily/production |
+| Shadow worker | `python3 scripts/archive_collector_daemon.py once` (add to cron with shadow worker) |
+| Continuous live | `python3 scripts/archive_collector_daemon.py loop --hours 24` |
+
+Backfill seeds: `manifest/seed_hosts.txt` (30 hosts; expand over time).
+
+## Shadow Internet Archive crawler
+
+`W07_ShadowMirror` polls CDX for recent captures using IA politeness (1 req/s, identifying User-Agent). The daemon re-runs `live` mode to stay current after historical backfill completes.
+
 ## Usage
 
 ```bash

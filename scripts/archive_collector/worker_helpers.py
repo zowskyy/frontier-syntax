@@ -14,6 +14,7 @@ from dataclasses import dataclass
 from typing import Any, Callable
 
 from .categorizer import Categorizer
+from .cdx_client import CDXClient
 from .state import utc_now
 from .storage import Storage, path_hash, record_id
 
@@ -130,6 +131,49 @@ def write_cdx_rows(
         )
         written += 1
     return written
+
+
+def scan_hosts_cdx(
+    storage: Storage,
+    client: CDXClient,
+    hosts: list[str],
+    *,
+    limit: int,
+    supervisor: str,
+    worker: str,
+) -> tuple[int, list[str]]:
+    """Scan multiple CDX hosts with isolated error handling."""
+    total = 0
+    errors: list[str] = []
+    for host in hosts:
+        try:
+            rows = client.query_host(host, limit=limit)
+            total += write_cdx_rows(storage, rows, supervisor=supervisor, worker=worker)
+        except Exception as exc:  # noqa: BLE001 — CDX network errors are expected
+            errors.append(f"{host}: {exc}")
+    return total, errors
+
+
+def summarize_record_hosts(records: list[dict[str, Any]]) -> dict[str, int]:
+    """Aggregate host counts for version-chain style workers."""
+    chains: dict[str, int] = {}
+    for rec in records:
+        host = rec.get("host", "")
+        chains[host] = chains.get(host, 0) + 1
+    return chains
+
+
+def classify_records_meta(records: list[dict[str, Any]]) -> dict[str, Any]:
+    """Single-pass TLD and status aggregation for classification workers."""
+    tlds: dict[str, int] = {}
+    statuses: dict[str, int] = {}
+    for rec in records:
+        parts = rec.get("host", "").split(".")
+        tld = parts[-1] if parts else "unknown"
+        tlds[tld] = tlds.get(tld, 0) + 1
+        status = str(rec.get("status", "unknown"))
+        statuses[status] = statuses.get(status, 0) + 1
+    return {"tlds": tlds, "statuses": statuses}
 
 
 def test_gate_smoke() -> None:

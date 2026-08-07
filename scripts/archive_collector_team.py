@@ -71,6 +71,7 @@ from scripts.archive_collector.workers import DEMO_HOSTS, SUPERVISORS, WORKERS
 MANIFEST = REPO / "manifest" / "archive_collector_run.json"
 REPORT = REPO / "audit_reports" / "archive_collector_report.md"
 SYSTEM_MANIFEST = REPO / "manifest" / "archive_collector.json"
+SEED_HOSTS_FILE = REPO / "manifest" / "seed_hosts.txt"
 
 MODES: dict[str, list[str]] = {
     "demo": [
@@ -114,6 +115,21 @@ MODES: dict[str, list[str]] = {
 
 # Workers that accept hosts/limit kwargs
 HOST_AWARE = {"W01_CDXScanner", "W02_DomainShard"}
+
+
+def load_seed_hosts(mode: str) -> list[str]:
+    """Demo uses compact set; backfill/full reads manifest/seed_hosts.txt."""
+    if mode == "demo":
+        return list(DEMO_HOSTS)
+    if SEED_HOSTS_FILE.exists():
+        hosts = [
+            ln.strip()
+            for ln in SEED_HOSTS_FILE.read_text(encoding="utf-8").splitlines()
+            if ln.strip() and not ln.startswith("#")
+        ]
+        if hosts:
+            return hosts
+    return list(DEMO_HOSTS)
 
 
 def _worker_kwargs(wid: str, mode: str, hosts: list[str]) -> dict[str, Any]:
@@ -251,7 +267,7 @@ def write_report(run: dict[str, Any]) -> None:
 
 def cmd_run(args: argparse.Namespace) -> int:
     mode = args.mode
-    hosts = list(DEMO_HOSTS) if mode == "demo" else list(DEMO_HOSTS)
+    hosts = load_seed_hosts(mode)
     workers = list(MODES[mode])
     if mode == "full":
         workers = list(MODES["backfill"]) + [w for w in MODES["live"] if w not in MODES["backfill"]]

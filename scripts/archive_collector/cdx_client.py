@@ -52,13 +52,6 @@ def with_retry_backoff(fn, fallback: Any = None, timeout: int = 5) -> Any:
         return fallback
 
 
-def _get_http_module() -> Any:
-    try:
-        return load_plugin("requests")
-    except ImportError:
-        return None
-
-
 class CDXClient:
     """Client for the Internet Archive CDX search API."""
 
@@ -73,44 +66,61 @@ class CDXClient:
         self.timeout_s = timeout_s
         self.user_agent = user_agent
         self._last_request_at = 0.0
-        self._requests = _get_http_module()
 
     def _wait_for_rate_limit(self) -> None:
         elapsed = time.monotonic() - self._last_request_at
         if elapsed < self.rate_limit_s:
             time.sleep(self.rate_limit_s - elapsed)
 
-    def _request(self, params: dict[str, str]) -> tuple[list[str], str | None]:
+    def _request(self, params: dict[str, str]) -> tuple[str, str | None]:
         self._wait_for_rate_limit()
         if not params:
             raise ValueError("empty CDX params")
         query = urllib.parse.urlencode(params)
         url = f"{CDX_BASE}?{query}"
 
-        if self._requests is not None:
-            resp = self._requests.get(
-                url,
-                headers={"User-Agent": self.user_agent},
-                timeout=self.timeout_s,
-            )
+        req = urllib.request.Request(url, headers={"User-Agent": self.user_agent})
+        try:
+            with urllib.request.urlopen(req, timeout=self.timeout_s) as resp:  # nosec B310
+                body = resp.read().decode("utf-8", errors="replace")
+        except urllib.error.HTTPError as exc:
             self._last_request_at = time.monotonic()
-            resp.raise_for_status()
-            body = resp.text
-        else:
-            req = urllib.request.Request(url, headers={"User-Agent": self.user_agent})
-            try:
-                with urllib.request.urlopen(req, timeout=self.timeout_s) as resp:  # nosec B310
-                    body = resp.read().decode("utf-8", errors="replace")
-            except urllib.error.HTTPError as exc:
-                self._last_request_at = time.monotonic()
-                raise RuntimeError(f"CDX HTTP {exc.code}: {exc.reason}") from exc
-            self._last_request_at = time.monotonic()
+            raise RuntimeError(f"CDX HTTP {exc.code}: {exc.reason}") from exc
+        self._last_request_at = time.monotonic()
 
-        lines = [ln for ln in body.splitlines() if ln.strip()]
         resumption_key: str | None = None
-        if lines and lines[-1].startswith("resumptionKey:"):
-            resumption_key = lines.pop().split(":", 1)[1].strip()
-        return lines, resumption_key
+        lines = body.splitlines()
+        if lines and lines[-1].strip().startswith("resumptionKey:"):
+            resumption_key = lines[-1].split(":", 1)[1].strip()
+            body = "\n".join(lines[:-1])
+        return body, resumption_key
+
+    def _parse_json_rows(self, body: str) -> list[list[str]]:
+        """Parse CDX JSON output (single array or newline-split fragments)."""
+        body = body.strip()
+        if not body:
+            return []
+        try:
+            data = json.loads(body)
+        except json.JSONDecodeError:
+            # IA sometimes splits the JSON array across lines — rejoin and retry.
+            joined = "".join(body.splitlines())
+            try:
+                data = json.loads(joined)
+            except json.JSONDecodeError:
+                return []
+
+        if not isinstance(data, list):
+            return []
+
+        rows: list[list[str]] = []
+        for item in data:
+            if not isinstance(item, list) or len(item) < 2:
+                continue
+            if item[0] in ("urlkey", "timestamp"):
+                continue
+            rows.append([str(c) for c in item])
+        return rows
 
     def _paginate(
         self,
@@ -124,17 +134,9 @@ class CDXClient:
             page_params["limit"] = str(limit)
 
         while True:
-            lines, resumption_key = self._request(page_params)
-            for line in lines:
-                if line.startswith("["):
-                    try:
-                        parsed = json.loads(line)
-                        if isinstance(parsed, list):
-                            rows.append([str(c) for c in parsed])
-                    except json.JSONDecodeError:
-                        continue
-                else:
-                    rows.append(line.split())
+            body, resumption_key = self._request(page_params)
+            page_rows = self._parse_json_rows(body)
+            rows.extend(page_rows)
             if not resumption_key:
                 break
             page_params["resumptionKey"] = resumption_key

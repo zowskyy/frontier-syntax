@@ -8,6 +8,7 @@ usage: python3 scripts/verify_archive_collector.py
 
 from __future__ import annotations
 
+import argparse
 import importlib
 import json
 import logging
@@ -76,25 +77,43 @@ def load_plugin(module: str) -> Any:
 
 
 def main() -> int:
+    logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
+    parser = argparse.ArgumentParser(
+        description="Verify archive collector package",
+        epilog="usage: verify_archive_collector.py --help",
+    )
+    parser.add_argument("--quick", action="store_true", help="skip demo network run")
+    try:
+        args = parser.parse_args()
+        return _run_verify(skip_demo=args.quick)
+    except Exception as exc:
+        log.error("verify failed: %s", exc)
+        return 1
+
+
+def _check_files() -> int:
     missing = [f for f in REQUIRED_FILES if not (ROOT / f).exists()]
-    if not missing:
-        pass
-    else:
+    if missing:
         print("FAIL: missing files:")
         for f in missing:
             print(f"  - {f}")
         return 1
+    return 0
 
+
+def _check_imports() -> int:
     if str(ROOT) not in sys.path:
         sys.path.insert(0, str(ROOT))
-
     for mod in REQUIRED_MODULES:
         try:
             load_plugin(mod)
         except Exception as exc:
             print(f"FAIL: cannot import {mod}: {exc}")
             return 1
+    return 0
 
+
+def _check_registry() -> int:
     from scripts.archive_collector import Categorizer, WORKERS, SUPERVISORS
 
     if len(WORKERS) != 21:
@@ -103,18 +122,19 @@ def main() -> int:
     if len(SUPERVISORS) != 3:
         print(f"FAIL: expected 3 supervisors, got {len(SUPERVISORS)}")
         return 1
-
     cat = Categorizer()
-    result = cat.classify_host("github.com")
-    if "industry" not in result or "topics" not in result:
+    sample = cat.classify_host("github.com")
+    if "industry" not in sample or "topics" not in sample:
         raise ValueError("categorizer missing required keys")
-
     manifest = json.loads((ROOT / "manifest" / "archive_collector.json").read_text(encoding="utf-8"))
     VerifyManifest(worker_count=manifest.get("worker_count", 0))
     if manifest.get("worker_count") != 21:
         print("FAIL: manifest worker_count must be 21")
         return 1
+    return 0
 
+
+def _run_demo() -> int:
     proc = subprocess.run(  # nosec B603
         [sys.executable, "scripts/archive_collector_team.py", "run", "--mode", "demo", "--sequential"],
         cwd=ROOT,
@@ -127,12 +147,36 @@ def main() -> int:
         print(proc.stdout[-2000:])
         print(proc.stderr[-1000:])
         return 1
+    stdout = proc.stdout.strip()
+    try:
+        demo_result = json.loads(stdout)
+    except json.JSONDecodeError:
+        try:
+            demo_result = json.loads(stdout.splitlines()[-1])
+        except (json.JSONDecodeError, IndexError):
+            print("FAIL: could not parse demo run output")
+            return 1
+    if demo_result.get("record_count", 0) < 1:
+        print("FAIL: demo mode collected zero records (CDX parse or network)")
+        return 1
+    return 0
 
+
+def _run_verify(skip_demo: bool = False) -> int:
+    if _check_files() != 0:
+        return 1
+    if _check_imports() != 0:
+        return 1
+    if _check_registry() != 0:
+        return 1
+    if skip_demo:
+        print("PASS: Archive Collector verification (quick)")
+        return 0
+    if _run_demo() != 0:
+        return 1
     print("PASS: Archive Collector verification")
     print(f"  Modules: {len(REQUIRED_MODULES)}")
     print(f"  Files: {len(REQUIRED_FILES)}")
-    print(f"  Workers: {len(WORKERS)}")
-    print(f"  Supervisors: {len(SUPERVISORS)}")
     print(f"  Manifest: manifest/archive_collector.json")
     return 0
 
