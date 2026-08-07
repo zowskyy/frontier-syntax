@@ -79,7 +79,17 @@ impl Interpreter {
                 self.pop_scope();
                 Ok(last)
             }
-            Stmt::FnDecl { .. } => Ok(None),
+            Stmt::While { condition, body } => {
+                while value_truthy(&self.eval_expr(condition)?) {
+                    self.push_scope();
+                    for s in body {
+                        self.eval_stmt(s)?;
+                    }
+                    self.pop_scope();
+                }
+                Ok(None)
+            }
+            Stmt::FnDecl { .. } | Stmt::VersionDecl { .. } | Stmt::ImportDecl { .. } => Ok(None),
         }
     }
 

@@ -9,6 +9,8 @@ pub mod error;
 #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
 pub mod grammar;
 #[cfg(not(target_arch = "wasm32"))]
+pub mod interpreter;
+#[cfg(not(target_arch = "wasm32"))]
 pub mod ipfs;
 #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
 pub mod knowledge;
@@ -26,6 +28,8 @@ pub mod packages;
 pub mod parser;
 #[cfg(not(target_arch = "wasm32"))]
 pub mod pq_signatures;
+#[cfg(not(target_arch = "wasm32"))]
+pub mod repl;
 #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
 pub mod resolver;
 #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]

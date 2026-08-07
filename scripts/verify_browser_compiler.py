@@ -35,7 +35,8 @@ def main() -> int:
         return rc
 
     wasm32 = subprocess.call(
-        ["cargo", "build", "--release", "--lib", "--target", "wasm32-unknown-unknown"],
+        ["cargo", "build", "--release", "--lib", "--target", "wasm32-unknown-unknown",
+         "--features", "full"],
         cwd=ROOT,
     )
     if wasm32 != 0:

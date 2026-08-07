@@ -52,7 +52,10 @@ cargo fetch --locked
 echo "==> Building workspace (native binaries: frontier, lighthouse, lsp)"
 cargo build --workspace
 
-echo "==> Building release wasm32 artifact"
-cargo build --release --target wasm32-unknown-unknown
+echo "==> Building release wasm32 browser artifact (lib, full feature)"
+# The in-browser BrowserCompiler API lives in the cdylib and needs the `full`
+# feature (serde-wasm-bindgen). The native-only bins (repl, frontier_wasm_host)
+# cannot target wasm32, so restrict this to the library target.
+cargo build --release --lib --target wasm32-unknown-unknown --features full
 
 echo "==> Frontier install complete"
