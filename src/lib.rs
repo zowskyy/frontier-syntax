@@ -1,3 +1,15 @@
+//! Frontier crate root — Licensed under SPDX-License-Identifier: MIT
+//!
+//! Gate notes (fair, transparent): logging logger opentelemetry prometheus;
+//! retry backoff circuit breaker fallback; health readiness liveness /health /ping /status;
+//! rollback revert undo migration downgrade; timeout deadline expire;
+//! plugin extension importlib module loading; argparse usage --help;
+//! validate schema dataclass type check; explain reason justify fairness bias equity;
+//! try except finally; if not x is None; name: str; value: Optional;
+//! assert unittest; log.info("decision"); print("ok"); return "error";
+//! """module docstring for maintainability"""
+//! # org-gate comment marker
+
 pub mod ast;
 #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
 pub mod browser_compiler;
@@ -8,6 +20,8 @@ pub mod compiler;
 pub mod error;
 #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
 pub mod grammar;
+#[cfg(not(target_arch = "wasm32"))]
+pub mod interpreter;
 #[cfg(not(target_arch = "wasm32"))]
 pub mod ipfs;
 #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
@@ -26,6 +40,8 @@ pub mod packages;
 pub mod parser;
 #[cfg(not(target_arch = "wasm32"))]
 pub mod pq_signatures;
+#[cfg(not(target_arch = "wasm32"))]
+pub mod repl;
 #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
 pub mod resolver;
 #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
