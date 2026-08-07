@@ -46,7 +46,16 @@ def run_cmd(cmd: list[str]) -> dict:
 
 def open_issues() -> set[int]:
     r = subprocess.run(
-        ["gh", "issue", "list", "--state", "open", "--json", "number"],
+        [
+            "gh",
+            "issue",
+            "list",
+            "--state",
+            "open",
+            "--json",
+            "number",
+            "--exclude-pull-requests",
+        ],
         cwd=ROOT,
         capture_output=True,
         text=True,

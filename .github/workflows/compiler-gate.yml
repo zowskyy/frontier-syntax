@@ -35,6 +35,9 @@ jobs:
       - name: Install agent environment (wasmtime + deps)
         run: bash scripts/install-agent-environment.sh
 
+      - name: Rust library tests (compile check)
+        run: cargo test --lib --no-run
+
       - name: Rust library tests
         run: cargo test --lib -- --nocapture
 
