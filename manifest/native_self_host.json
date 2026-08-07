@@ -1,5 +1,5 @@
 {
-  "verified_at": "2026-08-07T02:28:40.886133Z",
+  "verified_at": "2026-08-07T02:52:03.641883Z",
   "script": "scripts/run_native_self_host.py",
   "source": "frontier/src/self_host_probe.fr",
   "compiler_wasm": "target/wasm32-unknown-unknown/release/frontier.wasm",

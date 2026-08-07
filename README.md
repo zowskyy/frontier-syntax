@@ -20,15 +20,16 @@ Full guide: [docs/GET_HELP.md](docs/GET_HELP.md) · Cursor: `/get-help`
 
 <!-- SHADOW_WORKER_STATUS:BEGIN -->
 
-**Live audit & blueprint status** — _auto-updated on merge_
+**Live audit & blueprint status** — _auto-updated 2026-08-07 02:51:01 UTC_
 
 | | |
 |---|---|
 | Agent audit log | [`docs/agent_audit_log/`](docs/agent_audit_log/) |
-| Blueprint gate | run `python3 scripts/tracking.py gate` |
-| Taylor Ops | `python3 scripts/taylor_ops_team.py run --mode production` |
+| Latest ecosystem report | run `20260806T232938Z` |
+| Blueprint gate | Phase 0: **?** · Phase 1: **?** · open: — |
+| WASM | 84.3 KB (target &lt;100 KB met: True) |
 
-End of every agent turn: `python3 scripts/agent_shadow_worker.py run --taylor`
+End of every agent turn: `python3 scripts/agent_shadow_worker.py run`
 
 <!-- SHADOW_WORKER_STATUS:END -->
 
