@@ -1,6 +1,16 @@
 //! Integration tests for frontier-dex end-to-end pipeline.
 
+use std::path::PathBuf;
+
+use frontier_dex::parser::parse_dex;
 use frontier_dex::{DecompileOptions, Decompiler};
+
+fn fixture_path(name: &str) -> PathBuf {
+    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("tests")
+        .join("fixtures")
+        .join(name)
+}
 
 #[test]
 fn integration_decompile_pipeline() {
@@ -28,6 +38,28 @@ fn integration_decompile_pipeline() {
     let mut dec = Decompiler::new(options);
     let result = dec.decompile_bytes(&dex).expect("pipeline");
     assert!(result.proof_hash.is_some());
+}
+
+#[test]
+fn integration_fixture_minimal_dex() {
+    let path = fixture_path("minimal.dex");
+    let bytes = std::fs::read(&path).expect("read minimal.dex fixture");
+    let dex = parse_dex(&bytes).expect("parse minimal.dex");
+    assert_eq!(dex.header.magic[0..4], *b"dex\n");
+    assert_eq!(dex.classes.len(), 1);
+    assert_eq!(dex.classes[0].class_name, "LHello;");
+    assert!(!dex.classes[0].methods.is_empty());
+
+    let mut dec = Decompiler::new(DecompileOptions {
+        generate_proof: false,
+        neural: false,
+        cache: false,
+        fallback_engines: false,
+    });
+    let result = dec.decompile_bytes(&bytes).expect("decompile minimal.dex");
+    assert_eq!(result.engine_used, "frontier-dex");
+    assert!(!result.java_sources.is_empty());
+    assert!(result.java_sources[0].source.contains("Hello"));
 }
 
 #[test]
