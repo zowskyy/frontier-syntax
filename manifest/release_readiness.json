@@ -1,12 +1,11 @@
 {
   "verdict": "RC_READY",
   "version": "1.0.0-rc.1",
-  "audited_at": "2026-08-07T21:10:43.871299Z",
+  "audited_at": "2026-08-07T23:25:11.138425Z",
   "all_pass": false,
   "rc_ready": true,
   "ga_ready": false,
   "blockers": [
-    "wave_3_m5_compiler",
     "wave_3_phase4_validated"
   ],
   "rc_blockers": [],
@@ -20,7 +19,7 @@
     {
       "name": "wave_0_wasm_codegen_verify",
       "pass": true,
-      "manifest": "manifest\\wasm_codegen_verify.json",
+      "manifest": "manifest/wasm_codegen_verify.json",
       "field": "all_pass",
       "value": true,
       "expected": true
@@ -28,7 +27,7 @@
     {
       "name": "wave_0_wasm_size",
       "pass": true,
-      "manifest": "manifest\\wasm_size.json",
+      "manifest": "manifest/wasm_size.json",
       "field": "met",
       "value": true,
       "expected": true
@@ -36,7 +35,7 @@
     {
       "name": "wave_0_native_self_host",
       "pass": true,
-      "manifest": "manifest\\native_self_host.json",
+      "manifest": "manifest/native_self_host.json",
       "field": "pass",
       "value": true,
       "expected": true
@@ -52,15 +51,15 @@
     {
       "name": "wave_2_compiler_ci",
       "pass": true,
-      "path": ".github\\workflows\\compiler-gate.yml"
+      "path": ".github/workflows/compiler-gate.yml"
     },
     {
       "name": "wave_3_m5_compiler",
-      "pass": false,
-      "gate_slice": false,
+      "pass": true,
+      "gate_slice": true,
       "mission_slice": false,
       "milestone": "M5",
-      "reason": "compiler wasm build failed: ling futures-task v0.3.33\n   Compiling cfg-if v1.0.4\nerror[E0463]: can't find crate for `core`\n  |\n  = note: the `wasm32-unknown-unknown` target may not be installed\n  = help: consider downloading the target with `rustup target add wasm32-unknown-unknown`\n\nFor more information about this error, try `rustc --explain E0463`.\nerror: could not compile `unicode-ident` (lib) due to 1 previous error\nwarning: build failed, waiting for other jobs to finish...\nerror: could not compile `pin-project-lite` (lib) due to 1 previous error\nerror: could not compile `once_cell` (lib) due to 1 previous error\nerror: could not compile `futures-task` (lib) due to 1 previous error\nerror: could not compile `futures-core` (lib) due to 1 previous error\nerror: could not compile `cfg-if` (lib) due to 1 previous error\n"
+      "reason": null
     },
     {
       "name": "wave_3_phase4_validated",
@@ -70,11 +69,11 @@
         "phase_1": "validated",
         "phase_2": "validated",
         "phase_3": "validated",
-        "phase_4": "fail",
-        "phase_5": "blocked",
-        "phase_6": "blocked",
-        "phase_7": "blocked",
-        "phase_8": "fail"
+        "phase_4": "validated",
+        "phase_5": "validated",
+        "phase_6": "validated",
+        "phase_7": "fail",
+        "phase_8": "frozen"
       },
       "reason": "phases 4-8 not all validated (required for GA RELEASE_READY)"
     },
@@ -85,6 +84,6 @@
       "blocks_ga_only": true
     }
   ],
-  "report": "audit_reports\\RELEASE_READINESS_REPORT.md",
-  "manifest": "manifest\\release_readiness.json"
+  "report": "audit_reports/RELEASE_READINESS_REPORT.md",
+  "manifest": "manifest/release_readiness.json"
 }
