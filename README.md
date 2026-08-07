@@ -45,6 +45,26 @@ cargo run --release --bin repl
 - **final_hash.sha3:** `4526dc37ea9d2b11a3c75fe1f3b262a246a11a3d972afeafcbc9865e456bd3e6`
 - **ast_hash.sha3:** `3d5286d6079167b31d2e1c720da8af63eafe56d28666f0862f04abf02932b53f`
 
+## Cursor Gate (Agent Policy)
+
+Code changes are reviewed by dual gate scripts before merge. Bootstrapped from the Schema kit:
+
+```bash
+bash scripts/install-agent-environment.sh
+bash scripts/gate-file.sh --file samples/hello_passing.py
+bash scripts/gate-all-changed.sh
+```
+
+| Artifact | Role |
+|----------|------|
+| `cursor_gate.py` / `cursor_gate_fastest.py` | Dual reviewers (15 gates each) |
+| `AGENTS.md` | Agent completion policy |
+| `.cursor/rules/*.mdc` | Quarterback/worker delegation rules |
+| `.github/workflows/gate-check.yml` | CI gate on pull requests |
+| `samples/hello_passing.py` | Smoke-test fixture that passes all gates |
+
+> Blueprint issues #44–#48 remain open; the gate layer itself is production-ready.
+
 ## License
 
 MIT
