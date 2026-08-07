@@ -1,44 +1,44 @@
 {
-  "verified_at": "2026-08-07T04:00:26.766078Z",
+  "verified_at": "2026-08-07T05:20:50.123886Z",
   "script": "scripts/verify_wasm_codegen.py",
-  "wasmtime": null,
-  "all_pass": false,
+  "wasmtime": "/home/ubuntu/.wasmtime/bin/wasmtime",
+  "all_pass": true,
   "cases": [
     {
       "name": "const_return",
-      "pass": false,
+      "pass": true,
       "expected": 42,
-      "actual": null,
+      "actual": 42,
       "compile_ok": true,
-      "run_ok": false,
-      "output": "wasmtime not found"
+      "run_ok": true,
+      "output": "ok"
     },
     {
       "name": "let_if",
-      "pass": false,
+      "pass": true,
       "expected": 10,
-      "actual": null,
+      "actual": 10,
       "compile_ok": true,
-      "run_ok": false,
-      "output": "wasmtime not found"
+      "run_ok": true,
+      "output": "ok"
     },
     {
       "name": "while_loop",
-      "pass": false,
+      "pass": true,
       "expected": 13,
-      "actual": null,
+      "actual": 13,
       "compile_ok": true,
-      "run_ok": false,
-      "output": "wasmtime not found"
+      "run_ok": true,
+      "output": "ok"
     },
     {
       "name": "function_call",
-      "pass": false,
+      "pass": true,
       "expected": 42,
-      "actual": null,
+      "actual": 42,
       "compile_ok": true,
-      "run_ok": false,
-      "output": "wasmtime not found"
+      "run_ok": true,
+      "output": "ok"
     }
   ]
 }
