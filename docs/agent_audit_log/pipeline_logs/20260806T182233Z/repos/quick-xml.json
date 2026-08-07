@@ -1,0 +1,22 @@
+{
+  "name": "quick-xml",
+  "url": "https://github.com/zowskyy/quick-xml",
+  "description": "Rust high performance xml reader and writer",
+  "is_private": false,
+  "language": "Rust",
+  "updated_at": "2026-07-30T22:32:54Z",
+  "category": "fork_or_adjacent",
+  "access_status": "fetch_failed",
+  "readme_excerpt": "# quick-xml\n\n![status](https://github.com/tafia/quick-xml/actions/workflows/rust.yml/badge.svg)\n[![Crate](https://img.shields.io/crates/v/quick-xml.svg)](https://crates.io/crates/quick-xml)\n[![docs.rs](https://docs.rs/quick-xml/badge.svg)](https://docs.rs/quick-xml)\n[![codecov](https://img.shields.io/codecov/c/github/tafia/quick-xml)](https://codecov.io/gh/tafia/quick-xml)\n[![MSRV](https://img.shields.io/badge/rustc-1.86.0+-ab6000.svg)](https://blog.rust-lang.org/2025/04/03/Rust-1.86.0/)\n\nHigh performance xml pull reader/writer.\n\nThe reader:\n- is almost zero-copy (use of `Cow` whenever possible)\n- is easy on memory allocation (the API provides a way to reuse buffers)\n- support various encoding (with `encoding` feature), namespaces resolution, special characters.\n\nSyntax is inspired by [xml-rs](https://github.com/netvl/xml-rs).\n\n## Example\n\n### Reader\n\n```rust\nuse quick_xml::events::Event;\nuse quick_xml::reader::Reader;\n\nlet xml = r#\"<tag1 att1 = \"test\">\n                <tag2><!--Test comment-->Test</tag2>\n                <tag2>Test 2</tag2>\n             </tag1>\"#;\nlet mut reader = Reader::from_str(xml);\nreader.config_mut().trim_text(true);\n\nlet mut count = 0;\nlet mut txt = Vec::new();\nlet mut buf = Vec::new();\n\n// The `Reader` does not implement `Iterator` because it outputs borrowed data (`Cow`s)\nloop {\n    // NOTE: this is the generic case when we don't know about the input BufRead.\n    // when the input is a &str or a &[u8], we don't actually need to use another\n    // buffer, we could directly call `reader.read_event()`\n    match reader.read_event_into(&mut buf) {\n        Err(e) => panic!(\"Error at position {}: {:?}\", reader.error_position(), e),\n        // exits the loop when reaching end of file\n        Ok(Event::Eof) => break,\n\n        Ok(Event::Start(e)) => {\n            match e.name().as_ref() {\n                b\"tag1\" => println!(\"attributes values: {:?}\",\n                                    e.attributes().map(|a| a.unwrap().value)\n                                    .collect::<Vec<_>>()),\n                b\"tag2\" => count += 1,\n                _ => (),\n            }\n        }\n        Ok(Event::Text(e)) => txt.push(e.decode().unwrap().into_owned()),\n\n        // There are several other `Event`s we do not consider here\n        _ => (),\n    }\n... (116 more lines)",
+  "top_level_files": [],
+  "claims": [
+    "GitHub description: Rust high performance xml reader and writer"
+  ],
+  "can_do": [
+    "(capabilities not verified \u2014 metadata-only scan)"
+  ],
+  "cannot_do": [
+    "Not part of Frontier blueprint critical path"
+  ],
+  "blueprint_relation": "Upstream fork or unrelated project \u2014 no blueprint phase dependency."
+}

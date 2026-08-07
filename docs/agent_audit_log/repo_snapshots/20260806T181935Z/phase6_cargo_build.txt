@@ -1,0 +1,108 @@
+# Command: cargo build
+# Started: 2026-08-06T18:19:36Z
+
+   Compiling frontier v2.0.0 (/workspace)
+warning: unused import: `serde_json::Value`
+  --> src/parser/mod.rs:13:5
+   |
+13 | use serde_json::Value;
+   |     ^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` on by default
+
+warning: unused import: `std::path::Path`
+  --> src/parser/mod.rs:15:5
+   |
+15 | use std::path::Path;
+   |     ^^^^^^^^^^^^^^^
+
+warning: unused import: `SecretKey`
+ --> src/pq_signatures.rs:4:45
+  |
+4 | use pqcrypto_traits::sign::{PublicKey as _, SecretKey as _, SignedMessage as _};
+  |                                             ^^^^^^^^^
+
+warning: unused variable: `line`
+   --> src/lexer.rs:178:31
+    |
+178 |     fn read_string(&mut self, line: usize, column: usize) -> Token {
+    |                               ^^^^ help: if this is intentional, prefix it with an underscore: `_line`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: unused variable: `column`
+   --> src/lexer.rs:178:44
+    |
+178 |     fn read_string(&mut self, line: usize, column: usize) -> Token {
+    |                                            ^^^^^^ help: if this is intentional, prefix it with an underscore: `_column`
+
+warning: unused variable: `start`
+   --> src/parser/handwritten.rs:147:13
+    |
+147 |         let start = self.current().clone();
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_start`
+
+warning: variable does not need to be mutable
+   --> src/wasm_codegen.rs:144:9
+    |
+144 |     let mut codegen = FullModuleCodegen::new(program)?;
+    |         ----^^^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: unused variable: `idx`
+   --> src/wasm_codegen.rs:247:14
+    |
+247 |         for (idx, sig) in fns.into_iter().enumerate() {
+    |              ^^^ help: if this is intentional, prefix it with an underscore: `_idx`
+
+warning: unused variable: `main_func_count`
+   --> src/wasm_codegen.rs:578:43
+    |
+578 | fn export_section_multi(names: &[String], main_func_count: usize) -> Vec<u8> {
+    |                                           ^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_main_func_count`
+
+warning: field `input` is never read
+  --> src/lexer.rs:67:5
+   |
+66 | pub struct Lexer<'a> {
+   |            ----- field in this struct
+67 |     input: &'a str,
+   |     ^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: field `diagnostics` is never read
+   --> src/neural/completion.rs:149:5
+    |
+147 | pub struct NeuralLspServer {
+    |            --------------- field in this struct
+148 |     completion: NeuralCompletion,
+149 |     diagnostics: Vec<JsonValue>,
+    |     ^^^^^^^^^^^
+
+warning: method `parse_fn` is never used
+   --> src/parser/handwritten.rs:312:8
+    |
+12  | impl Parser {
+    | ----------- method in this implementation
+...
+312 |     fn parse_fn(&mut self) -> Result<Stmt, FrontierError> {
+    |        ^^^^^^^^
+
+warning: method `check_null_safety` is never used
+   --> src/resolver.rs:140:8
+    |
+37  | impl Resolver {
+    | ------------- method in this implementation
+...
+140 |     fn check_null_safety(&self, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {
+    |        ^^^^^^^^^^^^^^^^^
+
+warning: `frontier` (lib) generated 13 warnings (run `cargo fix --lib -p frontier` to apply 3 suggestions)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 5.04s
+
+# Exit code: 0
+# Finished: 2026-08-06T18:19:41Z

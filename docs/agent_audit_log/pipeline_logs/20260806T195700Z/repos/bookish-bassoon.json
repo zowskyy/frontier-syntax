@@ -1,0 +1,30 @@
+{
+  "name": "bookish-bassoon",
+  "url": "https://github.com/zowskyy/bookish-bassoon",
+  "description": "",
+  "is_private": false,
+  "language": "Shell",
+  "updated_at": "2026-08-04T01:30:53Z",
+  "category": "frontier_ecosystem",
+  "access_status": "ok",
+  "readme_excerpt": "# bookish-bassoon",
+  "top_level_files": [
+    ".cursor",
+    ".github",
+    "AUDIT_HISTORY.json",
+    "README.md",
+    "docs",
+    "package.json"
+  ],
+  "claims": [
+    "(no explicit claims extracted from README)"
+  ],
+  "can_do": [
+    "Top-level structure visible (6 entries): .cursor, .github, AUDIT_HISTORY.json, README.md, docs, package.json",
+    "Node/JS project (package.json present)"
+  ],
+  "cannot_do": [
+    "No .github/workflows at repo root (CI not confirmed)"
+  ],
+  "blueprint_relation": "Automation / worker scripts; may invoke frontier-syntax tooling."
+}

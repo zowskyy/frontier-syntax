@@ -1,0 +1,22 @@
+{
+  "name": "mia.loa",
+  "url": "https://github.com/zowskyy/mia.loa",
+  "description": "",
+  "is_private": false,
+  "language": "JavaScript",
+  "updated_at": "2026-08-05T08:55:07Z",
+  "category": "fork_or_adjacent",
+  "access_status": "fetch_failed",
+  "readme_excerpt": "# \u26a1 Lighthouse\n\n**Free offline AI coding agent. No subscription. Works on phones, RPi, anything.**\n\n## Quick Start\n\n```bash\nnpm install          # One dependency: express\nnode setup.js        # Download model (~4GB, one-time)\nnode core.js         # Start server\n# Open http://localhost:8899\n```\n\n## Mobile \u2014 Three Tiers\n\n| Tier | What | Setup |\n|------|------|-------|\n| **1: PWA** | Browser + home screen install | Open `http://<server>:8899` on phone |\n| **2: Capacitor** | Native Android/iOS app shell | `cd mobile/capacitor && npm install && node build-mobile.js` |\n| **3: WebLLM** | On-device AI in browser (WebGPU) | Tap **\ud83e\udde0 On-Device** in app header |\n\n### Connect your phone (Tier 1)\n\n1. Run `node core.js` on your laptop/RPi\n2. Open `http://<server-ip>:8899/connect.html` on any device\n3. Scan the QR code with your phone\n\n### Native app (Tier 2)\n\n```bash\ncd mobile/capacitor\nnpm install\nnode build-mobile.js --server http://192.168.1.10:8899\nnpm run add:android    # first time\nnpm run android        # open Android Studio\n```\n\nSee [mobile/capacitor/README.md](mobile/capacitor/README.md).\n\n### On-device AI (Tier 3)\n\nRequires Chrome 127+ with WebGPU and 8GB+ RAM. Enable via the header toggle. See [mobile/webllm/README.md](mobile/webllm/README.md).\n\n## Modes\n\n| Mode | What it does |\n|------|--------------|\n| Server mode | Uses llama-server (fastest, persistent) |\n| CLI mode | Uses llama-cli (works everywhere) |\n| Learning mode | No model needed \u2014 explains concepts |\n| On-device (WebLLM) | Model runs in browser via WebGPU |\n\n## Features\n\n- \ud83e\udde0 **ARC Cycle** \u2014 Analyzes \u2192 Plans \u2192 Codes \u2192 Self-Reviews\n- \ud83d\udca1 **Idea Mode** \u2014 Describe your idea, get questions, then code\n- \ud83d\udcf1 **Phone Ready** \u2014 PWA, voice input, share sheet, wake lock\n- \ud83d\udd0c **Fully Offline** \u2014 After model download, zero internet\n- \ud83d\udcbe **Projects** \u2014 Save and load your work\n- \ud83d\udda5\ufe0f **CLI** \u2014 Terminal mode for headless systems\n... (40 more lines)",
+  "top_level_files": [],
+  "claims": [
+    "(no explicit claims extracted from README)"
+  ],
+  "can_do": [
+    "(capabilities not verified \u2014 metadata-only scan)"
+  ],
+  "cannot_do": [
+    "Not part of Frontier blueprint critical path"
+  ],
+  "blueprint_relation": "Upstream fork or unrelated project \u2014 no blueprint phase dependency."
+}

@@ -1,0 +1,8 @@
+{
+  "version": "1.0.0",
+  "max_total_seconds": 60,
+  "max_seconds_per_repo": 5,
+  "max_audit_entry_bytes": 8192,
+  "max_git_artifact_kb_per_pr": 500,
+  "notes": "Ecosystem gather SLA for <=50 repos. Full local checks may exceed cap; use --fast in CI."
+}

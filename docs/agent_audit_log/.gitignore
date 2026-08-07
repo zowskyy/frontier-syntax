@@ -1,0 +1,5 @@
+state/
+*.log
+!pipeline_logs/**/pipeline.log
+private_prompts.jsonl
+archive/

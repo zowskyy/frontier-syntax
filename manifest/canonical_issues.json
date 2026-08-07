@@ -1,0 +1,68 @@
+{
+  "version": "1.0.0",
+  "validator": "Taylor Ops Independent Validator",
+  "validator_script": "scripts/taylor_issue_closer.py",
+  "rule": "Workers verify their slice, then the independent validator closes GitHub issues only when all checks pass. No partial credit.",
+  "canonical_range": [44, 45, 46, 47, 48],
+  "issues": {
+    "44": {
+      "github": 44,
+      "phase": "1.1",
+      "worker": "W2_CompilerCore",
+      "title": "wasm_codegen_incomplete",
+      "verification_commands": [
+        ["cargo", "test", "--lib", "wasm_codegen::", "--quiet"],
+        ["python3", "scripts/verify_wasm_codegen.py"]
+      ],
+      "evidence_manifest": "manifest/wasm_codegen_verify.json",
+      "evidence_field": "all_pass",
+      "blocked_until_issues_closed": []
+    },
+    "45": {
+      "github": 45,
+      "phase": "1.2",
+      "worker": "W2_CompilerCore",
+      "title": "knowledge_warnings_only",
+      "verification_commands": [
+        ["cargo", "test", "--lib", "wasm_codegen::tests::test_knowledge_changes_wasm", "--quiet"]
+      ],
+      "blocked_until_issues_closed": []
+    },
+    "46": {
+      "github": 46,
+      "phase": "1.3",
+      "worker": "W2_CompilerCore",
+      "title": "self_hosting_zero",
+      "verification_commands": [
+        ["python3", "scripts/verify_self_hosting.py", "--native"],
+        ["python3", "scripts/run_native_self_host.py"]
+      ],
+      "evidence_manifest": "manifest/native_self_host.json",
+      "evidence_field": "pass",
+      "requires_native_self_host": true,
+      "blocked_until_issues_closed": []
+    },
+    "47": {
+      "github": 47,
+      "phase": "2.1",
+      "worker": "W4_SpecParity",
+      "title": "spec_impl_gap",
+      "verification_commands": [
+        ["python3", "scripts/spec_impl_bridge.py"]
+      ],
+      "blocked_until_issues_closed": [44, 45, 46]
+    },
+    "48": {
+      "github": 48,
+      "phase": "3.1",
+      "worker": "W5_WasmSizer",
+      "title": "wasm_size",
+      "verification_commands": [
+        ["python3", "scripts/measure_wasm_size.py"]
+      ],
+      "evidence_manifest": "manifest/wasm_size.json",
+      "evidence_field": "met",
+      "blocked_until_issues_closed": []
+    }
+  }
+}

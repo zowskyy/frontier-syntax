@@ -1,0 +1,100 @@
+{
+  "run_id": "20260806T233032Z",
+  "mode": "end-of-turn",
+  "apply": false,
+  "started_at": "2026-08-06T23:30:32.368793Z",
+  "workers_scheduled": [
+    "W3_AuditGuardian",
+    "W7_LaunchContinuity"
+  ],
+  "groups": [
+    {
+      "group": 1,
+      "name": "FOUNDATION",
+      "mission": "Blueprint Phase 0\u20131: gate truth, compiler P0s, audit integrity",
+      "workers": [
+        {
+          "id": "W3_AuditGuardian",
+          "name": "AuditGuardian",
+          "group": 1,
+          "role": "PII scrub + schema validate",
+          "scripts": [
+            "scripts/scrub_audit_sessions.py",
+            "scripts/validate_audit_log.py"
+          ],
+          "steps": [
+            {
+              "command": "/usr/bin/python3 scripts/scrub_audit_sessions.py",
+              "exit_code": 0,
+              "pass": true,
+              "duration_s": 0.023,
+              "stdout_tail": "scrubbed 2026-08-06.jsonl: 90 entries, 0 prompts relocated\ndone: 90 entries, 0 prompts -> state/private_prompts.jsonl (gitignored)\n",
+              "stderr_tail": ""
+            },
+            {
+              "command": "/usr/bin/python3 scripts/validate_audit_log.py --strict-hash",
+              "exit_code": 0,
+              "pass": true,
+              "duration_s": 0.096,
+              "stdout_tail": "PASS: 90 entries validated\n",
+              "stderr_tail": ""
+            }
+          ],
+          "ok": true,
+          "started_at": "2026-08-06T23:30:32.368830Z",
+          "finished_at": "2026-08-06T23:30:32.487989Z"
+        }
+      ],
+      "ok": true,
+      "started_at": "2026-08-06T23:30:32.368823Z",
+      "finished_at": "2026-08-06T23:30:32.488006Z"
+    },
+    {
+      "group": 3,
+      "name": "SHIP",
+      "mission": "Production hardening: GitHub gambit + launch continuity",
+      "workers": [
+        {
+          "id": "W7_LaunchContinuity",
+          "name": "LaunchContinuity",
+          "group": 3,
+          "role": "Ecosystem + README + process log \u2014 launch continuity",
+          "scripts": [
+            "scripts/gather_ecosystem_knowledge.py",
+            "scripts/update_audit_readme.py",
+            "scripts/process_logger.py",
+            "scripts/sync_knowledge_base.py"
+          ],
+          "steps": [
+            {
+              "command": "/usr/bin/python3 scripts/update_audit_readme.py",
+              "exit_code": 0,
+              "pass": true,
+              "duration_s": 11.308,
+              "stdout_tail": "updated: docs/agent_audit_log/README.md\nupdated: README.md\n",
+              "stderr_tail": ""
+            },
+            {
+              "command": "/usr/bin/python3 scripts/process_logger.py",
+              "exit_code": 0,
+              "pass": true,
+              "duration_s": 0.026,
+              "stdout_tail": "\u2705 Logged to docs/process_log.fr\n",
+              "stderr_tail": "",
+              "optional": true
+            }
+          ],
+          "ok": true,
+          "started_at": "2026-08-06T23:30:32.488018Z",
+          "finished_at": "2026-08-06T23:30:43.822101Z"
+        }
+      ],
+      "ok": true,
+      "started_at": "2026-08-06T23:30:32.488015Z",
+      "finished_at": "2026-08-06T23:30:43.822120Z"
+    }
+  ],
+  "ok": true,
+  "production_ready": false,
+  "finished_at": "2026-08-06T23:30:43.822126Z"
+}

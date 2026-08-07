@@ -1,0 +1,25 @@
+{
+  "name": "Schema",
+  "url": "https://github.com/zowskyy/Schema",
+  "description": "",
+  "is_private": false,
+  "language": null,
+  "updated_at": "2026-08-06T18:46:24Z",
+  "category": "fork_or_adjacent",
+  "access_status": "ok",
+  "readme_excerpt": "# Schema",
+  "top_level_files": [
+    "README.md"
+  ],
+  "claims": [
+    "(no explicit claims extracted from README)"
+  ],
+  "can_do": [
+    "Top-level structure visible (1 entries): README.md"
+  ],
+  "cannot_do": [
+    "No .github/workflows at repo root (CI not confirmed)",
+    "Not part of Frontier blueprint critical path"
+  ],
+  "blueprint_relation": "Upstream fork or unrelated project \u2014 no blueprint phase dependency."
+}

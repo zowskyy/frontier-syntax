@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/zowskyy/frontier-agent-legal-record/schema/audit_entry.json",
+  "title": "AgentAuditEntry",
+  "type": "object",
+  "required": [
+    "id",
+    "timestamp_utc",
+    "session_id",
+    "category",
+    "action",
+    "why",
+    "how_to_repeat",
+    "honesty"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "timestamp_utc": { "type": "string", "format": "date-time" },
+    "session_id": { "type": "string" },
+    "agent": {
+      "type": "object",
+      "properties": {
+        "type": { "type": "string" },
+        "model": { "type": "string" },
+        "run_url": { "type": "string" },
+        "branch": { "type": "string" },
+        "repo": { "type": "string" }
+      }
+    },
+    "category": {
+      "enum": [
+        "user_prompt",
+        "assistant_response",
+        "tool_call",
+        "decision",
+        "git",
+        "pr",
+        "limitation",
+        "idle_flush",
+        "error",
+        "backfill"
+      ]
+    },
+    "action": { "type": "string" },
+    "why": { "type": "string" },
+    "how_to_repeat": {
+      "type": "object",
+      "properties": {
+        "command": { "type": "string" },
+        "script": { "type": "string" },
+        "skill": { "type": "string" },
+        "extension_hook": { "type": "string" },
+        "prerequisites": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "inputs": { "type": "object" },
+    "outputs": { "type": "object" },
+    "artifacts": { "type": "array", "items": { "type": "string" } },
+    "git": {
+      "type": "object",
+      "properties": {
+        "branch": { "type": "string" },
+        "commit": { "type": "string" },
+        "pr_url": { "type": "string" }
+      }
+    },
+    "honesty": {
+      "type": "object",
+      "required": ["verified_by_execution", "omissions"],
+      "properties": {
+        "verified_by_execution": { "type": "boolean" },
+        "omissions": { "type": "array", "items": { "type": "string" } },
+        "cannot_verify": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "user_prompt_excerpt": { "type": "string" },
+    "parent_id": { "type": "string" }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "name": "crxcibl3",
+  "url": "https://github.com/zowskyy/crxcibl3",
+  "description": "",
+  "is_private": false,
+  "language": "GDScript",
+  "updated_at": "2026-07-29T11:56:04Z",
+  "category": "fork_or_adjacent",
+  "access_status": "ok",
+  "readme_excerpt": "# CRXCIBL3 -- Web Build (Phaser 3)\n\n## Running it -- one script, every time\n```\n.\\run-game.ps1\n```\nThat's the whole process: starts a local server and opens the game in your\nbrowser automatically. No need to remember commands, ports, or URLs.\n\nFirst time only, if PowerShell blocks it:\n```\nSet-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass\n```\n\nTo stop: close the black server window `run-game.ps1` opened, or run\n`.\\stop-game.ps1` if it gets stuck/the window got closed by accident.\n\n(You can still double-click `index.html` directly for now since nothing\nloads external files yet -- but once real art gets added via\n`this.load.image(...)`, that stops working and the server becomes\nrequired. Using `run-game.ps1` from the start avoids hitting that\nconfusing switch later.)\n\n## Controls: **WASD** or **Arrow Keys** -- free 8-directional movement, not\ngrid-locked. Walk toward a building and watch your character tuck behind\nthe roof row instead of drawing on top of it -- that's the \"walk behind\nbuildings\" depth trick from the visual direction doc, done with a fixed\nrender-depth on roof tiles rather than anything fancy.\n\n## What's actually built\n- Real Phaser 3 game (not a mockup) -- physics-based movement, collision\n  against buildings/fences/palm trees, camera follow with world bounds\n- The boardwalk layout from the earlier level mockup, ported over\n- A Heat HUD bar in the corner (currently a static demo value -- see\n  \"Next steps\" below for wiring it to real game state)\n- Folder structure under `assets/` matching your art categories, ready\n  for your real files\n\n## Adding your real art (once cleaned up via Pixel It / Piskel)\nRight now every texture is generated in code (see\n`generatePlaceholderTextures()` in `js/BoardwalkScene.js`) instead of\nloaded from a file, which is why this needs zero setup to run. To swap\nin a real image:\n\n1. Drop the PNG into the matching `assets/` subfolder, e.g.\n   `assets/heroes/hero_enforcer_bigbody.png`\n2. In `BoardwalkScene.js`, add a load line inside `preload()`:\n   ```js\n   this.load.image('hero_enforcer_bigbody', 'assets/heroes/hero_enforcer_bigbody.png');\n   ```\n3. Use that key instead of a placeholder key wherever it's referenced,\n   e.g. change `'player'` to `'hero_enforcer_bigbody'` in `createPlayer()`\n\n**Important:** once you add even one `this.load.image(...)` call, opening\n`index.html` directly by double-clicking will likely fail (browsers block\nlocal file loading for security reasons -- this is the same CORS issue\nthat would've come up in Godot too, just earlier here). At that point,\nrun a tiny local server instead -- you already have Python installed:\n```\ncd crxcibl3-web\n... (15 more lines)",
+  "top_level_files": [
+    ".github",
+    ".gitignore",
+    "ANIMATION_ASSETS_MANIFEST.md",
+    "CREDITS.md",
+    "CRXCIBL3_COMPLETE_NARRATIVE_PACKAGE.md",
+    "FOR_ANIMATION_VOICEOVER_TEAM.md",
+    "KNOWLEDGE_BASE.md",
+    "PROJECT_BLUEPRINT.md",
+    "PROJECT_STATE.md",
+    "README.md",
+    "Screenshot 2026-07-18 025721.png",
+    "VOICEOVER_ANIMATION_GUIDE.md",
+    "assets",
+    "configs",
+    "crxcibl3-sprite-animation-production-spec.html",
+    "crxcibl3art",
+    "godot",
+    "index.html",
+    "js",
+    "run-game.ps1",
+    "stop-game.ps1"
+  ],
+  "claims": [
+    "(no explicit claims extracted from README)"
+  ],
+  "can_do": [
+    "Top-level structure visible (21 entries): .github, .gitignore, ANIMATION_ASSETS_MANIFEST.md, CREDITS.md, CRXCIBL3_COMPLETE_NARRATIVE_PACKAGE.md, FOR_ANIMATION_VOICEOVER_TEAM.md, KNOWLEDGE_BASE.md, PROJECT_BLUEPRINT.md"
+  ],
+  "cannot_do": [
+    "No .github/workflows at repo root (CI not confirmed)",
+    "Not part of Frontier blueprint critical path"
+  ],
+  "blueprint_relation": "Upstream fork or unrelated project \u2014 no blueprint phase dependency."
+}

@@ -1,13 +1,16 @@
 #!/usr/bin/env bash
 # gather_for_review.sh — Comprehensive data collection for frontier-syntax review.
-# Outputs to audit_reports/review_gather/
+# Outputs to docs/agent_audit_log/repo_snapshots/<timestamp>/
 set -uo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
-OUT="${ROOT}/audit_reports/review_gather"
+SNAP_ID="$(date -u +%Y%m%dT%H%M%SZ)"
+OUT="${ROOT}/docs/agent_audit_log/repo_snapshots/${SNAP_ID}"
 mkdir -p "$OUT"
+mkdir -p "${ROOT}/docs/agent_audit_log/repo_snapshots"
+echo "${SNAP_ID}" > "${ROOT}/docs/agent_audit_log/repo_snapshots/LATEST.txt"
 
 TIMESTAMP="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
 GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo 'unknown')"
@@ -779,7 +782,7 @@ generate_full_package() {
     echo "**Generated:** $TIMESTAMP  "
     echo "**Branch:** \`$GIT_BRANCH\`  "
     echo "**Commit:** \`$GIT_COMMIT\`  "
-    echo "**Output directory:** \`audit_reports/review_gather/\`"
+    echo "**Output directory:** \`docs/agent_audit_log/repo_snapshots/${SNAP_ID}\`"
     echo ""
     echo "---"
     echo ""

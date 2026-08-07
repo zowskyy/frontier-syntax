@@ -2,6 +2,7 @@
 
 Formally verifiable programming language — **A+ Hard Gate v2.0** with 7 innovations, autonomous worker swarm, and self-creation orchestration.
 
+
 ## Get Help (start here if GitHub confuses you)
 
 **You don't need to understand issues, PRs, or the request system.**
@@ -16,6 +17,20 @@ frontier get-help blocked                    # same via CLI
 Install in any repo: `bash scripts/install_help_system.sh /path/to/repo`
 
 Full guide: [docs/GET_HELP.md](docs/GET_HELP.md) · Cursor: `/get-help`
+
+<!-- SHADOW_WORKER_STATUS:BEGIN -->
+
+**Live audit & blueprint status** — _auto-updated on merge_
+
+| | |
+|---|---|
+| Agent audit log | [`docs/agent_audit_log/`](docs/agent_audit_log/) |
+| Blueprint gate | run `python3 scripts/tracking.py gate` |
+| Taylor Ops | `python3 scripts/taylor_ops_team.py run --mode production` |
+
+End of every agent turn: `python3 scripts/agent_shadow_worker.py run --taylor`
+
+<!-- SHADOW_WORKER_STATUS:END -->
 
 ## Quick Start
 
@@ -114,6 +129,9 @@ python3 scripts/generate_arc_status.py
 | `scripts/self_creation_orchestrator.py` | 6-phase flawless build loop |
 | `scripts/gap_solution_orchestrator.py` | P0 gap verification suite |
 | `build/arc_orchestrator.py` | ARC gate verification |
+| **`scripts/agent_shadow_worker.py`** | **Heartbeat + auto README refresh (every turn / cron)** |
+| `scripts/update_audit_readme.py` | Writes live-status blocks in README files |
+| **`scripts/taylor_ops_team.py`** | **Taylor Ops Team — 7 workers / 3 groups (gates + GitHub + continuity)** |
 
 ## Core Language (Hardened)
 

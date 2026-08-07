@@ -33,6 +33,8 @@ pub mod v2_resolver;
 #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
 pub mod unity;
 pub mod wasm_codegen;
+#[cfg(all(target_arch = "wasm32", feature = "wasm-slim"))]
+pub mod wasm_host_exports;
 #[cfg(not(target_arch = "wasm32"))]
 pub mod zk;
 
@@ -118,7 +120,7 @@ mod wasm;
 #[cfg(all(target_arch = "wasm32", not(feature = "wasm-slim")))]
 pub mod browser_wasm;
 
-#[cfg(all(target_arch = "wasm32", feature = "wasm-slim"))]
+#[cfg(all(target_arch = "wasm32", feature = "wasm-slim", not(feature = "wasm-host-only")))]
 pub mod browser_wasm_slim;
 
 #[cfg(test)]
