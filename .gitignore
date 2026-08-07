@@ -33,3 +33,4 @@ frontier.toml
 .frontierrc.toml
 .frontier-telemetry.log
 .frontier-telemetry.log.old
+manifest/help_requests.jsonl

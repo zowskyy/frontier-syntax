@@ -2,6 +2,21 @@
 
 Formally verifiable programming language — **A+ Hard Gate v2.0** with 7 innovations, autonomous worker swarm, and self-creation orchestration.
 
+## Get Help (start here if GitHub confuses you)
+
+**You don't need to understand issues, PRs, or the request system.**
+
+```bash
+python3 scripts/get_help.py "describe your problem in normal words"
+python3 scripts/get_help.py blocked          # what's stalling progress?
+python3 scripts/get_help.py status           # your open requests
+frontier get-help blocked                    # same via CLI
+```
+
+Install in any repo: `bash scripts/install_help_system.sh /path/to/repo`
+
+Full guide: [docs/GET_HELP.md](docs/GET_HELP.md) · Cursor: `/get-help`
+
 ## Quick Start
 
 ```bash

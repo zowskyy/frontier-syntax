@@ -14,6 +14,7 @@ pub fn print_global_help() {
     colors::print_command("knowledge <sub>", "Knowledge Hypercube queries");
 
     colors::print_help_heading("Tooling");
+    colors::print_command("get-help <message>", "Plain-language help — no GitHub required");
     colors::print_command("shell", "Interactive REPL");
     colors::print_command("watch [path]", "Watch directory and recompile on change");
     colors::print_command("config init|show", "Manage frontier.toml configuration");

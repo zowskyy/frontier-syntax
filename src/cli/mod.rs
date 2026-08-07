@@ -6,6 +6,7 @@ pub mod compile;
 pub mod completions;
 pub mod config;
 pub mod errors;
+pub mod get_help_cmd;
 pub mod help;
 pub mod knowledge;
 pub mod mcp;
@@ -69,6 +70,10 @@ fn dispatch(args: &[String], cmd: &str) -> Result<(), i32> {
                 return Err(1);
             }
         }
+        "get-help" | "gethelp" => {
+            get_help_cmd::run_get_help(args);
+        }
+        "compile-help" => help::print_compile_help(),
         "completions" => {
             let shell = args.get(2).map(|s| s.as_str()).unwrap_or("bash");
             match completions::generate(shell) {
@@ -79,7 +84,6 @@ fn dispatch(args: &[String], cmd: &str) -> Result<(), i32> {
                 }
             }
         }
-        "compile-help" => help::print_compile_help(),
         _ => {
             print_error(&format!("Unknown command: {cmd}"));
             help::print_global_help();
