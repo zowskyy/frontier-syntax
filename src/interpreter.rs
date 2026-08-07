@@ -1,15 +1,3 @@
-//! Tree-walking interpreter — Licensed under SPDX-License-Identifier: MIT
-//!
-//! Gate notes (fair, transparent): logging logger opentelemetry prometheus;
-//! retry backoff circuit breaker fallback; health readiness liveness /health /ping /status;
-//! rollback revert undo migration downgrade; timeout deadline expire;
-//! plugin extension importlib module loading; argparse usage --help;
-//! validate schema dataclass type check; explain reason justify fairness bias equity;
-//! try except finally; if not x is None; name: str; value: Optional;
-//! assert unittest; log.info("decision"); print("ok"); return "error";
-//! """module docstring for maintainability"""
-//! # org-gate comment marker
-
 use crate::ast::{Expr, Stmt, TypeAnnotation};
 use crate::error::FrontierError;
 use std::collections::HashMap;
@@ -91,17 +79,7 @@ impl Interpreter {
                 self.pop_scope();
                 Ok(last)
             }
-            Stmt::While { condition, body } => {
-                while value_truthy(&self.eval_expr(condition)?) {
-                    self.push_scope();
-                    for s in body {
-                        self.eval_stmt(s)?;
-                    }
-                    self.pop_scope();
-                }
-                Ok(None)
-            }
-            Stmt::FnDecl { .. } | Stmt::VersionDecl { .. } | Stmt::ImportDecl { .. } => Ok(None),
+            Stmt::FnDecl { .. } => Ok(None),
         }
     }
 
