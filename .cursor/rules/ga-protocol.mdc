@@ -53,4 +53,6 @@ Report in the final response:
 |-------|---------------|---------------|
 | 5 | `taylor_phase5_mission.py` | `verify_main_fr_native.py` |
 | 6 | `taylor_phase6_mission.py` | `verify_phase6_corpus.py` |
-| 7+ | add `taylor_phaseN_mission.py` | matching `verify_phaseN_*.py` |
+| 7 | `taylor_phase7_mission.py` | `verify_phase7_hardening.py` |
+| 8 | `taylor_phase8_mission.py` | `verify_phase8_launch.py` |
+| All | `taylor_compiler_30.py run` | 3 teams × 10 workers → `RELEASE_READY` |

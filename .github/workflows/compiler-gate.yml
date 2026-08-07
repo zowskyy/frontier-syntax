@@ -12,6 +12,9 @@ on:
       - "scripts/run_native_self_host.py"
       - "scripts/taylor_phase5_mission.py"
       - "scripts/taylor_phase6_mission.py"
+      - "scripts/taylor_phase7_mission.py"
+      - "scripts/taylor_phase8_mission.py"
+      - "scripts/taylor_compiler_30.py"
       - "scripts/training/**"
       - "scripts/release_readiness.py"
       - ".github/workflows/compiler-gate.yml"
@@ -126,11 +129,21 @@ jobs:
       - name: Training corpus gate (phase 6)
         run: python3 scripts/verify_phase6_corpus.py
 
+      - name: Taylor Phase 7 Gate slice (W2)
+        run: python3 scripts/taylor_phase7_mission.py --apply
+
       - name: Production hardening (phase 7)
         run: python3 scripts/verify_phase7_hardening.py
 
+      - name: Taylor Phase 8 Gate slice (W2)
+        run: python3 scripts/taylor_phase8_mission.py --apply
+
       - name: Launch gate (phase 8)
         run: python3 scripts/verify_phase8_launch.py --skip-url-check
+
+      - name: Taylor Compiler 30 (3 teams × 10 workers)
+        run: python3 scripts/taylor_compiler_30.py run --apply --skip-env
+        continue-on-error: true
 
       - name: Full tracking gate (phases 0-8)
         run: python3 scripts/tracking.py gate
