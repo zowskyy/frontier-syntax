@@ -36,7 +36,11 @@ jobs:
           python-version: "3.12"
 
       - name: Install agent environment (wasmtime + deps)
-        run: bash scripts/install-agent-environment.sh
+        run: |
+          bash scripts/install-agent-environment.sh
+          curl https://wasmtime.dev/install.sh -sSf | bash -s -- --version v25.0.0
+          echo "$HOME/.wasmtime/bin" >> "$GITHUB_PATH"
+          rustup target add wasm32-unknown-unknown
 
       - name: Rust library tests
         id: cargo_test
