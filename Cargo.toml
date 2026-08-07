@@ -21,6 +21,7 @@ sha3 = "0.10"
 unicode-normalization = "0.1"
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+frontier-dex = { path = "frontier-dex" }
 chrono = { version = "0.4.31", default-features = false, features = ["clock", "std"] }
 colored = "2.0.4"
 notify = "6.1.1"
