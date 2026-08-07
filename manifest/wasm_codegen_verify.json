@@ -1,5 +1,5 @@
 {
-  "verified_at": "2026-08-06T06:01:42.871253Z",
+  "verified_at": "2026-08-07T03:36:24.242404Z",
   "script": "scripts/verify_wasm_codegen.py",
   "wasmtime": "/usr/local/cargo/bin/wasmtime",
   "all_pass": true,

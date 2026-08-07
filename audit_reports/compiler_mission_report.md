@@ -1,6 +1,6 @@
 # Taylor Compiler Mission Report
 
-**Updated:** 2026-08-07T02:28:40.900523Z  
+**Updated:** 2026-08-07T03:37:59.336057Z  
 **Complete:** True  
 **Owner notify:** YES — self-hosting done  
 
@@ -12,7 +12,7 @@
 | M2 | native_self_host_probe | PASS |
 | M3 | verify_self_hosting_native | PASS |
 | M4 | close_issue_46 | PASS |
-| M5 | phase5_full_compiler (optional) | PASS |
+| M5 | phase5_full_compiler (optional) | FAIL |
 
 > **Owner:** You no longer need to worry about self-hosting (#46). Taylor workers validated native path.
 
