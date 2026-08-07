@@ -2,6 +2,7 @@ pub mod colors;
 pub mod compile;
 pub mod completions;
 pub mod config;
+pub mod dex_cmd;
 pub mod errors;
 pub mod help;
 pub mod knowledge;
@@ -51,6 +52,7 @@ fn dispatch(args: &[String], cmd: &str) -> Result<(), i32> {
         "compile" => compile::run_compile(args),
         "knowledge" => knowledge::run_knowledge(args),
         "unity" => unity_cmd::run_unity(args)?,
+        "dex" => dex_cmd::run_dex(args)?,
         "config" => run_config(args)?,
         "shell" => {
             if let Err(e) = repl::start_repl() {
