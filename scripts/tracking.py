@@ -92,7 +92,7 @@ def phase_1_checks(open_set: set[int]) -> tuple[bool, list[dict]]:
     evidence = []
     all_ok = True
 
-    r11 = run_cmd(["cargo", "test", "--lib", "wasm_codegen::"])
+    r11 = run_cmd(["cargo", "test", "--lib", "-p", "frontier", "wasm_codegen::"])
     r11_exec = run_cmd(["python3", "scripts/verify_wasm_codegen.py"])
     issue_open = 44 in open_set
     ok = r11["pass"] and r11_exec["pass"] and not issue_open
@@ -111,7 +111,7 @@ def phase_1_checks(open_set: set[int]) -> tuple[bool, list[dict]]:
     if not ok:
         all_ok = False
 
-    r12 = run_cmd(["cargo", "test", "--lib", "wasm_codegen::tests::test_knowledge_changes_wasm"])
+    r12 = run_cmd(["cargo", "test", "--lib", "-p", "frontier", "wasm_codegen::tests::test_knowledge_changes_wasm"])
     issue_open = 45 in open_set
     ok = r12["pass"] and not issue_open
     evidence.append({
@@ -167,7 +167,7 @@ def phase_2_checks(phase_1_ok: bool, open_set: set[int]) -> tuple[bool, list[dic
     r21 = run_cmd(["python3", "scripts/spec_impl_bridge.py"])
     ok21 = r21["pass"] and 47 not in open_set
     evidence.append({"check": "2.1_spec_impl", "ref": "issue_47", "pass": ok21, "issue_closed": 47 not in open_set, **r21})
-    r22 = run_cmd(["cargo", "test", "--lib"])
+    r22 = run_cmd(["cargo", "test", "--lib", "-p", "frontier"])
     evidence.append({"check": "2.2_lib_tests", "pass": r22["pass"], **r22})
     return ok21 and r22["pass"], evidence
 

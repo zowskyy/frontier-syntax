@@ -36,10 +36,10 @@ jobs:
         run: bash scripts/install-agent-environment.sh
 
       - name: Rust library tests (compile check)
-        run: cargo test --lib --no-run
+        run: cargo test --lib -p frontier --no-run
 
       - name: Rust library tests
-        run: cargo test --lib -- --nocapture
+        run: cargo test --lib -p frontier -- --nocapture
 
       - name: WASM codegen wasmtime execution
         run: python3 scripts/verify_wasm_codegen.py
