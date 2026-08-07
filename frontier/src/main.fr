@@ -1,9 +1,8 @@
-// Frontier self-hosting compiler — expanded Genesis entry (Peerless plan OPT-002)
+// Frontier self-hosting compiler — Genesis entry (int-only MVP for Phase 5)
 version: 2.0;
 
-fn lex(source: string) -> int {
-    let len: int = 0;
-    return len + 1;
+fn lex(source_len: int) -> int {
+    return source_len + 1;
 }
 
 fn parse_tokens(token_count: int) -> int {
@@ -14,17 +13,18 @@ fn codegen(ast_nodes: int) -> int {
     return ast_nodes * 42;
 }
 
-fn hash_source(source: string) -> int {
-    return codegen(parse_tokens(lex(source)));
+fn hash_source(source_len: int) -> int {
+    return codegen(parse_tokens(lex(source_len)));
 }
 
-fn compile(source: string) -> int {
-    let tokens: int = lex(source);
+fn compile(source_len: int) -> int {
+    let tokens: int = lex(source_len);
     let ast: int = parse_tokens(tokens);
     let wasm: int = codegen(ast);
-    return wasm + hash_source(source);
+    return wasm + hash_source(source_len);
 }
 
 fn main(): int {
-    return compile("frontier");
+    // 8 = len("frontier") — int proxy until string MVP lands
+    return compile(8);
 }

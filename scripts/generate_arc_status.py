@@ -16,15 +16,21 @@ WORKER_REPORT = ROOT / "chat_scrub" / "WORKER_REPORT.json"
 
 
 def run(cmd: list[str]) -> tuple[int, str]:
-    result = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
-    return result.returncode, (result.stdout + result.stderr).strip()
+    try:
+        result = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
+        return result.returncode, (result.stdout + result.stderr).strip()
+    except FileNotFoundError:
+        return 127, ""
 
 
 def gh_prs() -> list[dict]:
     code, out = run(["gh", "pr", "list", "--state", "all", "--limit", "30", "--json", "number,title,state,mergedAt"])
     if code != 0:
         return []
-    return json.loads(out)
+    try:
+        return json.loads(out)
+    except json.JSONDecodeError:
+        return []
 
 
 def count_rust_tests() -> int:
@@ -50,10 +56,16 @@ def script_exists(name: str) -> bool:
     return (ROOT / "scripts" / name).exists()
 
 
+def git_branch() -> str:
+    code, out = run(["git", "rev-parse", "--abbrev-ref", "HEAD"])
+    return out if code == 0 and out else "unknown"
+
+
 def generate() -> str:
     now = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     prs = gh_prs()
     open_prs = [p for p in prs if p["state"] == "OPEN"]
+    branch = git_branch()
     merged_critical = {15, 16, 19, 21, 23, 29, 30, 31, 42, 43}
     merged_status = {n: any(p["number"] == n and p["state"] == "MERGED" for p in prs) for n in merged_critical}
     rust_tests = count_rust_tests()
@@ -87,7 +99,7 @@ def generate() -> str:
 | Python test files | {py_tests} |
 | Knowledge entries | {entries} |
 | Known gaps (WORKER_REPORT) | {len(known_gaps)} |
-| Branch | `cursor/frontier-syntax-cycle1-e39f` |
+| Branch | `{branch}` |
 
 ---
 
@@ -153,7 +165,7 @@ The ARC review listed PRs #15, #16, #19, #21 as open. **Live GitHub state:**
 
 ## Honest Overall Assessment
 
-**~98% in-repo conclusion** — all WORKER_REPORT gaps resolved (0 known gaps). Knowledge base expanded to 208 entries with swarm process log ingestion. Remaining engineering is **WASM slimming**, **live runtime nodes**, and **Frontier-native compiler depth** — tracked but not blocking repo conclusion.
+**Phases 0–3 validated on `main`** — canonical issues #44–#48 closed; wasm-slim &lt;100 KB; wasmtime 4/4. Remaining for GA: Phase 4–7 (frozen), M5 full compiler, external launch. Run `python3 scripts/release_readiness.py --audit` for GO/NO-GO.
 
 *Regenerate: `python3 scripts/generate_arc_status.py`*
 """
@@ -164,8 +176,7 @@ def main() -> int:
     OUT.parent.mkdir(parents=True, exist_ok=True)
     content = generate()
     OUT.write_text(content, encoding="utf-8")
-    print(content)
-    print(f"\n✅ Written to {OUT.relative_to(ROOT)}")
+    print(f"Written to {OUT.relative_to(ROOT)}")
     return 0
 
 

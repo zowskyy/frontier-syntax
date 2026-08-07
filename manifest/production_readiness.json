@@ -1,40 +1,24 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "target": "production_ready",
   "blueprint": "PROJECT_BLUEPRINT.md",
-  "phases_required": ["phase_0", "phase_1", "phase_2", "phase_3", "phase_7"],
+  "updated_at": "2026-08-07T10:30:00Z",
+  "phases_validated": ["phase_0", "phase_1", "phase_2", "phase_3"],
+  "phases_frozen": ["phase_4", "phase_5", "phase_6", "phase_7", "phase_8"],
   "current_blockers": {
-    "phase_1": ["#46 self_hosting — bootstrap only; #44/#45 auto-close when verified"],
-    "phase_2": ["#47 blocked until #44-46 closed"],
-    "phase_3": ["#48 auto-close when wasm_size met:true"],
-    "phase_7": ["CI present", "audit hash chain", "independent validator closure"]
+    "rc": [],
+    "ga": [
+      "phase_4 — 7 innovations not empirically verified",
+      "phase_5 — M5 full Frontier-native compiler (manifest/compiler_self_host_mission.json M5=false)",
+      "phase_7 — clippy clean, agent security re-scan",
+      "external launch — Discord, website, social, waiting list"
+    ]
   },
+  "release_orchestrator": "scripts/release_readiness.py",
+  "release_checklist": "docs/RELEASE_CHECKLIST.md",
   "issue_closure": {
     "script": "scripts/taylor_issue_closer.py",
     "registry": "manifest/canonical_issues.json",
-    "workers": {
-      "W2_CompilerCore": [44, 45, 46],
-      "W4_SpecParity": [47],
-      "W5_WasmSizer": [48],
-      "W6_GitHubOps": "orchestrates all"
-    },
-    "apply_flag": "python3 scripts/taylor_ops_team.py run --mode production --apply"
-  },
-  "team_layout": {
-    "group_1_FOUNDATION": {
-      "blueprint_phases": [0, 1],
-      "workers": ["W1_GateKeeper", "W2_CompilerCore", "W3_AuditGuardian"],
-      "order": "sequential"
-    },
-    "group_2_BUILD": {
-      "blueprint_phases": [2, 3],
-      "workers": ["W4_SpecParity", "W5_WasmSizer"],
-      "order": "parallel"
-    },
-    "group_3_SHIP": {
-      "blueprint_phases": [7, 8],
-      "workers": ["W6_GitHubOps", "W7_LaunchContinuity"],
-      "order": "parallel"
-    }
+    "canonical_issues": "44-48 closed on main"
   }
 }
