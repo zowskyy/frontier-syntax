@@ -124,6 +124,9 @@ pub fn compile_source(source: &str, options: &CodeGenOptions) -> Result<(Vec<u8>
 
 fn validate_program_types(program: &Program) -> Result<(), String> {
     for stmt in &program.statements {
+        if let Stmt::ImportDecl { .. } = stmt {
+            return Err("Import declarations are not supported in WASM MVP".to_string());
+        }
         if let Stmt::FnDecl { name, .. } = stmt {
             if name == "main" {
                 return Ok(());
