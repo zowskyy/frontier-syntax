@@ -20,7 +20,7 @@ Full guide: [docs/GET_HELP.md](docs/GET_HELP.md) · Cursor: `/get-help`
 
 <!-- SHADOW_WORKER_STATUS:BEGIN -->
 
-**Live audit & blueprint status** — _auto-updated 2026-08-07 03:36:06 UTC_
+**Live audit & blueprint status** — _auto-updated 2026-08-07 04:00:07 UTC_
 
 | | |
 |---|---|
