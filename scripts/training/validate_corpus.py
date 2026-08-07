@@ -11,7 +11,7 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent
 CORPUS_DIR = ROOT / "manifest" / "training_corpus"
 JSONL = CORPUS_DIR / "frontier_v1.jsonl"
 STATS = CORPUS_DIR / "stats.json"

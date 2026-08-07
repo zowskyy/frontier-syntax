@@ -46,4 +46,11 @@ Report in the final response:
 
 1. Prefer fixes that advance GA blockers, not only the next red CI step.
 2. Split Gate slice vs Mission slice milestones (M5 gate vs M5b full compiler).
-3. Wire Taylor W2 + Compiler Gate to `taylor_phase5_mission.py` and full `tracking.py gate`.
+3. **Taylor workers for phase gates:** each phase gets `scripts/taylor_phaseN_mission.py` (P6-1..P6-4 pattern), wired in W2 + `compiler-gate.yml` before the verify script.
+4. Run full `tracking.py gate` + `release_readiness.py --audit` at end of cycle.
+
+| Phase | Taylor worker | Verify script |
+|-------|---------------|---------------|
+| 5 | `taylor_phase5_mission.py` | `verify_main_fr_native.py` |
+| 6 | `taylor_phase6_mission.py` | `verify_phase6_corpus.py` |
+| 7+ | add `taylor_phaseN_mission.py` | matching `verify_phaseN_*.py` |

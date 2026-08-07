@@ -71,6 +71,7 @@ WORKERS: dict[str, dict[str, Any]] = {
             "scripts/run_native_self_host.py",
             "scripts/taylor_compiler_mission.py",
             "scripts/taylor_phase5_mission.py",
+            "scripts/taylor_phase6_mission.py",
             "scripts/measure_wasm_size.py",
             "scripts/taylor_issue_closer.py",
         ],
@@ -80,6 +81,7 @@ WORKERS: dict[str, dict[str, Any]] = {
             [sys.executable, "scripts/verify_self_hosting.py"],
             [sys.executable, "scripts/taylor_compiler_mission.py"],
             [sys.executable, "scripts/taylor_phase5_mission.py", "--apply"],
+            [sys.executable, "scripts/taylor_phase6_mission.py", "--apply"],
         ],
         "apply_commands": [
             [sys.executable, "scripts/taylor_compiler_mission.py", "--apply"],
