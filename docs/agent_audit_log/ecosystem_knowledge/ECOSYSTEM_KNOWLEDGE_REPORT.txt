@@ -1,0 +1,1680 @@
+##############################################################################
+ZOWSKYY ECOSYSTEM KNOWLEDGE REPORT
+##############################################################################
+
+Generated:     2026-08-06T23:29:51Z
+Run ID:        20260806T232938Z
+Canonical repo: zowskyy/frontier-syntax
+Blueprint:     PROJECT_BLUEPRINT.md + TRACKING.json
+Pipeline log:  docs/agent_audit_log/pipeline_logs/20260806T232938Z/pipeline.log
+Audit sessions: docs/agent_audit_log/sessions/
+
+==============================================================================
+EXECUTIVE SUMMARY — frontier-syntax vs blueprint (bill) status
+==============================================================================
+
+Phase 0 (tracker hygiene):  PASS (slices 0.1–0.3 validated in TRACKING.json)
+Phase 1 (P0 compiler):      FAIL — issues #44, #45, #46 open
+Phase 2 (spec parity P1):   BLOCKED (depends on Phase 1)
+Phase 3 (WASM size P1):     FAIL — 127.4 KB measured, target 100 KB, met=False
+Phases 4–8:                 FROZEN until prior gates pass
+
+Gate command output (tail):
+  skipped (--fast)
+
+Repos scanned: 27
+  frontier_core:      1
+  frontier_ecosystem: 7
+  fork_or_adjacent:   19
+  other:              0
+
+Honesty: Remote repos receive shallow metadata scan (description, README excerpt,
+top-level files). Build/test not run except for local frontier-syntax.
+Private repos without token scope show access limitations.
+
+
+==============================================================================
+REPO 1: zowskyy/android-reverse-engineering-skill
+==============================================================================
+
+## WHAT IT IS
+  URL:        https://github.com/zowskyy/android-reverse-engineering-skill
+  Visibility: public
+  Language:   Shell
+  Category:   fork_or_adjacent
+  Updated:    2026-07-29T23:19:07Z
+  Access:     ok
+
+## WHAT IT CLAIMS
+  • GitHub description: Claude Code skill to support Android app's reverse engineering
+
+## README EXCERPT
+  # Android Reverse Engineering & API Extraction — Claude Code skill
+
+  [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![GitHub stars](https://img.shields.io/github/stars/SimoneAvogadro/android-reverse-engineering-skill?style=social)](https://github.com/SimoneAvogadro/android-reverse-engineering-skill/stargazers) [![GitHub last commit](https://img.shields.io/github/last-commit/SimoneAvogadro/android-reverse-engineering-skill)](https://github.com/SimoneAvogadro/android-reverse-engineering-skill/commits/master)
+
+  A Claude Code skill that decompiles Android APK/XAPK/JAR/AAR files and **extracts the HTTP APIs** used by the app — Retrofit endpoints, OkHttp calls, hardcoded URLs, authentication patterns — so you can document and reproduce them without the original source code.
+
+  > **First-class Kotlin support**: modern Android apps are Kotlin/KMP, heavily obfuscated with R8. This skill recovers the **original Kotlin class names** from metadata R8 cannot strip, and extracts APIs from **Ktor**, **Apollo (GraphQL)** and **Koin** — not just the classic Retrofit/OkHttp stack. See [Kotlin name recovery](#kotlin-name-recovery-r8-deobfuscation) below.
+
+  > **Windows / PowerShell support (experimental)**: The `*.ps1` scripts alongside the bash ones are a recent community contribution, still being stabilised. For any issues please open an issue on **this** repository (not on the contributors' upstream forks): the PowerShell scripts are maintained here by [@SimoneAvogadro](https://github.com/SimoneAvogadro).
+
+  ## Table of Contents
+
+  - [What it does](#what-it-does)
+  - [Requirements](#requirements)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Repository Structure](#repository-structure)
+  - [References](#references)
+  - [Acknowledgments](#acknowledgments)
+  - [Disclaimer](#disclaimer)
+  - [License](#license)
+
+  ## What it does
+
+  | Capability | Description |
+  |------------|-------------|
+  | **Fingerprint first (Phase 0)** | Triage an APK/XAPK in seconds — detect the framework (Flutter / React Native / Cordova / Xamarin / native-Kotlin), HTTP stack, obfuscation level and native libs *before* spending time on a full decompile |
+  | **Decompile** | APK, XAPK, JAR, and AAR files using jadx and Fernflower/Vineflower (single engine or side-by-side comparison) |
+  | **Recover Kotlin names** | Rebuild original `*Repository` / `*ViewModel` / `*UseCase` class names from R8-obfuscated binaries using Kotlin metadata that R8 cannot strip |
+  | **Extract APIs** | Retrofit, OkHttp, Volley **and modern Kotlin/KMP stacks: Ktor, Apollo (GraphQL), Koin DI** — endpoints, hardcoded URLs, auth headers, tokens and HMAC request-signing schemes |
+  | **Trace call flows** | From Activities/Fragments through ViewModels and repositories down to HTTP calls |
+  | **Analyze structure** | Manifest, packages, architecture patterns |
+  | **Handle obfuscation** | R8-resistant path/URL extraction plus strategies for navigating ProGuard/R8 output |
+
+
+## VERIFIED — CAN DO (this scan)
+  ✓ Top-level structure visible (5 entries): .claude-plugin, .gitattributes, LICENSE, README.md, plugins
+
+## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ No .github/workflows at repo root (CI not confirmed)
+  ✗ Not part of Frontier blueprint critical path
+
+## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
+  Upstream fork or unrelated project — no blueprint phase dependency.
+
+==============================================================================
+REPO 2: zowskyy/apex-android
+==============================================================================
+
+## WHAT IT IS
+  URL:        https://github.com/zowskyy/apex-android
+  Visibility: public
+  Language:   Python
+  Category:   frontier_ecosystem
+  Updated:    2026-08-06T04:29:44Z
+  Access:     ok
+
+## WHAT IT CLAIMS
+  • (no explicit claims extracted from README)
+
+## README EXCERPT
+  # APEX — Android Package EXaminer
+
+  APEX is a security-first Android reverse-engineering application with a CLI
+  and a private, local web interface. It inspects APK metadata, decodes binary
+  Android formats, decompiles DEX bytecode, builds editable projects, verifies
+  round trips, compares packages, and reports static security signals.
+
+  ## Install
+
+  **Download (no git required):** [GitHub Releases](https://github.com/zowskyy/apex-android/releases) —
+  Windows `.zip`, macOS `.zip`, Linux `.tar.gz`, and **APEX Mobile** `.apk` / `.aab`.
+
+  ```bash
+  python -m venv .venv
+  . .venv/bin/activate
+  pip install -e .
+  ```
+
+  The Python package uses [Androguard](https://github.com/androguard/androguard)
+  for production AXML, ARSC, and Java decompilation. The included
+  `apex_zip_reader` and `apex_dex_reader` Rust extensions are used automatically
+  when installed; otherwise bounded Python/Androguard fallbacks apply.
+
+  Optional tools expand rebuild support:
+
+  - `apktool`, or `APEX_APKTOOL_JAR=/path/to/apktool.jar`, recompiles edited XML
+    and resources.
+  - `apksigner`, or `APEX_APKSIGNER=/path/to/apksigner`, signs build output.
+  - `aapt2`, `adb`, and Java are reported by `apex doctor`.
+
+  APEX never labels a missing optional capability as successful. The raw backend
+  is a lossless archive project; readable files under `decoded/` are views, and
+  edited compiled resources require the apktool backend.
+
+  ## Use
+
+  ```bash
+  apex inspect app.apk
+  apex analyze app.apk --out report
+  apex decompile app.apk --out source
+  apex decode app.apk --out project
+  apex build project --out rebuilt.apk
+  apex verify rebuilt.apk
+  apex roundtrip app.apk --work roundtrip
+  apex security-scan app.apk
+  apex diff old.apk new.apk
+  apex framework-check app.apk
+  apex doctor
+  ```
+
+  To open the local interface:
+
+  ```bash
+  apex gui
+  ```
+
+  ### Use on your phone
+
+  Install **APEX Mobile** (`apex-mobile.apk`) — full engine on the device, with optional
+  desktop remote in **Settings**. Build: [docs/BUILD_STANDALONE_APK.md](docs/BUILD_STANDALONE_APK.md).
+  ... (170 more lines)
+
+## VERIFIED — CAN DO (this scan)
+  ✓ Top-level structure visible (32 entries): .cursor, .github, .gitignore, .pre-commit-config.yaml, .vscode, AGENTS.md, CHANGELOG.md, CODE_OF_CONDUCT.md
+  ✓ Rust project (Cargo.toml present)
+  ✓ Python project indicators present
+
+## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ No .github/workflows at repo root (CI not confirmed)
+
+## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
+  Android tooling adjacent to reverse-engineering skills. Not on critical blueprint path; may consume Frontier output later.
+
+==============================================================================
+REPO 3: zowskyy/apktool-diagnostics
+==============================================================================
+
+## WHAT IT IS
+  URL:        https://github.com/zowskyy/apktool-diagnostics
+  Visibility: public
+  Language:   Python
+  Category:   fork_or_adjacent
+  Updated:    2026-07-17T03:48:46Z
+  Access:     ok
+
+## WHAT IT CLAIMS
+  • See `sample_corpus_report.json` for a complete run against two real APKs:
+
+## README EXCERPT
+  # apktool-diagnostics
+
+  **Comprehensive toolkit for stress-testing apktool (Android APK decompile/rebuild tool).**
+
+  Find real bugs in apktool through differential testing against real APKs, security pre-screening, framework compatibility checking, semantic dex diffing, and coverage-guided fuzzing setup.
+
+  ## Why this exists
+
+  apktool is critical infrastructure: you point it at untrusted APKs and it processes them on your machine. When bugs hide in the decode/rebuild pipeline or in binary-format parsing, they affect everyone. This toolkit surfaces them.
+
+  - ✅ **Real-world testing** — validated against F-Droid client (round-trip passes, 1 residual edge case) and NewPipe (framework version failure correctly diagnosed)
+  - ✅ **Security focus** — built by reproducing CVE-2026-39973 (path traversal) end-to-end and confirming the fix
+  - ✅ **Found & fixed real bugs** — 2 bugs caught while building the tool itself (OOM in string-pool parsing, dict merge collision)
+  - ✅ **Not theoretical** — every claim traces to an actual test that could have failed
+
+  ## Quick start
+
+  ```bash
+  # Clone
+  git clone https://github.com/zowskyy/apktool-diagnostics.git
+  cd apktool-diagnostics
+
+  # Run a security scan
+  python3 apktool_diagnostics.py security-scan your-app.apk
+
+  # Test decode/rebuild round-trip
+  python3 apktool_diagnostics.py roundtrip apktool.jar your-app.apk ./work
+
+  # Or use the convenience script
+  bash examples/quick-start.sh your-app.apk
+  ```
+
+  ## What each subcommand does
+
+  ### `security-scan <apk>`
+  Scans `resources.arsc`'s string pools for path-traversal patterns (`../`, absolute paths) *before* decoding — independent of which apktool version is used. Directly built from reproducing CVE-2026-39973.
+
+  **Sample output:** `CLEAN` (0 findings) on real F-Droid APK, correctly flags malicious `../../../etc` type names.
+
+  ### `roundtrip <apktool.jar> <apk> <workdir> [--aapt2 <path>]`
+  Decodes an APK and immediately rebuilds it with zero edits, then diffs original vs. rebuilt at the entry level. Classifies every divergence as expected (signing metadata, resource renaming, SDK-qualifier pruning, XML line-number metadata) or a genuine anomaly.
+
+  **Sample result:** F-Droid client — 1119 entries, 0 unexplained anomalies after classification.
+
+  ### `framework-check <apktool.jar> <apk> <workdir>`
+  Attempts decode+build; on failure, parses aapt2 errors and reports which framework version is needed instead of a raw Java stack trace.
+
+  **Sample result:** NewPipe — correctly diagnoses `android:defaultLocale` missing (API 35 framework required).
+
+  ### `dex-diff <baksmali.jar> <orig_apk> <rebuilt_apk> <workdir>`
+  Independently disassembles `classes*.dex` and diffs the actual smali, not just byte-equality. Finds residual differences (like try/catch block merging) that are semantically equivalent but flagged for human review.
+
+  ### `corpus <apktool.jar> <baksmali.jar> <aapt2> <workdir> name=path [...]`
+  Runs the full pipeline (security scan, round-trip, framework-check, dex-diff) across multiple APKs in one pass.
+
+## VERIFIED — CAN DO (this scan)
+  ✓ Top-level structure visible (9 entries): CONTRIBUTING.md, GITHUB_SETUP_STEPS.md, LICENSE, LOCAL_SETUP.md, README.md, SECURITY_FINDING_CVE-2026-39973.md, apktool_diagnostics.py, examples
+
+## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ No .github/workflows at repo root (CI not confirmed)
+  ✗ Not part of Frontier blueprint critical path
+
+## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
+  Upstream fork or unrelated project — no blueprint phase dependency.
+
+==============================================================================
+REPO 4: zowskyy/bookish-bassoon
+==============================================================================
+
+## WHAT IT IS
+  URL:        https://github.com/zowskyy/bookish-bassoon
+  Visibility: public
+  Language:   Shell
+  Category:   frontier_ecosystem
+  Updated:    2026-08-04T01:30:53Z
+  Access:     ok
+
+## WHAT IT CLAIMS
+  • (no explicit claims extracted from README)
+
+## README EXCERPT
+  # bookish-bassoon
+
+## VERIFIED — CAN DO (this scan)
+  ✓ Top-level structure visible (6 entries): .cursor, .github, AUDIT_HISTORY.json, README.md, docs, package.json
+  ✓ Node/JS project (package.json present)
+
+## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ No .github/workflows at repo root (CI not confirmed)
+
+## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
+  Automation / worker scripts; may invoke frontier-syntax tooling.
+
+==============================================================================
+REPO 5: zowskyy/crxcibl3
+==============================================================================
+
+## WHAT IT IS
+  URL:        https://github.com/zowskyy/crxcibl3
+  Visibility: public
+  Language:   GDScript
+  Category:   fork_or_adjacent
+  Updated:    2026-07-29T11:56:04Z
+  Access:     ok
+
+## WHAT IT CLAIMS
+  • (no explicit claims extracted from README)
+
+## README EXCERPT
+  # CRXCIBL3 -- Web Build (Phaser 3)
+
+  ## Running it -- one script, every time
+  ```
+  .\run-game.ps1
+  ```
+  That's the whole process: starts a local server and opens the game in your
+  browser automatically. No need to remember commands, ports, or URLs.
+
+  First time only, if PowerShell blocks it:
+  ```
+  Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+  ```
+
+  To stop: close the black server window `run-game.ps1` opened, or run
+  `.\stop-game.ps1` if it gets stuck/the window got closed by accident.
+
+  (You can still double-click `index.html` directly for now since nothing
+  loads external files yet -- but once real art gets added via
+  `this.load.image(...)`, that stops working and the server becomes
+  required. Using `run-game.ps1` from the start avoids hitting that
+  confusing switch later.)
+
+  ## Controls: **WASD** or **Arrow Keys** -- free 8-directional movement, not
+  grid-locked. Walk toward a building and watch your character tuck behind
+  the roof row instead of drawing on top of it -- that's the "walk behind
+  buildings" depth trick from the visual direction doc, done with a fixed
+  render-depth on roof tiles rather than anything fancy.
+
+  ## What's actually built
+  - Real Phaser 3 game (not a mockup) -- physics-based movement, collision
+    against buildings/fences/palm trees, camera follow with world bounds
+  - The boardwalk layout from the earlier level mockup, ported over
+  - A Heat HUD bar in the corner (currently a static demo value -- see
+    "Next steps" below for wiring it to real game state)
+  - Folder structure under `assets/` matching your art categories, ready
+    for your real files
+
+  ## Adding your real art (once cleaned up via Pixel It / Piskel)
+  Right now every texture is generated in code (see
+  `generatePlaceholderTextures()` in `js/BoardwalkScene.js`) instead of
+  loaded from a file, which is why this needs zero setup to run. To swap
+  in a real image:
+
+  1. Drop the PNG into the matching `assets/` subfolder, e.g.
+     `assets/heroes/hero_enforcer_bigbody.png`
+  2. In `BoardwalkScene.js`, add a load line inside `preload()`:
+     ```js
+     this.load.image('hero_enforcer_bigbody', 'assets/heroes/hero_enforcer_bigbody.png');
+     ```
+  3. Use that key instead of a placeholder key wherever it's referenced,
+     e.g. change `'player'` to `'hero_enforcer_bigbody'` in `createPlayer()`
+
+  **Important:** once you add even one `this.load.image(...)` call, opening
+  `index.html` directly by double-clicking will likely fail (browsers block
+  local file loading for security reasons -- this is the same CORS issue
+  that would've come up in Godot too, just earlier here). At that point,
+  run a tiny local server instead -- you already have Python installed:
+  ```
+  cd crxcibl3-web
+  ... (15 more lines)
+
+## VERIFIED — CAN DO (this scan)
+  ✓ Top-level structure visible (21 entries): .github, .gitignore, ANIMATION_ASSETS_MANIFEST.md, CREDITS.md, CRXCIBL3_COMPLETE_NARRATIVE_PACKAGE.md, FOR_ANIMATION_VOICEOVER_TEAM.md, KNOWLEDGE_BASE.md, PROJECT_BLUEPRINT.md
+
+## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ No .github/workflows at repo root (CI not confirmed)
+  ✗ Not part of Frontier blueprint critical path
+
+## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
+  Upstream fork or unrelated project — no blueprint phase dependency.
+
+==============================================================================
+REPO 6: zowskyy/crxcibl3sounds
+==============================================================================
+
+## WHAT IT IS
+  URL:        https://github.com/zowskyy/crxcibl3sounds
+  Visibility: public
+  Language:   HTML
+  Category:   fork_or_adjacent
+  Updated:    2026-07-17T23:33:00Z
+  Access:     ok
+
+## WHAT IT CLAIMS
+  • GitHub description: bfxr.net in javascript, with more things!
+
+## README EXCERPT
+  ## About
+  [Bfxr2](https://www.bfxr.net/) a tool for making sound effects for games, a rewrite/refresh of the flash tool Bfxr in javascript.
+
+  ![image](https://github.com/user-attachments/assets/1701bccc-82d6-47e1-881c-ec6ca228dc89)
+
+  It's currently BETA, and new things should be coming to it, but the main addition right now is Obiwannabe's subtly wonderful footstep generator, ported from puredata to javsacript:
+
+  ![image](https://github.com/user-attachments/assets/1f338401-d2e4-4100-ad4d-471ad6e56f6f)
+
+  ## Development
+  cf. [DEVELOPMENT.md](https://github.com/increpare/bfxr2/blob/master/DEVELOPMENT.md).
+
+  ## Archaeology
+
+  I don't know if it's genetically related, but I believe that _why made a program called sound foley (which I haven't been able to get to work) which looks quite similar to Sfxr in design based on what I've seen of his _why's presentation of it.
+  The darling DrPetter made the program this is based on, Sfxr:
+
+  * http://drpetter.se/
+  * http://drpetter.se/article_sound.html
+  * http://drpetter.se/project_sfxr.html
+  The fabulous Tom Vian did a flash port of this, called as3sfxr
+  * http://www.tomvian.com/
+  * http://www.superflashbros.net/as3sfxr/
+  There's also a port of Sfxr to OS X that's quite loved by people (and was a little influential) called cfxr:
+  * http://thirdcog.eu/apps/cfxr
+  I did a mod of as3sfxr that introduced some new features, and called it as3sfxr-b:
+  * http://ded.increpare.com/~locus/as3sfxr-b/
+  After asking for feedback, I spent some time adding and changing more things, making something new. Which is Bfxr. Which is what you see on this page.
+
+  Code from
+  Bulk of coding of this version done by poor little me. In addition to code from Tom/DrPetter, code snippits were taken from
+
+  * http://www.firstpr.com.au/dsp/pink-noise/#Filtering for pink-noise related synthesis
+
+  Thanks + Acknolwedgements
+  * DrPetter, for Sfxr.
+  * Tom Vian, for his elegantly constructed as3sfxr port.
+  * @docky, @Draknek, @KommanderKlobb, @eigenbo, @GrimFang4, @nyarla, @bfod, @jasperbyrne, @draknek, @hybridmind, @RinkuHero, DustinGunn, mcc, and agj for feedback + suggestions. And Derek for some early encouragement.
+  The people from the #flex irc room on freenode for technical help in my hour of need, especially J_A_X.
+
+  Other software that can be software for making sounds:
+  * Audacity - http://audacity.sourceforge.net/
+  * HighC - http://highc.org/
+  * PXTone - http://buzinkai.net/PXTone/tutorial/
+  * Sound Effects Generator - http://www.windowsgames.co.uk/effects.html (windows only. I nicked a couple of things from this. )
+  * Freesound - http://www.freesound.org - Okay, not sound software, but a really amazing resource.
+  * ChipTone - https://sfbgames.itch.io/chiptone
+
+## VERIFIED — CAN DO (this scan)
+  ✓ Top-level structure visible (24 entries): .DS_Store, .cursorignore.txt, .gitattributes, .github, .gitignore, .vscode, DEVELOPMENT.md, LICENSE
+  ✓ Node/JS project (package.json present)
+
+## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ No .github/workflows at repo root (CI not confirmed)
+  ✗ Not part of Frontier blueprint critical path
+
+## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
+  Upstream fork or unrelated project — no blueprint phase dependency.
+
+==============================================================================
+REPO 7: zowskyy/echoscribe
+==============================================================================
+
+## WHAT IT IS
+  URL:        https://github.com/zowskyy/echoscribe
+  Visibility: public
+  Language:   Dart
+  Category:   fork_or_adjacent
+  Updated:    2026-07-10T19:35:25Z
+  Access:     ok
+
+## WHAT IT CLAIMS
+  • GitHub description: **EchoScribe** is a privacy-first, zero-backend Flutter application. It allows users to record audio, paste text, or share URLs to generate transcripts and summaries using their own AI provider API keys (BYOK - Bring Your Own Key).
+  • EchoScribe is a privacy-first, zero-backend Flutter application designed for users who want full control over their AI experience. By using your own API keys (BYOK), you ensure that your data stays be
+  • - **Local URL Extraction:** A privacy-first mechanism extracts web content directly on your device, bypassing paywalls and bot-detection while keeping your browsing private. Mandatory for Claude 🦀 and
+
+## README EXCERPT
+  # 🎙️ EchoScribe: Your API Key & Data
+
+  **Summarize voice, messages, and URLs. Your API Key — Your Data!**
+
+  EchoScribe is a privacy-first, zero-backend Flutter application designed for users who want full control over their AI experience. By using your own API keys (BYOK), you ensure that your data stays between you and the AI provider. No subscriptions, no tracking, no middleman.
+
+  ---
+
+  ## 🔒 Privacy & Security (BYOK)
+  - **No Backend:** Processing happens directly between your device and the AI provider. Your data is never stored on any third-party servers.
+  - **Secure Storage:** API keys are stored using hardware-backed encryption (Android Keystore / iOS Keychain).
+  - **Transparency:** Built for privacy-focused needs. No ads, no tracking, no hidden costs.
+
+  ## ✨ Key Features
+
+  ### 🎙️ Audio & Transcription
+  - **On-Device Recording:** Capture high-quality audio with live amplitude feedback.
+  - **OpenAI, Gemini, xAI & Local AI Support:** Choose OpenAI, Google Gemini, xAI Grok, or a local Whisper-compatible endpoint for voice transcription.
+  - **Voice Message Summary:** Share voice messages from WhatsApp or other apps directly to EchoScribe.
+  - **Note:** Claude 🦀 is text-only for app-side speech input.
+
+  ### 🖥️ Desktop Companions
+  - **Windows:** Native tray app for push-to-talk dictation, clipboard paste, and local browser summaries.
+  - **Linux:** GNOME Shell integration for push-to-talk dictation plus local browser summary extensions.
+  - **Same BYOK/local model:** Desktop requests go directly from your computer to the selected AI provider or your own Local AI endpoints.
+
+  ### ✍️ Floating Dictation on Android
+  - **System-Wide Voice Input:** Enable the Android accessibility service and overlay permission to use a movable EchoScribe dictation button in editable text fields.
+  - **Explicit Insert:** EchoScribe records only after you tap the floating button, shows a preview, and inserts text only after you tap Insert.
+  - **Safety Guards:** The floating button hides in password, PIN, credit-card, phone-pad, banking, and payment fields.
+  - **iOS Status:** iOS is not part of this v1 because Apple custom keyboard extensions do not provide reliable direct microphone recording for App Store-safe system-wide dictation.
+
+  ### ✍️ Smart Summarization
+  - **Audio • Text • URL:** Summarize everything in one tap.
+  - **Local URL Extraction:** A privacy-first mechanism extracts web content directly on your device, bypassing paywalls and bot-detection while keeping your browsing private. Mandatory for Claude 🦀 and Grok 𝕏.
+  - **Local AI Provider:** Use an Ollama-compatible `/api/chat` endpoint for summaries/translations and an OpenAI-compatible Whisper endpoint or Windows whisper.cpp for STT. Defaults are `qwen2.5:7b` and `whisper-1`; local model names remain editable.
+  - **Custom Prompts:** Fine-tune how your summaries look and feel in the settings.
+
+  ### 🚀 Pro Mode & Models
+  Access the world's most powerful AI models with a single toggle:
+  - **Standard (Fast):** GPT-5.4-mini, Gemini 3.5 Flash, Clau
+
+## VERIFIED — CAN DO (this scan)
+  ✓ Top-level structure visible (13 entries): .gitignore, README.md, analysis_options.yaml, android, assets, config, desktop, ios
+
+## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ No .github/workflows at repo root (CI not confirmed)
+  ✗ Not part of Frontier blueprint critical path
+
+## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
+  Upstream fork or unrelated project — no blueprint phase dependency.
+
+==============================================================================
+REPO 8: zowskyy/etrnL
+==============================================================================
+
+## WHAT IT IS
+  URL:        https://github.com/zowskyy/etrnL
+  Visibility: public
+  Language:   Shell
+  Category:   fork_or_adjacent
+  Updated:    2026-07-12T05:59:21Z
+  Access:     no_readme
+
+## WHAT IT CLAIMS
+  • GitHub description: Identity Continuity Infrastructure — Multimodal digital presence preservation
+
+## README EXCERPT
+  (no README or access denied)
+
+## VERIFIED — CAN DO (this scan)
+  ✓ Top-level structure visible (11 entries): .gitignore, .vscode, NEXT_STEPS.md, build.sh, build_all.sh, dailyworkflow.txt, etrnl, etrnl.egg-info
+  ✓ Python project indicators present
+
+## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ No .github/workflows at repo root (CI not confirmed)
+  ✗ Not part of Frontier blueprint critical path
+
+## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
+  Upstream fork or unrelated project — no blueprint phase dependency.
+
+==============================================================================
+REPO 9: zowskyy/frontier-agent-legal-record
+==============================================================================
+
+## WHAT IT IS
+  URL:        https://github.com/zowskyy/frontier-agent-legal-record
+  Visibility: private
+  Language:   (none detected)
+  Category:   frontier_ecosystem
+  Updated:    2026-08-06T17:54:48Z
+  Access:     no_readme
+
+## WHAT IT CLAIMS
+  • GitHub description: Private append-only audit log of Cursor agent actions (legal/personal record)
+
+## README EXCERPT
+  (no README or access denied)
+
+## VERIFIED — CAN DO (this scan)
+  ✓ (capabilities not verified — metadata-only scan)
+
+## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ (limitations not probed — shallow scan only)
+
+## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
+  Private audit mirror (cloud agent could not push). Superseded by in-repo docs/agent_audit_log/ per owner policy.
+
+==============================================================================
+REPO 10: zowskyy/frontier-syntax
+==============================================================================
+
+## WHAT IT IS
+  URL:        https://github.com/zowskyy/frontier-syntax
+  Visibility: public
+  Language:   Python
+  Category:   frontier_core
+  Updated:    2026-08-06T05:42:07Z
+  Access:     ok_local
+
+## WHAT IT CLAIMS
+  • GitHub description: L
+
+## README EXCERPT
+  # Frontier Syntax v2.0
+
+  Formally verifiable programming language — **A+ Hard Gate v2.0** with 7 innovations, autonomous worker swarm, and self-creation orchestration.
+
+  ## Quick Start
+
+  ```bash
+  # Full ARC verification (all gates)
+  python3 build/arc_orchestrator.py --verify
+
+  # Close all gaps via worker swarm
+  python3 scripts/swarm_close_gaps.py
+
+  # Swarm 2.0 — 20× optimized (4 workers, 8 parallel gates, async logging)
+  python3 scripts/swarm_optimized.py
+
+  # Ultimate conclusion — deploy swarms until all in-repo gaps closed
+  python3 scripts/ultimate_conclusion_orchestrator.py
+  python3 frontier_agent.py "Deploy swarms to reach ultimate conclusion"
+
+  # Every process logs to Frontier-readable file (LLM training data)
+  python3 scripts/process_logger.py
+
+  # Self-creation flawless build loop
+  python3 scripts/self_creation_orchestrator.py
+
+  # Frontier agent (natural language)
+  python3 frontier_agent.py "Solve all gaps"
+  python3 frontier_agent.py "Frontier self-creation flawless build"
+  python3 frontier_agent.py "Swarm optimization 20x"
+  python3 frontier_agent.py "Close peerless gaps"
+
+  # Symbiotic worker swarm (parallel agents)
+  python3 .cursor/symbiotic_agents.py --demo --workers 4
+
+  # Compile to WASM (let/if/calls/loops supported)
+  cargo run --bin frontier -- compile examples/v2_parser_test.fr -t wasm -O -p
+
+  # Genesis self-hosting bootstrap
+  cargo run --bin frontier -- compile frontier/src/main.fr --bootstrap -o bootstrap
+  python3 scripts/verify_self_hosting.py
+
+  # Runtime component tests
+  cargo run --bin frontier -- run frontier/gpu/vulkan.fr --test
+
+  # Rust tests
+  cargo test --lib
+
+  # Live system status
+  python3 scripts/generate_arc_status.py
+  ```
+
+  ## What's New (Merged)
+
+  > **Blueprint note:** Run `python3 scripts/tracking.py gate` for validated status. Items marked NOT VERIFIED below fail the independent gate or remain open on GitHub (#44–#48).
+
+  | Feature | Location | Gate status |
+  |---------|----------|-------------|
+  | WASM codegen (let/if/calls/loops) | `src/wasm_codegen.rs` | Tests pass — NOT VERIFIED (#44 open) |
+  | Knowledge → codegen wiring | `implementation_hint` | Test passes — NOT VERIFIED (#45 open) |
+  ... (117 more lines)
+
+## VERIFIED — CAN DO (this scan)
+
+## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ WASM size target NOT met: 127.4 KB vs 100 KB
+  ✗ scripts/tracking.py gate FAIL — Phase 1 P0s not validated
+  ✗ Issues #44–#48 remain open; no independent validator closure
+  ✗ Blueprint phase_1: fail — Issues #44-46 remain open; 1.3 requires Frontier-native self-host (not bootstrap)
+  ✗ Blueprint phase_2: blocked — Phase 1 gate has not passed
+  ✗ Blueprint phase_3: blocked — Size & Performance (P1)
+  ✗ Blueprint phase_4: frozen — FROZEN — do not run workers until phase_3 gate passes
+  ✗ Blueprint phase_5: frozen — FROZEN — Rust bootstrap pass does NOT satisfy exit condition
+  ✗ Blueprint phase_6: frozen — FROZEN — spec draft created prematurely; no work until phase_5 validated
+  ✗ Blueprint phase_7: frozen — Production Hardening
+  ✗ Blueprint phase_8: frozen — Launch
+
+## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
+  Canonical compiler repo. All blueprint phases (0–8) apply here. TRACKING.json + scripts/tracking.py gate are authoritative.
+
+==============================================================================
+REPO 11: zowskyy/GMFKNEEGA
+==============================================================================
+
+## WHAT IT IS
+  URL:        https://github.com/zowskyy/GMFKNEEGA
+  Visibility: private
+  Language:   (none detected)
+  Category:   fork_or_adjacent
+  Updated:    2026-07-19T06:49:52Z
+  Access:     inaccessible_private
+
+## WHAT IT CLAIMS
+  • GitHub description: GameMaker Master Knowledge Framework
+
+## README EXCERPT
+  (private — README not fetched)
+
+## VERIFIED — CAN DO (this scan)
+  ✓ (capabilities not verified — metadata-only scan)
+
+## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ Not part of Frontier blueprint critical path
+
+## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
+  Upstream fork or unrelated project — no blueprint phase dependency.
+
+==============================================================================
+REPO 12: zowskyy/gutterumble
+==============================================================================
+
+## WHAT IT IS
+  URL:        https://github.com/zowskyy/gutterumble
+  Visibility: public
+  Language:   GDScript
+  Category:   fork_or_adjacent
+  Updated:    2026-07-29T05:29:15Z
+  Access:     no_readme
+
+## WHAT IT CLAIMS
+  • (no explicit claims extracted from README)
+
+## README EXCERPT
+  (no README or access denied)
+
+## VERIFIED — CAN DO (this scan)
+  ✓ Top-level structure visible (17 entries): .gitattributes, .github, .gitignore, BUILD_GUIDE.md, BUILD_GUIDE_10X.md, CREDITS.md, PROJECT_BLUEPRINT.md, PROJECT_STATE.md
+
+## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ No .github/workflows at repo root (CI not confirmed)
+  ✗ Not part of Frontier blueprint critical path
+
+## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
+  Upstream fork or unrelated project — no blueprint phase dependency.
+
+==============================================================================
+REPO 13: zowskyy/jadx
+==============================================================================
+
+## WHAT IT IS
+  URL:        https://github.com/zowskyy/jadx
+  Visibility: public
+  Language:   Java
+  Category:   fork_or_adjacent
+  Updated:    2026-08-03T14:59:17Z
+  Access:     ok
+
+## WHAT IT CLAIMS
+  • GitHub description: Dex to Java decompiler
+
+## README EXCERPT
+  <img src="https://raw.githubusercontent.com/skylot/jadx/master/jadx-gui/src/main/resources/logos/jadx-logo.png" width="64" align="left" />
+
+  ## JADX
+
+  ![Build status](https://img.shields.io/github/actions/workflow/status/skylot/jadx/build-artifacts.yml)
+  ![GitHub contributors](https://img.shields.io/github/contributors/skylot/jadx)
+  ![GitHub all releases](https://img.shields.io/github/downloads/skylot/jadx/total)
+  ![GitHub release (latest by SemVer)](https://img.shields.io/github/downloads/skylot/jadx/latest/total)
+  ![Latest release](https://img.shields.io/github/release/skylot/jadx.svg)
+  [![Maven Central](https://img.shields.io/maven-central/v/io.github.skylot/jadx-core)](https://search.maven.org/search?q=g:io.github.skylot%20AND%20jadx)
+  ![Java 11+](https://img.shields.io/badge/Java-11%2B-blue)
+  [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+
+  **jadx** - Dex to Java decompiler
+
+  Command line and GUI tools for producing Java source code from Android Dex and Apk files
+
+  > [!WARNING]
+  > Please note that in most cases **jadx** can't decompile all 100% of the code, so errors will occur.<br />
+  > Check [Troubleshooting guide](https://github.com/skylot/jadx/wiki/Troubleshooting-Q&A#decompilation-issues) for workarounds.
+
+  **Main features:**
+  - decompile Dalvik bytecode to Java code from APK, dex, aar, aab and zip files
+  - decode `AndroidManifest.xml` and other resources from `resources.arsc`
+  - deobfuscator included
+
+  **jadx-gui features:**
+  - view decompiled code with highlighted syntax
+  - jump to declaration
+  - find usage
+  - full text search
+  - smali debugger, check [wiki page](https://github.com/skylot/jadx/wiki/Smali-debugger) for setup and usage
+
+  Jadx-gui key bindings can be found [here](https://github.com/skylot/jadx/wiki/JADX-GUI-Key-bindings)
+
+  See these features in action here: [jadx-gui features overview](https://github.com/skylot/jadx/wiki/jadx-gui-features-overview)
+
+  <img src="https://user-images.githubusercontent.com/118523/142730720-839f017e-38db-423e-b53f-39f5f0a0316f.png" width="700"/>
+
+  ### Download
+  - release
+    from [github: ![Latest release](https://img.shields.io/github/release/skylot/jadx.svg)](https://github.com/skylot/jadx/releases/latest)
+  - latest [unstable build ![GitHub commits since tagged version (branch)](https://img.shields.io/github/commits-since/skylot/jadx/latest/master)](https://nightly.link/skylot/jadx/workflows/build-artifacts/master)
+
+  After download unpack zip file go to `bin` directory and run:
+  - `jadx` - command line version
+  - `jadx-gui` - UI version
+
+  On Windows run `.bat` files with double-click\
+  **Note:** ensure you have installed Java 11 or later 64-bit version.
+  For Windows, you can download it from [oracle.com](https://www.oracle.com/java/technologies/downloads/#jdk17-windows) (select x64 Installer).
+
+  ### Install
+  - Arch Linux
+    [![Arch Linux package](https://img.shields.io/archlinux/v/extra/any/jadx)](https://archlinux.org/packages/extra/any/jadx/)
+    [![AUR Version](https:/
+
+## VERIFIED — CAN DO (this scan)
+  ✓ Top-level structure visible (29 entries): .editorconfig, .gitattributes, .github, .gitignore, .gitlab-ci.yml, .jitpack.yml, .run, .typos.toml
+
+## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ No .github/workflows at repo root (CI not confirmed)
+  ✗ Not part of Frontier blueprint critical path
+
+## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
+  Upstream fork or unrelated project — no blueprint phase dependency.
+
+==============================================================================
+REPO 14: zowskyy/masked-irl
+==============================================================================
+
+## WHAT IT IS
+  URL:        https://github.com/zowskyy/masked-irl
+  Visibility: public
+  Language:   Python
+  Category:   fork_or_adjacent
+  Updated:    2026-07-11T19:01:39Z
+  Access:     ok
+
+## WHAT IT CLAIMS
+  • GitHub description: Official Codebase for "Masked IRL: LLM-Guided Reward Disambiguation from Demonstrations and Language"."
+
+## README EXCERPT
+  # Masked IRL: LLM-Guided Reward Disambiguation from Demonstrations and Language
+
+  Official codebase for **Masked Inverse Reinforcement Learning (Masked IRL)**, a framework that uses large language models (LLMs) to combine demonstrations and natural language instructions for reward learning.
+
+  **Accepted to ICRA 2026**
+
+  **Paper**: [arXiv:2511.14565](https://arxiv.org/abs/2511.14565v1)  
+  **Project Page**: https://mit-clear-lab.github.io/Masked-IRL/
+
+  ## Overview
+
+  Masked IRL addresses the fundamental ambiguity in inverse reinforcement learning by:
+  1. Disambiguating ambiguous instructions using demonstration context
+  2. Using LLMs to infer state-relevance masks from language instructions
+  3. Enforcing invariance to irrelevant state components through a masking loss
+
+  This enables more sample-efficient and generalizable reward learning compared to prior language-conditioned IRL methods.
+
+  ## Installation
+
+  ### Dependencies
+
+  1. Create a conda environment:
+  ```bash
+  conda create -n maskedirl python=3.10
+  conda activate maskedirl
+  ```
+
+  2. Install PyTorch (CUDA 12.4):
+  ```bash
+  pip install torch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0 --index-url https://download.pytorch.org/whl/cu124
+  ```
+  Install cuda toolkit 12.4 with `conda install -c nvidia cuda-toolkit=12.4` or install different version of PyTorch that matches your cuda version.
+
+  3. Install remaining dependencies:
+  ```bash
+  pip install -r requirements.txt
+  ```
+
+  ## Dataset
+
+  ### Dataset Files
+
+  The codebase uses trajectory datasets stored in `data/traj_sets/`:
+
+  - **Simulation datasets**:
+    - `frankarobot_obj20_sg10_persg5.npy` - Main simulation dataset (20 objects, 10 start-goal pairs, 5 trajectories per pair)
+    - `frankarobot_obj20_sg10_persg5_shortest_paths.npy` - Shortest path trajectories for baseline comparison on extracting state relevance masks
+
+  - **Real robot datasets**:
+    - `frankarobot_obj100_sg50_persg50.npy` - Real robot dataset (100 objects, 50 start-goal pairs, 50 trajectories per pair)
+    - `frankarobot_obj100_sg50_persg50_dict.npy` - Dictionary format of real robot data
+
+  ### Generating Trajectories
+
+  To generate new trajectory datasets:
+
+  ```bash
+  # For simulation (set real: False in config)
+  cd src
+  ... (349 more lines)
+
+## VERIFIED — CAN DO (this scan)
+  ✓ Top-level structure visible (7 entries): .gitignore, LICENSE, README.md, config, notebooks, requirements.txt, src
+  ✓ Python project indicators present
+
+## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ No .github/workflows at repo root (CI not confirmed)
+  ✗ Not part of Frontier blueprint critical path
+
+## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
+  Upstream fork or unrelated project — no blueprint phase dependency.
+
+==============================================================================
+REPO 15: zowskyy/mcp-for-beginners
+==============================================================================
+
+## WHAT IT IS
+  URL:        https://github.com/zowskyy/mcp-for-beginners
+  Visibility: public
+  Language:   Jupyter Notebook
+  Category:   fork_or_adjacent
+  Updated:    2026-07-12T08:56:52Z
+  Access:     ok
+
+## WHAT IT CLAIMS
+  • GitHub description: This open-source curriculum introduces the fundamentals of Model Context Protocol (MCP) through real-world, cross-language examples in .NET, Java, TypeScript, JavaScript, Rust and Python. Designed for developers, it focuses on practical techniques for building modular, scalable, and secure AI workflows from session setup to service orchestration.
+  • > This gives you everything you need to complete the course with a much faster download.
+  • By the time you complete this journey, you'll have the confidence to build your own MCP servers, integrate them with popular AI platforms, and understand how this technology is reshaping the future of
+
+## README EXCERPT
+  ![MCP-for-beginners](./images/mcp-beginners.png) 
+
+  [![GitHub contributors](https://img.shields.io/github/contributors/microsoft/mcp-for-beginners.svg)](https://GitHub.com/microsoft/mcp-for-beginners/graphs/contributors)
+  [![GitHub issues](https://img.shields.io/github/issues/microsoft/mcp-for-beginners.svg)](https://GitHub.com/microsoft/mcp-for-beginners/issues)
+  [![GitHub pull-requests](https://img.shields.io/github/issues-pr/microsoft/mcp-for-beginners.svg)](https://GitHub.com/microsoft/mcp-for-beginners/pulls)
+  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+
+  [![GitHub watchers](https://img.shields.io/github/watchers/microsoft/mcp-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/mcp-for-beginners/watchers)
+  [![GitHub forks](https://img.shields.io/github/forks/microsoft/mcp-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/mcp-for-beginners/fork)
+  [![GitHub stars](https://img.shields.io/github/stars/microsoft/mcp-for-beginners?style=social&label=Star)](https://GitHub.com/microsoft/mcp-for-beginners/stargazers)
+
+
+  [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+
+  Follow these steps to get started using these resources:
+  1. **Fork the Repository**: Click [![GitHub forks](https://img.shields.io/github/forks/microsoft/mcp-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/mcp-for-beginners/fork)
+  2. **Clone the Repository**:   `git clone https://github.com/microsoft/mcp-for-beginners.git`
+  3. **Join The** [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+
+
+  ### 🌐 Multi-Language Support
+
+  #### Supported via GitHub Action (Automated & Always Up-to-Date)
+
+  <!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
+  [Arabic](./translations/ar/README.md) | [Bengali](./translations/bn/README.md) | [Bulgarian](./translations/bg/README.md) | [Burmese (Myanmar)](./translations/my/README.md) | [Chinese (Simplified)](./translations/zh-CN/README.md) | [Chinese (Traditional, Hong Kong)](./translations/zh-HK/README.md) | [Chinese (Traditional, Macau)](./translations/zh-MO/README.md) | [Chinese (Traditional, Taiwan)](./translations/zh-TW/README.md) | [Croatian](./translations/hr/README.md) | [Czech](./translations/cs/README.md) | [Danish](./translations/da/README.md) | [Dutch](./translations/nl/README.md) | [Estonian](./translations/et/README.md) | [Finnish](./translations/fi/README.md) | [French](./translations/fr/README.md) | [German](./translations/de/README.md) | [Greek](./translations/el/README.md) | [Hebrew](./translations/he/README.md) | [Hindi](./translations/hi/README.md) | [Hungarian](./translations/hu/README.md) | [Indonesian](./translations/id/README.md) | [Italian](./translations/it/README.md) | [Japanese](./translations/ja/README.md) | [Kannada](./translations/kn/README.md) | [Khmer](./translations/km/README.
+
+## VERIFIED — CAN DO (this scan)
+  ✓ Top-level structure visible (28 entries): .devcontainer, .dockerignore, .github, .gitignore, 00-Introduction, 01-CoreConcepts, 02-Security, 03-GettingStarted
+
+## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ No .github/workflows at repo root (CI not confirmed)
+  ✗ Not part of Frontier blueprint critical path
+
+## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
+  Upstream fork or unrelated project — no blueprint phase dependency.
+
+==============================================================================
+REPO 16: zowskyy/mia.loa
+==============================================================================
+
+## WHAT IT IS
+  URL:        https://github.com/zowskyy/mia.loa
+  Visibility: public
+  Language:   JavaScript
+  Category:   fork_or_adjacent
+  Updated:    2026-08-05T08:55:07Z
+  Access:     ok
+
+## WHAT IT CLAIMS
+  • (no explicit claims extracted from README)
+
+## README EXCERPT
+  # ⚡ Lighthouse
+
+  **Free offline AI coding agent. No subscription. Works on phones, RPi, anything.**
+
+  ## Quick Start
+
+  ```bash
+  npm install          # One dependency: express
+  node setup.js        # Download model (~4GB, one-time)
+  node core.js         # Start server
+  # Open http://localhost:8899
+  ```
+
+  ## Mobile — Three Tiers
+
+  | Tier | What | Setup |
+  |------|------|-------|
+  | **1: PWA** | Browser + home screen install | Open `http://<server>:8899` on phone |
+  | **2: Capacitor** | Native Android/iOS app shell | `cd mobile/capacitor && npm install && node build-mobile.js` |
+  | **3: WebLLM** | On-device AI in browser (WebGPU) | Tap **🧠 On-Device** in app header |
+
+  ### Connect your phone (Tier 1)
+
+  1. Run `node core.js` on your laptop/RPi
+  2. Open `http://<server-ip>:8899/connect.html` on any device
+  3. Scan the QR code with your phone
+
+  ### Native app (Tier 2)
+
+  ```bash
+  cd mobile/capacitor
+  npm install
+  node build-mobile.js --server http://192.168.1.10:8899
+  npm run add:android    # first time
+  npm run android        # open Android Studio
+  ```
+
+  See [mobile/capacitor/README.md](mobile/capacitor/README.md).
+
+  ### On-device AI (Tier 3)
+
+  Requires Chrome 127+ with WebGPU and 8GB+ RAM. Enable via the header toggle. See [mobile/webllm/README.md](mobile/webllm/README.md).
+
+  ## Modes
+
+  | Mode | What it does |
+  |------|--------------|
+  | Server mode | Uses llama-server (fastest, persistent) |
+  | CLI mode | Uses llama-cli (works everywhere) |
+  | Learning mode | No model needed — explains concepts |
+  | On-device (WebLLM) | Model runs in browser via WebGPU |
+
+  ## Features
+
+  - 🧠 **ARC Cycle** — Analyzes → Plans → Codes → Self-Reviews
+  - 💡 **Idea Mode** — Describe your idea, get questions, then code
+  - 📱 **Phone Ready** — PWA, voice input, share sheet, wake lock
+  - 🔌 **Fully Offline** — After model download, zero internet
+  - 💾 **Projects** — Save and load your work
+  - 🖥️ **CLI** — Terminal mode for headless systems
+  ... (40 more lines)
+
+## VERIFIED — CAN DO (this scan)
+  ✓ Top-level structure visible (18 entries): .github, .gitignore, README.md, RELEASE_CHECKLIST.md, RELEASE_NOTES.md, core.js, deploy.js, deploy.sh
+  ✓ Node/JS project (package.json present)
+
+## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ No .github/workflows at repo root (CI not confirmed)
+  ✗ Not part of Frontier blueprint critical path
+
+## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
+  Upstream fork or unrelated project — no blueprint phase dependency.
+
+==============================================================================
+REPO 17: zowskyy/nuDAWn
+==============================================================================
+
+## WHAT IT IS
+  URL:        https://github.com/zowskyy/nuDAWn
+  Visibility: private
+  Language:   C++
+  Category:   fork_or_adjacent
+  Updated:    2026-08-06T04:31:37Z
+  Access:     inaccessible_private
+
+## WHAT IT CLAIMS
+  • (no explicit claims extracted from README)
+
+## README EXCERPT
+  (private — README not fetched)
+
+## VERIFIED — CAN DO (this scan)
+  ✓ (capabilities not verified — metadata-only scan)
+
+## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ Not part of Frontier blueprint critical path
+
+## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
+  Upstream fork or unrelated project — no blueprint phase dependency.
+
+==============================================================================
+REPO 18: zowskyy/prjctnxs
+==============================================================================
+
+## WHAT IT IS
+  URL:        https://github.com/zowskyy/prjctnxs
+  Visibility: public
+  Language:   Python
+  Category:   frontier_ecosystem
+  Updated:    2026-08-05T20:37:07Z
+  Access:     ok
+
+## WHAT IT CLAIMS
+  • **Self-hosted, AI-native development ecosystem — Cursor IDE written entirely in Frontier Syntax.**
+
+## README EXCERPT
+  # Project Nexus
+
+  **Self-hosted, AI-native development ecosystem — Cursor IDE written entirely in Frontier Syntax.**
+
+  > Version: 2.5.1 (Real Implementation Bridge)
+
+  > 🚀 ARC VERDICT: BUILDING CURSOR FROM SCRATCH IN FRONTIER
+
+  You're not just building an engine — you're building the tool that builds the engine using the language we created. Ultimate dogfooding.
+
+  ## Vision
+
+  A Cursor-like IDE that:
+
+  1. Runs on the Frontier engine
+  2. Is written entirely in Frontier Syntax (no C++ external to the engine)
+  3. Has built-in AI assistance (Frontier understands itself)
+  4. Achieves 60+ FPS UI (1000+ FPS capable on the engine)
+  5. Weighs < 50MB compiled
+
+  ## Quick Start
+
+  ```bash
+  # Verify Slide 15 — Cursor IDE (A+ Hard Gate)
+  python3 build/arc_orchestrator.py --slides 15
+
+  # Spirits Within benchmark — film-quality real-time
+  python3 build/arc_orchestrator.py --benchmark spirits_within
+
+  # 100% Frontier-native AI (purge third-party)
+  python3 build/arc_orchestrator.py --patch purge-third-party
+  python3 build/arc_orchestrator.py --slides 15.9,15.10,15.11,15.12
+
+  # List slides and benchmarks
+  python3 build/arc_orchestrator.py --list
+
+  # Frontier v2.0 — verify all 7 innovations
+  python3 build/arc_orchestrator.py --verify
+
+  # Real implementation bridge (frontier-syntax Rust submodule)
+  python3 build/arc_orchestrator.py --patch bridge-to-reality
+  python3 build/arc_orchestrator.py --verify-real
+  python3 build/rust_bridge.py
+  python3 build/vertical_slice.py "Create a function that adds two numbers"
+  python3 build/real_benchmarks.py
+
+  # Project Nexus v2.5 — Quantum Leap (doubled performance, 10× v1.0.1)
+  python3 build/arc_orchestrator.py --patch quantum-leap-v2.5
+  python3 build/arc_orchestrator.py --verify-quantum-leap
+
+  # Project Nexus v2.0 — comprehensive improvements (7/7)
+  python3 build/arc_orchestrator.py --patch improve-v2.0
+  python3 build/arc_orchestrator.py --verify-improvements
+
+  # Run all benchmarks
+  python3 build/arc_orchestrator.py --benchmark all
+
+  # Frontier v2.0 — full patch verification + certificate
+  python3 build/arc_orchestrator.py --verify-patch --version 2.0
+
+  ... (123 more lines)
+
+## VERIFIED — CAN DO (this scan)
+  ✓ Top-level structure visible (31 entries): .cursor, .github, .gitignore, .gitmodules, Cargo.lock, Cargo.toml, LICENSE, MCPE_DEPLOYMENT.md
+  ✓ Rust project (Cargo.toml present)
+  ✓ Node/JS project (package.json present)
+
+## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ No .github/workflows at repo root (CI not confirmed)
+
+## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
+  Project Nexus support / submodule. Out of scope for frontier-syntax gate but ecosystem coordination repo.
+
+==============================================================================
+REPO 19: zowskyy/project-nexus
+==============================================================================
+
+## WHAT IT IS
+  URL:        https://github.com/zowskyy/project-nexus
+  Visibility: public
+  Language:   (none detected)
+  Category:   frontier_ecosystem
+  Updated:    2026-08-05T05:24:02Z
+  Access:     no_readme
+
+## WHAT IT CLAIMS
+  • GitHub description: Project Nexus — Cursor IDE written entirely in Frontier Syntax. Self-hosting AI-native development environment.
+
+## README EXCERPT
+  (no README or access denied)
+
+## VERIFIED — CAN DO (this scan)
+  ✓ (capabilities not verified — metadata-only scan)
+
+## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ Cannot self-host IDE — depends on frontier-syntax Phase 1+ (compiler not validated)
+
+## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
+  Claims Cursor IDE in Frontier Syntax. Blocked until frontier-syntax Phase 1 exit (self-hosting + working WASM). Phase 5+ dependency.
+
+==============================================================================
+REPO 20: zowskyy/quick-xml
+==============================================================================
+
+## WHAT IT IS
+  URL:        https://github.com/zowskyy/quick-xml
+  Visibility: public
+  Language:   Rust
+  Category:   fork_or_adjacent
+  Updated:    2026-07-30T22:32:54Z
+  Access:     ok
+
+## WHAT IT CLAIMS
+  • GitHub description: Rust high performance xml reader and writer
+
+## README EXCERPT
+  # quick-xml
+
+  ![status](https://github.com/tafia/quick-xml/actions/workflows/rust.yml/badge.svg)
+  [![Crate](https://img.shields.io/crates/v/quick-xml.svg)](https://crates.io/crates/quick-xml)
+  [![docs.rs](https://docs.rs/quick-xml/badge.svg)](https://docs.rs/quick-xml)
+  [![codecov](https://img.shields.io/codecov/c/github/tafia/quick-xml)](https://codecov.io/gh/tafia/quick-xml)
+  [![MSRV](https://img.shields.io/badge/rustc-1.86.0+-ab6000.svg)](https://blog.rust-lang.org/2025/04/03/Rust-1.86.0/)
+
+  High performance xml pull reader/writer.
+
+  The reader:
+  - is almost zero-copy (use of `Cow` whenever possible)
+  - is easy on memory allocation (the API provides a way to reuse buffers)
+  - support various encoding (with `encoding` feature), namespaces resolution, special characters.
+
+  Syntax is inspired by [xml-rs](https://github.com/netvl/xml-rs).
+
+  ## Example
+
+  ### Reader
+
+  ```rust
+  use quick_xml::events::Event;
+  use quick_xml::reader::Reader;
+
+  let xml = r#"<tag1 att1 = "test">
+                  <tag2><!--Test comment-->Test</tag2>
+                  <tag2>Test 2</tag2>
+               </tag1>"#;
+  let mut reader = Reader::from_str(xml);
+  reader.config_mut().trim_text(true);
+
+  let mut count = 0;
+  let mut txt = Vec::new();
+  let mut buf = Vec::new();
+
+  // The `Reader` does not implement `Iterator` because it outputs borrowed data (`Cow`s)
+  loop {
+      // NOTE: this is the generic case when we don't know about the input BufRead.
+      // when the input is a &str or a &[u8], we don't actually need to use another
+      // buffer, we could directly call `reader.read_event()`
+      match reader.read_event_into(&mut buf) {
+          Err(e) => panic!("Error at position {}: {:?}", reader.error_position(), e),
+          // exits the loop when reaching end of file
+          Ok(Event::Eof) => break,
+
+          Ok(Event::Start(e)) => {
+              match e.name().as_ref() {
+                  b"tag1" => println!("attributes values: {:?}",
+                                      e.attributes().map(|a| a.unwrap().value)
+                                      .collect::<Vec<_>>()),
+                  b"tag2" => count += 1,
+                  _ => (),
+              }
+          }
+          Ok(Event::Text(e)) => txt.push(e.decode().unwrap().into_owned()),
+
+          // There are several other `Event`s we do not consider here
+          _ => (),
+      }
+  ... (116 more lines)
+
+## VERIFIED — CAN DO (this scan)
+  ✓ Top-level structure visible (19 entries): .gitattributes, .github, .gitignore, .gitmodules, .rustfmt.toml, AGENTS.md, CLAUDE.md, CONTRIBUTING.md
+  ✓ Rust project (Cargo.toml present)
+
+## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ No .github/workflows at repo root (CI not confirmed)
+  ✗ Not part of Frontier blueprint critical path
+
+## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
+  Upstream fork or unrelated project — no blueprint phase dependency.
+
+==============================================================================
+REPO 21: zowskyy/repurpose-engine
+==============================================================================
+
+## WHAT IT IS
+  URL:        https://github.com/zowskyy/repurpose-engine
+  Visibility: public
+  Language:   Python
+  Category:   frontier_ecosystem
+  Updated:    2026-07-17T02:54:10Z
+  Access:     no_readme
+
+## WHAT IT CLAIMS
+  • (no explicit claims extracted from README)
+
+## README EXCERPT
+  (no README or access denied)
+
+## VERIFIED — CAN DO (this scan)
+  ✓ Top-level structure visible (1 entries): repurpose.py
+
+## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ No .github/workflows at repo root (CI not confirmed)
+
+## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
+  Automation / worker scripts; may invoke frontier-syntax tooling.
+
+==============================================================================
+REPO 22: zowskyy/Schema
+==============================================================================
+
+## WHAT IT IS
+  URL:        https://github.com/zowskyy/Schema
+  Visibility: public
+  Language:   Python
+  Category:   fork_or_adjacent
+  Updated:    2026-08-06T23:28:30Z
+  Access:     ok
+
+## WHAT IT CLAIMS
+  • (no explicit claims extracted from README)
+
+## README EXCERPT
+  # Cursor Gate — 15-Gate Review System
+
+  A modular Python script that runs 15 quality gates on code before it ships in Cursor or VS Code.
+
+  ## Agent completion policy
+
+  Every cloud agent environment bootstraps this policy via `.cursor/environment.json`:
+
+  - **`.cursor/rules/ship-finished-work.mdc`** — always-on project rule
+  - **`AGENTS.md`** — agent instructions at repo root
+  - **`scripts/install-agent-environment.sh`** — installs gate scripts to `~/.cursor/` on every VM
+
+  **Global (all projects):** paste `docs/USER_RULES_PASTE.md` into Cursor → Customize → Rules → User Rules.
+
+  Agents must loop write → gate → fix until both reviewers PASS. No iteration caps. No partial deliveries.
+
+  ## Quarterback / worker delegation
+
+  The main agent (quarterback) decomposes work and delegates heavy tasks to Task subagents (workers). Workers implement and gate their own changes but never message the user. After merging worker output, the quarterback **re-runs both gate reviewers on every changed file** before delivery.
+
+  See [`.cursor/rules/quarterback-worker.mdc`](.cursor/rules/quarterback-worker.mdc) for roles, delegation heuristics, and re-gate requirements.
+
+  ## Gate scripts
+
+  Run both reviewers (`cursor_gate_fastest.py` + `cursor_gate.py`) on one file:
+
+  ```bash
+  bash scripts/gate-file.sh --file path/to/file.py
+  ```
+
+  Gate all changed `.py`/`.ts`/`.js` files (from `git diff HEAD`), or explicit paths:
+
+  ```bash
+  bash scripts/gate-all-changed.sh              # changed files only
+  bash scripts/gate-all-changed.sh src/foo.py   # specific files
+  ```
+
+  Either script exits non-zero if either reviewer returns `FAIL`.
+
+  ## Sample fixtures
+
+  | File | Purpose |
+  |------|---------|
+  | [`samples/hello_passing.py`](samples/hello_passing.py) | Reference — passes all 15 gates in both reviewers |
+  | [`samples/hello.py`](samples/hello.py) | Minimal example — intentionally fails several gates |
+
+  ```bash
+  bash scripts/gate-file.sh --file samples/hello_passing.py  # expect PASS
+  bash scripts/gate-file.sh --file samples/hello.py          # expect FAIL
+  ```
+
+  ## CI gate-check
+
+  [`.github/workflows/gate-check.yml`](.github/workflows/gate-check.yml) runs on every pull request: installs deps, bootstraps the agent environment, then gates `samples/hello_passing.py` via `gate-file.sh`.
+
+  ## Quick Start
+
+  ### Option A: Fastest CLI (recommended — fail-fast, ~0.3–0.8s)
+
+  ```bash
+  ... (118 more lines)
+
+## VERIFIED — CAN DO (this scan)
+  ✓ Top-level structure visible (19 entries): .cursor, .cursorrules, .env.example, .github, .gitignore, AGENTS.md, CHANGELOG.md, Dockerfile
+  ✓ Python project indicators present
+
+## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ No .github/workflows at repo root (CI not confirmed)
+  ✗ Not part of Frontier blueprint critical path
+
+## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
+  Upstream fork or unrelated project — no blueprint phase dependency.
+
+==============================================================================
+REPO 23: zowskyy/slackhelper
+==============================================================================
+
+## WHAT IT IS
+  URL:        https://github.com/zowskyy/slackhelper
+  Visibility: public
+  Language:   (none detected)
+  Category:   fork_or_adjacent
+  Updated:    2026-07-14T09:07:53Z
+  Access:     ok
+
+## WHAT IT CLAIMS
+  • (no explicit claims extracted from README)
+
+## README EXCERPT
+  ﻿# slackhelper
+
+## VERIFIED — CAN DO (this scan)
+  ✓ Top-level structure visible (1 entries): README.md
+
+## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ No .github/workflows at repo root (CI not confirmed)
+  ✗ Not part of Frontier blueprint critical path
+
+## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
+  Upstream fork or unrelated project — no blueprint phase dependency.
+
+==============================================================================
+REPO 24: zowskyy/statecheck
+==============================================================================
+
+## WHAT IT IS
+  URL:        https://github.com/zowskyy/statecheck
+  Visibility: public
+  Language:   Python
+  Category:   frontier_ecosystem
+  Updated:    2026-07-14T13:36:39Z
+  Access:     ok
+
+## WHAT IT CLAIMS
+  • (no explicit claims extracted from README)
+
+## README EXCERPT
+  # StateCheck
+
+  A hard gate that stops an agent from running a tool unless a
+  deterministic pre-condition holds — and rolls back or taints the world if
+  a post-condition fails afterward. No prompts. No self-reports. Code
+  executing and checking, nothing else.
+
+  Read `PROTOCOL.md` for the actual spec — versioned, with a table of
+  contents. This file is the orientation.
+
+  ## Quick example
+
+  ```python
+  from statecheck.tool_executor import ToolContract, execute_contracted
+
+  # Predicates are plain Python callables, written by whoever authors the
+  # tool — never strings passed in at call time, never something a model
+  # supplies. This is deliberate: a string evaluated at runtime is exactly
+  # the kind of dynamic, model-influenceable check this primitive exists
+  # to rule out.
+  def repo_is_clean():
+      import subprocess
+      return subprocess.run(["git", "status", "--porcelain"], cwd="/repo",
+                             capture_output=True, text=True).stdout == ""
+
+  def push_succeeded(result):
+      return result["returncode"] == 0
+
+  contract = ToolContract(
+      name="git_push",
+      pre_condition=repo_is_clean,
+      post_condition=push_succeeded,
+      is_mutating=True,
+  )
+
+  def do_push():
+      import subprocess
+      r = subprocess.run(["git", "push", "origin", "main"], cwd="/repo",
+                          capture_output=True, text=True)
+      return {"returncode": r.returncode}
+
+  result = execute_contracted(contract, do_push)
+  # Returns whatever do_push() returned, on success.
+  # Raises ContractViolation or ExecutionFailure on failure — see below.
+  ```
+
+  ## What's here
+
+  ```
+  statecheck/
+    verifier_search.py    the correctness gate + search loop
+                           (propose -> execute -> score -> mutate,
+                            sandboxed, fitness=0 if incorrect, full stop)
+    tool_executor.py       the StateCheck itself
+                           (pre_condition -> execute -> post_condition,
+                            real rollback where possible, taint-tracking
+                            with scoped recovery where it isn't)
+    tool_call_parser.py    robust parsing of a model's {"tool": ..., "args": ...}
+                           output — markdown fences, stray prose, single
+                           quotes, all handled without guessing
+  ... (182 more lines)
+
+## VERIFIED — CAN DO (this scan)
+  ✓ Top-level structure visible (13 entries): .github, .gitignore, .vscode, CONTRIBUTING.md, LICENSE, PARTICIPANT_BRIEF.md, PROTOCOL.md, README.md
+  ✓ Python project indicators present
+
+## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ No .github/workflows at repo root (CI not confirmed)
+
+## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
+  Automation / worker scripts; may invoke frontier-syntax tooling.
+
+==============================================================================
+REPO 25: zowskyy/Vanadium
+==============================================================================
+
+## WHAT IT IS
+  URL:        https://github.com/zowskyy/Vanadium
+  Visibility: public
+  Language:   Python
+  Category:   fork_or_adjacent
+  Updated:    2026-08-03T12:26:50Z
+  Access:     ok
+
+## WHAT IT CLAIMS
+  • GitHub description: Privacy and security enhanced releases of Chromium for GrapheneOS. Vanadium provides the WebView and standard user-facing browser on GrapheneOS. It depends on hardening in other GrapheneOS repositories and doesn't include patches not relevant to the build targets used on GrapheneOS.
+
+## README EXCERPT
+  Vanadium is a privacy and security hardened variant of Chromium providing the WebView (used by
+  other apps to render web content) and standard browser for [GrapheneOS](https://grapheneos.org).
+  It depends on hardening and compatibility fixes in GrapheneOS rather than reinventing the wheel
+  inside Vanadium. For example, GrapheneOS already provides a hardened malloc implementation so
+  there's no need for Vanadium to replace it. Similarly, it can deploy security features causing
+  breakage on other operating systems due to the ability to fix compatibility problems in the OS.
+
+  See [the official build documentation](https://grapheneos.org/build#browser-and-webview) for build
+  instructions. See the [Vanadium section of our GrapheneOS features overview](https://grapheneos.org/features#vanadium) and the [web browsing section of 
+  our usage guide](https://grapheneos.org/usage#web-browsing) for more information about Vanadium.
+
+## VERIFIED — CAN DO (this scan)
+  ✓ Top-level structure visible (14 entries): .gclient, .gitignore, LICENSE, LICENSE.Apache-2.0-note, LICENSE.FTL-note, LICENSE.GPL-2.0, LICENSE.WebView-note, README.md
+
+## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ No .github/workflows at repo root (CI not confirmed)
+  ✗ Not part of Frontier blueprint critical path
+
+## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
+  Upstream fork or unrelated project — no blueprint phase dependency.
+
+==============================================================================
+REPO 26: zowskyy/verbose-train
+==============================================================================
+
+## WHAT IT IS
+  URL:        https://github.com/zowskyy/verbose-train
+  Visibility: private
+  Language:   (none detected)
+  Category:   fork_or_adjacent
+  Updated:    2026-08-03T15:00:33Z
+  Access:     inaccessible_private
+
+## WHAT IT CLAIMS
+  • (no explicit claims extracted from README)
+
+## README EXCERPT
+  (private — README not fetched)
+
+## VERIFIED — CAN DO (this scan)
+  ✓ (capabilities not verified — metadata-only scan)
+
+## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ Not part of Frontier blueprint critical path
+
+## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
+  Upstream fork or unrelated project — no blueprint phase dependency.
+
+==============================================================================
+REPO 27: zowskyy/Voice-Of-the-Star
+==============================================================================
+
+## WHAT IT IS
+  URL:        https://github.com/zowskyy/Voice-Of-the-Star
+  Visibility: public
+  Language:   Python
+  Category:   fork_or_adjacent
+  Updated:    2026-07-11T00:10:58Z
+  Access:     ok
+
+## WHAT IT CLAIMS
+  • GitHub description: 🌟VOS🌟: AI를 활용한 고인과의 채팅 및 음성 복원 서비스
+
+## README EXCERPT
+
+  # 👥 팀원 소개
+
+
+  <div align="left">
+    <table>
+      <tr>
+        <td align="center">
+          <a href="https://github.com/KyhNaz">
+            <img src="https://avatars.githubusercontent.com/u/141602472?v=4" alt="김영훈 프로필" width=120 height=120 />
+          </a>
+        </td>
+  <td align="center">
+          <a href="https://github.com/phantomkos">
+            <img src="https://avatars.githubusercontent.com/u/54060584?v=4" alt="권오성 프로필" width=120 height=120 />
+          </a>
+        </td>
+        <td align="center">
+          <a href="https://github.com/Somang-Kang">
+            <img src="https://avatars.githubusercontent.com/u/77764316?v=4" alt="강소망 프로필" width=120 height=120 />
+          </a>
+        </td>
+        <td align="center">
+          <a href="https://github.com/neymaru">
+            <img src="https://github.com/Think-Tank-6/VOS-server/assets/77764316/4e56ad03-af91-4e21-9544-00798cdad0be" alt="김성현 프로필" width=120 height=120 />
+          </a>
+        </td>
+        <td align="center">
+          <a href="https://github.com/2dilution2">
+            <img src="https://avatars.githubusercontent.com/u/74598367?v=4" alt="이희석 프로필" width=120 height=120 />
+          </a>
+        </td>
+        <td align="center">
+          <a href="https://github.com/rose129">
+            <img src="https://avatars.githubusercontent.com/u/75605706?v=4" alt="한지혜 프로필" width=120 height=120 />
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <a href="https://github.com/KyhNaz">
+            김영훈
+          </a>
+        </td>
+       <td align="center">
+          <a href="https://github.com/phantomkos">
+            권오성
+          </a>
+        </td>
+        <td align="center">
+          <a href="https://github.com/Somang-Kang">
+            강소망
+          </a>
+        </td>
+        <td align="center">
+          <a href="https://github.com/neymaru">
+            김성현
+          </a>
+        </td>
+        <td align="center">
+  ... (403 more lines)
+
+## VERIFIED — CAN DO (this scan)
+  ✓ Top-level structure visible (6 entries): .github, .gitignore, README.md, asset, backend, docker-compose.yml
+
+## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ No .github/workflows at repo root (CI not confirmed)
+  ✗ Not part of Frontier blueprint critical path
+
+## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
+  Upstream fork or unrelated project — no blueprint phase dependency.
+
+
+##############################################################################
+THIRD-PARTY CONTENT NOTICE
+##############################################################################
+README excerpts are reproduced for internal ecosystem inventory only.
+Each upstream repo retains its own license. See upstream LICENSE files.
+SPDX identifiers not auto-detected in this scan — verify before redistribution.
+
+##############################################################################
+END OF REPORT — regenerate with:
+  python3 scripts/gather_ecosystem_knowledge.py
+  python3 scripts/gather_ecosystem_knowledge.py --fast   # skip cargo rebuild
+  python3 scripts/gather_ecosystem_knowledge.py --dry-run  # no writes
+##############################################################################

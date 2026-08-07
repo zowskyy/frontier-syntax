@@ -1,0 +1,30 @@
+# cargo tree --depth 1 (native)
+# Generated: 2026-08-06T15:42:14Z
+
+frontier v2.0.0 (/workspace)
+├── ark-bn254 v0.5.0
+├── ark-ff v0.5.0
+├── ark-groth16 v0.5.0
+├── ark-r1cs-std v0.5.0
+├── ark-relations v0.5.1
+├── ark-serialize v0.5.0
+├── ark-snark v0.5.1
+├── ark-std v0.5.0
+├── chrono v0.4.45
+├── colored v2.2.0
+├── hex v0.4.3
+├── notify v6.1.1
+├── pqcrypto-dilithium v0.5.0
+│   [build-dependencies]
+├── pqcrypto-kyber v0.7.9
+│   [build-dependencies]
+├── pqcrypto-traits v0.3.5
+├── rand v0.8.7
+├── reqwest v0.12.28
+├── rustyline v14.0.0
+├── serde v1.0.229
+├── serde_json v1.0.151
+├── sha3 v0.10.9
+├── signal-hook v0.3.18
+├── toml v0.8.23
+└── unicode-normalization v0.1.25

@@ -6,7 +6,10 @@
       ],
       "command": "python3",
       "tools": [
-        "query_chat_knowledge"
+        "query_chat_knowledge",
+        "submit_help_request",
+        "get_help_status",
+        "list_stalled_work"
       ]
     }
   }

@@ -1,0 +1,22 @@
+{
+  "name": "crxcibl3sounds",
+  "url": "https://github.com/zowskyy/crxcibl3sounds",
+  "description": "bfxr.net in javascript, with more things!",
+  "is_private": false,
+  "language": "HTML",
+  "updated_at": "2026-07-17T23:33:00Z",
+  "category": "fork_or_adjacent",
+  "access_status": "fetch_failed",
+  "readme_excerpt": "## About\n[Bfxr2](https://www.bfxr.net/) a tool for making sound effects for games, a rewrite/refresh of the flash tool Bfxr in javascript.\n\n![image](https://github.com/user-attachments/assets/1701bccc-82d6-47e1-881c-ec6ca228dc89)\n\nIt's currently BETA, and new things should be coming to it, but the main addition right now is Obiwannabe's subtly wonderful footstep generator, ported from puredata to javsacript:\n\n![image](https://github.com/user-attachments/assets/1f338401-d2e4-4100-ad4d-471ad6e56f6f)\n\n## Development\ncf. [DEVELOPMENT.md](https://github.com/increpare/bfxr2/blob/master/DEVELOPMENT.md).\n\n## Archaeology\n\nI don't know if it's genetically related, but I believe that _why made a program called sound foley (which I haven't been able to get to work) which looks quite similar to Sfxr in design based on what I've seen of his _why's presentation of it.\nThe darling DrPetter made the program this is based on, Sfxr:\n\n* http://drpetter.se/\n* http://drpetter.se/article_sound.html\n* http://drpetter.se/project_sfxr.html\nThe fabulous Tom Vian did a flash port of this, called as3sfxr\n* http://www.tomvian.com/\n* http://www.superflashbros.net/as3sfxr/\nThere's also a port of Sfxr to OS X that's quite loved by people (and was a little influential) called cfxr:\n* http://thirdcog.eu/apps/cfxr\nI did a mod of as3sfxr that introduced some new features, and called it as3sfxr-b:\n* http://ded.increpare.com/~locus/as3sfxr-b/\nAfter asking for feedback, I spent some time adding and changing more things, making something new. Which is Bfxr. Which is what you see on this page.\n\nCode from\nBulk of coding of this version done by poor little me. In addition to code from Tom/DrPetter, code snippits were taken from\n\n* http://www.firstpr.com.au/dsp/pink-noise/#Filtering for pink-noise related synthesis\n\nThanks + Acknolwedgements\n* DrPetter, for Sfxr.\n* Tom Vian, for his elegantly constructed as3sfxr port.\n* @docky, @Draknek, @KommanderKlobb, @eigenbo, @GrimFang4, @nyarla, @bfod, @jasperbyrne, @draknek, @hybridmind, @RinkuHero, DustinGunn, mcc, and agj for feedback + suggestions. And Derek for some early encouragement.\nThe people from the #flex irc room on freenode for technical help in my hour of need, especially J_A_X.\n\nOther software that can be software for making sounds:\n* Audacity - http://audacity.sourceforge.net/\n* HighC - http://highc.org/\n* PXTone - http://buzinkai.net/PXTone/tutorial/\n* Sound Effects Generator - http://www.windowsgames.co.uk/effects.html (windows only. I nicked a couple of things from this. )\n* Freesound - http://www.freesound.org - Okay, not sound software, but a really amazing resource.\n* ChipTone - https://sfbgames.itch.io/chiptone",
+  "top_level_files": [],
+  "claims": [
+    "GitHub description: bfxr.net in javascript, with more things!"
+  ],
+  "can_do": [
+    "(capabilities not verified \u2014 metadata-only scan)"
+  ],
+  "cannot_do": [
+    "Not part of Frontier blueprint critical path"
+  ],
+  "blueprint_relation": "Upstream fork or unrelated project \u2014 no blueprint phase dependency."
+}

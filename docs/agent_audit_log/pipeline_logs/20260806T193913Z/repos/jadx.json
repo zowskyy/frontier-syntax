@@ -1,0 +1,53 @@
+{
+  "name": "jadx",
+  "url": "https://github.com/zowskyy/jadx",
+  "description": "Dex to Java decompiler",
+  "is_private": false,
+  "language": "Java",
+  "updated_at": "2026-08-03T14:59:17Z",
+  "category": "fork_or_adjacent",
+  "access_status": "ok",
+  "readme_excerpt": "<img src=\"https://raw.githubusercontent.com/skylot/jadx/master/jadx-gui/src/main/resources/logos/jadx-logo.png\" width=\"64\" align=\"left\" />\n\n## JADX\n\n![Build status](https://img.shields.io/github/actions/workflow/status/skylot/jadx/build-artifacts.yml)\n![GitHub contributors](https://img.shields.io/github/contributors/skylot/jadx)\n![GitHub all releases](https://img.shields.io/github/downloads/skylot/jadx/total)\n![GitHub release (latest by SemVer)](https://img.shields.io/github/downloads/skylot/jadx/latest/total)\n![Latest release](https://img.shields.io/github/release/skylot/jadx.svg)\n[![Maven Central](https://img.shields.io/maven-central/v/io.github.skylot/jadx-core)](https://search.maven.org/search?q=g:io.github.skylot%20AND%20jadx)\n![Java 11+](https://img.shields.io/badge/Java-11%2B-blue)\n[![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)\n\n**jadx** - Dex to Java decompiler\n\nCommand line and GUI tools for producing Java source code from Android Dex and Apk files\n\n> [!WARNING]\n> Please note that in most cases **jadx** can't decompile all 100% of the code, so errors will occur.<br />\n> Check [Troubleshooting guide](https://github.com/skylot/jadx/wiki/Troubleshooting-Q&A#decompilation-issues) for workarounds.\n\n**Main features:**\n- decompile Dalvik bytecode to Java code from APK, dex, aar, aab and zip files\n- decode `AndroidManifest.xml` and other resources from `resources.arsc`\n- deobfuscator included\n\n**jadx-gui features:**\n- view decompiled code with highlighted syntax\n- jump to declaration\n- find usage\n- full text search\n- smali debugger, check [wiki page](https://github.com/skylot/jadx/wiki/Smali-debugger) for setup and usage\n\nJadx-gui key bindings can be found [here](https://github.com/skylot/jadx/wiki/JADX-GUI-Key-bindings)\n\nSee these features in action here: [jadx-gui features overview](https://github.com/skylot/jadx/wiki/jadx-gui-features-overview)\n\n<img src=\"https://user-images.githubusercontent.com/118523/142730720-839f017e-38db-423e-b53f-39f5f0a0316f.png\" width=\"700\"/>\n\n### Download\n- release\n  from [github: ![Latest release](https://img.shields.io/github/release/skylot/jadx.svg)](https://github.com/skylot/jadx/releases/latest)\n- latest [unstable build ![GitHub commits since tagged version (branch)](https://img.shields.io/github/commits-since/skylot/jadx/latest/master)](https://nightly.link/skylot/jadx/workflows/build-artifacts/master)\n\nAfter download unpack zip file go to `bin` directory and run:\n- `jadx` - command line version\n- `jadx-gui` - UI version\n\nOn Windows run `.bat` files with double-click\\\n**Note:** ensure you have installed Java 11 or later 64-bit version.\nFor Windows, you can download it from [oracle.com](https://www.oracle.com/java/technologies/downloads/#jdk17-windows) (select x64 Installer).\n\n### Install\n- Arch Linux\n  [![Arch Linux package](https://img.shields.io/archlinux/v/extra/any/jadx)](https://archlinux.org/packages/extra/any/jadx/)\n  [![AUR Version](https://img.shields.io/aur/version/jadx-git)](https://aur.archlinux.org/packages/jadx-git)\n  ```bash\n  sudo pacman -S jadx\n  ```\n- macOS\n... (197 more lines)",
+  "top_level_files": [
+    ".editorconfig",
+    ".gitattributes",
+    ".github",
+    ".gitignore",
+    ".gitlab-ci.yml",
+    ".jitpack.yml",
+    ".run",
+    ".typos.toml",
+    "CODE_OF_CONDUCT.md",
+    "CONTRIBUTING.md",
+    "LICENSE",
+    "NOTICE",
+    "README.md",
+    "SECURITY.md",
+    "build.gradle.kts",
+    "buildSrc",
+    "config",
+    "contrib",
+    "gradle",
+    "gradle.properties",
+    "gradlew",
+    "gradlew.bat",
+    "jadx-cli",
+    "jadx-commons",
+    "jadx-core",
+    "jadx-gui",
+    "jadx-plugins",
+    "jadx-plugins-tools",
+    "settings.gradle.kts"
+  ],
+  "claims": [
+    "GitHub description: Dex to Java decompiler"
+  ],
+  "can_do": [
+    "Top-level structure visible (29 entries): .editorconfig, .gitattributes, .github, .gitignore, .gitlab-ci.yml, .jitpack.yml, .run, .typos.toml"
+  ],
+  "cannot_do": [
+    "No .github/workflows at repo root (CI not confirmed)",
+    "Not part of Frontier blueprint critical path"
+  ],
+  "blueprint_relation": "Upstream fork or unrelated project \u2014 no blueprint phase dependency."
+}

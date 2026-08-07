@@ -1,0 +1,13 @@
+{
+  "name": "frontier-syntax",
+  "version": "1.0.0",
+  "description": "Frontier Syntax WASM parser and tooling",
+  "main": "index.js",
+  "files": ["index.js", "wasm_parser_bg.wasm"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zowskyy/frontier-syntax.git"
+  },
+  "license": "MIT",
+  "keywords": ["frontier", "parser", "wasm", "language"]
+}

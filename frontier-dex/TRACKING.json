@@ -45,7 +45,7 @@
     "S-06": {
       "title": "Back-Propagation Optimiser",
       "status": "passed",
-      "gate": "Fixed-point IR↔AST convergence",
+      "gate": "Fixed-point IR\u2194AST convergence",
       "evidence": "optimizer::tests::test_fixed_point"
     },
     "S-07": {
@@ -74,10 +74,28 @@
     }
   },
   "gates": {
-    "unit_tests": { "required": 17, "passed": 23, "status": "passed" },
-    "formal_verification": { "status": "stub", "artifacts": "proofs/*.v" },
-    "zk_circuit": { "status": "stub", "artifacts": "zk/circuit.zk" },
-    "ipfs_integration": { "status": "passed", "evidence": "cache::test_ipfs_pin_stub" },
-    "benchmark": { "status": "passed", "evidence": "benchmark.sh BENCHMARK_GATE=PASS" }
-  }
+    "unit_tests": {
+      "required": 17,
+      "passed": 23,
+      "status": "passed"
+    },
+    "formal_verification": {
+      "status": "stub",
+      "artifacts": "proofs/*.v"
+    },
+    "zk_circuit": {
+      "status": "stub",
+      "artifacts": "zk/circuit.zk"
+    },
+    "ipfs_integration": {
+      "status": "passed",
+      "evidence": "cache::test_ipfs_pin_stub"
+    },
+    "benchmark": {
+      "status": "passed",
+      "evidence": "benchmark.sh BENCHMARK_GATE=PASS"
+    }
+  },
+  "status": "closed",
+  "closed_at": "2026-08-07T02:33:27Z"
 }

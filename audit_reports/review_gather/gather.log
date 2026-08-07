@@ -1,0 +1,50 @@
+[15:25:52] === gather_for_review started at 2026-08-06T15:25:52Z ===
+[15:25:52] Branch: cursor/blueprint-v2-wasm-llm-f519  Commit: c5bcf21
+[15:25:52] Output: /workspace/audit_reports/review_gather
+[15:25:52] PHASE 1: Repository structure
+[15:25:52]   -> /workspace/audit_reports/review_gather/phase1_structure.txt
+[15:25:52] PHASE 2: Source code
+[15:25:53]   -> /workspace/audit_reports/review_gather/phase2_rust_inventory.txt, /workspace/audit_reports/review_gather/phase2_key_modules_full.txt, /workspace/audit_reports/review_gather/phase2_other_src_preview.txt, /workspace/audit_reports/review_gather/phase2_entry_points.txt
+[15:25:53] PHASE 3: Worker discovery
+[15:25:53]   -> /workspace/audit_reports/review_gather/phase3_workers.txt (72 artifacts)
+[15:25:53] PHASE 4: Testing
+[15:25:53]   -> /workspace/audit_reports/review_gather/phase4_test_files.txt, /workspace/audit_reports/review_gather/phase4_integration_tests.txt, /workspace/audit_reports/review_gather/phase4_examples.txt
+[15:25:53] PHASE 5: Build configuration
+[15:25:53]   Running cargo tree (native)...
+[15:25:53]   Running cargo tree (wasm32)...
+[15:25:53]   -> /workspace/audit_reports/review_gather/phase5_cargo_toml.txt, /workspace/audit_reports/review_gather/phase5_build_config.txt, /workspace/audit_reports/review_gather/phase5_cargo_tree_native.txt, /workspace/audit_reports/review_gather/phase5_cargo_tree_wasm.txt
+[15:25:53] PHASE 6: Current state (builds, tests, gates)
+[15:25:53]   Running: cargo build
+[15:25:58]   Running: cargo build --target wasm32-unknown-unknown --no-default-features --features wasm-slim
+[15:26:09]   Running: cargo test --lib
+[15:26:11]   Running: cargo clippy -- -D warnings
+[15:26:24]   Running: python3 scripts/tracking.py gate
+[15:26:49]   Running: python3 scripts/verify_wasm_codegen.py
+[15:27:03]   Running: python3 scripts/measure_wasm_size.py
+[15:27:06]   Phase 6 complete
+[15:27:06] PHASE 7: Worker health (--help checks)
+[15:42:14] === gather_for_review started at 2026-08-06T15:42:14Z ===
+[15:42:14] Branch: cursor/blueprint-v2-wasm-llm-f519  Commit: c5bcf21
+[15:42:14] Output: /workspace/audit_reports/review_gather
+[15:42:14] PHASE 1: Repository structure
+[15:42:14]   -> /workspace/audit_reports/review_gather/phase1_structure.txt
+[15:42:14] PHASE 2: Source code
+[15:42:15]   -> /workspace/audit_reports/review_gather/phase2_rust_inventory.txt, /workspace/audit_reports/review_gather/phase2_key_modules_full.txt, /workspace/audit_reports/review_gather/phase2_other_src_preview.txt, /workspace/audit_reports/review_gather/phase2_entry_points.txt
+[15:42:15] PHASE 3: Worker discovery
+[15:42:15]   -> /workspace/audit_reports/review_gather/phase3_workers.txt (72 artifacts)
+[15:42:15] PHASE 4: Testing
+[15:42:15]   -> /workspace/audit_reports/review_gather/phase4_test_files.txt, /workspace/audit_reports/review_gather/phase4_integration_tests.txt, /workspace/audit_reports/review_gather/phase4_examples.txt
+[15:42:15] PHASE 5: Build configuration
+[15:42:15]   Running cargo tree (native)...
+[15:42:15]   Running cargo tree (wasm32)...
+[15:42:15]   -> /workspace/audit_reports/review_gather/phase5_cargo_toml.txt, /workspace/audit_reports/review_gather/phase5_build_config.txt, /workspace/audit_reports/review_gather/phase5_cargo_tree_native.txt, /workspace/audit_reports/review_gather/phase5_cargo_tree_wasm.txt
+[15:42:15] PHASE 6: Current state (builds, tests, gates)
+[15:42:15]   Running: cargo build
+[15:42:19]   Running: cargo build --target wasm32-unknown-unknown --no-default-features --features wasm-slim
+[15:42:22]   Running: cargo test --lib
+[15:42:24]   Running: cargo clippy -- -D warnings
+[15:42:28]   Running: python3 scripts/tracking.py gate
+[15:42:29]   Running: python3 scripts/verify_wasm_codegen.py
+[15:42:49]   Running: python3 scripts/measure_wasm_size.py
+[15:43:09]   Phase 6 complete
+[15:43:09] PHASE 7: Worker health (--help checks)

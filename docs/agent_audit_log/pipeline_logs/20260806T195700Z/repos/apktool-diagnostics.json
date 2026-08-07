@@ -1,0 +1,33 @@
+{
+  "name": "apktool-diagnostics",
+  "url": "https://github.com/zowskyy/apktool-diagnostics",
+  "description": "",
+  "is_private": false,
+  "language": "Python",
+  "updated_at": "2026-07-17T03:48:46Z",
+  "category": "fork_or_adjacent",
+  "access_status": "ok",
+  "readme_excerpt": "# apktool-diagnostics\n\n**Comprehensive toolkit for stress-testing apktool (Android APK decompile/rebuild tool).**\n\nFind real bugs in apktool through differential testing against real APKs, security pre-screening, framework compatibility checking, semantic dex diffing, and coverage-guided fuzzing setup.\n\n## Why this exists\n\napktool is critical infrastructure: you point it at untrusted APKs and it processes them on your machine. When bugs hide in the decode/rebuild pipeline or in binary-format parsing, they affect everyone. This toolkit surfaces them.\n\n- \u2705 **Real-world testing** \u2014 validated against F-Droid client (round-trip passes, 1 residual edge case) and NewPipe (framework version failure correctly diagnosed)\n- \u2705 **Security focus** \u2014 built by reproducing CVE-2026-39973 (path traversal) end-to-end and confirming the fix\n- \u2705 **Found & fixed real bugs** \u2014 2 bugs caught while building the tool itself (OOM in string-pool parsing, dict merge collision)\n- \u2705 **Not theoretical** \u2014 every claim traces to an actual test that could have failed\n\n## Quick start\n\n```bash\n# Clone\ngit clone https://github.com/zowskyy/apktool-diagnostics.git\ncd apktool-diagnostics\n\n# Run a security scan\npython3 apktool_diagnostics.py security-scan your-app.apk\n\n# Test decode/rebuild round-trip\npython3 apktool_diagnostics.py roundtrip apktool.jar your-app.apk ./work\n\n# Or use the convenience script\nbash examples/quick-start.sh your-app.apk\n```\n\n## What each subcommand does\n\n### `security-scan <apk>`\nScans `resources.arsc`'s string pools for path-traversal patterns (`../`, absolute paths) *before* decoding \u2014 independent of which apktool version is used. Directly built from reproducing CVE-2026-39973.\n\n**Sample output:** `CLEAN` (0 findings) on real F-Droid APK, correctly flags malicious `../../../etc` type names.\n\n### `roundtrip <apktool.jar> <apk> <workdir> [--aapt2 <path>]`\nDecodes an APK and immediately rebuilds it with zero edits, then diffs original vs. rebuilt at the entry level. Classifies every divergence as expected (signing metadata, resource renaming, SDK-qualifier pruning, XML line-number metadata) or a genuine anomaly.\n\n**Sample result:** F-Droid client \u2014 1119 entries, 0 unexplained anomalies after classification.\n\n### `framework-check <apktool.jar> <apk> <workdir>`\nAttempts decode+build; on failure, parses aapt2 errors and reports which framework version is needed instead of a raw Java stack trace.\n\n**Sample result:** NewPipe \u2014 correctly diagnoses `android:defaultLocale` missing (API 35 framework required).\n\n### `dex-diff <baksmali.jar> <orig_apk> <rebuilt_apk> <workdir>`\nIndependently disassembles `classes*.dex` and diffs the actual smali, not just byte-equality. Finds residual differences (like try/catch block merging) that are semantically equivalent but flagged for human review.\n\n### `corpus <apktool.jar> <baksmali.jar> <aapt2> <workdir> name=path [...]`\nRuns the full pipeline (security scan, round-trip, framework-check, dex-diff) across multiple APKs in one pass.\n\n## Real test results\n\nSee `sample_corpus_report.json` for a complete run against two real APKs:\n\n- **F-Droid client v1023051**: Round-trip PASS (0 unexplained anomalies), dex-diff finds 1 residual (try/catch merge, flagged for review)\n... (43 more lines)",
+  "top_level_files": [
+    "CONTRIBUTING.md",
+    "GITHUB_SETUP_STEPS.md",
+    "LICENSE",
+    "LOCAL_SETUP.md",
+    "README.md",
+    "SECURITY_FINDING_CVE-2026-39973.md",
+    "apktool_diagnostics.py",
+    "examples",
+    "sample_corpus_report.json"
+  ],
+  "claims": [
+    "See `sample_corpus_report.json` for a complete run against two real APKs:"
+  ],
+  "can_do": [
+    "Top-level structure visible (9 entries): CONTRIBUTING.md, GITHUB_SETUP_STEPS.md, LICENSE, LOCAL_SETUP.md, README.md, SECURITY_FINDING_CVE-2026-39973.md, apktool_diagnostics.py, examples"
+  ],
+  "cannot_do": [
+    "No .github/workflows at repo root (CI not confirmed)",
+    "Not part of Frontier blueprint critical path"
+  ],
+  "blueprint_relation": "Upstream fork or unrelated project \u2014 no blueprint phase dependency."
+}

@@ -14,28 +14,32 @@ build = "build.rs"
 crate-type = ["cdylib", "rlib"]
 
 [features]
-default = ["cli", "serde-json", "sha3-hash", "unicode-normalization"]
+default = ["cli", "serde-json", "sha3-hash", "unicode-normalization", "hex"]
 cli = []
-wasm-slim = ["dep:wee_alloc"]
-full = ["serde-wasm-bindgen", "unicode-normalization", "serde-json", "sha3-hash"]
+wasm-slim = []
+wasm-host-only = []
+full = ["serde-wasm-bindgen", "unicode-normalization", "serde-json", "sha3-hash", "hex"]
 serde-json = ["dep:serde_json", "dep:serde"]
 sha3-hash = ["dep:sha3"]
+hex = ["dep:hex"]
 unicode-normalization = ["dep:unicode-normalization"]
 
 [dependencies]
-hex = "0.4"
+hex = { version = "0.4", optional = true }
 serde = { version = "1.0", features = ["derive"], optional = true }
 serde_json = { version = "1.0", optional = true }
 sha3 = { version = "0.10", optional = true }
 unicode-normalization = { version = "0.1", optional = true }
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+frontier-dex = { path = "frontier-dex" }
 chrono = { version = "0.4.31", default-features = false, features = ["clock", "std"] }
 colored = "2.0.4"
 notify = "6.1.1"
 rustyline = "14.0.0"
 signal-hook = "0.3"
 toml = "0.8.12"
+wasmtime = "26"
 ark-bn254 = "0.5"
 ark-ff = "0.5"
 ark-groth16 = "0.5"
@@ -54,7 +58,6 @@ reqwest = { version = "0.12", default-features = false, features = ["blocking", 
 wasm-bindgen = "0.2"
 serde-wasm-bindgen = { version = "0.6", optional = true }
 getrandom = { version = "0.2", features = ["js"] }
-wee_alloc = { version = "0.4", optional = true }
 
 [dev-dependencies]
 
@@ -62,6 +65,10 @@ wee_alloc = { version = "0.4", optional = true }
 name = "frontier"
 path = "src/main.rs"
 required-features = ["cli"]
+
+[[bin]]
+name = "frontier_wasm_host"
+path = "src/bin/frontier_wasm_host.rs"
 
 [[bin]]
 name = "lighthouse"

@@ -1,0 +1,22 @@
+{
+  "name": "gutterumble",
+  "url": "https://github.com/zowskyy/gutterumble",
+  "description": "",
+  "is_private": false,
+  "language": "GDScript",
+  "updated_at": "2026-07-29T05:29:15Z",
+  "category": "fork_or_adjacent",
+  "access_status": "no_readme",
+  "readme_excerpt": "(no README or access denied)",
+  "top_level_files": [],
+  "claims": [
+    "(no explicit claims extracted from README)"
+  ],
+  "can_do": [
+    "(capabilities not verified \u2014 metadata-only scan)"
+  ],
+  "cannot_do": [
+    "Not part of Frontier blueprint critical path"
+  ],
+  "blueprint_relation": "Upstream fork or unrelated project \u2014 no blueprint phase dependency."
+}

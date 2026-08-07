@@ -71,12 +71,15 @@ def phase_1_checks(open_set: set[int]) -> tuple[bool, list[dict]]:
     all_ok = True
 
     r11 = run_cmd(["cargo", "test", "--lib", "wasm_codegen::"])
+    r11_exec = run_cmd(["python3", "scripts/verify_wasm_codegen.py"])
     issue_open = 44 in open_set
-    ok = r11["pass"] and not issue_open
+    ok = r11["pass"] and r11_exec["pass"] and not issue_open
     evidence.append({
         "check": "1.1_wasm_codegen",
         "ref": "issue_44",
         "tests_pass": r11["pass"],
+        "wasmtime_exec_pass": r11_exec["pass"],
+        "wasmtime_manifest": "manifest/wasm_codegen_verify.json",
         "issue_closed": not issue_open,
         "pass": ok,
         "status": "fail" if not ok else "validated",
@@ -102,19 +105,35 @@ def phase_1_checks(open_set: set[int]) -> tuple[bool, list[dict]]:
     if not ok:
         all_ok = False
 
-    # 1.3: bootstrap wrapper does NOT pass — always fail until Phase 5 Frontier-native
+    # 1.3: native wasmtime self-host (bootstrap alone is informational only)
     bootstrap = run_cmd(["python3", "scripts/verify_self_hosting.py"])
+    native = run_cmd(["python3", "scripts/verify_self_hosting.py", "--native"])
+    native_manifest = ROOT / "manifest" / "native_self_host.json"
+    native_ok = native["pass"]
+    if native_manifest.exists():
+        try:
+            native_ok = json.loads(native_manifest.read_text()).get("pass", False) and native_ok
+        except json.JSONDecodeError:
+            native_ok = False
     issue_open = 46 in open_set
+    ok = native_ok and not issue_open
     evidence.append({
         "check": "1.3_self_hosting",
         "ref": "issue_46",
         "bootstrap_script_pass": bootstrap["pass"],
+        "native_self_host_pass": native_ok,
+        "native_manifest": str(native_manifest.relative_to(ROOT)) if native_manifest.exists() else None,
         "issue_closed": not issue_open,
-        "pass": False,
-        "status": "fail",
-        "reason": "Bootstrap Rust wrapper ≠ Frontier-native compiler (blueprint Phase 1.3 / Phase 5 exit)",
+        "pass": ok,
+        "status": "fail" if not ok else "validated",
+        "reason": (
+            "issue #46 still open"
+            if issue_open
+            else ("native self-host not passing" if not native_ok else None)
+        ),
     })
-    all_ok = False
+    if not ok:
+        all_ok = False
 
     return all_ok, evidence
 

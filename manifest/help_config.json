@@ -1,0 +1,9 @@
+{
+  "repo_id": "frontier-syntax",
+  "repo_name": "Frontier Syntax",
+  "github_owner": "zowskyy",
+  "github_repo": "frontier-syntax",
+  "labels": ["get-help"],
+  "auto_create_github": true,
+  "tracking_file": "TRACKING.json"
+}

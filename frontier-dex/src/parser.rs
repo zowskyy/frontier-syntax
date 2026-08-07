@@ -357,16 +357,17 @@ fn read_uleb128(r: &mut Reader<'_>) -> Result<u32> {
     Ok(result)
 }
 
-fn read_mutf8(data: &[u8], offset: usize) -> Result<String> {
-    let mut i = offset;
+fn read_string_data(data: &[u8], offset: usize) -> Result<String> {
+    let mut r = Reader::new(data);
+    r.seek(offset)?;
+    let _utf16_size = read_uleb128(&mut r)?;
     let mut bytes = Vec::new();
-    while i < data.len() {
-        let b = data[i];
+    while r.remaining() > 0 {
+        let b = r.read_u8()?;
         if b == 0 {
             break;
         }
         bytes.push(b);
-        i += 1;
     }
     String::from_utf8(bytes).map_err(|e| DexError::Parse(e.to_string()))
 }
@@ -502,7 +503,7 @@ fn parse_string_ids(bytes: &[u8], header: &DexHeader) -> Result<Vec<StringId>> {
         let off = header.string_ids_off as usize + (i as usize) * 4;
         r.seek(off)?;
         let str_off = r.read_u32()? as usize;
-        let value = read_mutf8(bytes, str_off)?;
+        let value = read_string_data(bytes, str_off)?;
         ids.push(StringId {
             offset: str_off as u32,
             value,

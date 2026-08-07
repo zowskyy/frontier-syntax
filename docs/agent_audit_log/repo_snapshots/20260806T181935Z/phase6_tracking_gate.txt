@@ -1,0 +1,36 @@
+# Command: python3 scripts/tracking.py gate
+# Started: 2026-08-06T18:19:45Z
+
+{
+  "all_pass": false,
+  "phase_0_pass": false,
+  "phase_1_pass": false,
+  "phase_2_pass": false,
+  "phase_3_pass": false,
+  "phases_4_8": "frozen",
+  "open_issues": [
+    44,
+    45,
+    46,
+    47,
+    48,
+    64,
+    65,
+    66,
+    67,
+    68
+  ],
+  "evidence_file": "manifest/tracking_evidence.json"
+}
+  [FAIL] 0.1_issue_dedupe
+  [PASS] 0.2_gate_exists
+  [PASS] 0.3_public_claims
+  [FAIL] phase_1 — phase_0 incomplete
+  [FROZEN] phase_4
+  [FROZEN] phase_5
+  [FROZEN] phase_6
+  [FROZEN] phase_7
+  [FROZEN] phase_8
+
+# Exit code: 1
+# Finished: 2026-08-06T18:19:46Z

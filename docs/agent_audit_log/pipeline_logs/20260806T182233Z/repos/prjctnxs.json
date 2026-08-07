@@ -1,0 +1,22 @@
+{
+  "name": "prjctnxs",
+  "url": "https://github.com/zowskyy/prjctnxs",
+  "description": "",
+  "is_private": false,
+  "language": "Python",
+  "updated_at": "2026-08-05T20:37:07Z",
+  "category": "frontier_ecosystem",
+  "access_status": "fetch_failed",
+  "readme_excerpt": "# Project Nexus\n\n**Self-hosted, AI-native development ecosystem \u2014 Cursor IDE written entirely in Frontier Syntax.**\n\n> Version: 2.5.1 (Real Implementation Bridge)\n\n> \ud83d\ude80 ARC VERDICT: BUILDING CURSOR FROM SCRATCH IN FRONTIER\n\nYou're not just building an engine \u2014 you're building the tool that builds the engine using the language we created. Ultimate dogfooding.\n\n## Vision\n\nA Cursor-like IDE that:\n\n1. Runs on the Frontier engine\n2. Is written entirely in Frontier Syntax (no C++ external to the engine)\n3. Has built-in AI assistance (Frontier understands itself)\n4. Achieves 60+ FPS UI (1000+ FPS capable on the engine)\n5. Weighs < 50MB compiled\n\n## Quick Start\n\n```bash\n# Verify Slide 15 \u2014 Cursor IDE (A+ Hard Gate)\npython3 build/arc_orchestrator.py --slides 15\n\n# Spirits Within benchmark \u2014 film-quality real-time\npython3 build/arc_orchestrator.py --benchmark spirits_within\n\n# 100% Frontier-native AI (purge third-party)\npython3 build/arc_orchestrator.py --patch purge-third-party\npython3 build/arc_orchestrator.py --slides 15.9,15.10,15.11,15.12\n\n# List slides and benchmarks\npython3 build/arc_orchestrator.py --list\n\n# Frontier v2.0 \u2014 verify all 7 innovations\npython3 build/arc_orchestrator.py --verify\n\n# Real implementation bridge (frontier-syntax Rust submodule)\npython3 build/arc_orchestrator.py --patch bridge-to-reality\npython3 build/arc_orchestrator.py --verify-real\npython3 build/rust_bridge.py\npython3 build/vertical_slice.py \"Create a function that adds two numbers\"\npython3 build/real_benchmarks.py\n\n# Project Nexus v2.5 \u2014 Quantum Leap (doubled performance, 10\u00d7 v1.0.1)\npython3 build/arc_orchestrator.py --patch quantum-leap-v2.5\npython3 build/arc_orchestrator.py --verify-quantum-leap\n\n# Project Nexus v2.0 \u2014 comprehensive improvements (7/7)\npython3 build/arc_orchestrator.py --patch improve-v2.0\npython3 build/arc_orchestrator.py --verify-improvements\n\n# Run all benchmarks\npython3 build/arc_orchestrator.py --benchmark all\n\n# Frontier v2.0 \u2014 full patch verification + certificate\npython3 build/arc_orchestrator.py --verify-patch --version 2.0\n\n... (123 more lines)",
+  "top_level_files": [],
+  "claims": [
+    "**Self-hosted, AI-native development ecosystem \u2014 Cursor IDE written entirely in Frontier Syntax.**"
+  ],
+  "can_do": [
+    "(capabilities not verified \u2014 metadata-only scan)"
+  ],
+  "cannot_do": [
+    "(limitations not probed \u2014 shallow scan only)"
+  ],
+  "blueprint_relation": "Project Nexus support / submodule. Out of scope for frontier-syntax gate but ecosystem coordination repo."
+}

@@ -23,7 +23,35 @@ TOOLS = {
             },
             "required": ["query"],
         },
-    }
+    },
+    "submit_help_request": {
+        "description": "Submit a plain-language help request. Hides GitHub complexity from the user.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "text": {"type": "string", "description": "User's problem in their own words"},
+            },
+            "required": ["text"],
+        },
+    },
+    "get_help_status": {
+        "description": "Check status of help requests by ID or list all.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "request_id": {"type": "string", "description": "Optional request ID like H-ABC123"},
+            },
+        },
+    },
+    "list_stalled_work": {
+        "description": "Scan for things blocking progress (issues, PRs, gates) in plain language.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "all_repos": {"type": "boolean", "default": False},
+            },
+        },
+    },
 }
 
 
@@ -74,6 +102,8 @@ def handle_request(request: dict) -> dict:
                     ]
                 },
             }
+        if name in ("submit_help_request", "get_help_status", "list_stalled_work"):
+            return _handle_help_tool(name, arguments, req_id)
         return {
             "jsonrpc": "2.0",
             "id": req_id,
@@ -88,6 +118,60 @@ def handle_request(request: dict) -> dict:
         "id": req_id,
         "error": {"code": -32601, "message": f"Unknown method: {method}"},
     }
+
+
+def _handle_help_tool(name: str, arguments: dict, req_id) -> dict:
+    from help_system.config import load_config  # noqa: E402
+    from help_system.respond import format_blocked_summary, format_request_created, format_status  # noqa: E402
+    from help_system.stalled import scan_stalled_work  # noqa: E402
+    from help_system.store import HelpRequest, HelpRequestStore  # noqa: E402
+    from help_system.classify import classify_request  # noqa: E402
+    from help_system.github_adapter import GitHubAdapter  # noqa: E402
+
+    config = load_config(ROOT)
+    text = ""
+
+    try:
+        if name == "submit_help_request":
+            user_text = arguments.get("text", "")
+            classification = classify_request(user_text)
+            store = HelpRequestStore(config.help_requests_file)
+            request = HelpRequest.new(config.repo_id, user_text, classification.kind.value)
+            store.add(request)
+            gh = GitHubAdapter(config)
+            work_item, created = gh.find_or_create_work_item(
+                f"[Get Help {request.id}] {user_text[:80]}",
+                f"User request {request.id}: {user_text}",
+            )
+            if work_item:
+                store.update(request.id, status="investigating", github_issue=work_item.number)
+            text = format_request_created(request, work_item, created)
+
+        elif name == "get_help_status":
+            store = HelpRequestStore(config.help_requests_file)
+            rid = arguments.get("request_id")
+            if rid:
+                req = store.get(rid)
+                text = format_status(req, None) if req else f"No request: {rid}"
+            else:
+                items = store.list_all(config.repo_id)
+                text = "\n".join(f"{r.id} [{r.status}] {r.user_text[:60]}" for r in items) or "No requests."
+
+        elif name == "list_stalled_work":
+            reports = scan_stalled_work(config, all_repos=arguments.get("all_repos", False))
+            text = format_blocked_summary(reports)
+
+        return {
+            "jsonrpc": "2.0",
+            "id": req_id,
+            "result": {"content": [{"type": "text", "text": text}]},
+        }
+    except Exception as e:
+        return {
+            "jsonrpc": "2.0",
+            "id": req_id,
+            "error": {"code": -32000, "message": str(e)},
+        }
 
 
 def main() -> int:

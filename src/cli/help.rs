@@ -12,8 +12,10 @@ pub fn print_global_help() {
     colors::print_command("hash <file>", "Compute canonical AST SHA3-256 hash");
     colors::print_command("compile <file>", "Compile to WASM (use -t wasm, -O, -p)");
     colors::print_command("knowledge <sub>", "Knowledge Hypercube queries");
+    colors::print_command("dex decompile --input <file>", "Decompile Android DEX to Java");
 
     colors::print_help_heading("Tooling");
+    colors::print_command("get-help <message>", "Plain-language help — no GitHub required");
     colors::print_command("shell", "Interactive REPL");
     colors::print_command("watch [path]", "Watch directory and recompile on change");
     colors::print_command("config init|show", "Manage frontier.toml configuration");
@@ -31,6 +33,24 @@ pub fn print_global_help() {
     println!("  frontier knowledge suggest sort list::i32");
     println!("  frontier shell");
     println!("  frontier watch examples -- -t wasm -O");
+    println!("  frontier dex decompile --input classes.dex --proof --neural");
+}
+
+pub fn print_dex_help() {
+    colors::print_help_heading("dex — Android DEX decompiler");
+    println!();
+    println!("Usage: frontier dex decompile --input <file.dex> [options]");
+    println!();
+    colors::print_command("--input, -i <path>", "Input DEX file (required)");
+    colors::print_command("--output, -o <dir>", "Write .java files to directory");
+    colors::print_command("--proof", "Emit ZK proof hash");
+    colors::print_command("--neural", "Enable obfuscation predictor");
+    colors::print_command("--cache", "Use content-addressable cache");
+    colors::print_command("--fallback", "Enable CFR/Procyon/Fernflower fallback");
+    colors::print_command("--json", "JSON output");
+    println!();
+    println!("Example:");
+    println!("  frontier dex decompile --input classes.dex --proof --neural --cache");
 }
 
 pub fn print_compile_help() {

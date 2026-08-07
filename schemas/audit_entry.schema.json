@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/zowskyy/frontier-syntax/schemas/audit_entry.schema.json",
+  "title": "AgentAuditEntry",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "id",
+    "timestamp_utc",
+    "session_id",
+    "category",
+    "action",
+    "why",
+    "how_to_repeat",
+    "honesty",
+    "entry_hash"
+  ],
+  "properties": {
+    "id": { "type": "string", "minLength": 8 },
+    "timestamp_utc": { "type": "string" },
+    "session_id": { "type": "string" },
+    "prev_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "entry_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "agent": {
+      "type": "object",
+      "properties": {
+        "type": { "type": "string" },
+        "model": { "type": "string" },
+        "branch": { "type": "string" },
+        "commit": { "type": "string" },
+        "repo": { "type": "string" },
+        "run_url": { "type": "string" }
+      }
+    },
+    "category": {
+      "enum": [
+        "user_prompt",
+        "assistant_response",
+        "tool_call",
+        "decision",
+        "git",
+        "pr",
+        "limitation",
+        "idle_flush",
+        "error",
+        "backfill",
+        "pipeline"
+      ]
+    },
+    "tool": { "type": "string" },
+    "action": { "type": "string", "minLength": 1 },
+    "why": { "type": "string", "minLength": 1 },
+    "how_to_repeat": {
+      "type": "object",
+      "required": ["command", "script", "skill", "extension_hook", "prerequisites"],
+      "properties": {
+        "command": { "type": "string" },
+        "script": { "type": "string" },
+        "skill": { "type": "string" },
+        "extension_hook": { "type": "string" },
+        "prerequisites": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "inputs": { "type": "object" },
+    "outputs": { "type": "object" },
+    "artifacts": { "type": "array", "items": { "type": "string" } },
+    "exit_code": { "type": ["integer", "null"] },
+    "git": {
+      "type": "object",
+      "properties": {
+        "branch": { "type": "string" },
+        "commit": { "type": "string" },
+        "pr_url": { "type": "string" }
+      }
+    },
+    "honesty": {
+      "type": "object",
+      "required": ["verified_by_execution", "omissions", "cannot_verify"],
+      "properties": {
+        "verified_by_execution": { "type": "boolean" },
+        "omissions": { "type": "array", "items": { "type": "string" } },
+        "cannot_verify": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "user_prompt_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "parent_id": { "type": "string" }
+  },
+  "not": {
+    "required": ["user_prompt_excerpt"]
+  }
+}

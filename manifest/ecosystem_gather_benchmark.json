@@ -1,0 +1,23 @@
+{
+  "run_id": "20260806T232938Z",
+  "measured_at": "2026-08-06T23:29:51Z",
+  "repo_count": 27,
+  "timings_s": {
+    "list_repos_s": 0.7543448149954202,
+    "local_checks_s": 0.00018467900372343138,
+    "scan_repos_s": 12.289931259998411,
+    "total_s": 13.083183411996288
+  },
+  "sla": {
+    "version": "1.0.0",
+    "max_total_seconds": 60,
+    "max_seconds_per_repo": 5,
+    "max_audit_entry_bytes": 8192,
+    "max_git_artifact_kb_per_pr": 500,
+    "notes": "Ecosystem gather SLA for <=50 repos. Full local checks may exceed cap; use --fast in CI."
+  },
+  "sla_met": {
+    "total_under_cap": true,
+    "per_repo_under_cap": true
+  }
+}

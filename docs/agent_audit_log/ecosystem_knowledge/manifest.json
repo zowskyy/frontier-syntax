@@ -1,0 +1,211 @@
+{
+  "generated_at": "2026-08-06T23:29:51Z",
+  "run_id": "20260806T232938Z",
+  "owner": "zowskyy",
+  "repo_count": 27,
+  "report_path": "docs/agent_audit_log/ecosystem_knowledge/ECOSYSTEM_KNOWLEDGE_REPORT.txt",
+  "pipeline_log": "docs/agent_audit_log/pipeline_logs/20260806T232938Z/pipeline.log",
+  "frontier_syntax_gate": {
+    "tracking_gate_exit": 1,
+    "wasm_size_kb": 127.4,
+    "wasm_target_met": false,
+    "open_issues": [
+      44,
+      45,
+      46,
+      47,
+      48
+    ]
+  },
+  "repos": [
+    {
+      "name": "android-reverse-engineering-skill",
+      "category": "fork_or_adjacent",
+      "url": "https://github.com/zowskyy/android-reverse-engineering-skill",
+      "is_private": false,
+      "access_status": "ok"
+    },
+    {
+      "name": "apex-android",
+      "category": "frontier_ecosystem",
+      "url": "https://github.com/zowskyy/apex-android",
+      "is_private": false,
+      "access_status": "ok"
+    },
+    {
+      "name": "apktool-diagnostics",
+      "category": "fork_or_adjacent",
+      "url": "https://github.com/zowskyy/apktool-diagnostics",
+      "is_private": false,
+      "access_status": "ok"
+    },
+    {
+      "name": "bookish-bassoon",
+      "category": "frontier_ecosystem",
+      "url": "https://github.com/zowskyy/bookish-bassoon",
+      "is_private": false,
+      "access_status": "ok"
+    },
+    {
+      "name": "crxcibl3",
+      "category": "fork_or_adjacent",
+      "url": "https://github.com/zowskyy/crxcibl3",
+      "is_private": false,
+      "access_status": "ok"
+    },
+    {
+      "name": "crxcibl3sounds",
+      "category": "fork_or_adjacent",
+      "url": "https://github.com/zowskyy/crxcibl3sounds",
+      "is_private": false,
+      "access_status": "ok"
+    },
+    {
+      "name": "echoscribe",
+      "category": "fork_or_adjacent",
+      "url": "https://github.com/zowskyy/echoscribe",
+      "is_private": false,
+      "access_status": "ok"
+    },
+    {
+      "name": "etrnL",
+      "category": "fork_or_adjacent",
+      "url": "https://github.com/zowskyy/etrnL",
+      "is_private": false,
+      "access_status": "no_readme"
+    },
+    {
+      "name": "frontier-agent-legal-record",
+      "category": "frontier_ecosystem",
+      "url": "https://github.com/zowskyy/frontier-agent-legal-record",
+      "is_private": true,
+      "access_status": "no_readme"
+    },
+    {
+      "name": "frontier-syntax",
+      "category": "frontier_core",
+      "url": "https://github.com/zowskyy/frontier-syntax",
+      "is_private": false,
+      "access_status": "ok_local"
+    },
+    {
+      "name": "GMFKNEEGA",
+      "category": "fork_or_adjacent",
+      "url": "https://github.com/zowskyy/GMFKNEEGA",
+      "is_private": true,
+      "access_status": "inaccessible_private"
+    },
+    {
+      "name": "gutterumble",
+      "category": "fork_or_adjacent",
+      "url": "https://github.com/zowskyy/gutterumble",
+      "is_private": false,
+      "access_status": "no_readme"
+    },
+    {
+      "name": "jadx",
+      "category": "fork_or_adjacent",
+      "url": "https://github.com/zowskyy/jadx",
+      "is_private": false,
+      "access_status": "ok"
+    },
+    {
+      "name": "masked-irl",
+      "category": "fork_or_adjacent",
+      "url": "https://github.com/zowskyy/masked-irl",
+      "is_private": false,
+      "access_status": "ok"
+    },
+    {
+      "name": "mcp-for-beginners",
+      "category": "fork_or_adjacent",
+      "url": "https://github.com/zowskyy/mcp-for-beginners",
+      "is_private": false,
+      "access_status": "ok"
+    },
+    {
+      "name": "mia.loa",
+      "category": "fork_or_adjacent",
+      "url": "https://github.com/zowskyy/mia.loa",
+      "is_private": false,
+      "access_status": "ok"
+    },
+    {
+      "name": "nuDAWn",
+      "category": "fork_or_adjacent",
+      "url": "https://github.com/zowskyy/nuDAWn",
+      "is_private": true,
+      "access_status": "inaccessible_private"
+    },
+    {
+      "name": "prjctnxs",
+      "category": "frontier_ecosystem",
+      "url": "https://github.com/zowskyy/prjctnxs",
+      "is_private": false,
+      "access_status": "ok"
+    },
+    {
+      "name": "project-nexus",
+      "category": "frontier_ecosystem",
+      "url": "https://github.com/zowskyy/project-nexus",
+      "is_private": false,
+      "access_status": "no_readme"
+    },
+    {
+      "name": "quick-xml",
+      "category": "fork_or_adjacent",
+      "url": "https://github.com/zowskyy/quick-xml",
+      "is_private": false,
+      "access_status": "ok"
+    },
+    {
+      "name": "repurpose-engine",
+      "category": "frontier_ecosystem",
+      "url": "https://github.com/zowskyy/repurpose-engine",
+      "is_private": false,
+      "access_status": "no_readme"
+    },
+    {
+      "name": "Schema",
+      "category": "fork_or_adjacent",
+      "url": "https://github.com/zowskyy/Schema",
+      "is_private": false,
+      "access_status": "ok"
+    },
+    {
+      "name": "slackhelper",
+      "category": "fork_or_adjacent",
+      "url": "https://github.com/zowskyy/slackhelper",
+      "is_private": false,
+      "access_status": "ok"
+    },
+    {
+      "name": "statecheck",
+      "category": "frontier_ecosystem",
+      "url": "https://github.com/zowskyy/statecheck",
+      "is_private": false,
+      "access_status": "ok"
+    },
+    {
+      "name": "Vanadium",
+      "category": "fork_or_adjacent",
+      "url": "https://github.com/zowskyy/Vanadium",
+      "is_private": false,
+      "access_status": "ok"
+    },
+    {
+      "name": "verbose-train",
+      "category": "fork_or_adjacent",
+      "url": "https://github.com/zowskyy/verbose-train",
+      "is_private": true,
+      "access_status": "inaccessible_private"
+    },
+    {
+      "name": "Voice-Of-the-Star",
+      "category": "fork_or_adjacent",
+      "url": "https://github.com/zowskyy/Voice-Of-the-Star",
+      "is_private": false,
+      "access_status": "ok"
+    }
+  ]
+}

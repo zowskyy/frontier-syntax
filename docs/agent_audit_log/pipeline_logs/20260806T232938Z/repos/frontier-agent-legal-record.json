@@ -1,0 +1,22 @@
+{
+  "name": "frontier-agent-legal-record",
+  "url": "https://github.com/zowskyy/frontier-agent-legal-record",
+  "description": "Private append-only audit log of Cursor agent actions (legal/personal record)",
+  "is_private": true,
+  "language": null,
+  "updated_at": "2026-08-06T17:54:48Z",
+  "category": "frontier_ecosystem",
+  "access_status": "no_readme",
+  "readme_excerpt": "(no README or access denied)",
+  "top_level_files": [],
+  "claims": [
+    "GitHub description: Private append-only audit log of Cursor agent actions (legal/personal record)"
+  ],
+  "can_do": [
+    "(capabilities not verified \u2014 metadata-only scan)"
+  ],
+  "cannot_do": [
+    "(limitations not probed \u2014 shallow scan only)"
+  ],
+  "blueprint_relation": "Private audit mirror (cloud agent could not push). Superseded by in-repo docs/agent_audit_log/ per owner policy."
+}

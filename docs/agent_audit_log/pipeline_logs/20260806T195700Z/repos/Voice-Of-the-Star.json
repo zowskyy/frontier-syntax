@@ -1,0 +1,30 @@
+{
+  "name": "Voice-Of-the-Star",
+  "url": "https://github.com/zowskyy/Voice-Of-the-Star",
+  "description": "\ud83c\udf1fVOS\ud83c\udf1f: AI\ub97c \ud65c\uc6a9\ud55c \uace0\uc778\uacfc\uc758 \ucc44\ud305 \ubc0f \uc74c\uc131 \ubcf5\uc6d0 \uc11c\ube44\uc2a4",
+  "is_private": false,
+  "language": "Python",
+  "updated_at": "2026-07-11T00:10:58Z",
+  "category": "fork_or_adjacent",
+  "access_status": "ok",
+  "readme_excerpt": "\n# \ud83d\udc65\u00a0\ud300\uc6d0 \uc18c\uac1c\n\n\n<div align=\"left\">\n  <table>\n    <tr>\n      <td align=\"center\">\n        <a href=\"https://github.com/KyhNaz\">\n          <img src=\"https://avatars.githubusercontent.com/u/141602472?v=4\" alt=\"\uae40\uc601\ud6c8 \ud504\ub85c\ud544\" width=120 height=120 />\n        </a>\n      </td>\n<td align=\"center\">\n        <a href=\"https://github.com/phantomkos\">\n          <img src=\"https://avatars.githubusercontent.com/u/54060584?v=4\" alt=\"\uad8c\uc624\uc131 \ud504\ub85c\ud544\" width=120 height=120 />\n        </a>\n      </td>\n      <td align=\"center\">\n        <a href=\"https://github.com/Somang-Kang\">\n          <img src=\"https://avatars.githubusercontent.com/u/77764316?v=4\" alt=\"\uac15\uc18c\ub9dd \ud504\ub85c\ud544\" width=120 height=120 />\n        </a>\n      </td>\n      <td align=\"center\">\n        <a href=\"https://github.com/neymaru\">\n          <img src=\"https://github.com/Think-Tank-6/VOS-server/assets/77764316/4e56ad03-af91-4e21-9544-00798cdad0be\" alt=\"\uae40\uc131\ud604 \ud504\ub85c\ud544\" width=120 height=120 />\n        </a>\n      </td>\n      <td align=\"center\">\n        <a href=\"https://github.com/2dilution2\">\n          <img src=\"https://avatars.githubusercontent.com/u/74598367?v=4\" alt=\"\uc774\ud76c\uc11d \ud504\ub85c\ud544\" width=120 height=120 />\n        </a>\n      </td>\n      <td align=\"center\">\n        <a href=\"https://github.com/rose129\">\n          <img src=\"https://avatars.githubusercontent.com/u/75605706?v=4\" alt=\"\ud55c\uc9c0\ud61c \ud504\ub85c\ud544\" width=120 height=120 />\n        </a>\n      </td>\n    </tr>\n    <tr>\n      <td align=\"center\">\n        <a href=\"https://github.com/KyhNaz\">\n          \uae40\uc601\ud6c8\n        </a>\n      </td>\n     <td align=\"center\">\n        <a href=\"https://github.com/phantomkos\">\n          \uad8c\uc624\uc131\n        </a>\n      </td>\n      <td align=\"center\">\n        <a href=\"https://github.com/Somang-Kang\">\n          \uac15\uc18c\ub9dd\n        </a>\n      </td>\n      <td align=\"center\">\n        <a href=\"https://github.com/neymaru\">\n          \uae40\uc131\ud604\n        </a>\n      </td>\n      <td align=\"center\">\n... (403 more lines)",
+  "top_level_files": [
+    ".github",
+    ".gitignore",
+    "README.md",
+    "asset",
+    "backend",
+    "docker-compose.yml"
+  ],
+  "claims": [
+    "GitHub description: \ud83c\udf1fVOS\ud83c\udf1f: AI\ub97c \ud65c\uc6a9\ud55c \uace0\uc778\uacfc\uc758 \ucc44\ud305 \ubc0f \uc74c\uc131 \ubcf5\uc6d0 \uc11c\ube44\uc2a4"
+  ],
+  "can_do": [
+    "Top-level structure visible (6 entries): .github, .gitignore, README.md, asset, backend, docker-compose.yml"
+  ],
+  "cannot_do": [
+    "No .github/workflows at repo root (CI not confirmed)",
+    "Not part of Frontier blueprint critical path"
+  ],
+  "blueprint_relation": "Upstream fork or unrelated project \u2014 no blueprint phase dependency."
+}

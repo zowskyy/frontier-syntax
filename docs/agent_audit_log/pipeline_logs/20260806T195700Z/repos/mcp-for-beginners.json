@@ -1,0 +1,54 @@
+{
+  "name": "mcp-for-beginners",
+  "url": "https://github.com/zowskyy/mcp-for-beginners",
+  "description": "This open-source curriculum introduces the fundamentals of Model Context Protocol (MCP) through real-world, cross-language examples in .NET, Java, TypeScript, JavaScript, Rust and Python. Designed for developers, it focuses on practical techniques for building modular, scalable, and secure AI workflows from session setup to service orchestration.",
+  "is_private": false,
+  "language": "Jupyter Notebook",
+  "updated_at": "2026-07-12T08:56:52Z",
+  "category": "fork_or_adjacent",
+  "access_status": "ok",
+  "readme_excerpt": "![MCP-for-beginners](./images/mcp-beginners.png) \n\n[![GitHub contributors](https://img.shields.io/github/contributors/microsoft/mcp-for-beginners.svg)](https://GitHub.com/microsoft/mcp-for-beginners/graphs/contributors)\n[![GitHub issues](https://img.shields.io/github/issues/microsoft/mcp-for-beginners.svg)](https://GitHub.com/microsoft/mcp-for-beginners/issues)\n[![GitHub pull-requests](https://img.shields.io/github/issues-pr/microsoft/mcp-for-beginners.svg)](https://GitHub.com/microsoft/mcp-for-beginners/pulls)\n[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)\n\n[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/mcp-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/mcp-for-beginners/watchers)\n[![GitHub forks](https://img.shields.io/github/forks/microsoft/mcp-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/mcp-for-beginners/fork)\n[![GitHub stars](https://img.shields.io/github/stars/microsoft/mcp-for-beginners?style=social&label=Star)](https://GitHub.com/microsoft/mcp-for-beginners/stargazers)\n\n\n[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)\n\nFollow these steps to get started using these resources:\n1. **Fork the Repository**: Click [![GitHub forks](https://img.shields.io/github/forks/microsoft/mcp-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/mcp-for-beginners/fork)\n2. **Clone the Repository**:   `git clone https://github.com/microsoft/mcp-for-beginners.git`\n3. **Join The** [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)\n\n\n### \ud83c\udf10 Multi-Language Support\n\n#### Supported via GitHub Action (Automated & Always Up-to-Date)\n\n<!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->\n[Arabic](./translations/ar/README.md) | [Bengali](./translations/bn/README.md) | [Bulgarian](./translations/bg/README.md) | [Burmese (Myanmar)](./translations/my/README.md) | [Chinese (Simplified)](./translations/zh-CN/README.md) | [Chinese (Traditional, Hong Kong)](./translations/zh-HK/README.md) | [Chinese (Traditional, Macau)](./translations/zh-MO/README.md) | [Chinese (Traditional, Taiwan)](./translations/zh-TW/README.md) | [Croatian](./translations/hr/README.md) | [Czech](./translations/cs/README.md) | [Danish](./translations/da/README.md) | [Dutch](./translations/nl/README.md) | [Estonian](./translations/et/README.md) | [Finnish](./translations/fi/README.md) | [French](./translations/fr/README.md) | [German](./translations/de/README.md) | [Greek](./translations/el/README.md) | [Hebrew](./translations/he/README.md) | [Hindi](./translations/hi/README.md) | [Hungarian](./translations/hu/README.md) | [Indonesian](./translations/id/README.md) | [Italian](./translations/it/README.md) | [Japanese](./translations/ja/README.md) | [Kannada](./translations/kn/README.md) | [Khmer](./translations/km/README.md) | [Korean](./translations/ko/README.md) | [Lithuanian](./translations/lt/README.md) | [Malay](./translations/ms/README.md) | [Malayalam](./translations/ml/README.md) | [Marathi](./translations/mr/README.md) | [Nepali](./translations/ne/README.md) | [Nigerian Pidgin](./translations/pcm/README.md) | [Norwegian](./translations/no/README.md) | [Persian (Farsi)](./translations/fa/README.md) | [Polish](./translations/pl/README.md) | [Portuguese (Brazil)](./translations/pt-BR/README.md) | [Portuguese (Portugal)](./translations/pt-PT/README.md) | [Punjabi (Gurmukhi)](./translations/pa/README.md) | [Romanian](./translations/ro/README.md) | [Russian](./translations/ru/README.md) | [Serbian (Cyrillic)](./translations/sr/README.md) | [Slovak](./translations/sk/README.md) | [Slovenian](./translations/sl/README.md) | [Spanish](./translations/es/README.md) | [Swahili](./translations/sw/README.md) | [Swedish](./translations/sv/README.md) | [Tagalog (Filipino)](./translations/tl/README.md) | [Tamil](./translations/ta/README.md) | [Telugu](./translations/te/README.md) | [Thai](./translations/th/README.md) | [Turkish](./translations/tr/README.md) | [Ukrainian](./translations/uk/README.md) | [Urdu](./translations/ur/README.md) | [Vietnamese](./translations/vi/README.md)\n\n> **Prefer to Clone Locally?**\n>\n> This repository includes 50+ language translations which significantly increases the download size. To clone without translations, use sparse checkout:\n>\n> **Bash / macOS / Linux:**\n> ```bash\n> git clone --filter=blob:none --sparse https://github.com/microsoft/mcp-for-beginners.git\n> cd mcp-for-beginners\n> git sparse-checkout set --no-cone '/*' '!translations' '!translated_images'\n> ```\n>\n> **CMD (Windows):**\n> ```cmd\n> git clone --filter=blob:none --sparse https://github.com/microsoft/mcp-for-beginners.git\n> cd mcp-for-beginners\n> git sparse-checkout set --no-cone \"/*\" \"!translations\" \"!translated_images\"\n> ```\n>\n> This gives you everything you need to complete the course with a much faster download.\n<!-- CO-OP TRANSLATOR LANGUAGES TABLE END -->\n\n# \ud83d\ude80 Model Context Protocol (MCP) Curriculum for Beginners\n\n## **Learn MCP with Hands-on Code Examples in C#, Java, JavaScript, Rust, Python, and TypeScript**\n\n## \ud83e\udde0 Overview of the Model Context Protocol Curriculum\nWelcome to your journey into the Model Context Protocol! If you've ever wondered how AI applications communicate with different tools and services, you're about to discover the elegant solution that's transforming how developers build intelligent systems.\n\nThink of MCP as a universal translator for AI applications - just like how USB ports let you connect any device to your computer, MCP lets AI models connect to any tool or service in a standardized way. Whether you're building your first chatbot or working on complex AI workflows, understanding MCP will give you the power to create more capable and flexible applications.\n\nThis curriculum is designed with patience and care for your learning journey. We'll start with simple concepts you already understand and gradually build your expertise through hands-on practice in your favorite programming language. Every step includes clear explanations, practical examples, and plenty of encouragement along the way.\n\nBy the time you complete this journey, you'll have the confidence to build your own MCP servers, integrate them with popular AI platforms, and understand how this technology is reshaping the future of AI development. Let's begin this exciting adventure together!\n... (336 more lines)",
+  "top_level_files": [
+    ".devcontainer",
+    ".dockerignore",
+    ".github",
+    ".gitignore",
+    "00-Introduction",
+    "01-CoreConcepts",
+    "02-Security",
+    "03-GettingStarted",
+    "04-PracticalImplementation",
+    "05-AdvancedTopics",
+    "06-CommunityContributions",
+    "07-LessonsfromEarlyAdoption",
+    "08-BestPractices",
+    "09-CaseStudy",
+    "10-StreamliningAIWorkflowsBuildingAnMCPServerWithAIToolkit",
+    "11-MCPServerHandsOnLabs",
+    "12-tooling",
+    "AGENTS.md",
+    "CODE_OF_CONDUCT.md",
+    "LICENSE",
+    "README.md",
+    "SECURITY.md",
+    "SUPPORT.md",
+    "changelog.md",
+    "images",
+    "study_guide.md",
+    "translated_images",
+    "translations"
+  ],
+  "claims": [
+    "GitHub description: This open-source curriculum introduces the fundamentals of Model Context Protocol (MCP) through real-world, cross-language examples in .NET, Java, TypeScript, JavaScript, Rust and Python. Designed for developers, it focuses on practical techniques for building modular, scalable, and secure AI workflows from session setup to service orchestration.",
+    "> This gives you everything you need to complete the course with a much faster download.",
+    "By the time you complete this journey, you'll have the confidence to build your own MCP servers, integrate them with popular AI platforms, and understand how this technology is reshaping the future of"
+  ],
+  "can_do": [
+    "Top-level structure visible (28 entries): .devcontainer, .dockerignore, .github, .gitignore, 00-Introduction, 01-CoreConcepts, 02-Security, 03-GettingStarted"
+  ],
+  "cannot_do": [
+    "No .github/workflows at repo root (CI not confirmed)",
+    "Not part of Frontier blueprint critical path"
+  ],
+  "blueprint_relation": "Upstream fork or unrelated project \u2014 no blueprint phase dependency."
+}

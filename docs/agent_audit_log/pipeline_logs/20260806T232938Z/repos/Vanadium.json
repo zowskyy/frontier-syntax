@@ -1,0 +1,38 @@
+{
+  "name": "Vanadium",
+  "url": "https://github.com/zowskyy/Vanadium",
+  "description": "Privacy and security enhanced releases of Chromium for GrapheneOS. Vanadium provides the WebView and standard user-facing browser on GrapheneOS. It depends on hardening in other GrapheneOS repositories and doesn't include patches not relevant to the build targets used on GrapheneOS.",
+  "is_private": false,
+  "language": "Python",
+  "updated_at": "2026-08-03T12:26:50Z",
+  "category": "fork_or_adjacent",
+  "access_status": "ok",
+  "readme_excerpt": "Vanadium is a privacy and security hardened variant of Chromium providing the WebView (used by\nother apps to render web content) and standard browser for [GrapheneOS](https://grapheneos.org).\nIt depends on hardening and compatibility fixes in GrapheneOS rather than reinventing the wheel\ninside Vanadium. For example, GrapheneOS already provides a hardened malloc implementation so\nthere's no need for Vanadium to replace it. Similarly, it can deploy security features causing\nbreakage on other operating systems due to the ability to fix compatibility problems in the OS.\n\nSee [the official build documentation](https://grapheneos.org/build#browser-and-webview) for build\ninstructions. See the [Vanadium section of our GrapheneOS features overview](https://grapheneos.org/features#vanadium) and the [web browsing section of \nour usage guide](https://grapheneos.org/usage#web-browsing) for more information about Vanadium.",
+  "top_level_files": [
+    ".gclient",
+    ".gitignore",
+    "LICENSE",
+    "LICENSE.Apache-2.0-note",
+    "LICENSE.FTL-note",
+    "LICENSE.GPL-2.0",
+    "LICENSE.WebView-note",
+    "README.md",
+    "args.gn",
+    "generate-release",
+    "patches",
+    "readme. md",
+    "subprojects_patches",
+    "tools"
+  ],
+  "claims": [
+    "GitHub description: Privacy and security enhanced releases of Chromium for GrapheneOS. Vanadium provides the WebView and standard user-facing browser on GrapheneOS. It depends on hardening in other GrapheneOS repositories and doesn't include patches not relevant to the build targets used on GrapheneOS."
+  ],
+  "can_do": [
+    "Top-level structure visible (14 entries): .gclient, .gitignore, LICENSE, LICENSE.Apache-2.0-note, LICENSE.FTL-note, LICENSE.GPL-2.0, LICENSE.WebView-note, README.md"
+  ],
+  "cannot_do": [
+    "No .github/workflows at repo root (CI not confirmed)",
+    "Not part of Frontier blueprint critical path"
+  ],
+  "blueprint_relation": "Upstream fork or unrelated project \u2014 no blueprint phase dependency."
+}

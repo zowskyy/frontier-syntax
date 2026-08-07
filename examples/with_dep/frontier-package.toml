@@ -1,0 +1,5 @@
+name = "with-dep"
+version = "1.0.0"
+
+[dependencies]
+test-pkg = "^1.0.0"

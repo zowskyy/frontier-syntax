@@ -3,10 +3,9 @@
 //! Supports `let`, `if`, function `calls`, and `while` loops.
 
 use crate::ast::{Expr, Param, Program, Stmt, TypeSpec};
-#[cfg(all(target_arch = "wasm32", feature = "wasm-slim"))]
-use crate::knowledge_bridge_slim::{browser_context, get_optimal_algorithm, optimization_warnings};
 #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
 use crate::knowledge_bridge::{browser_context, get_optimal_algorithm, optimization_warnings};
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
 use crate::SizeHint;
 use std::collections::HashMap;
 
@@ -55,7 +54,35 @@ pub struct WasmModuleMeta {
     pub profile: Option<CompilationProfile>,
 }
 
+/// Slim WASM measure path — parse + codegen only, no metadata allocation.
+#[cfg(all(target_arch = "wasm32", feature = "wasm-slim"))]
+pub fn compile_to_wasm_bytes(source: &str) -> Result<Vec<u8>, String> {
+    let program = crate::parser::parse_source_typed(source).map_err(|e| e.message)?;
+    let options = CodeGenOptions {
+        optimize: false,
+        browser_exports: false,
+        collect_profile: false,
+        algorithm_hint: None,
+    };
+    FullModuleCodegen::new(&program)?.encode(&options)
+}
+
 pub fn compile_source(source: &str, options: &CodeGenOptions) -> Result<(Vec<u8>, WasmModuleMeta), String> {
+    #[cfg(all(target_arch = "wasm32", feature = "wasm-slim"))]
+    {
+        let wasm = compile_to_wasm_bytes(source)?;
+        return Ok((
+            wasm,
+            WasmModuleMeta {
+                exports: Vec::new(),
+                warnings: Vec::new(),
+                entry_value: 0,
+                selected_algorithm: None,
+                profile: None,
+            },
+        ));
+    }
+
     let total_start = std::time::Instant::now();
     let mut profile = if options.collect_profile {
         Some(CompilationProfile::default())
@@ -119,7 +146,7 @@ fn compile_program_with_profile(
     let mut algorithm_hint = None;
 
     if options.optimize {
-        #[cfg(not(all(target_arch = "wasm32", feature = "wasm-slim")))]
+        #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
         {
             let knowledge_start = std::time::Instant::now();
             warnings.extend(optimization_warnings("sort", "list::i32"));
@@ -232,6 +259,12 @@ impl FullModuleCodegen {
             return Err("No functions found in program".to_string());
         }
 
+        // WASM export convention: `main` is always function index 0.
+        if let Some(pos) = fns.iter().position(|f| f.name == "main") {
+            let main_fn = fns.remove(pos);
+            fns.insert(0, main_fn);
+        }
+
         let name_to_index: HashMap<String, u32> = fns
             .iter()
             .enumerate()
@@ -309,19 +342,12 @@ impl FullModuleCodegen {
 
         out.extend(section(5, &memory_section(1, Some(64))));
 
-        let export_names: Vec<String> = {
-            let mut names = vec!["main".to_string()];
-            if options.browser_exports {
-                names.extend([
-                    "compile_wasm".to_string(),
-                    "validate_wasm".to_string(),
-                    "evaluate_wasm".to_string(),
-                ]);
-            }
-            names.push("memory".to_string());
-            names
+        let export_names: &[&str] = if options.browser_exports {
+            &["main", "compile_wasm", "validate_wasm", "evaluate_wasm", "memory"]
+        } else {
+            &["main", "memory"]
         };
-        out.extend(section(7, &export_section_multi(&export_names, self.functions.len())));
+        out.extend(section(7, &export_section_static(export_names, self.functions.len())));
 
         // Code section
         let mut code_payload = encode_u32((self.functions.len() + stub_count) as u32);
@@ -472,7 +498,7 @@ impl FunctionCodegen {
                 let idx = *self
                     .locals
                     .get(name)
-                    .ok_or_else(|| format!("Unknown variable: {name}"))?;
+                    .ok_or_else(|| "unknown variable".to_string())?;
                 self.instructions.push(0x20); // local.get
                 self.instructions.extend(encode_u32(idx));
             }
@@ -486,7 +512,7 @@ impl FunctionCodegen {
                     "!" => {
                         self.instructions.push(0x45); // i32.eqz
                     }
-                    _ => return Err(format!("Unsupported unary operator: {operator}")),
+                    _ => return Err("unsupported unary operator".to_string()),
                 }
             }
             Expr::BinaryExpr {
@@ -519,7 +545,7 @@ impl FunctionCodegen {
                         self.instructions.push(0x4A); // i32.gt_s
                         return Ok(());
                     }
-                    _ => return Err(format!("Unsupported binary operator: {operator}")),
+                    _ => return Err("unsupported binary operator".to_string()),
                 };
                 self.instructions.push(op);
             }
@@ -531,7 +557,7 @@ impl FunctionCodegen {
                 let idx = *self
                     .name_to_index
                     .get(&name)
-                    .ok_or_else(|| format!("Unknown function: {name}"))?;
+                    .ok_or_else(|| "unknown function".to_string())?;
                 for arg in args {
                     self.emit_expr(arg)?;
                 }
@@ -575,32 +601,38 @@ fn stub_body(result: i32) -> Vec<u8> {
     b
 }
 
-fn export_section_multi(names: &[String], main_func_count: usize) -> Vec<u8> {
-    let mut entries: Vec<(String, u8, u32)> = Vec::new();
+fn export_section_static(names: &[&str], _main_func_count: usize) -> Vec<u8> {
+    let mut entries: Vec<(&str, u8, u32)> = Vec::new();
     let mut func_idx = 0u32;
     for name in names {
-        match name.as_str() {
-            "memory" => entries.push(("memory".to_string(), 0x02, 0)),
+        match *name {
+            "memory" => entries.push(("memory", 0x02, 0)),
             "main" => {
-                entries.push((name.clone(), 0x00, func_idx));
-                func_idx = 0; // main is always func 0 in our layout
+                entries.push((name, 0x00, func_idx));
+                func_idx = 0;
             }
             _ => {
-                entries.push((name.clone(), 0x00, func_idx));
+                entries.push((name, 0x00, func_idx));
                 func_idx += 1;
             }
         }
     }
-    if !entries.iter().any(|(n, _, _)| n == "memory") {
-        entries.push(("memory".to_string(), 0x02, 0));
+    if !entries.iter().any(|(n, _, _)| *n == "memory") {
+        entries.push(("memory", 0x02, 0));
     }
     let mut payload = encode_u32(entries.len() as u32);
     for (name, kind, index) in entries {
-        payload.extend(encode_name(&name));
+        payload.extend(encode_name(name));
         payload.push(kind);
         payload.extend(encode_u32(index));
     }
     payload
+}
+
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+fn export_section_multi(names: &[String], main_func_count: usize) -> Vec<u8> {
+    let static_names: Vec<&str> = names.iter().map(|s| s.as_str()).collect();
+    export_section_static(&static_names, main_func_count)
 }
 
 // ─── Const-fold helpers (metadata) ──────────────────────────────────────────
@@ -696,11 +728,13 @@ fn type_section(types: &[FuncType]) -> Vec<u8> {
 
 fn memory_section(min_pages: u32, max_pages: Option<u32>) -> Vec<u8> {
     let mut payload = encode_u32(1);
-    payload.push(0x00);
-    payload.extend(encode_u32(min_pages));
     if let Some(max) = max_pages {
         payload.push(0x01);
+        payload.extend(encode_u32(min_pages));
         payload.extend(encode_u32(max));
+    } else {
+        payload.push(0x00);
+        payload.extend(encode_u32(min_pages));
     }
     payload
 }

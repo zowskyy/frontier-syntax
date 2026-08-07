@@ -1,0 +1,289 @@
+# Command: cargo build --target wasm32-unknown-unknown --no-default-features --features wasm-slim
+# Started: 2026-08-06T15:42:19Z
+
+    Blocking waiting for file lock on build directory
+   Compiling frontier v2.0.0 (/workspace)
+warning: unused import: `std::fs`
+  --> src/parser/mod.rs:14:5
+   |
+14 | use std::fs;
+   |     ^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` on by default
+
+warning: unused import: `std::path::Path`
+  --> src/parser/mod.rs:15:5
+   |
+15 | use std::path::Path;
+   |     ^^^^^^^^^^^^^^^
+
+warning: unreachable statement
+  --> src/wasm_codegen.rs:86:5
+   |
+74 | /         return Ok((
+75 | |             wasm,
+76 | |             WasmModuleMeta {
+77 | |                 exports: Vec::new(),
+...  |
+82 | |             },
+83 | |         ));
+   | |__________- any code following this expression is unreachable
+...
+86 |       let total_start = std::time::Instant::now();
+   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ unreachable statement
+   |
+   = note: `#[warn(unreachable_code)]` on by default
+
+warning: variable does not need to be mutable
+  --> src/parser/handwritten.rs:80:13
+   |
+80 |         let mut version = None;
+   |             ----^^^^^^^
+   |             |
+   |             help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` on by default
+
+warning: variable does not need to be mutable
+   --> src/parser/handwritten.rs:110:13
+    |
+110 |         let mut requires = None;
+    |             ----^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> src/parser/handwritten.rs:111:13
+    |
+111 |         let mut ensures = None;
+    |             ----^^^^^^^
+    |             |
+    |             help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> src/parser/handwritten.rs:112:13
+    |
+112 |         let mut invariant = None;
+    |             ----^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+
+warning: unused variable: `start`
+   --> src/parser/handwritten.rs:178:13
+    |
+178 |         let start = self.current().clone();
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_start`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: unused variable: `options`
+  --> src/wasm_codegen.rs:70:37
+   |
+70 | pub fn compile_source(source: &str, options: &CodeGenOptions) -> Result<(Vec<u8>, WasmModuleMeta), String> {
+   |                                     ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_options`
+
+warning: variable does not need to be mutable
+   --> src/wasm_codegen.rs:144:9
+    |
+144 |     let mut warnings = Vec::new();
+    |         ----^^^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> src/wasm_codegen.rs:145:9
+    |
+145 |     let mut selected_algorithm = None;
+    |         ----^^^^^^^^^^^^^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> src/wasm_codegen.rs:146:9
+    |
+146 |     let mut algorithm_hint = None;
+    |         ----^^^^^^^^^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> src/wasm_codegen.rs:171:9
+    |
+171 |     let mut codegen = FullModuleCodegen::new(program)?;
+    |         ----^^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: unused variable: `idx`
+   --> src/wasm_codegen.rs:280:14
+    |
+280 |         for (idx, sig) in fns.into_iter().enumerate() {
+    |              ^^^ help: if this is intentional, prefix it with an underscore: `_idx`
+
+warning: constant `MAX_NESTING_DEPTH` is never used
+  --> src/lib.rs:53:7
+   |
+53 | const MAX_NESTING_DEPTH: usize = 64;
+   |       ^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: methods `parse_version_decl` and `parse_fn` are never used
+   --> src/parser/handwritten.rs:251:8
+    |
+12  | impl Parser {
+    | ----------- methods in this implementation
+...
+251 |     fn parse_version_decl(&mut self) -> Result<Stmt, FrontierError> {
+    |        ^^^^^^^^^^^^^^^^^^
+...
+349 |     fn parse_fn(&mut self) -> Result<Stmt, FrontierError> {
+    |        ^^^^^^^^
+
+warning: `frontier` (lib) generated 16 warnings (run `cargo fix --lib -p frontier` to apply 10 suggestions)
+error[E0433]: failed to resolve: could not find `lsp` in `frontier`
+  --> src/bin/lsp.rs:3:15
+   |
+3  | use frontier::lsp::neural_server::NeuralLspServer;
+   |               ^^^ could not find `lsp` in `frontier`
+   |
+note: found an item that was configured out
+  --> /workspace/src/lib.rs:19:9
+   |
+19 | pub mod lsp;
+   |         ^^^
+note: the item is gated here
+  --> /workspace/src/lib.rs:18:1
+   |
+18 | #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0433]: failed to resolve: use of unresolved module or unlinked crate `serde_json`
+  --> src/bin/lsp.rs:23:27
+   |
+23 |                 let err = serde_json::json!({
+   |                           ^^^^^^^^^^ use of unresolved module or unlinked crate `serde_json`
+
+error[E0433]: failed to resolve: use of unresolved module or unlinked crate `serde_json`
+  --> src/bin/lsp.rs:36:29
+   |
+36 |             "initialize" => serde_json::json!({
+   |                             ^^^^^^^^^^ use of unresolved module or unlinked crate `serde_json`
+
+error[E0433]: failed to resolve: use of unresolved module or unlinked crate `serde_json`
+  --> src/bin/lsp.rs:50:17
+   |
+50 |                 serde_json::json!({ "items": items })
+   |                 ^^^^^^^^^^ use of unresolved module or unlinked crate `serde_json`
+
+error[E0433]: failed to resolve: use of unresolved module or unlinked crate `serde_json`
+  --> src/bin/lsp.rs:52:25
+   |
+52 |             "health" => serde_json::json!({ "status": "ok", "service": "frontier-lsp" }),
+   |                         ^^^^^^^^^^ use of unresolved module or unlinked crate `serde_json`
+
+error[E0433]: failed to resolve: use of unresolved module or unlinked crate `serde_json`
+  --> src/bin/lsp.rs:53:27
+   |
+53 |             "shutdown" => serde_json::json!({ "status": "shutdown" }),
+   |                           ^^^^^^^^^^ use of unresolved module or unlinked crate `serde_json`
+
+error[E0433]: failed to resolve: use of unresolved module or unlinked crate `serde_json`
+  --> src/bin/lsp.rs:54:18
+   |
+54 |             _ => serde_json::json!({ "error": format!("unknown method: {method}") }),
+   |                  ^^^^^^^^^^ use of unresolved module or unlinked crate `serde_json`
+
+error[E0433]: failed to resolve: use of unresolved module or unlinked crate `serde_json`
+  --> src/bin/lsp.rs:57:20
+   |
+57 |         let resp = serde_json::json!({ "id": id, "result": result });
+   |                    ^^^^^^^^^^ use of unresolved module or unlinked crate `serde_json`
+
+error[E0433]: failed to resolve: use of unresolved module or unlinked crate `serde_json`
+  --> src/bin/lsp.rs:33:51
+   |
+33 |         let id = req.get("id").cloned().unwrap_or(serde_json::Value::Null);
+   |                                                   ^^^^^^^^^^ use of unresolved module or unlinked crate `serde_json`
+   |
+   = help: if you wanted to use a crate named `serde_json`, use `cargo add serde_json` to add it to your `Cargo.toml`
+
+error[E0432]: unresolved imports `frontier::parse_and_resolve`, `frontier::sha3_256_hex`
+  --> src/bin/lighthouse.rs:3:16
+   |
+3  | use frontier::{parse_and_resolve, sha3_256_hex};
+   |                ^^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^ no `sha3_256_hex` in the root
+   |                |
+   |                no `parse_and_resolve` in the root
+   |
+note: found an item that was configured out
+  --> /workspace/src/lib.rs:59:8
+   |
+59 | pub fn parse_and_resolve(source: &str) -> Result<(Program, resolver::ResolveResult), FrontierError> {
+   |        ^^^^^^^^^^^^^^^^^
+note: the item is gated here
+  --> /workspace/src/lib.rs:58:1
+   |
+58 | #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+note: found an item that was configured out
+  --> /workspace/src/lib.rs:41:44
+   |
+41 | pub use canonicalize::{canonical_ast_json, sha3_256_hex};
+   |                                            ^^^^^^^^^^^^
+note: the item is gated here
+  --> /workspace/src/lib.rs:40:1
+   |
+40 | #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0425]: cannot find function `parse_file` in module `frontier::parser`
+  --> src/bin/lighthouse.rs:44:37
+   |
+44 |             match frontier::parser::parse_file(sample.to_str().unwrap_or("")) {
+   |                                     ^^^^^^^^^^ not found in `frontier::parser`
+   |
+note: found an item that was configured out
+  --> /workspace/src/parser/mod.rs:26:8
+   |
+26 | pub fn parse_file(path: &str) -> Result<serde_json::Value, String> {
+   |        ^^^^^^^^^^
+note: the item is gated behind the `serde-json` feature
+  --> /workspace/src/parser/mod.rs:25:7
+   |
+25 | #[cfg(feature = "serde-json")]
+   |       ^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0433]: failed to resolve: use of unresolved module or unlinked crate `serde_json`
+  --> src/bin/lsp.rs:20:44
+   |
+20 |         let req: serde_json::Value = match serde_json::from_str(&line) {
+   |                                            ^^^^^^^^^^ use of unresolved module or unlinked crate `serde_json`
+   |
+   = help: if you wanted to use a crate named `serde_json`, use `cargo add serde_json` to add it to your `Cargo.toml`
+
+error[E0433]: failed to resolve: use of unresolved module or unlinked crate `serde_json`
+  --> src/bin/lsp.rs:20:18
+   |
+20 |         let req: serde_json::Value = match serde_json::from_str(&line) {
+   |                  ^^^^^^^^^^ use of unresolved module or unlinked crate `serde_json`
+   |
+   = help: if you wanted to use a crate named `serde_json`, use `cargo add serde_json` to add it to your `Cargo.toml`
+
+For more information about this error, try `rustc --explain E0433`.
+error[E0433]: failed to resolve: use of unresolved module or unlinked crate `serde_json`
+  --> src/bin/lighthouse.rs:55:46
+   |
+55 |                     let hash = sha3_256_hex(&serde_json::to_string(&program).unwrap());
+   |                                              ^^^^^^^^^^ use of unresolved module or unlinked crate `serde_json`
+   |
+   = help: if you wanted to use a crate named `serde_json`, use `cargo add serde_json` to add it to your `Cargo.toml`
+
+error: could not compile `frontier` (bin "lsp") due to 11 previous errors
+warning: build failed, waiting for other jobs to finish...
+Some errors have detailed explanations: E0425, E0432, E0433.
+For more information about an error, try `rustc --explain E0425`.
+error: could not compile `frontier` (bin "lighthouse") due to 3 previous errors
+
+# Exit code: 101
+# Finished: 2026-08-06T15:42:22Z

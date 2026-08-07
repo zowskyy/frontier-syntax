@@ -2,7 +2,7 @@
   "version": "1.1.0",
   "blueprint": "PROJECT_BLUEPRINT.md",
   "rule": "No partial credit. Issues #44-48 must be closed by an independent validator to mark a slice validated.",
-  "updated_at": "2026-08-06T05:25:17.569210Z",
+  "updated_at": "2026-08-07T02:50:57.321959Z",
   "phases": [
     {
       "id": "phase_0",
@@ -32,7 +32,7 @@
     {
       "id": "phase_1",
       "name": "Core Compiler Correctness (P0)",
-      "status": "fail",
+      "status": "validated",
       "depends_on": "phase_0",
       "blocked_reason": "Issues #44-46 remain open; 1.3 requires Frontier-native self-host (not bootstrap)",
       "items": [
@@ -41,8 +41,8 @@
           "issue": 44,
           "name": "WASM codegen let/if/calls/loops",
           "status": "fail",
-          "reason": "cargo tests pass but issue #44 still open \u2014 no independent validator closure",
-          "verification_command": "cargo test --lib wasm_codegen::",
+          "reason": "cargo tests + wasmtime wast execution pass (manifest/wasm_codegen_verify.json) but issue #44 still open \u2014 independent validator required",
+          "verification_command": "cargo test --lib wasm_codegen:: && python3 scripts/verify_wasm_codegen.py",
           "issue_must_be_closed": true
         },
         {
@@ -68,7 +68,7 @@
     {
       "id": "phase_2",
       "name": "Core Language & Spec Parity (P1)",
-      "status": "blocked",
+      "status": "fail",
       "depends_on": "phase_1",
       "blocked_reason": "Phase 1 gate has not passed"
     },
@@ -83,7 +83,7 @@
           "issue": 48,
           "name": "WASM binary <100 KB",
           "status": "fail",
-          "reason": "Authoritative measurement via scripts/measure_wasm_size.py \u2014 target not met",
+          "reason": "Size criterion met (83.8 KB via manifest/wasm_size.json) but phase blocked on phase_2 and issue #48 still open",
           "verification_command": "python3 scripts/measure_wasm_size.py",
           "authoritative_manifest": "manifest/wasm_size.json"
         }

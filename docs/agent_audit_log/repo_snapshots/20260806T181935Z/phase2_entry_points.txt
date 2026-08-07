@@ -1,0 +1,125 @@
+# PHASE 2: Entry points
+# Generated: 2026-08-06T18:19:35Z
+
+## src/lib.rs
+Lines: 147
+#[cfg(all(target_arch = "wasm32", feature = "wasm-slim"))]
+#[global_allocator]
+static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
+
+pub mod ast;
+pub mod browser_compiler;
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+pub mod canonicalize;
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+pub mod compiler;
+pub mod error;
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+pub mod grammar;
+#[cfg(not(target_arch = "wasm32"))]
+pub mod ipfs;
+#[cfg(all(target_arch = "wasm32", feature = "wasm-slim"))]
+pub mod knowledge_slim;
+#[cfg(all(target_arch = "wasm32", feature = "wasm-slim"))]
+pub mod knowledge_bridge_slim;
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+pub mod knowledge;
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+pub mod knowledge_bridge;
+pub mod lexer;
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+pub mod lsp;
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+pub mod migrate;
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+pub mod neural;
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+pub mod packages;
+pub mod parser;
+#[cfg(not(target_arch = "wasm32"))]
+pub mod pq_signatures;
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+pub mod resolver;
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+pub mod v2_resolver;
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+pub mod unity;
+pub mod wasm_codegen;
+#[cfg(not(target_arch = "wasm32"))]
+pub mod zk;
+
+pub use ast::Program;
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+pub use canonicalize::{canonical_ast_json, sha3_256_hex};
+pub use error::FrontierError;
+pub use parser::parse_program;
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+pub use resolver::resolve_program;
+#[cfg(all(target_arch = "wasm32", feature = "wasm-slim"))]
+pub use knowledge_slim::{get_ancestors, get_tradeoffs, hypercube_stats, optimize_hash, optimize_sort};
+#[cfg(all(target_arch = "wasm32", feature = "wasm-slim"))]
+pub use knowledge_slim::{SizeHint, SolverContext as KnowledgeContext};
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+pub use knowledge::{get_ancestors, get_tradeoffs, hypercube_stats, optimize_hash, optimize_sort};
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+pub use knowledge::solver::{SizeHint, SolverContext as KnowledgeContext};
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+pub use unity::{unity_compile, unity_evaluate, unity_verify, UnityCompiler, UnityModule};
+
+const MAX_NESTING_DEPTH: usize = 64;
+
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+use unicode_normalization::UnicodeNormalization;
+
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+pub fn parse_and_resolve(source: &str) -> Result<(Program, resolver::ResolveResult), FrontierError> {
+    let normalized: String = source.nfc().collect();
+    let program = parse_program(&normalized, MAX_NESTING_DEPTH)?;
+    let resolved = resolver::resolve_program(&program)?;
+    Ok((program, resolved))
+}
+
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+pub fn process_v2_ast(ast_json: &str) -> Result<serde_json::Value, String> {
+    let ast: serde_json::Value =
+        serde_json::from_str(ast_json).map_err(|e| format!("Invalid AST JSON: {e}"))?;
+... (see phase2_key_modules_full.txt for full content)
+
+## src/main.rs
+Lines: 12
+#[cfg(not(target_arch = "wasm32"))]
+mod cli;
+
+#[cfg(not(target_arch = "wasm32"))]
+fn main() {
+    cli::run();
+}
+
+#[cfg(target_arch = "wasm32")]
+fn main() {
+    eprintln!("The frontier CLI is not available on wasm32 targets.");
+}
+... (see phase2_key_modules_full.txt for full content)
+
+## Cargo.toml [[bin]] targets
+[[bin]]
+name = "frontier"
+path = "src/main.rs"
+required-features = ["cli"]
+--
+[[bin]]
+name = "lighthouse"
+path = "src/bin/lighthouse.rs"
+
+[[bin]]
+name = "lsp"
+path = "src/bin/lsp.rs"
+
+
+## Cargo.toml [lib]
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+default = ["cli", "serde-json", "sha3-hash", "unicode-normalization"]
+cli = []

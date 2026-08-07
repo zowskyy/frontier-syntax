@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frontier Syntax Playground</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Frontier Syntax Playground</h1>
+    <button id="run-btn">Run</button>
+  </header>
+  <div class="container">
+    <div class="editor-pane">
+      <h2>Source</h2>
+      <textarea id="editor" spellcheck="false">let x: int = 5;
+x + 3;</textarea>
+    </div>
+    <div class="output-pane">
+      <h2>AST JSON</h2>
+      <pre id="ast-output"></pre>
+      <h2>SHA-3 Hash</h2>
+      <pre id="hash-output"></pre>
+      <h2>Errors</h2>
+      <pre id="error-output" class="errors"></pre>
+    </div>
+  </div>
+  <script type="module" src="main.js"></script>
+</body>
+</html>

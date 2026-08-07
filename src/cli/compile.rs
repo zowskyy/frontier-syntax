@@ -2,14 +2,16 @@ use super::colors;
 use super::config;
 use super::errors;
 use super::profile;
-use super::telemetry;
 use std::fs;
 use std::os::unix::fs::PermissionsExt;
 use std::path::PathBuf;
-use std::time::Instant;
 
 pub fn run_compile(args: &[String]) {
-    let start = Instant::now();
+    if args.iter().any(|a| a == "--help" || a == "-h") {
+        super::help::print_compile_help();
+        return;
+    }
+
     let cfg = config::load_config();
 
     let input = match args.get(2) {
@@ -148,8 +150,6 @@ pub fn run_compile(args: &[String]) {
         errors::print_compile_error("Native compilation requires --bootstrap. Use -t wasm for WASM output.");
         std::process::exit(1);
     }
-
-    telemetry::record_command("compile", start.elapsed().as_millis());
 }
 
 fn has_flag(args: &[String], flag: &str) -> bool {
