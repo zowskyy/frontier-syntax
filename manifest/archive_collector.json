@@ -1,0 +1,86 @@
+{
+  "name": "archive_collector",
+  "version": "1.0.0",
+  "description": "Anonymous Internet Archive CDX dataset collector for Frontier Syntax",
+  "worker_count": 21,
+  "supervisor_count": 3,
+  "supervisors": {
+    "S1": {
+      "name": "Discovery",
+      "workers": [
+        "W01_CDXScanner",
+        "W02_DomainShard",
+        "W03_ResumptionWalker",
+        "W04_PolitenessGate",
+        "W05_PrefixEnumerator",
+        "W06_NewCaptureWatcher",
+        "W07_ShadowMirror"
+      ]
+    },
+    "S2": {
+      "name": "Collection",
+      "workers": [
+        "W08_SnapshotMeta",
+        "W09_StoreWriter",
+        "W10_VersionChain",
+        "W11_DedupHash",
+        "W12_MimeFilter",
+        "W13_Checkpoint",
+        "W14_RateLimiter"
+      ]
+    },
+    "S3": {
+      "name": "Classification",
+      "workers": [
+        "W15_IndustryClassifier",
+        "W16_TopicTagger",
+        "W17_SemanticIndex",
+        "W18_TLDAnalyzer",
+        "W19_ContentMeta",
+        "W20_CrossDomainGraph",
+        "W21_DatasetExporter"
+      ]
+    }
+  },
+  "modes": ["demo", "backfill", "live", "full"],
+  "demo_hosts": [
+    "wikipedia.org",
+    "archive.org",
+    "github.com",
+    "mozilla.org",
+    "python.org"
+  ],
+  "dataset_path": "manifest/archive_dataset/",
+  "record_schema": [
+    "id",
+    "host",
+    "path_hash",
+    "timestamp",
+    "industry",
+    "topics",
+    "mime",
+    "status",
+    "collected_at",
+    "supervisor",
+    "worker"
+  ],
+  "cdx_endpoint": "https://web.archive.org/cdx/search/cdx",
+  "rate_limit_s": 1.0,
+  "industries": [
+    "technology",
+    "healthcare",
+    "finance",
+    "education",
+    "government",
+    "media",
+    "retail",
+    "entertainment",
+    "nonprofit",
+    "science",
+    "travel",
+    "sports",
+    "unknown"
+  ],
+  "entrypoint": "scripts/archive_collector_team.py",
+  "verify": "scripts/verify_archive_collector.py"
+}
