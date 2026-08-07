@@ -120,6 +120,44 @@ python3 frontier_agent.py "Run chat scrub pipeline"
 
 See `docs/tutorials/knowledge_engine.md` and `docs/ARC_SYSTEM_STATUS.md`.
 
+## CLI Reference
+
+```bash
+# Build release binary
+cargo build --release --bin frontier
+
+# Verify all CLI features
+./scripts/verify_cli.sh
+
+# Live demo (auto or interactive)
+./scripts/demo.sh
+./scripts/demo.sh --present
+
+# Core commands
+frontier compile examples/showcase.fr -t wasm -O -p
+frontier knowledge suggest sort list::i32
+frontier knowledge ingest <file>    # continuous knowledge engine
+frontier shell                      # interactive REPL
+frontier watch examples -- -t wasm -O
+frontier config init
+frontier completions bash > ~/.frontier-completions.bash
+frontier mcp list
+frontier unity status
+```
+
+| Command | Description |
+|---------|-------------|
+| `compile` | WASM/browser/bootstrap compilation with `-O` optimize, `-p` profile |
+| `knowledge` | Hypercube suggest, ancestry, tradeoffs, ingest, query |
+| `shell` | Interactive REPL (rustyline with stdin fallback) |
+| `watch` | Auto-recompile on file change (Ctrl+C to stop) |
+| `config` | Manage `frontier.toml` configuration |
+| `completions` | Generate bash/zsh/fish completions |
+| `mcp` | MCP server integration |
+| `unity` | Archive Unity crawler status |
+
+See `DEMO.md` for a 3-minute presenter walkthrough.
+
 ## In-House Lighthouse Stack
 
 ```bash

@@ -1,3 +1,6 @@
+#[cfg(test)]
+mod tests;
+
 pub mod colors;
 pub mod compile;
 pub mod completions;
