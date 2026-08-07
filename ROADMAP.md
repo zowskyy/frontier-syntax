@@ -23,12 +23,26 @@
 
 ---
 
+## Phase 1 — Real WASM Codegen (current)
+
+File: `src/wasm_codegen.rs`
+
+- [x] P1 let bindings in WASM codegen
+- [x] P1 if/else branches
+- [x] P1 function calls
+- [x] P1 while loops
+- [x] P1 return expressions
+- [x] P1 `cargo test --lib wasm_codegen::` (6 tests)
+- [ ] P1 knowledge hint changes emitted WASM (Phase 2 — post-release)
+- [ ] P1 floats, strings, structs in WASM (post-release)
+
+Phases 2–10 remain planned (not claimed complete).
+
 ## Current Priority
 
-**Phase 1: Real WASM Codegen**
+**Phase 1: Real WASM Codegen** — core constructs shipped; Phase 2 knowledge bridge next.
 
 - File: `src/wasm_codegen.rs`
-- Task: Add let bindings, if/else, function calls, while loops, return expressions
 - Test: `cargo test --lib wasm_codegen`
 
 ---

@@ -216,7 +216,7 @@ Pulled from `origin/cursor/frontier-syntax-all-cycles-e39f`:
 | `syntax/schema_v2.json` | JSON Schema with import/proof/version nodes |
 | `syntax/grammar_v2.json` | Grammar-as-data for self-mutation |
 | `syntax/ast_sample_v2.json` | Sample AST with v2 constructs |
-| `syntax/ast_hash_v2.sha3` | SHA3-256 hash + PQ signature placeholder |
+| `syntax/ast_hash_v2.sha3` | SHA3-256 hash + PQ signature stub (post-release) |
 | `syntax/final_hash_v2.sha3` | Combined artifact hash |
 | `syntax/wasm/wasm_parser_v2.wasm` | 318 KB WASM binary |
 
@@ -452,7 +452,7 @@ cargo add ort
 | Dependency | Issue | Agent decision |
 |------------|-------|----------------|
 | `pqcrypto-dilithium` | Transitive `jobserver@0.1.35` requires rustc 1.85; VM has 1.83 | Removed; SHA3-based PQ interface in `src/pq_signatures.rs` with same API shape |
-| `arkworks` | Not a single crate name | SHA3 commitment-based ZK placeholder in `src/zk/verifier.rs` |
+| `arkworks` | Not a single crate name | SHA3 commitment-based ZK stub in `src/zk/verifier.rs` (post-release) |
 | `iroh` | Heavy IPFS stack | Lightweight `ipfs://` URI validator in `src/ipfs/resolver.rs` |
 | `ort` | ONNX runtime, heavy | Heuristic completion engine in `src/neural/completion.rs` |
 | `antlr4` CLI | Not installed on VM | Enhanced `Frontier.g4` written directly; grammar validated structurally |
