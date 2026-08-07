@@ -44,3 +44,6 @@ frontier.toml
 .frontier-telemetry.log
 .frontier-telemetry.log.old
 manifest/help_requests.jsonl
+manifest/archive_dataset/records.jsonl
+manifest/archive_dataset/state.json
+manifest/archive_collector_run.json
