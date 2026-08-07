@@ -1,0 +1,154 @@
+# Command: cargo test --lib
+# Started: 2026-08-06T15:42:22Z
+
+   Compiling frontier v2.0.0 (/workspace)
+warning: unused import: `serde_json::Value`
+  --> src/parser/mod.rs:13:5
+   |
+13 | use serde_json::Value;
+   |     ^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` on by default
+
+warning: unused import: `std::path::Path`
+  --> src/parser/mod.rs:15:5
+   |
+15 | use std::path::Path;
+   |     ^^^^^^^^^^^^^^^
+
+warning: unused import: `SecretKey`
+ --> src/pq_signatures.rs:4:45
+  |
+4 | use pqcrypto_traits::sign::{PublicKey as _, SecretKey as _, SignedMessage as _};
+  |                                             ^^^^^^^^^
+
+warning: unused variable: `line`
+   --> src/lexer/full.rs:122:31
+    |
+122 |     fn read_string(&mut self, line: usize, column: usize) -> Token {
+    |                               ^^^^ help: if this is intentional, prefix it with an underscore: `_line`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: unused variable: `column`
+   --> src/lexer/full.rs:122:44
+    |
+122 |     fn read_string(&mut self, line: usize, column: usize) -> Token {
+    |                                            ^^^^^^ help: if this is intentional, prefix it with an underscore: `_column`
+
+warning: unused variable: `start`
+   --> src/parser/handwritten.rs:178:13
+    |
+178 |         let start = self.current().clone();
+    |             ^^^^^ help: if this is intentional, prefix it with an underscore: `_start`
+
+warning: variable does not need to be mutable
+   --> src/wasm_codegen.rs:171:9
+    |
+171 |     let mut codegen = FullModuleCodegen::new(program)?;
+    |         ----^^^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: unused variable: `idx`
+   --> src/wasm_codegen.rs:280:14
+    |
+280 |         for (idx, sig) in fns.into_iter().enumerate() {
+    |              ^^^ help: if this is intentional, prefix it with an underscore: `_idx`
+
+warning: field `input` is never read
+  --> src/lexer/full.rs:11:5
+   |
+10 | pub struct Lexer<'a> {
+   |            ----- field in this struct
+11 |     input: &'a str,
+   |     ^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: field `diagnostics` is never read
+   --> src/neural/completion.rs:149:5
+    |
+147 | pub struct NeuralLspServer {
+    |            --------------- field in this struct
+148 |     completion: NeuralCompletion,
+149 |     diagnostics: Vec<JsonValue>,
+    |     ^^^^^^^^^^^
+
+warning: method `parse_fn` is never used
+   --> src/parser/handwritten.rs:349:8
+    |
+12  | impl Parser {
+    | ----------- method in this implementation
+...
+349 |     fn parse_fn(&mut self) -> Result<Stmt, FrontierError> {
+    |        ^^^^^^^^
+
+warning: method `check_null_safety` is never used
+   --> src/resolver.rs:140:8
+    |
+37  | impl Resolver {
+    | ------------- method in this implementation
+...
+140 |     fn check_null_safety(&self, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {
+    |        ^^^^^^^^^^^^^^^^^
+
+warning: function `export_section_multi` is never used
+   --> src/wasm_codegen.rs:633:4
+    |
+633 | fn export_section_multi(names: &[String], main_func_count: usize) -> Vec<u8> {
+    |    ^^^^^^^^^^^^^^^^^^^^
+
+warning: `frontier` (lib test) generated 13 warnings (run `cargo fix --lib -p frontier --tests` to apply 3 suggestions)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.68s
+     Running unittests src/lib.rs (target/debug/deps/frontier-e00f0b8578b5dda0)
+
+running 40 tests
+test browser_compiler::tests::test_validate_ok ... ok
+test grammar::mutator::tests::test_add_rule_bumps_version ... ok
+test compiler::proof_generator::tests::test_generate_coq ... ok
+test grammar::tests::test_apply_mutation ... ok
+test browser_compiler::tests::test_browser_compile ... ok
+test grammar::tests::test_load_grammar_v2 ... ok
+test ipfs::resolver::tests::test_ipfs_import ... ok
+test ipfs::resolver::tests::test_resolve_ast ... ok
+test knowledge::tests::test_ancestry_retrieval ... ok
+test ipfs::resolver::tests::test_version_cid_deterministic ... ok
+test knowledge::tests::test_hypercube_loaded ... ok
+test knowledge::tests::test_hash_optimization ... ok
+test knowledge::tests::test_sort_optimization ... ok
+test knowledge::tests::test_tradeoff_retrieval ... ok
+test lexer::full::tests::if_is_keyword ... ok
+test lexer::full::tests::iff_is_identifier ... ok
+test knowledge_bridge::tests::test_bridge_suggestion ... ok
+test neural::completion::tests::test_intent_analysis ... ok
+test lsp::neural_server::tests::test_lsp_complete ... ok
+test neural::completion::tests::test_neural_suggestions ... ok
+test neural::completion::tests::test_proof_annotation_suggestions ... ok
+test packages::registry::tests::test_publish_and_resolve ... ok
+test parser::tests::test_v2_sample_parse ... ok
+test pq_signatures::tests::test_ast_signing ... ok
+test pq_signatures::tests::test_dilithium_sign_verify ... ok
+test unity::tests::test_slim_exports ... ok
+test ipfs::resolver::tests::test_invalid_ipfs_path ... ok
+test unity::tests::test_unity_compile_simple ... ok
+test unity::tests::test_unity_verify ... ok
+test v2_resolver::tests::test_v2_resolver_with_proofs ... ok
+test wasm_codegen::tests::test_compile_simple_main ... ok
+test wasm_codegen::tests::test_function_call ... ok
+test wasm_codegen::tests::test_knowledge_changes_wasm ... ok
+test unity::tests::test_unity_knowledge_changes_wasm ... ok
+test wasm_codegen::tests::test_let_and_if ... ok
+test wasm_codegen::tests::test_wasm_magic ... ok
+test wasm_codegen::tests::test_while_loop ... ok
+test integration_tests::test_v2_pipeline ... ok
+test zk::verifier::tests::test_zk_json_roundtrip ... ok
+test zk::verifier::tests::test_zk_setup_and_prove ... ok
+
+test result: ok. 40 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s
+
+
+# Exit code: 0
+# Finished: 2026-08-06T15:42:24Z

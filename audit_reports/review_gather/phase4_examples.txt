@@ -1,0 +1,95 @@
+# PHASE 4: examples/*.fr
+# Generated: 2026-08-06T15:42:14Z
+
+================================================================================
+FILE: examples/auto_optimize.fr (9 lines)
+================================================================================
+// Frontier — auto-optimized sort example
+// The Knowledge Hypercube silently selects optimal algorithms from 70+ years of history.
+
+version: 2.0;
+
+fn main(): void {
+    // sort(data) would invoke optimize_sort() in the compiler pipeline
+    // get_sort_ancestry() exposes chosen algorithm lineage
+}
+
+================================================================================
+FILE: examples/sample.fr (12 lines)
+================================================================================
+fn main(): void {
+    let x: int = 10;
+    let y: int = 20;
+    let z: int = x + y * 2;
+    if (z > 25) {
+        let msg: string = "big";
+        return;
+    } else {
+        let msg: string = "small";
+        return;
+    }
+}
+
+================================================================================
+FILE: examples/sample_v2.fr (16 lines)
+================================================================================
+version: 2.0;
+
+import "ipfs://QmExampleHash1234567890" as math_utils;
+
+@requires(x > 0)
+@ensures(result > x)
+fn double(x: int): int {
+    return x * 2;
+}
+
+fn main(): void {
+    let x: int = 10;
+    while (x > 0) {
+        double(x);
+    }
+}
+
+================================================================================
+FILE: examples/showcase.fr (19 lines)
+================================================================================
+// Frontier Syntax v2.0 — Live Demo Program
+// Designed for presentations: parses cleanly, compiles to WASM, triggers Knowledge Hypercube.
+
+version: 2.0;
+
+@requires(n >= 0)
+@ensures(result >= n)
+fn fibonacci(n: int) -> int {
+    if (n <= 1) {
+        return n;
+    } else {
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+}
+
+fn main(): int {
+    let answer: int = fibonacci(10);
+    return answer;
+}
+
+================================================================================
+FILE: examples/v2_parser_test.fr (16 lines)
+================================================================================
+version: 2.0;
+
+import "ipfs://QmXyzExample1234567890" as std;
+
+@requires(x > 0)
+@ensures(result > x)
+fn double(x: int) -> int {
+    return x * 2;
+}
+
+fn main(): void {
+    let x: int = 10;
+    while (x > 0) {
+        double(x);
+    }
+}
+

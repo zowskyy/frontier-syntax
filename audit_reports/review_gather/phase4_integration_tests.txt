@@ -1,0 +1,285 @@
+# PHASE 4: Integration tests
+# Generated: 2026-08-06T15:42:14Z
+
+================================================================================
+FILE: frontier-dex/tests/integration.rs (39 lines)
+================================================================================
+//! Integration tests for frontier-dex end-to-end pipeline.
+
+use frontier_dex::{DecompileOptions, Decompiler};
+
+#[test]
+fn integration_decompile_pipeline() {
+    let mut dex = vec![0u8; 512];
+    dex[0..8].copy_from_slice(b"dex\n035\0");
+    dex[32] = 0x00;
+    dex[33] = 0x02;
+    dex[36] = 0x70;
+    dex[40] = 0x78;
+    dex[41] = 0x56;
+    dex[42] = 0x34;
+    dex[43] = 0x12;
+    dex[52] = 0x70;
+    dex[112] = 1;
+    dex[116] = 0;
+    dex[117] = 0;
+    dex[120] = 1;
+
+    let options = DecompileOptions {
+        generate_proof: true,
+        neural: true,
+        cache: true,
+        fallback_engines: true,
+    };
+    let mut dec = Decompiler::new(options);
+    let result = dec.decompile_bytes(&dex).expect("pipeline");
+    assert!(result.proof_hash.is_some());
+}
+
+#[test]
+fn integration_proof_verifier() {
+    use frontier_dex::verifier::ProofVerifier;
+    let v = ProofVerifier::new();
+    let combined = v.combine(&["parse:a".into(), "opt:b".into()]).unwrap();
+    assert_eq!(combined.len(), 64);
+}
+
+## tests/scrub_generated/ (Python scrub tests)
+--- ./tests/scrub_generated/test_scripts__test_redos_py.py (19 lines) ---
+"""Auto-generated scrub validation for scripts__test_redos.py."""
+
+import subprocess
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+SOURCE = ROOT / "chat_scrub" / "CODE_EXTRACTION" / "scripts__test_redos.py"
+
+
+def test_scripts__test_redos_py_syntax():
+    """Verify extracted Python file compiles."""
+    assert SOURCE.exists(), f"missing extracted file: {SOURCE}"
+    result = subprocess.run(
+        [sys.executable, "-m", "py_compile", str(SOURCE)],
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, result.stderr
+
+--- ./tests/scrub_generated/test_src__packages__registry_rs.py (12 lines) ---
+"""Auto-generated scrub validation for src__packages__registry.rs."""
+
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+SOURCE = ROOT / "chat_scrub" / "CODE_EXTRACTION" / "src__packages__registry.rs"
+
+
+def test_src__packages__registry_rs_exists():
+    """Verify extracted Rust file still exists and is non-empty."""
+    assert SOURCE.exists(), f"missing extracted file: {SOURCE}"
+    assert SOURCE.stat().st_size > 0
+
+--- ./tests/scrub_generated/test_src__neural__completion_rs.py (12 lines) ---
+"""Auto-generated scrub validation for src__neural__completion.rs."""
+
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+SOURCE = ROOT / "chat_scrub" / "CODE_EXTRACTION" / "src__neural__completion.rs"
+
+
+def test_src__neural__completion_rs_exists():
+    """Verify extracted Rust file still exists and is non-empty."""
+    assert SOURCE.exists(), f"missing extracted file: {SOURCE}"
+    assert SOURCE.stat().st_size > 0
+
+--- ./tests/scrub_generated/test_build__arc_orchestrator_py.py (19 lines) ---
+"""Auto-generated scrub validation for build__arc_orchestrator.py."""
+
+import subprocess
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+SOURCE = ROOT / "chat_scrub" / "CODE_EXTRACTION" / "build__arc_orchestrator.py"
+
+
+def test_build__arc_orchestrator_py_syntax():
+    """Verify extracted Python file compiles."""
+    assert SOURCE.exists(), f"missing extracted file: {SOURCE}"
+    result = subprocess.run(
+        [sys.executable, "-m", "py_compile", str(SOURCE)],
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, result.stderr
+
+--- ./tests/scrub_generated/test_scripts__verify_cycle1_py.py (19 lines) ---
+"""Auto-generated scrub validation for scripts__verify_cycle1.py."""
+
+import subprocess
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+SOURCE = ROOT / "chat_scrub" / "CODE_EXTRACTION" / "scripts__verify_cycle1.py"
+
+
+def test_scripts__verify_cycle1_py_syntax():
+    """Verify extracted Python file compiles."""
+    assert SOURCE.exists(), f"missing extracted file: {SOURCE}"
+    result = subprocess.run(
+        [sys.executable, "-m", "py_compile", str(SOURCE)],
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, result.stderr
+
+--- ./tests/scrub_generated/test_deploy__config_yaml.py (11 lines) ---
+"""Auto-generated scrub validation for deploy__config.yaml."""
+
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+SOURCE = ROOT / "chat_scrub" / "CODE_EXTRACTION" / "deploy__config.yaml"
+
+
+def test_deploy__config_yaml_exists():
+    assert SOURCE.exists()
+    assert SOURCE.read_text(encoding="utf-8").strip()
+
+--- ./tests/scrub_generated/test_src__zk__verifier_rs.py (12 lines) ---
+"""Auto-generated scrub validation for src__zk__verifier.rs."""
+
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+SOURCE = ROOT / "chat_scrub" / "CODE_EXTRACTION" / "src__zk__verifier.rs"
+
+
+def test_src__zk__verifier_rs_exists():
+    """Verify extracted Rust file still exists and is non-empty."""
+    assert SOURCE.exists(), f"missing extracted file: {SOURCE}"
+    assert SOURCE.stat().st_size > 0
+
+--- ./tests/scrub_generated/test_src__grammar__mutator_rs.py (12 lines) ---
+"""Auto-generated scrub validation for src__grammar__mutator.rs."""
+
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+SOURCE = ROOT / "chat_scrub" / "CODE_EXTRACTION" / "src__grammar__mutator.rs"
+
+
+def test_src__grammar__mutator_rs_exists():
+    """Verify extracted Rust file still exists and is non-empty."""
+    assert SOURCE.exists(), f"missing extracted file: {SOURCE}"
+    assert SOURCE.stat().st_size > 0
+
+--- ./tests/scrub_generated/test_deploy__health_check_sh.py (11 lines) ---
+"""Auto-generated scrub validation for deploy__health_check.sh."""
+
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+SOURCE = ROOT / "chat_scrub" / "CODE_EXTRACTION" / "deploy__health_check.sh"
+
+
+def test_deploy__health_check_sh_exists():
+    assert SOURCE.exists()
+    assert SOURCE.read_text(encoding="utf-8").strip()
+
+--- ./tests/scrub_generated/test_frontier_agent_py.py (19 lines) ---
+"""Auto-generated scrub validation for frontier_agent.py."""
+
+import subprocess
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+SOURCE = ROOT / "chat_scrub" / "CODE_EXTRACTION" / "frontier_agent.py"
+
+
+def test_frontier_agent_py_syntax():
+    """Verify extracted Python file compiles."""
+    assert SOURCE.exists(), f"missing extracted file: {SOURCE}"
+    result = subprocess.run(
+        [sys.executable, "-m", "py_compile", str(SOURCE)],
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, result.stderr
+
+--- ./tests/scrub_generated/test_src__pq_signatures_rs.py (12 lines) ---
+"""Auto-generated scrub validation for src__pq_signatures.rs."""
+
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+SOURCE = ROOT / "chat_scrub" / "CODE_EXTRACTION" / "src__pq_signatures.rs"
+
+
+def test_src__pq_signatures_rs_exists():
+    """Verify extracted Rust file still exists and is non-empty."""
+    assert SOURCE.exists(), f"missing extracted file: {SOURCE}"
+    assert SOURCE.stat().st_size > 0
+
+--- ./tests/scrub_generated/__init__.py (0 lines) ---
+
+--- ./tests/scrub_generated/test_src__ipfs__resolver_rs.py (12 lines) ---
+"""Auto-generated scrub validation for src__ipfs__resolver.rs."""
+
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+SOURCE = ROOT / "chat_scrub" / "CODE_EXTRACTION" / "src__ipfs__resolver.rs"
+
+
+def test_src__ipfs__resolver_rs_exists():
+    """Verify extracted Rust file still exists and is non-empty."""
+    assert SOURCE.exists(), f"missing extracted file: {SOURCE}"
+    assert SOURCE.stat().st_size > 0
+
+--- ./tests/scrub_generated/test_src__unity_rs.py (12 lines) ---
+"""Auto-generated scrub validation for src__unity.rs."""
+
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+SOURCE = ROOT / "chat_scrub" / "CODE_EXTRACTION" / "src__unity.rs"
+
+
+def test_src__unity_rs_exists():
+    """Verify extracted Rust file still exists and is non-empty."""
+    assert SOURCE.exists(), f"missing extracted file: {SOURCE}"
+    assert SOURCE.stat().st_size > 0
+
+--- ./tests/scrub_generated/test_src__compiler__proof_generator_rs.py (12 lines) ---
+"""Auto-generated scrub validation for src__compiler__proof_generator.rs."""
+
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+SOURCE = ROOT / "chat_scrub" / "CODE_EXTRACTION" / "src__compiler__proof_generator.rs"
+
+
+def test_src__compiler__proof_generator_rs_exists():
+    """Verify extracted Rust file still exists and is non-empty."""
+    assert SOURCE.exists(), f"missing extracted file: {SOURCE}"
+    assert SOURCE.stat().st_size > 0
+
+--- ./tests/scrub_generated/test_src__wasm_codegen_rs.py (12 lines) ---
+"""Auto-generated scrub validation for src__wasm_codegen.rs."""
+
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+SOURCE = ROOT / "chat_scrub" / "CODE_EXTRACTION" / "src__wasm_codegen.rs"
+
+
+def test_src__wasm_codegen_rs_exists():
+    """Verify extracted Rust file still exists and is non-empty."""
+    assert SOURCE.exists(), f"missing extracted file: {SOURCE}"
+    assert SOURCE.stat().st_size > 0
+
