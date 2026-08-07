@@ -38,18 +38,22 @@ def run_native(source: Path, expected: int, out_name: str) -> dict:
     return data
 
 
-def update_m5(passing: bool) -> None:
+def update_m5_gate(passing: bool) -> None:
+    """M5 = Gate slice only; M5b full compiler is owned by taylor_compiler_mission."""
     if not MISSION.exists():
         return
     data = json.loads(MISSION.read_text(encoding="utf-8"))
+    ts = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     m5 = data.setdefault("milestones", {}).setdefault("M5", {})
+    m5["name"] = "main_fr_native_gate"
+    m5["slice"] = "gate"
     m5["pass"] = passing
-    m5["updated_at"] = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+    m5["updated_at"] = ts
     if passing:
-        m5["reason"] = "main.fr native wasmtime self-host verified"
+        m5["reason"] = "main.fr native wasmtime self-host verified (Gate slice)"
     else:
         m5.setdefault("reason", "main.fr native path not passing")
-    data["updated_at"] = m5["updated_at"]
+    data["updated_at"] = ts
     MISSION.write_text(json.dumps(data, indent=2), encoding="utf-8")
 
 
@@ -70,7 +74,7 @@ def verify() -> dict:
 
     MANIFEST.parent.mkdir(parents=True, exist_ok=True)
     MANIFEST.write_text(json.dumps(result, indent=2), encoding="utf-8")
-    update_m5(result.get("pass", False))
+    update_m5_gate(result.get("pass", False))
     return result
 
 

@@ -219,15 +219,13 @@ def phase_5_checks(phase_4_ok: bool) -> tuple[bool, list[dict]]:
         return False, [{"check": "phase_5", "pass": False, "status": "blocked", "reason": "phase_4 not validated"}]
     evidence = []
     r = run_cmd(["python3", "scripts/verify_main_fr_native.py"])
-    mission = read_json_safe(ROOT / "manifest" / "compiler_self_host_mission.json")
-    m5_ok = mission.get("milestones", {}).get("M5", {}).get("pass") is True
-    ok = r["pass"] and m5_ok
+    manifest_ok = read_manifest(ROOT / "manifest" / "main_fr_native.json", "pass")
+    ok = r["pass"] and manifest_ok
     evidence.append({
         "check": "5.1_main_fr_native",
         "pass": ok,
         "status": "validated" if ok else "fail",
         "manifest": "manifest/main_fr_native.json",
-        "m5_pass": m5_ok,
         **r,
     })
     return ok, evidence

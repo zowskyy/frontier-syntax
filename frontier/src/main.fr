@@ -1,5 +1,5 @@
-// Frontier self-hosting compiler — Genesis entry (int-only MVP for Phase 5)
-version: 2.0;
+// Frontier self-hosting compiler — Genesis entry (int-only Gate slice for Phase 5)
+// version decl omitted: wasm-slim parser rejects top-level version statements
 
 fn lex(source_len: int) -> int {
     return source_len + 1;

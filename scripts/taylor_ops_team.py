@@ -70,6 +70,7 @@ WORKERS: dict[str, dict[str, Any]] = {
             "scripts/verify_self_hosting.py",
             "scripts/run_native_self_host.py",
             "scripts/taylor_compiler_mission.py",
+            "scripts/taylor_phase5_mission.py",
             "scripts/measure_wasm_size.py",
             "scripts/taylor_issue_closer.py",
         ],
@@ -78,6 +79,7 @@ WORKERS: dict[str, dict[str, Any]] = {
             ["cargo", "test", "--lib", "wasm_codegen::tests::test_knowledge_changes_wasm", "--quiet"],
             [sys.executable, "scripts/verify_self_hosting.py"],
             [sys.executable, "scripts/taylor_compiler_mission.py"],
+            [sys.executable, "scripts/taylor_phase5_mission.py", "--apply"],
         ],
         "apply_commands": [
             [sys.executable, "scripts/taylor_compiler_mission.py", "--apply"],
@@ -520,6 +522,19 @@ def write_report(run: dict[str, Any]) -> None:
     if prod_path.exists():
         prod = json.loads(prod_path.read_text(encoding="utf-8"))
         lines.append(f"Target: `{prod.get('target')}` — blockers documented in `{prod_path.relative_to(REPO)}`")
+    ga_path = REPO / "manifest" / "ga_status.json"
+    if ga_path.exists():
+        ga = json.loads(ga_path.read_text(encoding="utf-8"))
+        lines.append("")
+        lines.append("## GA protocol")
+        lines.append("")
+        lines.append(f"**Verdict:** `{ga.get('verdict', 'unknown')}`  ")
+        lines.append(f"**Target:** `{ga.get('target', 'RELEASE_READY')}`  ")
+        blockers = ga.get("blockers") or []
+        if blockers:
+            lines.append(f"**GA blockers:** {', '.join(blockers)}  ")
+        else:
+            lines.append("**GA blockers:** none  ")
     lines.append("")
     if run.get("production_ready"):
         lines.append("**PRODUCTION GATE: PASS** (all worker steps green)")
@@ -540,25 +555,25 @@ def write_report(run: dict[str, Any]) -> None:
 
 
 def assess_production_readiness(run: dict[str, Any]) -> bool:
-    """Honest prod flag: tracking gate + wasm target + no hard worker failures."""
+    """Honest prod flag: tracking gate + wasm target + GA audit + no hard worker failures."""
     gate = run_cmd([sys.executable, "scripts/tracking.py", "gate"], timeout=120)
     wasm_path = REPO / "manifest" / "wasm_size.json"
     wasm_met = False
     if wasm_path.exists():
         wasm_met = json.loads(wasm_path.read_text(encoding="utf-8")).get("met", False)
 
+    ga_audit = run_cmd(
+        [sys.executable, "scripts/release_readiness.py", "--audit", "--skip-run"],
+        timeout=120,
+    )
+
     hard_fail = False
     for g in run.get("groups", []):
         for w in g.get("workers", []):
             if not w.get("ok"):
                 hard_fail = True
-            for s in w.get("steps", []):
-                if not s.get("pass") and not s.get("optional") and not s.get("informational_fail"):
-                    # Workers with allow_nonzero mark informational_fail on steps
-                    if not s.get("skipped"):
-                        pass  # already in worker ok
 
-    return gate["pass"] and wasm_met and not hard_fail and run.get("ok", False)
+    return gate["pass"] and wasm_met and ga_audit["pass"] and not hard_fail and run.get("ok", False)
 
 
 def cmd_inventory(_: argparse.Namespace) -> int:
@@ -611,8 +626,9 @@ def cmd_run(args: argparse.Namespace) -> int:
             sweep_cmd.append("--apply")
         run["issue_closure_sweep"] = run_cmd(sweep_cmd, timeout=600)
 
-    # Production readiness: honest assessment from gate + wasm manifest
+    # Production readiness: honest assessment from gate + wasm manifest + GA audit
     if mode in ("production", "full"):
+        run_cmd([sys.executable, "scripts/release_readiness.py", "--audit", "--skip-run"], timeout=120)
         run["production_ready"] = assess_production_readiness(run)
     else:
         run["production_ready"] = False
