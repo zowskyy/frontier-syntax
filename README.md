@@ -20,14 +20,14 @@ Full guide: [docs/GET_HELP.md](docs/GET_HELP.md) · Cursor: `/get-help`
 
 <!-- SHADOW_WORKER_STATUS:BEGIN -->
 
-**Live audit & blueprint status** — _auto-updated 2026-08-07 05:20:34 UTC_
+**Live audit & blueprint status** — _auto-updated 2026-08-07 23:22:11 UTC_
 
 | | |
 |---|---|
 | Agent audit log | [`docs/agent_audit_log/`](docs/agent_audit_log/) |
 | Latest ecosystem report | run `20260806T232938Z` |
 | Blueprint gate | Phase 0: **PASS** · Phase 1: **PASS** · open: — |
-| WASM | 93.0 KB (target &lt;100 KB met: True) |
+| WASM | 93.7 KB (target &lt;100 KB met: True) |
 
 End of every agent turn: `python3 scripts/agent_shadow_worker.py run`
 

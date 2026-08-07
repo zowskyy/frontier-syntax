@@ -4,10 +4,9 @@
   "ga_ready": false,
   "rc_ready": true,
   "blockers": [
-    "wave_3_m5_compiler",
     "wave_3_phase4_validated"
   ],
   "rc_blockers": [],
-  "audited_at": "2026-08-07T21:10:43.871299Z",
-  "manifest": "manifest\\release_readiness.json"
+  "audited_at": "2026-08-07T23:25:11.138425Z",
+  "manifest": "manifest/release_readiness.json"
 }

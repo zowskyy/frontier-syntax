@@ -1,0 +1,16 @@
+{
+  "verified_at": "2026-08-07T23:37:06.205581Z",
+  "script": "scripts/training/validate_corpus.py",
+  "sample_count": 1000,
+  "min_samples": 1000,
+  "count_ok": true,
+  "validation": {
+    "validated_count": 50,
+    "total_samples": 1000,
+    "compile_pass_rate": 1.0,
+    "wasmtime_pass_rate": 1.0,
+    "failures": [],
+    "full_validation": false
+  },
+  "pass": true
+}
