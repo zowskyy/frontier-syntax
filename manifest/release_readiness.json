@@ -1,0 +1,95 @@
+{
+  "verdict": "RC_READY",
+  "version": "1.0.0-rc.1",
+  "audited_at": "2026-08-07T17:32:45.651605Z",
+  "all_pass": false,
+  "rc_ready": true,
+  "ga_ready": false,
+  "blockers": [
+    "wave_3_m5_compiler",
+    "wave_3_phase4_validated",
+    "wave_5_launch_external"
+  ],
+  "rc_blockers": [],
+  "checks": [
+    {
+      "name": "wave_0_tracking_gate",
+      "pass": true,
+      "skipped_run": true,
+      "evidence": "manifest/tracking_evidence.json"
+    },
+    {
+      "name": "wave_0_wasm_codegen_verify",
+      "pass": true,
+      "manifest": "manifest\\wasm_codegen_verify.json",
+      "field": "all_pass",
+      "value": true,
+      "expected": true
+    },
+    {
+      "name": "wave_0_wasm_size",
+      "pass": true,
+      "manifest": "manifest\\wasm_size.json",
+      "field": "met",
+      "value": true,
+      "expected": true
+    },
+    {
+      "name": "wave_0_native_self_host",
+      "pass": true,
+      "manifest": "manifest\\native_self_host.json",
+      "field": "pass",
+      "value": true,
+      "expected": true
+    },
+    {
+      "name": "wave_1_security_md",
+      "pass": true
+    },
+    {
+      "name": "wave_1_release_checklist",
+      "pass": true
+    },
+    {
+      "name": "wave_2_compiler_ci",
+      "pass": true,
+      "path": ".github\\workflows\\compiler-gate.yml"
+    },
+    {
+      "name": "wave_3_m5_compiler",
+      "pass": false,
+      "milestone": "M5",
+      "reason": null
+    },
+    {
+      "name": "wave_3_phase4_validated",
+      "pass": false,
+      "phases": {
+        "phase_0": "validated",
+        "phase_1": "validated",
+        "phase_2": "validated",
+        "phase_3": "validated",
+        "phase_4": "frozen",
+        "phase_5": "frozen",
+        "phase_6": "frozen",
+        "phase_7": "frozen",
+        "phase_8": "frozen"
+      },
+      "reason": "phases 4, 5, 7 not validated (required for GA RELEASE_READY)"
+    },
+    {
+      "name": "wave_5_launch_external",
+      "pass": false,
+      "pending": [
+        "Discord server",
+        "Website live",
+        "Social media",
+        "Waiting list",
+        "Launch date"
+      ],
+      "blocks_ga_only": true
+    }
+  ],
+  "report": "audit_reports\\RELEASE_READINESS_REPORT.md",
+  "manifest": "manifest\\release_readiness.json"
+}

@@ -1,0 +1,19 @@
+{
+  "verified_at": "2026-08-07T17:42:52.928684Z",
+  "script": "scripts/verify_agent_security.py",
+  "pass": true,
+  "results": [
+    {
+      "path": "frontier_agent.py",
+      "present": true,
+      "pass": true,
+      "findings": []
+    },
+    {
+      "path": ".cursor\\symbiotic_agents.py",
+      "present": true,
+      "pass": true,
+      "findings": []
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # ARC System Status — Live Report
 
-**Generated:** 2026-08-06T02:25:09.687430Z  
+**Generated:** 2026-08-07T17:32:32.171037Z  
 **Source:** `scripts/generate_arc_status.py` (repository inspection, not estimates)
 
 ---
@@ -9,12 +9,12 @@
 
 | Metric | Live Value |
 |--------|------------|
-| Open PRs | 2 |
-| Rust lib tests | 40 passing |
-| Python test files | 15 |
-| Knowledge entries | 502 |
+| Open PRs | 0 |
+| Rust lib tests | 0 passing |
+| Python test files | 18 |
+| Knowledge entries | 638 |
 | Known gaps (WORKER_REPORT) | 0 |
-| Branch | `cursor/frontier-syntax-cycle1-e39f` |
+| Branch | `main` |
 
 ---
 
@@ -24,18 +24,18 @@ The ARC review listed PRs #15, #16, #19, #21 as open. **Live GitHub state:**
 
 | PR | Title | Actual Status |
 |----|-------|---------------|
-| #15 | Verification Engine v3.0 | ✅ MERGED |
+| #15 | Verification Engine v3.0 | ⬜ Not merged |
 | #16 | Complete hardened CLI v2.0 | ⬜ — branch closed; CLI v2 landed via other merges |
-| #19 | frontier-master skill + Python agent | ✅ MERGED |
-| #21 | Symbiotic Tandem | ✅ MERGED |
-| #23 | Knowledge engine upgrade | ✅ MERGED |
-| #29 | Deploy script + mcp list | ✅ MERGED |
-| #30 | ARC system status scripts | ✅ MERGED |
-| #31 | Advanced archive crawler | ✅ MERGED |
-| #42 | Self-creation orchestrator | ✅ MERGED |
-| #43 | Solve all P0 gaps | ✅ MERGED |
+| #19 | frontier-master skill + Python agent | ⬜ |
+| #21 | Symbiotic Tandem | ⬜ |
+| #23 | Knowledge engine upgrade | ⬜ |
+| #29 | Deploy script + mcp list | ⬜ |
+| #30 | ARC system status scripts | ⬜ |
+| #31 | Advanced archive crawler | ⬜ |
+| #42 | Self-creation orchestrator | ⬜ |
+| #43 | Solve all P0 gaps | ⬜ |
 
-**Open PRs right now:** #52, #51
+**Open PRs right now:** None
 
 ---
 
@@ -44,7 +44,7 @@ The ARC review listed PRs #15, #16, #19, #21 as open. **Live GitHub state:**
 | Component | Status | Evidence |
 |-----------|--------|----------|
 | Frontier Language | 🟢 Core complete | `frontier/core/*.frontier`, `cargo test --lib` |
-| Knowledge Engine | 🟢 Deployed | 502 entries, MCP, dashboard, git hooks |
+| Knowledge Engine | 🟢 Deployed | 638 entries, MCP, dashboard, git hooks |
 | Frontier-DEX | 🟢 Implemented | `frontier-dex/` workspace member |
 | Lighthouse Stack | 🟢 Spec present | `frontier/lighthouse/*.frontier` |
 | Symbiotic Tandem | 🟢 Merged | `.cursor/symbiotic_agents.py`, PR #21 |
@@ -84,6 +84,6 @@ The ARC review listed PRs #15, #16, #19, #21 as open. **Live GitHub state:**
 
 ## Honest Overall Assessment
 
-**~98% in-repo conclusion** — all WORKER_REPORT gaps resolved (0 known gaps). Knowledge base expanded to 208 entries with swarm process log ingestion. Remaining engineering is **WASM slimming**, **live runtime nodes**, and **Frontier-native compiler depth** — tracked but not blocking repo conclusion.
+**Phases 0–3 validated on `main`** — canonical issues #44–#48 closed; wasm-slim &lt;100 KB; wasmtime 4/4. Remaining for GA: Phase 4–7 (frozen), M5 full compiler, external launch. Run `python3 scripts/release_readiness.py --audit` for GO/NO-GO.
 
 *Regenerate: `python3 scripts/generate_arc_status.py`*

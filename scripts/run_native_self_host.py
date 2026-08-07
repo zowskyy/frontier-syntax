@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 import subprocess
 import sys
@@ -13,7 +14,7 @@ ROOT = Path(__file__).resolve().parent.parent
 MANIFEST = ROOT / "manifest" / "native_self_host.json"
 COMPILER_WASM = ROOT / "target" / "wasm32-unknown-unknown" / "release" / "frontier.wasm"
 HOST_BIN = ROOT / "target" / "release" / "frontier_wasm_host"
-SOURCE = ROOT / "frontier" / "src" / "self_host_probe.fr"
+DEFAULT_SOURCE = ROOT / "frontier" / "src" / "self_host_probe.fr"
 WASM_MAGIC = b"\0asm"
 
 BUILD_COMPILER = [
@@ -63,45 +64,66 @@ def ensure_artifacts() -> tuple[bool, str]:
     return True, "ok"
 
 
-def native_self_host() -> dict:
-    if not SOURCE.exists():
-        return {"pass": False, "error": f"missing {SOURCE}"}
+def native_self_host(
+    source: Path = DEFAULT_SOURCE,
+    expected: int = 42,
+    output_name: str = "native_self_host_probe.wasm",
+    write_manifest: bool = True,
+) -> dict:
+    if not source.exists():
+        return {"pass": False, "error": f"missing {source}"}
 
     ok, msg = ensure_artifacts()
     if not ok:
         return {"pass": False, "error": msg}
 
-    out_path = ROOT / "target" / "native_self_host_probe.wasm"
+    out_path = ROOT / "target" / output_name
     ok, out = run([
-        str(HOST_BIN), str(COMPILER_WASM), str(SOURCE), "-o", str(out_path),
+        str(HOST_BIN), str(COMPILER_WASM), str(source), "-o", str(out_path),
     ])
     if not ok or not out_path.exists():
         return {"pass": False, "stage": "native_wasmtime", "error": out}
 
     wasm_ok = valid_wasm(out_path)
-    run_ok, run_out = run_wasm_main(out_path) if wasm_ok else (False, "invalid wasm")
+    run_ok, run_out = run_wasm_main(out_path, expected) if wasm_ok else (False, "invalid wasm")
 
     result = {
         "verified_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "script": "scripts/run_native_self_host.py",
-        "source": str(SOURCE.relative_to(ROOT)),
+        "source": str(source.relative_to(ROOT)),
+        "expected_main": expected,
         "compiler_wasm": str(COMPILER_WASM.relative_to(ROOT)),
         "host": str(HOST_BIN.relative_to(ROOT)),
         "output_wasm": str(out_path.relative_to(ROOT)),
         "output_bytes": out_path.stat().st_size,
         "valid_wasm": wasm_ok,
-        "main_returns_42": run_ok,
+        "main_returns_expected": run_ok,
+        "main_returns_42": run_ok if expected == 42 else None,
         "pass": wasm_ok and run_ok,
         "bootstrap_cargo_on_recompile": False,
         "mode": "native_wasmtime",
     }
-    MANIFEST.parent.mkdir(parents=True, exist_ok=True)
-    MANIFEST.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    if write_manifest and source == DEFAULT_SOURCE:
+        MANIFEST.parent.mkdir(parents=True, exist_ok=True)
+        MANIFEST.write_text(json.dumps(result, indent=2), encoding="utf-8")
     return result
 
 
 def main() -> int:
-    result = native_self_host()
+    parser = argparse.ArgumentParser(description="Native self-host via wasmtime")
+    parser.add_argument("--source", type=Path, default=DEFAULT_SOURCE, help="Frontier source to compile")
+    parser.add_argument("--expected", type=int, default=42, help="Expected main() return value")
+    parser.add_argument("--output-name", default="native_self_host_probe.wasm", help="Output WASM filename under target/")
+    parser.add_argument("--no-manifest", action="store_true", help="Do not overwrite native_self_host.json")
+    args = parser.parse_args()
+
+    source = args.source if args.source.is_absolute() else ROOT / args.source
+    result = native_self_host(
+        source=source,
+        expected=args.expected,
+        output_name=args.output_name,
+        write_manifest=not args.no_manifest,
+    )
     print(json.dumps(result, indent=2))
     return 0 if result.get("pass") else 1
 

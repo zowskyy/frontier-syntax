@@ -26,6 +26,15 @@ CANONICAL_ISSUES = {44, 45, 46, 47, 48}
 FROZEN_FROM_PHASE = 4
 
 
+def read_manifest(path: Path, field: str, expected=True) -> bool:
+    if not path.exists():
+        return False
+    try:
+        return json.loads(path.read_text(encoding="utf-8")).get(field) == expected
+    except json.JSONDecodeError:
+        return False
+
+
 def run_cmd(cmd: list[str]) -> dict:
     r = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
     return {
@@ -61,7 +70,11 @@ def phase_0_checks() -> tuple[bool, list[dict]]:
     evidence.append({"check": "0.2_gate_exists", "pass": gate_exists})
     readme = (ROOT / "README.md").read_text(encoding="utf-8") if (ROOT / "README.md").exists() else ""
     launch = (ROOT / "LAUNCH_CHECKLIST.md").read_text(encoding="utf-8") if (ROOT / "LAUNCH_CHECKLIST.md").exists() else ""
-    claims_ok = "NOT VERIFIED" in readme and "NOT VERIFIED" in launch
+    claims_ok = (
+        "VALIDATED" in readme
+        and "VALIDATED" in launch
+        and "NOT VERIFIED" in launch  # honest marker for Phase 4+ still required
+    )
     evidence.append({"check": "0.3_public_claims", "pass": claims_ok})
     return all(e["pass"] for e in evidence), evidence
 
@@ -175,7 +188,86 @@ def phase_3_checks(phase_2_ok: bool, open_set: set[int]) -> tuple[bool, list[dic
     return ok, evidence
 
 
-def frozen_phases_report() -> list[dict]:
+def phase_4_checks(phase_3_ok: bool) -> tuple[bool, list[dict]]:
+    if not phase_3_ok:
+        return False, [{"check": "phase_4", "pass": False, "status": "blocked", "reason": "phase_3 not validated"}]
+    evidence = []
+    r = run_cmd(["python3", "scripts/verify_innovations.py"])
+    manifest_ok = read_manifest(ROOT / "manifest" / "innovations_verify.json", "pass")
+    ok = r["pass"] and manifest_ok
+    evidence.append({
+        "check": "4.1_innovations",
+        "pass": ok,
+        "status": "validated" if ok else "fail",
+        "manifest": "manifest/innovations_verify.json",
+        **r,
+    })
+    return ok, evidence
+
+
+def phase_5_checks(phase_4_ok: bool) -> tuple[bool, list[dict]]:
+    if not phase_4_ok:
+        return False, [{"check": "phase_5", "pass": False, "status": "blocked", "reason": "phase_4 not validated"}]
+    evidence = []
+    r = run_cmd(["python3", "scripts/verify_main_fr_native.py"])
+    mission = read_json_safe(ROOT / "manifest" / "compiler_self_host_mission.json")
+    m5_ok = mission.get("milestones", {}).get("M5", {}).get("pass") is True
+    ok = r["pass"] and m5_ok
+    evidence.append({
+        "check": "5.1_main_fr_native",
+        "pass": ok,
+        "status": "validated" if ok else "fail",
+        "manifest": "manifest/main_fr_native.json",
+        "m5_pass": m5_ok,
+        **r,
+    })
+    return ok, evidence
+
+
+def phase_6_checks(phase_5_ok: bool) -> tuple[bool, list[dict]]:
+    if not phase_5_ok:
+        return False, [{"check": "phase_6", "pass": False, "status": "blocked", "reason": "phase_5 not validated"}]
+    evidence = []
+    r = run_cmd(["python3", "scripts/verify_phase6_corpus.py"])
+    manifest_ok = read_manifest(ROOT / "manifest" / "phase6_corpus_verify.json", "pass")
+    ok = r["pass"] and manifest_ok
+    evidence.append({
+        "check": "6.1_training_corpus",
+        "pass": ok,
+        "status": "validated" if ok else "fail",
+        "manifest": "manifest/phase6_corpus_verify.json",
+        **r,
+    })
+    return ok, evidence
+
+
+def phase_7_checks(phase_6_ok: bool) -> tuple[bool, list[dict]]:
+    if not phase_6_ok:
+        return False, [{"check": "phase_7", "pass": False, "status": "blocked", "reason": "phase_6 not validated"}]
+    evidence = []
+    r = run_cmd(["python3", "scripts/verify_phase7_hardening.py"])
+    manifest_ok = read_manifest(ROOT / "manifest" / "phase7_hardening_verify.json", "pass")
+    ok = r["pass"] and manifest_ok
+    evidence.append({
+        "check": "7.1_production_hardening",
+        "pass": ok,
+        "status": "validated" if ok else "fail",
+        "manifest": "manifest/phase7_hardening_verify.json",
+        **r,
+    })
+    return ok, evidence
+
+
+def read_json_safe(path: Path) -> dict:
+    if not path.exists():
+        return {}
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return {}
+
+
+def frozen_phases_report(from_phase: int) -> list[dict]:
     return [
         {
             "check": f"phase_{p}",
@@ -183,7 +275,7 @@ def frozen_phases_report() -> list[dict]:
             "status": "frozen",
             "reason": f"FROZEN until phase_{p - 1} gate passes",
         }
-        for p in range(FROZEN_FROM_PHASE, 9)
+        for p in range(from_phase, 9)
     ]
 
 
@@ -216,10 +308,32 @@ def gate() -> dict:
     elif p0_ok:
         evidence.append({"check": "phase_3", "pass": False, "status": "blocked", "reason": "phase_2 not validated"})
 
-    # Phases 4–8: never evaluated while frozen
-    evidence.extend(frozen_phases_report())
+    p4_ok = p5_ok = p6_ok = p7_ok = False
+    if p0_ok and p1_ok and p2_ok and p3_ok:
+        p4_ok, e4 = phase_4_checks(p3_ok)
+        evidence.extend(e4)
+        if p4_ok:
+            p5_ok, e5 = phase_5_checks(p4_ok)
+            evidence.extend(e5)
+        else:
+            evidence.append({"check": "phase_5", "pass": False, "status": "blocked", "reason": "phase_4 not validated"})
+        if p4_ok and p5_ok:
+            p6_ok, e6 = phase_6_checks(p5_ok)
+            evidence.extend(e6)
+        elif p4_ok:
+            evidence.append({"check": "phase_6", "pass": False, "status": "blocked", "reason": "phase_5 not validated"})
+        if p4_ok and p5_ok and p6_ok:
+            p7_ok, e7 = phase_7_checks(p6_ok)
+            evidence.extend(e7)
+        elif p4_ok and p5_ok:
+            evidence.append({"check": "phase_7", "pass": False, "status": "blocked", "reason": "phase_6 not validated"})
+        evidence.extend(frozen_phases_report(8 if p7_ok else (7 if p6_ok else (6 if p5_ok else (5 if p4_ok else 4)))))
+    elif p0_ok and p1_ok and p2_ok:
+        evidence.extend(frozen_phases_report(4))
+    elif p0_ok:
+        evidence.extend(frozen_phases_report(FROZEN_FROM_PHASE))
 
-    all_pass = p0_ok and p1_ok and p2_ok and p3_ok
+    all_pass = p0_ok and p1_ok and p2_ok and p3_ok and p4_ok and p5_ok and p6_ok and p7_ok
 
     summary = {
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
@@ -227,7 +341,11 @@ def gate() -> dict:
         "phase_1_pass": p1_ok,
         "phase_2_pass": p2_ok,
         "phase_3_pass": p3_ok,
-        "phases_4_8": "frozen",
+        "phase_4_pass": p4_ok,
+        "phase_5_pass": p5_ok,
+        "phase_6_pass": p6_ok,
+        "phase_7_pass": p7_ok,
+        "phases_8": "frozen" if p7_ok else "blocked",
         "all_pass": all_pass,
         "open_issues": sorted(open_set),
         "no_partial_credit": True,
@@ -244,13 +362,17 @@ def gate() -> dict:
             "phase_1": "validated" if p1_ok else "fail",
             "phase_2": "validated" if p2_ok else ("blocked" if not p1_ok else "fail"),
             "phase_3": "validated" if p3_ok else ("blocked" if not p2_ok else "fail"),
+            "phase_4": "validated" if p4_ok else ("blocked" if not p3_ok else "fail"),
+            "phase_5": "validated" if p5_ok else ("blocked" if not p4_ok else "fail"),
+            "phase_6": "validated" if p6_ok else ("blocked" if not p5_ok else "fail"),
+            "phase_7": "validated" if p7_ok else ("blocked" if not p6_ok else "fail"),
+            "phase_8": "frozen",
         }
         for phase in data.get("phases", []):
             pid = phase["id"]
             if pid in status_map:
                 phase["status"] = status_map[pid]
-            elif pid in data.get("frozen_phases", []):
-                phase["status"] = "frozen"
+        data["frozen_phases"] = [p for p, st in status_map.items() if st == "frozen"]
         TRACKING.write_text(json.dumps(data, indent=2), encoding="utf-8")
 
     return summary
@@ -267,7 +389,11 @@ def main() -> int:
         "phase_1_pass": summary["phase_1_pass"],
         "phase_2_pass": summary["phase_2_pass"],
         "phase_3_pass": summary["phase_3_pass"],
-        "phases_4_8": summary["phases_4_8"],
+        "phase_4_pass": summary["phase_4_pass"],
+        "phase_5_pass": summary["phase_5_pass"],
+        "phase_6_pass": summary["phase_6_pass"],
+        "phase_7_pass": summary["phase_7_pass"],
+        "phases_8": summary["phases_8"],
         "open_issues": summary["open_issues"],
         "evidence_file": str(EVIDENCE.relative_to(ROOT)),
     }, indent=2))
