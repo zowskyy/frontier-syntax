@@ -1,0 +1,49 @@
+---
+description: AUTO-ENABLED — GA protocol north star; every session ends with release readiness audit
+alwaysApply: true
+---
+
+# GA protocol — AUTOMATIC
+
+**North star:** `RELEASE_READY` from `scripts/release_readiness.py --audit`. Gate-slice fixes are steps on this path, not the finish line.
+
+## Verdict ladder
+
+| Verdict | Meaning |
+|---------|---------|
+| `NOT_READY` | RC blockers remain |
+| `RC_READY` | Compiler RC; GA blockers still open |
+| `RELEASE_READY` | GA GO |
+
+## End-of-session (mandatory)
+
+Before delivering work to the user, run:
+
+```bash
+python3 scripts/release_readiness.py --audit --skip-run
+```
+
+If `--skip-run` manifests are stale, run full audit (requires cargo/wasmtime locally; CI is authoritative for Rust).
+
+Report in the final response:
+
+- **Verdict** (`NOT_READY` / `RC_READY` / `RELEASE_READY`)
+- **GA blockers** from `manifest/release_readiness.json`
+- **Next GA step** (smallest blocker to clear)
+
+## Honesty rule
+
+- Do not claim GA, launch-ready, or phase-validated status unless evidence manifests and `TRACKING.json` agree.
+- Keep `NOT VERIFIED` markers in checklists until `verdict == RELEASE_READY`.
+
+## Vocabulary
+
+- **Gate slice** — CI exit for a phase (e.g. Phase 5: `main.fr` → wasmtime → 840)
+- **Mission slice** — long-horizon goal (e.g. M5b full compiler in `main.fr`)
+- **GA** — `RELEASE_READY` orchestrator
+
+## When changing compiler / tracking / CI
+
+1. Prefer fixes that advance GA blockers, not only the next red CI step.
+2. Split Gate slice vs Mission slice milestones (M5 gate vs M5b full compiler).
+3. Wire Taylor W2 + Compiler Gate to `taylor_phase5_mission.py` and full `tracking.py gate`.

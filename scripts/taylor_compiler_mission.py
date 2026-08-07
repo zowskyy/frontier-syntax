@@ -48,9 +48,9 @@ MILESTONES = [
         "complete_when": "issue_46_closed",
     },
     {
-        "id": "M5",
+        "id": "M5b",
         "name": "phase5_full_compiler",
-        "description": "Grow main.fr to full compiler; Phase 5 exit — optional long-horizon",
+        "description": "Grow main.fr to full compiler — Mission slice (long horizon)",
         "complete_when": "main_fr_full_compiler",
         "optional": True,
     },
@@ -162,8 +162,26 @@ def advance(*, apply: bool = False) -> dict[str, Any]:
             "pass": ev["pass"],
             "updated_at": utc_now(),
         }
+        if ms["id"] == "M5b":
+            mission["milestones"]["M5b"]["slice"] = "mission"
         if not ev.get("optional") and not ev["pass"]:
             all_required_pass = False
+
+    # Preserve M5 Gate slice — owned by verify_main_fr_native / taylor_phase5_mission
+    if "M5" not in mission["milestones"]:
+        gate_manifest = ROOT / "manifest" / "main_fr_native.json"
+        gate_pass = False
+        if gate_manifest.exists():
+            try:
+                gate_pass = bool(json.loads(gate_manifest.read_text(encoding="utf-8")).get("pass"))
+            except json.JSONDecodeError:
+                pass
+        mission["milestones"]["M5"] = {
+            "name": "main_fr_native_gate",
+            "slice": "gate",
+            "pass": gate_pass,
+            "updated_at": utc_now(),
+        }
 
     # Required milestones: M1-M4 (not M5 optional Phase 5)
     required_ids = [m["id"] for m in MILESTONES if not m.get("optional")]

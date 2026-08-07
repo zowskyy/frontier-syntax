@@ -19,6 +19,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 MANIFEST = ROOT / "manifest" / "release_readiness.json"
+GA_STATUS = ROOT / "manifest" / "ga_status.json"
 DEFAULT_REPORT = ROOT / "audit_reports" / "RELEASE_READINESS_REPORT.md"
 TRACKING = ROOT / "TRACKING.json"
 
@@ -95,10 +96,26 @@ def frozen_phases_complete() -> dict:
 
 
 def m5_complete() -> dict:
-    data = read_json(ROOT / "manifest" / "compiler_self_host_mission.json")
-    m5 = data.get("milestones", {}).get("M5", {})
-    ok = m5.get("pass") is True
-    return {"pass": ok, "milestone": "M5", "reason": m5.get("reason")}
+    """M5 Gate slice (main_fr_native) satisfies GA v1; M5b full compiler is stretch."""
+    gate = read_json(ROOT / "manifest" / "main_fr_native.json")
+    gate_ok = gate.get("pass") is True
+    mission = read_json(ROOT / "manifest" / "compiler_self_host_mission.json")
+    m5_gate = mission.get("milestones", {}).get("M5", {})
+    if not gate_ok and m5_gate.get("pass") is True:
+        gate_ok = True
+    m5b = mission.get("milestones", {}).get("M5b", {})
+    mission_ok = m5b.get("pass") is True
+    ok = gate_ok or mission_ok
+    reason = None
+    if not ok:
+        reason = gate.get("native", {}).get("error") or m5_gate.get("reason") or m5b.get("reason")
+    return {
+        "pass": ok,
+        "gate_slice": gate_ok,
+        "mission_slice": mission_ok,
+        "milestone": "M5",
+        "reason": reason,
+    }
 
 
 def launch_items_pending() -> dict:
@@ -252,6 +269,26 @@ def write_report(result: dict, path: Path) -> None:
     path.write_text("\n".join(lines), encoding="utf-8")
 
 
+def write_ga_status(result: dict) -> None:
+    GA_STATUS.parent.mkdir(parents=True, exist_ok=True)
+    GA_STATUS.write_text(
+        json.dumps(
+            {
+                "target": "RELEASE_READY",
+                "verdict": result["verdict"],
+                "ga_ready": result["ga_ready"],
+                "rc_ready": result["rc_ready"],
+                "blockers": result["blockers"],
+                "rc_blockers": result["rc_blockers"],
+                "audited_at": result["audited_at"],
+                "manifest": str(MANIFEST.relative_to(ROOT)),
+            },
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Release readiness audit")
     parser.add_argument("--audit", action="store_true", help="Run audit and write reports")
@@ -268,6 +305,7 @@ def main() -> int:
     MANIFEST.parent.mkdir(parents=True, exist_ok=True)
     MANIFEST.write_text(json.dumps(result, indent=2), encoding="utf-8")
     write_report(result, args.output if args.output.is_absolute() else ROOT / args.output)
+    write_ga_status(result)
 
     print(json.dumps({
         "verdict": result["verdict"],
