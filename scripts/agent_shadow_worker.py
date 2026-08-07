@@ -163,8 +163,11 @@ def cmd_run(args: argparse.Namespace) -> int:
             actions.append("readme:post-ecosystem")
 
     if args.taylor:
+        taylor_cmd = [sys.executable, str(TAYLOR), "run", "--mode", args.taylor_mode]
+        if args.taylor_apply:
+            taylor_cmd.append("--apply")
         r = subprocess.run(
-            [sys.executable, str(TAYLOR), "run", "--mode", args.taylor_mode],
+            taylor_cmd,
             cwd=REPO,
             capture_output=True,
             text=True,
@@ -215,6 +218,11 @@ def main() -> int:
         default="end-of-turn",
         choices=["end-of-turn", "daily", "production", "full"],
         help="Taylor mode when --taylor is set (default: end-of-turn)",
+    )
+    r.add_argument(
+        "--taylor-apply",
+        action="store_true",
+        help="with --taylor: close eligible GitHub issues (--apply on taylor_ops_team)",
     )
     r.set_defaults(func=cmd_run)
     c = sub.add_parser("install-cron")

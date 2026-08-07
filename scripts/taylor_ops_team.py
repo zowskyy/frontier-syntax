@@ -13,8 +13,12 @@ Production pipeline (mode=production):
     W5 WasmSizer       → measure_wasm_size + optimize
 
   Group 3 SHIP (Production hardening + launch prep) — parallel:
-    W6 GitHubOps       → issues + PRs + CI workflow
+    W6 GitHubOps       → issues + PRs + CI + issue closure orchestration
     W7 LaunchContinuity → ecosystem gather + README status + process log
+
+Issue closure (all modes except end-of-turn):
+  Each worker audits/closes its canonical GitHub issues via scripts/taylor_issue_closer.py
+  after verification steps. W6 runs the full sweep. Use --apply to close on GitHub.
 
 Modes:
   end-of-turn   — W3 + W7 (fast; shadow worker default)
@@ -40,6 +44,7 @@ MANIFEST = REPO / "manifest" / "taylor_ops_team.json"
 REPORT = REPO / "audit_reports" / "taylor_ops_team_report.md"
 INVENTORY = REPO / "manifest" / "interaction_script_inventory.json"
 LOGGER = REPO / "scripts" / "agent_audit_logger.py"
+ISSUE_CLOSER = REPO / "scripts" / "taylor_issue_closer.py"
 
 # ---------------------------------------------------------------------------
 # Team roster — 7 workers in 3 groups
@@ -59,10 +64,12 @@ WORKERS: dict[str, dict[str, Any]] = {
     "W2_CompilerCore": {
         "group": 1,
         "name": "CompilerCore",
-        "role": "Phase 1 P0 — wasm_codegen + self-hosting verification",
+        "role": "Phase 1 P0 — wasm_codegen + self-hosting verification; closes #44–#46",
+        "issue_numbers": [44, 45, 46],
         "scripts": [
             "scripts/verify_self_hosting.py",
             "scripts/measure_wasm_size.py",
+            "scripts/taylor_issue_closer.py",
         ],
         "commands": [
             ["cargo", "test", "--lib", "wasm_codegen::", "--quiet"],
@@ -91,10 +98,12 @@ WORKERS: dict[str, dict[str, Any]] = {
     "W4_SpecParity": {
         "group": 2,
         "name": "SpecParity",
-        "role": "Phase 2 — spec/impl bridge + language hardening",
+        "role": "Phase 2 — spec/impl bridge + language hardening; closes #47",
+        "issue_numbers": [47],
         "scripts": [
             "scripts/spec_impl_bridge.py",
             "scripts/verify_language_hardening.py",
+            "scripts/taylor_issue_closer.py",
         ],
         "commands": [
             [sys.executable, "scripts/spec_impl_bridge.py"],
@@ -105,11 +114,13 @@ WORKERS: dict[str, dict[str, Any]] = {
     "W5_WasmSizer": {
         "group": 2,
         "name": "WasmSizer",
-        "role": "Phase 3 — WASM size target (#48); audit history before optimize",
+        "role": "Phase 3 — WASM size target (#48); audit history before optimize; closes #48",
+        "issue_numbers": [48],
         "scripts": [
             "scripts/audit_wasm_size_history.py",
             "scripts/measure_wasm_size.py",
             "scripts/optimize_wasm_size.py",
+            "scripts/taylor_issue_closer.py",
         ],
         "commands": [
             [sys.executable, "scripts/audit_wasm_size_history.py"],
@@ -122,18 +133,22 @@ WORKERS: dict[str, dict[str, Any]] = {
     "W6_GitHubOps": {
         "group": 3,
         "name": "GitHubOps",
-        "role": "Issues + PRs + CI — production ship checklist",
+        "role": "Issues + PRs + CI — orchestrates canonical issue closure (#44–#48)",
+        "issue_numbers": [44, 45, 46, 47, 48],
         "scripts": [
             "scripts/dedupe_issues.py",
             "scripts/swarm_resolve_prs.py",
+            "scripts/taylor_issue_closer.py",
             ".github/workflows/blueprint-gate.yml",
         ],
         "commands": [
             ["gh", "issue", "list", "--state", "open", "--json", "number,title,labels"],
             ["gh", "pr", "list", "--state", "open", "--json", "number,title,headRefName,isDraft"],
+            [sys.executable, "scripts/taylor_issue_closer.py", "audit"],
         ],
         "apply_commands": [
             [sys.executable, "scripts/dedupe_issues.py"],
+            [sys.executable, "scripts/taylor_issue_closer.py", "close", "--apply"],
         ],
         "allow_nonzero": False,
     },
@@ -258,7 +273,32 @@ def run_cmd(cmd: list[str], timeout: int = 300) -> dict[str, Any]:
         }
 
 
-def run_worker(wid: str, *, apply: bool = False, mode: str = "daily") -> dict[str, Any]:
+def run_issue_closure_for_worker(
+    wid: str,
+    *,
+    apply: bool = False,
+    run_id: str | None = None,
+    mode: str = "daily",
+) -> dict[str, Any] | None:
+    """Independent validator pass for issues owned by this worker."""
+    if mode == "end-of-turn":
+        return None
+    spec = WORKERS.get(wid, {})
+    if not spec.get("issue_numbers") or not ISSUE_CLOSER.exists():
+        return None
+    cmd = [sys.executable, str(ISSUE_CLOSER), "close", "--worker", wid]
+    if apply:
+        cmd.append("--apply")
+    if run_id:
+        cmd.extend(["--run-id", run_id])
+    step = run_cmd(cmd, timeout=600)
+    step["issue_closure"] = True
+    step["worker"] = wid
+    step["issues_owned"] = spec.get("issue_numbers")
+    return step
+
+
+def run_worker(wid: str, *, apply: bool = False, mode: str = "daily", run_id: str | None = None) -> dict[str, Any]:
     spec = WORKERS[wid]
     result: dict[str, Any] = {
         "id": wid,
@@ -354,6 +394,14 @@ def run_worker(wid: str, *, apply: bool = False, mode: str = "daily") -> dict[st
         if not wf.exists():
             result["ok"] = False
 
+    closure = run_issue_closure_for_worker(wid, apply=apply, run_id=run_id, mode=mode)
+    if closure:
+        result["steps"].append(closure)
+        result["issue_closure"] = {
+            "eligible": "eligible" in (closure.get("stdout_tail") or ""),
+            "applied": apply,
+        }
+
     result["finished_at"] = utc_now()
     return result
 
@@ -366,6 +414,7 @@ def run_group(
     parallel: bool,
     mode: str = "daily",
     force_sequential: bool = False,
+    run_id: str | None = None,
 ) -> dict[str, Any]:
     meta = GROUPS[gid]
     group_result: dict[str, Any] = {
@@ -387,7 +436,7 @@ def run_group(
 
     if use_parallel and len(active) > 1:
         with ThreadPoolExecutor(max_workers=len(active)) as pool:
-            futs = {pool.submit(run_worker, w, apply=apply, mode=mode): w for w in active}
+            futs = {pool.submit(run_worker, w, apply=apply, mode=mode, run_id=run_id): w for w in active}
             for fut in as_completed(futs):
                 wr = fut.result()
                 group_result["workers"].append(wr)
@@ -395,7 +444,7 @@ def run_group(
                     group_result["ok"] = False
     else:
         for w in active:
-            wr = run_worker(w, apply=apply, mode=mode)
+            wr = run_worker(w, apply=apply, mode=mode, run_id=run_id)
             group_result["workers"].append(wr)
             if not wr["ok"]:
                 group_result["ok"] = False
@@ -446,6 +495,18 @@ def write_report(run: dict[str, Any]) -> None:
                     f"| `{cmd}` | {s.get('exit_code')} | {s.get('duration_s', '?')}s |"
                 )
             lines.append("")
+
+    lines.append("")
+    closure_path = REPO / "manifest" / "issue_closure_status.json"
+    if closure_path.exists():
+        closure = json.loads(closure_path.read_text(encoding="utf-8"))
+        lines.append("## Issue closure (Taylor Ops validator)")
+        lines.append("")
+        lines.append(f"Eligible: `{closure.get('eligible_to_close', [])}`  ")
+        lines.append(f"Closed this run: `{closure.get('closed_this_run', [])}`  ")
+        lines.append(f"Still open: `{closure.get('still_open', [])}`  ")
+        lines.append(f"Report: `audit_reports/issue_closure_report.md`")
+        lines.append("")
 
     lines.append("## Production readiness")
     lines.append("")
@@ -532,10 +593,17 @@ def cmd_run(args: argparse.Namespace) -> int:
         if not group_workers:
             continue
         within_parallel = group_parallel and not GROUPS[gid].get("sequential", False)
-        gr = run_group(gid, workers, apply=args.apply, parallel=within_parallel and not args.sequential, mode=mode)
+        gr = run_group(gid, workers, apply=args.apply, parallel=within_parallel and not args.sequential, mode=mode, run_id=run_id)
         run["groups"].append(gr)
         if not gr.get("skipped") and not gr["ok"]:
             run["ok"] = False
+
+    # Final independent validator sweep (W6 orchestration) — daily/production/full only
+    if mode != "end-of-turn" and ISSUE_CLOSER.exists():
+        sweep_cmd = [sys.executable, str(ISSUE_CLOSER), "close", "--run-id", run_id]
+        if args.apply:
+            sweep_cmd.append("--apply")
+        run["issue_closure_sweep"] = run_cmd(sweep_cmd, timeout=600)
 
     # Production readiness: honest assessment from gate + wasm manifest
     if mode in ("production", "full"):
@@ -603,7 +671,7 @@ def main() -> int:
         default="daily",
         help="end-of-turn | daily | production | full (default: daily)",
     )
-    r.add_argument("--apply", action="store_true", help="allow mutating GitHub actions (dedupe)")
+    r.add_argument("--apply", action="store_true", help="close eligible GitHub issues + dedupe (mutating)")
     r.add_argument("--sequential", action="store_true", help="disable within-group parallelism")
     r.set_defaults(func=cmd_run)
 
