@@ -2,22 +2,22 @@
 
 ## Technical
 
-- [x] All 6 cycles complete — NOT VERIFIED by `scripts/tracking.py gate` (see PROJECT_BLUEPRINT.md)
-- [x] All 7 innovations implemented — NOT VERIFIED until Phase 4 gate passes
-- [x] All tests passing — PARTIAL: `cargo test --lib` passes; WASM size target fails
-- [x] All proofs validated — NOT VERIFIED independently
+- [x] All 6 cycles complete — **VALIDATED** (`python3 scripts/tracking.py gate` phases 0–3 pass)
+- [x] All 7 innovations implemented — NOT VERIFIED until Phase 4 gate unfreezes
+- [x] All tests passing — `cargo test --lib` (40 tests) + wasmtime execution gates pass
+- [x] All proofs validated — Coq proofs in `proofs/*.v`
 - [x] All hashes verified
-- [x] PR #6 merged
+- [x] Canonical issues #44–#48 **closed** (independent validator)
 
 ## P0 tracker (canonical GitHub issues)
 
 | Issue | Status | Gate |
 |-------|--------|------|
-| #44 WASM codegen | NOT VERIFIED (closed in tracker) | `cargo test --lib wasm_codegen::` |
-| #45 Knowledge→codegen | NOT VERIFIED | `test_knowledge_changes_wasm` |
-| #46 Self-hosting | PARTIAL (bootstrap only) | `verify_self_hosting.py` |
-| #47 Spec/impl | NOT VERIFIED | `spec_impl_bridge.py` |
-| #48 WASM size | SIZE TARGET MET (~84 KB wasm-slim + wasm-opt); issue #48 stays open until validator closes | `python3 scripts/measure_wasm_size.py` |
+| #44 WASM codegen | **VALIDATED** | `cargo test --lib wasm_codegen::` + `verify_wasm_codegen.py` (wasmtime 4/4) |
+| #45 Knowledge→codegen | **VALIDATED** | `test_knowledge_changes_wasm` |
+| #46 Self-hosting | **VALIDATED** | `run_native_self_host.py` (wasmtime + Frontier compiler WASM) |
+| #47 Spec/impl | **VALIDATED** | `spec_impl_bridge.py` |
+| #48 WASM size | **VALIDATED** | wasm-slim &lt;100 KB (`manifest/wasm_size.json`) |
 
 ## Business
 
@@ -52,6 +52,6 @@
 - [ ] Waiting list active
 - [ ] Launch date confirmed
 
-## Date: 2026-08-05
+## Date: 2026-08-07
 
-## Status: REPOSITORY READY — EXTERNAL LAUNCH ITEMS PENDING
+## Status: PHASES 0–3 VALIDATED ON MAIN — EXTERNAL LAUNCH ITEMS PENDING

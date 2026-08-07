@@ -1,5 +1,5 @@
 {
-  "verified_at": "2026-08-07T03:37:59.104152Z",
+  "verified_at": "2026-08-07T05:22:15.105722Z",
   "script": "scripts/verify_self_hosting.py",
   "source": "frontier/src/main.fr",
   "bootstrap_pass": true,
@@ -11,7 +11,7 @@
     "output": "PASS: Self-hosting bootstrap (cmp identical)"
   },
   "native": {
-    "verified_at": "2026-08-07T03:37:59.098630Z",
+    "verified_at": "2026-08-07T05:22:15.100812Z",
     "script": "scripts/run_native_self_host.py",
     "source": "frontier/src/self_host_probe.fr",
     "compiler_wasm": "target/wasm32-unknown-unknown/release/frontier.wasm",

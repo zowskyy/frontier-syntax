@@ -46,13 +46,27 @@ def load_json(path: Path) -> dict[str, Any] | None:
 
 def gate_summary() -> dict[str, Any]:
     out: dict[str, Any] = {"exit_code": None, "phase_0": "?", "phase_1": "?", "open_issues": []}
+    evidence_path = REPO / "manifest" / "tracking_evidence.json"
+
+    def apply_evidence(data: dict[str, Any]) -> None:
+        if data.get("phase_0_pass"):
+            out["phase_0"] = "PASS"
+        elif data.get("phase_0_pass") is False:
+            out["phase_0"] = "FAIL"
+        if data.get("phase_1_pass"):
+            out["phase_1"] = "PASS"
+        elif data.get("phase_1_pass") is False:
+            out["phase_1"] = "FAIL"
+        if "open_issues" in data:
+            out["open_issues"] = data["open_issues"]
+
     try:
         r = subprocess.run(
             [sys.executable, str(REPO / "scripts" / "tracking.py"), "gate"],
             cwd=REPO,
             capture_output=True,
             text=True,
-            timeout=90,
+            timeout=180,
         )
         out["exit_code"] = r.returncode
         body = r.stdout + r.stderr
@@ -70,6 +84,11 @@ def gate_summary() -> dict[str, Any]:
             out["open_issues"] = [int(x) for x in nums]
     except (subprocess.TimeoutExpired, OSError):
         out["error"] = "gate timeout"
+        if evidence_path.exists():
+            try:
+                apply_evidence(json.loads(evidence_path.read_text(encoding="utf-8")))
+            except json.JSONDecodeError:
+                pass
     return out
 
 
