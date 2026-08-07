@@ -1,30 +1,13 @@
 {
-  "run_id": "20260807T000735Z",
-  "audited_at": "2026-08-07T00:08:34.175637Z",
+  "run_id": "20260807T030314Z",
+  "audited_at": "2026-08-07T03:10:21.723869Z",
   "validator": "Taylor Ops Independent Validator (scripts/taylor_issue_closer.py)",
   "apply": true,
   "worker_filter": null,
-  "open_before": [
-    44,
-    45,
-    46,
-    47,
-    48
-  ],
-  "eligible_to_close": [
-    44,
-    45,
-    48
-  ],
-  "closed_this_run": [
-    44,
-    45,
-    48
-  ],
-  "still_open": [
-    46,
-    47
-  ],
+  "open_before": [],
+  "eligible_to_close": [],
+  "closed_this_run": [],
+  "still_open": [],
   "issues": [
     {
       "issue": 44,
@@ -32,33 +15,12 @@
       "phase": "1.1",
       "worker": "W2_CompilerCore",
       "title": "wasm_codegen_incomplete",
-      "open": true,
-      "eligible": true,
+      "open": false,
+      "eligible": false,
       "closed": false,
-      "steps": [
-        {
-          "command": "cargo test --lib wasm_codegen:: --quiet",
-          "pass": true,
-          "exit_code": 0,
-          "output_tail": "truct Lexer<'a> {\n   |            ----- field in this struct\n11 |     input: &'a str,\n   |     ^^^^^\n   |\n   = note: `#[warn(dead_code)]` on by default\n\nwarning: field `diagnostics` is never read\n   --> src/neural/completion.rs:149:5\n    |\n147 | pub struct NeuralLspServer {\n    |            --------------- field in this struct\n148 |     completion: NeuralCompletion,\n149 |     diagnostics: Vec<JsonValue>,\n    |     ^^^^^^^^^^^\n\nwarning: method `parse_fn` is never used\n   --> src/parser/handwritten.rs:349:8\n    |\n12  | impl Parser {\n    | ----------- method in this implementation\n...\n349 |     fn parse_fn(&mut self) -> Result<Stmt, FrontierError> {\n    |        ^^^^^^^^\n\nwarning: method `check_null_safety` is never used\n   --> src/resolver.rs:140:8\n    |\n37  | impl Resolver {\n    | ------------- method in this implementation\n...\n140 |     fn check_null_safety(&self, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {\n    |        ^^^^^^^^^^^^^^^^^\n\nwarning: function `export_section_multi` is never used\n   --> src/wasm_codegen.rs:633:4\n    |\n633 | fn export_section_multi(names: &[String], main_func_count: usize) -> Vec<u8> {\n    |    ^^^^^^^^^^^^^^^^^^^^\n\n",
-          "check": "verification_command"
-        },
-        {
-          "command": "python3 scripts/verify_wasm_codegen.py",
-          "pass": true,
-          "exit_code": 0,
-          "output_tail": "{\n  \"pass\": true,\n  \"verified_at\": \"2026-08-07T00:07:51.572715Z\",\n  \"script\": \"scripts/verify_wasm_codegen.py\",\n  \"wasmtime\": \"/usr/local/cargo/bin/wasmtime\",\n  \"all_pass\": true,\n  \"cases\": [\n    {\n      \"name\": \"const_return\",\n      \"pass\": true,\n      \"expected\": 42,\n      \"actual\": 42,\n      \"compile_ok\": true,\n      \"run_ok\": true,\n      \"output\": \"ok\"\n    },\n    {\n      \"name\": \"let_if\",\n      \"pass\": true,\n      \"expected\": 10,\n      \"actual\": 10,\n      \"compile_ok\": true,\n      \"run_ok\": true,\n      \"output\": \"ok\"\n    },\n    {\n      \"name\": \"while_loop\",\n      \"pass\": true,\n      \"expected\": 13,\n      \"actual\": 13,\n      \"compile_ok\": true,\n      \"run_ok\": true,\n      \"output\": \"ok\"\n    },\n    {\n      \"name\": \"function_call\",\n      \"pass\": true,\n      \"expected\": 42,\n      \"actual\": 42,\n      \"compile_ok\": true,\n      \"run_ok\": true,\n      \"output\": \"ok\"\n    }\n  ]\n}\n",
-          "check": "verification_command"
-        },
-        {
-          "check": "evidence_manifest",
-          "path": "manifest/wasm_codegen_verify.json",
-          "field": "all_pass",
-          "value": true,
-          "pass": true
-        }
-      ],
-      "blockers": []
+      "steps": [],
+      "blockers": [],
+      "already_closed": true
     },
     {
       "issue": 45,
@@ -66,19 +28,12 @@
       "phase": "1.2",
       "worker": "W2_CompilerCore",
       "title": "knowledge_warnings_only",
-      "open": true,
-      "eligible": true,
+      "open": false,
+      "eligible": false,
       "closed": false,
-      "steps": [
-        {
-          "command": "cargo test --lib wasm_codegen::tests::test_knowledge_changes_wasm --quiet",
-          "pass": true,
-          "exit_code": 0,
-          "output_tail": "truct Lexer<'a> {\n   |            ----- field in this struct\n11 |     input: &'a str,\n   |     ^^^^^\n   |\n   = note: `#[warn(dead_code)]` on by default\n\nwarning: field `diagnostics` is never read\n   --> src/neural/completion.rs:149:5\n    |\n147 | pub struct NeuralLspServer {\n    |            --------------- field in this struct\n148 |     completion: NeuralCompletion,\n149 |     diagnostics: Vec<JsonValue>,\n    |     ^^^^^^^^^^^\n\nwarning: method `parse_fn` is never used\n   --> src/parser/handwritten.rs:349:8\n    |\n12  | impl Parser {\n    | ----------- method in this implementation\n...\n349 |     fn parse_fn(&mut self) -> Result<Stmt, FrontierError> {\n    |        ^^^^^^^^\n\nwarning: method `check_null_safety` is never used\n   --> src/resolver.rs:140:8\n    |\n37  | impl Resolver {\n    | ------------- method in this implementation\n...\n140 |     fn check_null_safety(&self, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {\n    |        ^^^^^^^^^^^^^^^^^\n\nwarning: function `export_section_multi` is never used\n   --> src/wasm_codegen.rs:633:4\n    |\n633 | fn export_section_multi(names: &[String], main_func_count: usize) -> Vec<u8> {\n    |    ^^^^^^^^^^^^^^^^^^^^\n\n",
-          "check": "verification_command"
-        }
-      ],
-      "blockers": []
+      "steps": [],
+      "blockers": [],
+      "already_closed": true
     },
     {
       "issue": 46,
@@ -86,26 +41,12 @@
       "phase": "1.3",
       "worker": "W2_CompilerCore",
       "title": "self_hosting_zero",
-      "open": true,
+      "open": false,
       "eligible": false,
       "closed": false,
-      "steps": [
-        {
-          "check": "native_self_host",
-          "pass": false,
-          "reason": "Bootstrap Rust wrapper \u2260 Frontier-native compiler (PROJECT_BLUEPRINT.md slice 1.3)"
-        },
-        {
-          "command": "python3 scripts/verify_self_hosting.py",
-          "pass": true,
-          "exit_code": 0,
-          "output_tail": "PASS: Self-hosting bootstrap (cmp identical)\n",
-          "check": "verification_command"
-        }
-      ],
-      "blockers": [
-        "Bootstrap Rust wrapper \u2260 Frontier-native compiler (PROJECT_BLUEPRINT.md slice 1.3)"
-      ]
+      "steps": [],
+      "blockers": [],
+      "already_closed": true
     },
     {
       "issue": 47,
@@ -113,23 +54,12 @@
       "phase": "2.1",
       "worker": "W4_SpecParity",
       "title": "spec_impl_gap",
-      "open": true,
+      "open": false,
       "eligible": false,
       "closed": false,
-      "steps": [
-        {
-          "command": "python3 scripts/spec_impl_bridge.py",
-          "pass": true,
-          "exit_code": 0,
-          "output_tail": "PASS: Spec/impl bridge \u2014 10 core modules mapped\n",
-          "check": "verification_command"
-        }
-      ],
-      "blockers": [
-        "dependency issue #44 still open",
-        "dependency issue #45 still open",
-        "dependency issue #46 still open"
-      ]
+      "steps": [],
+      "blockers": [],
+      "already_closed": true
     },
     {
       "issue": 48,
@@ -137,52 +67,13 @@
       "phase": "3.1",
       "worker": "W5_WasmSizer",
       "title": "wasm_size",
-      "open": true,
-      "eligible": true,
+      "open": false,
+      "eligible": false,
       "closed": false,
-      "steps": [
-        {
-          "command": "python3 scripts/measure_wasm_size.py",
-          "pass": true,
-          "exit_code": 0,
-          "output_tail": "{\n  \"pass\": true,\n  \"measured_at\": \"2026-08-07T00:08:03.632871Z\",\n  \"measurement_script\": \"scripts/measure_wasm_size.py\",\n  \"build_command\": \"cargo build --release --lib --target wasm32-unknown-unknown --no-default-features --features wasm-slim\",\n  \"build_profile\": \"wasm-slim\",\n  \"artifact_path\": \"target/wasm32-unknown-unknown/release/frontier.opt.wasm\",\n  \"raw_artifact_path\": \"target/wasm32-unknown-unknown/release/frontier.wasm\",\n  \"raw_size_bytes\": 94916,\n  \"raw_size_kb\": 92.7,\n  \"wasm_opt_applied\": true,\n  \"size_bytes\": 86332,\n  \"size_kb\": 84.3,\n  \"target_kb\": 100,\n  \"met\": true,\n  \"git_sha\": \"5261a9b\",\n  \"note\": \"wasm-slim build: parser + codegen + compile_frontier_wasm export. Full browser API (BrowserCompiler) requires --features full. Baseline monolithic build was ~885 KB; slim + wasm-opt is measured here.\"\n}\n",
-          "check": "verification_command"
-        },
-        {
-          "check": "evidence_manifest",
-          "path": "manifest/wasm_size.json",
-          "field": "met",
-          "value": true,
-          "pass": true
-        }
-      ],
-      "blockers": []
+      "steps": [],
+      "blockers": [],
+      "already_closed": true
     }
   ],
-  "close_actions": [
-    {
-      "issue": 44,
-      "pass": true,
-      "exit_code": 0,
-      "output": "\u2713 Closed issue zowskyy/frontier-syntax#44 ([P0] wasm_codegen_incomplete: Only const-folded main() works; let/if/calls/loops missing)\n",
-      "worker": "W2_CompilerCore",
-      "phase": "1.1"
-    },
-    {
-      "issue": 45,
-      "pass": true,
-      "exit_code": 0,
-      "output": "\u2713 Closed issue zowskyy/frontier-syntax#45 ([P0] knowledge_warnings_only: Knowledge suggestions are warnings, not codegen changes)\n",
-      "worker": "W2_CompilerCore",
-      "phase": "1.2"
-    },
-    {
-      "issue": 48,
-      "pass": true,
-      "exit_code": 0,
-      "output": "\u2713 Closed issue zowskyy/frontier-syntax#48 ([P1] wasm_size_760kb: Full WASM build ~760 KB vs <100 KB target)\n",
-      "worker": "W5_WasmSizer",
-      "phase": "3.1"
-    }
-  ]
+  "close_actions": []
 }

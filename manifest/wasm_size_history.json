@@ -1,14 +1,22 @@
 {
-  "audited_at": "2026-08-06T23:46:12.727561Z",
+  "audited_at": "2026-08-07T03:08:34.005561Z",
   "auditor": "scripts/audit_wasm_size_history.py",
   "owner_directive": "Check git history and sibling branches for prior sub-100 KB WASM work (owner recalls ~98 KB in a prior chat) before any #48 remediation.",
-  "current_ref": "cursor/agent-legal-record-f519",
+  "current_ref": "cursor/frontier-universal-script-99bd",
   "current_manifest": {
     "size_kb": 84.3,
     "met": true,
     "git_sha": "188ef08"
   },
   "ref_snapshots": [
+    {
+      "ref": "HEAD",
+      "commit": "98bc6e8028e7",
+      "size_kb": 84.3,
+      "met": true,
+      "measured_at": "2026-08-06T23:45:51.383742Z",
+      "git_sha": "188ef08"
+    },
     {
       "ref": "cursor/frontier-syntax-cycle1-e39f",
       "commit": "3db369c529c4",
@@ -18,7 +26,7 @@
       "git_sha": "89d2924"
     },
     {
-      "ref": "cursor/wasm-size-phase3-f519",
+      "ref": "origin/cursor/wasm-size-phase3-f519",
       "commit": "d426b2bc3ace",
       "size_kb": 83.8,
       "met": true,
@@ -26,7 +34,7 @@
       "git_sha": "74390a2"
     },
     {
-      "ref": "cursor/blueprint-v2-wasm-llm-f519",
+      "ref": "origin/cursor/blueprint-v2-wasm-llm-f519",
       "commit": "9fd8ecc5de2c",
       "size_kb": 83.8,
       "met": true,
@@ -35,6 +43,20 @@
     }
   ],
   "commit_history": [
+    {
+      "commit": "c31a8be3ea79",
+      "subject": "Merge cursor/taylor-issue-closure-f519 into main",
+      "size_kb": 84.3,
+      "met": true,
+      "git_sha": "188ef08"
+    },
+    {
+      "commit": "5261a9b64461",
+      "subject": "Reconcile wasm-slim from wasm-size-phase3 \u2014 84.3 KB met:true on current branch",
+      "size_kb": 84.3,
+      "met": true,
+      "git_sha": "188ef08"
+    },
     {
       "commit": "9f86adbbb372",
       "subject": "WasmSizer: audit history before #48 \u2014 owner directive for prior sub-100KB work",
@@ -103,7 +125,7 @@
     {
       "file": "docs/agent_audit_log/README.md",
       "line": 17,
-      "excerpt": "| WASM size | 127.4 KB (target met: False) |"
+      "excerpt": "| WASM size | 84.3 KB (target met: True) |"
     },
     {
       "file": "docs/agent_audit_log/ecosystem_knowledge/ECOSYSTEM_KNOWLEDGE_REPORT.txt",
@@ -302,72 +324,107 @@
     },
     {
       "file": "audit_reports/wasm_size_history_report.md",
-      "line": 31,
-      "excerpt": "**RECONCILE_BEFORE_FIX: target already met on cursor/wasm-size-phase3-f519 (83.8 KB, commit d426b2bc3ace). Cherry-pick/merge wasm-slim changes before re-optimizing #48.**"
-    },
-    {
-      "file": "audit_reports/wasm_size_history_report.md",
-      "line": 37,
+      "line": 35,
       "excerpt": "- `9f86adbbb372` \u2014 127.4 KB (FAIL) \u2014 WasmSizer: audit history before #48 \u2014 owner directive for pr"
     },
     {
       "file": "audit_reports/wasm_size_history_report.md",
-      "line": 38,
+      "line": 36,
       "excerpt": "- `b0f0e2324113` \u2014 127.4 KB (FAIL) \u2014 Taylor Ops: production pipeline groups (Foundation\u2192Build\u2192Shi"
     },
     {
       "file": "audit_reports/wasm_size_history_report.md",
-      "line": 39,
+      "line": 37,
       "excerpt": "- `d4d0d31b7551` \u2014 127.4 KB (FAIL) \u2014 Taylor Ops: end-of-turn + daily gambit confirmed DONE"
     },
     {
       "file": "audit_reports/wasm_size_history_report.md",
-      "line": 40,
+      "line": 38,
       "excerpt": "- `5539845d5891` \u2014 127.4 KB (FAIL) \u2014 Taylor Ops Team: 7 workers in 3 groups wiring all interactio"
     },
     {
       "file": "audit_reports/wasm_size_history_report.md",
-      "line": 41,
+      "line": 39,
       "excerpt": "- `7c64dfc018b3` \u2014 83.8 KB (PASS) \u2014 feat: wasm-slim hits <100 KB target \u2014 885 KB \u2192 83.8 KB"
     },
     {
       "file": "audit_reports/wasm_size_history_report.md",
-      "line": 42,
+      "line": 40,
       "excerpt": "- `74390a254bcc` \u2014 127.4 KB (FAIL) \u2014 feat: wasm-slim build \u2014 885 KB \u2192 127 KB (phase 3 WASM work)"
     },
     {
       "file": "audit_reports/wasm_size_history_report.md",
-      "line": 43,
+      "line": 41,
       "excerpt": "- `89d2924621ca` \u2014 885.3 KB (FAIL) \u2014 fix: strict blueprint gate \u2014 no partial credit, freeze phase"
     },
     {
       "file": "audit_reports/wasm_size_history_report.md",
-      "line": 44,
+      "line": 42,
       "excerpt": "- `a0f43a26bea8` \u2014 885.3 KB (FAIL) \u2014 feat: 4 teams \u00d7 6 workers execute Peerless implementation pl"
     },
     {
       "file": "audit_reports/wasm_size_history_report.md",
-      "line": 45,
+      "line": 43,
       "excerpt": "- `2a3628b42a5f` \u2014 885.5 KB (FAIL) \u2014 feat: ultimate conclusion orchestrator \u2014 deploy swarms to co"
     },
     {
       "file": "audit_reports/peerless_gaps_report.md",
       "line": 50,
-      "excerpt": "\"output\": \"m-slim build: parser + codegen + compile_frontier_wasm export. Full browser API (BrowserCompiler) requires --features full. Baseline monolithic build was ~885 KB; slim + wasm-opt is measure"
+      "excerpt": "\"output\": \"WASM size: 885.3 KB (target <100 KB \\u2014 tracked)\\nPASS: WASM build OK \\u2014 885.3 KB tracked (target <100 KB)\\n\","
     },
     {
-      "file": "audit_reports/review_gather/phase9_config_files.txt",
-      "line": 174,
-      "excerpt": "\"name\": \"WASM binary <100 KB\","
+      "file": "audit_reports/post_audit_step_1_report.md",
+      "line": 19,
+      "excerpt": "| VSIX Package | `language-support/frontier-syntax-vscode/frontier-syntax-0.1.0.vsix` | Packaged (462 KB) |"
     },
     {
-      "file": "audit_reports/review_gather/phase9_config_files.txt",
-      "line": 221,
-      "excerpt": "\"48\": \"wasm_size_760kb\""
+      "file": "audit_reports/cycle_6_report.md",
+      "line": 14,
+      "excerpt": "| WASM Parser | `syntax/wasm_parser.wasm` | Created (245 KB) |"
+    },
+    {
+      "file": "audit_reports/review_gather/phase6_measure_wasm_size.txt",
+      "line": 20,
+      "excerpt": "\"note\": \"wasm-slim build: parser + codegen + compile_frontier_wasm export. Full browser API (BrowserCompiler) requires --features full. Baseline monolithic build was ~885 KB; slim + wasm-opt is measur"
+    },
+    {
+      "file": "audit_reports/review_gather/phase2_other_src_preview.txt",
+      "line": 177,
+      "excerpt": "//! Minimal wasm-bindgen surface for wasm-slim builds (<100 KB target)."
+    },
+    {
+      "file": "audit_reports/review_gather/phase3_workers.txt",
+      "line": 253,
+      "excerpt": "{\"id\": \"3b\", \"cmd\": [\"python3\", \"-c\", \"import json; d=json.load(open('manifest/wasm_size.json')); print(d); exit(0 if d.get('met') else 1)\"], \"doc\": \"Slice 3.1: target <100 KB\"},"
+    },
+    {
+      "file": "audit_reports/review_gather/phase3_workers.txt",
+      "line": 429,
+      "excerpt": "\"wasm_size_760kb\": 48,"
+    },
+    {
+      "file": "audit_reports/review_gather/phase1_structure.txt",
+      "line": 97,
+      "excerpt": "238\t./chat_scrub/gap_fixes/wasm_size_760kb.json"
+    },
+    {
+      "file": "audit_reports/review_gather/phase1_structure.txt",
+      "line": 105,
+      "excerpt": "216\t./chat_scrub/issues/wasm_size_760kb.md"
+    },
+    {
+      "file": "audit_reports/review_gather/phase1_structure.txt",
+      "line": 964,
+      "excerpt": "wasm_size_760kb.json"
+    },
+    {
+      "file": "audit_reports/review_gather/phase1_structure.txt",
+      "line": 986,
+      "excerpt": "wasm_size_760kb.md"
     }
   ],
   "best_met_snapshot": {
-    "ref": "cursor/wasm-size-phase3-f519",
+    "ref": "origin/cursor/wasm-size-phase3-f519",
     "commit": "d426b2bc3ace",
     "size_kb": 83.8,
     "met": true,

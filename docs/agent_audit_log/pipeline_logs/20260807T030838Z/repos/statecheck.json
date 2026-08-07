@@ -1,0 +1,47 @@
+{
+  "name": "statecheck",
+  "url": "https://github.com/zowskyy/statecheck",
+  "description": "",
+  "is_private": false,
+  "language": "Python",
+  "updated_at": "2026-08-07T00:28:30Z",
+  "category": "frontier_ecosystem",
+  "access_status": "ok",
+  "readme_excerpt": "# StateCheck\n\nA hard gate that stops an agent from running a tool unless a\ndeterministic pre-condition holds \u2014 and rolls back or taints the world if\na post-condition fails afterward. No prompts. No self-reports. Code\nexecuting and checking, nothing else.\n\nRead `PROTOCOL.md` for the actual spec \u2014 versioned, with a table of\ncontents. This file is the orientation.\n\n## Quick example\n\n```python\nfrom statecheck.tool_executor import ToolContract, execute_contracted\n\n# Predicates are plain Python callables, written by whoever authors the\n# tool \u2014 never strings passed in at call time, never something a model\n# supplies. This is deliberate: a string evaluated at runtime is exactly\n# the kind of dynamic, model-influenceable check this primitive exists\n# to rule out.\ndef repo_is_clean():\n    import subprocess\n    return subprocess.run([\"git\", \"status\", \"--porcelain\"], cwd=\"/repo\",\n                           capture_output=True, text=True).stdout == \"\"\n\ndef push_succeeded(result):\n    return result[\"returncode\"] == 0\n\ncontract = ToolContract(\n    name=\"git_push\",\n    pre_condition=repo_is_clean,\n    post_condition=push_succeeded,\n    is_mutating=True,\n)\n\ndef do_push():\n    import subprocess\n    r = subprocess.run([\"git\", \"push\", \"origin\", \"main\"], cwd=\"/repo\",\n                        capture_output=True, text=True)\n    return {\"returncode\": r.returncode}\n\nresult = execute_contracted(contract, do_push)\n# Returns whatever do_push() returned, on success.\n# Raises ContractViolation or ExecutionFailure on failure \u2014 see below.\n```\n\n## What's here\n\n```\nstatecheck/\n  verifier_search.py    the correctness gate + search loop\n                         (propose -> execute -> score -> mutate,\n                          sandboxed, fitness=0 if incorrect, full stop)\n  tool_executor.py       the StateCheck itself\n                         (pre_condition -> execute -> post_condition,\n                          real rollback where possible, taint-tracking\n                          with scoped recovery where it isn't)\n  tool_call_parser.py    robust parsing of a model's {\"tool\": ..., \"args\": ...}\n                         output \u2014 markdown fences, stray prose, single\n                         quotes, all handled without guessing\n... (182 more lines)",
+  "top_level_files": [
+    ".cursor",
+    ".cursorrules",
+    ".env.example",
+    ".github",
+    ".gitignore",
+    ".vscode",
+    "AGENTS.md",
+    "CONTRIBUTING.md",
+    "LICENSE",
+    "PARTICIPANT_BRIEF.md",
+    "PROTOCOL.md",
+    "README.md",
+    "comparative_claim",
+    "cursor_gate.py",
+    "cursor_gate_fastest.py",
+    "docs",
+    "external_validation",
+    "requirements-gate.txt",
+    "requirements.txt",
+    "samples",
+    "scripts",
+    "statecheck",
+    "tests"
+  ],
+  "claims": [
+    "(no explicit claims extracted from README)"
+  ],
+  "can_do": [
+    "Top-level structure visible (23 entries): .cursor, .cursorrules, .env.example, .github, .gitignore, .vscode, AGENTS.md, CONTRIBUTING.md",
+    "Python project indicators present"
+  ],
+  "cannot_do": [
+    "No .github/workflows at repo root (CI not confirmed)"
+  ],
+  "blueprint_relation": "Automation / worker scripts; may invoke frontier-syntax tooling."
+}

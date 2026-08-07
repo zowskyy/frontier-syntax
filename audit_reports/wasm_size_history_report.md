@@ -1,7 +1,7 @@
 # WASM Size History Audit
 
-**Audited:** 2026-08-06T23:46:12.727561Z  
-**Current ref:** `cursor/agent-legal-record-f519`  
+**Audited:** 2026-08-07T03:08:34.005561Z  
+**Current ref:** `cursor/frontier-universal-script-99bd`  
 
 ## Owner directive
 
@@ -17,13 +17,14 @@ Check git history and sibling branches for prior sub-100 KB WASM work (owner rec
 
 | ref | commit | size_kb | met |
 |-----|--------|---------|-----|
+| `HEAD` | `98bc6e8028e7` | 84.3 | True |
 | `cursor/frontier-syntax-cycle1-e39f` | `3db369c529c4` | 127.4 | False |
-| `cursor/wasm-size-phase3-f519` | `d426b2bc3ace` | 83.8 | True |
-| `cursor/blueprint-v2-wasm-llm-f519` | `9fd8ecc5de2c` | 83.8 | True |
+| `origin/cursor/wasm-size-phase3-f519` | `d426b2bc3ace` | 83.8 | True |
+| `origin/cursor/blueprint-v2-wasm-llm-f519` | `9fd8ecc5de2c` | 83.8 | True |
 
 ## Best historical `met: true`
 
-- **Ref:** `cursor/wasm-size-phase3-f519` @ `d426b2bc3ace`
+- **Ref:** `origin/cursor/wasm-size-phase3-f519` @ `d426b2bc3ace`
 - **Size:** 83.8 KB (target 100 KB)
 
 ## Recommendation
@@ -32,6 +33,8 @@ Check git history and sibling branches for prior sub-100 KB WASM work (owner rec
 
 ## Commit history (manifest/wasm_size.json)
 
+- `c31a8be3ea79` — 84.3 KB (PASS) — Merge cursor/taylor-issue-closure-f519 into main
+- `5261a9b64461` — 84.3 KB (PASS) — Reconcile wasm-slim from wasm-size-phase3 — 84.3 KB met:true
 - `9f86adbbb372` — 127.4 KB (FAIL) — WasmSizer: audit history before #48 — owner directive for pr
 - `b0f0e2324113` — 127.4 KB (FAIL) — Taylor Ops: production pipeline groups (Foundation→Build→Shi
 - `d4d0d31b7551` — 127.4 KB (FAIL) — Taylor Ops: end-of-turn + daily gambit confirmed DONE

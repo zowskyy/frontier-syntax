@@ -45,7 +45,17 @@ else
 fi
 echo "==> wasm-bindgen: $(wasm-bindgen --version)"
 
-# 3. Fetch dependencies and warm the build cache (native binaries + wasm).
+# 4. Wasmtime for empirical WASM execution (tracking gate 1.1 / 1.3).
+if command -v wasmtime >/dev/null 2>&1; then
+  echo "==> wasmtime already installed: $(wasmtime --version)"
+else
+  echo "==> Installing wasmtime v25.0.0"
+  curl -fsSL https://wasmtime.dev/install.sh | bash -s -- --version v25.0.0
+  export PATH="${HOME}/.wasmtime/bin:${PATH}"
+  echo "==> wasmtime: $(wasmtime --version)"
+fi
+
+# 5. Fetch dependencies and warm the build cache (native binaries + wasm).
 echo "==> Fetching crate dependencies"
 cargo fetch --locked
 

@@ -1,0 +1,22 @@
+{
+  "name": "GMFKNEEGA",
+  "url": "https://github.com/zowskyy/GMFKNEEGA",
+  "description": "GameMaker Master Knowledge Framework",
+  "is_private": true,
+  "language": "Python",
+  "updated_at": "2026-08-07T03:01:42Z",
+  "category": "fork_or_adjacent",
+  "access_status": "inaccessible_private",
+  "readme_excerpt": "(private \u2014 README not fetched)",
+  "top_level_files": [],
+  "claims": [
+    "GitHub description: GameMaker Master Knowledge Framework"
+  ],
+  "can_do": [
+    "(capabilities not verified \u2014 metadata-only scan)"
+  ],
+  "cannot_do": [
+    "Not part of Frontier blueprint critical path"
+  ],
+  "blueprint_relation": "Upstream fork or unrelated project \u2014 no blueprint phase dependency."
+}

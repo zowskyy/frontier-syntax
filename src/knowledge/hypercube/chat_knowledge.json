@@ -2,7 +2,7 @@
   "version": 1,
   "updated_at": "2026-08-06T00:25:03.644607Z",
   "source_report": "chat_scrub/WORKER_REPORT.json",
-  "entry_count": 638,
+  "entry_count": 683,
   "entries": [
     {
       "id": "ReDoS_lexer",
@@ -8157,6 +8157,591 @@
       ],
       "severity": "info",
       "source": "docs/lexicon_log.fr"
+    },
+    {
+      "id": "swarm_process_lexicon_export_341",
+      "category": "swarm_optimization",
+      "title": "Swarm: lexicon_export",
+      "content": "Decision: lexicon_bound_delta. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_lexicon_core_verify_342",
+      "category": "swarm_optimization",
+      "title": "Swarm: lexicon_core_verify",
+      "content": "Decision: lexicon_bound_alpha. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_spec_impl_bridge_343",
+      "category": "swarm_optimization",
+      "title": "Swarm: spec_impl_bridge",
+      "content": "Decision: lexicon_bound_gamma. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_sync_knowledge_344",
+      "category": "swarm_optimization",
+      "title": "Swarm: sync_knowledge",
+      "content": "Decision: lexicon_bound_gamma. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_user_ticket_verify_345",
+      "category": "swarm_optimization",
+      "title": "Swarm: user_ticket_verify",
+      "content": "Decision: lexicon_bound_gamma. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_lexicon_ingest_346",
+      "category": "swarm_optimization",
+      "title": "Swarm: lexicon_ingest",
+      "content": "Decision: lexicon_bound_gamma. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_wasm_build_347",
+      "category": "swarm_optimization",
+      "title": "Swarm: wasm_build",
+      "content": "Decision: lexicon_bound_alpha. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_lib_tests_348",
+      "category": "swarm_optimization",
+      "title": "Swarm: lib_tests",
+      "content": "Decision: lexicon_bound_delta. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_gpu_runtime_349",
+      "category": "swarm_optimization",
+      "title": "Swarm: gpu_runtime",
+      "content": "Decision: lexicon_bound_beta. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_ipfs_runtime_350",
+      "category": "swarm_optimization",
+      "title": "Swarm: ipfs_runtime",
+      "content": "Decision: lexicon_bound_beta. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P1_351",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P1",
+      "content": "Decision: close_Live GPU runtime. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_arc_status_352",
+      "category": "swarm_optimization",
+      "title": "Swarm: arc_status",
+      "content": "Decision: lexicon_bound_delta. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_cdx_runtime_353",
+      "category": "swarm_optimization",
+      "title": "Swarm: cdx_runtime",
+      "content": "Decision: lexicon_bound_beta. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_self_host_verify_354",
+      "category": "swarm_optimization",
+      "title": "Swarm: self_host_verify",
+      "content": "Decision: lexicon_bound_alpha. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_zk_tests_355",
+      "category": "swarm_optimization",
+      "title": "Swarm: zk_tests",
+      "content": "Decision: lexicon_bound_gamma. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P2_356",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P2",
+      "content": "Decision: close_Live IPFS runtime. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_main_fr_parse_357",
+      "category": "swarm_optimization",
+      "title": "Swarm: main_fr_parse",
+      "content": "Decision: lexicon_bound_alpha. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_wasm_codegen_tests_358",
+      "category": "swarm_optimization",
+      "title": "Swarm: wasm_codegen_tests",
+      "content": "Decision: lexicon_bound_alpha. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P3_359",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P3",
+      "content": "Decision: close_Live CDX streaming. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P4_360",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P4",
+      "content": "Decision: close_WASM size optimization. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_arc_verify_361",
+      "category": "swarm_optimization",
+      "title": "Swarm: arc_verify",
+      "content": "Decision: lexicon_bound_delta. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P5_362",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P5",
+      "content": "Decision: close_True self-hosting in Frontier. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_peerless_P6_363",
+      "category": "swarm_optimization",
+      "title": "Swarm: peerless_P6",
+      "content": "Decision: close_Teacher-student unity module. Result: closed.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_close_peerless_364",
+      "category": "swarm_optimization",
+      "title": "Swarm: close_peerless",
+      "content": "Decision: lexicon_bound_gamma. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_lexicon_deploy_365",
+      "category": "swarm_optimization",
+      "title": "Swarm: lexicon_deploy",
+      "content": "Decision: complete. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_pr_resolution_366",
+      "category": "swarm_optimization",
+      "title": "Swarm: pr_resolution",
+      "content": "Decision: start. Result: running.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_pr_resolution_367",
+      "category": "swarm_optimization",
+      "title": "Swarm: pr_resolution",
+      "content": "Decision: complete. Result: partial.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "swarm_process_blueprint_phase_swarm_368",
+      "category": "swarm_optimization",
+      "title": "Swarm: blueprint_phase_swarm",
+      "content": "Decision: complete. Result: pass.",
+      "tags": [
+        "swarm",
+        "process_log",
+        "llm_training"
+      ],
+      "severity": "info",
+      "source": "docs/process_log.fr"
+    },
+    {
+      "id": "manifest_taylor_ops_team",
+      "category": "manifest",
+      "title": "Manifest: taylor_ops_team",
+      "content": "{\n\"run_id\": \"20260806T233032Z\",\n\"mode\": \"end-of-turn\",\n\"apply\": false,\n\"started_at\": \"2026-08-06T23:30:32.368793Z\",\n\"workers_scheduled\": [\n\"W3_AuditGuardian\",\n\"W7_LaunchContinuity\"\n],\n\"groups\": [\n{\n\"group\": 1,\n\"name\": \"FOUNDATION\",\n\"mission\": \"Blueprint Phase 0\\u20131: gate truth, compiler P0s, audit integrity\",\n\"workers\": [\n{\n\"id\": \"W3_AuditGuardian\",\n\"name\": \"AuditGuardian\",\n\"group\": 1,\n\"role\": \"PII scrub + schema validate\",\n\"scripts\": [\n\"scripts/scrub_audit_sessions.py\",\n\"scripts/validate_aud",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/taylor_ops_team.json"
+    },
+    {
+      "id": "manifest_wasm_size_history",
+      "category": "manifest",
+      "title": "Manifest: wasm_size_history",
+      "content": "{\n\"audited_at\": \"2026-08-07T03:08:34.005561Z\",\n\"auditor\": \"scripts/audit_wasm_size_history.py\",\n\"owner_directive\": \"Check git history and sibling branches for prior sub-100 KB WASM work (owner recalls ~98 KB in a prior chat) before any #48 remediation.\",\n\"current_ref\": \"cursor/frontier-universal-script-99bd\",\n\"current_manifest\": {\n\"size_kb\": 84.3,\n\"met\": true,\n\"git_sha\": \"188ef08\"\n},\n\"ref_snapshots\": [\n{\n\"ref\": \"HEAD\",\n\"commit\": \"98bc6e8028e7\",\n\"size_kb\": 84.3,\n\"met\": true,\n\"measured_at\": \"2026-",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/wasm_size_history.json"
+    },
+    {
+      "id": "manifest_native_self_host",
+      "category": "manifest",
+      "title": "Manifest: native_self_host",
+      "content": "{\n\"verified_at\": \"2026-08-07T02:52:03.641883Z\",\n\"script\": \"scripts/run_native_self_host.py\",\n\"source\": \"frontier/src/self_host_probe.fr\",\n\"compiler_wasm\": \"target/wasm32-unknown-unknown/release/frontier.wasm\",\n\"host\": \"target/release/frontier_wasm_host\",\n\"output_wasm\": \"target/native_self_host_probe.wasm\",\n\"output_bytes\": 56,\n\"valid_wasm\": true,\n\"main_returns_42\": true,\n\"pass\": true,\n\"bootstrap_cargo_on_recompile\": false,\n\"mode\": \"native_wasmtime\"\n}",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/native_self_host.json"
+    },
+    {
+      "id": "manifest_ecosystem_gather_sla",
+      "category": "manifest",
+      "title": "Manifest: ecosystem_gather_sla",
+      "content": "{\n\"version\": \"1.0.0\",\n\"max_total_seconds\": 60,\n\"max_seconds_per_repo\": 5,\n\"max_audit_entry_bytes\": 8192,\n\"max_git_artifact_kb_per_pr\": 500,\n\"notes\": \"Ecosystem gather SLA for <=50 repos. Full local checks may exceed cap; use --fast in CI.\"\n}",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/ecosystem_gather_sla.json"
+    },
+    {
+      "id": "manifest_tracking_evidence",
+      "category": "manifest",
+      "title": "Manifest: tracking_evidence",
+      "content": "{\n\"generated_at\": \"2026-08-07T03:04:58.167736Z\",\n\"phase_0_pass\": true,\n\"phase_1_pass\": false,\n\"phase_2_pass\": false,\n\"phase_3_pass\": false,\n\"phases_4_8\": \"frozen\",\n\"all_pass\": false,\n\"open_issues\": [\n47\n],\n\"no_partial_credit\": true,\n\"evidence\": [\n{\n\"check\": \"0.1_issue_dedupe\",\n\"pass\": true,\n\"open_issues\": [\n47\n],\n\"expected\": [\n44,\n45,\n46,\n47,\n48\n]\n},\n{\n\"check\": \"0.2_gate_exists\",\n\"pass\": true\n},\n{\n\"check\": \"0.3_public_claims\",\n\"pass\": true\n},\n{\n\"check\": \"1.1_wasm_codegen\",\n\"ref\": \"issue_44\",\n\"te",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/tracking_evidence.json"
+    },
+    {
+      "id": "manifest_canonical_issues",
+      "category": "manifest",
+      "title": "Manifest: canonical_issues",
+      "content": "{\n\"version\": \"1.0.0\",\n\"validator\": \"Taylor Ops Independent Validator\",\n\"validator_script\": \"scripts/taylor_issue_closer.py\",\n\"rule\": \"Workers verify their slice, then the independent validator closes GitHub issues only when all checks pass. No partial credit.\",\n\"canonical_range\": [\n44,\n45,\n46,\n47,\n48\n],\n\"issues\": {\n\"44\": {\n\"github\": 44,\n\"phase\": \"1.1\",\n\"worker\": \"W2_CompilerCore\",\n\"title\": \"wasm_codegen_incomplete\",\n\"verification_commands\": [\n[\n\"cargo\",\n\"test\",\n\"--lib\",\n\"wasm_codegen::\",\n\"--quie",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/canonical_issues.json"
+    },
+    {
+      "id": "manifest_blueprint_phase_swarm",
+      "category": "manifest",
+      "title": "Manifest: blueprint_phase_swarm",
+      "content": "{\n\"generated_at\": \"2026-08-06T05:25:04.347955Z\",\n\"mode\": \"sequential_strict\",\n\"frozen_phases\": [\n\"phase_4\",\n\"phase_5\",\n\"phase_6\",\n\"phase_7\",\n\"phase_8\"\n],\n\"stopped_at\": \"phase_1\",\n\"teams_run\": 2,\n\"duration_ms\": 34928,\n\"phase_results\": [\n{\n\"phase\": \"phase_0\",\n\"name\": \"Tracker & Truth Hygiene\",\n\"workers\": [\n{\n\"worker\": \"0a\",\n\"doc\": \"Slice 0.1: dedupe issues\",\n\"pass\": true,\n\"duration_ms\": 509,\n\"output\": \"{\\n  \\\"closed\\\": 0,\\n  \\\"kept\\\": [\\n    48,\\n    47,\\n    46,\\n    45,\\n    44\\n  ],\\n  \\\"open_r",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/blueprint_phase_swarm.json"
+    },
+    {
+      "id": "manifest_repo_registry",
+      "category": "manifest",
+      "title": "Manifest: repo_registry",
+      "content": "{\n\"version\": \"1.0.0\",\n\"description\": \"Cross-repo registry for the Get Help system\",\n\"repos\": [\n{\n\"id\": \"frontier-syntax\",\n\"name\": \"Frontier Syntax\",\n\"path\": \".\",\n\"github\": \"zowskyy/frontier-syntax\",\n\"notes\": \"Path is relative to clone location; updated on register\"\n}\n]\n}",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/repo_registry.json"
+    },
+    {
+      "id": "manifest_pr_resolution",
+      "category": "manifest",
+      "title": "Manifest: pr_resolution",
+      "content": "{\n\"generated_at\": \"2026-08-06T04:40:00.000000Z\",\n\"open_prs_found\": 4,\n\"open_prs_remaining\": 0,\n\"pr_stack\": [\n{\n\"number\": 51,\n\"branch\": \"cursor/worker-swarm-kb-optimization-f519\",\n\"resolution\": \"CLOSED \\u2014 superseded by stack merge\"\n},\n{\n\"number\": 52,\n\"branch\": \"cursor/peerless-chat-swarm-f519\",\n\"resolution\": \"MERGED\"\n},\n{\n\"number\": 53,\n\"branch\": \"cursor/execute-peerless-plan-f519\",\n\"resolution\": \"MERGED\"\n},\n{\n\"number\": 54,\n\"branch\": \"cursor/lexicon-bound-worker-f519\",\n\"resolution\": \"MERGED\"\n}",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/pr_resolution.json"
+    },
+    {
+      "id": "manifest_interaction_script_inventory",
+      "category": "manifest",
+      "title": "Manifest: interaction_script_inventory",
+      "content": "{\n\"version\": \"1.0.0\",\n\"generated_for\": \"taylor_ops_team\",\n\"note\": \"All scripts written during agent\\u2194owner interaction across frontier-syntax \\u2014 not just audit-era. Categorized for the 7-worker / 3-group ops team.\",\n\"categories\": {\n\"audit_continuity\": [\n\"scripts/agent_audit_logger.py\",\n\"scripts/agent_audit_hook.py\",\n\"scripts/agent_shadow_worker.py\",\n\"scripts/update_audit_readme.py\",\n\"scripts/validate_audit_log.py\",\n\"scripts/scrub_audit_sessions.py\",\n\"scripts/audit_log_retention.py\",\n\"scr",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/interaction_script_inventory.json"
+    },
+    {
+      "id": "manifest_self_hosting_verify",
+      "category": "manifest",
+      "title": "Manifest: self_hosting_verify",
+      "content": "{\n\"verified_at\": \"2026-08-07T03:09:53.076936Z\",\n\"script\": \"scripts/verify_self_hosting.py\",\n\"source\": \"frontier/src/main.fr\",\n\"bootstrap_pass\": true,\n\"native_pass\": false,\n\"bootstrap\": {\n\"pass\": true,\n\"mode\": \"bootstrap\",\n\"uses_cargo_on_recompile\": true,\n\"output\": \"PASS: Self-hosting bootstrap (cmp identical)\"\n},\n\"native\": {\n\"pass\": false,\n\"error\": \"gs, **kwargs) as process:\\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/usr/lib/python3.12/subprocess.py\\\", line 1026, in __init__\\n    self._exe",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/self_hosting_verify.json"
+    },
+    {
+      "id": "manifest_ecosystem_gather_benchmark",
+      "category": "manifest",
+      "title": "Manifest: ecosystem_gather_benchmark",
+      "content": "{\n\"run_id\": \"20260807T030838Z\",\n\"measured_at\": \"2026-08-07T03:08:51Z\",\n\"repo_count\": 27,\n\"timings_s\": {\n\"list_repos_s\": 0.7411083619999772,\n\"local_checks_s\": 0.0001507350002611929,\n\"scan_repos_s\": 11.855528207000134,\n\"total_s\": 12.637684731999798\n},\n\"sla\": {\n\"version\": \"1.0.0\",\n\"max_total_seconds\": 60,\n\"max_seconds_per_repo\": 5,\n\"max_audit_entry_bytes\": 8192,\n\"max_git_artifact_kb_per_pr\": 500,\n\"notes\": \"Ecosystem gather SLA for <=50 repos. Full local checks may exceed cap; use --fast in CI.\"\n},\n",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/ecosystem_gather_benchmark.json"
+    },
+    {
+      "id": "manifest_help_config",
+      "category": "manifest",
+      "title": "Manifest: help_config",
+      "content": "{\n\"repo_id\": \"frontier-syntax\",\n\"repo_name\": \"Frontier Syntax\",\n\"github_owner\": \"zowskyy\",\n\"github_repo\": \"frontier-syntax\",\n\"labels\": [\n\"get-help\"\n],\n\"auto_create_github\": true,\n\"tracking_file\": \"TRACKING.json\"\n}",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/help_config.json"
+    },
+    {
+      "id": "manifest_issue_closure_status",
+      "category": "manifest",
+      "title": "Manifest: issue_closure_status",
+      "content": "{\n\"run_id\": \"20260807T030314Z\",\n\"audited_at\": \"2026-08-07T03:08:38.311347Z\",\n\"validator\": \"Taylor Ops Independent Validator (scripts/taylor_issue_closer.py)\",\n\"apply\": true,\n\"worker_filter\": \"W6_GitHubOps\",\n\"open_before\": [],\n\"eligible_to_close\": [],\n\"closed_this_run\": [],\n\"still_open\": [],\n\"issues\": [],\n\"close_actions\": []\n}",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/issue_closure_status.json"
+    },
+    {
+      "id": "manifest_compiler_self_host_mission",
+      "category": "manifest",
+      "title": "Manifest: compiler_self_host_mission",
+      "content": "{\n\"version\": \"1.0.0\",\n\"owner\": \"W2_CompilerCore\",\n\"goal\": \"Frontier-native self-hosting \\u2014 owner notified when Phase 1.3 (#46) complete; M5 continues for full compiler\",\n\"complete\": false,\n\"owner_notify\": true,\n\"updated_at\": \"2026-08-07T03:08:18.016762Z\",\n\"milestones\": {\n\"M1\": {\n\"name\": \"wasm_host_exports\",\n\"pass\": true,\n\"updated_at\": \"2026-08-07T03:07:00.247045Z\"\n},\n\"M2\": {\n\"name\": \"native_self_host_probe\",\n\"pass\": false,\n\"updated_at\": \"2026-08-07T03:07:35.744270Z\"\n},\n\"M3\": {\n\"name\": \"verif",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/compiler_self_host_mission.json"
+    },
+    {
+      "id": "manifest_wasm_codegen_verify",
+      "category": "manifest",
+      "title": "Manifest: wasm_codegen_verify",
+      "content": "{\n\"verified_at\": \"2026-08-07T03:09:07.026543Z\",\n\"script\": \"scripts/verify_wasm_codegen.py\",\n\"wasmtime\": null,\n\"all_pass\": false,\n\"cases\": [\n{\n\"name\": \"const_return\",\n\"pass\": false,\n\"expected\": 42,\n\"actual\": null,\n\"compile_ok\": true,\n\"run_ok\": false,\n\"output\": \"wasmtime not found\"\n},\n{\n\"name\": \"let_if\",\n\"pass\": false,\n\"expected\": 10,\n\"actual\": null,\n\"compile_ok\": true,\n\"run_ok\": false,\n\"output\": \"wasmtime not found\"\n},\n{\n\"name\": \"while_loop\",\n\"pass\": false,\n\"expected\": 13,\n\"actual\": null,\n\"compil",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/wasm_codegen_verify.json"
+    },
+    {
+      "id": "manifest_production_readiness",
+      "category": "manifest",
+      "title": "Manifest: production_readiness",
+      "content": "{\n\"version\": \"1.0.0\",\n\"target\": \"production_ready\",\n\"blueprint\": \"PROJECT_BLUEPRINT.md\",\n\"phases_required\": [\n\"phase_0\",\n\"phase_1\",\n\"phase_2\",\n\"phase_3\",\n\"phase_7\"\n],\n\"current_blockers\": {\n\"phase_1\": [\n\"#46 self_hosting \\u2014 bootstrap only; #44/#45 auto-close when verified\"\n],\n\"phase_2\": [\n\"#47 blocked until #44-46 closed\"\n],\n\"phase_3\": [\n\"#48 auto-close when wasm_size met:true\"\n],\n\"phase_7\": [\n\"CI present\",\n\"audit hash chain\",\n\"independent validator closure\"\n]\n},\n\"issue_closure\": {\n\"script\": ",
+      "tags": [
+        "manifest",
+        "swarm",
+        "conclusion"
+      ],
+      "severity": "info",
+      "source": "manifest/production_readiness.json"
     }
   ],
   "ingested_at": [
@@ -8167,5 +8752,5 @@
     "2026-08-06T00:20:00.476875Z",
     "2026-08-06T00:25:03.644607Z"
   ],
-  "last_sync": "2026-08-06T02:42:37.781663Z"
+  "last_sync": "2026-08-07T03:10:21.399832Z"
 }

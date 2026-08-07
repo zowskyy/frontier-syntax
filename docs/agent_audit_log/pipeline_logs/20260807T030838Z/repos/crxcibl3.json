@@ -1,0 +1,57 @@
+{
+  "name": "crxcibl3",
+  "url": "https://github.com/zowskyy/crxcibl3",
+  "description": "",
+  "is_private": false,
+  "language": "GDScript",
+  "updated_at": "2026-08-07T03:01:54Z",
+  "category": "fork_or_adjacent",
+  "access_status": "ok",
+  "readme_excerpt": "# CRXCIBL3 -- Web Build (Phaser 3)\n\n## Running it -- one script, every time\n```\n.\\run-game.ps1\n```\nThat's the whole process: starts a local server and opens the game in your\nbrowser automatically. No need to remember commands, ports, or URLs.\n\nFirst time only, if PowerShell blocks it:\n```\nSet-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass\n```\n\nTo stop: close the black server window `run-game.ps1` opened, or run\n`.\\stop-game.ps1` if it gets stuck/the window got closed by accident.\n\n(Once art loads from `assets/` via `this.load.image(...)`, opening\n`index.html` directly may fail due to browser CORS rules \u2014 use\n`run-game.ps1` or `python3 -m http.server` instead.)\n\n## Controls: **WASD** or **Arrow Keys** -- free 8-directional movement, not\ngrid-locked. **SPACE** attacks when close to an enemy. Walk toward a building\nand watch your character tuck behind the roof row instead of drawing on top\nof it -- that's the \"walk behind buildings\" depth trick from the visual\ndirection doc, done with a fixed render-depth on roof tiles rather than\nanything fancy.\n\n## What's actually built\n- Real Phaser 3 game (not a mockup) -- physics-based movement, collision\n  against buildings/fences/palm trees, camera follow with world bounds\n- The boardwalk layout from the earlier level mockup, ported over\n- **GameState.js** + **Stress.js** -- JS ports of `GameState.gd` / `Stress.gd`\n  autoload logic (heat, resources, relationships, stress thresholds)\n- Heat HUD bar wired to live `GameState.heat` with vignette feedback at 26%\n  and 51% thresholds; stress meter shows crew stress from combat\n- Hero sprite (`assets/heroes/hero_enforcer_ghost.png`) and enemy grunt sprite\n  (`assets/enemies/enemy_grunt_idle.png`); procedural palette-matched tiles for\n  ground/buildings until PNG tilesets land in `assets/`\n- Folder structure under `assets/` matching your art categories, ready\n  for your real files\n\n## Adding your real art (once cleaned up via Pixel It / Piskel)\nThe hero and enemy already load from `assets/`. Tiles still generate in-code\n(see `generateTileTextures()` in `js/BoardwalkScene.js`) for zero-setup runs.\nTo swap in a real tile or building image:\n\n1. Drop the PNG into the matching `assets/` subfolder, e.g.\n   `assets/tiles/tile_ground.png`\n2. In `BoardwalkScene.js`, add a load line inside `preload()`:\n   ```js\n   this.load.image('tile_ground', 'assets/tiles/tile_ground.png');\n   ```\n3. Remove the matching `rect('tile_ground', ...)` block from\n   `generateTileTextures()` so the loaded PNG is used instead.\n\n**Important:** once you add even one `this.load.image(...)` call, opening\n`index.html` directly by double-clicking will likely fail (browsers block\nlocal file loading for security reasons -- this is the same CORS issue\nthat would've come up in Godot too, just earlier here). At that point,\n... (15 more lines)",
+  "top_level_files": [
+    ".cursor",
+    ".cursorrules",
+    ".env.example",
+    ".github",
+    ".gitignore",
+    "AGENTS.md",
+    "ANIMATION_ASSETS_MANIFEST.md",
+    "CREDITS.md",
+    "CRXCIBL3_COMPLETE_NARRATIVE_PACKAGE.md",
+    "FOR_ANIMATION_VOICEOVER_TEAM.md",
+    "KNOWLEDGE_BASE.md",
+    "LICENSE",
+    "PROJECT_BLUEPRINT.md",
+    "PROJECT_STATE.md",
+    "README.md",
+    "Screenshot 2026-07-18 025721.png",
+    "VOICEOVER_ANIMATION_GUIDE.md",
+    "assets",
+    "configs",
+    "crxcibl3-sprite-animation-production-spec.html",
+    "crxcibl3art",
+    "cursor_gate.py",
+    "cursor_gate_fastest.py",
+    "docs",
+    "godot",
+    "index.html",
+    "js",
+    "requirements.txt",
+    "run-game.ps1",
+    "samples",
+    "scripts",
+    "stop-game.ps1"
+  ],
+  "claims": [
+    "(no explicit claims extracted from README)"
+  ],
+  "can_do": [
+    "Top-level structure visible (32 entries): .cursor, .cursorrules, .env.example, .github, .gitignore, AGENTS.md, ANIMATION_ASSETS_MANIFEST.md, CREDITS.md",
+    "Python project indicators present"
+  ],
+  "cannot_do": [
+    "No .github/workflows at repo root (CI not confirmed)",
+    "Not part of Frontier blueprint critical path"
+  ],
+  "blueprint_relation": "Upstream fork or unrelated project \u2014 no blueprint phase dependency."
+}

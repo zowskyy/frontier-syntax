@@ -1,0 +1,41 @@
+{
+  "name": "project-nexus",
+  "url": "https://github.com/zowskyy/project-nexus",
+  "description": "Project Nexus \u2014 Cursor IDE written entirely in Frontier Syntax. Self-hosting AI-native development environment.",
+  "is_private": false,
+  "language": "Python",
+  "updated_at": "2026-08-07T03:04:31Z",
+  "category": "frontier_ecosystem",
+  "access_status": "ok",
+  "readme_excerpt": "# Project Nexus\n\n**Cursor IDE written entirely in Frontier Syntax** \u2014 a self-hosting, AI-native development environment.\n\nThis repository bootstraps [Cursor Gate](https://github.com/zowskyy/Schema) (15-gate review) and hosts the Frontier Syntax source for Nexus IDE modules.\n\n## Vision\n\n| Layer | Language | Status |\n|-------|----------|--------|\n| IDE shell (editor, workspace, terminal) | Frontier Syntax `.fr` | Buffer + gate bridge implemented \u2014 see `nexus/` |\n| Quality gates & agent policy | Python (`cursor_gate*.py`) | Bootstrapped & CI-green |\n| Frontier compiler / runtime | External \u2014 [frontier-syntax](https://github.com/zowskyy/frontier-syntax) | Dependency (not vendored) |\n\n## Quick start\n\n```bash\n# Bootstrap gate reviewers + agent policy (also runs on cloud agent VM boot)\nbash scripts/install-agent-environment.sh\n\n# Gate a Python file (both reviewers must PASS before shipping)\nbash scripts/gate-file.sh --file samples/hello_passing.py\n\n# Gate all changed .py / .ts / .js files\nbash scripts/gate-all-changed.sh\n```\n\n## Nexus modules (`nexus/`)\n\n| Module | File | Purpose | Status |\n|--------|------|---------|--------|\n| Bootstrap | `nexus/main.fr` | IDE entrypoint | Implemented |\n| Editor | `nexus/editor/buffer.fr` | Text buffer & edits | Implemented |\n| Workspace | `nexus/workspace/tree.fr` | File tree & project root | Minimal API |\n| Agent | `nexus/agent/session.fr` | AI agent session loop | Minimal API |\n| Shell | `nexus/shell/terminal.fr` | Integrated terminal | Minimal API |\n| Gate bridge | `nexus/gate/review.fr` | Invoke Cursor Gate from Frontier | Implemented (`scripts/gate-bridge.sh`) |\n\nSee [docs/ROADMAP.md](docs/ROADMAP.md) for the full gap audit and dependency on frontier-syntax.\n\n## Agent completion policy\n\nEvery cloud agent environment bootstraps this policy via `.cursor/environment.json`:\n\n- `.cursor/rules/ship-finished-work.mdc` \u2014 ship finished work only\n- `.cursor/rules/quarterback-worker.mdc` \u2014 quarterback / worker delegation\n- `AGENTS.md` \u2014 agent instructions at repo root\n- `scripts/install-agent-environment.sh` \u2014 installs gate scripts to `~/.cursor/`\n\n**Global (all projects):** paste `docs/USER_RULES_PASTE.md` into Cursor \u2192 Customize \u2192 Rules \u2192 User Rules.\n\n## CI\n\n[`.github/workflows/gate-check.yml`](.github/workflows/gate-check.yml) runs on every pull request: install deps, bootstrap agent environment, gate `samples/hello_passing.py`.\n\n## Configuration\n\nCopy `.env.example` to `~/.cursor/.env` or project `.env` for optional LLM-backed gate settings.\n\n## Re-bootstrap Cursor Gate from Schema\n... (4 more lines)",
+  "top_level_files": [
+    ".cursor",
+    ".cursorrules",
+    ".env.example",
+    ".github",
+    ".gitignore",
+    "AGENTS.md",
+    "LICENSE",
+    "README.md",
+    "cursor_gate.py",
+    "cursor_gate_fastest.py",
+    "docs",
+    "nexus",
+    "requirements.txt",
+    "samples",
+    "scripts"
+  ],
+  "claims": [
+    "GitHub description: Project Nexus \u2014 Cursor IDE written entirely in Frontier Syntax. Self-hosting AI-native development environment.",
+    "**Cursor IDE written entirely in Frontier Syntax** \u2014 a self-hosting, AI-native development environment."
+  ],
+  "can_do": [
+    "Top-level structure visible (15 entries): .cursor, .cursorrules, .env.example, .github, .gitignore, AGENTS.md, LICENSE, README.md",
+    "Python project indicators present"
+  ],
+  "cannot_do": [
+    "No .github/workflows at repo root (CI not confirmed)",
+    "Cannot self-host IDE \u2014 depends on frontier-syntax Phase 1+ (compiler not validated)"
+  ],
+  "blueprint_relation": "Claims Cursor IDE in Frontier Syntax. Blocked until frontier-syntax Phase 1 exit (self-hosting + working WASM). Phase 5+ dependency."
+}

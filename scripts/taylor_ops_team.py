@@ -167,11 +167,13 @@ WORKERS: dict[str, dict[str, Any]] = {
             "scripts/update_audit_readme.py",
             "scripts/process_logger.py",
             "scripts/sync_knowledge_base.py",
+            "frontier_universal.py",
         ],
         "commands": [
             [sys.executable, "scripts/gather_ecosystem_knowledge.py", "--fast"],
             [sys.executable, "scripts/update_audit_readme.py"],
             [sys.executable, "scripts/sync_knowledge_base.py"],
+            [sys.executable, "frontier_universal.py", "--self-test"],
         ],
         "light_commands": [
             [sys.executable, "scripts/update_audit_readme.py"],

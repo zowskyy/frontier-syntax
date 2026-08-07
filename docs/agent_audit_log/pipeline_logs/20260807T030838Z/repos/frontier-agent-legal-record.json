@@ -1,0 +1,22 @@
+{
+  "name": "frontier-agent-legal-record",
+  "url": "https://github.com/zowskyy/frontier-agent-legal-record",
+  "description": "Private append-only audit log of Cursor agent actions (legal/personal record)",
+  "is_private": true,
+  "language": "Python",
+  "updated_at": "2026-08-07T03:04:29Z",
+  "category": "frontier_ecosystem",
+  "access_status": "inaccessible_private",
+  "readme_excerpt": "# frontier-agent-legal-record\n\nPrivate append-only audit log of Cursor agent actions \u2014 a legal/personal record with hash-chain integrity.\n\n## Purpose\n\nCursor Gate writes ephemeral audit lines to `~/.cursor/gate-logs/`. This repository is the **durable, tamper-evident ledger** for:\n\n- Gate review outcomes (per file, per reviewer)\n- Imported gate audit JSONL and per-run JSON from local gate logs\n- Explicit agent action events (commits, cloud runs, task boundaries)\n\nEach entry is append-only JSONL with `prev_hash` \u2192 `entry_hash` chaining. Tampering breaks the chain.\n\n## Quick start\n\n```bash\npip install -r requirements.txt\n\n# Record a generic agent action\npython3 scripts/record-action.py record --event agent_task_start --field repo Schema --field branch main\n\n# Verify chain integrity\npython3 scripts/record-action.py verify\n\n# Import new lines from ~/.cursor/gate-logs/\npython3 scripts/sync-gate-logs.py\n\n# Run gate on a file (also records to legal log when record-action.py is present)\nbash scripts/gate-file.sh --file samples/hello_passing.py\n```\n\n## Layout\n\n```\nlegal_record/           # Hash-chained audit logger\nrecords/\n  agent_actions.jsonl   # Append-only event log (committed)\n  chain_head.json         # Latest entry_hash pointer\n  sync_state.json         # Dedup hashes for gate-log import\nscripts/\n  record-action.py        # CLI: record / record-gate / verify\n  sync-gate-logs.py       # Pull from ~/.cursor/gate-logs/\n  gate-file.sh            # Gate + legal record hook\n```\n\n## Environment\n\n| Variable | Default | Description |\n|----------|---------|-------------|\n| `LEGAL_RECORD_DIR` | `./records` | Directory for JSONL + chain head |\n| `LEGAL_RECORD_ACTOR` | `cursor-agent` | Actor label on each entry |\n| `GATE_LOG_DIR` | `~/.cursor/gate-logs` | Source for sync-gate-logs |\n\n## Cursor Gate bootstrap\n\nThis repo includes the full Cursor Gate stack (15-gate reviewers, CI, agent rules). Bootstrapped from [zowskyy/Schema](https://github.com/zowskyy/Schema).\n\n## Tests\n\n... (11 more lines)",
+  "top_level_files": [],
+  "claims": [
+    "GitHub description: Private append-only audit log of Cursor agent actions (legal/personal record)"
+  ],
+  "can_do": [
+    "(capabilities not verified \u2014 metadata-only scan)"
+  ],
+  "cannot_do": [
+    "(limitations not probed \u2014 shallow scan only)"
+  ],
+  "blueprint_relation": "Private audit mirror (cloud agent could not push). Superseded by in-repo docs/agent_audit_log/ per owner policy."
+}

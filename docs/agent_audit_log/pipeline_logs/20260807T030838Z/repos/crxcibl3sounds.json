@@ -1,0 +1,59 @@
+{
+  "name": "crxcibl3sounds",
+  "url": "https://github.com/zowskyy/crxcibl3sounds",
+  "description": "bfxr.net in javascript, with more things!",
+  "is_private": false,
+  "language": "HTML",
+  "updated_at": "2026-08-07T00:28:33Z",
+  "category": "fork_or_adjacent",
+  "access_status": "ok",
+  "readme_excerpt": "# crxcibl3sounds (Bfxr2)\n\nFork of [Bfxr2](https://www.bfxr.net/) \u2014 a browser-based tool for making sound effects for games. Ships with [Cursor Gate](https://github.com/zowskyy/Schema) for agent-driven code review.\n\n## Install\n\n```bash\ngit clone https://github.com/zowskyy/crxcibl3sounds.git\ncd crxcibl3sounds\nnpm install                    # optional \u2014 only needed for compile step\npip install -r requirements.txt\nbash scripts/install-agent-environment.sh\n```\n\n## Run\n\nServe the repo root over HTTP and open `index.html`:\n\n```bash\npython3 -m http.server 8080\n# open http://localhost:8080\n```\n\nOr use any static file server (nginx, `npx serve`, etc.).\n\n## Deploy\n\n| Target | Steps |\n|--------|-------|\n| Static site | Upload repo root (or `bin/` after compile) to any static host (GitHub Pages, S3, Netlify) |\n| Production build | `node compile.js` \u2192 minified assets in `bin/` \u2192 deploy `bin/` |\n| Gate before ship | `bash scripts/gate-file.sh --file samples/hello_passing.py` |\n\nSee [DEVELOPMENT.md](DEVELOPMENT.md) for template authoring and the compile pipeline.\n\n## Cursor Gate\n\n```bash\nbash scripts/install-agent-environment.sh\nbash scripts/gate-file.sh --file samples/hello_passing.py\n```\n\nPR CI: `.github/workflows/gate-check.yml`\n\n---\n\n## About\n[Bfxr2](https://www.bfxr.net/) a tool for making sound effects for games, a rewrite/refresh of the flash tool Bfxr in javascript.\n\n![image](https://github.com/user-attachments/assets/1701bccc-82d6-47e1-881c-ec6ca228dc89)\n\nIt's currently BETA, and new things should be coming to it, but the main addition right now is Obiwannabe's subtly wonderful footstep generator, ported from puredata to javsacript:\n\n![image](https://github.com/user-attachments/assets/1f338401-d2e4-4100-ad4d-471ad6e56f6f)\n\n## Development\ncf. [DEVELOPMENT.md](https://github.com/increpare/bfxr2/blob/master/DEVELOPMENT.md).\n\n## Archaeology\n\n... (33 more lines)",
+  "top_level_files": [
+    ".cursor",
+    ".cursorignore.txt",
+    ".cursorrules",
+    ".env.example",
+    ".gitattributes",
+    ".github",
+    ".gitignore",
+    ".vscode",
+    "AGENTS.md",
+    "DEVELOPMENT.md",
+    "LICENSE",
+    "README.md",
+    "bin",
+    "compile.js",
+    "css",
+    "cursor_gate.py",
+    "cursor_gate_fastest.py",
+    "docs",
+    "favicon.ico",
+    "favicon.png",
+    "gzipper",
+    "img",
+    "index.html",
+    "insert_templates.js",
+    "js",
+    "package-lock.json",
+    "package.json",
+    "requirements.txt",
+    "samples",
+    "scripts",
+    "template_links.txt",
+    "templates",
+    "upload"
+  ],
+  "claims": [
+    "GitHub description: bfxr.net in javascript, with more things!"
+  ],
+  "can_do": [
+    "Top-level structure visible (33 entries): .cursor, .cursorignore.txt, .cursorrules, .env.example, .gitattributes, .github, .gitignore, .vscode",
+    "Node/JS project (package.json present)",
+    "Python project indicators present"
+  ],
+  "cannot_do": [
+    "No .github/workflows at repo root (CI not confirmed)",
+    "Not part of Frontier blueprint critical path"
+  ],
+  "blueprint_relation": "Upstream fork or unrelated project \u2014 no blueprint phase dependency."
+}

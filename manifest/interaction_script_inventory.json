@@ -74,6 +74,7 @@
     "agent_entrypoints": [
       "frontier_agent.py",
       "frontier_worker.py",
+      "frontier_universal.py",
       ".cursor/skills/agent-audit-record.md",
       ".cursor/skills/frontier-master.md"
     ]
