@@ -46,6 +46,7 @@ pub struct CompilationProfile {
     pub total_time: u128,
 }
 
+#[derive(Debug, Clone)]
 pub struct WasmModuleMeta {
     pub exports: Vec<String>,
     pub warnings: Vec<String>,
@@ -617,8 +618,8 @@ fn stub_body(result: i32) -> Vec<u8> {
 fn export_section_static(names: &[&str], user_func_count: usize) -> Vec<u8> {
     let stub_names = ["compile_wasm", "validate_wasm", "evaluate_wasm"];
     let mut entries: Vec<(&str, u8, u32)> = Vec::new();
-    for name in names {
-        match *name {
+    for &name in names {
+        match name {
             "memory" => entries.push(("memory", 0x02, 0)),
             "main" => entries.push(("main", 0x00, 0)),
             "compile_wasm" | "validate_wasm" | "evaluate_wasm" => {
