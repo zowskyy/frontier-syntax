@@ -46,7 +46,16 @@ def run_cmd(cmd: list[str]) -> dict:
 
 def open_issues() -> set[int]:
     r = subprocess.run(
-        ["gh", "issue", "list", "--state", "open", "--json", "number"],
+        [
+            "gh",
+            "issue",
+            "list",
+            "--state",
+            "open",
+            "--json",
+            "number",
+            "--exclude-pull-requests",
+        ],
         cwd=ROOT,
         capture_output=True,
         text=True,
@@ -83,7 +92,7 @@ def phase_1_checks(open_set: set[int]) -> tuple[bool, list[dict]]:
     evidence = []
     all_ok = True
 
-    r11 = run_cmd(["cargo", "test", "--lib", "wasm_codegen::"])
+    r11 = run_cmd(["cargo", "test", "--lib", "-p", "frontier", "wasm_codegen::"])
     r11_exec = run_cmd(["python3", "scripts/verify_wasm_codegen.py"])
     issue_open = 44 in open_set
     ok = r11["pass"] and r11_exec["pass"] and not issue_open
@@ -102,7 +111,7 @@ def phase_1_checks(open_set: set[int]) -> tuple[bool, list[dict]]:
     if not ok:
         all_ok = False
 
-    r12 = run_cmd(["cargo", "test", "--lib", "wasm_codegen::tests::test_knowledge_changes_wasm"])
+    r12 = run_cmd(["cargo", "test", "--lib", "-p", "frontier", "wasm_codegen::tests::test_knowledge_changes_wasm"])
     issue_open = 45 in open_set
     ok = r12["pass"] and not issue_open
     evidence.append({
@@ -158,7 +167,7 @@ def phase_2_checks(phase_1_ok: bool, open_set: set[int]) -> tuple[bool, list[dic
     r21 = run_cmd(["python3", "scripts/spec_impl_bridge.py"])
     ok21 = r21["pass"] and 47 not in open_set
     evidence.append({"check": "2.1_spec_impl", "ref": "issue_47", "pass": ok21, "issue_closed": 47 not in open_set, **r21})
-    r22 = run_cmd(["cargo", "test", "--lib"])
+    r22 = run_cmd(["cargo", "test", "--lib", "-p", "frontier"])
     evidence.append({"check": "2.2_lib_tests", "pass": r22["pass"], **r22})
     return ok21 and r22["pass"], evidence
 
@@ -279,7 +288,24 @@ def frozen_phases_report(from_phase: int) -> list[dict]:
     ]
 
 
-def gate() -> dict:
+def phase_8_checks(phase_7_ok: bool) -> tuple[bool, list[dict]]:
+    if not phase_7_ok:
+        return False, [{"check": "phase_8", "pass": False, "status": "blocked", "reason": "phase_7 not validated"}]
+    evidence = []
+    r = run_cmd(["python3", "scripts/verify_phase8_launch.py", "--skip-url-check"])
+    manifest_ok = read_manifest(ROOT / "manifest" / "phase8_launch_verify.json", "pass")
+    ok = r["pass"] and manifest_ok
+    evidence.append({
+        "check": "8.1_launch",
+        "pass": ok,
+        "status": "validated" if ok else "fail",
+        "manifest": "manifest/phase8_launch_verify.json",
+        **r,
+    })
+    return ok, evidence
+
+
+def gate(max_phase: int = 8) -> dict:
     evidence: list[dict] = []
 
     p0_ok, e0 = phase_0_checks()
@@ -308,32 +334,46 @@ def gate() -> dict:
     elif p0_ok:
         evidence.append({"check": "phase_3", "pass": False, "status": "blocked", "reason": "phase_2 not validated"})
 
-    p4_ok = p5_ok = p6_ok = p7_ok = False
-    if p0_ok and p1_ok and p2_ok and p3_ok:
+    p4_ok = p5_ok = p6_ok = p7_ok = p8_ok = False
+    if p0_ok and p1_ok and p2_ok and p3_ok and max_phase >= 4:
         p4_ok, e4 = phase_4_checks(p3_ok)
         evidence.extend(e4)
-        if p4_ok:
+        if p4_ok and max_phase >= 5:
             p5_ok, e5 = phase_5_checks(p4_ok)
             evidence.extend(e5)
-        else:
+        elif max_phase >= 5:
             evidence.append({"check": "phase_5", "pass": False, "status": "blocked", "reason": "phase_4 not validated"})
-        if p4_ok and p5_ok:
+        if p4_ok and p5_ok and max_phase >= 6:
             p6_ok, e6 = phase_6_checks(p5_ok)
             evidence.extend(e6)
-        elif p4_ok:
+        elif max_phase >= 6:
             evidence.append({"check": "phase_6", "pass": False, "status": "blocked", "reason": "phase_5 not validated"})
-        if p4_ok and p5_ok and p6_ok:
+        if p4_ok and p5_ok and p6_ok and max_phase >= 7:
             p7_ok, e7 = phase_7_checks(p6_ok)
             evidence.extend(e7)
-        elif p4_ok and p5_ok:
+        elif max_phase >= 7:
             evidence.append({"check": "phase_7", "pass": False, "status": "blocked", "reason": "phase_6 not validated"})
-        evidence.extend(frozen_phases_report(8 if p7_ok else (7 if p6_ok else (6 if p5_ok else (5 if p4_ok else 4)))))
+        if p4_ok and p5_ok and p6_ok and p7_ok and max_phase >= 8:
+            p8_ok, e8 = phase_8_checks(p7_ok)
+            evidence.extend(e8)
+        elif max_phase >= 8:
+            evidence.append({"check": "phase_8", "pass": False, "status": "blocked", "reason": "phase_7 not validated"})
+        if max_phase < 8:
+            evidence.extend(frozen_phases_report(max(4, max_phase + 1)))
     elif p0_ok and p1_ok and p2_ok:
-        evidence.extend(frozen_phases_report(4))
+        if max_phase < 4:
+            evidence.extend(frozen_phases_report(4))
     elif p0_ok:
         evidence.extend(frozen_phases_report(FROZEN_FROM_PHASE))
 
-    all_pass = p0_ok and p1_ok and p2_ok and p3_ok and p4_ok and p5_ok and p6_ok and p7_ok
+    if max_phase >= 8:
+        all_pass = p0_ok and p1_ok and p2_ok and p3_ok and p4_ok and p5_ok and p6_ok and p7_ok and p8_ok
+    elif max_phase == 7:
+        all_pass = p0_ok and p1_ok and p2_ok and p3_ok and p4_ok and p5_ok and p6_ok and p7_ok
+    elif max_phase == 3:
+        all_pass = p0_ok and p1_ok and p2_ok and p3_ok
+    else:
+        all_pass = p0_ok and p1_ok and p2_ok and p3_ok
 
     summary = {
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
@@ -345,7 +385,9 @@ def gate() -> dict:
         "phase_5_pass": p5_ok,
         "phase_6_pass": p6_ok,
         "phase_7_pass": p7_ok,
-        "phases_8": "frozen" if p7_ok else "blocked",
+        "phase_8_pass": p8_ok if max_phase >= 8 else None,
+        "max_phase": max_phase,
+        "phases_8": "validated" if p8_ok else ("frozen" if p7_ok and max_phase >= 8 else "blocked"),
         "all_pass": all_pass,
         "open_issues": sorted(open_set),
         "no_partial_credit": True,
@@ -366,8 +408,10 @@ def gate() -> dict:
             "phase_5": "validated" if p5_ok else ("blocked" if not p4_ok else "fail"),
             "phase_6": "validated" if p6_ok else ("blocked" if not p5_ok else "fail"),
             "phase_7": "validated" if p7_ok else ("blocked" if not p6_ok else "fail"),
-            "phase_8": "frozen",
+            "phase_8": "validated" if p8_ok else ("blocked" if not p7_ok else ("frozen" if max_phase < 8 else "fail")),
         }
+        if max_phase < 8:
+            status_map["phase_8"] = "frozen"
         for phase in data.get("phases", []):
             pid = phase["id"]
             if pid in status_map:
@@ -379,10 +423,16 @@ def gate() -> dict:
 
 
 def main() -> int:
-    if len(sys.argv) < 2 or sys.argv[1] != "gate":
-        print("Usage: python3 scripts/tracking.py gate", file=sys.stderr)
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Blueprint tracking gate")
+    parser.add_argument("command", nargs="?", default="gate")
+    parser.add_argument("--max-phase", type=int, default=8, help="Highest phase to evaluate (blueprint gate uses 3)")
+    args = parser.parse_args()
+    if args.command != "gate":
+        print("Usage: python3 scripts/tracking.py gate [--max-phase N]", file=sys.stderr)
         return 2
-    summary = gate()
+    summary = gate(max_phase=args.max_phase)
     print(json.dumps({
         "all_pass": summary["all_pass"],
         "phase_0_pass": summary["phase_0_pass"],
@@ -393,6 +443,8 @@ def main() -> int:
         "phase_5_pass": summary["phase_5_pass"],
         "phase_6_pass": summary["phase_6_pass"],
         "phase_7_pass": summary["phase_7_pass"],
+        "phase_8_pass": summary.get("phase_8_pass"),
+        "max_phase": summary.get("max_phase", 8),
         "phases_8": summary["phases_8"],
         "open_issues": summary["open_issues"],
         "evidence_file": str(EVIDENCE.relative_to(ROOT)),

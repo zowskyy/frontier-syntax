@@ -46,6 +46,7 @@ pub struct CompilationProfile {
     pub total_time: u128,
 }
 
+#[derive(Debug, Clone)]
 pub struct WasmModuleMeta {
     pub exports: Vec<String>,
     pub warnings: Vec<String>,
@@ -124,6 +125,9 @@ pub fn compile_source(source: &str, options: &CodeGenOptions) -> Result<(Vec<u8>
 
 fn validate_program_types(program: &Program) -> Result<(), String> {
     for stmt in &program.statements {
+        if let Stmt::ImportDecl { .. } = stmt {
+            return Err("Import declarations are not supported in WASM MVP".to_string());
+        }
         if let Stmt::FnDecl { name, .. } = stmt {
             if name == "main" {
                 return Ok(());
@@ -614,8 +618,8 @@ fn stub_body(result: i32) -> Vec<u8> {
 fn export_section_static(names: &[&str], user_func_count: usize) -> Vec<u8> {
     let stub_names = ["compile_wasm", "validate_wasm", "evaluate_wasm"];
     let mut entries: Vec<(&str, u8, u32)> = Vec::new();
-    for name in names {
-        match *name {
+    for &name in names {
+        match name {
             "memory" => entries.push(("memory", 0x02, 0)),
             "main" => entries.push(("main", 0x00, 0)),
             "compile_wasm" | "validate_wasm" | "evaluate_wasm" => {
@@ -919,7 +923,7 @@ fn main(): int {
 
     #[test]
     fn test_import_decl_rejected() {
-        let source = r#"import foo from "bar";
+        let source = r#"import "bar" as foo;
 fn main(): int { return 0; }"#;
         let err = compile_source(source, &CodeGenOptions::default()).unwrap_err();
         assert!(err.contains("Import declarations"));

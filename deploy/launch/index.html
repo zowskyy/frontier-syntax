@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Frontier Syntax — Launch</title>
+  <style>
+    :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
+    body { max-width: 52rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
+    h1 { font-size: 2rem; margin-bottom: 0.25rem; }
+    .tag { opacity: 0.8; font-size: 0.95rem; }
+    code { background: rgba(127,127,127,0.15); padding: 0.1rem 0.35rem; border-radius: 4px; }
+    ul { padding-left: 1.2rem; }
+    a { color: inherit; }
+  </style>
+</head>
+<body>
+  <h1>Frontier Syntax</h1>
+  <p class="tag">v2.0 — WASM-native compiler with empirical release gates</p>
+  <p>
+    Frontier Syntax is a research language and compiler toolchain with wasmtime-verified codegen,
+    native self-host probes, and automated release readiness auditing.
+  </p>
+  <h2>Quick start</h2>
+  <pre><code>git clone https://github.com/zowskyy/frontier-syntax.git
+cd frontier-syntax
+cargo test --lib
+python3 scripts/release_readiness.py --audit</code></pre>
+  <h2>Community</h2>
+  <ul>
+    <li><a href="https://github.com/zowskyy/frontier-syntax/discussions">Discussions (Discord alternative)</a></li>
+    <li><a href="https://github.com/zowskyy/frontier-syntax/issues/new?template=feature_request.md">Waitlist / feature requests</a></li>
+    <li><a href="https://github.com/zowskyy/frontier-syntax">GitHub repository</a></li>
+  </ul>
+  <h2>Release status</h2>
+  <p>See <code>manifest/release_readiness.json</code> and <code>docs/RELEASE_CHECKLIST.md</code> in the repository.</p>
+</body>
+</html>

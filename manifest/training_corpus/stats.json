@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-08-07T17:42:53.177365Z",
+  "generated_at": "2026-08-07T18:19:47.426317Z",
   "script": "scripts/training/generate_corpus.py",
   "sample_count": 1000,
-  "jsonl_sha256": "47ec0a6bfaba9e789f64c55e7058a084f13a78e6d84b9464df631a406aad1222",
-  "compiler_git_sha": "35b4d75937a4",
+  "jsonl_sha256": "97aba42725458e5e76b072143ba6d8ba04e1896d6332e9d80106d6f6310af8cb",
+  "compiler_git_sha": "479718894fa8",
   "feature_tags": [
     "call",
     "const_return",

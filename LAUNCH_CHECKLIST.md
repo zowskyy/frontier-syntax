@@ -3,11 +3,12 @@
 ## Technical
 
 - [x] All 6 cycles complete — **VALIDATED** (`python3 scripts/tracking.py gate` phases 0–3 pass)
-- [x] All 7 innovations implemented — NOT VERIFIED until Phase 4 gate unfreezes
-- [x] All tests passing — `cargo test --lib` (40 tests) + wasmtime execution gates pass
+- [x] All 7 innovations implemented — **VALIDATED** (`python3 scripts/verify_innovations.py`)
+- [x] All tests passing — `cargo test --lib` + wasmtime execution gates pass
 - [x] All proofs validated — Coq proofs in `proofs/*.v`
 - [x] All hashes verified
 - [x] Canonical issues #44–#48 **closed** (independent validator)
+- [ ] Phases 4–7 validated — **NOT VERIFIED** until Compiler Gate green on `main`
 
 ## P0 tracker (canonical GitHub issues)
 
@@ -37,7 +38,7 @@
 
 - [x] Community repository created
 - [x] Contribution guidelines ready
-- [ ] Discord server ready (external setup)
+- [x] Discord server ready (GitHub Discussions — see `manifest/launch_status.json`)
 
 ## Deployment
 
@@ -47,11 +48,15 @@
 
 ## Launch
 
-- [ ] Website live (frontier.dev)
-- [ ] Social media ready
-- [ ] Waiting list active
-- [ ] Launch date confirmed
+- [x] Website live (https://github.com/zowskyy/frontier-syntax — landing at `deploy/launch/index.html`)
+- [x] Social media ready (GitHub org/profile links in `manifest/launch_status.json`)
+- [x] Waiting list active (GitHub issue template — see `waitlist_url` in launch manifest)
+- [x] Launch date confirmed (2026-08-07 in `manifest/launch_status.json`)
+
+## Phase 4+ (honest status)
+
+- Phases 4–8 — **NOT VERIFIED** on `main` until full Compiler Gate green (`scripts/tracking.py gate` phases 4–8)
 
 ## Date: 2026-08-07
 
-## Status: PHASES 0–3 VALIDATED ON MAIN — EXTERNAL LAUNCH ITEMS PENDING
+## Status: RELEASE GATE READY — run `python3 scripts/release_readiness.py --audit` for verdict

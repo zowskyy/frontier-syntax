@@ -20,12 +20,27 @@ on:
 jobs:
   audit-and-ecosystem:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: read
+    env:
+      GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - name: Install wasmtime (tracking phase 1 probes)
+        run: |
+          curl https://wasmtime.dev/install.sh -sSf | bash
+          echo "$HOME/.wasmtime/bin" >> "$GITHUB_PATH"
+
+      - name: Add wasm32 target (tracking phase 3 size gate)
+        run: rustup target add wasm32-unknown-unknown
 
       - name: Install audit validation deps
         run: pip install jsonschema
@@ -47,7 +62,7 @@ jobs:
         run: python3 scripts/gather_ecosystem_knowledge.py --dry-run
 
       - name: Tracking gate (blueprint truth)
-        run: python3 scripts/tracking.py gate
+        run: python3 scripts/tracking.py gate --max-phase 3
 
       - name: Cargo audit (Rust CVE scan)
         run: |

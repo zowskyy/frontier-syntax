@@ -69,7 +69,7 @@ def compile_fr(source: str, out: Path) -> tuple[bool, str]:
     src.write_text(source, encoding="utf-8")
     r = subprocess.run(
         [
-            "cargo", "run", "--quiet", "--bin", "frontier", "--",
+            "cargo", "run", "--quiet", "-p", "frontier", "--bin", "frontier", "--",
             "compile", str(src), "-t", "wasm", "-o", str(out), "--no-optimize",
         ],
         cwd=ROOT,
