@@ -2,9 +2,8 @@
 
 use wasm_bindgen::prelude::*;
 
-use crate::browser_compiler;
-
 #[wasm_bindgen]
 pub fn compile_frontier_wasm(source: &str) -> Result<Vec<u8>, JsValue> {
-    browser_compiler::compile_to_wasm(source, true).map_err(|e| JsValue::from_str(&e))
+    crate::wasm_codegen::compile_to_wasm_bytes(source)
+        .map_err(|e| JsValue::from_str(&e))
 }

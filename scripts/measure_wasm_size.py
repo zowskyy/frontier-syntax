@@ -52,7 +52,7 @@ def optimize_wasm(raw: Path, out: Path) -> bool:
     if not wasm_opt:
         return False
     r = subprocess.run(
-        [wasm_opt, "-Oz", "--enable-bulk-memory", "--strip-debug", "--strip-producers", str(raw), "-o", str(out)],
+        [wasm_opt, "-Oz", "--converge", "--enable-bulk-memory", "--strip-debug", "--strip-producers", "--flatten", str(raw), "-o", str(out)],
         capture_output=True,
         text=True,
     )
