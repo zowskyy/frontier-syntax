@@ -12,6 +12,8 @@ DOCS_DIR = ROOT / "frontier" / "docs"
 VERIFY_SCRIPT = ROOT / "scripts" / "verify_language_hardening.py"
 V2_VERIFY_SCRIPT = ROOT / "scripts" / "verify_v2.py"
 CYCLE1_SCRIPT = ROOT / "scripts" / "verify_cycle1.py"
+DEX_HYBRID_MODULE = ROOT / "frontier" / "dex-hybrid" / "module.yaml"
+DEX_CARGO_TOML = ROOT / "frontier-dex" / "Cargo.toml"
 
 REQUIRED_CORE_FILES = [
     "parser.frontier",
@@ -101,17 +103,55 @@ def verify():
     return 0
 
 
+def verify_dex_hybrid() -> int:
+    """Verify dex-hybrid module integration gates."""
+    errors = []
+
+    if not DEX_HYBRID_MODULE.exists():
+        errors.append(f"missing {DEX_HYBRID_MODULE.relative_to(ROOT)}")
+    if not DEX_CARGO_TOML.exists():
+        errors.append(f"missing {DEX_CARGO_TOML.relative_to(ROOT)}")
+
+    result = subprocess.run(
+        ["cargo", "test", "-p", "frontier-dex"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        errors.append("cargo test -p frontier-dex failed")
+
+    if errors:
+        print("FAIL: dex-hybrid module verification:")
+        for error in errors:
+            print(f"  - {error}")
+        return 1
+
+    print("✅ dex-hybrid module verified")
+    return 0
+
+
 def main():
     parser = argparse.ArgumentParser(description="Frontier ARC orchestrator")
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--patch", choices=["harden-language"], help="Apply a language patch")
     group.add_argument("--verify", action="store_true", help="Verify all ARC gates")
+    parser.add_argument(
+        "--include-module",
+        choices=["dex-hybrid"],
+        help="Additionally verify an optional Frontier module",
+    )
     args = parser.parse_args()
 
     if args.patch == "harden-language":
         return patch_harden_language()
     if args.verify:
-        return verify()
+        rc = verify()
+        if rc != 0:
+            return rc
+        if args.include_module == "dex-hybrid":
+            return verify_dex_hybrid()
+        return 0
     return 1
 
 

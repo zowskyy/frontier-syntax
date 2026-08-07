@@ -627,6 +627,7 @@ dependencies = [
  "ark-std",
  "chrono",
  "colored",
+ "frontier-dex",
  "getrandom 0.2.17",
  "hex",
  "notify",

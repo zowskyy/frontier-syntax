@@ -13,3 +13,4 @@
 {"ts":"2026-08-05T20:15:00Z","event":"gate_pass","gate":"unit_tests","detail":"23/17 tests passed"}
 {"ts":"2026-08-05T20:15:01Z","event":"gate_pass","gate":"benchmark","detail":"BENCHMARK_GATE=PASS"}
 {"ts":"2026-08-05T20:15:02Z","event":"project_complete","actor":"frontier-dex-builder","detail":"All 10 slices gated"}
+{"ts":"2026-08-07T02:33:27Z","event":"project_closed","actor":"closeout.sh","detail":"verify.sh passed; TRACKING.json status=closed"}
