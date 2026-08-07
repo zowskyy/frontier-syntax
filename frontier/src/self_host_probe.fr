@@ -1,0 +1,5 @@
+// Minimal self-host probe — Phase 1.3 slice target (#46)
+
+fn main(): int {
+    return 42;
+}

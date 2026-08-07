@@ -68,6 +68,8 @@ WORKERS: dict[str, dict[str, Any]] = {
         "issue_numbers": [44, 45, 46],
         "scripts": [
             "scripts/verify_self_hosting.py",
+            "scripts/run_native_self_host.py",
+            "scripts/taylor_compiler_mission.py",
             "scripts/measure_wasm_size.py",
             "scripts/taylor_issue_closer.py",
         ],
@@ -75,6 +77,10 @@ WORKERS: dict[str, dict[str, Any]] = {
             ["cargo", "test", "--lib", "wasm_codegen::", "--quiet"],
             ["cargo", "test", "--lib", "wasm_codegen::tests::test_knowledge_changes_wasm", "--quiet"],
             [sys.executable, "scripts/verify_self_hosting.py"],
+            [sys.executable, "scripts/taylor_compiler_mission.py"],
+        ],
+        "apply_commands": [
+            [sys.executable, "scripts/taylor_compiler_mission.py", "--apply"],
         ],
         "optional_commands": [
             [sys.executable, "scripts/verify_wasm_codegen.py"],

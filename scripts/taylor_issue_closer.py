@@ -65,10 +65,25 @@ def run_cmd(cmd: list[str], timeout: int = 300) -> dict[str, Any]:
 
 
 def check_native_self_host() -> dict[str, Any]:
-    """Phase 1.3 requires Frontier-native self-host, not Rust bootstrap."""
+    """Phase 1.3 — wasmtime + Frontier compiler WASM (no bootstrap.run cargo)."""
+    r = subprocess.run(
+        [sys.executable, str(ROOT / "scripts/run_native_self_host.py")],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        timeout=600,
+    )
+    try:
+        data = json.loads(r.stdout)
+        passed = bool(data.get("pass"))
+    except json.JSONDecodeError:
+        passed = False
+        data = {"error": (r.stdout + r.stderr)[-400:]}
     return {
-        "pass": False,
-        "reason": "Bootstrap Rust wrapper ≠ Frontier-native compiler (PROJECT_BLUEPRINT.md slice 1.3)",
+        "pass": passed,
+        "reason": None if passed else "Native self-host not yet passing — see manifest/native_self_host.json",
+        "manifest": "manifest/native_self_host.json",
+        "detail": data,
     }
 
 

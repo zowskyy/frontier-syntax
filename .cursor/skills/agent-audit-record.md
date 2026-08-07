@@ -32,3 +32,4 @@ Group 1 runs **sequential** in production mode (gate → compiler → audit).
 4. Do not wait for owner to re-prompt gates/issues/PRs/README.
 5. **WASM #48:** run `scripts/audit_wasm_size_history.py` before any optimize/remediation — owner believes a prior chat hit sub-100 KB (~98 KB); reconcile `cursor/wasm-size-phase3-f519` (83.8 KB `met:true`) before re-working #48.
 6. **Issue closure:** workers close their canonical GitHub issues after verification via `scripts/taylor_issue_closer.py`. Production/daily: audit automatically; use `--apply` on `taylor_ops_team.py run` to close eligible issues (#44–#48). #46 stays open until Frontier-native self-host exists.
+7. **Compiler mission:** W2 runs `scripts/taylor_compiler_mission.py` every production/daily cycle until `manifest/compiler_self_host_mission.json` has `complete: true`. Owner is only notified when native self-host passes and #46 closes.
