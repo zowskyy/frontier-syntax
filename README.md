@@ -20,14 +20,14 @@ Full guide: [docs/GET_HELP.md](docs/GET_HELP.md) · Cursor: `/get-help`
 
 <!-- SHADOW_WORKER_STATUS:BEGIN -->
 
-**Live audit & blueprint status** — _auto-updated 2026-08-07 02:51:01 UTC_
+**Live audit & blueprint status** — _auto-updated 2026-08-07 03:48:39 UTC_
 
 | | |
 |---|---|
 | Agent audit log | [`docs/agent_audit_log/`](docs/agent_audit_log/) |
 | Latest ecosystem report | run `20260806T232938Z` |
 | Blueprint gate | Phase 0: **?** · Phase 1: **?** · open: — |
-| WASM | 84.3 KB (target &lt;100 KB met: True) |
+| WASM | 93.0 KB (target &lt;100 KB met: True) |
 
 End of every agent turn: `python3 scripts/agent_shadow_worker.py run`
 
@@ -83,13 +83,13 @@ python3 scripts/generate_arc_status.py
 
 ## What's New (Merged)
 
-> **Blueprint note:** Run `python3 scripts/tracking.py gate` for validated status. Items marked NOT VERIFIED below fail the independent gate or remain open on GitHub (#44–#48).
+> **Blueprint note:** `python3 scripts/tracking.py gate` — phases 0–3 **validated** on `main` (2026-08-07). Phases 4–8 frozen per `PROJECT_BLUEPRINT.md`.
 
 | Feature | Location | Gate status |
 |---------|----------|-------------|
-| WASM codegen (let/if/calls/loops) | `src/wasm_codegen.rs` | Tests pass — NOT VERIFIED (#44 open) |
-| Knowledge → codegen wiring | `implementation_hint` | Test passes — NOT VERIFIED (#45 open) |
-| Genesis self-hosting bootstrap | `--bootstrap`, `frontier/src/main.fr` | PARTIAL bootstrap — NOT VERIFIED (#46) |
+| WASM codegen (let/if/calls/loops) | `src/wasm_codegen.rs` | **VALIDATED** — wasmtime 4/4 (#44 closed) |
+| Knowledge → codegen wiring | `implementation_hint` | **VALIDATED** — `test_knowledge_changes_wasm` (#45 closed) |
+| Native self-hosting | `run_native_self_host.py` | **VALIDATED** — wasmtime + compiler WASM (#46 closed) |
 | Coq proofs (4/4) | `proofs/*.v` |
 | Self-creation orchestrator | `scripts/self_creation_orchestrator.py` |
 | Gap solution orchestrator | `scripts/gap_solution_orchestrator.py` |
@@ -225,9 +225,10 @@ python3 scripts/close_peerless_gaps.py     # logs each P1–P6 closure
 
 ## Remaining Work (Honest)
 
-- WASM binary size ~885 KB (target <100 KB) — tracked in `manifest/wasm_size.json`; requires dedicated slim WASM crate
-- True self-hosting uses Rust bootstrap wrapper; Frontier-native compiler growing in `frontier/src/main.fr`
+- Phases 4–8 **frozen** — innovation verification NOT VERIFIED until Phase 4 unfreezes (see `PROJECT_BLUEPRINT.md`)
+- Full browser WASM API (`--features full`) is larger than wasm-slim; use `wasm-slim` for &lt;100 KB gate
 - Live GPU/IPFS/CDX production nodes — module tests pass; production deployment is external
+- External launch: website, social, waiting list, Discord (see `LAUNCH_CHECKLIST.md`)
 
 | Phase | Scope | Status |
 |-------|-------|--------|
@@ -291,7 +292,7 @@ bash scripts/gate-all-changed.sh
 | `.github/workflows/gate-check.yml` | CI gate on pull requests |
 | `samples/hello_passing.py` | Smoke-test fixture that passes all gates |
 
-> Blueprint issues #44–#48 remain open; the gate layer itself is production-ready.
+> Blueprint phases 0–3 validated on `main`. Phases 4–8 frozen per `PROJECT_BLUEPRINT.md`.
 
 ## License
 

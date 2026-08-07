@@ -1,7 +1,7 @@
 {
-  "verified_at": "2026-08-06T06:01:42.871253Z",
+  "verified_at": "2026-08-07T03:48:54.221750Z",
   "script": "scripts/verify_wasm_codegen.py",
-  "wasmtime": "/usr/local/cargo/bin/wasmtime",
+  "wasmtime": "/home/ubuntu/.wasmtime/bin/wasmtime",
   "all_pass": true,
   "cases": [
     {

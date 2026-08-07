@@ -1,0 +1,29 @@
+name: cursor_sandbox
+description: "Recreated sandbox for cursor"
+
+runtime:
+  memory_limit_mb: 256
+  cpu_limit: 1.0
+  network: "restricted"
+  filesystem: "persistent"
+  allowed_syscalls:
+    - read
+    - write
+    - open
+    - close
+    - stat
+    - fstat
+    - mmap
+    - munmap
+
+environment_variables:
+  TERM: xterm-256color
+  LANG: en_US.UTF-8
+  LC_ALL: C.UTF-8
+
+timeout_seconds: 30
+
+overhead:
+  execution_time_multiplier: 1.2
+  memory_overhead_mb: 8.5
+  startup_delay_ms: 150
