@@ -8,7 +8,7 @@
 - [x] All proofs validated — Coq proofs in `proofs/*.v`
 - [x] All hashes verified
 - [x] Canonical issues #44–#48 **closed** (independent validator)
-- [x] Phases 4–7 validated — `scripts/tracking.py gate` (innovations, M5, corpus, hardening)
+- [ ] Phases 4–7 validated — **NOT VERIFIED** until Compiler Gate green on `main`
 
 ## P0 tracker (canonical GitHub issues)
 
@@ -52,6 +52,10 @@
 - [x] Social media ready (GitHub org/profile links in `manifest/launch_status.json`)
 - [x] Waiting list active (GitHub issue template — see `waitlist_url` in launch manifest)
 - [x] Launch date confirmed (2026-08-07 in `manifest/launch_status.json`)
+
+## Phase 4+ (honest status)
+
+- Phases 4–8 — **NOT VERIFIED** on `main` until full Compiler Gate green (`scripts/tracking.py gate` phases 4–8)
 
 ## Date: 2026-08-07
 
