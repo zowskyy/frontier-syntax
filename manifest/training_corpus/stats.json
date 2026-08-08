@@ -9,5 +9,8 @@
     "const_return",
     "if",
     "let"
-  ]
+  ],
+  "validated_at": "2026-08-08T04:17:44.742144Z",
+  "validation_pass": true,
+  "wasmtime_pass_rate": 1.0
 }

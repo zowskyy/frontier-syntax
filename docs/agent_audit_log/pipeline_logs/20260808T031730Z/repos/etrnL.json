@@ -1,0 +1,50 @@
+{
+  "name": "etrnL",
+  "url": "https://github.com/zowskyy/etrnL",
+  "description": "Identity Continuity Infrastructure \u2014 Multimodal digital presence preservation",
+  "is_private": false,
+  "language": "Python",
+  "updated_at": "2026-08-07T02:59:21Z",
+  "category": "fork_or_adjacent",
+  "access_status": "ok",
+  "readme_excerpt": "# EtrnL\n\n**Identity manifold for multimodal presence, privacy, and continuity.**\n\nEtrnL encodes voice, face, text, and context into a 128-dimensional learned manifold where encoding, generation, memory, and navigation are the same operation.\n\n## Quick start\n\n```bash\npython3 -m venv .venv\nsource .venv/bin/activate          # Windows: .venv\\Scripts\\activate\npip install -r requirements-dev.txt\n\n# Smoke test the core manifold\npython -c \"from etrnl.manifold import IdentityManifold; m = IdentityManifold(); print('ok')\"\n\n# Run tests\npytest tests/ -v\n```\n\n## Modules\n\n| Module | Purpose |\n|--------|---------|\n| `manifold` | Identity encoding, generation, navigation, interpolation |\n| `presence` | Cryptographic proof-of-presence challenge-response |\n| `privacy` | Consent filtering and semantic privacy budgets |\n| `gradient` | Five-level perspective gradient (VERBATIM \u2192 UNKNOWN) |\n| `continuity` | Life continuity states: ACTIVE \u2192 DORMANT \u2192 GUARDIANSHIP \u2192 LEGACY |\n| `holograph` | Holographic model fragmentation and reconstruction |\n| `resonance` | Temporal resonance \u2014 memory reconstruction from manifold |\n| `self_prove` | Self-proving architecture with continuous validation |\n\n## Development\n\n```bash\nblack etrnl/ tests/\nruff check etrnl/ tests/\npytest tests/ -v\n```\n\n## Cursor Gate\n\nThis repo includes the [Cursor Gate](https://github.com/zowskyy/Schema) stack for agent-driven code review. Gate reviewer deps live in `requirements-gate.txt`.\n\n```bash\npip install -r requirements-gate.txt\nbash scripts/install-agent-environment.sh\nbash scripts/gate-file.sh --file samples/hello_passing.py\n```\n\nPR CI: workflow `Gate Check` runs the gate on `samples/hello_passing.py`.\n\n## Layout\n\n```\netrnl/              # Core Python package\ntests/              # pytest suite (one file per module + integration)\ndocs/ROADMAP.md     # Gap audit and next milestones\nscripts/            # Gate scripts + build helpers\n... (5 more lines)",
+  "top_level_files": [
+    ".cursor",
+    ".cursorrules",
+    ".env.example",
+    ".github",
+    ".gitignore",
+    ".vscode",
+    "AGENTS.md",
+    "LICENSE",
+    "NEXT_STEPS.md",
+    "README.md",
+    "build.sh",
+    "build_all.sh",
+    "cursor_gate.py",
+    "cursor_gate_fastest.py",
+    "dailyworkflow.txt",
+    "docs",
+    "etrnl",
+    "etrnl.egg-info",
+    "pyproject.toml",
+    "requirements-dev.txt",
+    "requirements-gate.txt",
+    "samples",
+    "scripts",
+    "tests",
+    "update.sh"
+  ],
+  "claims": [
+    "GitHub description: Identity Continuity Infrastructure \u2014 Multimodal digital presence preservation"
+  ],
+  "can_do": [
+    "Top-level structure visible (25 entries): .cursor, .cursorrules, .env.example, .github, .gitignore, .vscode, AGENTS.md, LICENSE",
+    "Python project indicators present"
+  ],
+  "cannot_do": [
+    "No .github/workflows at repo root (CI not confirmed)",
+    "Not part of Frontier blueprint critical path"
+  ],
+  "blueprint_relation": "Upstream fork or unrelated project \u2014 no blueprint phase dependency."
+}

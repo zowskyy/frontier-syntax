@@ -1,0 +1,55 @@
+{
+  "name": "crxcibl3",
+  "url": "https://github.com/zowskyy/crxcibl3",
+  "description": "",
+  "is_private": false,
+  "language": "GDScript",
+  "updated_at": "2026-08-08T01:39:50Z",
+  "category": "fork_or_adjacent",
+  "access_status": "ok",
+  "readme_excerpt": "# CRXCIBL3\n\n> **Beach Boulevard \u2014 Godot 4.7.1 crew shooter with JSON-driven cutscenes, the Blackwood arc, and all five Corrupted Six boss encounters.**\n\n[![Godot 4.7.1](https://img.shields.io/badge/Godot-4.7.1-478CBF?logo=godotengine&logoColor=white)](https://godotengine.org)\n[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)\n[![Version: 1.2.1](https://img.shields.io/badge/Version-1.2.1-blue.svg)](CHANGELOG.md)\n[![Platform](https://img.shields.io/badge/platform-Android%20%7C%20Web%20%7C%20Windows%20%7C%20Linux-lightgrey)](godot/export_presets.cfg)\n\n---\n\n## Quickstart\n\n```bash\n# 1. Clone / open this repo\n# 2. Install Godot 4.7.1 \u2014 https://godotengine.org/download\n# 3. Godot Project Manager \u2192 Import \u2192 godot/project.godot\n# 4. Press F5 \u2014 Main menu \u2192 New Game \u2192 hero selection \u2192 boardwalk TestRoom\n\n# Optional: regenerate brand icon\npython3 scripts/generate_icon.py\n\n# Optional: structural checks (no Godot editor required)\npython3 scripts/check_tscn.py\npython3 scripts/check_gd.py\n\n# Optional: boot a Corrupted Six boss directly (QA / demo)\ngodot --path godot -s res://tools/play_boss_demo.gd -- --boss-cross\ngodot --path godot -s res://tools/play_boss_demo.gd -- --boss-voss\ngodot --path godot -s res://tools/play_boss_demo.gd -- --boss-moreau\ngodot --path godot -s res://tools/play_boss_demo.gd -- --boss-hayes\ngodot --path godot -s res://tools/play_boss_demo.gd -- --boss-webb\n```\n\n**Play flow (pick one):**\n\n- **Act 3 boss run:** enter the Corrupted Six trigger zones in TestRoom (Cross Tower, Voss compound, Moreau lab, correctional yard, Webb data center).\n- **Full story arc:** TestRoom \u2192 rooftop trigger (Building3) \u2192 Blackwood fight \u2192 car chase \u2192 Emperor estate reckoning \u2192 epilogue.\n\n---\n\n## What's built\n\n| Area | Status |\n|------|--------|\n| **Boardwalk combat** | Heat / stress / HP, enemies, bodega shop, hideout, crack-house generator, squad TAB switch |\n| **Blackwood arc** | Rooftop surprise \u2192 car chase \u2192 Emperor final stand \u2192 JSON reckoning \u2192 epilogue |\n| **Corrupted Six bosses** | Cross, Voss, Moreau, Hayes, Webb \u2014 playable encounters via `BossGeneric` + JSON beats |\n| **Cutscene system** | `CutsceneDirector` beat sequencer + `DialogueBox` UI + JSON data in `godot/data/` |\n| **25 autoloads** | GameState, Stress, SaveSystem, Bosses, Emperor, Epilogue, \u2026 |\n| **12 heroes** | From `configs/game_config.json` via HeroDefinitions / HeroFactory |\n| **Export** | Android, Web, Windows Desktop, Linux/X11 presets; CI debug APK artifact |\n\nGodot 4.7.1 is the **sole shipping client** \u2014 the legacy Phaser web prototype has been retired.\n\n---\n\n## Cutscene beats (Slices 3.18+)\n\nHand declarative beats to `CutsceneDirector.play()`. Lines render as **captions** with lip flap \u2014 no voiceover:\n... (99 more lines)",
+  "top_level_files": [
+    ".cursor",
+    ".cursorrules",
+    ".env.example",
+    ".github",
+    ".gitignore",
+    "AGENTS.md",
+    "ANIMATION_ASSETS_MANIFEST.md",
+    "ATTRIBUTIONS.md",
+    "CHANGELOG.md",
+    "CREDITS.md",
+    "CRXCIBL3_COMPLETE_NARRATIVE_PACKAGE.md",
+    "FOR_ANIMATION_VOICEOVER_TEAM.md",
+    "KNOWLEDGE_BASE.md",
+    "LICENSE",
+    "PROJECT_BLUEPRINT.md",
+    "PROJECT_STATE.md",
+    "README.md",
+    "Screenshot 2026-07-18 025721.png",
+    "VOICEOVER_ANIMATION_GUIDE.md",
+    "assets",
+    "configs",
+    "crxcibl3-sprite-animation-production-spec.html",
+    "crxcibl3art",
+    "cursor_gate.py",
+    "cursor_gate_fastest.py",
+    "docs",
+    "godot",
+    "requirements.txt",
+    "samples",
+    "scripts"
+  ],
+  "claims": [
+    "(no explicit claims extracted from README)"
+  ],
+  "can_do": [
+    "Top-level structure visible (30 entries): .cursor, .cursorrules, .env.example, .github, .gitignore, AGENTS.md, ANIMATION_ASSETS_MANIFEST.md, ATTRIBUTIONS.md",
+    "Python project indicators present"
+  ],
+  "cannot_do": [
+    "No .github/workflows at repo root (CI not confirmed)",
+    "Not part of Frontier blueprint critical path"
+  ],
+  "blueprint_relation": "Upstream fork or unrelated project \u2014 no blueprint phase dependency."
+}

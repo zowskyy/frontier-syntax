@@ -1,5 +1,5 @@
 {
-  "verified_at": "2026-08-08T01:05:21.042868Z",
+  "verified_at": "2026-08-08T04:14:14.178003Z",
   "script": "scripts/verify_innovations.py",
   "innovations_pass": 7,
   "innovations_total": 7,
@@ -14,7 +14,7 @@
       "tests_pass": true,
       "pass": true,
       "command": "cargo test --lib grammar::",
-      "output": "lf, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {\n    |        ^^^^^^^^^^^^^^^^^\n\nwarning: function `export_section_multi` is never used\n   --> src/wasm_codegen.rs:648:4\n    |\n648 | fn export_section_multi(names: &[String], main_func_count: usize) -> Vec<u8> {\n    |    ^^^^^^^^^^^^^^^^^^^^\n\nwarning: `frontier` (lib test) generated 13 warnings (run `cargo fix --lib -p frontier --tests` to apply 3 suggestions)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 9.36s\n     Running unittests src/lib.rs (target/debug/deps/frontier-bd04effebbbfa3e0)\n"
+      "output": "\nrunning 3 tests\ntest grammar::tests::test_load_grammar_v2 ... ok\ntest grammar::mutator::tests::test_add_rule_bumps_version ... ok\ntest grammar::tests::test_apply_mutation ... ok\n\ntest result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 42 filtered out; finished in 0.00s\n\n   Compiling frontier v2.0.0 (/workspace)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.74s\n     Running unittests src/lib.rs (target/debug/deps/frontier-bd04effebbbfa3e0)\n"
     },
     {
       "id": 2,
@@ -24,7 +24,7 @@
       "tests_pass": true,
       "pass": true,
       "command": "cargo test --lib compiler::proof_generator::",
-      "output": "lf, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {\n    |        ^^^^^^^^^^^^^^^^^\n\nwarning: function `export_section_multi` is never used\n   --> src/wasm_codegen.rs:648:4\n    |\n648 | fn export_section_multi(names: &[String], main_func_count: usize) -> Vec<u8> {\n    |    ^^^^^^^^^^^^^^^^^^^^\n\nwarning: `frontier` (lib test) generated 13 warnings (run `cargo fix --lib -p frontier --tests` to apply 3 suggestions)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.77s\n     Running unittests src/lib.rs (target/debug/deps/frontier-bd04effebbbfa3e0)\n"
+      "output": "\nrunning 1 test\ntest compiler::proof_generator::tests::test_generate_coq ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 44 filtered out; finished in 0.00s\n\n   Compiling frontier v2.0.0 (/workspace)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.69s\n     Running unittests src/lib.rs (target/debug/deps/frontier-bd04effebbbfa3e0)\n"
     },
     {
       "id": 3,
@@ -34,7 +34,7 @@
       "tests_pass": true,
       "pass": true,
       "command": "cargo test --lib pq_signatures::",
-      "output": "lf, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {\n    |        ^^^^^^^^^^^^^^^^^\n\nwarning: function `export_section_multi` is never used\n   --> src/wasm_codegen.rs:648:4\n    |\n648 | fn export_section_multi(names: &[String], main_func_count: usize) -> Vec<u8> {\n    |    ^^^^^^^^^^^^^^^^^^^^\n\nwarning: `frontier` (lib test) generated 13 warnings (run `cargo fix --lib -p frontier --tests` to apply 3 suggestions)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.90s\n     Running unittests src/lib.rs (target/debug/deps/frontier-bd04effebbbfa3e0)\n"
+      "output": "\nrunning 2 tests\ntest pq_signatures::tests::test_dilithium_sign_verify ... ok\ntest pq_signatures::tests::test_ast_signing ... ok\n\ntest result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 43 filtered out; finished in 0.00s\n\n   Compiling frontier v2.0.0 (/workspace)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.69s\n     Running unittests src/lib.rs (target/debug/deps/frontier-bd04effebbbfa3e0)\n"
     },
     {
       "id": 4,
@@ -44,7 +44,7 @@
       "tests_pass": true,
       "pass": true,
       "command": "cargo test --lib zk::verifier::",
-      "output": "lf, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {\n    |        ^^^^^^^^^^^^^^^^^\n\nwarning: function `export_section_multi` is never used\n   --> src/wasm_codegen.rs:648:4\n    |\n648 | fn export_section_multi(names: &[String], main_func_count: usize) -> Vec<u8> {\n    |    ^^^^^^^^^^^^^^^^^^^^\n\nwarning: `frontier` (lib test) generated 13 warnings (run `cargo fix --lib -p frontier --tests` to apply 3 suggestions)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.58s\n     Running unittests src/lib.rs (target/debug/deps/frontier-bd04effebbbfa3e0)\n"
+      "output": "\nrunning 2 tests\ntest zk::verifier::tests::test_zk_json_roundtrip ... ok\ntest zk::verifier::tests::test_zk_setup_and_prove ... ok\n\ntest result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 43 filtered out; finished in 0.11s\n\n   Compiling frontier v2.0.0 (/workspace)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.67s\n     Running unittests src/lib.rs (target/debug/deps/frontier-bd04effebbbfa3e0)\n"
     },
     {
       "id": 5,
@@ -54,7 +54,7 @@
       "tests_pass": true,
       "pass": true,
       "command": "cargo test --lib ipfs::resolver::",
-      "output": "lf, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {\n    |        ^^^^^^^^^^^^^^^^^\n\nwarning: function `export_section_multi` is never used\n   --> src/wasm_codegen.rs:648:4\n    |\n648 | fn export_section_multi(names: &[String], main_func_count: usize) -> Vec<u8> {\n    |    ^^^^^^^^^^^^^^^^^^^^\n\nwarning: `frontier` (lib test) generated 13 warnings (run `cargo fix --lib -p frontier --tests` to apply 3 suggestions)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.25s\n     Running unittests src/lib.rs (target/debug/deps/frontier-bd04effebbbfa3e0)\n"
+      "output": "\nrunning 4 tests\ntest ipfs::resolver::tests::test_resolve_ast ... ok\ntest ipfs::resolver::tests::test_invalid_ipfs_path ... ok\ntest ipfs::resolver::tests::test_ipfs_import ... ok\ntest ipfs::resolver::tests::test_version_cid_deterministic ... ok\n\ntest result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 41 filtered out; finished in 0.00s\n\n   Compiling frontier v2.0.0 (/workspace)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.66s\n     Running unittests src/lib.rs (target/debug/deps/frontier-bd04effebbbfa3e0)\n"
     },
     {
       "id": 6,
@@ -64,7 +64,7 @@
       "tests_pass": true,
       "pass": true,
       "command": "cargo test --lib neural::completion::",
-      "output": "lf, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {\n    |        ^^^^^^^^^^^^^^^^^\n\nwarning: function `export_section_multi` is never used\n   --> src/wasm_codegen.rs:648:4\n    |\n648 | fn export_section_multi(names: &[String], main_func_count: usize) -> Vec<u8> {\n    |    ^^^^^^^^^^^^^^^^^^^^\n\nwarning: `frontier` (lib test) generated 13 warnings (run `cargo fix --lib -p frontier --tests` to apply 3 suggestions)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.28s\n     Running unittests src/lib.rs (target/debug/deps/frontier-bd04effebbbfa3e0)\n"
+      "output": "\nrunning 3 tests\ntest neural::completion::tests::test_intent_analysis ... ok\ntest neural::completion::tests::test_proof_annotation_suggestions ... ok\ntest neural::completion::tests::test_neural_suggestions ... ok\n\ntest result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 42 filtered out; finished in 0.00s\n\n   Compiling frontier v2.0.0 (/workspace)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.70s\n     Running unittests src/lib.rs (target/debug/deps/frontier-bd04effebbbfa3e0)\n"
     },
     {
       "id": 7,
@@ -74,7 +74,7 @@
       "tests_pass": true,
       "pass": true,
       "command": "cargo test --lib packages::registry::",
-      "output": "lf, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {\n    |        ^^^^^^^^^^^^^^^^^\n\nwarning: function `export_section_multi` is never used\n   --> src/wasm_codegen.rs:648:4\n    |\n648 | fn export_section_multi(names: &[String], main_func_count: usize) -> Vec<u8> {\n    |    ^^^^^^^^^^^^^^^^^^^^\n\nwarning: `frontier` (lib test) generated 13 warnings (run `cargo fix --lib -p frontier --tests` to apply 3 suggestions)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.63s\n     Running unittests src/lib.rs (target/debug/deps/frontier-bd04effebbbfa3e0)\n"
+      "output": "\nrunning 1 test\ntest packages::registry::tests::test_publish_and_resolve ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 44 filtered out; finished in 0.00s\n\n   Compiling frontier v2.0.0 (/workspace)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.70s\n     Running unittests src/lib.rs (target/debug/deps/frontier-bd04effebbbfa3e0)\n"
     }
   ]
 }

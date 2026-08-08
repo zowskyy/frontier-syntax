@@ -1,0 +1,40 @@
+{
+  "name": "repurpose-engine",
+  "url": "https://github.com/zowskyy/repurpose-engine",
+  "description": "",
+  "is_private": false,
+  "language": "Python",
+  "updated_at": "2026-08-07T02:59:20Z",
+  "category": "frontier_ecosystem",
+  "access_status": "ok",
+  "readme_excerpt": "# repurpose-engine\n\nSingle-source content repurposing engine. Takes a blog post, transcript, or voice-memo transcript and produces platform-native drafts for X, LinkedIn, Reddit, Newsletter, YouTube Shorts, and Instagram.\n\n```bash\npython repurpose.py --platform x --content \"Your source text here.\"\npython repurpose.py --platform linkedin --content \"...\" --json\n```",
+  "top_level_files": [
+    ".cursor",
+    ".cursorrules",
+    ".env.example",
+    ".github",
+    ".gitignore",
+    "AGENTS.md",
+    "LICENSE",
+    "README.md",
+    "cursor_gate.py",
+    "cursor_gate_fastest.py",
+    "docs",
+    "repurpose.py",
+    "requirements.txt",
+    "samples",
+    "scripts",
+    "test_repurpose.py"
+  ],
+  "claims": [
+    "(no explicit claims extracted from README)"
+  ],
+  "can_do": [
+    "Top-level structure visible (16 entries): .cursor, .cursorrules, .env.example, .github, .gitignore, AGENTS.md, LICENSE, README.md",
+    "Python project indicators present"
+  ],
+  "cannot_do": [
+    "No .github/workflows at repo root (CI not confirmed)"
+  ],
+  "blueprint_relation": "Automation / worker scripts; may invoke frontier-syntax tooling."
+}

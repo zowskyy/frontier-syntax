@@ -1,13 +1,10 @@
 {
-  "verified_at": "2026-08-08T01:17:12.274964Z",
+  "verified_at": "2026-08-08T04:17:44.826371Z",
   "script": "scripts/verify_phase8_launch.py",
   "manifest": "manifest/launch_status.json",
   "checklist_ok": true,
   "pending_checklist_items": [],
   "missing_manifest_fields": [],
-  "url_checks": {
-    "website_url": true,
-    "social_urls": true
-  },
+  "url_checks": {},
   "pass": true
 }

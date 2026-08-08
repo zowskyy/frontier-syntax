@@ -1,5 +1,5 @@
 {
-  "verified_at": "2026-08-08T01:17:11.292794Z",
+  "verified_at": "2026-08-08T04:13:59.225071Z",
   "script": "scripts/run_native_self_host.py",
   "source": "frontier/src/self_host_probe.fr",
   "expected_main": 42,

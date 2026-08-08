@@ -1,0 +1,56 @@
+{
+  "name": "synstudios",
+  "url": "https://github.com/zowskyy/synstudios",
+  "description": "",
+  "is_private": false,
+  "language": "TypeScript",
+  "updated_at": "2026-08-08T03:10:45Z",
+  "category": "other",
+  "access_status": "ok",
+  "readme_excerpt": "# SynStudios\n\n**2D sprite and 3D animation trial studio** \u2014 preview scenes in capped 30-second runs before committing to full production. Available as a **web app** and **Google Play Android app**.\n\nBlack-and-white UI. Compatible with Godot `AnimationLoader` horizontal strip conventions and React Three Fiber 3D rigs.\n\n## Features\n\n- **2D sprite preview** \u2014 horizontal strip playback, pixel-perfect canvas, PNG upload\n- **3D rig preview** \u2014 React Three Fiber with orbit camera\n- **Split mode** \u2014 composite 2D + 3D cutscene trials\n- **30s trial player** \u2014 FPS metrics and pass/fail gate\n- **Android app** \u2014 Capacitor shell for Google Play submission\n\n## Quick start (web)\n\n```bash\ncd synstudios\nnpm install\nnpm run dev\n```\n\nOpen [http://localhost:3000](http://localhost:3000)\n\n## Google Play / Android\n\n### Taylor Play Store workers\n\nSeven-worker pipeline (adapted from Taylor Ops Team):\n\n| Worker | Role |\n|--------|------|\n| W1 GateKeeper | Brand + secrets audit |\n| W2 BuildCore | Next.js static export |\n| W3 AuditGuardian | Play Store policy checklist |\n| W4 SpecParity | 2D/3D feature verification |\n| W5 BundleSizer | Export size + Android config |\n| W6 ReleaseOps | Signing + version manifest |\n| W7 LaunchContinuity | Store listing docs |\n\n```powershell\nnpm install\npython scripts/taylor_playstore_team.py --mode production\n```\n\n### Build release AAB\n\n```powershell\n# One-time: create signing keystore\nkeytool -genkey -v -keystore android/synstudios-release.jks -alias synstudios -keyalg RSA -keysize 2048 -validity 10000\ncopy android\\keystore.properties.example android\\keystore.properties\n# Edit keystore.properties with your passwords\n\nnpm run android:release\n```\n\nUpload `android/app/build/outputs/bundle/release/app-release.aab` to Google Play Console.\n\nSee **`store/SUBMISSION_CHECKLIST.md`** for full Play Store submission steps.\n\n... (23 more lines)",
+  "top_level_files": [
+    ".github",
+    ".gitignore",
+    "CONTEXT.md",
+    "Caddyfile.txt",
+    "README.md",
+    "android",
+    "benchmarks",
+    "bun.lock",
+    "capacitor.config.ts",
+    "components.json",
+    "custom.db",
+    "database-runtime-build.sh",
+    "eslint.config.mjs",
+    "logo.svg",
+    "next-env.d.ts",
+    "next.config.ts",
+    "package-lock.json",
+    "package.json",
+    "postcss.config.mjs",
+    "public",
+    "pulsestudio-cyberpunk.png",
+    "pulsestudio-initial.png",
+    "python-runtime-build.sh",
+    "python-runtime-container.sh",
+    "robots.txt",
+    "schema.prisma",
+    "scripts",
+    "server.ts",
+    "src",
+    "store",
+    "tailwind.config.ts",
+    "tsconfig.json"
+  ],
+  "claims": [
+    "(no explicit claims extracted from README)"
+  ],
+  "can_do": [
+    "Top-level structure visible (32 entries): .github, .gitignore, CONTEXT.md, Caddyfile.txt, README.md, android, benchmarks, bun.lock",
+    "Node/JS project (package.json present)"
+  ],
+  "cannot_do": [
+    "No .github/workflows at repo root (CI not confirmed)"
+  ],
+  "blueprint_relation": "No direct blueprint dependency identified."
+}

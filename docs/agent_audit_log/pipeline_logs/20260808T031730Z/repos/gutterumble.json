@@ -1,0 +1,53 @@
+{
+  "name": "gutterumble",
+  "url": "https://github.com/zowskyy/gutterumble",
+  "description": "",
+  "is_private": false,
+  "language": "GDScript",
+  "updated_at": "2026-08-07T03:01:46Z",
+  "category": "fork_or_adjacent",
+  "access_status": "ok",
+  "readme_excerpt": "# GUTTERUMBLE\n\nStreet-fighting arena brawler built in **Godot 4.7** (Mobile/Android). Customize your fighter, pick a weapon, and battle AI opponents across urban arenas.\n\n**Status**: Main Menu \u2705 \u00b7 Character Creator \u2705 \u00b7 Back Alley Arena \u2705 \u00b7 Rooftop Arena \u2705 \u00b7 Combat Core \u2705 \u00b7 Remaining Content \u274c\n\nSee [BUILD_GUIDE.md](BUILD_GUIDE.md) for the full slide-by-slice development roadmap (~15\u201320 playable hours target, 6 arenas, 5 weapon types).\n\n## Install\n\n### Prerequisites\n\n- [Godot 4.7](https://godotengine.org/) (Mobile export templates for Android)\n- Python 3.12+ (Cursor Gate tooling only)\n\n### Clone and bootstrap\n\n```bash\ngit clone https://github.com/zowskyy/gutterumble.git\ncd gutterumble\npip install -r requirements.txt\nbash scripts/install-agent-environment.sh\n```\n\nOpen `project.godot` in the Godot editor, or import the folder as an existing project.\n\n### Android export (optional)\n\nInstall Android SDK/NDK via Godot Editor \u2192 Export \u2192 Android, then configure signing keys under `android/` export presets.\n\n## Run\n\n### In-editor\n\n1. Open the project in Godot 4.7\n2. Press **F5** (main scene: `scenes/main_menu/main_menu.tscn`)\n3. Flow: Main Menu \u2192 Arena Select \u2192 Fight (or Gang Wars for multi-wave rooftop)\n\n### Controls (1v1 / Gang Wars)\n\n| Key | Action |\n|-----|--------|\n| WASD / arrows | Move |\n| Z | Light attack |\n| X | Heavy attack |\n| Space | Dodge |\n| C | Special (when meter full) |\n\n### Gate a file locally\n\n```bash\nbash scripts/gate-file.sh --file samples/hello_passing.py\n```\n\n## Deploy\n\n| Target | Steps |\n|--------|-------|\n| Android APK | Godot \u2192 Project \u2192 Export \u2192 Android \u2192 Export Project |\n| Desktop (dev) | Godot \u2192 Export \u2192 Windows/Linux (configure preset) |\n... (27 more lines)",
+  "top_level_files": [
+    ".cursor",
+    ".cursorrules",
+    ".env.example",
+    ".gitattributes",
+    ".github",
+    ".gitignore",
+    "AGENTS.md",
+    "BUILD_GUIDE.md",
+    "BUILD_GUIDE_10X.md",
+    "CREDITS.md",
+    "LICENSE",
+    "PROJECT_BLUEPRINT.md",
+    "PROJECT_STATE.md",
+    "README.md",
+    "assets",
+    "autoloads",
+    "backend",
+    "conceptart",
+    "cursor_gate.py",
+    "cursor_gate_fastest.py",
+    "docs",
+    "mouse.tscn",
+    "project.godot",
+    "requirements.txt",
+    "samples",
+    "scenes",
+    "scripts",
+    "tools"
+  ],
+  "claims": [
+    "(no explicit claims extracted from README)"
+  ],
+  "can_do": [
+    "Top-level structure visible (28 entries): .cursor, .cursorrules, .env.example, .gitattributes, .github, .gitignore, AGENTS.md, BUILD_GUIDE.md",
+    "Python project indicators present"
+  ],
+  "cannot_do": [
+    "No .github/workflows at repo root (CI not confirmed)",
+    "Not part of Frontier blueprint critical path"
+  ],
+  "blueprint_relation": "Upstream fork or unrelated project \u2014 no blueprint phase dependency."
+}

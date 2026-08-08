@@ -1,8 +1,8 @@
 {
-  "run_id": "20260807T033606Z",
-  "audited_at": "2026-08-07T03:36:06.833501Z",
+  "run_id": "20260808T030640Z",
+  "audited_at": "2026-08-08T03:20:47.790044Z",
   "validator": "Taylor Ops Independent Validator (scripts/taylor_issue_closer.py)",
-  "apply": false,
+  "apply": true,
   "worker_filter": null,
   "open_before": [],
   "eligible_to_close": [],

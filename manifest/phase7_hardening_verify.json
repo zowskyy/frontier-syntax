@@ -1,17 +1,17 @@
 {
-  "verified_at": "2026-08-08T01:17:11.318088Z",
+  "verified_at": "2026-08-08T04:17:44.773289Z",
   "script": "scripts/verify_phase7_hardening.py",
   "clippy": {
-    "pass": false,
-    "exit_code": 101,
+    "pass": true,
+    "exit_code": 0,
     "command": "cargo clippy --lib -- -D warnings",
-    "output": "        let args_s: Vec<String> = args.iter().map(|a| self.print_expr(a)).collect();\n    |                                                               ^^^^\n...\n188 |                 self.print_expr(cond),\n    |                 ^^^^\n189 |                 self.print_expr(then_expr),\n    |                 ^^^^\n190 |                 self.print_expr(else_expr)\n    |                 ^^^^\n    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#only_used_in_recursion\n    = note: `-D clippy::only-used-in-recursion` implied by `-D warnings`\n    = help: to override `-D warnings` add `#[allow(clippy::only_used_in_recursion)]`\n\nerror: could not compile `frontier-dex` (lib) due to 17 previous errors\nwarning: build failed, waiting for other jobs to finish...\n"
+    "output": "   Compiling frontier v2.0.0 (/workspace)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.66s\n"
   },
   "agent_security": {
     "pass": true,
     "exit_code": 0,
     "command": "/usr/bin/python3 /workspace/scripts/verify_agent_security.py",
-    "output": "{\n  \"verified_at\": \"2026-08-08T01:13:42.529266Z\",\n  \"script\": \"scripts/verify_agent_security.py\",\n  \"pass\": true,\n  \"results\": [\n    {\n      \"path\": \"frontier_agent.py\",\n      \"present\": true,\n      \"pass\": true,\n      \"findings\": []\n    },\n    {\n      \"path\": \".cursor/symbiotic_agents.py\",\n      \"present\": true,\n      \"pass\": true,\n      \"findings\": []\n    }\n  ]\n}\n"
+    "output": "{\n  \"verified_at\": \"2026-08-08T04:06:45.560195Z\",\n  \"script\": \"scripts/verify_agent_security.py\",\n  \"pass\": true,\n  \"results\": [\n    {\n      \"path\": \"frontier_agent.py\",\n      \"present\": true,\n      \"pass\": true,\n      \"findings\": []\n    },\n    {\n      \"path\": \".cursor/symbiotic_agents.py\",\n      \"present\": true,\n      \"pass\": true,\n      \"findings\": []\n    }\n  ]\n}\n"
   },
   "compiler_ci": {
     "pass": true
@@ -20,20 +20,44 @@
     "pass": true,
     "runs": [
       {
-        "exit_code": 1,
+        "exit_code": 0,
         "summary": {
-          "all_pass": false,
-          "parse_error": true
+          "all_pass": true,
+          "phase_0_pass": true,
+          "phase_1_pass": true,
+          "phase_2_pass": true,
+          "phase_3_pass": true,
+          "phase_4_pass": true,
+          "phase_5_pass": true,
+          "phase_6_pass": true,
+          "phase_7_pass": false,
+          "phase_8_pass": null,
+          "max_phase": 6,
+          "phases_8": "blocked",
+          "open_issues": [],
+          "evidence_file": "manifest/tracking_evidence.json"
         }
       },
       {
-        "exit_code": 1,
+        "exit_code": 0,
         "summary": {
-          "all_pass": false,
-          "parse_error": true
+          "all_pass": true,
+          "phase_0_pass": true,
+          "phase_1_pass": true,
+          "phase_2_pass": true,
+          "phase_3_pass": true,
+          "phase_4_pass": true,
+          "phase_5_pass": true,
+          "phase_6_pass": true,
+          "phase_7_pass": false,
+          "phase_8_pass": null,
+          "max_phase": 6,
+          "phases_8": "blocked",
+          "open_issues": [],
+          "evidence_file": "manifest/tracking_evidence.json"
         }
       }
     ]
   },
-  "pass": false
+  "pass": true
 }

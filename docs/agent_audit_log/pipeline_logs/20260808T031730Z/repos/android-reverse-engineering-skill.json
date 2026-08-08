@@ -1,0 +1,42 @@
+{
+  "name": "android-reverse-engineering-skill",
+  "url": "https://github.com/zowskyy/android-reverse-engineering-skill",
+  "description": "Claude Code skill to support Android app's reverse engineering",
+  "is_private": false,
+  "language": "Shell",
+  "updated_at": "2026-08-07T03:14:38Z",
+  "category": "fork_or_adjacent",
+  "access_status": "ok",
+  "readme_excerpt": "# Android Reverse Engineering & API Extraction \u2014 Claude Code skill\n\n[![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![GitHub stars](https://img.shields.io/github/stars/SimoneAvogadro/android-reverse-engineering-skill?style=social)](https://github.com/SimoneAvogadro/android-reverse-engineering-skill/stargazers) [![GitHub last commit](https://img.shields.io/github/last-commit/SimoneAvogadro/android-reverse-engineering-skill)](https://github.com/SimoneAvogadro/android-reverse-engineering-skill/commits/master)\n\nA Claude Code skill that decompiles Android APK/XAPK/JAR/AAR files and **extracts the HTTP APIs** used by the app \u2014 Retrofit endpoints, OkHttp calls, hardcoded URLs, authentication patterns \u2014 so you can document and reproduce them without the original source code.\n\n> **First-class Kotlin support**: modern Android apps are Kotlin/KMP, heavily obfuscated with R8. This skill recovers the **original Kotlin class names** from metadata R8 cannot strip, and extracts APIs from **Ktor**, **Apollo (GraphQL)** and **Koin** \u2014 not just the classic Retrofit/OkHttp stack. See [Kotlin name recovery](#kotlin-name-recovery-r8-deobfuscation) below.\n\n> **Windows / PowerShell support**: Bash scripts are the primary path on Linux/macOS. On Windows, equivalent `*.ps1` scripts are provided (`check-deps`, `install-dep`, `decompile`, `find-api-calls`). Use `run-skill-script.sh` to auto-pick bash vs PowerShell, or call `*.ps1` directly with PowerShell 7+ (`pwsh`). Scripts without a `.ps1` twin (e.g. `fingerprint.sh`, `recover-kotlin-names.sh`) remain bash-only. Report issues on **this** repository.\n\n## Table of Contents\n\n- [What it does](#what-it-does)\n- [Requirements](#requirements)\n- [Installation](#installation)\n- [Usage](#usage)\n- [Repository Structure](#repository-structure)\n- [References](#references)\n- [Acknowledgments](#acknowledgments)\n- [Disclaimer](#disclaimer)\n- [License](#license)\n\n## What it does\n\n| Capability | Description |\n|------------|-------------|\n| **Fingerprint first (Phase 0)** | Triage an APK/XAPK in seconds \u2014 detect the framework (Flutter / React Native / Cordova / Xamarin / native-Kotlin), HTTP stack, obfuscation level and native libs *before* spending time on a full decompile |\n| **Decompile** | APK, XAPK, JAR, and AAR files using jadx and Fernflower/Vineflower (single engine or side-by-side comparison) |\n| **Recover Kotlin names** | Rebuild original `*Repository` / `*ViewModel` / `*UseCase` class names from R8-obfuscated binaries using Kotlin metadata that R8 cannot strip |\n| **Extract APIs** | Retrofit, OkHttp, Volley **and modern Kotlin/KMP stacks: Ktor, Apollo (GraphQL), Koin DI** \u2014 endpoints, hardcoded URLs, auth headers, tokens and HMAC request-signing schemes |\n| **Trace call flows** | From Activities/Fragments through ViewModels and repositories down to HTTP calls |\n| **Analyze structure** | Manifest, packages, architecture patterns |\n| **Handle obfuscation** | R8-resistant path/URL extraction plus strategies for navigating ProGuard/R8 output |\n\n## Requirements\n\n**Required:**\n\n- Java JDK 17+\n- [jadx](https://github.com/skylot/jadx) (CLI)\n\n**Optional (recommended):**\n\n- [Vineflower](https://github.com/Vineflower/vineflower) or [Fernflower](https://github.com/JetBrains/fernflower) \u2014 better output on complex Java code\n- [dex2jar](https://github.com/ThexXTURBOXx/dex2jar) \u2014 needed to use Fernflower on APK/DEX files\n\nSee `plugins/android-reverse-engineering/skills/android-reverse-engineering/references/setup-guide.md` for detailed installation instructions.\n\n## Installation\n\n### From GitHub (recommended)\n\nInside Claude Code, run:\n\n```text\n/plugin marketplace add SimoneAvogadro/android-reverse-engineering-skill\n/plugin install android-reverse-engineering@android-reverse-engineering-skill\n```\n\nThe skill will be permanently available in all future sessions.\n... (174 more lines)",
+  "top_level_files": [
+    ".claude-plugin",
+    ".cursor",
+    ".cursorrules",
+    ".env.example",
+    ".gitattributes",
+    ".github",
+    ".gitignore",
+    "AGENTS.md",
+    "LICENSE",
+    "README.md",
+    "cursor_gate.py",
+    "cursor_gate_fastest.py",
+    "docs",
+    "plugins",
+    "requirements.txt",
+    "samples",
+    "scripts"
+  ],
+  "claims": [
+    "GitHub description: Claude Code skill to support Android app's reverse engineering"
+  ],
+  "can_do": [
+    "Top-level structure visible (17 entries): .claude-plugin, .cursor, .cursorrules, .env.example, .gitattributes, .github, .gitignore, AGENTS.md",
+    "Python project indicators present"
+  ],
+  "cannot_do": [
+    "No .github/workflows at repo root (CI not confirmed)",
+    "Not part of Frontier blueprint critical path"
+  ],
+  "blueprint_relation": "Upstream fork or unrelated project \u2014 no blueprint phase dependency."
+}

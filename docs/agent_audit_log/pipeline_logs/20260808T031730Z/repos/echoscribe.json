@@ -1,0 +1,52 @@
+{
+  "name": "echoscribe",
+  "url": "https://github.com/zowskyy/echoscribe",
+  "description": "**EchoScribe** is a privacy-first, zero-backend Flutter application. It allows users to record audio, paste text, or share URLs to generate transcripts and summaries using their own AI provider API keys (BYOK - Bring Your Own Key).",
+  "is_private": false,
+  "language": "Dart",
+  "updated_at": "2026-08-07T03:14:44Z",
+  "category": "fork_or_adjacent",
+  "access_status": "ok",
+  "readme_excerpt": "# \ud83c\udf99\ufe0f EchoScribe: Your API Key & Data\n\n**Summarize voice, messages, and URLs. Your API Key \u2014 Your Data!**\n\nEchoScribe is a privacy-first, zero-backend Flutter application designed for users who want full control over their AI experience. By using your own API keys (BYOK), you ensure that your data stays between you and the AI provider. No subscriptions, no tracking, no middleman.\n\n---\n\n## \ud83d\udd12 Privacy & Security (BYOK)\n- **No Backend:** Processing happens directly between your device and the AI provider. Your data is never stored on any third-party servers.\n- **Secure Storage:** API keys are stored using hardware-backed encryption (Android Keystore / iOS Keychain).\n- **Transparency:** Built for privacy-focused needs. No ads, no tracking, no hidden costs.\n\n## \u2728 Key Features\n\n### \ud83c\udf99\ufe0f Audio & Transcription\n- **On-Device Recording:** Capture high-quality audio with live amplitude feedback.\n- **OpenAI, Gemini, xAI & Local AI Support:** Choose OpenAI, Google Gemini, xAI Grok, or a local Whisper-compatible endpoint for voice transcription.\n- **Voice Message Summary:** Share voice messages from WhatsApp or other apps directly to EchoScribe.\n- **Note:** Claude \ud83e\udd80 is text-only for app-side speech input.\n\n### \ud83d\udda5\ufe0f Desktop Companions\n- **Windows:** Native tray app for push-to-talk dictation, clipboard paste, and local browser summaries.\n- **Linux:** GNOME Shell integration for push-to-talk dictation plus local browser summary extensions.\n- **Same BYOK/local model:** Desktop requests go directly from your computer to the selected AI provider or your own Local AI endpoints.\n\n### \u270d\ufe0f Floating Dictation on Android\n- **System-Wide Voice Input:** Enable the Android accessibility service and overlay permission to use a movable EchoScribe dictation button in editable text fields.\n- **Explicit Insert:** EchoScribe records only after you tap the floating button, shows a preview, and inserts text only after you tap Insert.\n- **Safety Guards:** The floating button hides in password, PIN, credit-card, phone-pad, banking, and payment fields.\n- **iOS Status:** iOS is not part of this v1 because Apple custom keyboard extensions do not provide reliable direct microphone recording for App Store-safe system-wide dictation.\n\n### \u270d\ufe0f Smart Summarization\n- **Audio \u2022 Text \u2022 URL:** Summarize everything in one tap.\n- **Local URL Extraction:** A privacy-first mechanism extracts web content directly on your device, bypassing paywalls and bot-detection while keeping your browsing private. Mandatory for Claude \ud83e\udd80 and Grok \ud835\udd4f.\n- **Local AI Provider:** Use an Ollama-compatible `/api/chat` endpoint for summaries/translations and an OpenAI-compatible Whisper endpoint or Windows whisper.cpp for STT. Defaults are `qwen2.5:7b` and `whisper-1`; local model names remain editable.\n- **Custom Prompts:** Fine-tune how your summaries look and feel in the settings.\n\n### \ud83d\ude80 Pro Mode & Models\nAccess the world's most powerful AI models with a single toggle:\n- **Standard (Fast):** GPT-5.4-mini, Gemini 3.5 Flash, Claude 4.6 Sonnet, Grok 4.3, or local `qwen2.5:7b`.\n- **Pro Mode (Premium):** GPT-5.5, Gemini 3.1 Pro, Claude 4.8 Opus, Grok 4.3.\n\n### \ud83c\udf0d Intelligent Re-Translation\nNeed a result in another language? Change the target language via the globe icon, and EchoScribe will automatically re-process the source content to provide a high-quality summary in the new language.\n\n### \ud83d\udcfa Fullscreen Mode\nDouble-tap any transcription or summary to enter an immersive, distraction-free reading mode with smooth animations.\n\n### \ud83d\udd0a Text-to-Speech (TTS)\nListen to your summaries on the go. Supports high-quality neural voices from OpenAI (MP3), Google (WAV), and xAI Grok (MP3) with local caching.\n\n---\n\n## \ud83d\udd11 Getting Started\nTo use EchoScribe, you'll need at least one API key:\n- **OpenAI:** [Get API Key](https://platform.openai.com/api-keys)\n- **Google Gemini:** [Get API Key](https://aistudio.google.com/app/apikey)\n- **Anthropic Claude:** [Get API Key](https://console.anthropic.com/settings/keys)\n- **xAI Grok:** [Get API Key](https://console.x.ai/)\n... (140 more lines)",
+  "top_level_files": [
+    ".cursor",
+    ".cursorrules",
+    ".env.example",
+    ".github",
+    ".gitignore",
+    "AGENTS.md",
+    "LICENSE",
+    "README.md",
+    "analysis_options.yaml",
+    "android",
+    "assets",
+    "config",
+    "cursor_gate.py",
+    "cursor_gate_fastest.py",
+    "desktop",
+    "docs",
+    "ios",
+    "lib",
+    "pubspec.lock",
+    "pubspec.yaml",
+    "requirements.txt",
+    "samples",
+    "scripts",
+    "test",
+    "web"
+  ],
+  "claims": [
+    "GitHub description: **EchoScribe** is a privacy-first, zero-backend Flutter application. It allows users to record audio, paste text, or share URLs to generate transcripts and summaries using their own AI provider API keys (BYOK - Bring Your Own Key).",
+    "EchoScribe is a privacy-first, zero-backend Flutter application designed for users who want full control over their AI experience. By using your own API keys (BYOK), you ensure that your data stays be",
+    "- **Local URL Extraction:** A privacy-first mechanism extracts web content directly on your device, bypassing paywalls and bot-detection while keeping your browsing private. Mandatory for Claude \ud83e\udd80 and"
+  ],
+  "can_do": [
+    "Top-level structure visible (25 entries): .cursor, .cursorrules, .env.example, .github, .gitignore, AGENTS.md, LICENSE, README.md",
+    "Python project indicators present"
+  ],
+  "cannot_do": [
+    "No .github/workflows at repo root (CI not confirmed)",
+    "Not part of Frontier blueprint critical path"
+  ],
+  "blueprint_relation": "Upstream fork or unrelated project \u2014 no blueprint phase dependency."
+}

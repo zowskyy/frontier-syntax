@@ -1,0 +1,42 @@
+{
+  "name": "bookish-bassoon",
+  "url": "https://github.com/zowskyy/bookish-bassoon",
+  "description": "",
+  "is_private": false,
+  "language": "Python",
+  "updated_at": "2026-08-07T03:02:57Z",
+  "category": "frontier_ecosystem",
+  "access_status": "ok",
+  "readme_excerpt": "# bookish-bassoon\n\nPCB audit infrastructure for the **ARC (Automated Review & Compliance)** workflow. This repo wires Cursor Cloud Agents, GitHub Actions, and local scripts so PCB design artifacts are extracted, audited, and gated before merge.\n\n## What this repo does\n\n- **Manifest-driven extraction** \u2014 `.cursor/audit_input.yaml` points at schematic, layout, BOM, and stackup files.\n- **8-phase ARC audit** \u2014 agents follow `.cursor/PCB_AUDIT_SOP.md` and `.cursor/skills/universal-arc-engine/SKILL.md`.\n- **Report + history** \u2014 `AUDIT_REPORT.md` and `AUDIT_HISTORY.json` track findings across runs.\n- **CI gating** \u2014 `ARC: CLEAN` GitHub check blocks merge when findings remain.\n\nSample E2E artifacts live under `docs/` (`e2e-test-trigger.pdf`, `bom.csv`, `stackup.csv`).\n\n## Install\n\n```bash\ngit clone https://github.com/zowskyy/bookish-bassoon.git\ncd bookish-bassoon\npip install -r requirements.txt\nbash scripts/install-agent-environment.sh\n```\n\nFor PCB extraction locally (poppler, pandas, yaml):\n\n```bash\nbash .cursor/install.sh\n```\n\nOr install the minimum tools manually:\n\n```bash\nsudo apt-get install -y poppler-utils jq bc python3-yaml python3-pandas\n```\n\n## Run a sample audit (local)\n\nRun the full local sample pipeline \u2014 extract artifacts, generate a clean report, append history:\n\n```bash\nbash scripts/run-sample-audit.sh\n```\n\nThis will:\n\n1. Extract PCB context from `docs/` into `/tmp/pcb_context/` via `.cursor/extract_pcb_context.sh`\n2. Write an empty findings file (clean sample)\n3. Generate `AUDIT_REPORT.md` and append `AUDIT_HISTORY.json` via `.cursor/generate_report.sh`\n\nDry-run extraction only:\n\n```bash\nbash .cursor/extract_pcb_context.sh --dry-run\n```\n\n## PCB audit workflow (end-to-end)\n\n### 1. Configure artifacts\n\nEdit `.cursor/audit_input.yaml` with paths to your design files:\n\n... (78 more lines)",
+  "top_level_files": [
+    ".cursor",
+    ".cursorrules",
+    ".env.example",
+    ".github",
+    ".gitignore",
+    "AGENTS.md",
+    "AUDIT_HISTORY.json",
+    "AUDIT_REPORT.md",
+    "LICENSE",
+    "README.md",
+    "cursor_gate.py",
+    "cursor_gate_fastest.py",
+    "docs",
+    "package.json",
+    "requirements.txt",
+    "samples",
+    "scripts"
+  ],
+  "claims": [
+    "(no explicit claims extracted from README)"
+  ],
+  "can_do": [
+    "Top-level structure visible (17 entries): .cursor, .cursorrules, .env.example, .github, .gitignore, AGENTS.md, AUDIT_HISTORY.json, AUDIT_REPORT.md",
+    "Node/JS project (package.json present)",
+    "Python project indicators present"
+  ],
+  "cannot_do": [
+    "No .github/workflows at repo root (CI not confirmed)"
+  ],
+  "blueprint_relation": "Automation / worker scripts; may invoke frontier-syntax tooling."
+}

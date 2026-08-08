@@ -1,0 +1,34 @@
+[2026-08-08T03:17:30Z] [START] ecosystem gather run_id=20260808T031730Z dry_run=False
+[2026-08-08T03:17:30Z] [LIST] gh repo list zowskyy
+[2026-08-08T03:17:31Z] [LIST] found 28 repos
+[2026-08-08T03:17:31Z] [LOCAL] load frontier-syntax status
+[2026-08-08T03:17:31Z] [SCAN] [1/28] android-reverse-engineering-skill
+[2026-08-08T03:17:32Z] [SCAN] [2/28] apex-android
+[2026-08-08T03:17:32Z] [SCAN] [3/28] apktool-diagnostics
+[2026-08-08T03:17:33Z] [SCAN] [4/28] bookish-bassoon
+[2026-08-08T03:17:34Z] [SCAN] [5/28] crxcibl3
+[2026-08-08T03:17:34Z] [SCAN] [6/28] crxcibl3sounds
+[2026-08-08T03:17:35Z] [SCAN] [7/28] echoscribe
+[2026-08-08T03:17:36Z] [SCAN] [8/28] etrnL
+[2026-08-08T03:17:36Z] [SCAN] [9/28] frontier-agent-legal-record
+[2026-08-08T03:17:37Z] [SCAN] [10/28] frontier-syntax
+[2026-08-08T03:17:37Z] [SCAN] [11/28] GMFKNEEGA
+[2026-08-08T03:17:37Z] [SCAN] [12/28] gutterumble
+[2026-08-08T03:17:38Z] [SCAN] [13/28] jadx
+[2026-08-08T03:17:38Z] [SCAN] [14/28] masked-irl
+[2026-08-08T03:17:39Z] [SCAN] [15/28] mcp-for-beginners
+[2026-08-08T03:17:40Z] [SCAN] [16/28] mia.loa
+[2026-08-08T03:17:40Z] [SCAN] [17/28] nuDAWn
+[2026-08-08T03:17:40Z] [SCAN] [18/28] prjctnxs
+[2026-08-08T03:17:41Z] [SCAN] [19/28] project-nexus
+[2026-08-08T03:17:41Z] [SCAN] [20/28] quick-xml
+[2026-08-08T03:17:42Z] [SCAN] [21/28] repurpose-engine
+[2026-08-08T03:17:43Z] [SCAN] [22/28] Schema
+[2026-08-08T03:17:44Z] [SCAN] [23/28] slackhelper
+[2026-08-08T03:17:44Z] [SCAN] [24/28] statecheck
+[2026-08-08T03:17:45Z] [SCAN] [25/28] synstudios
+[2026-08-08T03:17:45Z] [SCAN] [26/28] Vanadium
+[2026-08-08T03:17:46Z] [SCAN] [27/28] verbose-train
+[2026-08-08T03:17:46Z] [SCAN] [28/28] Voice-Of-the-Star
+[2026-08-08T03:17:47Z] [WRITE] consolidated report
+[2026-08-08T03:17:47Z] [DONE] report=ECOSYSTEM_KNOWLEDGE_REPORT.txt
