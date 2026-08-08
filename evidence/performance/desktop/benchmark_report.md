@@ -1,5 +1,5 @@
 # Benchmark Report — desktop
-- Timestamp: 2026-08-08T22:22:56.704044Z
+- Timestamp: 2026-08-08T23:22:24.999196Z
 - Platform: Linux-6.12.94+-x86_64-with-glibc2.39
 - Python: 3.12.3
 

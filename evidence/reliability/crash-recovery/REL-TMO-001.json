@@ -1,7 +1,7 @@
 {
   "test_id": "REL-TMO-001",
   "name": "tool timeout simulation",
-  "timestamp": "2026-08-08T22:22:56.696517Z",
+  "timestamp": "2026-08-08T23:22:24.991988Z",
   "environment": "ci",
   "input": {},
   "expected": {

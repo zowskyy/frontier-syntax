@@ -6,6 +6,15 @@ Licensed under SPDX-License-Identifier: Apache-2.0
 
 All notable changes to the local-coding-agent package are documented here.
 
+## [0.1.0-rc.1] - 2026-08-08
+
+### Release candidate
+
+- All blueprint slices 0–36 implemented with pytest evidence
+- Taylor mission orchestrator and Frontier relay logging
+- Release packages: wheel, sdist, evidence bundle, SHA256SUMS
+- Public go blocked on mobile device runtime verification
+
 ## [0.1.0] - 2026-08-08
 
 ### Added

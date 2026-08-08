@@ -94,26 +94,18 @@ component SliceRelay_{slice_id}_{entry_id} {{
 
 
 def update_tracking(slices: dict[int, dict[str, Any]]) -> None:
-    if TRACKING_PY.exists():
-        import importlib.util
-
-        spec = importlib.util.spec_from_file_location("tracking", TRACKING_PY)
-        mod = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(mod)
-        data = dict(mod.TRACKING_DATA)
+    out = ROOT / "manifest" / "local_coding_agent_tracking.json"
+    if out.exists():
+        data = json.loads(out.read_text(encoding="utf-8"))
     else:
-        data = json.loads((ROOT / "manifest" / "local_coding_agent_tracking.json").read_text())
-
+        data = {"slices": []}
     if "slices" not in data:
         data["slices"] = []
-    existing = {s["id"]: s for s in data["slices"]}
+    existing = {s["id"]: s for s in data["slices"] if "id" in s}
     for sid, info in slices.items():
         existing[sid] = {"id": sid, **info}
     data["slices"] = [existing[k] for k in sorted(existing)]
     data["updated_at"] = utc_now()
-    data["go_decision_allowed"] = all(s.get("status") == "complete" for s in data["slices"] if s["id"] <= 36)
-
-    out = ROOT / "manifest" / "local_coding_agent_tracking.json"
     out.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
 
 

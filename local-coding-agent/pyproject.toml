@@ -4,9 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "local-coding-agent"
-version = "0.1.0"
+version = "0.1.0rc1"
 description = "Local-first AI coding agent with deterministic capability enforcement"
 readme = "README.md"
+license = "Apache-2.0"
 requires-python = ">=3.10"
 dependencies = [
     "pydantic>=2.0",
