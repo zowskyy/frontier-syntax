@@ -1,7 +1,7 @@
 //! Post-Quantum Signatures with Dilithium3 (NIST PQC finalist)
 
 use pqcrypto_dilithium::dilithium3;
-use pqcrypto_traits::sign::{PublicKey as _, SecretKey as _, SignedMessage as _};
+use pqcrypto_traits::sign::{PublicKey as _, SignedMessage as _};
 use serde::{Deserialize, Serialize};
 
 /// Post-quantum cryptographic key pair (Dilithium3)

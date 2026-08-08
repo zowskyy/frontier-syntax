@@ -4,6 +4,12 @@ pub struct ProofGenerator {
     proofs: Vec<String>,
 }
 
+impl Default for ProofGenerator {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ProofGenerator {
     pub fn new() -> Self {
         ProofGenerator {

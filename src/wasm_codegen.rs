@@ -173,7 +173,7 @@ fn compile_program_with_profile(
     effective_options.algorithm_hint = algorithm_hint.clone();
 
     let codegen_start = std::time::Instant::now();
-    let mut codegen = FullModuleCodegen::new(program)?;
+    let codegen = FullModuleCodegen::new(program)?;
     let bytes = codegen.encode(&effective_options)?;
     let entry_value = codegen.main_const_result.unwrap_or(0);
 
@@ -282,7 +282,7 @@ impl FullModuleCodegen {
             .and_then(|f| find_return_int(&f.body));
 
         let mut compiled = Vec::new();
-        for (idx, sig) in fns.into_iter().enumerate() {
+        for sig in fns.into_iter() {
             let mut gen = FunctionCodegen::new(&sig, &name_to_index);
             gen.emit_body(&sig.body)?;
             compiled.push(CompiledFn {
@@ -645,6 +645,7 @@ fn export_section_static(names: &[&str], user_func_count: usize) -> Vec<u8> {
 }
 
 #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+#[allow(dead_code)]
 fn export_section_multi(names: &[String], main_func_count: usize) -> Vec<u8> {
     let static_names: Vec<&str> = names.iter().map(|s| s.as_str()).collect();
     export_section_static(&static_names, main_func_count)

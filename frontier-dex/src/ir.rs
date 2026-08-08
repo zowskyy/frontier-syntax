@@ -242,10 +242,8 @@ fn collect_regs(insn: &SsaInstruction, regs: &mut HashSet<u16>) {
         | SsaInstruction::Phi { dest, .. } => {
             regs.insert(*dest);
         }
-        SsaInstruction::Invoke { result, .. } => {
-            if let Some(r) = result {
-                regs.insert(*r);
-            }
+        SsaInstruction::Invoke { result: Some(r), .. } => {
+            regs.insert(*r);
         }
         _ => {}
     }
@@ -294,11 +292,11 @@ fn decode_insn(insns: &[u16], pc: usize) -> (SsaInstruction, usize, Option<u32>)
         0x00 => (SsaInstruction::Nop, width, None),
         0x0e => {
             let value = insns[pc + 1] as i16 as i32;
-            let reg = (insns[pc] >> 8) as u16;
+            let reg = insns[pc] >> 8;
             (
                 SsaInstruction::Const {
                     dest: reg,
-                    value: SsaOperand::ConstI32(value as i32),
+                    value: SsaOperand::ConstI32(value),
                 },
                 width,
                 None,
@@ -306,7 +304,7 @@ fn decode_insn(insns: &[u16], pc: usize) -> (SsaInstruction, usize, Option<u32>)
         }
         0x0f => (SsaInstruction::ReturnVoid, width, None),
         0x11 => {
-            let reg = (insns[pc] >> 8) as u16;
+            let reg = insns[pc] >> 8;
             (
                 SsaInstruction::Return {
                     value: Some(SsaOperand::Register(reg)),
@@ -325,8 +323,8 @@ fn decode_insn(insns: &[u16], pc: usize) -> (SsaInstruction, usize, Option<u32>)
             )
         }
         0x32 => {
-            let reg_a = (insns[pc] >> 8) as u16;
-            let reg_b = (insns[pc] & 0xFF) as u16;
+            let reg_a = insns[pc] >> 8;
+            let reg_b = insns[pc] & 0xFF;
             let offset = insns[pc + 2] as i16 as i32;
             let target = (pc as i32 + offset) as u32;
             (
@@ -341,7 +339,7 @@ fn decode_insn(insns: &[u16], pc: usize) -> (SsaInstruction, usize, Option<u32>)
             )
         }
         0x6e => {
-            let args_reg = (insns[pc] >> 8) as u16;
+            let args_reg = insns[pc] >> 8;
             (
                 SsaInstruction::Invoke {
                     kind: InvokeKind::Virtual,
@@ -354,9 +352,9 @@ fn decode_insn(insns: &[u16], pc: usize) -> (SsaInstruction, usize, Option<u32>)
             )
         }
         0x90 => {
-            let dest = (insns[pc] >> 8) as u16;
-            let left = ((insns[pc] >> 4) & 0x0f) as u16;
-            let right = (insns[pc] & 0x0f) as u16;
+            let dest = insns[pc] >> 8;
+            let left = (insns[pc] >> 4) & 0x0f;
+            let right = insns[pc] & 0x0f;
             (
                 SsaInstruction::Add {
                     dest,
@@ -368,7 +366,7 @@ fn decode_insn(insns: &[u16], pc: usize) -> (SsaInstruction, usize, Option<u32>)
             )
         }
         0x2b => {
-            let reg = (insns[pc] >> 8) as u16;
+            let reg = insns[pc] >> 8;
             let size = insns[pc + 1] as usize;
             let mut targets = Vec::new();
             let mut i = 0;

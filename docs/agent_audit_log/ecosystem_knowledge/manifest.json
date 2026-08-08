@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-08-06T23:29:51Z",
-  "run_id": "20260806T232938Z",
+  "generated_at": "2026-08-08T03:17:47Z",
+  "run_id": "20260808T031730Z",
   "owner": "zowskyy",
-  "repo_count": 27,
+  "repo_count": 28,
   "report_path": "docs/agent_audit_log/ecosystem_knowledge/ECOSYSTEM_KNOWLEDGE_REPORT.txt",
-  "pipeline_log": "docs/agent_audit_log/pipeline_logs/20260806T232938Z/pipeline.log",
+  "pipeline_log": "docs/agent_audit_log/pipeline_logs/20260808T031730Z/pipeline.log",
   "frontier_syntax_gate": {
     "tracking_gate_exit": 1,
-    "wasm_size_kb": 127.4,
-    "wasm_target_met": false,
+    "wasm_size_kb": 93.7,
+    "wasm_target_met": true,
     "open_issues": [
       44,
       45,
@@ -72,14 +72,14 @@
       "category": "fork_or_adjacent",
       "url": "https://github.com/zowskyy/etrnL",
       "is_private": false,
-      "access_status": "no_readme"
+      "access_status": "ok"
     },
     {
       "name": "frontier-agent-legal-record",
       "category": "frontier_ecosystem",
       "url": "https://github.com/zowskyy/frontier-agent-legal-record",
       "is_private": true,
-      "access_status": "no_readme"
+      "access_status": "inaccessible_private"
     },
     {
       "name": "frontier-syntax",
@@ -100,7 +100,7 @@
       "category": "fork_or_adjacent",
       "url": "https://github.com/zowskyy/gutterumble",
       "is_private": false,
-      "access_status": "no_readme"
+      "access_status": "ok"
     },
     {
       "name": "jadx",
@@ -149,7 +149,7 @@
       "category": "frontier_ecosystem",
       "url": "https://github.com/zowskyy/project-nexus",
       "is_private": false,
-      "access_status": "no_readme"
+      "access_status": "ok"
     },
     {
       "name": "quick-xml",
@@ -163,7 +163,7 @@
       "category": "frontier_ecosystem",
       "url": "https://github.com/zowskyy/repurpose-engine",
       "is_private": false,
-      "access_status": "no_readme"
+      "access_status": "ok"
     },
     {
       "name": "Schema",
@@ -177,12 +177,19 @@
       "category": "fork_or_adjacent",
       "url": "https://github.com/zowskyy/slackhelper",
       "is_private": false,
-      "access_status": "ok"
+      "access_status": "no_readme"
     },
     {
       "name": "statecheck",
       "category": "frontier_ecosystem",
       "url": "https://github.com/zowskyy/statecheck",
+      "is_private": false,
+      "access_status": "ok"
+    },
+    {
+      "name": "synstudios",
+      "category": "other",
+      "url": "https://github.com/zowskyy/synstudios",
       "is_private": false,
       "access_status": "ok"
     },

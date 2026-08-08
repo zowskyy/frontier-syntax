@@ -1,5 +1,5 @@
 {
-  "verified_at": "2026-08-07T05:22:15.105722Z",
+  "verified_at": "2026-08-08T04:13:59.230595Z",
   "script": "scripts/verify_self_hosting.py",
   "source": "frontier/src/main.fr",
   "bootstrap_pass": true,
@@ -11,14 +11,16 @@
     "output": "PASS: Self-hosting bootstrap (cmp identical)"
   },
   "native": {
-    "verified_at": "2026-08-07T05:22:15.100812Z",
+    "verified_at": "2026-08-08T04:13:59.225071Z",
     "script": "scripts/run_native_self_host.py",
     "source": "frontier/src/self_host_probe.fr",
+    "expected_main": 42,
     "compiler_wasm": "target/wasm32-unknown-unknown/release/frontier.wasm",
     "host": "target/release/frontier_wasm_host",
     "output_wasm": "target/native_self_host_probe.wasm",
     "output_bytes": 56,
     "valid_wasm": true,
+    "main_returns_expected": true,
     "main_returns_42": true,
     "pass": true,
     "bootstrap_cargo_on_recompile": false,

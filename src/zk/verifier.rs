@@ -63,6 +63,12 @@ pub struct ZkVerifier {
     verifying_key: Option<VerifyingKey<Bn254>>,
 }
 
+impl Default for ZkVerifier {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ZkVerifier {
     pub fn new() -> Self {
         ZkVerifier {

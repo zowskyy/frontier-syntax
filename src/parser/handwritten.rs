@@ -175,7 +175,7 @@ impl Parser {
     }
 
     fn parse_let(&mut self) -> Result<Stmt, FrontierError> {
-        let start = self.current().clone();
+        let _start = self.current().clone();
         self.advance();
         let name = self.expect_ident()?;
         self.expect(Token::Colon)?;
@@ -346,6 +346,7 @@ impl Parser {
         Ok((kind, proof))
     }
 
+    #[allow(dead_code)]
     fn parse_fn(&mut self) -> Result<Stmt, FrontierError> {
         self.parse_fn_with_proofs(None, None, None)
     }

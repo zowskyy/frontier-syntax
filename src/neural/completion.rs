@@ -146,7 +146,14 @@ impl NeuralCompletion {
 
 pub struct NeuralLspServer {
     completion: NeuralCompletion,
+    #[allow(dead_code)]
     diagnostics: Vec<JsonValue>,
+}
+
+impl Default for NeuralLspServer {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl NeuralLspServer {

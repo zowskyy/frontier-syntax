@@ -8,6 +8,7 @@ pub struct TokenInfo {
 }
 
 pub struct Lexer<'a> {
+    #[allow(dead_code)]
     input: &'a str,
     chars: Vec<char>,
     pos: usize,
@@ -119,7 +120,7 @@ impl<'a> Lexer<'a> {
         }
     }
 
-    fn read_string(&mut self, line: usize, column: usize) -> Token {
+    fn read_string(&mut self, _line: usize, _column: usize) -> Token {
         self.advance(); // opening quote
         let mut s = String::new();
         while let Some(ch) = self.peek() {
@@ -168,7 +169,7 @@ impl<'a> Lexer<'a> {
             self.advance();
             if self.peek() == Some('.') {
                 self.advance();
-                while self.peek().map_or(false, |c| c.is_ascii_digit()) {
+                while self.peek().is_some_and(|c| c.is_ascii_digit()) {
                     self.advance();
                 }
                 if matches!(self.peek(), Some('e' | 'E')) {
@@ -176,7 +177,7 @@ impl<'a> Lexer<'a> {
                     if matches!(self.peek(), Some('+' | '-')) {
                         self.advance();
                     }
-                    while self.peek().map_or(false, |c| c.is_ascii_digit()) {
+                    while self.peek().is_some_and(|c| c.is_ascii_digit()) {
                         self.advance();
                     }
                 }
@@ -185,12 +186,12 @@ impl<'a> Lexer<'a> {
             }
             return Token::Integer(0);
         }
-        while self.peek().map_or(false, |c| c.is_ascii_digit()) {
+        while self.peek().is_some_and(|c| c.is_ascii_digit()) {
             self.advance();
         }
-        if self.peek() == Some('.') && self.peek_at(1).map_or(false, |c| c.is_ascii_digit()) {
+        if self.peek() == Some('.') && self.peek_at(1).is_some_and(|c| c.is_ascii_digit()) {
             self.advance();
-            while self.peek().map_or(false, |c| c.is_ascii_digit()) {
+            while self.peek().is_some_and(|c| c.is_ascii_digit()) {
                 self.advance();
             }
             if matches!(self.peek(), Some('e' | 'E')) {
@@ -198,7 +199,7 @@ impl<'a> Lexer<'a> {
                 if matches!(self.peek(), Some('+' | '-')) {
                     self.advance();
                 }
-                while self.peek().map_or(false, |c| c.is_ascii_digit()) {
+                while self.peek().is_some_and(|c| c.is_ascii_digit()) {
                     self.advance();
                 }
             }
@@ -210,7 +211,7 @@ impl<'a> Lexer<'a> {
             if matches!(self.peek(), Some('+' | '-')) {
                 self.advance();
             }
-            while self.peek().map_or(false, |c| c.is_ascii_digit()) {
+            while self.peek().is_some_and(|c| c.is_ascii_digit()) {
                 self.advance();
             }
             let text: String = self.chars[start..self.pos].iter().collect();
@@ -223,11 +224,11 @@ impl<'a> Lexer<'a> {
     fn read_ident(&mut self) -> Token {
         let start = self.pos;
         self.advance();
-        while self.peek().map_or(false, Self::is_id_cont) {
+        while self.peek().is_some_and(Self::is_id_cont) {
             self.advance();
         }
         let text: String = self.chars[start..self.pos].iter().collect();
-        if self.peek().map_or(false, Self::is_id_cont) {
+        if self.peek().is_some_and(Self::is_id_cont) {
             // keyword boundary: if we matched "if" but more id chars follow, it's identifier
             // already consumed full identifier
         }

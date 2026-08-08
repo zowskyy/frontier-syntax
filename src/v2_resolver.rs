@@ -23,6 +23,12 @@ pub struct V2Resolver {
     errors: Vec<String>,
 }
 
+impl Default for V2Resolver {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl V2Resolver {
     pub fn new() -> Self {
         V2Resolver {

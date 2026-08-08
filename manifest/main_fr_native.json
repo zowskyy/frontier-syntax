@@ -1,0 +1,25 @@
+{
+  "verified_at": "2026-08-08T04:14:51.045557Z",
+  "script": "scripts/verify_main_fr_native.py",
+  "source": "frontier/src/main.fr",
+  "expected_main": 840,
+  "native": {
+    "verified_at": "2026-08-08T04:14:51.039996Z",
+    "script": "scripts/run_native_self_host.py",
+    "source": "frontier/src/main.fr",
+    "expected_main": 840,
+    "compiler_wasm": "target/wasm32-unknown-unknown/release/frontier.wasm",
+    "host": "target/release/frontier_wasm_host",
+    "output_wasm": "target/native_main_fr.wasm",
+    "output_bytes": 177,
+    "valid_wasm": true,
+    "main_returns_expected": true,
+    "main_returns_42": null,
+    "pass": true,
+    "bootstrap_cargo_on_recompile": false,
+    "mode": "native_wasmtime",
+    "exit_code": 0
+  },
+  "pass": true,
+  "milestone": "M5"
+}

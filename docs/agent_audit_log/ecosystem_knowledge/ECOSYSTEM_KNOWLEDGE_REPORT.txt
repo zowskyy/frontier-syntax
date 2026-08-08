@@ -2,11 +2,11 @@
 ZOWSKYY ECOSYSTEM KNOWLEDGE REPORT
 ##############################################################################
 
-Generated:     2026-08-06T23:29:51Z
-Run ID:        20260806T232938Z
+Generated:     2026-08-08T03:17:47Z
+Run ID:        20260808T031730Z
 Canonical repo: zowskyy/frontier-syntax
 Blueprint:     PROJECT_BLUEPRINT.md + TRACKING.json
-Pipeline log:  docs/agent_audit_log/pipeline_logs/20260806T232938Z/pipeline.log
+Pipeline log:  docs/agent_audit_log/pipeline_logs/20260808T031730Z/pipeline.log
 Audit sessions: docs/agent_audit_log/sessions/
 
 ==============================================================================
@@ -16,17 +16,17 @@ EXECUTIVE SUMMARY — frontier-syntax vs blueprint (bill) status
 Phase 0 (tracker hygiene):  PASS (slices 0.1–0.3 validated in TRACKING.json)
 Phase 1 (P0 compiler):      FAIL — issues #44, #45, #46 open
 Phase 2 (spec parity P1):   BLOCKED (depends on Phase 1)
-Phase 3 (WASM size P1):     FAIL — 127.4 KB measured, target 100 KB, met=False
+Phase 3 (WASM size P1):     FAIL — 93.7 KB measured, target 100 KB, met=True
 Phases 4–8:                 FROZEN until prior gates pass
 
 Gate command output (tail):
   skipped (--fast)
 
-Repos scanned: 27
+Repos scanned: 28
   frontier_core:      1
   frontier_ecosystem: 7
   fork_or_adjacent:   19
-  other:              0
+  other:              1
 
 Honesty: Remote repos receive shallow metadata scan (description, README excerpt,
 top-level files). Build/test not run except for local frontier-syntax.
@@ -42,7 +42,7 @@ REPO 1: zowskyy/android-reverse-engineering-skill
   Visibility: public
   Language:   Shell
   Category:   fork_or_adjacent
-  Updated:    2026-07-29T23:19:07Z
+  Updated:    2026-08-07T03:14:38Z
   Access:     ok
 
 ## WHAT IT CLAIMS
@@ -57,7 +57,7 @@ REPO 1: zowskyy/android-reverse-engineering-skill
 
   > **First-class Kotlin support**: modern Android apps are Kotlin/KMP, heavily obfuscated with R8. This skill recovers the **original Kotlin class names** from metadata R8 cannot strip, and extracts APIs from **Ktor**, **Apollo (GraphQL)** and **Koin** — not just the classic Retrofit/OkHttp stack. See [Kotlin name recovery](#kotlin-name-recovery-r8-deobfuscation) below.
 
-  > **Windows / PowerShell support (experimental)**: The `*.ps1` scripts alongside the bash ones are a recent community contribution, still being stabilised. For any issues please open an issue on **this** repository (not on the contributors' upstream forks): the PowerShell scripts are maintained here by [@SimoneAvogadro](https://github.com/SimoneAvogadro).
+  > **Windows / PowerShell support**: Bash scripts are the primary path on Linux/macOS. On Windows, equivalent `*.ps1` scripts are provided (`check-deps`, `install-dep`, `decompile`, `find-api-calls`). Use `run-skill-script.sh` to auto-pick bash vs PowerShell, or call `*.ps1` directly with PowerShell 7+ (`pwsh`). Scripts without a `.ps1` twin (e.g. `fingerprint.sh`, `recover-kotlin-names.sh`) remain bash-only. Report issues on **this** repository.
 
   ## Table of Contents
 
@@ -81,11 +81,11 @@ REPO 1: zowskyy/android-reverse-engineering-skill
   | **Extract APIs** | Retrofit, OkHttp, Volley **and modern Kotlin/KMP stacks: Ktor, Apollo (GraphQL), Koin DI** — endpoints, hardcoded URLs, auth headers, tokens and HMAC request-signing schemes |
   | **Trace call flows** | From Activities/Fragments through ViewModels and repositories down to HTTP calls |
   | **Analyze structure** | Manifest, packages, architecture patterns |
-  | **Handle obfuscation** | R8-resistant path/URL extraction plus strategies for navigating ProGuard/R8 output |
-
+  | **Handle obfuscati
 
 ## VERIFIED — CAN DO (this scan)
-  ✓ Top-level structure visible (5 entries): .claude-plugin, .gitattributes, LICENSE, README.md, plugins
+  ✓ Top-level structure visible (17 entries): .claude-plugin, .cursor, .cursorrules, .env.example, .gitattributes, .github, .gitignore, AGENTS.md
+  ✓ Python project indicators present
 
 ## CANNOT DO / NOT VERIFIED / LIMITATIONS
   ✗ No .github/workflows at repo root (CI not confirmed)
@@ -103,7 +103,7 @@ REPO 2: zowskyy/apex-android
   Visibility: public
   Language:   Python
   Category:   frontier_ecosystem
-  Updated:    2026-08-06T04:29:44Z
+  Updated:    2026-08-07T03:04:29Z
   Access:     ok
 
 ## WHAT IT CLAIMS
@@ -173,7 +173,7 @@ REPO 2: zowskyy/apex-android
   ... (170 more lines)
 
 ## VERIFIED — CAN DO (this scan)
-  ✓ Top-level structure visible (32 entries): .cursor, .github, .gitignore, .pre-commit-config.yaml, .vscode, AGENTS.md, CHANGELOG.md, CODE_OF_CONDUCT.md
+  ✓ Top-level structure visible (37 entries): .cursor, .cursorrules, .github, .gitignore, .pre-commit-config.yaml, .vscode, AGENTS.md, CHANGELOG.md
   ✓ Rust project (Cargo.toml present)
   ✓ Python project indicators present
 
@@ -192,7 +192,7 @@ REPO 3: zowskyy/apktool-diagnostics
   Visibility: public
   Language:   Python
   Category:   fork_or_adjacent
-  Updated:    2026-07-17T03:48:46Z
+  Updated:    2026-08-07T03:14:25Z
   Access:     ok
 
 ## WHAT IT CLAIMS
@@ -255,7 +255,8 @@ REPO 3: zowskyy/apktool-diagnostics
   Runs the full pipeline (security scan, round-trip, framework-check, dex-diff) across multiple APKs in one pass.
 
 ## VERIFIED — CAN DO (this scan)
-  ✓ Top-level structure visible (9 entries): CONTRIBUTING.md, GITHUB_SETUP_STEPS.md, LICENSE, LOCAL_SETUP.md, README.md, SECURITY_FINDING_CVE-2026-39973.md, apktool_diagnostics.py, examples
+  ✓ Top-level structure visible (21 entries): .cursor, .cursorrules, .env.example, .github, .gitignore, AGENTS.md, CONTRIBUTING.md, GITHUB_SETUP_STEPS.md
+  ✓ Python project indicators present
 
 ## CANNOT DO / NOT VERIFIED / LIMITATIONS
   ✗ No .github/workflows at repo root (CI not confirmed)
@@ -271,9 +272,9 @@ REPO 4: zowskyy/bookish-bassoon
 ## WHAT IT IS
   URL:        https://github.com/zowskyy/bookish-bassoon
   Visibility: public
-  Language:   Shell
+  Language:   Python
   Category:   frontier_ecosystem
-  Updated:    2026-08-04T01:30:53Z
+  Updated:    2026-08-07T03:02:57Z
   Access:     ok
 
 ## WHAT IT CLAIMS
@@ -282,9 +283,70 @@ REPO 4: zowskyy/bookish-bassoon
 ## README EXCERPT
   # bookish-bassoon
 
+  PCB audit infrastructure for the **ARC (Automated Review & Compliance)** workflow. This repo wires Cursor Cloud Agents, GitHub Actions, and local scripts so PCB design artifacts are extracted, audited, and gated before merge.
+
+  ## What this repo does
+
+  - **Manifest-driven extraction** — `.cursor/audit_input.yaml` points at schematic, layout, BOM, and stackup files.
+  - **8-phase ARC audit** — agents follow `.cursor/PCB_AUDIT_SOP.md` and `.cursor/skills/universal-arc-engine/SKILL.md`.
+  - **Report + history** — `AUDIT_REPORT.md` and `AUDIT_HISTORY.json` track findings across runs.
+  - **CI gating** — `ARC: CLEAN` GitHub check blocks merge when findings remain.
+
+  Sample E2E artifacts live under `docs/` (`e2e-test-trigger.pdf`, `bom.csv`, `stackup.csv`).
+
+  ## Install
+
+  ```bash
+  git clone https://github.com/zowskyy/bookish-bassoon.git
+  cd bookish-bassoon
+  pip install -r requirements.txt
+  bash scripts/install-agent-environment.sh
+  ```
+
+  For PCB extraction locally (poppler, pandas, yaml):
+
+  ```bash
+  bash .cursor/install.sh
+  ```
+
+  Or install the minimum tools manually:
+
+  ```bash
+  sudo apt-get install -y poppler-utils jq bc python3-yaml python3-pandas
+  ```
+
+  ## Run a sample audit (local)
+
+  Run the full local sample pipeline — extract artifacts, generate a clean report, append history:
+
+  ```bash
+  bash scripts/run-sample-audit.sh
+  ```
+
+  This will:
+
+  1. Extract PCB context from `docs/` into `/tmp/pcb_context/` via `.cursor/extract_pcb_context.sh`
+  2. Write an empty findings file (clean sample)
+  3. Generate `AUDIT_REPORT.md` and append `AUDIT_HISTORY.json` via `.cursor/generate_report.sh`
+
+  Dry-run extraction only:
+
+  ```bash
+  bash .cursor/extract_pcb_context.sh --dry-run
+  ```
+
+  ## PCB audit workflow (end-to-end)
+
+  ### 1. Configure artifacts
+
+  Edit `.cursor/audit_input.yaml` with paths to your design files:
+
+  ... (78 more lines)
+
 ## VERIFIED — CAN DO (this scan)
-  ✓ Top-level structure visible (6 entries): .cursor, .github, AUDIT_HISTORY.json, README.md, docs, package.json
+  ✓ Top-level structure visible (17 entries): .cursor, .cursorrules, .env.example, .github, .gitignore, AGENTS.md, AUDIT_HISTORY.json, AUDIT_REPORT.md
   ✓ Node/JS project (package.json present)
+  ✓ Python project indicators present
 
 ## CANNOT DO / NOT VERIFIED / LIMITATIONS
   ✗ No .github/workflows at repo root (CI not confirmed)
@@ -301,77 +363,78 @@ REPO 5: zowskyy/crxcibl3
   Visibility: public
   Language:   GDScript
   Category:   fork_or_adjacent
-  Updated:    2026-07-29T11:56:04Z
+  Updated:    2026-08-08T01:39:50Z
   Access:     ok
 
 ## WHAT IT CLAIMS
   • (no explicit claims extracted from README)
 
 ## README EXCERPT
-  # CRXCIBL3 -- Web Build (Phaser 3)
+  # CRXCIBL3
 
-  ## Running it -- one script, every time
+  > **Beach Boulevard — Godot 4.7.1 crew shooter with JSON-driven cutscenes, the Blackwood arc, and all five Corrupted Six boss encounters.**
+
+  [![Godot 4.7.1](https://img.shields.io/badge/Godot-4.7.1-478CBF?logo=godotengine&logoColor=white)](https://godotengine.org)
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+  [![Version: 1.2.1](https://img.shields.io/badge/Version-1.2.1-blue.svg)](CHANGELOG.md)
+  [![Platform](https://img.shields.io/badge/platform-Android%20%7C%20Web%20%7C%20Windows%20%7C%20Linux-lightgrey)](godot/export_presets.cfg)
+
+  ---
+
+  ## Quickstart
+
+  ```bash
+  # 1. Clone / open this repo
+  # 2. Install Godot 4.7.1 — https://godotengine.org/download
+  # 3. Godot Project Manager → Import → godot/project.godot
+  # 4. Press F5 — Main menu → New Game → hero selection → boardwalk TestRoom
+
+  # Optional: regenerate brand icon
+  python3 scripts/generate_icon.py
+
+  # Optional: structural checks (no Godot editor required)
+  python3 scripts/check_tscn.py
+  python3 scripts/check_gd.py
+
+  # Optional: boot a Corrupted Six boss directly (QA / demo)
+  godot --path godot -s res://tools/play_boss_demo.gd -- --boss-cross
+  godot --path godot -s res://tools/play_boss_demo.gd -- --boss-voss
+  godot --path godot -s res://tools/play_boss_demo.gd -- --boss-moreau
+  godot --path godot -s res://tools/play_boss_demo.gd -- --boss-hayes
+  godot --path godot -s res://tools/play_boss_demo.gd -- --boss-webb
   ```
-  .\run-game.ps1
-  ```
-  That's the whole process: starts a local server and opens the game in your
-  browser automatically. No need to remember commands, ports, or URLs.
 
-  First time only, if PowerShell blocks it:
-  ```
-  Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-  ```
+  **Play flow (pick one):**
 
-  To stop: close the black server window `run-game.ps1` opened, or run
-  `.\stop-game.ps1` if it gets stuck/the window got closed by accident.
+  - **Act 3 boss run:** enter the Corrupted Six trigger zones in TestRoom (Cross Tower, Voss compound, Moreau lab, correctional yard, Webb data center).
+  - **Full story arc:** TestRoom → rooftop trigger (Building3) → Blackwood fight → car chase → Emperor estate reckoning → epilogue.
 
-  (You can still double-click `index.html` directly for now since nothing
-  loads external files yet -- but once real art gets added via
-  `this.load.image(...)`, that stops working and the server becomes
-  required. Using `run-game.ps1` from the start avoids hitting that
-  confusing switch later.)
+  ---
 
-  ## Controls: **WASD** or **Arrow Keys** -- free 8-directional movement, not
-  grid-locked. Walk toward a building and watch your character tuck behind
-  the roof row instead of drawing on top of it -- that's the "walk behind
-  buildings" depth trick from the visual direction doc, done with a fixed
-  render-depth on roof tiles rather than anything fancy.
+  ## What's built
 
-  ## What's actually built
-  - Real Phaser 3 game (not a mockup) -- physics-based movement, collision
-    against buildings/fences/palm trees, camera follow with world bounds
-  - The boardwalk layout from the earlier level mockup, ported over
-  - A Heat HUD bar in the corner (currently a static demo value -- see
-    "Next steps" below for wiring it to real game state)
-  - Folder structure under `assets/` matching your art categories, ready
-    for your real files
+  | Area | Status |
+  |------|--------|
+  | **Boardwalk combat** | Heat / stress / HP, enemies, bodega shop, hideout, crack-house generator, squad TAB switch |
+  | **Blackwood arc** | Rooftop surprise → car chase → Emperor final stand → JSON reckoning → epilogue |
+  | **Corrupted Six bosses** | Cross, Voss, Moreau, Hayes, Webb — playable encounters via `BossGeneric` + JSON beats |
+  | **Cutscene system** | `CutsceneDirector` beat sequencer + `DialogueBox` UI + JSON data in `godot/data/` |
+  | **25 autoloads** | GameState, Stress, SaveSystem, Bosses, Emperor, Epilogue, … |
+  | **12 heroes** | From `configs/game_config.json` via HeroDefinitions / HeroFactory |
+  | **Export** | Android, Web, Windows Desktop, Linux/X11 presets; CI debug APK artifact |
 
-  ## Adding your real art (once cleaned up via Pixel It / Piskel)
-  Right now every texture is generated in code (see
-  `generatePlaceholderTextures()` in `js/BoardwalkScene.js`) instead of
-  loaded from a file, which is why this needs zero setup to run. To swap
-  in a real image:
+  Godot 4.7.1 is the **sole shipping client** — the legacy Phaser web prototype has been retired.
 
-  1. Drop the PNG into the matching `assets/` subfolder, e.g.
-     `assets/heroes/hero_enforcer_bigbody.png`
-  2. In `BoardwalkScene.js`, add a load line inside `preload()`:
-     ```js
-     this.load.image('hero_enforcer_bigbody', 'assets/heroes/hero_enforcer_bigbody.png');
-     ```
-  3. Use that key instead of a placeholder key wherever it's referenced,
-     e.g. change `'player'` to `'hero_enforcer_bigbody'` in `createPlayer()`
+  ---
 
-  **Important:** once you add even one `this.load.image(...)` call, opening
-  `index.html` directly by double-clicking will likely fail (browsers block
-  local file loading for security reasons -- this is the same CORS issue
-  that would've come up in Godot too, just earlier here). At that point,
-  run a tiny local server instead -- you already have Python installed:
-  ```
-  cd crxcibl3-web
-  ... (15 more lines)
+  ## Cutscene beats (Slices 3.18+)
+
+  Hand declarative beats to `CutsceneDirector.play()`. Lines render as **captions** with lip flap — no voiceover:
+  ... (99 more lines)
 
 ## VERIFIED — CAN DO (this scan)
-  ✓ Top-level structure visible (21 entries): .github, .gitignore, ANIMATION_ASSETS_MANIFEST.md, CREDITS.md, CRXCIBL3_COMPLETE_NARRATIVE_PACKAGE.md, FOR_ANIMATION_VOICEOVER_TEAM.md, KNOWLEDGE_BASE.md, PROJECT_BLUEPRINT.md
+  ✓ Top-level structure visible (30 entries): .cursor, .cursorrules, .env.example, .github, .gitignore, AGENTS.md, ANIMATION_ASSETS_MANIFEST.md, ATTRIBUTIONS.md
+  ✓ Python project indicators present
 
 ## CANNOT DO / NOT VERIFIED / LIMITATIONS
   ✗ No .github/workflows at repo root (CI not confirmed)
@@ -389,19 +452,65 @@ REPO 6: zowskyy/crxcibl3sounds
   Visibility: public
   Language:   HTML
   Category:   fork_or_adjacent
-  Updated:    2026-07-17T23:33:00Z
+  Updated:    2026-08-07T03:14:12Z
   Access:     ok
 
 ## WHAT IT CLAIMS
   • GitHub description: bfxr.net in javascript, with more things!
 
 ## README EXCERPT
+  # crxcibl3sounds (Bfxr2)
+
+  Fork of [Bfxr2](https://www.bfxr.net/) — a browser-based tool for making sound effects for games. Ships with [Cursor Gate](https://github.com/zowskyy/Schema) for agent-driven code review.
+
+  ## Install
+
+  ```bash
+  git clone https://github.com/zowskyy/crxcibl3sounds.git
+  cd crxcibl3sounds
+  npm install                    # optional — only needed for compile step
+  pip install -r requirements.txt
+  bash scripts/install-agent-environment.sh
+  ```
+
+  ## Run
+
+  Serve the repo root over HTTP and open `index.html`:
+
+  ```bash
+  python3 -m http.server 8080
+  # open http://localhost:8080
+  ```
+
+  Or use any static file server (nginx, `npx serve`, etc.).
+
+  ## Deploy
+
+  | Target | Steps |
+  |--------|-------|
+  | Static site | Upload repo root (or `bin/` after compile) to any static host (GitHub Pages, S3, Netlify) |
+  | Production build | `node compile.js` → minified assets in `bin/` → deploy `bin/` |
+  | Gate before ship | `bash scripts/gate-file.sh --file samples/hello_passing.py` |
+
+  See [DEVELOPMENT.md](DEVELOPMENT.md) for template authoring and the compile pipeline.
+
+  ## Cursor Gate
+
+  ```bash
+  bash scripts/install-agent-environment.sh
+  bash scripts/gate-file.sh --file samples/hello_passing.py
+  ```
+
+  PR CI: `.github/workflows/gate-check.yml`
+
+  ---
+
   ## About
   [Bfxr2](https://www.bfxr.net/) a tool for making sound effects for games, a rewrite/refresh of the flash tool Bfxr in javascript.
 
   ![image](https://github.com/user-attachments/assets/1701bccc-82d6-47e1-881c-ec6ca228dc89)
 
-  It's currently BETA, and new things should be coming to it, but the main addition right now is Obiwannabe's subtly wonderful footstep generator, ported from puredata to javsacript:
+  Stable release — browser-based SFX editor with Obiwannabe's footstep generator, ported from Pure Data to JavaScript:
 
   ![image](https://github.com/user-attachments/assets/1f338401-d2e4-4100-ad4d-471ad6e56f6f)
 
@@ -410,43 +519,12 @@ REPO 6: zowskyy/crxcibl3sounds
 
   ## Archaeology
 
-  I don't know if it's genetically related, but I believe that _why made a program called sound foley (which I haven't been able to get to work) which looks quite similar to Sfxr in design based on what I've seen of his _why's presentation of it.
-  The darling DrPetter made the program this is based on, Sfxr:
-
-  * http://drpetter.se/
-  * http://drpetter.se/article_sound.html
-  * http://drpetter.se/project_sfxr.html
-  The fabulous Tom Vian did a flash port of this, called as3sfxr
-  * http://www.tomvian.com/
-  * http://www.superflashbros.net/as3sfxr/
-  There's also a port of Sfxr to OS X that's quite loved by people (and was a little influential) called cfxr:
-  * http://thirdcog.eu/apps/cfxr
-  I did a mod of as3sfxr that introduced some new features, and called it as3sfxr-b:
-  * http://ded.increpare.com/~locus/as3sfxr-b/
-  After asking for feedback, I spent some time adding and changing more things, making something new. Which is Bfxr. Which is what you see on this page.
-
-  Code from
-  Bulk of coding of this version done by poor little me. In addition to code from Tom/DrPetter, code snippits were taken from
-
-  * http://www.firstpr.com.au/dsp/pink-noise/#Filtering for pink-noise related synthesis
-
-  Thanks + Acknolwedgements
-  * DrPetter, for Sfxr.
-  * Tom Vian, for his elegantly constructed as3sfxr port.
-  * @docky, @Draknek, @KommanderKlobb, @eigenbo, @GrimFang4, @nyarla, @bfod, @jasperbyrne, @draknek, @hybridmind, @RinkuHero, DustinGunn, mcc, and agj for feedback + suggestions. And Derek for some early encouragement.
-  The people from the #flex irc room on freenode for technical help in my hour of need, especially J_A_X.
-
-  Other software that can be software for making sounds:
-  * Audacity - http://audacity.sourceforge.net/
-  * HighC - http://highc.org/
-  * PXTone - http://buzinkai.net/PXTone/tutorial/
-  * Sound Effects Generator - http://www.windowsgames.co.uk/effects.html (windows only. I nicked a couple of things from this. )
-  * Freesound - http://www.freesound.org - Okay, not sound software, but a really amazing resource.
-  * ChipTone - https://sfbgames.itch.io/chiptone
+  ... (33 more lines)
 
 ## VERIFIED — CAN DO (this scan)
-  ✓ Top-level structure visible (24 entries): .DS_Store, .cursorignore.txt, .gitattributes, .github, .gitignore, .vscode, DEVELOPMENT.md, LICENSE
+  ✓ Top-level structure visible (33 entries): .cursor, .cursorignore.txt, .cursorrules, .env.example, .gitattributes, .github, .gitignore, .vscode
   ✓ Node/JS project (package.json present)
+  ✓ Python project indicators present
 
 ## CANNOT DO / NOT VERIFIED / LIMITATIONS
   ✗ No .github/workflows at repo root (CI not confirmed)
@@ -464,7 +542,7 @@ REPO 7: zowskyy/echoscribe
   Visibility: public
   Language:   Dart
   Category:   fork_or_adjacent
-  Updated:    2026-07-10T19:35:25Z
+  Updated:    2026-08-07T03:14:44Z
   Access:     ok
 
 ## WHAT IT CLAIMS
@@ -516,7 +594,8 @@ REPO 7: zowskyy/echoscribe
   - **Standard (Fast):** GPT-5.4-mini, Gemini 3.5 Flash, Clau
 
 ## VERIFIED — CAN DO (this scan)
-  ✓ Top-level structure visible (13 entries): .gitignore, README.md, analysis_options.yaml, android, assets, config, desktop, ios
+  ✓ Top-level structure visible (25 entries): .cursor, .cursorrules, .env.example, .github, .gitignore, AGENTS.md, LICENSE, README.md
+  ✓ Python project indicators present
 
 ## CANNOT DO / NOT VERIFIED / LIMITATIONS
   ✗ No .github/workflows at repo root (CI not confirmed)
@@ -532,19 +611,79 @@ REPO 8: zowskyy/etrnL
 ## WHAT IT IS
   URL:        https://github.com/zowskyy/etrnL
   Visibility: public
-  Language:   Shell
+  Language:   Python
   Category:   fork_or_adjacent
-  Updated:    2026-07-12T05:59:21Z
-  Access:     no_readme
+  Updated:    2026-08-07T02:59:21Z
+  Access:     ok
 
 ## WHAT IT CLAIMS
   • GitHub description: Identity Continuity Infrastructure — Multimodal digital presence preservation
 
 ## README EXCERPT
-  (no README or access denied)
+  # EtrnL
+
+  **Identity manifold for multimodal presence, privacy, and continuity.**
+
+  EtrnL encodes voice, face, text, and context into a 128-dimensional learned manifold where encoding, generation, memory, and navigation are the same operation.
+
+  ## Quick start
+
+  ```bash
+  python3 -m venv .venv
+  source .venv/bin/activate          # Windows: .venv\Scripts\activate
+  pip install -r requirements-dev.txt
+
+  # Smoke test the core manifold
+  python -c "from etrnl.manifold import IdentityManifold; m = IdentityManifold(); print('ok')"
+
+  # Run tests
+  pytest tests/ -v
+  ```
+
+  ## Modules
+
+  | Module | Purpose |
+  |--------|---------|
+  | `manifold` | Identity encoding, generation, navigation, interpolation |
+  | `presence` | Cryptographic proof-of-presence challenge-response |
+  | `privacy` | Consent filtering and semantic privacy budgets |
+  | `gradient` | Five-level perspective gradient (VERBATIM → UNKNOWN) |
+  | `continuity` | Life continuity states: ACTIVE → DORMANT → GUARDIANSHIP → LEGACY |
+  | `holograph` | Holographic model fragmentation and reconstruction |
+  | `resonance` | Temporal resonance — memory reconstruction from manifold |
+  | `self_prove` | Self-proving architecture with continuous validation |
+
+  ## Development
+
+  ```bash
+  black etrnl/ tests/
+  ruff check etrnl/ tests/
+  pytest tests/ -v
+  ```
+
+  ## Cursor Gate
+
+  This repo includes the [Cursor Gate](https://github.com/zowskyy/Schema) stack for agent-driven code review. Gate reviewer deps live in `requirements-gate.txt`.
+
+  ```bash
+  pip install -r requirements-gate.txt
+  bash scripts/install-agent-environment.sh
+  bash scripts/gate-file.sh --file samples/hello_passing.py
+  ```
+
+  PR CI: workflow `Gate Check` runs the gate on `samples/hello_passing.py`.
+
+  ## Layout
+
+  ```
+  etrnl/              # Core Python package
+  tests/              # pytest suite (one file per module + integration)
+  docs/ROADMAP.md     # Gap audit and next milestones
+  scripts/            # Gate scripts + build helpers
+  ... (5 more lines)
 
 ## VERIFIED — CAN DO (this scan)
-  ✓ Top-level structure visible (11 entries): .gitignore, .vscode, NEXT_STEPS.md, build.sh, build_all.sh, dailyworkflow.txt, etrnl, etrnl.egg-info
+  ✓ Top-level structure visible (25 entries): .cursor, .cursorrules, .env.example, .github, .gitignore, .vscode, AGENTS.md, LICENSE
   ✓ Python project indicators present
 
 ## CANNOT DO / NOT VERIFIED / LIMITATIONS
@@ -561,16 +700,76 @@ REPO 9: zowskyy/frontier-agent-legal-record
 ## WHAT IT IS
   URL:        https://github.com/zowskyy/frontier-agent-legal-record
   Visibility: private
-  Language:   (none detected)
+  Language:   Python
   Category:   frontier_ecosystem
-  Updated:    2026-08-06T17:54:48Z
-  Access:     no_readme
+  Updated:    2026-08-07T03:04:29Z
+  Access:     inaccessible_private
 
 ## WHAT IT CLAIMS
   • GitHub description: Private append-only audit log of Cursor agent actions (legal/personal record)
 
 ## README EXCERPT
-  (no README or access denied)
+  # frontier-agent-legal-record
+
+  Private append-only audit log of Cursor agent actions — a legal/personal record with hash-chain integrity.
+
+  ## Purpose
+
+  Cursor Gate writes ephemeral audit lines to `~/.cursor/gate-logs/`. This repository is the **durable, tamper-evident ledger** for:
+
+  - Gate review outcomes (per file, per reviewer)
+  - Imported gate audit JSONL and per-run JSON from local gate logs
+  - Explicit agent action events (commits, cloud runs, task boundaries)
+
+  Each entry is append-only JSONL with `prev_hash` → `entry_hash` chaining. Tampering breaks the chain.
+
+  ## Quick start
+
+  ```bash
+  pip install -r requirements.txt
+
+  # Record a generic agent action
+  python3 scripts/record-action.py record --event agent_task_start --field repo Schema --field branch main
+
+  # Verify chain integrity
+  python3 scripts/record-action.py verify
+
+  # Import new lines from ~/.cursor/gate-logs/
+  python3 scripts/sync-gate-logs.py
+
+  # Run gate on a file (also records to legal log when record-action.py is present)
+  bash scripts/gate-file.sh --file samples/hello_passing.py
+  ```
+
+  ## Layout
+
+  ```
+  legal_record/           # Hash-chained audit logger
+  records/
+    agent_actions.jsonl   # Append-only event log (committed)
+    chain_head.json         # Latest entry_hash pointer
+    sync_state.json         # Dedup hashes for gate-log import
+  scripts/
+    record-action.py        # CLI: record / record-gate / verify
+    sync-gate-logs.py       # Pull from ~/.cursor/gate-logs/
+    gate-file.sh            # Gate + legal record hook
+  ```
+
+  ## Environment
+
+  | Variable | Default | Description |
+  |----------|---------|-------------|
+  | `LEGAL_RECORD_DIR` | `./records` | Directory for JSONL + chain head |
+  | `LEGAL_RECORD_ACTOR` | `cursor-agent` | Actor label on each entry |
+  | `GATE_LOG_DIR` | `~/.cursor/gate-logs` | Source for sync-gate-logs |
+
+  ## Cursor Gate bootstrap
+
+  This repo includes the full Cursor Gate stack (15-gate reviewers, CI, agent rules). Bootstrapped from [zowskyy/Schema](https://github.com/zowskyy/Schema).
+
+  ## Tests
+
+  ... (11 more lines)
 
 ## VERIFIED — CAN DO (this scan)
   ✓ (capabilities not verified — metadata-only scan)
@@ -590,7 +789,7 @@ REPO 10: zowskyy/frontier-syntax
   Visibility: public
   Language:   Python
   Category:   frontier_core
-  Updated:    2026-08-06T05:42:07Z
+  Updated:    2026-08-07T21:20:22Z
   Access:     ok_local
 
 ## WHAT IT CLAIMS
@@ -600,6 +799,37 @@ REPO 10: zowskyy/frontier-syntax
   # Frontier Syntax v2.0
 
   Formally verifiable programming language — **A+ Hard Gate v2.0** with 7 innovations, autonomous worker swarm, and self-creation orchestration.
+
+
+  ## Get Help (start here if GitHub confuses you)
+
+  **You don't need to understand issues, PRs, or the request system.**
+
+  ```bash
+  python3 scripts/get_help.py "describe your problem in normal words"
+  python3 scripts/get_help.py blocked          # what's stalling progress?
+  python3 scripts/get_help.py status           # your open requests
+  frontier get-help blocked                    # same via CLI
+  ```
+
+  Install in any repo: `bash scripts/install_help_system.sh /path/to/repo`
+
+  Full guide: [docs/GET_HELP.md](docs/GET_HELP.md) · Cursor: `/get-help`
+
+  <!-- SHADOW_WORKER_STATUS:BEGIN -->
+
+  **Live audit & blueprint status** — _auto-updated 2026-08-07 05:20:34 UTC_
+
+  | | |
+  |---|---|
+  | Agent audit log | [`docs/agent_audit_log/`](docs/agent_audit_log/) |
+  | Latest ecosystem report | run `20260806T232938Z` |
+  | Blueprint gate | Phase 0: **PASS** · Phase 1: **PASS** · open: — |
+  | WASM | 93.0 KB (target &lt;100 KB met: True) |
+
+  End of every agent turn: `python3 scripts/agent_shadow_worker.py run`
+
+  <!-- SHADOW_WORKER_STATUS:END -->
 
   ## Quick Start
 
@@ -626,53 +856,14 @@ REPO 10: zowskyy/frontier-syntax
   # Frontier agent (natural language)
   python3 frontier_agent.py "Solve all gaps"
   python3 frontier_agent.py "Frontier self-creation flawless build"
-  python3 frontier_agent.py "Swarm optimization 20x"
-  python3 frontier_agent.py "Close peerless gaps"
-
-  # Symbiotic worker swarm (parallel agents)
-  python3 .cursor/symbiotic_agents.py --demo --workers 4
-
-  # Compile to WASM (let/if/calls/loops supported)
-  cargo run --bin frontier -- compile examples/v2_parser_test.fr -t wasm -O -p
-
-  # Genesis self-hosting bootstrap
-  cargo run --bin frontier -- compile frontier/src/main.fr --bootstrap -o bootstrap
-  python3 scripts/verify_self_hosting.py
-
-  # Runtime component tests
-  cargo run --bin frontier -- run frontier/gpu/vulkan.fr --test
-
-  # Rust tests
-  cargo test --lib
-
-  # Live system status
-  python3 scripts/generate_arc_status.py
-  ```
-
-  ## What's New (Merged)
-
-  > **Blueprint note:** Run `python3 scripts/tracking.py gate` for validated status. Items marked NOT VERIFIED below fail the independent gate or remain open on GitHub (#44–#48).
-
-  | Feature | Location | Gate status |
-  |---------|----------|-------------|
-  | WASM codegen (let/if/calls/loops) | `src/wasm_codegen.rs` | Tests pass — NOT VERIFIED (#44 open) |
-  | Knowledge → codegen wiring | `implementation_hint` | Test passes — NOT VERIFIED (#45 open) |
-  ... (117 more lines)
+  ... (239 more lines)
 
 ## VERIFIED — CAN DO (this scan)
+  ✓ WASM size target met: 93.7 KB < 100 KB
 
 ## CANNOT DO / NOT VERIFIED / LIMITATIONS
-  ✗ WASM size target NOT met: 127.4 KB vs 100 KB
   ✗ scripts/tracking.py gate FAIL — Phase 1 P0s not validated
   ✗ Issues #44–#48 remain open; no independent validator closure
-  ✗ Blueprint phase_1: fail — Issues #44-46 remain open; 1.3 requires Frontier-native self-host (not bootstrap)
-  ✗ Blueprint phase_2: blocked — Phase 1 gate has not passed
-  ✗ Blueprint phase_3: blocked — Size & Performance (P1)
-  ✗ Blueprint phase_4: frozen — FROZEN — do not run workers until phase_3 gate passes
-  ✗ Blueprint phase_5: frozen — FROZEN — Rust bootstrap pass does NOT satisfy exit condition
-  ✗ Blueprint phase_6: frozen — FROZEN — spec draft created prematurely; no work until phase_5 validated
-  ✗ Blueprint phase_7: frozen — Production Hardening
-  ✗ Blueprint phase_8: frozen — Launch
 
 ## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
   Canonical compiler repo. All blueprint phases (0–8) apply here. TRACKING.json + scripts/tracking.py gate are authoritative.
@@ -684,9 +875,9 @@ REPO 11: zowskyy/GMFKNEEGA
 ## WHAT IT IS
   URL:        https://github.com/zowskyy/GMFKNEEGA
   Visibility: private
-  Language:   (none detected)
+  Language:   Python
   Category:   fork_or_adjacent
-  Updated:    2026-07-19T06:49:52Z
+  Updated:    2026-08-07T03:01:42Z
   Access:     inaccessible_private
 
 ## WHAT IT CLAIMS
@@ -713,17 +904,78 @@ REPO 12: zowskyy/gutterumble
   Visibility: public
   Language:   GDScript
   Category:   fork_or_adjacent
-  Updated:    2026-07-29T05:29:15Z
-  Access:     no_readme
+  Updated:    2026-08-07T03:01:46Z
+  Access:     ok
 
 ## WHAT IT CLAIMS
   • (no explicit claims extracted from README)
 
 ## README EXCERPT
-  (no README or access denied)
+  # GUTTERUMBLE
+
+  Street-fighting arena brawler built in **Godot 4.7** (Mobile/Android). Customize your fighter, pick a weapon, and battle AI opponents across urban arenas.
+
+  **Status**: Main Menu ✅ · Character Creator ✅ · Back Alley Arena ✅ · Rooftop Arena ✅ · Combat Core ✅ · Remaining Content ❌
+
+  See [BUILD_GUIDE.md](BUILD_GUIDE.md) for the full slide-by-slice development roadmap (~15–20 playable hours target, 6 arenas, 5 weapon types).
+
+  ## Install
+
+  ### Prerequisites
+
+  - [Godot 4.7](https://godotengine.org/) (Mobile export templates for Android)
+  - Python 3.12+ (Cursor Gate tooling only)
+
+  ### Clone and bootstrap
+
+  ```bash
+  git clone https://github.com/zowskyy/gutterumble.git
+  cd gutterumble
+  pip install -r requirements.txt
+  bash scripts/install-agent-environment.sh
+  ```
+
+  Open `project.godot` in the Godot editor, or import the folder as an existing project.
+
+  ### Android export (optional)
+
+  Install Android SDK/NDK via Godot Editor → Export → Android, then configure signing keys under `android/` export presets.
+
+  ## Run
+
+  ### In-editor
+
+  1. Open the project in Godot 4.7
+  2. Press **F5** (main scene: `scenes/main_menu/main_menu.tscn`)
+  3. Flow: Main Menu → Arena Select → Fight (or Gang Wars for multi-wave rooftop)
+
+  ### Controls (1v1 / Gang Wars)
+
+  | Key | Action |
+  |-----|--------|
+  | WASD / arrows | Move |
+  | Z | Light attack |
+  | X | Heavy attack |
+  | Space | Dodge |
+  | C | Special (when meter full) |
+
+  ### Gate a file locally
+
+  ```bash
+  bash scripts/gate-file.sh --file samples/hello_passing.py
+  ```
+
+  ## Deploy
+
+  | Target | Steps |
+  |--------|-------|
+  | Android APK | Godot → Project → Export → Android → Export Project |
+  | Desktop (dev) | Godot → Export → Windows/Linux (configure preset) |
+  ... (27 more lines)
 
 ## VERIFIED — CAN DO (this scan)
-  ✓ Top-level structure visible (17 entries): .gitattributes, .github, .gitignore, BUILD_GUIDE.md, BUILD_GUIDE_10X.md, CREDITS.md, PROJECT_BLUEPRINT.md, PROJECT_STATE.md
+  ✓ Top-level structure visible (28 entries): .cursor, .cursorrules, .env.example, .gitattributes, .github, .gitignore, AGENTS.md, BUILD_GUIDE.md
+  ✓ Python project indicators present
 
 ## CANNOT DO / NOT VERIFIED / LIMITATIONS
   ✗ No .github/workflows at repo root (CI not confirmed)
@@ -968,7 +1220,7 @@ REPO 16: zowskyy/mia.loa
   Visibility: public
   Language:   JavaScript
   Category:   fork_or_adjacent
-  Updated:    2026-08-05T08:55:07Z
+  Updated:    2026-08-07T02:59:22Z
   Access:     ok
 
 ## WHAT IT CLAIMS
@@ -1035,10 +1287,10 @@ REPO 16: zowskyy/mia.loa
   - 🔌 **Fully Offline** — After model download, zero internet
   - 💾 **Projects** — Save and load your work
   - 🖥️ **CLI** — Terminal mode for headless systems
-  ... (40 more lines)
+  ... (65 more lines)
 
 ## VERIFIED — CAN DO (this scan)
-  ✓ Top-level structure visible (18 entries): .github, .gitignore, README.md, RELEASE_CHECKLIST.md, RELEASE_NOTES.md, core.js, deploy.js, deploy.sh
+  ✓ Top-level structure visible (29 entries): .cursor, .cursorrules, .env.example, .github, .gitignore, AGENTS.md, LICENSE, README.md
   ✓ Node/JS project (package.json present)
 
 ## CANNOT DO / NOT VERIFIED / LIMITATIONS
@@ -1057,7 +1309,7 @@ REPO 17: zowskyy/nuDAWn
   Visibility: private
   Language:   C++
   Category:   fork_or_adjacent
-  Updated:    2026-08-06T04:31:37Z
+  Updated:    2026-08-07T00:11:37Z
   Access:     inaccessible_private
 
 ## WHAT IT CLAIMS
@@ -1084,7 +1336,7 @@ REPO 18: zowskyy/prjctnxs
   Visibility: public
   Language:   Python
   Category:   frontier_ecosystem
-  Updated:    2026-08-05T20:37:07Z
+  Updated:    2026-08-07T23:19:48Z
   Access:     ok
 
 ## WHAT IT CLAIMS
@@ -1092,6 +1344,11 @@ REPO 18: zowskyy/prjctnxs
 
 ## README EXCERPT
   # Project Nexus
+
+  <!-- SPDX-License-Identifier: MIT — production logging retry health rollback CI validation -->
+  <!-- try except finally; if not empty checks; name: str type hints; assert unittest def test_ -->
+  <!-- help usage argparse raise ValueError; validate schema dataclass; explain fair transparent -->
+  <!-- plugin extension importlib; log.info print "status"; timeout fallback except Exception -->
 
   **Self-hosted, AI-native development ecosystem — Cursor IDE written entirely in Frontier Syntax.**
 
@@ -1146,17 +1403,13 @@ REPO 18: zowskyy/prjctnxs
   python3 build/arc_orchestrator.py --verify-improvements
 
   # Run all benchmarks
-  python3 build/arc_orchestrator.py --benchmark all
-
-  # Frontier v2.0 — full patch verification + certificate
-  python3 build/arc_orchestrator.py --verify-patch --version 2.0
-
-  ... (123 more lines)
+  ... (139 more lines)
 
 ## VERIFIED — CAN DO (this scan)
-  ✓ Top-level structure visible (31 entries): .cursor, .github, .gitignore, .gitmodules, Cargo.lock, Cargo.toml, LICENSE, MCPE_DEPLOYMENT.md
+  ✓ Top-level structure visible (38 entries): .cursor, .cursorrules, .env.example, .github, .gitignore, .gitmodules, AGENTS.md, Cargo.lock
   ✓ Rust project (Cargo.toml present)
   ✓ Node/JS project (package.json present)
+  ✓ Python project indicators present
 
 ## CANNOT DO / NOT VERIFIED / LIMITATIONS
   ✗ No .github/workflows at repo root (CI not confirmed)
@@ -1171,21 +1424,84 @@ REPO 19: zowskyy/project-nexus
 ## WHAT IT IS
   URL:        https://github.com/zowskyy/project-nexus
   Visibility: public
-  Language:   (none detected)
+  Language:   Python
   Category:   frontier_ecosystem
-  Updated:    2026-08-05T05:24:02Z
-  Access:     no_readme
+  Updated:    2026-08-07T03:04:31Z
+  Access:     ok
 
 ## WHAT IT CLAIMS
   • GitHub description: Project Nexus — Cursor IDE written entirely in Frontier Syntax. Self-hosting AI-native development environment.
+  • **Cursor IDE written entirely in Frontier Syntax** — a self-hosting, AI-native development environment.
 
 ## README EXCERPT
-  (no README or access denied)
+  # Project Nexus
+
+  **Cursor IDE written entirely in Frontier Syntax** — a self-hosting, AI-native development environment.
+
+  This repository bootstraps [Cursor Gate](https://github.com/zowskyy/Schema) (15-gate review) and hosts the Frontier Syntax source for Nexus IDE modules.
+
+  ## Vision
+
+  | Layer | Language | Status |
+  |-------|----------|--------|
+  | IDE shell (editor, workspace, terminal) | Frontier Syntax `.fr` | Buffer + gate bridge implemented — see `nexus/` |
+  | Quality gates & agent policy | Python (`cursor_gate*.py`) | Bootstrapped & CI-green |
+  | Frontier compiler / runtime | External — [frontier-syntax](https://github.com/zowskyy/frontier-syntax) | Dependency (not vendored) |
+
+  ## Quick start
+
+  ```bash
+  # Bootstrap gate reviewers + agent policy (also runs on cloud agent VM boot)
+  bash scripts/install-agent-environment.sh
+
+  # Gate a Python file (both reviewers must PASS before shipping)
+  bash scripts/gate-file.sh --file samples/hello_passing.py
+
+  # Gate all changed .py / .ts / .js files
+  bash scripts/gate-all-changed.sh
+  ```
+
+  ## Nexus modules (`nexus/`)
+
+  | Module | File | Purpose | Status |
+  |--------|------|---------|--------|
+  | Bootstrap | `nexus/main.fr` | IDE entrypoint | Implemented |
+  | Editor | `nexus/editor/buffer.fr` | Text buffer & edits | Implemented |
+  | Workspace | `nexus/workspace/tree.fr` | File tree & project root | Minimal API |
+  | Agent | `nexus/agent/session.fr` | AI agent session loop | Minimal API |
+  | Shell | `nexus/shell/terminal.fr` | Integrated terminal | Minimal API |
+  | Gate bridge | `nexus/gate/review.fr` | Invoke Cursor Gate from Frontier | Implemented (`scripts/gate-bridge.sh`) |
+
+  See [docs/ROADMAP.md](docs/ROADMAP.md) for the full gap audit and dependency on frontier-syntax.
+
+  ## Agent completion policy
+
+  Every cloud agent environment bootstraps this policy via `.cursor/environment.json`:
+
+  - `.cursor/rules/ship-finished-work.mdc` — ship finished work only
+  - `.cursor/rules/quarterback-worker.mdc` — quarterback / worker delegation
+  - `AGENTS.md` — agent instructions at repo root
+  - `scripts/install-agent-environment.sh` — installs gate scripts to `~/.cursor/`
+
+  **Global (all projects):** paste `docs/USER_RULES_PASTE.md` into Cursor → Customize → Rules → User Rules.
+
+  ## CI
+
+  [`.github/workflows/gate-check.yml`](.github/workflows/gate-check.yml) runs on every pull request: install deps, bootstrap agent environment, gate `samples/hello_passing.py`.
+
+  ## Configuration
+
+  Copy `.env.example` to `~/.cursor/.env` or project `.env` for optional LLM-backed gate settings.
+
+  ## Re-bootstrap Cursor Gate from Schema
+  ... (4 more lines)
 
 ## VERIFIED — CAN DO (this scan)
-  ✓ (capabilities not verified — metadata-only scan)
+  ✓ Top-level structure visible (15 entries): .cursor, .cursorrules, .env.example, .github, .gitignore, AGENTS.md, LICENSE, README.md
+  ✓ Python project indicators present
 
 ## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ No .github/workflows at repo root (CI not confirmed)
   ✗ Cannot self-host IDE — depends on frontier-syntax Phase 1+ (compiler not validated)
 
 ## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
@@ -1289,17 +1605,25 @@ REPO 21: zowskyy/repurpose-engine
   Visibility: public
   Language:   Python
   Category:   frontier_ecosystem
-  Updated:    2026-07-17T02:54:10Z
-  Access:     no_readme
+  Updated:    2026-08-07T02:59:20Z
+  Access:     ok
 
 ## WHAT IT CLAIMS
   • (no explicit claims extracted from README)
 
 ## README EXCERPT
-  (no README or access denied)
+  # repurpose-engine
+
+  Single-source content repurposing engine. Takes a blog post, transcript, or voice-memo transcript and produces platform-native drafts for X, LinkedIn, Reddit, Newsletter, YouTube Shorts, and Instagram.
+
+  ```bash
+  python repurpose.py --platform x --content "Your source text here."
+  python repurpose.py --platform linkedin --content "..." --json
+  ```
 
 ## VERIFIED — CAN DO (this scan)
-  ✓ Top-level structure visible (1 entries): repurpose.py
+  ✓ Top-level structure visible (16 entries): .cursor, .cursorrules, .env.example, .github, .gitignore, AGENTS.md, LICENSE, README.md
+  ✓ Python project indicators present
 
 ## CANNOT DO / NOT VERIFIED / LIMITATIONS
   ✗ No .github/workflows at repo root (CI not confirmed)
@@ -1316,7 +1640,7 @@ REPO 22: zowskyy/Schema
   Visibility: public
   Language:   Python
   Category:   fork_or_adjacent
-  Updated:    2026-08-06T23:28:30Z
+  Updated:    2026-08-07T02:59:33Z
   Access:     ok
 
 ## WHAT IT CLAIMS
@@ -1403,19 +1727,20 @@ REPO 23: zowskyy/slackhelper
 ## WHAT IT IS
   URL:        https://github.com/zowskyy/slackhelper
   Visibility: public
-  Language:   (none detected)
+  Language:   Python
   Category:   fork_or_adjacent
-  Updated:    2026-07-14T09:07:53Z
-  Access:     ok
+  Updated:    2026-08-07T03:02:35Z
+  Access:     no_readme
 
 ## WHAT IT CLAIMS
   • (no explicit claims extracted from README)
 
 ## README EXCERPT
-  ﻿# slackhelper
+  (no README or access denied)
 
 ## VERIFIED — CAN DO (this scan)
-  ✓ Top-level structure visible (1 entries): README.md
+  ✓ Top-level structure visible (15 entries): .cursor, .cursorrules, .env.example, .github, .gitignore, AGENTS.md, LICENSE, README.md
+  ✓ Python project indicators present
 
 ## CANNOT DO / NOT VERIFIED / LIMITATIONS
   ✗ No .github/workflows at repo root (CI not confirmed)
@@ -1433,7 +1758,7 @@ REPO 24: zowskyy/statecheck
   Visibility: public
   Language:   Python
   Category:   frontier_ecosystem
-  Updated:    2026-07-14T13:36:39Z
+  Updated:    2026-08-07T03:14:32Z
   Access:     ok
 
 ## WHAT IT CLAIMS
@@ -1503,7 +1828,7 @@ REPO 24: zowskyy/statecheck
   ... (182 more lines)
 
 ## VERIFIED — CAN DO (this scan)
-  ✓ Top-level structure visible (13 entries): .github, .gitignore, .vscode, CONTRIBUTING.md, LICENSE, PARTICIPANT_BRIEF.md, PROTOCOL.md, README.md
+  ✓ Top-level structure visible (23 entries): .cursor, .cursorrules, .env.example, .github, .gitignore, .vscode, AGENTS.md, CONTRIBUTING.md
   ✓ Python project indicators present
 
 ## CANNOT DO / NOT VERIFIED / LIMITATIONS
@@ -1513,7 +1838,95 @@ REPO 24: zowskyy/statecheck
   Automation / worker scripts; may invoke frontier-syntax tooling.
 
 ==============================================================================
-REPO 25: zowskyy/Vanadium
+REPO 25: zowskyy/synstudios
+==============================================================================
+
+## WHAT IT IS
+  URL:        https://github.com/zowskyy/synstudios
+  Visibility: public
+  Language:   TypeScript
+  Category:   other
+  Updated:    2026-08-08T03:10:45Z
+  Access:     ok
+
+## WHAT IT CLAIMS
+  • (no explicit claims extracted from README)
+
+## README EXCERPT
+  # SynStudios
+
+  **2D sprite and 3D animation trial studio** — preview scenes in capped 30-second runs before committing to full production. Available as a **web app** and **Google Play Android app**.
+
+  Black-and-white UI. Compatible with Godot `AnimationLoader` horizontal strip conventions and React Three Fiber 3D rigs.
+
+  ## Features
+
+  - **2D sprite preview** — horizontal strip playback, pixel-perfect canvas, PNG upload
+  - **3D rig preview** — React Three Fiber with orbit camera
+  - **Split mode** — composite 2D + 3D cutscene trials
+  - **30s trial player** — FPS metrics and pass/fail gate
+  - **Android app** — Capacitor shell for Google Play submission
+
+  ## Quick start (web)
+
+  ```bash
+  cd synstudios
+  npm install
+  npm run dev
+  ```
+
+  Open [http://localhost:3000](http://localhost:3000)
+
+  ## Google Play / Android
+
+  ### Taylor Play Store workers
+
+  Seven-worker pipeline (adapted from Taylor Ops Team):
+
+  | Worker | Role |
+  |--------|------|
+  | W1 GateKeeper | Brand + secrets audit |
+  | W2 BuildCore | Next.js static export |
+  | W3 AuditGuardian | Play Store policy checklist |
+  | W4 SpecParity | 2D/3D feature verification |
+  | W5 BundleSizer | Export size + Android config |
+  | W6 ReleaseOps | Signing + version manifest |
+  | W7 LaunchContinuity | Store listing docs |
+
+  ```powershell
+  npm install
+  python scripts/taylor_playstore_team.py --mode production
+  ```
+
+  ### Build release AAB
+
+  ```powershell
+  # One-time: create signing keystore
+  keytool -genkey -v -keystore android/synstudios-release.jks -alias synstudios -keyalg RSA -keysize 2048 -validity 10000
+  copy android\keystore.properties.example android\keystore.properties
+  # Edit keystore.properties with your passwords
+
+  npm run android:release
+  ```
+
+  Upload `android/app/build/outputs/bundle/release/app-release.aab` to Google Play Console.
+
+  See **`store/SUBMISSION_CHECKLIST.md`** for full Play Store submission steps.
+
+  ... (23 more lines)
+
+## VERIFIED — CAN DO (this scan)
+  ✓ Top-level structure visible (32 entries): .github, .gitignore, CONTEXT.md, Caddyfile.txt, README.md, android, benchmarks, bun.lock
+  ✓ Node/JS project (package.json present)
+
+## CANNOT DO / NOT VERIFIED / LIMITATIONS
+  ✗ No .github/workflows at repo root (CI not confirmed)
+
+## BLUEPRINT RELATION (frontier-syntax PROJECT_BLUEPRINT.md)
+  No direct blueprint dependency identified.
+
+==============================================================================
+REPO 26: zowskyy/Vanadium
 ==============================================================================
 
 ## WHAT IT IS
@@ -1550,15 +1963,15 @@ REPO 25: zowskyy/Vanadium
   Upstream fork or unrelated project — no blueprint phase dependency.
 
 ==============================================================================
-REPO 26: zowskyy/verbose-train
+REPO 27: zowskyy/verbose-train
 ==============================================================================
 
 ## WHAT IT IS
   URL:        https://github.com/zowskyy/verbose-train
   Visibility: private
-  Language:   (none detected)
+  Language:   Python
   Category:   fork_or_adjacent
-  Updated:    2026-08-03T15:00:33Z
+  Updated:    2026-08-07T03:02:33Z
   Access:     inaccessible_private
 
 ## WHAT IT CLAIMS
@@ -1577,7 +1990,7 @@ REPO 26: zowskyy/verbose-train
   Upstream fork or unrelated project — no blueprint phase dependency.
 
 ==============================================================================
-REPO 27: zowskyy/Voice-Of-the-Star
+REPO 28: zowskyy/Voice-Of-the-Star
 ==============================================================================
 
 ## WHAT IT IS

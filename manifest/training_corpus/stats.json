@@ -1,13 +1,16 @@
 {
-  "generated_at": "2026-08-07T18:19:47.426317Z",
+  "generated_at": "2026-08-08T01:52:27.395526Z",
   "script": "scripts/training/generate_corpus.py",
   "sample_count": 1000,
-  "jsonl_sha256": "97aba42725458e5e76b072143ba6d8ba04e1896d6332e9d80106d6f6310af8cb",
-  "compiler_git_sha": "479718894fa8",
+  "jsonl_sha256": "4e7ea63f8ba0d99f1969aa39a2ccf6f8bfa9e9a614027779d7f9c992a74063ca",
+  "compiler_git_sha": "cf199a1ae1f2",
   "feature_tags": [
     "call",
     "const_return",
     "if",
     "let"
-  ]
+  ],
+  "validated_at": "2026-08-08T04:17:44.742144Z",
+  "validation_pass": true,
+  "wasmtime_pass_rate": 1.0
 }

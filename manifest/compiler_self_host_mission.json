@@ -4,32 +4,40 @@
   "goal": "Frontier-native self-hosting \u2014 owner notified when Phase 1.3 (#46) complete; M5 continues for full compiler",
   "complete": true,
   "owner_notify": true,
-  "updated_at": "2026-08-07T03:37:59.336057Z",
+  "updated_at": "2026-08-08T04:14:51.046078Z",
   "milestones": {
     "M1": {
       "name": "wasm_host_exports",
       "pass": true,
-      "updated_at": "2026-08-07T03:36:07.073929Z"
+      "updated_at": "2026-08-08T03:15:04.154005Z"
     },
     "M2": {
       "name": "native_self_host_probe",
       "pass": true,
-      "updated_at": "2026-08-07T03:36:45.106151Z"
+      "updated_at": "2026-08-08T03:15:41.339294Z"
     },
     "M3": {
       "name": "verify_self_hosting_native",
       "pass": true,
-      "updated_at": "2026-08-07T03:37:59.112121Z"
+      "updated_at": "2026-08-08T03:16:37.393652Z"
     },
     "M4": {
       "name": "close_issue_46",
       "pass": true,
-      "updated_at": "2026-08-07T03:37:59.335863Z"
+      "updated_at": "2026-08-08T03:16:37.683370Z"
     },
     "M5": {
+      "name": "main_fr_native_gate",
+      "pass": true,
+      "updated_at": "2026-08-08T04:14:51.046078Z",
+      "slice": "gate",
+      "reason": "main.fr native wasmtime self-host verified (Gate slice)"
+    },
+    "M5b": {
       "name": "phase5_full_compiler",
       "pass": false,
-      "updated_at": "2026-08-07T03:37:59.336031Z"
+      "updated_at": "2026-08-08T03:16:37.683483Z",
+      "slice": "mission"
     }
   },
   "evidence": {
@@ -38,7 +46,7 @@
     "issue_46": "closed"
   },
   "last_run": {
-    "apply": false,
+    "apply": true,
     "results": [
       {
         "id": "M1",
@@ -59,7 +67,7 @@
           "command": "python3 scripts/run_native_self_host.py",
           "pass": true,
           "exit_code": 0,
-          "output_tail": "{\n  \"verified_at\": \"2026-08-07T03:36:45.100386Z\",\n  \"script\": \"scripts/run_native_self_host.py\",\n  \"source\": \"frontier/src/self_host_probe.fr\",\n  \"compiler_wasm\": \"target/wasm32-unknown-unknown/release/frontier.wasm\",\n  \"host\": \"target/release/frontier_wasm_host\",\n  \"output_wasm\": \"target/native_self_host_probe.wasm\",\n  \"output_bytes\": 56,\n  \"valid_wasm\": true,\n  \"main_returns_42\": true,\n  \"pass\": true,\n  \"bootstrap_cargo_on_recompile\": false,\n  \"mode\": \"native_wasmtime\"\n}\n"
+          "output_tail": "{\n  \"verified_at\": \"2026-08-08T03:15:41.329040Z\",\n  \"script\": \"scripts/run_native_self_host.py\",\n  \"source\": \"frontier/src/self_host_probe.fr\",\n  \"expected_main\": 42,\n  \"compiler_wasm\": \"target/wasm32-unknown-unknown/release/frontier.wasm\",\n  \"host\": \"target/release/frontier_wasm_host\",\n  \"output_wasm\": \"target/native_self_host_probe.wasm\",\n  \"output_bytes\": 56,\n  \"valid_wasm\": true,\n  \"main_returns_expected\": true,\n  \"main_returns_42\": true,\n  \"pass\": true,\n  \"bootstrap_cargo_on_recompile\": false,\n  \"mode\": \"native_wasmtime\"\n}\n"
         }
       },
       {
@@ -71,7 +79,7 @@
           "command": "python3 scripts/verify_self_hosting.py --native",
           "pass": true,
           "exit_code": 0,
-          "output_tail": "self_host.py\",\n    \"source\": \"frontier/src/self_host_probe.fr\",\n    \"compiler_wasm\": \"target/wasm32-unknown-unknown/release/frontier.wasm\",\n    \"host\": \"target/release/frontier_wasm_host\",\n    \"output_wasm\": \"target/native_self_host_probe.wasm\",\n    \"output_bytes\": 56,\n    \"valid_wasm\": true,\n    \"main_returns_42\": true,\n    \"pass\": true,\n    \"bootstrap_cargo_on_recompile\": false,\n    \"mode\": \"native\",\n    \"uses_cargo_on_recompile\": false,\n    \"output\": \"PASS: Native self-host (wasmtime + Frontier compiler WASM)\"\n  },\n  \"pass\": true\n}\nPASS: Native self-host (wasmtime + Frontier compiler WASM)\n"
+          "output_tail": "r\",\n    \"expected_main\": 42,\n    \"compiler_wasm\": \"target/wasm32-unknown-unknown/release/frontier.wasm\",\n    \"host\": \"target/release/frontier_wasm_host\",\n    \"output_wasm\": \"target/native_self_host_probe.wasm\",\n    \"output_bytes\": 56,\n    \"valid_wasm\": true,\n    \"main_returns_expected\": true,\n    \"main_returns_42\": true,\n    \"pass\": true,\n    \"bootstrap_cargo_on_recompile\": false,\n    \"mode\": \"native\",\n    \"uses_cargo_on_recompile\": false,\n    \"output\": \"PASS: Native self-host (wasmtime + Frontier compiler WASM)\"\n  },\n  \"pass\": true\n}\nPASS: Native self-host (wasmtime + Frontier compiler WASM)\n"
         }
       },
       {
@@ -82,7 +90,7 @@
         "issue_46_open": false
       },
       {
-        "id": "M5",
+        "id": "M5b",
         "name": "phase5_full_compiler",
         "pass": false,
         "optional": true,

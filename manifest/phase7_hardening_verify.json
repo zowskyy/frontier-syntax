@@ -1,0 +1,63 @@
+{
+  "verified_at": "2026-08-08T04:17:44.773289Z",
+  "script": "scripts/verify_phase7_hardening.py",
+  "clippy": {
+    "pass": true,
+    "exit_code": 0,
+    "command": "cargo clippy --lib -- -D warnings",
+    "output": "   Compiling frontier v2.0.0 (/workspace)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.66s\n"
+  },
+  "agent_security": {
+    "pass": true,
+    "exit_code": 0,
+    "command": "/usr/bin/python3 /workspace/scripts/verify_agent_security.py",
+    "output": "{\n  \"verified_at\": \"2026-08-08T04:06:45.560195Z\",\n  \"script\": \"scripts/verify_agent_security.py\",\n  \"pass\": true,\n  \"results\": [\n    {\n      \"path\": \"frontier_agent.py\",\n      \"present\": true,\n      \"pass\": true,\n      \"findings\": []\n    },\n    {\n      \"path\": \".cursor/symbiotic_agents.py\",\n      \"present\": true,\n      \"pass\": true,\n      \"findings\": []\n    }\n  ]\n}\n"
+  },
+  "compiler_ci": {
+    "pass": true
+  },
+  "gate_stability": {
+    "pass": true,
+    "runs": [
+      {
+        "exit_code": 0,
+        "summary": {
+          "all_pass": true,
+          "phase_0_pass": true,
+          "phase_1_pass": true,
+          "phase_2_pass": true,
+          "phase_3_pass": true,
+          "phase_4_pass": true,
+          "phase_5_pass": true,
+          "phase_6_pass": true,
+          "phase_7_pass": false,
+          "phase_8_pass": null,
+          "max_phase": 6,
+          "phases_8": "blocked",
+          "open_issues": [],
+          "evidence_file": "manifest/tracking_evidence.json"
+        }
+      },
+      {
+        "exit_code": 0,
+        "summary": {
+          "all_pass": true,
+          "phase_0_pass": true,
+          "phase_1_pass": true,
+          "phase_2_pass": true,
+          "phase_3_pass": true,
+          "phase_4_pass": true,
+          "phase_5_pass": true,
+          "phase_6_pass": true,
+          "phase_7_pass": false,
+          "phase_8_pass": null,
+          "max_phase": 6,
+          "phases_8": "blocked",
+          "open_issues": [],
+          "evidence_file": "manifest/tracking_evidence.json"
+        }
+      }
+    ]
+  },
+  "pass": true
+}

@@ -231,16 +231,14 @@ impl Solver {
                     + (tradeoff.realtime as f32 / 100.0) * context.realtime_weight)
                     / 8.0;
 
-            if matches!(problem.size_hint, SizeHint::Tiny | SizeHint::Small) {
-                if entry.name_hash == hash_name("insertion_sort") {
+            if matches!(problem.size_hint, SizeHint::Tiny | SizeHint::Small)
+                && entry.name_hash == hash_name("insertion_sort") {
                     score -= 0.05;
                 }
-            }
-            if matches!(problem.size_hint, SizeHint::Large | SizeHint::Huge) {
-                if entry.name_hash == hash_name("timsort") {
+            if matches!(problem.size_hint, SizeHint::Large | SizeHint::Huge)
+                && entry.name_hash == hash_name("timsort") {
                     score -= 0.08;
                 }
-            }
 
             if score < best_score {
                 best_score = score;

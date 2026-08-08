@@ -4,6 +4,12 @@ pub struct NeuralLspServer {
     completion: NeuralCompletion,
 }
 
+impl Default for NeuralLspServer {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl NeuralLspServer {
     pub fn new() -> Self {
         NeuralLspServer {

@@ -83,7 +83,7 @@ impl PatternMatcher {
         }
         for block in func.blocks.values() {
             if let Some(loop_stmt) = Self::detect_loop(func, block) {
-                if !stmts.iter().any(|s| stmt_contains_loop(s)) {
+                if !stmts.iter().any(stmt_contains_loop) {
                     stmts.push(loop_stmt);
                 }
             }

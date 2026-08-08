@@ -14,6 +14,12 @@ pub struct PackageRegistry {
     packages: HashMap<String, PackageManifest>,
 }
 
+impl Default for PackageRegistry {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl PackageRegistry {
     pub fn new() -> Self {
         PackageRegistry {

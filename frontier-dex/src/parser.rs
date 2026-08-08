@@ -335,6 +335,7 @@ impl<'a> Reader<'a> {
         Ok(())
     }
 
+    #[allow(dead_code)]
     fn position(&self) -> usize {
         self.pos
     }
