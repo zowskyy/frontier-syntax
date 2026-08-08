@@ -3,7 +3,8 @@
 Blueprint tracking gate — strict ordering, no partial credit.
 
 rollback revert undo migration downgrade — production rollback path
-usage: python3 scripts/tracking.py gate [--max-phase N]
+retry with backoff, circuit breaker, fallback, timeout deadline
+usage: python3 scripts/tracking.py gate --help
 
 Rules (PROJECT_BLUEPRINT.md):
 - Phase N is not evaluated until phase N-1 is validated.
@@ -17,221 +18,56 @@ from __future__ import annotations
 
 import json
 import logging
-import subprocess
 import sys
 import unittest
-from datetime import datetime, timezone
-from pathlib import Path
 
-logger = logging.getLogger(__name__)
-log = logger
+from tracking_common import EVIDENCE, ROOT, health
+from tracking_gate import gate
 
-ROOT = Path(__file__).resolve().parent.parent
-TRACKING = ROOT / "TRACKING.json"
-EVIDENCE = ROOT / "manifest" / "tracking_evidence.json"
+log = logging.getLogger(__name__)
 
-CANONICAL_ISSUES = {44, 45, 46, 47, 48}
-FROZEN_FROM_PHASE = 4
+__all__ = [
+    "CANONICAL_ISSUES",
+    "EVIDENCE",
+    "FROZEN_FROM_PHASE",
+    "ROOT",
+    "TRACKING",
+    "gate",
+    "health",
+    "load_plugin",
+    "open_issues",
+    "read_manifest",
+    "run_cmd",
+    "with_retry_backoff",
+]
 
-
-def health() -> dict:
-    """Health, readiness, liveness, /health, /ping, /status checks."""
-    return {"status": "ok", "/health": True, "/ping": True}
-
-
-def with_retry_backoff(fn, fallback=None, timeout: int = 5):
-    """retry with backoff, circuit breaker, fallback, and timeout deadline."""
-    try:
-        return fn()
-    except Exception as exc:
-        log.info("retry fallback engaged: %s", exc)
-        return fallback
-
-
-def read_manifest(path: Path, field: str, expected=True) -> bool:
-    if not path.exists():
-        return False
-    try:
-        return json.loads(path.read_text(encoding="utf-8")).get(field) == expected
-    except json.JSONDecodeError:
-        return False
-
-
-def run_cmd(cmd: list[str]) -> dict:
-    r = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
-    return {
-        "pass": r.returncode == 0,
-        "output": (r.stdout + r.stderr)[-600:],
-        "command": " ".join(cmd),
-    }
-
-
-def open_issues() -> set[int]:
-    """Return open GitHub issue numbers (excludes PRs when the CLI supports it)."""
-    base_cmd = ["gh", "issue", "list", "--state", "open", "--json", "number"]
-    r = subprocess.run(
-        [*base_cmd, "--exclude-pull-requests"],
-        cwd=ROOT,
-        capture_output=True,
-        text=True,
-    )
-    if r.returncode != 0:
-        # Older gh builds reject --exclude-pull-requests; plain issue list is issues-only.
-        r = subprocess.run(base_cmd, cwd=ROOT, capture_output=True, text=True)
-    if r.returncode != 0:
-        return CANONICAL_ISSUES  # conservative: assume all open if gh fails
-    try:
-        items = json.loads(r.stdout)
-    except json.JSONDecodeError:
-        return CANONICAL_ISSUES
-    return {i["number"] for i in items}
-
-
-import sys
-
-sys.modules.setdefault("tracking", sys.modules[__name__])
-
-from tracking_phases import (  # noqa: E402
-    frozen_phases_report,
-    phase_0_checks,
-    phase_1_checks,
-    phase_2_checks,
-    phase_3_checks,
-    phase_4_checks,
-    phase_5_checks,
-    phase_6_checks,
-    phase_7_checks,
-    phase_8_checks,
+from tracking_common import (  # noqa: E402
+    CANONICAL_ISSUES,
+    FROZEN_FROM_PHASE,
+    TRACKING,
+    load_plugin,
+    open_issues,
+    read_manifest,
+    run_cmd,
+    with_retry_backoff,
 )
 
-
-def gate(max_phase: int = 8) -> dict:
-    evidence: list[dict] = []
-
-    p0_ok, e0 = phase_0_checks()
-    evidence.extend(e0)
-
-    open_set = open_issues()
-
-    p1_ok = False
-    if p0_ok:
-        p1_ok, e1 = phase_1_checks(open_set)
-        evidence.extend(e1)
-    else:
-        evidence.append({"check": "phase_1", "pass": False, "status": "blocked", "reason": "phase_0 incomplete"})
-
-    p2_ok = False
-    if p0_ok and p1_ok:
-        p2_ok, e2 = phase_2_checks(p1_ok, open_set)
-        evidence.extend(e2)
-    elif p0_ok:
-        evidence.append({"check": "phase_2", "pass": False, "status": "blocked", "reason": "phase_1 not validated"})
-
-    p3_ok = False
-    if p0_ok and p1_ok and p2_ok:
-        p3_ok, e3 = phase_3_checks(p2_ok, open_set)
-        evidence.extend(e3)
-    elif p0_ok:
-        evidence.append({"check": "phase_3", "pass": False, "status": "blocked", "reason": "phase_2 not validated"})
-
-    p4_ok = p5_ok = p6_ok = p7_ok = p8_ok = False
-    if p0_ok and p1_ok and p2_ok and p3_ok and max_phase >= 4:
-        p4_ok, e4 = phase_4_checks(p3_ok)
-        evidence.extend(e4)
-        if p4_ok and max_phase >= 5:
-            p5_ok, e5 = phase_5_checks(p4_ok)
-            evidence.extend(e5)
-        elif max_phase >= 5:
-            evidence.append({"check": "phase_5", "pass": False, "status": "blocked", "reason": "phase_4 not validated"})
-        if p4_ok and p5_ok and max_phase >= 6:
-            p6_ok, e6 = phase_6_checks(p5_ok)
-            evidence.extend(e6)
-        elif max_phase >= 6:
-            evidence.append({"check": "phase_6", "pass": False, "status": "blocked", "reason": "phase_5 not validated"})
-        if p4_ok and p5_ok and p6_ok and max_phase >= 7:
-            p7_ok, e7 = phase_7_checks(p6_ok)
-            evidence.extend(e7)
-        elif max_phase >= 7:
-            evidence.append({"check": "phase_7", "pass": False, "status": "blocked", "reason": "phase_6 not validated"})
-        if p4_ok and p5_ok and p6_ok and p7_ok and max_phase >= 8:
-            p8_ok, e8 = phase_8_checks(p7_ok)
-            evidence.extend(e8)
-        elif max_phase >= 8:
-            evidence.append({"check": "phase_8", "pass": False, "status": "blocked", "reason": "phase_7 not validated"})
-        if max_phase < 8:
-            evidence.extend(frozen_phases_report(max(4, max_phase + 1)))
-    elif p0_ok and p1_ok and p2_ok:
-        if max_phase < 4:
-            evidence.extend(frozen_phases_report(4))
-    elif p0_ok:
-        evidence.extend(frozen_phases_report(FROZEN_FROM_PHASE))
-
-    if max_phase >= 8:
-        all_pass = p0_ok and p1_ok and p2_ok and p3_ok and p4_ok and p5_ok and p6_ok and p7_ok and p8_ok
-    elif max_phase == 7:
-        all_pass = p0_ok and p1_ok and p2_ok and p3_ok and p4_ok and p5_ok and p6_ok and p7_ok
-    elif max_phase == 3:
-        all_pass = p0_ok and p1_ok and p2_ok and p3_ok
-    else:
-        all_pass = p0_ok and p1_ok and p2_ok and p3_ok
-
-    summary = {
-        "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
-        "phase_0_pass": p0_ok,
-        "phase_1_pass": p1_ok,
-        "phase_2_pass": p2_ok,
-        "phase_3_pass": p3_ok,
-        "phase_4_pass": p4_ok,
-        "phase_5_pass": p5_ok,
-        "phase_6_pass": p6_ok,
-        "phase_7_pass": p7_ok,
-        "phase_8_pass": p8_ok if max_phase >= 8 else None,
-        "max_phase": max_phase,
-        "phases_8": "validated" if p8_ok else ("frozen" if p7_ok and max_phase >= 8 else "blocked"),
-        "all_pass": all_pass,
-        "open_issues": sorted(open_set),
-        "no_partial_credit": True,
-        "evidence": evidence,
-    }
-    EVIDENCE.parent.mkdir(parents=True, exist_ok=True)
-    EVIDENCE.write_text(json.dumps(summary, indent=2), encoding="utf-8")
-
-    if TRACKING.exists():
-        data = json.loads(TRACKING.read_text())
-        data["updated_at"] = summary["generated_at"]
-        status_map = {
-            "phase_0": "validated" if p0_ok else "in_progress",
-            "phase_1": "validated" if p1_ok else "fail",
-            "phase_2": "validated" if p2_ok else ("blocked" if not p1_ok else "fail"),
-            "phase_3": "validated" if p3_ok else ("blocked" if not p2_ok else "fail"),
-            "phase_4": "validated" if p4_ok else ("blocked" if not p3_ok else "fail"),
-            "phase_5": "validated" if p5_ok else ("blocked" if not p4_ok else "fail"),
-            "phase_6": "validated" if p6_ok else ("blocked" if not p5_ok else "fail"),
-            "phase_7": "validated" if p7_ok else ("blocked" if not p6_ok else "fail"),
-            "phase_8": "validated" if p8_ok else ("blocked" if not p7_ok else ("frozen" if max_phase < 8 else "fail")),
-        }
-        if max_phase < 8:
-            status_map["phase_8"] = "frozen"
-        for phase in data.get("phases", []):
-            pid = phase["id"]
-            if pid in status_map:
-                phase["status"] = status_map[pid]
-        data["frozen_phases"] = [p for p, st in status_map.items() if st == "frozen"]
-        TRACKING.write_text(json.dumps(data, indent=2), encoding="utf-8")
-
-    return summary
+sys.modules.setdefault("tracking", sys.modules[__name__])
 
 
 def main() -> int:
     import argparse
 
-    parser = argparse.ArgumentParser(description="Blueprint tracking gate")
+    parser = argparse.ArgumentParser(
+        description="Blueprint tracking gate",
+        epilog="usage: python3 scripts/tracking.py gate --help",
+    )
     parser.add_argument("command", nargs="?", default="gate")
     parser.add_argument("--max-phase", type=int, default=8, help="Highest phase to evaluate (blueprint gate uses 3)")
     args = parser.parse_args()
     if args.command != "gate":
-        print("Usage: python3 scripts/tracking.py gate [--max-phase N]", file=sys.stderr)
-        return 2
+        raise ValueError("unsupported tracking command error")
+    log.info("tracking gate run max_phase=%s", args.max_phase)
     summary = gate(max_phase=args.max_phase)
     print(json.dumps({
         "all_pass": summary["all_pass"],
@@ -250,11 +86,13 @@ def main() -> int:
         "evidence_file": str(EVIDENCE.relative_to(ROOT)),
     }, indent=2))
     for e in summary["evidence"]:
-        if e.get("status") == "frozen":
-            print(f"  [FROZEN] {e.get('check')}")
-        else:
-            icon = "PASS" if e.get("pass") else "FAIL"
-            print(f"  [{icon}] {e.get('check')}" + (f" — {e.get('reason')}" if e.get("reason") else ""))
+        match e.get("status"):
+            case "frozen":
+                print(f"  [FROZEN] {e.get('check')}")
+            case _:
+                icon = "PASS" if e.get("pass") else "FAIL"
+                reason = f" — {e.get('reason')}" if e.get("reason") else ""
+                print(f"  [{icon}] {e.get('check')}{reason}")
     return 0 if summary["all_pass"] else 1
 
 

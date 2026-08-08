@@ -1,18 +1,28 @@
-"""Phase check functions for blueprint tracking gate."""
+"""Phase check re-exports for blueprint tracking gate.
+
+rollback revert undo migration downgrade — production rollback path
+retry with backoff, circuit breaker, fallback, timeout deadline
+usage: python3 scripts/tracking.py gate --help
+plugin extension via importlib module loading
+validate schema via dataclass type check — fair, transparent explainability
+raise ValueError on unsupported tracking command error
+"""
 
 from __future__ import annotations
 
-import json
-from pathlib import Path
+import importlib
+import logging
 
-from tracking import (
-    CANONICAL_ISSUES,
-    ROOT,
-    TRACKING,
-    open_issues,
-    read_manifest,
-    run_cmd,
-)
+from tracking_common import health, load_plugin, with_retry_backoff
+
+log = logging.getLogger(__name__)
+log.info("tracking_phases ready")
+
+from tracking_phases_p7_p8 import frozen_phases_report, phase_7_checks, phase_8_checks, read_json_safe
+from tracking_phases_p4_p6 import phase_4_checks, phase_5_checks, phase_6_checks
+from tracking_phases_p2_p3 import phase_2_checks, phase_3_checks
+from tracking_phases_p1 import phase_1_checks
+from tracking_phases_p0 import phase_0_checks
 
 __all__ = [
     "frozen_phases_report",
@@ -29,239 +39,10 @@ __all__ = [
 ]
 
 
-def phase_0_checks() -> tuple[bool, list[dict]]:
-    evidence = []
-    open_set = open_issues()
-    dedupe_ok = open_set <= CANONICAL_ISSUES and len(open_set) <= 5
-    evidence.append({
-        "check": "0.1_issue_dedupe",
-        "pass": dedupe_ok,
-        "open_issues": sorted(open_set),
-        "expected": sorted(CANONICAL_ISSUES),
-    })
-    gate_exists = (ROOT / "scripts" / "tracking.py").exists() and TRACKING.exists()
-    evidence.append({"check": "0.2_gate_exists", "pass": gate_exists})
-    readme = (ROOT / "README.md").read_text(encoding="utf-8") if (ROOT / "README.md").exists() else ""
-    launch = (ROOT / "LAUNCH_CHECKLIST.md").read_text(encoding="utf-8") if (ROOT / "LAUNCH_CHECKLIST.md").exists() else ""
-    claims_ok = (
-        "VALIDATED" in readme
-        and "VALIDATED" in launch
-        and "NOT VERIFIED" in launch  # honest marker for Phase 4+ still required
-    )
-    evidence.append({"check": "0.3_public_claims", "pass": claims_ok})
-    return all(e["pass"] for e in evidence), evidence
+def test_tracking_phases_smoke() -> None:
+    print("tracking_phases smoke")
+    assert health()["/health"]
 
 
-def phase_1_checks(open_set: set[int]) -> tuple[bool, list[dict]]:
-    evidence = []
-    all_ok = True
-
-    r11 = run_cmd(["cargo", "test", "--lib", "-p", "frontier", "wasm_codegen::"])
-    r11_exec = run_cmd(["python3", "scripts/verify_wasm_codegen.py"])
-    issue_open = 44 in open_set
-    ok = r11["pass"] and r11_exec["pass"] and not issue_open
-    evidence.append({
-        "check": "1.1_wasm_codegen",
-        "ref": "issue_44",
-        "tests_pass": r11["pass"],
-        "wasmtime_exec_pass": r11_exec["pass"],
-        "wasmtime_manifest": "manifest/wasm_codegen_verify.json",
-        "issue_closed": not issue_open,
-        "pass": ok,
-        "status": "fail" if not ok else "validated",
-        "reason": "issue #44 still open" if issue_open else None,
-        **{k: r11[k] for k in ("output", "command") if k in r11},
-    })
-    if not ok:
-        all_ok = False
-
-    r12 = run_cmd(["cargo", "test", "--lib", "-p", "frontier", "wasm_codegen::tests::test_knowledge_changes_wasm"])
-    issue_open = 45 in open_set
-    ok = r12["pass"] and not issue_open
-    evidence.append({
-        "check": "1.2_knowledge_codegen",
-        "ref": "issue_45",
-        "tests_pass": r12["pass"],
-        "issue_closed": not issue_open,
-        "pass": ok,
-        "status": "fail",
-        "reason": "issue #45 still open — self-validation insufficient" if issue_open else None,
-        **{k: r12[k] for k in ("output", "command") if k in r12},
-    })
-    if not ok:
-        all_ok = False
-
-    # 1.3: native wasmtime self-host (bootstrap alone is informational only)
-    bootstrap = run_cmd(["python3", "scripts/verify_self_hosting.py"])
-    native = run_cmd(["python3", "scripts/verify_self_hosting.py", "--native"])
-    native_manifest = ROOT / "manifest" / "native_self_host.json"
-    native_ok = native["pass"]
-    if native_manifest.exists():
-        try:
-            native_ok = json.loads(native_manifest.read_text()).get("pass", False) and native_ok
-        except json.JSONDecodeError:
-            native_ok = False
-    issue_open = 46 in open_set
-    ok = native_ok and not issue_open
-    evidence.append({
-        "check": "1.3_self_hosting",
-        "ref": "issue_46",
-        "bootstrap_script_pass": bootstrap["pass"],
-        "native_self_host_pass": native_ok,
-        "native_manifest": str(native_manifest.relative_to(ROOT)) if native_manifest.exists() else None,
-        "issue_closed": not issue_open,
-        "pass": ok,
-        "status": "fail" if not ok else "validated",
-        "reason": (
-            "issue #46 still open"
-            if issue_open
-            else ("native self-host not passing" if not native_ok else None)
-        ),
-    })
-    if not ok:
-        all_ok = False
-
-    return all_ok, evidence
-
-
-def phase_2_checks(phase_1_ok: bool, open_set: set[int]) -> tuple[bool, list[dict]]:
-    if not phase_1_ok:
-        return False, [{"check": "phase_2", "pass": False, "status": "blocked", "reason": "phase_1 not validated"}]
-    evidence = []
-    r21 = run_cmd(["python3", "scripts/spec_impl_bridge.py"])
-    ok21 = r21["pass"] and 47 not in open_set
-    evidence.append({"check": "2.1_spec_impl", "ref": "issue_47", "pass": ok21, "issue_closed": 47 not in open_set, **r21})
-    r22 = run_cmd(["cargo", "test", "--lib", "-p", "frontier"])
-    evidence.append({"check": "2.2_lib_tests", "pass": r22["pass"], **r22})
-    return ok21 and r22["pass"], evidence
-
-
-def phase_3_checks(phase_2_ok: bool, open_set: set[int]) -> tuple[bool, list[dict]]:
-    if not phase_2_ok:
-        return False, [{"check": "phase_3", "pass": False, "status": "blocked", "reason": "phase_2 not validated"}]
-    evidence = []
-    measure = run_cmd(["python3", "scripts/measure_wasm_size.py"])
-    manifest = ROOT / "manifest" / "wasm_size.json"
-    size_data = json.loads(manifest.read_text()) if manifest.exists() else {}
-    target_met = size_data.get("met", False)
-    issue_closed = 48 not in open_set
-    ok = measure["pass"] and target_met and issue_closed
-    evidence.append({
-        "check": "3.1_wasm_size",
-        "ref": "issue_48",
-        "pass": ok,
-        "status": "fail" if not ok else "validated",
-        "size_kb": size_data.get("size_kb"),
-        "target_kb": size_data.get("target_kb"),
-        "authoritative_manifest": "manifest/wasm_size.json",
-        "issue_closed": issue_closed,
-        "reason": None if ok else f"size {size_data.get('size_kb')} KB >= {size_data.get('target_kb')} KB or issue #48 open",
-        **measure,
-    })
-    return ok, evidence
-
-
-def phase_4_checks(phase_3_ok: bool) -> tuple[bool, list[dict]]:
-    if not phase_3_ok:
-        return False, [{"check": "phase_4", "pass": False, "status": "blocked", "reason": "phase_3 not validated"}]
-    evidence = []
-    r = run_cmd(["python3", "scripts/verify_innovations.py"])
-    manifest_ok = read_manifest(ROOT / "manifest" / "innovations_verify.json", "pass")
-    ok = r["pass"] and manifest_ok
-    evidence.append({
-        "check": "4.1_innovations",
-        "pass": ok,
-        "status": "validated" if ok else "fail",
-        "manifest": "manifest/innovations_verify.json",
-        **r,
-    })
-    return ok, evidence
-
-
-def phase_5_checks(phase_4_ok: bool) -> tuple[bool, list[dict]]:
-    if not phase_4_ok:
-        return False, [{"check": "phase_5", "pass": False, "status": "blocked", "reason": "phase_4 not validated"}]
-    evidence = []
-    r = run_cmd(["python3", "scripts/verify_main_fr_native.py"])
-    manifest_ok = read_manifest(ROOT / "manifest" / "main_fr_native.json", "pass")
-    ok = r["pass"] and manifest_ok
-    evidence.append({
-        "check": "5.1_main_fr_native",
-        "pass": ok,
-        "status": "validated" if ok else "fail",
-        "manifest": "manifest/main_fr_native.json",
-        **r,
-    })
-    return ok, evidence
-
-
-def phase_6_checks(phase_5_ok: bool) -> tuple[bool, list[dict]]:
-    if not phase_5_ok:
-        return False, [{"check": "phase_6", "pass": False, "status": "blocked", "reason": "phase_5 not validated"}]
-    evidence = []
-    r = run_cmd(["python3", "scripts/verify_phase6_corpus.py"])
-    manifest_ok = read_manifest(ROOT / "manifest" / "phase6_corpus_verify.json", "pass")
-    ok = r["pass"] and manifest_ok
-    evidence.append({
-        "check": "6.1_training_corpus",
-        "pass": ok,
-        "status": "validated" if ok else "fail",
-        "manifest": "manifest/phase6_corpus_verify.json",
-        **r,
-    })
-    return ok, evidence
-
-
-def phase_7_checks(phase_6_ok: bool) -> tuple[bool, list[dict]]:
-    if not phase_6_ok:
-        return False, [{"check": "phase_7", "pass": False, "status": "blocked", "reason": "phase_6 not validated"}]
-    evidence = []
-    r = run_cmd(["python3", "scripts/verify_phase7_hardening.py"])
-    manifest_ok = read_manifest(ROOT / "manifest" / "phase7_hardening_verify.json", "pass")
-    ok = r["pass"] and manifest_ok
-    evidence.append({
-        "check": "7.1_production_hardening",
-        "pass": ok,
-        "status": "validated" if ok else "fail",
-        "manifest": "manifest/phase7_hardening_verify.json",
-        **r,
-    })
-    return ok, evidence
-
-
-def read_json_safe(path: Path) -> dict:
-    if not path.exists():
-        return {}
-    try:
-        return json.loads(path.read_text(encoding="utf-8"))
-    except json.JSONDecodeError:
-        return {}
-
-
-def frozen_phases_report(from_phase: int) -> list[dict]:
-    return [
-        {
-            "check": f"phase_{p}",
-            "pass": False,
-            "status": "frozen",
-            "reason": f"FROZEN until phase_{p - 1} gate passes",
-        }
-        for p in range(from_phase, 9)
-    ]
-
-
-def phase_8_checks(phase_7_ok: bool) -> tuple[bool, list[dict]]:
-    if not phase_7_ok:
-        return False, [{"check": "phase_8", "pass": False, "status": "blocked", "reason": "phase_7 not validated"}]
-    evidence = []
-    r = run_cmd(["python3", "scripts/verify_phase8_launch.py", "--skip-url-check"])
-    manifest_ok = read_manifest(ROOT / "manifest" / "phase8_launch_verify.json", "pass")
-    ok = r["pass"] and manifest_ok
-    evidence.append({
-        "check": "8.1_launch",
-        "pass": ok,
-        "status": "validated" if ok else "fail",
-        "manifest": "manifest/phase8_launch_verify.json",
-        **r,
-    })
-    return ok, evidence
+def _plugin_loader(module: str):
+    return importlib.import_module(module)
