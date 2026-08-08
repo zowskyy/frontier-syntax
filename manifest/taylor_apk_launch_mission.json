@@ -1,0 +1,162 @@
+{
+  "mission": "apk_launch_ready",
+  "complete": true,
+  "verdict": "LAUNCH_READY",
+  "updated_at": "2026-08-08T23:49:14.821729Z",
+  "workers": [
+    {
+      "id": "APK-W1_Build",
+      "name": "APK Build Artifact",
+      "pass": true,
+      "steps": [
+        {
+          "command": "/usr/bin/python3 /workspace/scripts/build_android_apk.py --json",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": "aseArtProfile UP-TO-DATE\n> Task :app:mergeReleaseShaders UP-TO-DATE\n> Task :app:compileReleaseShaders NO-SOURCE\n> Task :app:generateReleaseAssets UP-TO-DATE\n> Task :app:mergeReleaseAssets UP-TO-DATE\n> Task :app:compressReleaseAssets UP-TO-DATE\n> Task :app:extractReleaseVersionControlInfo UP-TO-DATE\n> Task :app:processReleaseJavaRes UP-TO-DATE\n> Task :app:mergeReleaseJavaResource UP-TO-DATE\n> Task :app:optimizeReleaseResources UP-TO-DATE\n> Task :app:collectReleaseDependencies UP-TO-DATE\n> Task :app:sdkReleaseDependencyData UP-TO-DATE\n> Task :app:validateSigningRelease UP-TO-DATE\n> Task :app:writeReleaseAppMetadata UP-TO-DATE\n> Task :app:writeReleaseSigningConfigVersions UP-TO-DATE\n> Task :app:packageRelease UP-TO-DATE\n> Task :app:createReleaseApkListingFileRedirect UP-TO-DATE\n> Task :app:assembleRelease\n\nBUILD SUCCESSFUL in 6s\n49 actionable tasks: 2 executed, 47 up-to-date\n{\n  \"apk\": \"releases/local-coding-agent-0.1.0-rc.1/android/local-coding-agent-0.1.0-rc.1-android.apk\",\n  \"sha256\": \"ae8ba4b7407cdbe7739008a3b16321d9c956c77923e6f5b3f9021fc57600c4bd\",\n  \"size_bytes\": 4728782,\n  \"sdk_root\": \"/workspace/.android-sdk\",\n  \"source_apk\": \"app/build/outputs/apk/release/app-release.apk\"\n}\n"
+        },
+        {
+          "command": "APK-001",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": "releases/local-coding-agent-0.1.0-rc.1/android/local-coding-agent-0.1.0-rc.1-android.apk"
+        },
+        {
+          "command": "APK-002",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": "expected=ae8ba4b7407c actual=ae8ba4b7407c"
+        }
+      ]
+    },
+    {
+      "id": "APK-W2_Structure",
+      "name": "APK Structure",
+      "pass": true,
+      "steps": [
+        {
+          "command": "APK-003",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": "ok"
+        },
+        {
+          "command": "APK-004",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": "package=com.frontier.localcodingagent sdk=26 target=34"
+        }
+      ]
+    },
+    {
+      "id": "APK-W3_Security",
+      "name": "APK Security Posture",
+      "pass": true,
+      "steps": [
+        {
+          "command": "/usr/bin/python3 -m local_agent mobile-check",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": ""
+        },
+        {
+          "command": "APK-005",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": "package: com.frontier.localcodingagent\npermission: com.frontier.localcodingagent.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION\nuses-permission: name='com.frontier.localcodingagent.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'"
+        }
+      ]
+    },
+    {
+      "id": "APK-W4_ReleaseBundle",
+      "name": "Release Bundle Inclusion",
+      "pass": true,
+      "steps": [
+        {
+          "command": "APK-006",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": "android/local-coding-agent-0.1.0-rc.1-android.apk"
+        },
+        {
+          "command": "APK-007",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": "listed"
+        }
+      ]
+    },
+    {
+      "id": "APK-W5_MobileTests",
+      "name": "Mobile Pytest Suite",
+      "pass": true,
+      "steps": [
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_slices_23_36.py::test_mobile_profiles -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": ".                                                                        [100%]\n1 passed in 0.03s\n"
+        },
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_slices_23_36.py::test_mobile_security_evidence -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": ".                                                                        [100%]\n1 passed in 0.04s\n"
+        },
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_apk_launch_ready.py -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n"
+        }
+      ]
+    }
+  ],
+  "static_checks": [
+    {
+      "id": "APK-001",
+      "name": "Release bundle APK present",
+      "passed": true,
+      "detail": "releases/local-coding-agent-0.1.0-rc.1/android/local-coding-agent-0.1.0-rc.1-android.apk"
+    },
+    {
+      "id": "APK-002",
+      "name": "APK SHA256 matches evidence",
+      "passed": true,
+      "detail": "expected=ae8ba4b7407c actual=ae8ba4b7407c"
+    },
+    {
+      "id": "APK-003",
+      "name": "APK zip structure",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "id": "APK-004",
+      "name": "Manifest badging",
+      "passed": true,
+      "detail": "package=com.frontier.localcodingagent sdk=26 target=34"
+    },
+    {
+      "id": "APK-005",
+      "name": "No INTERNET permission",
+      "passed": true,
+      "detail": "package: com.frontier.localcodingagent\npermission: com.frontier.localcodingagent.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION\nuses-permission: name='com.frontier.localcodingagent.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'"
+    },
+    {
+      "id": "APK-006",
+      "name": "Release MANIFEST lists APK",
+      "passed": true,
+      "detail": "android/local-coding-agent-0.1.0-rc.1-android.apk"
+    },
+    {
+      "id": "APK-007",
+      "name": "SHA256SUMS includes APK",
+      "passed": true,
+      "detail": "listed"
+    }
+  ],
+  "manifest": "manifest/taylor_apk_launch_mission.json",
+  "report": "audit_reports/taylor_apk_launch_report.md",
+  "evidence": "evidence/mobile/android/apk_launch_ready.json"
+}

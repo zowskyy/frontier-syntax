@@ -54,6 +54,15 @@ def _load_apk_build(apk_meta: Path) -> dict[str, Any]:
         return {}
 
 
+def _launch_status(evidence_dir: Path) -> str:
+    launch_path = evidence_dir / "apk_launch_ready.json"
+    try:
+        data = json.loads(launch_path.read_text(encoding="utf-8"))
+        return str(data.get("verdict", "NOT_READY"))
+    except (json.JSONDecodeError, OSError, FileNotFoundError):
+        return "NOT_READY"
+
+
 def _build_status(apk_meta: Path) -> str:
     try:
         apk_meta.read_text(encoding="utf-8")
@@ -173,6 +182,7 @@ class MobileSecurity:
             "checks": self.CHECKS,
             "policies": self.check_policies(network_enabled=False),
             "status": _build_status(apk_meta),
+            "launch_status": _launch_status(evidence_dir),
             "device_runtime": "UNEXECUTED_REQUIRES_RUNTIME",
             "apk_build": apk_build,
         }

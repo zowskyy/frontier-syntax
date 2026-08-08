@@ -5655,3 +5655,103 @@ component ProcessEntry_20260808_232435_319322 {
     duration_ms: 0,
     metrics_json: "{\"slice\":36,\"evidence\":\"releases/local-coding-agent-0.1.0-rc.1.tar.gz\"}",
 }
+
+component ProcessEntry_20260808_234527_794492 {
+    timestamp: "2026-08-08T23:45:27.794484Z",
+    process: "local_agent_slice_30",
+    decision: "APK launch APK-W4_ReleaseBundle",
+    result: "pass",
+    worker: "APK-W4_ReleaseBundle",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":30,\"evidence\":\"evidence/mobile/android/apk_launch_ready.json\"}",
+}
+
+component ProcessEntry_20260808_234527_799396 {
+    timestamp: "2026-08-08T23:45:27.799388Z",
+    process: "local_agent_slice_30",
+    decision: "APK launch APK-W2_Structure",
+    result: "pass",
+    worker: "APK-W2_Structure",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":30,\"evidence\":\"evidence/mobile/android/apk_launch_ready.json\"}",
+}
+
+component ProcessEntry_20260808_234527_974051 {
+    timestamp: "2026-08-08T23:45:27.974043Z",
+    process: "local_agent_slice_30",
+    decision: "APK launch APK-W3_Security",
+    result: "pass",
+    worker: "APK-W3_Security",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":30,\"evidence\":\"evidence/mobile/android/apk_launch_ready.json\"}",
+}
+
+component ProcessEntry_20260808_234528_697916 {
+    timestamp: "2026-08-08T23:45:28.697909Z",
+    process: "local_agent_slice_30",
+    decision: "APK launch APK-W5_MobileTests",
+    result: "pass",
+    worker: "APK-W5_MobileTests",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":30,\"evidence\":\"evidence/mobile/android/apk_launch_ready.json\"}",
+}
+
+component ProcessEntry_20260808_234535_413486 {
+    timestamp: "2026-08-08T23:45:35.413476Z",
+    process: "local_agent_slice_30",
+    decision: "APK launch APK-W1_Build",
+    result: "pass",
+    worker: "APK-W1_Build",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":30,\"evidence\":\"evidence/mobile/android/apk_launch_ready.json\"}",
+}
+
+component ProcessEntry_20260808_234907_181398 {
+    timestamp: "2026-08-08T23:49:07.181389Z",
+    process: "local_agent_slice_30",
+    decision: "APK launch APK-W4_ReleaseBundle",
+    result: "pass",
+    worker: "APK-W4_ReleaseBundle",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":30,\"evidence\":\"evidence/mobile/android/apk_launch_ready.json\"}",
+}
+
+component ProcessEntry_20260808_234907_186435 {
+    timestamp: "2026-08-08T23:49:07.186428Z",
+    process: "local_agent_slice_30",
+    decision: "APK launch APK-W2_Structure",
+    result: "pass",
+    worker: "APK-W2_Structure",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":30,\"evidence\":\"evidence/mobile/android/apk_launch_ready.json\"}",
+}
+
+component ProcessEntry_20260808_234907_336219 {
+    timestamp: "2026-08-08T23:49:07.336211Z",
+    process: "local_agent_slice_30",
+    decision: "APK launch APK-W3_Security",
+    result: "pass",
+    worker: "APK-W3_Security",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":30,\"evidence\":\"evidence/mobile/android/apk_launch_ready.json\"}",
+}
+
+component ProcessEntry_20260808_234908_079935 {
+    timestamp: "2026-08-08T23:49:08.079928Z",
+    process: "local_agent_slice_30",
+    decision: "APK launch APK-W5_MobileTests",
+    result: "pass",
+    worker: "APK-W5_MobileTests",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":30,\"evidence\":\"evidence/mobile/android/apk_launch_ready.json\"}",
+}
+
+component ProcessEntry_20260808_234914_803191 {
+    timestamp: "2026-08-08T23:49:14.803177Z",
+    process: "local_agent_slice_30",
+    decision: "APK launch APK-W1_Build",
+    result: "pass",
+    worker: "APK-W1_Build",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":30,\"evidence\":\"evidence/mobile/android/apk_launch_ready.json\"}",
+}

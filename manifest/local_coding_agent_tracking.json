@@ -4,7 +4,7 @@
   "blueprint": "docs/AI_Coding_Agent_Validation_Blueprint_and_Roadmap.md",
   "frontier_spec": "frontier/roadmap/local_coding_agent.fr",
   "rule": "No slice complete without executable evidence. Go decision only when evidence record exists.",
-  "updated_at": "2026-08-08T23:24:35.319567Z",
+  "updated_at": "2026-08-08T23:49:14.803426Z",
   "implementation_status": "SLICE_0_36_COMPLETE",
   "taylor_mission": "manifest/taylor_local_coding_agent_mission.json",
   "test_evidence": "161 passed, 1 skipped (pytest)",
@@ -157,6 +157,12 @@
   ],
   "go_decision_allowed": false,
   "slices": [
+    {
+      "id": 30,
+      "name": "APK launch APK-W1_Build",
+      "status": "complete",
+      "evidence": "evidence/mobile/android/apk_launch_ready.json"
+    },
     {
       "id": 36,
       "name": "v0.1.0-rc.1 release package",

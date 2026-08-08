@@ -1,0 +1,54 @@
+{
+  "timestamp": "2026-08-08T23:49:14.843263Z",
+  "verdict": "LAUNCH_READY",
+  "passed": true,
+  "launch_ready": true,
+  "taylor_complete": true,
+  "iterations": 1,
+  "checks": [
+    {
+      "id": "APK-001",
+      "name": "Release bundle APK present",
+      "passed": true,
+      "detail": "releases/local-coding-agent-0.1.0-rc.1/android/local-coding-agent-0.1.0-rc.1-android.apk"
+    },
+    {
+      "id": "APK-002",
+      "name": "APK SHA256 matches evidence",
+      "passed": true,
+      "detail": "expected=ae8ba4b7407c actual=ae8ba4b7407c"
+    },
+    {
+      "id": "APK-003",
+      "name": "APK zip structure",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "id": "APK-004",
+      "name": "Manifest badging",
+      "passed": true,
+      "detail": "package=com.frontier.localcodingagent sdk=26 target=34"
+    },
+    {
+      "id": "APK-005",
+      "name": "No INTERNET permission",
+      "passed": true,
+      "detail": "package: com.frontier.localcodingagent\npermission: com.frontier.localcodingagent.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION\nuses-permission: name='com.frontier.localcodingagent.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'"
+    },
+    {
+      "id": "APK-006",
+      "name": "Release MANIFEST lists APK",
+      "passed": true,
+      "detail": "android/local-coding-agent-0.1.0-rc.1-android.apk"
+    },
+    {
+      "id": "APK-007",
+      "name": "SHA256SUMS includes APK",
+      "passed": true,
+      "detail": "listed"
+    }
+  ],
+  "remediation_actions": [],
+  "evidence": "evidence/mobile/android/apk_launch_ready.json"
+}

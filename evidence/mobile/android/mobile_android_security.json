@@ -13,6 +13,7 @@
     "secrets_not_in_bundle": true
   },
   "status": "BUILD_VERIFIED",
+  "launch_status": "LAUNCH_READY",
   "device_runtime": "UNEXECUTED_REQUIRES_RUNTIME",
   "apk_build": {
     "apk": "releases/local-coding-agent-0.1.0-rc.1/android/local-coding-agent-0.1.0-rc.1-android.apk",
