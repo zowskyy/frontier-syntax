@@ -1,0 +1,24 @@
+{
+  "name": "local-coding-agent",
+  "version": "0.1.0-rc.1",
+  "version_pep440": "0.1.0rc1",
+  "built_at": "2026-08-08T23:22:27.765526Z",
+  "audit_passed": true,
+  "go_decision_public": false,
+  "artifacts": [
+    "RELEASE_NOTES.md",
+    "SHA256SUMS",
+    "dist/local_coding_agent-0.1.0rc1-py3-none-any.whl",
+    "dist/local_coding_agent-0.1.0rc1.tar.gz",
+    "evidence/dependency/citations.json",
+    "evidence/dependency/model-matrix.json",
+    "evidence/integration/coding-tasks/E2E-001.json",
+    "evidence/performance/desktop/benchmark_report.json",
+    "evidence/release/checksums/source_checksums.json",
+    "evidence/release/release-candidate-report/rc_validation.json",
+    "evidence/release/release-candidate-report/security_gate.json",
+    "evidence/release/sbom/sbom.json",
+    "sbom.json"
+  ],
+  "install_wheel": "dist/local_coding_agent-0.1.0rc1-py3-none-any.whl"
+}

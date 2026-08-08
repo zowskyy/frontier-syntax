@@ -4105,3 +4105,1553 @@ component ProcessEntry_20260808_222923_660372 {
     duration_ms: 1,
     metrics_json: "{\"duration_ms\":1}",
 }
+
+component ProcessEntry_20260808_232052_243460 {
+    timestamp: "2026-08-08T23:20:52.243450Z",
+    process: "local_agent_slice_0",
+    decision: "SLICE 0",
+    result: "pass",
+    worker: "LCA-W1_Foundation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":0,\"evidence\":\"evidence/integration/slice_0_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232052_304913 {
+    timestamp: "2026-08-08T23:20:52.304904Z",
+    process: "local_agent_slice_1",
+    decision: "SLICE 1",
+    result: "pass",
+    worker: "LCA-W1_Foundation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":1,\"evidence\":\"evidence/integration/slice_1_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232052_349883 {
+    timestamp: "2026-08-08T23:20:52.349875Z",
+    process: "local_agent_slice_2",
+    decision: "SLICE 2",
+    result: "pass",
+    worker: "LCA-W1_Foundation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":2,\"evidence\":\"evidence/integration/slice_2_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232052_396361 {
+    timestamp: "2026-08-08T23:20:52.396353Z",
+    process: "local_agent_slice_3",
+    decision: "SLICE 3",
+    result: "pass",
+    worker: "LCA-W1_Foundation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":3,\"evidence\":\"evidence/integration/slice_3_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232053_043845 {
+    timestamp: "2026-08-08T23:20:53.043837Z",
+    process: "local_agent_slice_4",
+    decision: "SLICE 4",
+    result: "pass",
+    worker: "LCA-W2_ModelTools",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":4,\"evidence\":\"evidence/integration/slice_4_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232053_087876 {
+    timestamp: "2026-08-08T23:20:53.087869Z",
+    process: "local_agent_slice_5",
+    decision: "SLICE 5",
+    result: "pass",
+    worker: "LCA-W2_ModelTools",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":5,\"evidence\":\"evidence/integration/slice_5_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232053_135155 {
+    timestamp: "2026-08-08T23:20:53.135140Z",
+    process: "local_agent_slice_6",
+    decision: "SLICE 6",
+    result: "pass",
+    worker: "LCA-W2_ModelTools",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":6,\"evidence\":\"evidence/integration/slice_6_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232053_178627 {
+    timestamp: "2026-08-08T23:20:53.178619Z",
+    process: "local_agent_slice_7",
+    decision: "SLICE 7",
+    result: "pass",
+    worker: "LCA-W2_ModelTools",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":7,\"evidence\":\"evidence/integration/slice_7_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232053_222920 {
+    timestamp: "2026-08-08T23:20:53.222913Z",
+    process: "local_agent_slice_8",
+    decision: "SLICE 8",
+    result: "pass",
+    worker: "LCA-W2_ModelTools",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":8,\"evidence\":\"evidence/integration/slice_8_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232053_783747 {
+    timestamp: "2026-08-08T23:20:53.783739Z",
+    process: "local_agent_slice_23",
+    decision: "SLICE 23",
+    result: "pass",
+    worker: "LCA-W5_Evaluation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":23,\"evidence\":\"evidence/integration/slice_23_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232053_832447 {
+    timestamp: "2026-08-08T23:20:53.832439Z",
+    process: "local_agent_slice_24",
+    decision: "SLICE 24",
+    result: "pass",
+    worker: "LCA-W5_Evaluation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":24,\"evidence\":\"evidence/integration/slice_24_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232053_876648 {
+    timestamp: "2026-08-08T23:20:53.876640Z",
+    process: "local_agent_slice_25",
+    decision: "SLICE 25",
+    result: "pass",
+    worker: "LCA-W5_Evaluation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":25,\"evidence\":\"evidence/integration/slice_25_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232053_920332 {
+    timestamp: "2026-08-08T23:20:53.920324Z",
+    process: "local_agent_slice_26",
+    decision: "SLICE 26",
+    result: "pass",
+    worker: "LCA-W5_Evaluation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":26,\"evidence\":\"evidence/integration/slice_26_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232054_317843 {
+    timestamp: "2026-08-08T23:20:54.317834Z",
+    process: "local_agent_slice_27",
+    decision: "SLICE 27",
+    result: "pass",
+    worker: "LCA-W6_Mobile",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":27,\"evidence\":\"evidence/integration/slice_27_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232054_363629 {
+    timestamp: "2026-08-08T23:20:54.363621Z",
+    process: "local_agent_slice_28",
+    decision: "SLICE 28",
+    result: "pass",
+    worker: "LCA-W6_Mobile",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":28,\"evidence\":\"evidence/integration/slice_28_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232054_407713 {
+    timestamp: "2026-08-08T23:20:54.407704Z",
+    process: "local_agent_slice_29",
+    decision: "SLICE 29",
+    result: "pass",
+    worker: "LCA-W6_Mobile",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":29,\"evidence\":\"evidence/integration/slice_29_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232054_452163 {
+    timestamp: "2026-08-08T23:20:54.452153Z",
+    process: "local_agent_slice_30",
+    decision: "SLICE 30",
+    result: "pass",
+    worker: "LCA-W6_Mobile",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":30,\"evidence\":\"evidence/integration/slice_30_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232055_027704 {
+    timestamp: "2026-08-08T23:20:55.027695Z",
+    process: "local_agent_slice_9",
+    decision: "SLICE 9",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":9,\"evidence\":\"evidence/integration/slice_9_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232055_070973 {
+    timestamp: "2026-08-08T23:20:55.070965Z",
+    process: "local_agent_slice_10",
+    decision: "SLICE 10",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":10,\"evidence\":\"evidence/integration/slice_10_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232055_114301 {
+    timestamp: "2026-08-08T23:20:55.114292Z",
+    process: "local_agent_slice_11",
+    decision: "SLICE 11",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":11,\"evidence\":\"evidence/integration/slice_11_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232055_156902 {
+    timestamp: "2026-08-08T23:20:55.156894Z",
+    process: "local_agent_slice_12",
+    decision: "SLICE 12",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":12,\"evidence\":\"evidence/integration/slice_12_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232055_200314 {
+    timestamp: "2026-08-08T23:20:55.200306Z",
+    process: "local_agent_slice_13",
+    decision: "SLICE 13",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":13,\"evidence\":\"evidence/integration/slice_13_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232055_243802 {
+    timestamp: "2026-08-08T23:20:55.243794Z",
+    process: "local_agent_slice_14",
+    decision: "SLICE 14",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":14,\"evidence\":\"evidence/integration/slice_14_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232055_286322 {
+    timestamp: "2026-08-08T23:20:55.286314Z",
+    process: "local_agent_slice_15",
+    decision: "SLICE 15",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":15,\"evidence\":\"evidence/integration/slice_15_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232055_329657 {
+    timestamp: "2026-08-08T23:20:55.329650Z",
+    process: "local_agent_slice_16",
+    decision: "SLICE 16",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":16,\"evidence\":\"evidence/integration/slice_16_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232055_870192 {
+    timestamp: "2026-08-08T23:20:55.870184Z",
+    process: "local_agent_slice_31",
+    decision: "SLICE 31",
+    result: "pass",
+    worker: "LCA-W7_Release",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":31,\"evidence\":\"evidence/integration/slice_31_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232055_915067 {
+    timestamp: "2026-08-08T23:20:55.915060Z",
+    process: "local_agent_slice_32",
+    decision: "SLICE 32",
+    result: "pass",
+    worker: "LCA-W7_Release",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":32,\"evidence\":\"evidence/integration/slice_32_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232055_957948 {
+    timestamp: "2026-08-08T23:20:55.957940Z",
+    process: "local_agent_slice_33",
+    decision: "SLICE 33",
+    result: "pass",
+    worker: "LCA-W7_Release",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":33,\"evidence\":\"evidence/integration/slice_33_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232056_000032 {
+    timestamp: "2026-08-08T23:20:56.000025Z",
+    process: "local_agent_slice_34",
+    decision: "SLICE 34",
+    result: "pass",
+    worker: "LCA-W7_Release",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":34,\"evidence\":\"evidence/integration/slice_34_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232056_043359 {
+    timestamp: "2026-08-08T23:20:56.043351Z",
+    process: "local_agent_slice_35",
+    decision: "SLICE 35",
+    result: "pass",
+    worker: "LCA-W7_Release",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":35,\"evidence\":\"evidence/integration/slice_35_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232056_085805 {
+    timestamp: "2026-08-08T23:20:56.085798Z",
+    process: "local_agent_slice_36",
+    decision: "SLICE 36",
+    result: "pass",
+    worker: "LCA-W7_Release",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":36,\"evidence\":\"evidence/integration/slice_36_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232056_296418 {
+    timestamp: "2026-08-08T23:20:56.296411Z",
+    process: "local_agent_slice_17",
+    decision: "SLICE 17",
+    result: "pass",
+    worker: "LCA-W4_Agent",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":17,\"evidence\":\"evidence/integration/slice_17_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232056_340515 {
+    timestamp: "2026-08-08T23:20:56.340507Z",
+    process: "local_agent_slice_18",
+    decision: "SLICE 18",
+    result: "pass",
+    worker: "LCA-W4_Agent",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":18,\"evidence\":\"evidence/integration/slice_18_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232056_385154 {
+    timestamp: "2026-08-08T23:20:56.385146Z",
+    process: "local_agent_slice_19",
+    decision: "SLICE 19",
+    result: "pass",
+    worker: "LCA-W4_Agent",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":19,\"evidence\":\"evidence/integration/slice_19_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232056_428061 {
+    timestamp: "2026-08-08T23:20:56.428053Z",
+    process: "local_agent_slice_20",
+    decision: "SLICE 20",
+    result: "pass",
+    worker: "LCA-W4_Agent",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":20,\"evidence\":\"evidence/integration/slice_20_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232056_470687 {
+    timestamp: "2026-08-08T23:20:56.470680Z",
+    process: "local_agent_slice_21",
+    decision: "SLICE 21",
+    result: "pass",
+    worker: "LCA-W4_Agent",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":21,\"evidence\":\"evidence/integration/slice_21_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232056_513315 {
+    timestamp: "2026-08-08T23:20:56.513308Z",
+    process: "local_agent_slice_22",
+    decision: "SLICE 22",
+    result: "pass",
+    worker: "LCA-W4_Agent",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":22,\"evidence\":\"evidence/integration/slice_22_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232057_390130 {
+    timestamp: "2026-08-08T23:20:57.390120Z",
+    process: "local_agent_slice_36",
+    decision: "v1.0.0",
+    result: "pass",
+    worker: "LCA-W7_Release",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":36,\"evidence\":\"evidence/release/release-candidate-report/rc_validation.json\"}",
+}
+
+component ProcessEntry_20260808_232137_252762 {
+    timestamp: "2026-08-08T23:21:37.252754Z",
+    process: "local_agent_slice_0",
+    decision: "SLICE 0",
+    result: "pass",
+    worker: "LCA-W1_Foundation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":0,\"evidence\":\"evidence/integration/slice_0_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232137_295266 {
+    timestamp: "2026-08-08T23:21:37.295258Z",
+    process: "local_agent_slice_1",
+    decision: "SLICE 1",
+    result: "pass",
+    worker: "LCA-W1_Foundation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":1,\"evidence\":\"evidence/integration/slice_1_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232137_343036 {
+    timestamp: "2026-08-08T23:21:37.343028Z",
+    process: "local_agent_slice_2",
+    decision: "SLICE 2",
+    result: "pass",
+    worker: "LCA-W1_Foundation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":2,\"evidence\":\"evidence/integration/slice_2_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232137_386758 {
+    timestamp: "2026-08-08T23:21:37.386750Z",
+    process: "local_agent_slice_3",
+    decision: "SLICE 3",
+    result: "pass",
+    worker: "LCA-W1_Foundation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":3,\"evidence\":\"evidence/integration/slice_3_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232137_987092 {
+    timestamp: "2026-08-08T23:21:37.987084Z",
+    process: "local_agent_slice_4",
+    decision: "SLICE 4",
+    result: "pass",
+    worker: "LCA-W2_ModelTools",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":4,\"evidence\":\"evidence/integration/slice_4_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232138_029539 {
+    timestamp: "2026-08-08T23:21:38.029532Z",
+    process: "local_agent_slice_5",
+    decision: "SLICE 5",
+    result: "pass",
+    worker: "LCA-W2_ModelTools",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":5,\"evidence\":\"evidence/integration/slice_5_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232138_071646 {
+    timestamp: "2026-08-08T23:21:38.071638Z",
+    process: "local_agent_slice_6",
+    decision: "SLICE 6",
+    result: "pass",
+    worker: "LCA-W2_ModelTools",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":6,\"evidence\":\"evidence/integration/slice_6_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232138_113869 {
+    timestamp: "2026-08-08T23:21:38.113861Z",
+    process: "local_agent_slice_7",
+    decision: "SLICE 7",
+    result: "pass",
+    worker: "LCA-W2_ModelTools",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":7,\"evidence\":\"evidence/integration/slice_7_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232138_156894 {
+    timestamp: "2026-08-08T23:21:38.156886Z",
+    process: "local_agent_slice_8",
+    decision: "SLICE 8",
+    result: "pass",
+    worker: "LCA-W2_ModelTools",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":8,\"evidence\":\"evidence/integration/slice_8_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232138_649306 {
+    timestamp: "2026-08-08T23:21:38.649298Z",
+    process: "local_agent_slice_23",
+    decision: "SLICE 23",
+    result: "pass",
+    worker: "LCA-W5_Evaluation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":23,\"evidence\":\"evidence/integration/slice_23_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232138_692531 {
+    timestamp: "2026-08-08T23:21:38.692523Z",
+    process: "local_agent_slice_24",
+    decision: "SLICE 24",
+    result: "pass",
+    worker: "LCA-W5_Evaluation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":24,\"evidence\":\"evidence/integration/slice_24_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232138_734791 {
+    timestamp: "2026-08-08T23:21:38.734783Z",
+    process: "local_agent_slice_25",
+    decision: "SLICE 25",
+    result: "pass",
+    worker: "LCA-W5_Evaluation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":25,\"evidence\":\"evidence/integration/slice_25_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232138_777708 {
+    timestamp: "2026-08-08T23:21:38.777700Z",
+    process: "local_agent_slice_26",
+    decision: "SLICE 26",
+    result: "pass",
+    worker: "LCA-W5_Evaluation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":26,\"evidence\":\"evidence/integration/slice_26_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232139_233619 {
+    timestamp: "2026-08-08T23:21:39.233611Z",
+    process: "local_agent_slice_27",
+    decision: "SLICE 27",
+    result: "pass",
+    worker: "LCA-W6_Mobile",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":27,\"evidence\":\"evidence/integration/slice_27_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232139_276562 {
+    timestamp: "2026-08-08T23:21:39.276554Z",
+    process: "local_agent_slice_28",
+    decision: "SLICE 28",
+    result: "pass",
+    worker: "LCA-W6_Mobile",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":28,\"evidence\":\"evidence/integration/slice_28_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232139_321939 {
+    timestamp: "2026-08-08T23:21:39.321931Z",
+    process: "local_agent_slice_29",
+    decision: "SLICE 29",
+    result: "pass",
+    worker: "LCA-W6_Mobile",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":29,\"evidence\":\"evidence/integration/slice_29_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232139_364644 {
+    timestamp: "2026-08-08T23:21:39.364636Z",
+    process: "local_agent_slice_30",
+    decision: "SLICE 30",
+    result: "pass",
+    worker: "LCA-W6_Mobile",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":30,\"evidence\":\"evidence/integration/slice_30_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232139_900499 {
+    timestamp: "2026-08-08T23:21:39.900491Z",
+    process: "local_agent_slice_9",
+    decision: "SLICE 9",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":9,\"evidence\":\"evidence/integration/slice_9_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232139_943238 {
+    timestamp: "2026-08-08T23:21:39.943231Z",
+    process: "local_agent_slice_10",
+    decision: "SLICE 10",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":10,\"evidence\":\"evidence/integration/slice_10_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232139_985397 {
+    timestamp: "2026-08-08T23:21:39.985389Z",
+    process: "local_agent_slice_11",
+    decision: "SLICE 11",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":11,\"evidence\":\"evidence/integration/slice_11_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232140_027455 {
+    timestamp: "2026-08-08T23:21:40.027447Z",
+    process: "local_agent_slice_12",
+    decision: "SLICE 12",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":12,\"evidence\":\"evidence/integration/slice_12_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232140_069678 {
+    timestamp: "2026-08-08T23:21:40.069670Z",
+    process: "local_agent_slice_13",
+    decision: "SLICE 13",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":13,\"evidence\":\"evidence/integration/slice_13_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232140_111833 {
+    timestamp: "2026-08-08T23:21:40.111825Z",
+    process: "local_agent_slice_14",
+    decision: "SLICE 14",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":14,\"evidence\":\"evidence/integration/slice_14_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232140_154206 {
+    timestamp: "2026-08-08T23:21:40.154198Z",
+    process: "local_agent_slice_15",
+    decision: "SLICE 15",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":15,\"evidence\":\"evidence/integration/slice_15_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232140_198857 {
+    timestamp: "2026-08-08T23:21:40.198849Z",
+    process: "local_agent_slice_16",
+    decision: "SLICE 16",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":16,\"evidence\":\"evidence/integration/slice_16_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232140_585548 {
+    timestamp: "2026-08-08T23:21:40.585540Z",
+    process: "local_agent_slice_31",
+    decision: "SLICE 31",
+    result: "pass",
+    worker: "LCA-W7_Release",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":31,\"evidence\":\"evidence/integration/slice_31_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232140_628564 {
+    timestamp: "2026-08-08T23:21:40.628556Z",
+    process: "local_agent_slice_32",
+    decision: "SLICE 32",
+    result: "pass",
+    worker: "LCA-W7_Release",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":32,\"evidence\":\"evidence/integration/slice_32_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232140_671080 {
+    timestamp: "2026-08-08T23:21:40.671073Z",
+    process: "local_agent_slice_33",
+    decision: "SLICE 33",
+    result: "pass",
+    worker: "LCA-W7_Release",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":33,\"evidence\":\"evidence/integration/slice_33_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232140_713837 {
+    timestamp: "2026-08-08T23:21:40.713829Z",
+    process: "local_agent_slice_34",
+    decision: "SLICE 34",
+    result: "pass",
+    worker: "LCA-W7_Release",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":34,\"evidence\":\"evidence/integration/slice_34_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232140_756555 {
+    timestamp: "2026-08-08T23:21:40.756547Z",
+    process: "local_agent_slice_35",
+    decision: "SLICE 35",
+    result: "pass",
+    worker: "LCA-W7_Release",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":35,\"evidence\":\"evidence/integration/slice_35_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232140_799718 {
+    timestamp: "2026-08-08T23:21:40.799710Z",
+    process: "local_agent_slice_36",
+    decision: "SLICE 36",
+    result: "pass",
+    worker: "LCA-W7_Release",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":36,\"evidence\":\"evidence/integration/slice_36_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232141_296207 {
+    timestamp: "2026-08-08T23:21:41.296199Z",
+    process: "local_agent_slice_17",
+    decision: "SLICE 17",
+    result: "pass",
+    worker: "LCA-W4_Agent",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":17,\"evidence\":\"evidence/integration/slice_17_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232141_339632 {
+    timestamp: "2026-08-08T23:21:41.339624Z",
+    process: "local_agent_slice_18",
+    decision: "SLICE 18",
+    result: "pass",
+    worker: "LCA-W4_Agent",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":18,\"evidence\":\"evidence/integration/slice_18_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232141_382063 {
+    timestamp: "2026-08-08T23:21:41.382055Z",
+    process: "local_agent_slice_19",
+    decision: "SLICE 19",
+    result: "pass",
+    worker: "LCA-W4_Agent",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":19,\"evidence\":\"evidence/integration/slice_19_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232141_424329 {
+    timestamp: "2026-08-08T23:21:41.424321Z",
+    process: "local_agent_slice_20",
+    decision: "SLICE 20",
+    result: "pass",
+    worker: "LCA-W4_Agent",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":20,\"evidence\":\"evidence/integration/slice_20_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232141_466832 {
+    timestamp: "2026-08-08T23:21:41.466824Z",
+    process: "local_agent_slice_21",
+    decision: "SLICE 21",
+    result: "pass",
+    worker: "LCA-W4_Agent",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":21,\"evidence\":\"evidence/integration/slice_21_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232141_509048 {
+    timestamp: "2026-08-08T23:21:41.509041Z",
+    process: "local_agent_slice_22",
+    decision: "SLICE 22",
+    result: "pass",
+    worker: "LCA-W4_Agent",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":22,\"evidence\":\"evidence/integration/slice_22_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232142_306923 {
+    timestamp: "2026-08-08T23:21:42.306915Z",
+    process: "local_agent_slice_36",
+    decision: "v1.0.0",
+    result: "pass",
+    worker: "LCA-W7_Release",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":36,\"evidence\":\"evidence/release/release-candidate-report/rc_validation.json\"}",
+}
+
+component ProcessEntry_20260808_232202_569911 {
+    timestamp: "2026-08-08T23:22:02.569902Z",
+    process: "local_agent_slice_0",
+    decision: "SLICE 0",
+    result: "pass",
+    worker: "LCA-W1_Foundation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":0,\"evidence\":\"evidence/integration/slice_0_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232202_619201 {
+    timestamp: "2026-08-08T23:22:02.619193Z",
+    process: "local_agent_slice_1",
+    decision: "SLICE 1",
+    result: "pass",
+    worker: "LCA-W1_Foundation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":1,\"evidence\":\"evidence/integration/slice_1_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232202_668678 {
+    timestamp: "2026-08-08T23:22:02.668670Z",
+    process: "local_agent_slice_2",
+    decision: "SLICE 2",
+    result: "pass",
+    worker: "LCA-W1_Foundation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":2,\"evidence\":\"evidence/integration/slice_2_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232202_714386 {
+    timestamp: "2026-08-08T23:22:02.714379Z",
+    process: "local_agent_slice_3",
+    decision: "SLICE 3",
+    result: "pass",
+    worker: "LCA-W1_Foundation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":3,\"evidence\":\"evidence/integration/slice_3_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232203_365440 {
+    timestamp: "2026-08-08T23:22:03.365431Z",
+    process: "local_agent_slice_4",
+    decision: "SLICE 4",
+    result: "pass",
+    worker: "LCA-W2_ModelTools",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":4,\"evidence\":\"evidence/integration/slice_4_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232203_408725 {
+    timestamp: "2026-08-08T23:22:03.408717Z",
+    process: "local_agent_slice_5",
+    decision: "SLICE 5",
+    result: "pass",
+    worker: "LCA-W2_ModelTools",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":5,\"evidence\":\"evidence/integration/slice_5_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232203_452859 {
+    timestamp: "2026-08-08T23:22:03.452852Z",
+    process: "local_agent_slice_6",
+    decision: "SLICE 6",
+    result: "pass",
+    worker: "LCA-W2_ModelTools",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":6,\"evidence\":\"evidence/integration/slice_6_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232203_496003 {
+    timestamp: "2026-08-08T23:22:03.495995Z",
+    process: "local_agent_slice_7",
+    decision: "SLICE 7",
+    result: "pass",
+    worker: "LCA-W2_ModelTools",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":7,\"evidence\":\"evidence/integration/slice_7_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232203_539015 {
+    timestamp: "2026-08-08T23:22:03.539007Z",
+    process: "local_agent_slice_8",
+    decision: "SLICE 8",
+    result: "pass",
+    worker: "LCA-W2_ModelTools",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":8,\"evidence\":\"evidence/integration/slice_8_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232204_007945 {
+    timestamp: "2026-08-08T23:22:04.007937Z",
+    process: "local_agent_slice_23",
+    decision: "SLICE 23",
+    result: "pass",
+    worker: "LCA-W5_Evaluation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":23,\"evidence\":\"evidence/integration/slice_23_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232204_051544 {
+    timestamp: "2026-08-08T23:22:04.051536Z",
+    process: "local_agent_slice_24",
+    decision: "SLICE 24",
+    result: "pass",
+    worker: "LCA-W5_Evaluation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":24,\"evidence\":\"evidence/integration/slice_24_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232204_094166 {
+    timestamp: "2026-08-08T23:22:04.094158Z",
+    process: "local_agent_slice_25",
+    decision: "SLICE 25",
+    result: "pass",
+    worker: "LCA-W5_Evaluation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":25,\"evidence\":\"evidence/integration/slice_25_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232204_137092 {
+    timestamp: "2026-08-08T23:22:04.137084Z",
+    process: "local_agent_slice_26",
+    decision: "SLICE 26",
+    result: "pass",
+    worker: "LCA-W5_Evaluation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":26,\"evidence\":\"evidence/integration/slice_26_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232204_609091 {
+    timestamp: "2026-08-08T23:22:04.609083Z",
+    process: "local_agent_slice_27",
+    decision: "SLICE 27",
+    result: "pass",
+    worker: "LCA-W6_Mobile",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":27,\"evidence\":\"evidence/integration/slice_27_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232204_652730 {
+    timestamp: "2026-08-08T23:22:04.652722Z",
+    process: "local_agent_slice_28",
+    decision: "SLICE 28",
+    result: "pass",
+    worker: "LCA-W6_Mobile",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":28,\"evidence\":\"evidence/integration/slice_28_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232204_696829 {
+    timestamp: "2026-08-08T23:22:04.696821Z",
+    process: "local_agent_slice_29",
+    decision: "SLICE 29",
+    result: "pass",
+    worker: "LCA-W6_Mobile",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":29,\"evidence\":\"evidence/integration/slice_29_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232204_740102 {
+    timestamp: "2026-08-08T23:22:04.740094Z",
+    process: "local_agent_slice_30",
+    decision: "SLICE 30",
+    result: "pass",
+    worker: "LCA-W6_Mobile",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":30,\"evidence\":\"evidence/integration/slice_30_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232205_211705 {
+    timestamp: "2026-08-08T23:22:05.211697Z",
+    process: "local_agent_slice_9",
+    decision: "SLICE 9",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":9,\"evidence\":\"evidence/integration/slice_9_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232205_255179 {
+    timestamp: "2026-08-08T23:22:05.255171Z",
+    process: "local_agent_slice_10",
+    decision: "SLICE 10",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":10,\"evidence\":\"evidence/integration/slice_10_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232205_297511 {
+    timestamp: "2026-08-08T23:22:05.297503Z",
+    process: "local_agent_slice_11",
+    decision: "SLICE 11",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":11,\"evidence\":\"evidence/integration/slice_11_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232205_340740 {
+    timestamp: "2026-08-08T23:22:05.340732Z",
+    process: "local_agent_slice_12",
+    decision: "SLICE 12",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":12,\"evidence\":\"evidence/integration/slice_12_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232205_383651 {
+    timestamp: "2026-08-08T23:22:05.383642Z",
+    process: "local_agent_slice_13",
+    decision: "SLICE 13",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":13,\"evidence\":\"evidence/integration/slice_13_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232205_426274 {
+    timestamp: "2026-08-08T23:22:05.426267Z",
+    process: "local_agent_slice_14",
+    decision: "SLICE 14",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":14,\"evidence\":\"evidence/integration/slice_14_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232205_468704 {
+    timestamp: "2026-08-08T23:22:05.468696Z",
+    process: "local_agent_slice_15",
+    decision: "SLICE 15",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":15,\"evidence\":\"evidence/integration/slice_15_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232205_511579 {
+    timestamp: "2026-08-08T23:22:05.511572Z",
+    process: "local_agent_slice_16",
+    decision: "SLICE 16",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":16,\"evidence\":\"evidence/integration/slice_16_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232205_974273 {
+    timestamp: "2026-08-08T23:22:05.974265Z",
+    process: "local_agent_slice_31",
+    decision: "SLICE 31",
+    result: "pass",
+    worker: "LCA-W7_Release",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":31,\"evidence\":\"evidence/integration/slice_31_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232206_018455 {
+    timestamp: "2026-08-08T23:22:06.018447Z",
+    process: "local_agent_slice_32",
+    decision: "SLICE 32",
+    result: "pass",
+    worker: "LCA-W7_Release",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":32,\"evidence\":\"evidence/integration/slice_32_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232206_061658 {
+    timestamp: "2026-08-08T23:22:06.061651Z",
+    process: "local_agent_slice_33",
+    decision: "SLICE 33",
+    result: "pass",
+    worker: "LCA-W7_Release",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":33,\"evidence\":\"evidence/integration/slice_33_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232206_104411 {
+    timestamp: "2026-08-08T23:22:06.104403Z",
+    process: "local_agent_slice_34",
+    decision: "SLICE 34",
+    result: "pass",
+    worker: "LCA-W7_Release",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":34,\"evidence\":\"evidence/integration/slice_34_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232206_149354 {
+    timestamp: "2026-08-08T23:22:06.149346Z",
+    process: "local_agent_slice_35",
+    decision: "SLICE 35",
+    result: "pass",
+    worker: "LCA-W7_Release",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":35,\"evidence\":\"evidence/integration/slice_35_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232206_193733 {
+    timestamp: "2026-08-08T23:22:06.193725Z",
+    process: "local_agent_slice_36",
+    decision: "SLICE 36",
+    result: "pass",
+    worker: "LCA-W7_Release",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":36,\"evidence\":\"evidence/integration/slice_36_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232206_613547 {
+    timestamp: "2026-08-08T23:22:06.613539Z",
+    process: "local_agent_slice_17",
+    decision: "SLICE 17",
+    result: "pass",
+    worker: "LCA-W4_Agent",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":17,\"evidence\":\"evidence/integration/slice_17_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232206_657737 {
+    timestamp: "2026-08-08T23:22:06.657729Z",
+    process: "local_agent_slice_18",
+    decision: "SLICE 18",
+    result: "pass",
+    worker: "LCA-W4_Agent",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":18,\"evidence\":\"evidence/integration/slice_18_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232206_700768 {
+    timestamp: "2026-08-08T23:22:06.700760Z",
+    process: "local_agent_slice_19",
+    decision: "SLICE 19",
+    result: "pass",
+    worker: "LCA-W4_Agent",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":19,\"evidence\":\"evidence/integration/slice_19_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232206_743148 {
+    timestamp: "2026-08-08T23:22:06.743140Z",
+    process: "local_agent_slice_20",
+    decision: "SLICE 20",
+    result: "pass",
+    worker: "LCA-W4_Agent",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":20,\"evidence\":\"evidence/integration/slice_20_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232206_785785 {
+    timestamp: "2026-08-08T23:22:06.785761Z",
+    process: "local_agent_slice_21",
+    decision: "SLICE 21",
+    result: "pass",
+    worker: "LCA-W4_Agent",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":21,\"evidence\":\"evidence/integration/slice_21_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232206_830169 {
+    timestamp: "2026-08-08T23:22:06.830161Z",
+    process: "local_agent_slice_22",
+    decision: "SLICE 22",
+    result: "pass",
+    worker: "LCA-W4_Agent",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":22,\"evidence\":\"evidence/integration/slice_22_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232207_653138 {
+    timestamp: "2026-08-08T23:22:07.653131Z",
+    process: "local_agent_slice_36",
+    decision: "v1.0.0",
+    result: "pass",
+    worker: "LCA-W7_Release",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":36,\"evidence\":\"evidence/release/release-candidate-report/rc_validation.json\"}",
+}
+
+component ProcessEntry_20260808_232218_847789 {
+    timestamp: "2026-08-08T23:22:18.847781Z",
+    process: "local_agent_slice_0",
+    decision: "SLICE 0",
+    result: "pass",
+    worker: "LCA-W1_Foundation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":0,\"evidence\":\"evidence/integration/slice_0_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232218_896703 {
+    timestamp: "2026-08-08T23:22:18.896695Z",
+    process: "local_agent_slice_1",
+    decision: "SLICE 1",
+    result: "pass",
+    worker: "LCA-W1_Foundation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":1,\"evidence\":\"evidence/integration/slice_1_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232218_943166 {
+    timestamp: "2026-08-08T23:22:18.943159Z",
+    process: "local_agent_slice_2",
+    decision: "SLICE 2",
+    result: "pass",
+    worker: "LCA-W1_Foundation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":2,\"evidence\":\"evidence/integration/slice_2_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232218_987045 {
+    timestamp: "2026-08-08T23:22:18.987037Z",
+    process: "local_agent_slice_3",
+    decision: "SLICE 3",
+    result: "pass",
+    worker: "LCA-W1_Foundation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":3,\"evidence\":\"evidence/integration/slice_3_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232219_581036 {
+    timestamp: "2026-08-08T23:22:19.581028Z",
+    process: "local_agent_slice_4",
+    decision: "SLICE 4",
+    result: "pass",
+    worker: "LCA-W2_ModelTools",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":4,\"evidence\":\"evidence/integration/slice_4_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232219_623310 {
+    timestamp: "2026-08-08T23:22:19.623302Z",
+    process: "local_agent_slice_5",
+    decision: "SLICE 5",
+    result: "pass",
+    worker: "LCA-W2_ModelTools",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":5,\"evidence\":\"evidence/integration/slice_5_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232219_666023 {
+    timestamp: "2026-08-08T23:22:19.666015Z",
+    process: "local_agent_slice_6",
+    decision: "SLICE 6",
+    result: "pass",
+    worker: "LCA-W2_ModelTools",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":6,\"evidence\":\"evidence/integration/slice_6_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232219_708135 {
+    timestamp: "2026-08-08T23:22:19.708127Z",
+    process: "local_agent_slice_7",
+    decision: "SLICE 7",
+    result: "pass",
+    worker: "LCA-W2_ModelTools",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":7,\"evidence\":\"evidence/integration/slice_7_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232219_751050 {
+    timestamp: "2026-08-08T23:22:19.751042Z",
+    process: "local_agent_slice_8",
+    decision: "SLICE 8",
+    result: "pass",
+    worker: "LCA-W2_ModelTools",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":8,\"evidence\":\"evidence/integration/slice_8_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232220_276493 {
+    timestamp: "2026-08-08T23:22:20.276485Z",
+    process: "local_agent_slice_23",
+    decision: "SLICE 23",
+    result: "pass",
+    worker: "LCA-W5_Evaluation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":23,\"evidence\":\"evidence/integration/slice_23_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232220_318811 {
+    timestamp: "2026-08-08T23:22:20.318804Z",
+    process: "local_agent_slice_24",
+    decision: "SLICE 24",
+    result: "pass",
+    worker: "LCA-W5_Evaluation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":24,\"evidence\":\"evidence/integration/slice_24_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232220_361100 {
+    timestamp: "2026-08-08T23:22:20.361092Z",
+    process: "local_agent_slice_25",
+    decision: "SLICE 25",
+    result: "pass",
+    worker: "LCA-W5_Evaluation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":25,\"evidence\":\"evidence/integration/slice_25_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232220_403815 {
+    timestamp: "2026-08-08T23:22:20.403808Z",
+    process: "local_agent_slice_26",
+    decision: "SLICE 26",
+    result: "pass",
+    worker: "LCA-W5_Evaluation",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":26,\"evidence\":\"evidence/integration/slice_26_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232220_793816 {
+    timestamp: "2026-08-08T23:22:20.793808Z",
+    process: "local_agent_slice_27",
+    decision: "SLICE 27",
+    result: "pass",
+    worker: "LCA-W6_Mobile",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":27,\"evidence\":\"evidence/integration/slice_27_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232220_836309 {
+    timestamp: "2026-08-08T23:22:20.836302Z",
+    process: "local_agent_slice_28",
+    decision: "SLICE 28",
+    result: "pass",
+    worker: "LCA-W6_Mobile",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":28,\"evidence\":\"evidence/integration/slice_28_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232220_879879 {
+    timestamp: "2026-08-08T23:22:20.879871Z",
+    process: "local_agent_slice_29",
+    decision: "SLICE 29",
+    result: "pass",
+    worker: "LCA-W6_Mobile",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":29,\"evidence\":\"evidence/integration/slice_29_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232220_921928 {
+    timestamp: "2026-08-08T23:22:20.921920Z",
+    process: "local_agent_slice_30",
+    decision: "SLICE 30",
+    result: "pass",
+    worker: "LCA-W6_Mobile",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":30,\"evidence\":\"evidence/integration/slice_30_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232221_537107 {
+    timestamp: "2026-08-08T23:22:21.537098Z",
+    process: "local_agent_slice_9",
+    decision: "SLICE 9",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":9,\"evidence\":\"evidence/integration/slice_9_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232221_582930 {
+    timestamp: "2026-08-08T23:22:21.582922Z",
+    process: "local_agent_slice_10",
+    decision: "SLICE 10",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":10,\"evidence\":\"evidence/integration/slice_10_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232221_626408 {
+    timestamp: "2026-08-08T23:22:21.626400Z",
+    process: "local_agent_slice_11",
+    decision: "SLICE 11",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":11,\"evidence\":\"evidence/integration/slice_11_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232221_669078 {
+    timestamp: "2026-08-08T23:22:21.669071Z",
+    process: "local_agent_slice_12",
+    decision: "SLICE 12",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":12,\"evidence\":\"evidence/integration/slice_12_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232221_712582 {
+    timestamp: "2026-08-08T23:22:21.712574Z",
+    process: "local_agent_slice_13",
+    decision: "SLICE 13",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":13,\"evidence\":\"evidence/integration/slice_13_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232221_755415 {
+    timestamp: "2026-08-08T23:22:21.755407Z",
+    process: "local_agent_slice_14",
+    decision: "SLICE 14",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":14,\"evidence\":\"evidence/integration/slice_14_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232221_798952 {
+    timestamp: "2026-08-08T23:22:21.798943Z",
+    process: "local_agent_slice_15",
+    decision: "SLICE 15",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":15,\"evidence\":\"evidence/integration/slice_15_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232221_844286 {
+    timestamp: "2026-08-08T23:22:21.844278Z",
+    process: "local_agent_slice_16",
+    decision: "SLICE 16",
+    result: "pass",
+    worker: "LCA-W3_Knowledge",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":16,\"evidence\":\"evidence/integration/slice_16_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232222_232323 {
+    timestamp: "2026-08-08T23:22:22.232315Z",
+    process: "local_agent_slice_31",
+    decision: "SLICE 31",
+    result: "pass",
+    worker: "LCA-W7_Release",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":31,\"evidence\":\"evidence/integration/slice_31_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232222_275082 {
+    timestamp: "2026-08-08T23:22:22.275074Z",
+    process: "local_agent_slice_32",
+    decision: "SLICE 32",
+    result: "pass",
+    worker: "LCA-W7_Release",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":32,\"evidence\":\"evidence/integration/slice_32_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232222_318817 {
+    timestamp: "2026-08-08T23:22:22.318809Z",
+    process: "local_agent_slice_33",
+    decision: "SLICE 33",
+    result: "pass",
+    worker: "LCA-W7_Release",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":33,\"evidence\":\"evidence/integration/slice_33_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232222_361539 {
+    timestamp: "2026-08-08T23:22:22.361531Z",
+    process: "local_agent_slice_34",
+    decision: "SLICE 34",
+    result: "pass",
+    worker: "LCA-W7_Release",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":34,\"evidence\":\"evidence/integration/slice_34_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232222_405103 {
+    timestamp: "2026-08-08T23:22:22.405095Z",
+    process: "local_agent_slice_35",
+    decision: "SLICE 35",
+    result: "pass",
+    worker: "LCA-W7_Release",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":35,\"evidence\":\"evidence/integration/slice_35_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232222_450804 {
+    timestamp: "2026-08-08T23:22:22.450796Z",
+    process: "local_agent_slice_36",
+    decision: "SLICE 36",
+    result: "pass",
+    worker: "LCA-W7_Release",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":36,\"evidence\":\"evidence/integration/slice_36_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232222_916662 {
+    timestamp: "2026-08-08T23:22:22.916653Z",
+    process: "local_agent_slice_17",
+    decision: "SLICE 17",
+    result: "pass",
+    worker: "LCA-W4_Agent",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":17,\"evidence\":\"evidence/integration/slice_17_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232222_960553 {
+    timestamp: "2026-08-08T23:22:22.960544Z",
+    process: "local_agent_slice_18",
+    decision: "SLICE 18",
+    result: "pass",
+    worker: "LCA-W4_Agent",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":18,\"evidence\":\"evidence/integration/slice_18_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232223_002840 {
+    timestamp: "2026-08-08T23:22:23.002833Z",
+    process: "local_agent_slice_19",
+    decision: "SLICE 19",
+    result: "pass",
+    worker: "LCA-W4_Agent",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":19,\"evidence\":\"evidence/integration/slice_19_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232223_044952 {
+    timestamp: "2026-08-08T23:22:23.044944Z",
+    process: "local_agent_slice_20",
+    decision: "SLICE 20",
+    result: "pass",
+    worker: "LCA-W4_Agent",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":20,\"evidence\":\"evidence/integration/slice_20_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232223_087003 {
+    timestamp: "2026-08-08T23:22:23.086995Z",
+    process: "local_agent_slice_21",
+    decision: "SLICE 21",
+    result: "pass",
+    worker: "LCA-W4_Agent",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":21,\"evidence\":\"evidence/integration/slice_21_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232223_128962 {
+    timestamp: "2026-08-08T23:22:23.128954Z",
+    process: "local_agent_slice_22",
+    decision: "SLICE 22",
+    result: "pass",
+    worker: "LCA-W4_Agent",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":22,\"evidence\":\"evidence/integration/slice_22_pytest.json\"}",
+}
+
+component ProcessEntry_20260808_232223_972800 {
+    timestamp: "2026-08-08T23:22:23.972792Z",
+    process: "local_agent_slice_36",
+    decision: "v1.0.0",
+    result: "pass",
+    worker: "LCA-W7_Release",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":36,\"evidence\":\"evidence/release/release-candidate-report/rc_validation.json\"}",
+}
+
+component ProcessEntry_20260808_232355_517007 {
+    timestamp: "2026-08-08T23:23:55.516999Z",
+    process: "local_agent_slice_36",
+    decision: "v0.1.0-rc.1 release package",
+    result: "pass",
+    worker: "release_audit",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":36,\"evidence\":\"releases/local-coding-agent-0.1.0-rc.1.tar.gz\"}",
+}
+
+component ProcessEntry_20260808_232407_059868 {
+    timestamp: "2026-08-08T23:24:07.059851Z",
+    process: "local_agent_slice_36",
+    decision: "v0.1.0-rc.1 release package",
+    result: "pass",
+    worker: "release_audit",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":36,\"evidence\":\"releases/local-coding-agent-0.1.0-rc.1.tar.gz\"}",
+}
+
+component ProcessEntry_20260808_232435_319322 {
+    timestamp: "2026-08-08T23:24:35.319312Z",
+    process: "local_agent_slice_36",
+    decision: "v0.1.0-rc.1 release package",
+    result: "pass",
+    worker: "release_audit",
+    duration_ms: 0,
+    metrics_json: "{\"slice\":36,\"evidence\":\"releases/local-coding-agent-0.1.0-rc.1.tar.gz\"}",
+}

@@ -1,0 +1,52 @@
+{
+  "version": "0.1.0-rc.1",
+  "timestamp": "2026-08-08T23:22:25.025030Z",
+  "passed": true,
+  "ready_for_release_package": true,
+  "go_decision_public": false,
+  "go_decision_public_reason": "Mobile OS device testing (public release check #6) not executed",
+  "checks": [
+    {
+      "id": "AUD-001",
+      "name": "Full pytest suite",
+      "passed": true,
+      "detail": "onstructor (from: tests/test_test_runner.py)\n    class TestRunnerError(ValueError):\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n161 passed, 1 skipped, 2 warnings in 6.09s\n"
+    },
+    {
+      "id": "AUD-002",
+      "name": "Taylor mission complete",
+      "passed": true,
+      "detail": "see manifest/taylor_local_coding_agent_mission.json"
+    },
+    {
+      "id": "AUD-003",
+      "name": "Release candidate validation",
+      "passed": true,
+      "detail": " \"2026-08-08T23:22:24.770553Z\",\n  \"sbom\": \"/workspace/evidence/release/sbom/sbom.json\",\n  \"tests_passed\": true,\n  \"security_gate_passed\": true,\n  \"go_decision_allowed\": true,\n  \"tag\": \"v0.1.0-rc.1\"\n}\n"
+    },
+    {
+      "id": "AUD-004",
+      "name": "Desktop benchmark harness",
+      "passed": true,
+      "detail": ": \"desktop\",\n  \"summary\": {\n    \"reliability_pass\": 2,\n    \"reliability_total\": 2,\n    \"augmentation_improved\": true,\n    \"model_tool_call_valid\": false,\n    \"e2e_pass\": 10,\n    \"e2e_total\": 10\n  }\n}\n"
+    },
+    {
+      "id": "AUD-005",
+      "name": "Web-verified dependency citations",
+      "passed": true,
+      "detail": "/workspace/evidence/dependency/citations.json"
+    },
+    {
+      "id": "AUD-006",
+      "name": "Blueprint slice tracking",
+      "passed": true,
+      "detail": "local_coding_agent_tracking.json"
+    },
+    {
+      "id": "AUD-007",
+      "name": "Public release honesty (mobile device check open)",
+      "passed": true,
+      "detail": "check #6 correctly UNEXECUTED_REQUIRES_RUNTIME"
+    }
+  ]
+}

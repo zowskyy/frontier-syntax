@@ -24,7 +24,9 @@ pkg/
 *.aux
 .lia.cache
 dist/
+!releases/**/dist/
 *.tar.gz
+!releases/**/*.tar.gz
 test_projects/
 __pycache__/
 *.pyc
