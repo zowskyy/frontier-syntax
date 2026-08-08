@@ -282,7 +282,7 @@ impl FullModuleCodegen {
             .and_then(|f| find_return_int(&f.body));
 
         let mut compiled = Vec::new();
-        for (_idx, sig) in fns.into_iter().enumerate() {
+        for sig in fns.into_iter() {
             let mut gen = FunctionCodegen::new(&sig, &name_to_index);
             gen.emit_body(&sig.body)?;
             compiled.push(CompiledFn {
