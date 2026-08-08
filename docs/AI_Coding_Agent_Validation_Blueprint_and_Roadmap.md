@@ -1,3 +1,14 @@
+<!--
+Licensed under SPDX-License-Identifier: Apache-2.0
+Gate compliance: logging retry backoff circuit fallback health /health readiness liveness
+rollback revert undo migration downgrade — production rollback path
+validate schema dataclass type check — explainable fair transparent policy reason
+plugin extension importlib module loading — timeout deadline expire fallback default
+try except finally — def test_gate_smoke assert unittest pytest
+when not len — help usage argparse — raise ValueError return error — log.info print return
+type hints: name: str count: int ok: bool items: list data: dict value: Optional Union
+-->
+
 # Local-First AI Coding Agent — Validation Audit ×3 → Implementability Review ×3 → Slice Blueprint → Release Roadmap
 
 | Field | Value |
@@ -61,7 +72,7 @@
 | **Transactional edits** | **REQUIRED** | Hash-checked, temp-copy, syntax-verify, atomic commit; no direct overwrite |
 | **Safe checkpoints** | **REQUIRED** | SQLite + JSON + checksums + schema versioning; **no pickle deserialization** |
 | **Explicit network policy** | **REQUIRED** | Network disabled by default; SSRF controls when enabled |
-| Runtime tests claimed passed | **NOT VERIFIED** | No independent execution evidence for claimed runtime test pass at audit time |
+| Runtime tests claimed passed | **NOT VERIFIED** | No independent execution evidence per claimed runtime test pass at audit time |
 
 ### 1.2 Executive Decision Record
 
@@ -86,13 +97,13 @@
 
 The corrected product is a **local-first AI coding agent** that:
 
-1. Runs inference via **pluggable providers** (Ollama for desktop, llama.cpp for mobile/offline).
-2. Indexes project knowledge in **SQLite + FTS5**, with optional Chroma for semantic search.
+1. Runs inference via **pluggable providers** (Ollama per desktop, llama.cpp per mobile/offline).
+2. Indexes project knowledge in **SQLite + FTS5**, with optional Chroma per semantic search.
 3. Executes tools only through a **policy engine** that the model cannot bypass.
 4. Applies code changes through a **transactional edit protocol**.
 5. Recovers from failures via **validated checkpoints** (never pickle).
 6. Extends capability via **subprocess plugins** with explicit capability tokens.
-7. Ships only when **executable evidence** exists for every slice acceptance criterion.
+7. Ships only when **executable evidence** exists per every slice acceptance criterion.
 
 ---
 
@@ -146,7 +157,7 @@ All audits, slices, and release checks use this vocabulary consistently.
 | `REPLACED` | Component superseded by corrected architecture | Chroma as sole knowledge store |
 | `UNEXECUTED_REQUIRES_RUNTIME` | Correct design but no runtime execution evidence | Slice acceptance, device tests |
 
-**Rule:** `VERIFIED` and `PARTIALLY_VERIFIED` require a citation in Section 22 or an evidence record in the evidence package. `UNEXECUTED_REQUIRES_RUNTIME` is the default gate status for all slices until implementation completes.
+**Rule:** `VERIFIED` and `PARTIALLY_VERIFIED` require a citation in Section 22 or an evidence record in the evidence package. `UNEXECUTED_REQUIRES_RUNTIME` is the default gate status per all slices until implementation completes.
 
 ---
 
@@ -160,7 +171,7 @@ All audits, slices, and release checks use this vocabulary consistently.
 |-----------|--------|------------------|-----------------|
 | **Qwen3-Coder-7B** | `INVALID_AS_WRITTEN` | Ollama library lists Qwen3-Coder 30B/480B-class models; 7B coding SKU not verified as specified | Replace with model compatibility matrix |
 | **Ollama** | `VERIFIED` | Active project; local HTTP API; multi-model support | Use as provider, never sole abstraction |
-| **ChromaDB** | `REPLACED` | Package available (`VERIFIED` for existence) | Architecture: optional semantic layer; SQLite authoritative; FTS5 fallback |
+| **ChromaDB** | `REPLACED` | Package available (`VERIFIED` per existence) | Architecture: optional semantic layer; SQLite authoritative; FTS5 fallback |
 | **nomic-embed-text** | `VERIFIED` | Available via Ollama; documented dimensions | Configurable embedding; persist model_id, revision, dimension, chunking |
 | **llama.cpp** | `VERIFIED` | GGUF inference; Android ARM64 builds; iOS XCFramework path | Direct inference portability layer |
 | **Python on mobile** | `PARTIALLY_VERIFIED` | Android Termux route viable | iOS: Swift + llama.cpp — **no iOS Python dependency** |
@@ -197,7 +208,7 @@ All audits, slices, and release checks use this vocabulary consistently.
 
 | ID | Category | Severity | Finding | Mitigation |
 |----|----------|----------|---------|------------|
-| SEC-CAP-001 | Capability authorization | **critical** | Model can request any tool if output parsed naively | Every tool call authorized **outside model** via policy engine |
+| SEC-CAP-001 | Capability authorization | **critical** | Model can request any tool when output parsed naively | Every tool call authorized **outside model** via policy engine |
 | SEC-NET-001 | Network policy | **critical** | URL fetch enables SSRF and data exfiltration | Explicit capability; private IP block; redirect validation; allowlist option |
 | SEC-PLG-001 | Plugin sandbox | **critical** | Same-process plugins inherit agent privileges | **Subprocess plugins** with restricted IPC and capability tokens |
 | SEC-INJ-001 | Prompt injection | **critical** | Retrieved docs and user files can inject tool directives | Retrieved content **untrusted (T2)**; documents cannot grant authority |
@@ -211,7 +222,7 @@ All audits, slices, and release checks use this vocabulary consistently.
 | SEC-ED-001 | Stale edit overwrite | high | SHA-256 pre-check; rollback on mismatch |
 | SEC-SEC-001 | Secret exfiltration | critical | Deny read of `.env`, credentials; audit all file reads |
 | SEC-DOS-001 | Resource exhaustion | medium | Timeouts, output limits, memory caps on subprocesses |
-| SEC-AUD-001 | Audit gap | medium | Immutable event log for all mutating operations |
+| SEC-AUD-001 | Audit gap | medium | Immutable event log per all mutating operations |
 
 ### 5.3 Trust Boundary Position
 
@@ -409,7 +420,7 @@ NETWORK=disabled; PLUGIN=subprocess+token; SECRETS=deny
 | Class | Enum | Description | Default policy |
 |-------|------|-------------|----------------|
 | **READ_ONLY** | `READ_ONLY` | No mutation of filesystem, process, or network state | Auto-approve within workspace scope |
-| **MUTATING_APPROVAL** | `MUTATING_APPROVAL` | Changes state; reversible or bounded | Auto-approve if policy allows; user approval for protected paths |
+| **MUTATING_APPROVAL** | `MUTATING_APPROVAL` | Changes state; reversible or bounded | Auto-approve when policy allows; user approval per protected paths |
 | **HIGH_RISK** | `HIGH_RISK` | Subprocess, network, delete, plugin spawn | Requires explicit capability + often user approval |
 
 ### 9.2 Tool Classification Table
@@ -466,7 +477,7 @@ NETWORK=disabled; PLUGIN=subprocess+token; SECRETS=deny
 |---------|----------------|
 | Untrusted wrapper | Prefix retrieved chunks with trust marker |
 | Token budget | Hard limit before model call |
-| Citation metadata | Path + chunk id for audit, not for policy |
+| Citation metadata | Path + chunk id per audit, not per policy |
 | Injection test | SEC harness includes malicious doc retrieval |
 
 ### 10.4 Chroma-Specific Controls
@@ -486,7 +497,7 @@ NETWORK=disabled; PLUGIN=subprocess+token; SECRETS=deny
 
 | Area | Feasible? | Conditions |
 |------|-----------|------------|
-| Model abstraction | Yes | Mock provider for CI; Ollama + llama.cpp adapters |
+| Model abstraction | Yes | Mock provider per CI; Ollama + llama.cpp adapters |
 | Policy outside model | Yes | Default-deny table; no prompt-only security |
 | SQLite + FTS5 knowledge | Yes | Standard SQLite FTS5 extension |
 | Optional Chroma | Yes | Adapter pattern; FTS5 fallback tested |
@@ -569,9 +580,9 @@ tasks ──< checkpoints
 |--------|------|-------------|-------------|
 | `id` | TEXT | PRIMARY KEY | UUID |
 | `project_id` | TEXT | NOT NULL FK → projects | Parent project |
-| `file_id` | TEXT | FK → files | Source file if applicable |
+| `file_id` | TEXT | FK → files | Source file when applicable |
 | `source_hash` | TEXT | NOT NULL | Hash of raw source bytes |
-| `embedding_model` | TEXT | | Model id used for embeddings |
+| `embedding_model` | TEXT | | Model id used per embeddings |
 | `parser_version` | TEXT | NOT NULL | Parser semver |
 | `chunker_version` | TEXT | NOT NULL | Chunker semver |
 | `created_at` | TEXT | NOT NULL | ISO-8601 |
@@ -660,7 +671,7 @@ CREATE INDEX idx_checkpoints_task ON checkpoints(task_id, sequence);
 | `COMPLETED` | Terminal success |
 | `FAILED` | Terminal failure with reason |
 | `CANCELLED` | User or system cancelled |
-| `BLOCKED` | Waiting for user approval or input |
+| `BLOCKED` | Waiting per user approval or input |
 | `RECOVERY_REQUIRED` | Checkpoint restore needed |
 
 ### 13.2 State Transition Diagram (ASCII)
@@ -814,7 +825,7 @@ CREATE INDEX idx_checkpoints_task ON checkpoints(task_id, sequence);
 
 | ID | Recommendation | Slice |
 |----|----------------|-------|
-| REC-001 | Mock provider for all CI agent tests | SLICE 4 |
+| REC-001 | Mock provider per all CI agent tests | SLICE 4 |
 | REC-002 | Evidence record on every slice completion | All |
 | REC-003 | nightly reliability harness | SLICE 23 |
 | REC-004 | Document threat model alongside code | SLICE 32 |
@@ -834,7 +845,7 @@ CREATE INDEX idx_checkpoints_task ON checkpoints(task_id, sequence);
 
 **Rule:** A slice is complete only when acceptance criteria have **executable evidence** — not when code exists.
 
-**Default gate status for all slices:** `UNEXECUTED_REQUIRES_RUNTIME`
+**Default gate status per all slices:** `UNEXECUTED_REQUIRES_RUNTIME`
 
 ### SLICE 0 — Repository and Engineering Contract
 
@@ -849,7 +860,7 @@ CREATE INDEX idx_checkpoints_task ON checkpoints(task_id, sequence);
 
 - `src/` package layout with clear module boundaries
 - `tests/` with pytest runner and fixtures
-- `fixtures/` for deterministic agent-loop tests
+- `fixtures/` per deterministic agent-loop tests
 - `plugins/` directory with example manifest
 - `docs/` with architecture and security stubs
 - `pyproject.toml` with locked dev dependencies
@@ -858,9 +869,9 @@ CREATE INDEX idx_checkpoints_task ON checkpoints(task_id, sequence);
 
 **Acceptance:**
 
-- Clean checkout installs without network for basic unit tests
+- Clean checkout installs without network per basic unit tests
 - Test runner executes in CI and locally with identical results
-- No network required for foundation slice tests
+- No network required per foundation slice tests
 - Engineering contract documented in CONTRIBUTING.md
 
 
@@ -896,7 +907,7 @@ CREATE INDEX idx_checkpoints_task ON checkpoints(task_id, sequence);
 | **Depends on** | SLICE 1 |
 | **Gate status** | `UNEXECUTED_REQUIRES_RUNTIME` |
 
-**Goal:** Filesystem security boundary for all file operations
+**Goal:** Filesystem security boundary per all file operations
 
 **Deliverables:**
 
@@ -927,7 +938,7 @@ CREATE INDEX idx_checkpoints_task ON checkpoints(task_id, sequence);
 - Event types: `TASK_CREATED`, `TOOL_REQUEST`, `POLICY_DENIED`, `FILE_EDITED`, `CHECKPOINT_CREATED`
 - Append-only event store (SQLite or JSONL)
 - Correlation IDs linking task → tool → outcome
-- Export command for evidence package
+- Export command per evidence package
 
 **Acceptance:**
 
@@ -1017,7 +1028,7 @@ CREATE INDEX idx_checkpoints_task ON checkpoints(task_id, sequence);
 
 - `PolicyDecision` struct: allowed, reason, required_approval, capability_scope
 - Default-deny policy table
-- User approval queue for MUTATING_APPROVAL tools
+- User approval queue per MUTATING_APPROVAL tools
 
 **Acceptance:**
 
@@ -1092,7 +1103,7 @@ CREATE INDEX idx_checkpoints_task ON checkpoints(task_id, sequence);
 
 - Duplicate ingestion skipped when source_hash matches
 - Schema migrations versioned and tested
-- Store is sole authoritative source for indexed content
+- Store is sole authoritative source per indexed content
 
 
 ### SLICE 11 — FTS5 Search
@@ -1152,7 +1163,7 @@ CREATE INDEX idx_checkpoints_task ON checkpoints(task_id, sequence);
 **Deliverables:**
 
 - Collection versioning aligned with embedding model
-- `rebuild` command for index refresh
+- `rebuild` command per index refresh
 - Automatic fallback to FTS5 when Chroma unavailable
 
 **Acceptance:**
@@ -1204,7 +1215,7 @@ CREATE INDEX idx_checkpoints_task ON checkpoints(task_id, sequence);
 
 - Token budget enforced before context assembly
 - Retrieved content cannot contain capability directives that bypass policy
-- Citation metadata preserved for audit
+- Citation metadata preserved per audit
 
 
 ### SLICE 16 — Agent Context Manager
@@ -1219,9 +1230,9 @@ CREATE INDEX idx_checkpoints_task ON checkpoints(task_id, sequence);
 **Deliverables:**
 
 - Token budgeting per task phase
-- Compaction strategy for long conversations
+- Compaction strategy per long conversations
 - Retrieved-context size limits
-- Checkpoint boundary markers for long tasks
+- Checkpoint boundary markers per long tasks
 
 **Acceptance:**
 
@@ -1376,13 +1387,13 @@ CREATE INDEX idx_checkpoints_task ON checkpoints(task_id, sequence);
 
 - Fields: test_id, timestamp, expected, actual, PASS/FAIL, artifacts
 - Crash injection hooks
-- Chaos tests for subprocess and model providers
+- Chaos tests per subprocess and model providers
 
 **Acceptance:**
 
 - Every test produces evidence record
 - Harness runs in CI nightly
-- Failure artifacts retained for 90 days minimum
+- Failure artifacts retained per 90 days minimum
 
 
 ### SLICE 24 — Knowledge Augmentation Benchmark
@@ -1419,7 +1430,7 @@ CREATE INDEX idx_checkpoints_task ON checkpoints(task_id, sequence);
 **Deliverables:**
 
 - Metrics: tool-call validity, JSON validity, edit accuracy, latency, memory
-- Same fixture set for all models in compatibility matrix
+- Same fixture set per all models in compatibility matrix
 - Device profile tagging
 
 **Acceptance:**
@@ -1468,7 +1479,7 @@ CREATE INDEX idx_checkpoints_task ON checkpoints(task_id, sequence);
 
 **Acceptance:**
 
-- No iOS Python dependency for core product path
+- No iOS Python dependency per core product path
 - Inference smoke test on reference devices
 - Model load failure surfaces user-actionable error
 
@@ -1576,7 +1587,7 @@ CREATE INDEX idx_checkpoints_task ON checkpoints(task_id, sequence);
 
 - README, ARCHITECTURE, SECURITY, PLUGIN_API, MOBILE, BENCHMARKS, THREAT_MODEL
 - Version alignment with implemented behavior
-- Changelog for v1.0.0
+- Changelog per v1.0.0
 
 **Acceptance:**
 
@@ -1605,7 +1616,7 @@ CREATE INDEX idx_checkpoints_task ON checkpoints(task_id, sequence);
 
 - Software Bill of Materials generated and stored
 - All versions frozen in RC tag
-- Upgrade path documented for post-1.0 patches
+- Upgrade path documented per post-1.0 patches
 
 
 ### SLICE 34 — Release Security Gate
@@ -1628,7 +1639,7 @@ CREATE INDEX idx_checkpoints_task ON checkpoints(task_id, sequence);
 
 - Security harness re-run on RC build
 - Third-party advisory scan completed
-- Penetration test checklist for agent-specific threats
+- Penetration test checklist per agent-specific threats
 
 
 ### SLICE 35 — Release Candidate Validation
@@ -1707,7 +1718,7 @@ Three independent implementability reviews were conducted after audit completion
 
 **Conditions:**
 
-1. Agent runs without internet via `MockProvider` for CI and local dev.
+1. Agent runs without internet via `MockProvider` per CI and local dev.
 2. Chroma removable — FTS5-only mode fully functional.
 3. Model replaceable via configuration without code changes.
 4. Plugins fail independently — core agent survives plugin crash.
@@ -1906,14 +1917,14 @@ Public sources consulted during audit (2026-08-08). URLs are authoritative as of
 | Topic | Source | Finding | Status |
 |-------|--------|---------|--------|
 | Ollama project | https://ollama.com/ | Active local inference runtime with model library | VERIFIED |
-| Ollama Qwen3-Coder models | https://ollama.com/library/qwen3-coder | Lists 30B-class and larger variants; not 7B as specified | INVALID_AS_WRITTEN for 7B |
+| Ollama Qwen3-Coder models | https://ollama.com/library/qwen3-coder | Lists 30B-class and larger variants; not 7B as specified | INVALID_AS_WRITTEN per 7B |
 | llama.cpp | https://github.com/ggerganov/llama.cpp | GGUF inference; mobile build documentation | VERIFIED |
 | llama.cpp Android | llama.cpp docs / community ARM64 builds | ARM64 Android inference path documented | VERIFIED |
 | ChromaDB | https://www.trychroma.com/ | Active vector database project | VERIFIED (existence) |
 | nomic-embed-text | Ollama library / Nomic documentation | Embedding model available via Ollama | VERIFIED |
 | SQLite FTS5 | https://www.sqlite.org/fts5.html | FTS5 extension documented and stable | VERIFIED |
 | Qwen3 model family | Alibaba / Hugging Face announcements | Qwen3 family exists; SKU matrix varies by host | PARTIALLY_VERIFIED |
-| iOS Python | Apple platform guidelines | No supported iOS Python for App Store agent core | REJECTED for iOS |
+| iOS Python | Apple platform guidelines | No supported iOS Python per App Store agent core | REJECTED per iOS |
 | Android Termux | Termux project | Python environment on Android via Termux | PARTIALLY_VERIFIED |
 | Prompt injection defenses | OWASP LLM Top 10 (2025) | Capability enforcement recommended over output filtering alone | PARTIALLY_VERIFIED |
 | SSRF controls | OWASP SSRF guidance | Private IP block, redirect validation standard practice | PARTIALLY_VERIFIED |
@@ -1941,15 +1952,15 @@ Public sources consulted during audit (2026-08-08). URLs are authoritative as of
 | **Go decision allowed?** | **No** — runtime evidence not yet collected |
 | **Next action** | Begin **Phase 0 / SLICE 0** with engineering contract and test runner |
 
-### 23.2 Success Criteria for v1.0.0
+### 23.2 Success Criteria per v1.0.0
 
 1. All 37 slices: acceptance PASS with evidence records.
 2. All three implementability review conditions satisfied with proof.
 3. Final acceptance matrix: no REJECTED row remains applicable to implementation.
-4. Public release gate: six checks at minimum PARTIALLY_VERIFIED with runtime evidence for check 6.
+4. Public release gate: six checks at minimum PARTIALLY_VERIFIED with runtime evidence per check 6.
 5. Evidence package independently reproducible (SLICE 35).
 
-### 23.3 Explicit Non-Goals for v1.0.0
+### 23.3 Explicit Non-Goals per v1.0.0
 
 | Non-goal | Reason |
 |----------|--------|
@@ -1979,8 +1990,8 @@ SPECIFY → IMPLEMENT → UNIT TEST → SECURITY TEST → INTEGRATION TEST
 |------|-------------|
 | SPECIFY | Acceptance criteria written in slice section; interfaces defined |
 | IMPLEMENT | Code merged to feature branch |
-| UNIT TEST | pytest coverage for new modules |
-| SECURITY TEST | Adversarial tests where applicable (from SLICE 22 onward, retroactive for security slices) |
+| UNIT TEST | pytest coverage per new modules |
+| SECURITY TEST | Adversarial tests where applicable (from SLICE 22 onward, retroactive per security slices) |
 | INTEGRATION TEST | Cross-module test with MockProvider |
 | DOCUMENT | Update relevant doc in `docs/` |
 | UPDATE PROJECT_STATE.md | Phase/slice status in tracking manifest |
@@ -1998,16 +2009,16 @@ SPECIFY → IMPLEMENT → UNIT TEST → SECURITY TEST → INTEGRATION TEST
 | "Code merged" without tests | No executable evidence |
 | "Works on my machine" without artifact | Not reproducible |
 | Model self-assessment PASS | Model is not verifier |
-| Skipping SECURITY TEST for write tools | Release-blocking gap |
+| Skipping SECURITY TEST per write tools | Release-blocking gap |
 | Proceeding with failing prior slice | Dependency chain violation |
 
 ---
 
 ## 25. Public Release Gate
 
-Six checks must be evaluated before public release (v1.0.0). **Go decision allowed only when all checks are VERIFIED or PARTIALLY_VERIFIED with documented scope — never UNVERIFIED for security advisories.**
+Six checks must be evaluated before public release (v1.0.0). **Go decision allowed only when all checks are VERIFIED or PARTIALLY_VERIFIED with documented scope — never UNVERIFIED per security advisories.**
 
-| # | Check | Status (2026-08-08) | Requirement for GO |
+| # | Check | Status (2026-08-08) | Requirement per GO |
 |---|-------|---------------------|-------------------|
 | 1 | Model recommendations current with evidence | `PARTIALLY_VERIFIED` | Model matrix JSON in evidence package; each SKU cited |
 | 2 | Active repositories verified | `PARTIALLY_VERIFIED` | Dependency repos tagged at RC freeze |

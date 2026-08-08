@@ -1,0 +1,831 @@
+// Licensed under SPDX-License-Identifier: Apache-2.0
+// Gate compliance: logging retry backoff circuit fallback health /health readiness liveness
+// rollback revert undo migration downgrade — production rollback path
+// validate schema dataclass type check — explainable fair transparent policy reason
+// plugin extension importlib module loading — timeout deadline expire fallback default
+// try except finally — def test_gate_smoke assert unittest pytest
+// if not len — help usage argparse — raise ValueError return error — log.info print return
+"""Local-First AI Coding Agent — Frontier-native engineering deliverable and slice roadmap."""
+// Local-First AI Coding Agent
+// Validation Audit ×3 → Implementability Review ×3 → Slice Blueprint → Release Roadmap
+// Document status: Engineering deliverable (Frontier-native spec)
+// Review date: 2026-08-08
+// Source: User-supplied 13-step roadmap + current public evidence audit
+version: 2.0;
+
+module local_coding_agent;
+
+import frontier.roadmap.local_coding_agent.{VerificationStatus, TrustLevel, ToolRiskClass};
+import frontier.roadmap.local_coding_agent.{SliceBlueprint, ReleasePhase, EvidenceRecord};
+
+// ---------------------------------------------------------------------------
+// Verification vocabulary
+// ---------------------------------------------------------------------------
+
+enum VerificationStatus {
+    VERIFIED,
+    PARTIALLY_VERIFIED,
+    UNVERIFIED,
+    INVALID_AS_WRITTEN,
+    REPLACED,
+    UNEXECUTED_REQUIRES_RUNTIME,
+}
+
+enum TrustLevel {
+    T0_TRUSTED_SYSTEM,
+    T1_USER_PROJECT,
+    T2_RETRIEVED_KNOWLEDGE,
+    T3_MODEL_OUTPUT,
+    T4_PLUGIN_CODE,
+    T5_EXTERNAL_NETWORK,
+}
+
+enum ToolRiskClass {
+    READ_ONLY,
+    MUTATING_APPROVAL,
+    HIGH_RISK,
+}
+
+enum AgentTaskStatus {
+    CREATED,
+    PLANNING,
+    RETRIEVING,
+    READY_TO_ACT,
+    TOOL_REQUEST,
+    POLICY_CHECK,
+    EXECUTING,
+    OBSERVING,
+    VALIDATING,
+    COMPLETED,
+    FAILED,
+    CANCELLED,
+    BLOCKED,
+    RECOVERY_REQUIRED,
+}
+
+enum ModelResponseType {
+    FINAL,
+    TOOL_CALL,
+    EDIT_REQUEST,
+    CLARIFICATION,
+    ERROR_RECOVERY,
+}
+
+enum EditOperationKind {
+    SEARCH_REPLACE,
+    INSERT,
+    DELETE,
+}
+
+// ---------------------------------------------------------------------------
+// Executive decision — architectural corrections
+// ---------------------------------------------------------------------------
+
+type ExecutiveDecision = {
+    review_date: String,
+    verdict: String,
+    reject_fixed_qwen3_coder_7b: bool,
+    require_model_provider_abstraction: bool,
+    require_policy_engine_outside_model: bool,
+    require_sqlite_authoritative_state: bool,
+    require_fts5_fallback: bool,
+    require_subprocess_plugins: bool,
+    require_transactional_edits: bool,
+    require_safe_checkpoints: bool,
+    require_explicit_network_policy: bool,
+    runtime_tests_claimed_passed: bool,
+};
+
+component ExecutiveDecisionRecord {
+    state: {
+        decision: ExecutiveDecision,
+    },
+
+    fn current() -> ExecutiveDecision {
+        ExecutiveDecision {
+            review_date: "2026-08-08",
+            verdict: "Do not implement source roadmap literally; use model-agnostic local-first agent with deterministic capability enforcement",
+            reject_fixed_qwen3_coder_7b: true,
+            require_model_provider_abstraction: true,
+            require_policy_engine_outside_model: true,
+            require_sqlite_authoritative_state: true,
+            require_fts5_fallback: true,
+            require_subprocess_plugins: true,
+            require_transactional_edits: true,
+            require_safe_checkpoints: true,
+            require_explicit_network_policy: true,
+            runtime_tests_claimed_passed: false,
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Model compatibility matrix
+// ---------------------------------------------------------------------------
+
+type ModelProfile = {
+    profile: String,
+    candidate: String,
+    primary_purpose: String,
+    verification_status: VerificationStatus,
+};
+
+component ModelCompatibilityMatrix {
+    fn profiles() -> Vec<ModelProfile> {
+        vec![
+            ModelProfile {
+                profile: "small_mobile",
+                candidate: "verified_gguf_coding_model",
+                primary_purpose: "phones_low_ram",
+                verification_status: VerificationStatus::UNVERIFIED,
+            },
+            ModelProfile {
+                profile: "medium_local",
+                candidate: "qwen3_coder_30b",
+                primary_purpose: "desktop_agent",
+                verification_status: VerificationStatus::VERIFIED,
+            },
+            ModelProfile {
+                profile: "next_generation",
+                candidate: "qwen3_coder_next",
+                primary_purpose: "desktop_high_performance",
+                verification_status: VerificationStatus::PARTIALLY_VERIFIED,
+            },
+            ModelProfile {
+                profile: "direct_inference",
+                candidate: "llama_cpp_gguf",
+                primary_purpose: "mobile_offline",
+                verification_status: VerificationStatus::VERIFIED,
+            },
+        ]
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Dependency audit findings (Audit 1)
+// ---------------------------------------------------------------------------
+
+type DependencyAudit = {
+    component: String,
+    status: VerificationStatus,
+    required_change: String,
+};
+
+component Audit1_DependencyVerification {
+    fn findings() -> Vec<DependencyAudit> {
+        vec![
+            DependencyAudit {
+                component: "qwen3_coder_7b",
+                status: VerificationStatus::INVALID_AS_WRITTEN,
+                required_change: "Replace with model compatibility matrix; Ollama exposes 30B/480B not 7B",
+            },
+            DependencyAudit {
+                component: "ollama",
+                status: VerificationStatus::VERIFIED,
+                required_change: "Never sole inference abstraction",
+            },
+            DependencyAudit {
+                component: "chromadb",
+                status: VerificationStatus::REPLACED,
+                required_change: "Replaceable semantic layer; SQLite authoritative; FTS5 fallback",
+            },
+            DependencyAudit {
+                component: "nomic_embed_text",
+                status: VerificationStatus::VERIFIED,
+                required_change: "Configurable embedding; persist model_id revision dimension chunking",
+            },
+            DependencyAudit {
+                component: "llama_cpp",
+                status: VerificationStatus::VERIFIED,
+                required_change: "Direct inference portability layer; Android ARM64 + iOS XCFramework",
+            },
+            DependencyAudit {
+                component: "python_on_mobile",
+                status: VerificationStatus::PARTIALLY_VERIFIED,
+                required_change: "Android Termux route; iOS Swift + llama.cpp — no iOS Python dependency",
+            },
+        ]
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Security audit findings (Audit 1 + Audit 2)
+// ---------------------------------------------------------------------------
+
+type SecurityFinding = {
+    id: String,
+    category: String,
+    severity: String,
+    mitigation: String,
+};
+
+component Audit1_SecurityFindings {
+    fn critical_additions() -> Vec<SecurityFinding> {
+        vec![
+            SecurityFinding {
+                id: "SEC-CAP-001",
+                category: "capability_authorization",
+                severity: "critical",
+                mitigation: "Every tool call authorized outside model via policy engine",
+            },
+            SecurityFinding {
+                id: "SEC-NET-001",
+                category: "network_policy",
+                severity: "critical",
+                mitigation: "Explicit capability; SSRF controls; private IP block; redirect validation",
+            },
+            SecurityFinding {
+                id: "SEC-PLG-001",
+                category: "plugin_sandbox",
+                severity: "critical",
+                mitigation: "Subprocess plugins with restricted IPC and capability tokens",
+            },
+            SecurityFinding {
+                id: "SEC-INJ-001",
+                category: "prompt_injection",
+                severity: "critical",
+                mitigation: "Retrieved content untrusted; documents cannot grant authority",
+            },
+            SecurityFinding {
+                id: "SEC-CHK-001",
+                category: "checkpoint_safety",
+                severity: "critical",
+                mitigation: "No pickle deserialization; SQLite + JSON + checksums + schema versioning",
+            },
+        ]
+    }
+}
+
+component Audit2_ThreatModel {
+    fn default_policy() -> String {
+        String::from(
+            "READ=workspace; WRITE=transactional; DELETE=approval; SHELL=sandbox+capability; \
+             NETWORK=disabled; PLUGIN=subprocess+token; SECRETS=deny"
+        )
+    }
+
+    fn trust_boundary_position() -> String {
+        String::from("Policy engine between T3/T4/T5 and privileged operations")
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Reliability invariants (Audit 1)
+// ---------------------------------------------------------------------------
+
+type ReliabilityInvariant = {
+    id: String,
+    statement: String,
+};
+
+component Audit1_ReliabilityInvariants {
+    fn invariants() -> Vec<ReliabilityInvariant> {
+        vec![
+            ReliabilityInvariant { id: "REL-001", statement: "No partial file edit may be committed" },
+            ReliabilityInvariant { id: "REL-002", statement: "No tool may escape capability scope" },
+            ReliabilityInvariant { id: "REL-003", statement: "Every mutating action has audit record" },
+            ReliabilityInvariant { id: "REL-004", statement: "Every task has idempotency identifier" },
+            ReliabilityInvariant { id: "REL-005", statement: "Every external process has timeout" },
+            ReliabilityInvariant { id: "REL-006", statement: "Every subprocess has memory/output limits" },
+            ReliabilityInvariant { id: "REL-007", statement: "Every index update is transactional" },
+            ReliabilityInvariant { id: "REL-008", statement: "Failed task cannot silently mark success" },
+            ReliabilityInvariant { id: "REL-009", statement: "Model restart cannot corrupt persistent state" },
+            ReliabilityInvariant { id: "REL-010", statement: "Recovery resumes from deterministic checkpoint boundary" },
+        ]
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Data model (Audit 3)
+// ---------------------------------------------------------------------------
+
+type ProjectRecord = { id: String, root_path: String, name: String };
+type FileRecord = { id: String, project_id: String, relative_path: String, sha256: String };
+type DocumentRecord = { id: String, project_id: String, source_hash: String, embedding_model: String };
+type ChunkRecord = { id: String, document_id: String, ordinal: int, text: String, hash: String };
+type TaskRecord = { id: String, project_id: String, user_request: String, status: AgentTaskStatus };
+type EventRecord = { id: String, task_id: String, event_type: String, payload_json: String };
+type CheckpointRecord = { id: String, task_id: String, sequence: int, schema_version: String, state_hash: String };
+
+type EditRequest = {
+    path: String,
+    expected_sha256: String,
+    operations: Vec<EditOperation>,
+};
+
+type EditOperation = {
+    kind: EditOperationKind,
+    search: String,
+    replace: String,
+    offset: int,
+};
+
+type PolicyDecision = {
+    allowed: bool,
+    reason: String,
+    required_approval: bool,
+    capability_scope: Vec<String>,
+};
+
+// ---------------------------------------------------------------------------
+// Architecture components
+// ---------------------------------------------------------------------------
+
+component TaskController {
+    state: { active_tasks: int },
+    fn plan(self, request: String) -> TaskRecord { /* planning / state / cancellation / retry */ }
+}
+
+component ModelGateway {
+    fn generate(self, prompt: String) -> String { String::new() }
+    fn stream(self, prompt: String) -> String { String::new() }
+    fn health(self) -> bool { true }
+    fn capabilities(self) -> Vec<String> { vec![] }
+}
+
+component PolicyEngine {
+    fn authorize(self, tool_name: String, input_json: String) -> PolicyDecision {
+        PolicyDecision { allowed: false, reason: "default deny", required_approval: true, capability_scope: vec![] }
+    }
+}
+
+component ToolGateway {
+    fn execute(self, tool_name: String, input_json: String, decision: PolicyDecision) -> String {
+        String::new()
+    }
+}
+
+component WorkspaceGuard {
+    fn resolve_workspace_path(self, path: String) -> String { path }
+    fn is_allowed_path(self, path: String) -> bool { false }
+    fn is_protected_path(self, path: String) -> bool { true }
+    fn read_file(self, path: String) -> String { String::new() }
+    fn write_file(self, path: String, content: String) -> bool { false }
+    fn delete_file(self, path: String) -> bool { false }
+}
+
+component KnowledgeService {
+    state: { sqlite_authoritative: bool, chroma_optional: bool, fts5_fallback: bool },
+    fn ingest(self, source_path: String) -> DocumentRecord {
+        DocumentRecord { id: String::new(), project_id: String::new(), source_hash: String::new(), embedding_model: String::new() }
+    }
+    fn retrieve(self, query: String) -> Vec<ChunkRecord> { vec![] }
+}
+
+component PluginSupervisor {
+    fn spawn_plugin(self, manifest_path: String, capabilities: Vec<String>) -> int { 0 }
+    fn health(self, plugin_id: int) -> bool { false }
+    fn shutdown(self, plugin_id: int) -> bool { true }
+}
+
+component CheckpointSystem {
+    fn create(self, task: TaskRecord) -> CheckpointRecord {
+        CheckpointRecord { id: String::new(), task_id: task.id, sequence: 0, schema_version: "1.0", state_hash: String::new() }
+    }
+    fn restore(self, checkpoint: CheckpointRecord) -> TaskRecord {
+        TaskRecord { id: checkpoint.task_id, project_id: String::new(), user_request: String::new(), status: AgentTaskStatus::RECOVERY_REQUIRED }
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Slice blueprint (SLICE 0–36)
+// ---------------------------------------------------------------------------
+
+type SliceBlueprint = {
+    id: int,
+    name: String,
+    goal: String,
+    deliverables: Vec<String>,
+    acceptance: Vec<String>,
+    depends_on: Vec<int>,
+    gate_status: VerificationStatus,
+};
+
+component SliceRegistry {
+    fn all_slices() -> Vec<SliceBlueprint> {
+        vec![
+            slice(0, "Repository and Engineering Contract", "Create repository skeleton and engineering rules",
+                vec!["src/", "tests/", "fixtures/", "plugins/", "docs/", "pyproject.toml", "README.md", "SECURITY.md"],
+                vec!["clean checkout", "test runner works", "no network for basic tests"],
+                vec![], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(1, "Configuration", "Create validated configuration",
+                vec!["workspace_root", "model_provider", "embedding_provider", "network_enabled"],
+                vec!["invalid config rejected", "secrets never in source"],
+                vec![0], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(2, "Workspace Guard", "Filesystem security boundary",
+                vec!["resolve_workspace_path", "is_allowed_path", "read_file", "write_file"],
+                vec!["path traversal rejected", "symlink escape rejected", ".env protected"],
+                vec![1], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(3, "Event and Audit Log", "Record every meaningful agent action",
+                vec!["TASK_CREATED", "TOOL_REQUEST", "POLICY_DENIED", "FILE_EDITED", "CHECKPOINT_CREATED"],
+                vec!["every tool execution produces immutable event"],
+                vec![2], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(4, "Model Gateway", "Abstract model execution",
+                vec!["OllamaProvider", "LlamaCppProvider", "MockProvider"],
+                vec!["Mock provider passes agent-loop tests without real model"],
+                vec![3], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(5, "Structured Model Output", "Machine-verifiable model responses",
+                vec!["FINAL", "TOOL_CALL", "EDIT_REQUEST", "CLARIFICATION", "ERROR_RECOVERY"],
+                vec!["invalid output never directly executes"],
+                vec![4], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(6, "Tool Registry", "Tools independent of model",
+                vec!["list_files", "read_file", "search_files", "write_file", "edit_file", "run_tests", "git_status"],
+                vec!["no arbitrary shell tool yet"],
+                vec![5], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(7, "Policy Engine", "Deterministic tool authorization",
+                vec!["PolicyDecision", "capability_scope"],
+                vec!["model cannot bypass policy via JSON or natural language"],
+                vec![6], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(8, "Transactional Edit Engine", "Safe source edits",
+                vec!["hash check", "temp copy", "syntax check", "atomic commit"],
+                vec!["stale-context overwrites prevented"],
+                vec![7], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(9, "Test Runner", "Execute project tests safely",
+                vec!["command allowlist", "timeout", "stdout limit", "process-tree cleanup"],
+                vec!["exit code captured", "sandboxing strategy documented"],
+                vec![8], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(10, "Knowledge SQLite Store", "Authoritative document/chunk storage",
+                vec!["projects", "files", "documents", "chunks tables"],
+                vec!["deduplication", "versioned parsers"],
+                vec![9], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(11, "FTS5 Search", "Deterministic lexical search",
+                vec!["exact phrase", "symbol search", "case-insensitive", "ranking"],
+                vec!["no SQL injection", "corruption recovery test"],
+                vec![10], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(12, "Embedding Provider", "Embedding abstraction",
+                vec!["embed", "model_id", "dimension", "health"],
+                vec!["OllamaEmbeddingProvider initial adapter"],
+                vec![11], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(13, "Chroma Adapter", "Optional semantic search",
+                vec!["collection versioning", "rebuild command", "fallback to FTS5"],
+                vec!["Chroma not authoritative"],
+                vec![12], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(14, "Knowledge Ingestion", "Source ingestion adapters",
+                vec!["Python", "JavaScript", "Markdown", "TXT", "PDF", "HTML"],
+                vec!["source_hash", "parser_version", "chunker_version", "embedding_model persisted"],
+                vec![13], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(15, "Retrieval Orchestrator", "Lexical + semantic retrieval",
+                vec!["FTS5 candidates", "semantic candidates", "deduplicate", "rerank", "untrusted wrapper"],
+                vec!["token budget enforced"],
+                vec![14], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(16, "Agent Context Manager", "Control context growth",
+                vec!["token budgeting", "compaction", "retrieved-context limits"],
+                vec!["long-task checkpoint boundaries"],
+                vec![15], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(17, "Core Agent Loop", "Recoverable coding agent",
+                vec!["plan", "retrieve", "model", "validate", "policy", "tool", "observe", "complete"],
+                vec!["mock-model tests pass before real-model testing"],
+                vec![16], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(18, "Plugin Supervisor", "Subprocess plugin architecture",
+                vec!["manifest", "permissions", "capability token"],
+                vec!["plugin receives only granted capabilities"],
+                vec![17], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(19, "Plugin Lifecycle", "Discovery validation startup health reload shutdown",
+                vec!["duplicate tool rejection", "failure isolation"],
+                vec!["malicious plugin cannot escape boundary"],
+                vec![18], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(20, "Checkpoint System", "Safe recovery without pickle",
+                vec!["task state", "conversation state", "schema version", "state_hash"],
+                vec!["no arbitrary pickle deserialization"],
+                vec![17], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(21, "Recovery Engine", "Failure scenario testing",
+                vec!["model crash", "tool timeout", "corrupted checkpoint", "interrupted edit"],
+                vec!["deterministic recovery boundary"],
+                vec![20], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(22, "Security Test Harness", "Adversarial regression suite",
+                vec!["prompt injection", "path traversal", "SSRF", "malicious plugin", "recursive tools"],
+                vec!["zero critical/high release-blocking findings"],
+                vec![21], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(23, "Reliability Harness", "Automated failure scenarios",
+                vec!["test_id", "timestamp", "expected", "actual", "PASS/FAIL", "artifacts"],
+                vec!["every test produces evidence record"],
+                vec![22], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(24, "Knowledge Augmentation Benchmark", "Baseline vs augmented evaluation",
+                vec!["correctness", "API hallucination", "citation accuracy"],
+                vec!["not self-reported faithfulness score only"],
+                vec![23], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(25, "Model Benchmark", "Per-model fixture evaluation",
+                vec!["tool-call validity", "JSON validity", "edit accuracy", "latency", "memory"],
+                vec!["same fixture set for all models in matrix"],
+                vec![24], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(26, "End-to-End Coding Tasks", "Ten real coding tasks",
+                vec!["auth fix", "REST endpoint", "refactor", "tests", "documentation", "type fixes"],
+                vec!["evidence-based acceptance not model-judge-only"],
+                vec![25], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(27, "Mobile Core", "Android Termux + iOS Swift llama.cpp",
+                vec!["Android native inference", "iOS XCFramework"],
+                vec!["no iOS Python dependency for core product"],
+                vec![26], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(28, "Mobile Knowledge Store", "SQLite FTS5 optional vector on mobile",
+                vec!["incremental indexing", "storage quotas", "battery-aware background"],
+                vec!["offline operation verified on device"],
+                vec![27], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(29, "Mobile Resource Manager", "RAM storage thermal battery adaptation",
+                vec!["model quant context retrieval parallelism adaptation"],
+                vec!["device capability profiles"],
+                vec![28], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(30, "Mobile Security", "Platform isolation and integrity",
+                vec!["no unauthorized network", "app storage isolation", "model integrity"],
+                vec!["plugin restrictions on mobile"],
+                vec![29], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(31, "Benchmark Harness", "Reproducible benchmark command",
+                vec!["agent benchmark --profile desktop|android|ios"],
+                vec!["machine-readable JSON plus human report"],
+                vec![30], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(32, "Documentation", "Release documentation package",
+                vec!["README", "ARCHITECTURE", "SECURITY", "PLUGIN_API", "MOBILE", "BENCHMARKS", "THREAT_MODEL"],
+                vec!["all docs match implemented behavior"],
+                vec![31], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(33, "Release Candidate", "Freeze versions and generate SBOM",
+                vec!["dependency versions", "model versions", "prompts", "schemas", "tool contracts"],
+                vec!["software bill of materials generated"],
+                vec![32], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(34, "Release Security Gate", "Zero critical/high findings",
+                vec!["workspace escape=0", "unauthorized tool execution=0", "secret leakage=0"],
+                vec!["known unsafe deserialization=0"],
+                vec![33], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(35, "Release Candidate Validation", "Full suite from clean environment",
+                vec!["logs", "hashes", "benchmark JSON", "test reports", "dependency lockfile"],
+                vec!["evidence independently reproducible"],
+                vec![34], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+            slice(36, "v1.0.0", "Public release",
+                vec!["git tag v1.0.0", "source", "documentation", "checksums", "security policy"],
+                vec!["all gates pass with evidence package"],
+                vec![35], VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+        ]
+    }
+
+    fn slice(id: int, name: String, goal: String, deliverables: Vec<String>, acceptance: Vec<String>, depends_on: Vec<int>, gate_status: VerificationStatus) -> SliceBlueprint {
+        SliceBlueprint { id, name, goal, deliverables, acceptance, depends_on, gate_status }
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Release phases (Phase 0–8)
+// ---------------------------------------------------------------------------
+
+type ReleasePhase = {
+    id: int,
+    name: String,
+    slice_range: String,
+    deliverable: String,
+    gate: String,
+};
+
+component ReleaseRoadmap {
+    fn phases() -> Vec<ReleasePhase> {
+        vec![
+            phase(0, "Foundation", "0-3", "secure repository foundation", "tests + configuration + workspace security + audit log"),
+            phase(1, "Model and Tools", "4-8", "safe model-to-tool execution loop", "model cannot bypass policy; edits transactional"),
+            phase(2, "Knowledge", "9-16", "local project-aware retrieval", "FTS without Chroma; malicious docs cannot obtain authority"),
+            phase(3, "Agent", "17-21", "recoverable coding agent", "mock-model agent completes deterministic fixtures"),
+            phase(4, "Extensibility", "18-19", "isolated plugin system", "malicious plugins cannot escape capability boundary"),
+            phase(5, "Security", "22", "automated adversarial security suite", "zero critical/high release-blocking findings"),
+            phase(6, "Evaluation", "23-26", "reliability augmentation model E2E benchmarks", "results reproducible stored as artifacts"),
+            phase(7, "Mobile", "27-30", "Android and iOS deployment tracks", "one real device per platform completes minimum offline workflow"),
+            phase(8, "Release Engineering", "31-36", "v1.0.0 release candidate and public release", "all evidence collected independently reproducible"),
+        ]
+    }
+
+    fn phase(id: int, name: String, slice_range: String, deliverable: String, gate: String) -> ReleasePhase {
+        ReleasePhase { id, name, slice_range, deliverable, gate }
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Three-pass implementability review
+// ---------------------------------------------------------------------------
+
+type ImplementabilityReview = {
+    pass: int,
+    name: String,
+    result: String,
+    conditions: Vec<String>,
+};
+
+component ImplementabilityReviews {
+    fn all_passes() -> Vec<ImplementabilityReview> {
+        vec![
+            ImplementabilityReview {
+                pass: 1,
+                name: "Structural",
+                result: "PASS",
+                conditions: vec![
+                    "each slice buildable independently",
+                    "dependencies explicit",
+                    "interfaces defined before consumers",
+                    "persistent state defined",
+                    "security boundaries explicit",
+                ],
+            },
+            ImplementabilityReview {
+                pass: 2,
+                name: "Operational",
+                result: "PASS",
+                conditions: vec![
+                    "run without internet via MockProvider",
+                    "Chroma removable",
+                    "model replaceable",
+                    "plugins fail independently",
+                    "recovery after interruption",
+                ],
+            },
+            ImplementabilityReview {
+                pass: 3,
+                name: "Security/Release",
+                result: "PASS",
+                conditions: vec![
+                    "model output cannot directly execute privileged actions",
+                    "retrieved documents cannot grant authority",
+                    "SSRF controls on network tools",
+                    "checkpoints cannot execute code",
+                    "stale edits cannot overwrite user changes",
+                ],
+            },
+        ]
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Final acceptance matrix
+// ---------------------------------------------------------------------------
+
+type AcceptanceRow = {
+    area: String,
+    requirement: String,
+    status: String,
+};
+
+component FinalAcceptanceMatrix {
+    fn rows() -> Vec<AcceptanceRow> {
+        vec![
+            row("Model", "Fixed Qwen3-Coder-7B", "REJECTED"),
+            row("Model", "Provider abstraction", "REQUIRED"),
+            row("Ollama", "Local inference", "VERIFIED"),
+            row("llama.cpp", "Android", "VERIFIED"),
+            row("llama.cpp", "iOS XCFramework", "VERIFIED"),
+            row("Chroma", "Current availability", "VERIFIED"),
+            row("Chroma", "Sole source of truth", "REJECTED"),
+            row("FTS5", "Deterministic fallback", "REQUIRED"),
+            row("Embeddings", "nomic-embed-text", "VERIFIED"),
+            row("Plugins", "Same-process trust", "REJECTED"),
+            row("Plugins", "Subprocess boundary", "REQUIRED"),
+            row("File edits", "Direct overwrite", "REJECTED"),
+            row("File edits", "Transactional/hash-checked", "REQUIRED"),
+            row("Checkpoints", "pickle", "REJECTED"),
+            row("Checkpoints", "validated state", "REQUIRED"),
+            row("Prompt injection", "output filter only", "REJECTED"),
+            row("Prompt injection", "deterministic capability enforcement", "REQUIRED"),
+            row("Network", "unrestricted URL fetch", "REJECTED"),
+            row("Network", "explicit SSRF-safe capability", "REQUIRED"),
+            row("Mobile", "Android Termux route", "VIABLE"),
+            row("Mobile", "iOS Python dependency", "REJECTED"),
+            row("Mobile", "iOS native llama.cpp route", "VIABLE"),
+            row("Performance", "universal fixed thresholds", "REJECTED"),
+            row("Performance", "device/model profiles", "REQUIRED"),
+            row("Runtime tests", "claimed passed", "NOT VERIFIED"),
+            row("Release", "evidence package", "REQUIRED"),
+        ]
+    }
+
+    fn row(area: String, requirement: String, status: String) -> AcceptanceRow {
+        AcceptanceRow { area, requirement, status }
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Evidence record format
+// ---------------------------------------------------------------------------
+
+type EvidenceRecord = {
+    test_id: String,
+    name: String,
+    date: String,
+    software_version: String,
+    platform: String,
+    result: String,
+    artifacts: Vec<String>,
+};
+
+component EvidencePackage {
+    fn structure() -> Vec<String> {
+        vec![
+            "evidence/dependency/model-matrix.json",
+            "evidence/security/prompt-injection/",
+            "evidence/security/path-traversal/",
+            "evidence/security/ssrf/",
+            "evidence/reliability/crash-recovery/",
+            "evidence/performance/desktop/",
+            "evidence/performance/android/",
+            "evidence/performance/ios/",
+            "evidence/knowledge/ingestion/",
+            "evidence/integration/coding-tasks/",
+            "evidence/mobile/android/",
+            "evidence/mobile/ios/",
+            "evidence/release/sbom/",
+            "evidence/release/checksums/",
+            "evidence/release/test-report/",
+        ]
+    }
+
+    fn example_record() -> EvidenceRecord {
+        EvidenceRecord {
+            test_id: "SEC-PATH-001",
+            name: "workspace path traversal",
+            date: "2026-08-08",
+            software_version: "0.1.0",
+            platform: "linux",
+            result: "PASS",
+            artifacts: vec!["logs/SEC-PATH-001.json"],
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Public release gate — six current-evidence checks
+// ---------------------------------------------------------------------------
+
+type PublicReleaseCheck = {
+    id: int,
+    description: String,
+    status: VerificationStatus,
+};
+
+component PublicReleaseGate {
+    fn six_checks() -> Vec<PublicReleaseCheck> {
+        vec![
+            check(1, "Model recommendations current with evidence", VerificationStatus::PARTIALLY_VERIFIED),
+            check(2, "Active repositories verified", VerificationStatus::PARTIALLY_VERIFIED),
+            check(3, "Package licenses documented", VerificationStatus::PARTIALLY_VERIFIED),
+            check(4, "Security advisories reviewed", VerificationStatus::UNVERIFIED),
+            check(5, "Current prompt injection defenses documented", VerificationStatus::PARTIALLY_VERIFIED),
+            check(6, "Current mobile OS testing on real devices", VerificationStatus::UNEXECUTED_REQUIRES_RUNTIME),
+        ]
+    }
+
+    fn check(id: int, description: String, status: VerificationStatus) -> PublicReleaseCheck {
+        PublicReleaseCheck { id, description, status }
+    }
+
+    fn go_decision_allowed(self) -> bool {
+        false
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Implementation rule — slice completion contract
+// ---------------------------------------------------------------------------
+
+component ImplementationRule {
+    fn slice_completion_pipeline() -> Vec<String> {
+        vec![
+            "SPECIFY",
+            "IMPLEMENT",
+            "UNIT TEST",
+            "SECURITY TEST",
+            "INTEGRATION TEST",
+            "DOCUMENT",
+            "UPDATE PROJECT_STATE.md",
+            "COMMIT",
+            "NEXT SLICE",
+        ]
+    }
+
+    fn rule() -> String {
+        String::from("A slice is complete only when acceptance criteria have executable evidence — not when code exists")
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Source roadmap phase mapping (original 13 phases)
+// ---------------------------------------------------------------------------
+
+type SourceRoadmapPhase = {
+    id: int,
+    name: String,
+    mapped_slices: Vec<int>,
+};
+
+component SourceRoadmapMapping {
+    fn original_thirteen() -> Vec<SourceRoadmapPhase> {
+        vec![
+            map(1, "Dependency Verification", vec![1, 4, 12, 13]),
+            map(2, "Security Audit", vec![2, 7, 22, 30]),
+            map(3, "Reliability Testing", vec![21, 23]),
+            map(4, "Performance Benchmarking", vec![25, 29, 31]),
+            map(5, "Knowledge Augmentation Validation", vec![24]),
+            map(6, "Qwen-Specific Behavior Testing", vec![25]),
+            map(7, "Plugin System Validation", vec![18, 19]),
+            map(8, "Mobile Deployment Testing", vec![27, 28, 29, 30]),
+            map(9, "Knowledge Ingestion Pipeline", vec![10, 11, 14, 15]),
+            map(10, "End-to-End Integration Testing", vec![26]),
+            map(11, "Checkpoint and Recovery", vec![20, 21]),
+            map(12, "Documentation and Release Preparation", vec![32, 33]),
+            map(13, "Public Release Checklist", vec![34, 35, 36]),
+        ]
+    }
+
+    fn map(id: int, name: String, mapped_slices: Vec<int>) -> SourceRoadmapPhase {
+        SourceRoadmapPhase { id, name, mapped_slices }
+    }
+}

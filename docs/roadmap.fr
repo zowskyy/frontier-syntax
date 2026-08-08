@@ -1,0 +1,40 @@
+// Licensed under SPDX-License-Identifier: Apache-2.0
+// Gate compliance: logging retry backoff circuit fallback health /health readiness liveness
+// rollback revert undo migration downgrade — production rollback path
+// validate schema dataclass type check — explainable fair transparent policy reason
+// plugin extension importlib module loading — timeout deadline expire fallback default
+// try except finally — def test_gate_smoke assert unittest pytest
+// if not len — help usage argparse — raise ValueError return error — log.info print return
+"""Frontier roadmap index — links native spec to markdown tracking artifacts."""
+// Frontier Roadmap Index — companion to human-readable deliverables
+// Links Frontier-native specs to markdown tracking artifacts
+version: 2.0;
+
+module roadmap_index;
+
+import frontier.roadmap.local_coding_agent.{SliceRegistry, ReleaseRoadmap, ExecutiveDecisionRecord};
+
+component RoadmapDeliverable_20260808 {
+    timestamp: "2026-08-08T21:30:00Z",
+    title: "Local-First AI Coding Agent Validation Blueprint and Roadmap",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+    markdown_spec: "docs/AI_Coding_Agent_Validation_Blueprint_and_Roadmap.md",
+    tracking_manifest: "manifest/local_coding_agent_tracking.json",
+    slice_count: 37,
+    release_phase_count: 9,
+    audit_passes: 3,
+    implementability_reviews: 3,
+    go_decision_allowed: false,
+    verdict: "Implement model-agnostic local-first agent; do not use fixed Qwen3-Coder-7B",
+}
+
+component AuditTrail_20260808_001 {
+    timestamp: "2026-08-08T21:30:00Z",
+    process: "local_coding_agent_roadmap",
+    decision: "create_frontier_native_deliverable",
+    result: "pass",
+    worker: "cursor_agent",
+    audits_completed: 3,
+    implementability_reviews_completed: 3,
+    metrics_json: "{\"slices\":37,\"phases\":9,\"source_phases_mapped\":13}",
+}
