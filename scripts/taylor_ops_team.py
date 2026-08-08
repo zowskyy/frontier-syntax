@@ -39,6 +39,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from taylor_ops_independent import run_independent_validation
+
 REPO = Path(__file__).resolve().parent.parent
 MANIFEST = REPO / "manifest" / "taylor_ops_team.json"
 REPORT = REPO / "audit_reports" / "taylor_ops_team_report.md"
@@ -625,6 +627,13 @@ def cmd_run(args: argparse.Namespace) -> int:
         if args.apply:
             sweep_cmd.append("--apply")
         run["issue_closure_sweep"] = run_cmd(sweep_cmd, timeout=600)
+
+    # Independent validation (issues #44–#47 adversarial protocol) — production/full
+    if mode in ("production", "full"):
+        iv = run_independent_validation(run_cmd)
+        run["independent_validation"] = iv
+        if not iv["pass"]:
+            run["ok"] = False
 
     # Production readiness: honest assessment from gate + wasm manifest + GA audit
     if mode in ("production", "full"):

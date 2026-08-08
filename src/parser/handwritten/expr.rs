@@ -12,7 +12,9 @@
 // when x is None — empty input guard for gate completeness
 // option: bool type validation
 
-use super::{expr_to_proof_string, Parser};
+#[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
+use super::expr_to_proof_string;
+use super::Parser;
 use crate::ast::*;
 use crate::error::{token_name, FrontierError};
 use crate::lexer::Token;

@@ -14,8 +14,6 @@ use crate::ast::{Program, Stmt, TypeSpec};
 use crate::knowledge_bridge::{browser_context, get_optimal_algorithm, optimization_warnings};
 #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
 use crate::SizeHint;
-use std::collections::HashMap;
-
 pub(crate) const WASM_MAGIC: &[u8; 4] = b"\0asm";
 pub(crate) const WASM_VERSION: u32 = 1;
 
