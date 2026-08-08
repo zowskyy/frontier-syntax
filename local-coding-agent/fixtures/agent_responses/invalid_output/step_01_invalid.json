@@ -1,0 +1,5 @@
+{
+  "type": "TOOL_CALL",
+  "tool": "nonexistent_tool",
+  "arguments": {}
+}

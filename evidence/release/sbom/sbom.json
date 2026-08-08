@@ -1,0 +1,10 @@
+{
+  "name": "local-coding-agent",
+  "version": "0.1.0",
+  "generated_at": "2026-08-08T22:22:57.599188Z",
+  "dependencies": [
+    "pydantic>=2.0",
+    "pydantic-settings>=2.0"
+  ],
+  "pyproject_sha256": "cba7158f4c01b351f80a4c9e2d8bc9b2f806c79ca7ff5264e0a4378f32f205a2"
+}

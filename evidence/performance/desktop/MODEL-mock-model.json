@@ -1,0 +1,9 @@
+{
+  "model_id": "mock-model",
+  "provider": "MockProvider",
+  "tool_call_valid": false,
+  "json_valid": true,
+  "edit_accuracy": 1.0,
+  "latency_ms": 0.05052500000601867,
+  "memory_mb": 0.0
+}

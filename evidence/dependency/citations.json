@@ -1,0 +1,35 @@
+{
+  "updated_at": "2026-08-08T22:22:49.423569Z",
+  "sources": [
+    {
+      "id": "qwen3-coder-ollama",
+      "url": "https://github.com/QwenLM/Qwen3-Coder",
+      "claim": "Qwen3-Coder 30B-A3B available; reject fixed 7B assumption",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "ollama-qwen3-coder-30b",
+      "url": "https://www.theaitechpulse.com/qwen3-coder-ollama-2026",
+      "claim": "ollama run qwen3-coder:30b \u2014 Q4_K_M ~19GB, 256K context",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "chromadb-pypi",
+      "url": "https://pypi.org/project/chromadb/1.5.9/",
+      "claim": "Chroma 1.5.9 Python >=3.9 Apache-2.0",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "hybrid-fts5-chroma",
+      "url": "https://dev.to/sviat_barbutsa/how-search-and-ask-work-local-hybrid-rag-with-chromadb-sqlite-fts5-226c",
+      "claim": "SQLite FTS5 authoritative + Chroma semantic optional",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "llama-cpp-mobile",
+      "url": "https://github.com/ggerganov/llama.cpp",
+      "claim": "llama.cpp Android ARM64 and iOS XCFramework paths",
+      "status": "PARTIALLY_VERIFIED"
+    }
+  ]
+}

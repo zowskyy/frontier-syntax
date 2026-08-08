@@ -1,0 +1,7 @@
+{
+  "name": "example-echo",
+  "version": "1.0.0",
+  "entrypoint": "echo_plugin.py",
+  "description": "Simple echo plugin for testing subprocess isolation",
+  "permissions": ["echo"]
+}

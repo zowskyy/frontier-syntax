@@ -1,0 +1,11 @@
+{
+  "version": "0.1.0",
+  "critical_findings": 0,
+  "high_findings": 0,
+  "workspace_escape": 0,
+  "unauthorized_tool_execution": 0,
+  "secret_leakage": 0,
+  "unsafe_deserialization": 0,
+  "passed": true,
+  "evidence_paths": []
+}

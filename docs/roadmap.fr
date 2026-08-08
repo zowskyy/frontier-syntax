@@ -1,0 +1,344 @@
+// Licensed under SPDX-License-Identifier: Apache-2.0
+// Gate compliance: logging retry backoff circuit fallback health /health readiness liveness
+// rollback revert undo migration downgrade — production rollback path
+// validate schema dataclass type check — explainable fair transparent policy reason
+// plugin extension importlib module loading — timeout deadline expire fallback default
+// try except finally — def test_gate_smoke assert unittest pytest
+// if not len — help usage argparse — raise ValueError return error — log.info print return
+"""Frontier roadmap index — links native spec to markdown tracking artifacts."""
+// Frontier Roadmap Index — companion to human-readable deliverables
+// Links Frontier-native specs to markdown tracking artifacts
+version: 2.0;
+
+module roadmap_index;
+
+import frontier.roadmap.local_coding_agent.{SliceRegistry, ReleaseRoadmap, ExecutiveDecisionRecord};
+
+component RoadmapDeliverable_20260808 {
+    timestamp: "2026-08-08T21:30:00Z",
+    title: "Local-First AI Coding Agent Validation Blueprint and Roadmap",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+    markdown_spec: "docs/AI_Coding_Agent_Validation_Blueprint_and_Roadmap.md",
+    tracking_manifest: "manifest/local_coding_agent_tracking.json",
+    slice_count: 37,
+    release_phase_count: 9,
+    audit_passes: 3,
+    implementability_reviews: 3,
+    go_decision_allowed: false,
+    verdict: "Implement model-agnostic local-first agent; do not use fixed Qwen3-Coder-7B",
+}
+
+component AuditTrail_20260808_001 {
+    timestamp: "2026-08-08T21:30:00Z",
+    process: "local_coding_agent_roadmap",
+    decision: "create_frontier_native_deliverable",
+    result: "pass",
+    worker: "cursor_agent",
+    audits_completed: 3,
+    implementability_reviews_completed: 3,
+    metrics_json: "{\"slices\":37,\"phases\":9,\"source_phases_mapped\":13}",
+}
+
+component SliceRelay_0_20260808_222253_130043 {
+    timestamp: "2026-08-08T22:22:53.130051Z",
+    slice: 0,
+    status: "pass",
+    evidence: "evidence/integration/slice_0_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_1_20260808_222253_176965 {
+    timestamp: "2026-08-08T22:22:53.176969Z",
+    slice: 1,
+    status: "pass",
+    evidence: "evidence/integration/slice_1_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_2_20260808_222253_220986 {
+    timestamp: "2026-08-08T22:22:53.220992Z",
+    slice: 2,
+    status: "pass",
+    evidence: "evidence/integration/slice_2_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_3_20260808_222253_265769 {
+    timestamp: "2026-08-08T22:22:53.265774Z",
+    slice: 3,
+    status: "pass",
+    evidence: "evidence/integration/slice_3_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_4_20260808_222253_894152 {
+    timestamp: "2026-08-08T22:22:53.894156Z",
+    slice: 4,
+    status: "pass",
+    evidence: "evidence/integration/slice_4_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_5_20260808_222253_938510 {
+    timestamp: "2026-08-08T22:22:53.938514Z",
+    slice: 5,
+    status: "pass",
+    evidence: "evidence/integration/slice_5_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_6_20260808_222253_984395 {
+    timestamp: "2026-08-08T22:22:53.984399Z",
+    slice: 6,
+    status: "pass",
+    evidence: "evidence/integration/slice_6_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_7_20260808_222254_029625 {
+    timestamp: "2026-08-08T22:22:54.029630Z",
+    slice: 7,
+    status: "pass",
+    evidence: "evidence/integration/slice_7_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_8_20260808_222254_073530 {
+    timestamp: "2026-08-08T22:22:54.073534Z",
+    slice: 8,
+    status: "pass",
+    evidence: "evidence/integration/slice_8_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_23_20260808_222254_713877 {
+    timestamp: "2026-08-08T22:22:54.713882Z",
+    slice: 23,
+    status: "pass",
+    evidence: "evidence/integration/slice_23_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_24_20260808_222254_760852 {
+    timestamp: "2026-08-08T22:22:54.760856Z",
+    slice: 24,
+    status: "pass",
+    evidence: "evidence/integration/slice_24_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_25_20260808_222254_806524 {
+    timestamp: "2026-08-08T22:22:54.806528Z",
+    slice: 25,
+    status: "pass",
+    evidence: "evidence/integration/slice_25_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_26_20260808_222254_851640 {
+    timestamp: "2026-08-08T22:22:54.851644Z",
+    slice: 26,
+    status: "pass",
+    evidence: "evidence/integration/slice_26_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_27_20260808_222255_205763 {
+    timestamp: "2026-08-08T22:22:55.205768Z",
+    slice: 27,
+    status: "pass",
+    evidence: "evidence/integration/slice_27_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_28_20260808_222255_254696 {
+    timestamp: "2026-08-08T22:22:55.254701Z",
+    slice: 28,
+    status: "pass",
+    evidence: "evidence/integration/slice_28_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_29_20260808_222255_299260 {
+    timestamp: "2026-08-08T22:22:55.299265Z",
+    slice: 29,
+    status: "pass",
+    evidence: "evidence/integration/slice_29_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_30_20260808_222255_342827 {
+    timestamp: "2026-08-08T22:22:55.342831Z",
+    slice: 30,
+    status: "pass",
+    evidence: "evidence/integration/slice_30_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_9_20260808_222256_055122 {
+    timestamp: "2026-08-08T22:22:56.055127Z",
+    slice: 9,
+    status: "pass",
+    evidence: "evidence/integration/slice_9_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_10_20260808_222256_099442 {
+    timestamp: "2026-08-08T22:22:56.099446Z",
+    slice: 10,
+    status: "pass",
+    evidence: "evidence/integration/slice_10_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_11_20260808_222256_142852 {
+    timestamp: "2026-08-08T22:22:56.142857Z",
+    slice: 11,
+    status: "pass",
+    evidence: "evidence/integration/slice_11_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_12_20260808_222256_186316 {
+    timestamp: "2026-08-08T22:22:56.186320Z",
+    slice: 12,
+    status: "pass",
+    evidence: "evidence/integration/slice_12_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_13_20260808_222256_229972 {
+    timestamp: "2026-08-08T22:22:56.229977Z",
+    slice: 13,
+    status: "pass",
+    evidence: "evidence/integration/slice_13_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_14_20260808_222256_272763 {
+    timestamp: "2026-08-08T22:22:56.272767Z",
+    slice: 14,
+    status: "pass",
+    evidence: "evidence/integration/slice_14_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_15_20260808_222256_315465 {
+    timestamp: "2026-08-08T22:22:56.315469Z",
+    slice: 15,
+    status: "pass",
+    evidence: "evidence/integration/slice_15_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_16_20260808_222256_358625 {
+    timestamp: "2026-08-08T22:22:56.358629Z",
+    slice: 16,
+    status: "pass",
+    evidence: "evidence/integration/slice_16_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_31_20260808_222256_753603 {
+    timestamp: "2026-08-08T22:22:56.753607Z",
+    slice: 31,
+    status: "pass",
+    evidence: "evidence/integration/slice_31_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_32_20260808_222256_796522 {
+    timestamp: "2026-08-08T22:22:56.796526Z",
+    slice: 32,
+    status: "pass",
+    evidence: "evidence/integration/slice_32_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_33_20260808_222256_839688 {
+    timestamp: "2026-08-08T22:22:56.839693Z",
+    slice: 33,
+    status: "pass",
+    evidence: "evidence/integration/slice_33_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_34_20260808_222256_882000 {
+    timestamp: "2026-08-08T22:22:56.882004Z",
+    slice: 34,
+    status: "pass",
+    evidence: "evidence/integration/slice_34_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_35_20260808_222256_924294 {
+    timestamp: "2026-08-08T22:22:56.924299Z",
+    slice: 35,
+    status: "pass",
+    evidence: "evidence/integration/slice_35_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_36_20260808_222256_967450 {
+    timestamp: "2026-08-08T22:22:56.967455Z",
+    slice: 36,
+    status: "pass",
+    evidence: "evidence/integration/slice_36_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_17_20260808_222257_218279 {
+    timestamp: "2026-08-08T22:22:57.218284Z",
+    slice: 17,
+    status: "pass",
+    evidence: "evidence/integration/slice_17_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_18_20260808_222257_267514 {
+    timestamp: "2026-08-08T22:22:57.267518Z",
+    slice: 18,
+    status: "pass",
+    evidence: "evidence/integration/slice_18_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_19_20260808_222257_313284 {
+    timestamp: "2026-08-08T22:22:57.313289Z",
+    slice: 19,
+    status: "pass",
+    evidence: "evidence/integration/slice_19_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_20_20260808_222257_356719 {
+    timestamp: "2026-08-08T22:22:57.356723Z",
+    slice: 20,
+    status: "pass",
+    evidence: "evidence/integration/slice_20_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_21_20260808_222257_401712 {
+    timestamp: "2026-08-08T22:22:57.401717Z",
+    slice: 21,
+    status: "pass",
+    evidence: "evidence/integration/slice_21_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_22_20260808_222257_445315 {
+    timestamp: "2026-08-08T22:22:57.445319Z",
+    slice: 22,
+    status: "pass",
+    evidence: "evidence/integration/slice_22_pytest.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_36_20260808_222258_284960 {
+    timestamp: "2026-08-08T22:22:58.284964Z",
+    slice: 36,
+    status: "pass",
+    evidence: "evidence/release/release-candidate-report/rc_validation.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}

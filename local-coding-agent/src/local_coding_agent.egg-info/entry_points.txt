@@ -1,0 +1,2 @@
+[console_scripts]
+agent = local_agent.__main__:main
