@@ -128,6 +128,13 @@ impl<'ctx> Codegen<'ctx> {
                 self.vars.insert(name.clone(), alloca);
                 Ok(None)
             }
+            Stmt::Assign { name, value } => {
+                let val = self.gen_expr(value)?;
+                if let Some(alloca) = self.vars.get(name) {
+                    self.builder.as_ref().unwrap().build_store(*alloca, val).unwrap();
+                }
+                Ok(None)
+            }
             Stmt::Return { value } => {
                 let val = if let Some(v) = value {
                     self.gen_expr(v)?
