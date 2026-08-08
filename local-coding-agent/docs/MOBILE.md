@@ -28,7 +28,12 @@ Swift host + llama.cpp XCFramework. **No iOS Python** for core product.
 ## Evidence
 
 APK build is recorded in `evidence/mobile/android/apk_build.json` (`BUILD_VERIFIED`).
-Device runtime tests remain `UNEXECUTED_REQUIRES_RUNTIME` until real hardware verification.
+Launch-ready audit: `evidence/mobile/android/apk_launch_ready.json` (`LAUNCH_READY` for artifact; device runtime still required).
+
+```bash
+python3 scripts/audit_apk_launch_ready.py
+python3 scripts/taylor_apk_launch_mission.py --apply
+```
 
 ```bash
 python -m local_agent mobile-check

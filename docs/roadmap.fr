@@ -1582,3 +1582,83 @@ component SliceRelay_36_20260808_232435_319457 {
     evidence: "releases/local-coding-agent-0.1.0-rc.1.tar.gz",
     frontier_spec: "frontier/roadmap/local_coding_agent.fr",
 }
+
+component SliceRelay_30_20260808_234527_794608 {
+    timestamp: "2026-08-08T23:45:27.794613Z",
+    slice: 30,
+    status: "pass",
+    evidence: "evidence/mobile/android/apk_launch_ready.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_30_20260808_234527_799507 {
+    timestamp: "2026-08-08T23:45:27.799512Z",
+    slice: 30,
+    status: "pass",
+    evidence: "evidence/mobile/android/apk_launch_ready.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_30_20260808_234527_974159 {
+    timestamp: "2026-08-08T23:45:27.974164Z",
+    slice: 30,
+    status: "pass",
+    evidence: "evidence/mobile/android/apk_launch_ready.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_30_20260808_234528_698025 {
+    timestamp: "2026-08-08T23:45:28.698030Z",
+    slice: 30,
+    status: "pass",
+    evidence: "evidence/mobile/android/apk_launch_ready.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_30_20260808_234535_413600 {
+    timestamp: "2026-08-08T23:45:35.413605Z",
+    slice: 30,
+    status: "pass",
+    evidence: "evidence/mobile/android/apk_launch_ready.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_30_20260808_234907_181547 {
+    timestamp: "2026-08-08T23:49:07.181552Z",
+    slice: 30,
+    status: "pass",
+    evidence: "evidence/mobile/android/apk_launch_ready.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_30_20260808_234907_186544 {
+    timestamp: "2026-08-08T23:49:07.186548Z",
+    slice: 30,
+    status: "pass",
+    evidence: "evidence/mobile/android/apk_launch_ready.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_30_20260808_234907_336337 {
+    timestamp: "2026-08-08T23:49:07.336342Z",
+    slice: 30,
+    status: "pass",
+    evidence: "evidence/mobile/android/apk_launch_ready.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_30_20260808_234908_080044 {
+    timestamp: "2026-08-08T23:49:08.080048Z",
+    slice: 30,
+    status: "pass",
+    evidence: "evidence/mobile/android/apk_launch_ready.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
+
+component SliceRelay_30_20260808_234914_803314 {
+    timestamp: "2026-08-08T23:49:14.803319Z",
+    slice: 30,
+    status: "pass",
+    evidence: "evidence/mobile/android/apk_launch_ready.json",
+    frontier_spec: "frontier/roadmap/local_coding_agent.fr",
+}
