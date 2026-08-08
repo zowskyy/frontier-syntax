@@ -1,0 +1,136 @@
+{
+  "verified_at": "2026-08-08T06:40:36.940114Z",
+  "script": "scripts/independent_validate.py",
+  "commit": "6c6ddbb64c24b7983871c5fb0ee4838258d0116d",
+  "required_pass": true,
+  "pass": true,
+  "user_blockers": [
+    {
+      "id": "45_query_not_codegen",
+      "issue": "45",
+      "reason": "By design: query searches chat_knowledge; codegen wiring verified separately"
+    },
+    {
+      "id": "46_fr_compiler_tree",
+      "issue": "46",
+      "reason": "M5b full compiler in Frontier source \u2014 mission slice; needs product sign-off"
+    },
+    {
+      "id": "47_future_constructs",
+      "issue": "47",
+      "reason": "Spec .frontier describes future features; v1 MVP scope \u2014 user confirms roadmap"
+    }
+  ],
+  "checks": [
+    {
+      "id": "44_official_suite",
+      "issue": "44",
+      "name": "WASM official 4-case wasmtime suite",
+      "pass": true,
+      "required": true,
+      "user_input": false,
+      "command": "python3 scripts/verify_wasm_codegen.py",
+      "output": "{\n  \"pass\": true,\n  \"verified_at\": \"2026-08-08T06:39:56.872054Z\",\n  \"script\": \"scripts/verify_wasm_codegen.py\",\n  \"wasmtime\": \"/home/ubuntu/.wasmtime/bin/wasmtime\",\n  \"all_pass\": true,\n  \"cases\": [\n    {\n      \"name\": \"const_return\",\n      \"pass\": true,\n      \"expected\": 42,\n      \"actual\": 42,\n      \"compile_ok\": true,\n      \"run_ok\": true,\n      \"output\": \"ok\"\n    },\n    {\n      \"name\": \"let_if\",\n      \"pass\": true,\n      \"expected\": 10,\n      \"actual\": 10,\n      \"compile_ok\": true,\n      \"run_ok\": true,\n      \"output\": \"ok\"\n    },\n    {\n      \"name\": \"while_loop\",\n      \"pass\": true,\n      \"expected\": 13,\n      \"actual\": 13,\n      \"compile_ok\": true,\n      \"run_ok\": true,\n      \"output\": \"ok\"\n    },\n    {\n      \"name\": \"function_call\",\n      \"pass\": true,\n      \"expected\": 42,\n      \"actual\": 42,\n      \"compile_ok\": true,\n      \"run_ok\": true,\n      \"output\": \"ok\"\n    }\n  ]\n}\n",
+      "reason": null
+    },
+    {
+      "id": "44_nested_loop",
+      "issue": "44",
+      "name": "Nested if/while with mut+assign returns 104",
+      "pass": true,
+      "required": true,
+      "user_input": false,
+      "command": "frontier compile + wasmtime wast assert 104",
+      "output": "compile_ok=True\n\u2705 Compiled to WASM: /tmp/tmp_rnnofmr/nested.wasm\n\nrun_ok=True\n",
+      "reason": null
+    },
+    {
+      "id": "45_knowledge_codegen",
+      "issue": "45",
+      "name": "Knowledge changes emitted WASM (unit test)",
+      "pass": true,
+      "required": true,
+      "user_input": false,
+      "command": "cargo test --lib -p frontier wasm_codegen::tests::test_knowledge_changes_wasm -- --nocapture",
+      "output": "\nrunning 1 test\ntest wasm_codegen::tests::test_knowledge_changes_wasm ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 55 filtered out; finished in 0.00s\n\n   Compiling frontier v2.0.0 (/workspace)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.16s\n     Running unittests src/lib.rs (target/debug/deps/frontier-bd04effebbbfa3e0)\n",
+      "reason": null
+    },
+    {
+      "id": "45_query_not_codegen",
+      "issue": "45",
+      "name": "knowledge query is search-only (no --trace); wiring is compile -O",
+      "pass": true,
+      "required": false,
+      "user_input": true,
+      "command": "/workspace/target/release/frontier knowledge query loop optimization",
+      "output": ": close_WASM size optimization. Result: closed.\",\n    \"tags\": [\n      \"swarm\",\n      \"process_log\",\n      \"llm_training\"\n    ],\n    \"severity\": \"info\",\n    \"source\": \"docs/process_log.fr\",\n    \"score\": 0.3898\n  },\n  {\n    \"id\": \"swarm_process_peerless_P4_30\",\n    \"category\": \"swarm_optimization\",\n    \"title\": \"Swarm: peerless_P4\",\n    \"content\": \"Decision: close_WASM size optimization. Result: closed.\",\n    \"tags\": [\n      \"swarm\",\n      \"process_log\",\n      \"llm_training\"\n    ],\n    \"severity\": \"info\",\n    \"source\": \"docs/process_log.fr\",\n    \"score\": 0.3898\n  },\n  {\n    \"id\": \"swarm_process_peerless_P4_40\",\n    \"category\": \"swarm_optimization\",\n    \"title\": \"Swarm: peerless_P4\",\n    \"content\": \"Decision: close_WASM size optimization. Result: closed.\",\n    \"tags\": [\n      \"swarm\",\n      \"process_log\",\n      \"llm_training\"\n    ],\n    \"severity\": \"info\",\n    \"source\": \"docs/process_log.fr\",\n    \"score\": 0.3898\n  },\n  {\n    \"id\": \"swarm_process_peerless_P4_51\",\n    \"category\": \"swarm_optimization\",\n    \"title\": \"Swarm: peerless_P4\",\n    \"content\": \"Decision: close_WASM size optimization. Result: closed.\",\n    \"tags\": [\n      \"swarm\",\n      \"process_log\",\n      \"llm_training\"\n    ],\n    \"severity\": \"info\",\n    \"source\": \"docs/process_log.fr\",\n    \"score\": 0.3898\n  },\n  {\n    \"id\": \"swarm_process_peerless_P4_61\",\n    \"category\": \"swarm_optimization\",\n    \"title\": \"Swarm: peerless_P4\",\n    \"content\": \"Decision: close_WASM size optimization. Result: closed.\",\n    \"tags\": [\n      \"swarm\",\n      \"process_log\",\n      \"llm_training\"\n    ],\n    \"severity\": \"info\",\n    \"source\": \"docs/process_log.fr\",\n    \"score\": 0.3898\n  },\n  {\n    \"id\": \"swarm_process_peerless_P4_88\",\n    \"category\": \"swarm_optimization\",\n    \"title\": \"Swarm: peerless_P4\",\n    \"content\": \"Decision: close_WASM size optimization. Result: closed.\",\n    \"tags\": [\n      \"swarm\",\n      \"process_log\",\n      \"llm_training\"\n    ],\n    \"severity\": \"info\",\n    \"source\": \"docs/process_log.fr\",\n    \"score\": 0.3898\n  }\n]\n",
+      "reason": "By design: query searches chat_knowledge; codegen wiring verified separately"
+    },
+    {
+      "id": "46_native_main_fr",
+      "issue": "46",
+      "name": "Native wasmtime path main.fr \u2192 840",
+      "pass": true,
+      "required": true,
+      "user_input": false,
+      "command": "python3 scripts/run_native_self_host.py --source frontier/src/main.fr --expected 840",
+      "output": "{\n  \"verified_at\": \"2026-08-08T06:40:36.833560Z\",\n  \"script\": \"scripts/run_native_self_host.py\",\n  \"source\": \"frontier/src/main.fr\",\n  \"expected_main\": 840,\n  \"compiler_wasm\": \"target/wasm32-unknown-unknown/release/frontier.wasm\",\n  \"host\": \"target/release/frontier_wasm_host\",\n  \"output_wasm\": \"target/native_self_host_probe.wasm\",\n  \"output_bytes\": 177,\n  \"valid_wasm\": true,\n  \"main_returns_expected\": true,\n  \"main_returns_42\": null,\n  \"pass\": true,\n  \"bootstrap_cargo_on_recompile\": false,\n  \"mode\": \"native_wasmtime\"\n}\n",
+      "reason": null
+    },
+    {
+      "id": "46_fr_compiler_tree",
+      "issue": "46",
+      "name": "Frontier .fr files exist under compiler/src (gate slice stub)",
+      "pass": true,
+      "required": false,
+      "user_input": true,
+      "command": "find .fr under compiler/src",
+      "output": "count=2\n./frontier/src/main.fr\n./frontier/src/self_host_probe.fr\n",
+      "reason": "M5b full compiler in Frontier source \u2014 mission slice; needs product sign-off"
+    },
+    {
+      "id": "47_file_mapping",
+      "issue": "47",
+      "name": "Spec .frontier files map to Rust modules",
+      "pass": true,
+      "required": true,
+      "user_input": false,
+      "command": "python3 scripts/spec_impl_bridge.py",
+      "output": "PASS: Spec/impl bridge \u2014 10 core modules mapped\n",
+      "reason": null
+    },
+    {
+      "id": "47_v1_behaviors",
+      "issue": "47",
+      "name": "Implemented v1 constructs (if/call) execute via wasmtime",
+      "pass": true,
+      "required": true,
+      "user_input": false,
+      "command": "compile + wasmtime per construct",
+      "output": "ok",
+      "reason": null
+    },
+    {
+      "id": "47_future_constructs",
+      "issue": "47",
+      "name": "match/closures/Result not in v1 MVP (correctly rejected)",
+      "pass": true,
+      "required": false,
+      "user_input": true,
+      "command": "compile probes (expect parse fail)",
+      "output": "all rejected as expected",
+      "reason": "Spec .frontier describes future features; v1 MVP scope \u2014 user confirms roadmap"
+    },
+    {
+      "id": "adversarial",
+      "issue": "\u2014",
+      "name": "Malformed/empty input rejected cleanly",
+      "pass": true,
+      "required": true,
+      "user_input": false,
+      "command": "frontier compile adversarial inputs",
+      "output": "empty: exit=1 tail='Program must define fn main()\\n  Hint: run `frontier compile --help` for usage examples\\n'\nmalformed: exit=1 tail='-PARSE]: Expected identifier but found { at line 1, column 10.\\n  Hint: run `frontier compile --help` for usage examples\\n'\nhuge: exit=0 tail='\u2705 Compiled to WASM: /tmp/tmp7gagrxmn/huge.wasm\\n'",
+      "reason": null
+    }
+  ]
+}

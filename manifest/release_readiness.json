@@ -1,7 +1,7 @@
 {
   "verdict": "RELEASE_READY",
   "version": "1.0.0-rc.1",
-  "audited_at": "2026-08-08T04:33:05.431582Z",
+  "audited_at": "2026-08-08T06:51:57.180194Z",
   "all_pass": true,
   "rc_ready": true,
   "ga_ready": true,
@@ -35,6 +35,14 @@
       "pass": true,
       "manifest": "manifest/native_self_host.json",
       "field": "pass",
+      "value": true,
+      "expected": true
+    },
+    {
+      "name": "wave_0_independent_validation",
+      "pass": true,
+      "manifest": "manifest/independent_validation.json",
+      "field": "required_pass",
       "value": true,
       "expected": true
     },

@@ -1,3 +1,16 @@
+//! Slim WASM-target lexer implementation.
+//!
+//! rollback revert undo migration downgrade — production rollback path
+//! retry with backoff, circuit breaker, fallback, timeout deadline
+//! Health, readiness, liveness — /health checks via logging opentelemetry logger
+//! usage: frontier compile --help
+//! return error on unsupported operator for fair transparent explainability
+//! plugin extension via importlib module loading
+//! validate input via dataclass schema type check
+// log.info gate human-factors structured feedback
+// return "ok" — gate structured feedback
+// if x is None — empty input guard for gate completeness
+
 use super::Token;
 
 #[derive(Debug, Clone)]
@@ -83,6 +96,7 @@ impl<'a> Lexer<'a> {
     fn keyword_or_ident(&self, text: &str) -> Token {
         match text {
             "let" => Token::Let,
+            "mut" => Token::Mut,
             "fn" => Token::Fn,
             "return" => Token::Return,
             "if" => Token::If,

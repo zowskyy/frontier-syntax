@@ -32,6 +32,9 @@ pub mod resolver;
 pub mod v2_resolver;
 #[cfg(any(not(target_arch = "wasm32"), not(feature = "wasm-slim")))]
 pub mod unity;
+mod wasm_binary;
+mod wasm_emit;
+mod wasm_module;
 pub mod wasm_codegen;
 #[cfg(all(target_arch = "wasm32", feature = "wasm-slim"))]
 pub mod wasm_host_exports;
