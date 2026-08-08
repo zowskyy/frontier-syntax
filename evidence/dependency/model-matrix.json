@@ -1,0 +1,30 @@
+{
+  "updated_at": "2026-08-08T22:22:49.423757Z",
+  "profiles": [
+    {
+      "profile": "medium_local",
+      "candidate": "qwen3-coder:30b",
+      "provider": "ollama",
+      "status": "VERIFIED"
+    },
+    {
+      "profile": "next_generation",
+      "candidate": "qwen3-coder-next",
+      "provider": "ollama",
+      "status": "PARTIALLY_VERIFIED"
+    },
+    {
+      "profile": "direct_inference",
+      "candidate": "gguf",
+      "provider": "llama_cpp",
+      "status": "VERIFIED"
+    },
+    {
+      "profile": "small_mobile",
+      "candidate": "device-specific-gguf",
+      "provider": "llama_cpp",
+      "status": "UNVERIFIED"
+    }
+  ],
+  "citations_file": "evidence/dependency/citations.json"
+}

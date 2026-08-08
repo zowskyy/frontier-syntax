@@ -1,0 +1,263 @@
+{
+  "mission": "local_coding_agent_blueprint",
+  "slices": "0-36",
+  "complete": true,
+  "updated_at": "2026-08-08T22:22:58.305102Z",
+  "workers": [
+    {
+      "id": "LCA-W1_Foundation",
+      "name": "Foundation",
+      "pass": true,
+      "steps": [
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_config.py -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": ".......                                                                  [100%]\n7 passed in 0.02s\n"
+        },
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_workspace.py -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": "..........                                                               [100%]\n10 passed in 0.03s\n"
+        },
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_audit.py -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": "........                                                                 [100%]\n8 passed in 0.04s\n"
+        }
+      ]
+    },
+    {
+      "id": "LCA-W2_ModelTools",
+      "name": "Model and Tools",
+      "pass": true,
+      "steps": [
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_model.py -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": "..........                                                               [100%]\n10 passed in 0.03s\n"
+        },
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_output.py -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": "............                                                             [100%]\n12 passed in 0.01s\n"
+        },
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_tools.py -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": "............                                                             [100%]\n12 passed in 0.22s\n"
+        },
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_policy.py -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": "............                                                             [100%]\n12 passed in 0.01s\n"
+        },
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_edit_engine.py -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": ".........                                                                [100%]\n9 passed in 0.02s\n"
+        }
+      ]
+    },
+    {
+      "id": "LCA-W3_Knowledge",
+      "name": "Knowledge",
+      "pass": true,
+      "steps": [
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_test_runner.py -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": ".....                                                                    [100%]\n=============================== warnings summary ===============================\nsrc/local_agent/test_runner.py:113\n  /workspace/local-coding-agent/src/local_agent/test_runner.py:113: PytestCollectionWarning: cannot collect test class 'TestRunner' because it has a __init__ constructor (from: tests/test_test_runner.py)\n    class TestRunner:\n\nsrc/local_agent/test_runner.py:53\n  /workspace/local-coding-agent/src/local_agent/test_runner.py:53: PytestCollectionWarning: cannot collect test class 'TestRunnerError' because it has a __init__ constructor (from: tests/test_test_runner.py)\n    class TestRunnerError(ValueError):\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n5 passed, 2 warnings in 1.34s\n"
+        },
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_knowledge_store.py -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": "....                                                                     [100%]\n4 passed in 0.02s\n"
+        },
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_fts.py -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": "....                                                                     [100%]\n4 passed in 0.02s\n"
+        },
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_embedding.py -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": "...                                                                      [100%]\n3 passed in 0.02s\n"
+        },
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_chroma_adapter.py -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": "..s                                                                      [100%]\n2 passed, 1 skipped in 0.01s\n"
+        },
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_ingestion.py -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": "....                                                                     [100%]\n4 passed in 0.02s\n"
+        },
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_retrieval.py -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": "...                                                                      [100%]\n3 passed in 0.03s\n"
+        },
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_context.py -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": "....                                                                     [100%]\n4 passed in 0.01s\n"
+        }
+      ]
+    },
+    {
+      "id": "LCA-W4_Agent",
+      "name": "Agent and Plugins",
+      "pass": true,
+      "steps": [
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_agent_loop.py -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": ".......                                                                  [100%]\n7 passed in 0.08s\n"
+        },
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_plugin_supervisor.py -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": "........                                                                 [100%]\n8 passed in 0.08s\n"
+        },
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_plugin_lifecycle.py -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": "......                                                                   [100%]\n6 passed in 3.08s\n"
+        },
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_checkpoint.py -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": ".......                                                                  [100%]\n7 passed in 0.03s\n"
+        },
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_recovery.py -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": "......                                                                   [100%]\n6 passed in 0.08s\n"
+        },
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_security_harness.py -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": ".........                                                                [100%]\n9 passed in 0.01s\n"
+        }
+      ]
+    },
+    {
+      "id": "LCA-W5_Evaluation",
+      "name": "Evaluation",
+      "pass": true,
+      "steps": [
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_slices_23_36.py::test_reliability_harness -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": ".                                                                        [100%]\n1 passed in 0.10s\n"
+        },
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_slices_23_36.py::test_augmentation_benchmark -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": ".                                                                        [100%]\n1 passed in 0.03s\n"
+        },
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_slices_23_36.py::test_model_benchmark -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": ".                                                                        [100%]\n1 passed in 0.03s\n"
+        },
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_slices_23_36.py::test_e2e_runner -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": ".                                                                        [100%]\n1 passed in 0.05s\n"
+        }
+      ]
+    },
+    {
+      "id": "LCA-W6_Mobile",
+      "name": "Mobile",
+      "pass": true,
+      "steps": [
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_slices_23_36.py::test_mobile_profiles -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": ".                                                                        [100%]\n1 passed in 0.03s\n"
+        },
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_slices_23_36.py::test_mobile_resource_manager -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": ".                                                                        [100%]\n1 passed in 0.03s\n"
+        },
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_slices_23_36.py::test_mobile_security_evidence -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": ".                                                                        [100%]\n1 passed in 0.03s\n"
+        },
+        {
+          "command": "/usr/bin/python3 -m local_agent mobile-check",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": ""
+        }
+      ]
+    },
+    {
+      "id": "LCA-W7_Release",
+      "name": "Release Engineering",
+      "pass": true,
+      "steps": [
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_slices_23_36.py::test_benchmark_harness_desktop -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": ".                                                                        [100%]\n1 passed in 0.10s\n"
+        },
+        {
+          "command": "/usr/bin/python3 -m pytest tests/test_slices_23_36.py::test_release_engineering -q",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": ".                                                                        [100%]\n1 passed in 0.97s\n"
+        },
+        {
+          "command": "/usr/bin/python3 -m local_agent benchmark --profile desktop",
+          "pass": true,
+          "exit_code": 0,
+          "output_tail": "{\n  \"profile\": \"desktop\",\n  \"summary\": {\n    \"reliability_pass\": 2,\n    \"reliability_total\": 2,\n    \"augmentation_improved\": true,\n    \"model_tool_call_valid\": false,\n    \"e2e_pass\": 10,\n    \"e2e_total\": 10\n  }\n}\n"
+        }
+      ]
+    }
+  ],
+  "release_validate": {
+    "command": "/usr/bin/python3 -m local_agent release-validate",
+    "pass": true,
+    "exit_code": 0,
+    "output_tail": "{\n  \"version\": \"0.1.0-rc.1\",\n  \"timestamp\": \"2026-08-08T22:22:58.231589Z\",\n  \"sbom\": \"/workspace/evidence/release/sbom/sbom.json\",\n  \"tests_passed\": true,\n  \"security_gate_passed\": true,\n  \"go_decision_allowed\": true,\n  \"tag\": \"v0.1.0-rc.1\"\n}\n"
+  },
+  "manifest": "manifest/taylor_local_coding_agent_mission.json",
+  "report": "audit_reports/taylor_local_coding_agent_report.md"
+}

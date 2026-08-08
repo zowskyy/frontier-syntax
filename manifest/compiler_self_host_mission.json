@@ -4,7 +4,7 @@
   "goal": "Frontier-native self-hosting \u2014 owner notified when Phase 1.3 (#46) complete; M5 continues for full compiler",
   "complete": true,
   "owner_notify": true,
-  "updated_at": "2026-08-08T04:14:51.046078Z",
+  "updated_at": "2026-08-08T22:29:08.684003Z",
   "milestones": {
     "M1": {
       "name": "wasm_host_exports",
@@ -29,7 +29,7 @@
     "M5": {
       "name": "main_fr_native_gate",
       "pass": true,
-      "updated_at": "2026-08-08T04:14:51.046078Z",
+      "updated_at": "2026-08-08T22:29:08.684003Z",
       "slice": "gate",
       "reason": "main.fr native wasmtime self-host verified (Gate slice)"
     },

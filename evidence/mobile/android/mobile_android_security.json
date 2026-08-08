@@ -1,0 +1,17 @@
+{
+  "platform": "android",
+  "checks": [
+    "no_unauthorized_network",
+    "app_storage_isolation",
+    "no_private_path_access",
+    "model_integrity_checksum",
+    "plugin_subprocess_only"
+  ],
+  "policies": {
+    "network_disabled_by_default": true,
+    "plugins_subprocess": true,
+    "secrets_not_in_bundle": true
+  },
+  "status": "SCAFFOLD_VERIFIED",
+  "device_runtime": "UNEXECUTED_REQUIRES_RUNTIME"
+}

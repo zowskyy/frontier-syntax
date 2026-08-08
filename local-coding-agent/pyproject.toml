@@ -13,6 +13,9 @@ dependencies = [
     "pydantic-settings>=2.0",
 ]
 
+[project.scripts]
+agent = "local_agent.__main__:main"
+
 [project.optional-dependencies]
 chroma = ["chromadb>=0.4.0"]
 dev = ["pytest>=7.4"]

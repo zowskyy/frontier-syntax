@@ -1,10 +1,10 @@
 {
-  "verified_at": "2026-08-08T04:14:51.045557Z",
+  "verified_at": "2026-08-08T22:29:08.683353Z",
   "script": "scripts/verify_main_fr_native.py",
   "source": "frontier/src/main.fr",
   "expected_main": 840,
   "native": {
-    "verified_at": "2026-08-08T04:14:51.039996Z",
+    "verified_at": "2026-08-08T22:29:08.676468Z",
     "script": "scripts/run_native_self_host.py",
     "source": "frontier/src/main.fr",
     "expected_main": 840,

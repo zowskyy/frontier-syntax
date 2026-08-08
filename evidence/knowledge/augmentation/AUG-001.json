@@ -1,0 +1,8 @@
+{
+  "task_id": "001",
+  "baseline_correct": false,
+  "augmented_correct": true,
+  "hallucination_baseline": false,
+  "hallucination_augmented": false,
+  "citation_accuracy": 1.0
+}
