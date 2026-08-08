@@ -3,6 +3,7 @@
   "audited_at": "2026-08-08T03:20:47.790044Z",
   "validator": "Taylor Ops Independent Validator (scripts/taylor_issue_closer.py)",
   "apply": true,
+  "pass": true,
   "worker_filter": null,
   "open_before": [],
   "eligible_to_close": [],

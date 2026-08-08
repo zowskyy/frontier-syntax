@@ -4,6 +4,8 @@
 **Basis:** Live audit of README, LAUNCH_CHECKLIST.md, open issues #35–#48, and gate evidence in `manifest/` — not the repo's self-reported status.
 **Rule:** This document is the single source of truth. If code, README, or a script disagrees with this file, this file wins until updated with evidence.
 
+**Agent enforcement:** `.cursor/rules/blueprint-completion.mdc` — agents must run `python3 scripts/blueprint_audit.py` before claiming completion. `RELEASE_READY` does not override an incomplete blueprint.
+
 ---
 
 ## 0. Compilation target policy (v2.0)

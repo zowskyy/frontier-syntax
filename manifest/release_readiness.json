@@ -1,11 +1,13 @@
 {
-  "verdict": "RELEASE_READY",
+  "verdict": "RC_READY",
   "version": "1.0.0-rc.1",
-  "audited_at": "2026-08-08T04:33:05.431582Z",
-  "all_pass": true,
+  "audited_at": "2026-08-08T20:11:43.729149Z",
+  "all_pass": false,
   "rc_ready": true,
-  "ga_ready": true,
-  "blockers": [],
+  "ga_ready": false,
+  "blockers": [
+    "wave_blueprint_completion"
+  ],
   "rc_blockers": [],
   "checks": [
     {
@@ -80,6 +82,28 @@
       "pass": true,
       "pending": [],
       "blocks_ga_only": true
+    },
+    {
+      "name": "wave_blueprint_completion",
+      "pass": false,
+      "complete": false,
+      "open_slices": [
+        "0.3",
+        "1.3",
+        "2.2",
+        "5.0",
+        "6.1",
+        "6.2",
+        "6.3",
+        "7.0",
+        "8.0",
+        "11.0"
+      ],
+      "slices_pass": 7,
+      "slices_total": 17,
+      "blueprint": "PROJECT_BLUEPRINT.md",
+      "skipped_run": true,
+      "manifest": "manifest/blueprint_completion.json"
     }
   ],
   "report": "audit_reports/RELEASE_READINESS_REPORT.md",

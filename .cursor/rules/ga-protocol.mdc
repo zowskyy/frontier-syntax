@@ -5,7 +5,9 @@ alwaysApply: true
 
 # GA protocol — AUTOMATIC
 
-**North star:** `RELEASE_READY` from `scripts/release_readiness.py --audit`. Gate-slice fixes are steps on this path, not the finish line.
+**Supreme authority:** `.cursor/rules/blueprint-completion.mdc` — if the blueprint is incomplete, the job is not done regardless of this protocol.
+
+**North star (secondary):** `RELEASE_READY` from `scripts/release_readiness.py --audit`. Gate-slice fixes are steps on this path, not the finish line — and **never** the finish line if the blueprint still has open slices.
 
 ## Verdict ladder
 
@@ -38,9 +40,10 @@ Report in the final response:
 
 ## Vocabulary
 
-- **Gate slice** — CI exit for a phase (e.g. Phase 5: `main.fr` → wasmtime → 840)
-- **Mission slice** — long-horizon goal (e.g. M5b full compiler in `main.fr`)
-- **GA** — `RELEASE_READY` orchestrator
+- **Blueprint slice** — one acceptance criterion in the user/canonical blueprint; **all must pass** before delivery
+- **Gate slice** — CI/orchestrator exit for a phase (e.g. Phase 5: `main.fr` → wasmtime → 840); does not close blueprint mission slices
+- **Mission slice** — long-horizon blueprint goal (e.g. M5b full compiler in `main.fr`)
+- **GA** — `RELEASE_READY` orchestrator; subordinate to blueprint completion
 
 ## When changing compiler / tracking / CI
 
