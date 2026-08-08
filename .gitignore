@@ -24,7 +24,8 @@ pkg/
 *.aux
 .lia.cache
 dist/
-!releases/**/dist/
+!releases/
+!releases/**
 *.tar.gz
 !releases/**/*.tar.gz
 test_projects/
@@ -49,3 +50,7 @@ manifest/help_requests.jsonl
 manifest/archive_dataset/records.jsonl
 manifest/archive_dataset/state.json
 manifest/archive_collector_run.json
+.android-sdk/
+local-coding-agent/mobile/android/.gradle/
+local-coding-agent/mobile/android/app/build/
+local-coding-agent/mobile/android/build/

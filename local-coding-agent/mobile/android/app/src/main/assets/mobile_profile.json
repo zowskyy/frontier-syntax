@@ -1,0 +1,11 @@
+{
+  "version": "0.1.0-rc.1",
+  "inference_path": "Termux + Python control + llama.cpp GGUF (ARM64)",
+  "checklist": [
+    "load GGUF model from app storage",
+    "run offline inference",
+    "index project with SQLite FTS5",
+    "execute read-only agent task"
+  ],
+  "resource_summary": "Recommended: Q4_K_M @ 4096 ctx on 4GB RAM; Q5_K_M @ 8192 on 8GB."
+}

@@ -1,0 +1,24 @@
+{
+  "platform": "android",
+  "checks": [
+    "no_unauthorized_network",
+    "app_storage_isolation",
+    "no_private_path_access",
+    "model_integrity_checksum",
+    "plugin_subprocess_only"
+  ],
+  "policies": {
+    "network_disabled_by_default": true,
+    "plugins_subprocess": true,
+    "secrets_not_in_bundle": true
+  },
+  "status": "BUILD_VERIFIED",
+  "device_runtime": "UNEXECUTED_REQUIRES_RUNTIME",
+  "apk_build": {
+    "apk": "releases/local-coding-agent-0.1.0-rc.1/android/local-coding-agent-0.1.0-rc.1-android.apk",
+    "sha256": "ae8ba4b7407cdbe7739008a3b16321d9c956c77923e6f5b3f9021fc57600c4bd",
+    "size_bytes": 4728782,
+    "sdk_root": "/workspace/.android-sdk",
+    "source_apk": "app/build/outputs/apk/release/app-release.apk"
+  }
+}

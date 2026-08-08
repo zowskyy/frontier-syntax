@@ -1,6 +1,6 @@
 {
   "version": "0.1.0-rc.1",
-  "timestamp": "2026-08-08T23:22:24.770553Z",
+  "timestamp": "2026-08-08T23:33:03.086457Z",
   "sbom": "/workspace/evidence/release/sbom/sbom.json",
   "tests_passed": true,
   "security_gate_passed": true,
