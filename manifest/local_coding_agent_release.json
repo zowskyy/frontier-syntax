@@ -3,5 +3,5 @@
   "release_dir": "releases/local-coding-agent-0.1.0-rc.1",
   "tarball": "releases/local-coding-agent-0.1.0-rc.1.tar.gz",
   "audit_passed": true,
-  "artifact_count": 25
+  "artifact_count": 31
 }

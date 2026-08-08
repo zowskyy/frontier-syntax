@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Local Coding Agent</string>
+    <string name="app_title">Local Coding Agent</string>
+    <string name="version_label">Version %1$s (RC)</string>
+    <string name="checklist_label">Offline workflow checklist</string>
+    <string name="bootstrap_label">Termux bootstrap</string>
+    <string name="copy_bootstrap">Copy bootstrap command</string>
+    <string name="copied_bootstrap">Bootstrap command copied</string>
+</resources>

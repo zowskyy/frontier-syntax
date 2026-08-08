@@ -7,6 +7,7 @@ Release candidate (RC). Suitable for integration testing. Public launch blocked 
 ## Contents
 
 - Python wheel and source distribution (`dist/`)
+- Android APK (`android/local-coding-agent-0.1.0-rc.1-android.apk`)
 - SBOM and checksums
 - Curated evidence package
 - Audit manifest
@@ -17,6 +18,14 @@ Release candidate (RC). Suitable for integration testing. Public launch blocked 
 pip install dist/local_coding_agent-0.1.0rc1-py3-none-any.whl
 agent benchmark --profile desktop
 ```
+
+### Android
+
+```bash
+adb install android/local-coding-agent-0.1.0-rc.1-android.apk
+```
+
+The APK is an offline-first launcher that ships the Termux bootstrap for the Python agent runtime.
 
 ## Blueprint status
 
