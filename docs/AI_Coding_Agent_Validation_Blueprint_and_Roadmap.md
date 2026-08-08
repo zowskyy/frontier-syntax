@@ -836,9 +836,6 @@ CREATE INDEX idx_checkpoints_task ON checkpoints(task_id, sequence);
 
 **Default gate status for all slices:** `UNEXECUTED_REQUIRES_RUNTIME`
 
-## 16. Slice-by-Slice Blueprint (SLICE 0 – SLICE 36)
-
-
 ### SLICE 0 — Repository and Engineering Contract
 
 | Field | Value |
