@@ -9,10 +9,7 @@ pub mod handwritten;
 pub use handwritten::parse_program;
 use crate::ast::Program;
 use crate::error::FrontierError;
-#[cfg(feature = "serde-json")]
-use serde_json::Value;
 use std::fs;
-use std::path::Path;
 
 /// Parse Frontier v2.0 source into a JSON AST value.
 #[cfg(feature = "serde-json")]

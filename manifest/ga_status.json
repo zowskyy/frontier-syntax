@@ -1,13 +1,15 @@
 {
   "target": "RELEASE_READY",
-  "verdict": "RC_READY",
+  "verdict": "NOT_READY",
   "ga_ready": false,
-  "rc_ready": true,
+  "rc_ready": false,
   "blockers": [
-    "wave_3_m5_compiler",
+    "wave_0_tracking_gate",
     "wave_3_phase4_validated"
   ],
-  "rc_blockers": [],
-  "audited_at": "2026-08-07T21:10:43.871299Z",
-  "manifest": "manifest\\release_readiness.json"
+  "rc_blockers": [
+    "wave_0_tracking_gate"
+  ],
+  "audited_at": "2026-08-08T01:11:19.770168Z",
+  "manifest": "manifest/release_readiness.json"
 }

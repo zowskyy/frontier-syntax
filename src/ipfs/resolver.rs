@@ -15,6 +15,12 @@ pub struct IpfsImportResolver {
     gateway: String,
 }
 
+impl Default for IpfsImportResolver {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl IpfsImportResolver {
     pub fn new() -> Self {
         let client = Client::builder()

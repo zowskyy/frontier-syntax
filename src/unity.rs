@@ -168,11 +168,10 @@ fn detect_operations(source: &str, functions: &HashSet<String>) -> Vec<String> {
         ("find", "search"),
         ("hash", "hash"),
     ] {
-        if lower.contains(pattern) || functions.iter().any(|f| f.contains(pattern)) {
-            if !ops.iter().any(|o| o == op) {
+        if (lower.contains(pattern) || functions.iter().any(|f| f.contains(pattern)))
+            && !ops.iter().any(|o| o == op) {
                 ops.push(op.to_string());
             }
-        }
     }
     ops
 }
@@ -310,7 +309,7 @@ export const unity = new FrontierUnity();
 
 // --- Spec validation: specs ARE the implementation contract ---
 
-fn validate_spec(source: &str, wasm: &Vec<u8>, exports: &[String]) -> bool {
+fn validate_spec(source: &str, wasm: &[u8], exports: &[String]) -> bool {
     let mut specs_found = 0;
     let mut specs_ok = 0;
 

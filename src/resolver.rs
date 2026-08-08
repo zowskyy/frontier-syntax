@@ -34,6 +34,12 @@ pub struct Resolver {
     node_counter: u32,
 }
 
+impl Default for Resolver {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Resolver {
     pub fn new() -> Self {
         let root = Scope {
@@ -137,6 +143,7 @@ impl Resolver {
         }
     }
 
+    #[allow(dead_code)]
     fn check_null_safety(&self, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {
         match type_spec.annotation {
             TypeAnnotation::Required => Ok(()),

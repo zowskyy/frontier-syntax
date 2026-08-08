@@ -45,24 +45,24 @@ def run_cmd(cmd: list[str]) -> dict:
 
 
 def open_issues() -> set[int]:
+    """Return open GitHub issue numbers (excludes PRs when the CLI supports it)."""
+    base_cmd = ["gh", "issue", "list", "--state", "open", "--json", "number"]
     r = subprocess.run(
-        [
-            "gh",
-            "issue",
-            "list",
-            "--state",
-            "open",
-            "--json",
-            "number",
-            "--exclude-pull-requests",
-        ],
+        [*base_cmd, "--exclude-pull-requests"],
         cwd=ROOT,
         capture_output=True,
         text=True,
     )
     if r.returncode != 0:
+        # Older gh builds reject --exclude-pull-requests; plain issue list is issues-only.
+        r = subprocess.run(base_cmd, cwd=ROOT, capture_output=True, text=True)
+    if r.returncode != 0:
         return CANONICAL_ISSUES  # conservative: assume all open if gh fails
-    return {i["number"] for i in json.loads(r.stdout)}
+    try:
+        items = json.loads(r.stdout)
+    except json.JSONDecodeError:
+        return CANONICAL_ISSUES
+    return {i["number"] for i in items}
 
 
 def phase_0_checks() -> tuple[bool, list[dict]]:

@@ -161,22 +161,22 @@ impl FixedPointOptimizer {
     pub fn run_until_fixed_point(
         &self,
         mut func: SsaFunction,
-        mut ast: AstNode,
+        _initial_ast: AstNode,
     ) -> (SsaFunction, AstNode, usize) {
+        let _ = _initial_ast;
         let mut iterations = 0;
         loop {
             iterations += 1;
             func = Self::optimize_ir(func);
-            ast = crate::ast::PatternMatcher::match_ir_to_ast(&func);
+            let mut ast = crate::ast::PatternMatcher::match_ir_to_ast(&func);
             ast = AstOptimizer::rewrite_ast(ast);
             let constants = Self::extract_constants_from_ast(&ast);
             let (new_func, changed) = Self::apply_constants_to_ir(func, &constants);
             func = new_func;
             if !changed || iterations >= self.max_iterations {
-                break;
+                return (func, ast, iterations);
             }
         }
-        (func, ast, iterations)
     }
 
     fn optimize_ir(mut func: SsaFunction) -> SsaFunction {
@@ -201,16 +201,14 @@ impl FixedPointOptimizer {
         let mut changed = false;
         for block in func.blocks.values_mut() {
             for insn in &mut block.instructions {
-                if let SsaInstruction::Move { dest, src } = insn {
-                    if let SsaOperand::Register(r) = src {
-                        let key = format!("v{r}");
-                        if let Some(v) = constants.get(&key) {
-                            *insn = SsaInstruction::Const {
-                                dest: *dest,
-                                value: SsaOperand::ConstI32(*v),
-                            };
-                            changed = true;
-                        }
+                if let SsaInstruction::Move { dest, src: SsaOperand::Register(r) } = insn {
+                    let key = format!("v{r}");
+                    if let Some(v) = constants.get(&key) {
+                        *insn = SsaInstruction::Const {
+                            dest: *dest,
+                            value: SsaOperand::ConstI32(*v),
+                        };
+                        changed = true;
                     }
                 }
             }
@@ -225,10 +223,8 @@ fn is_dead(insn: &SsaInstruction) -> bool {
 
 fn collect_constants(stmt: &AstStmt, map: &mut HashMap<String, i32>) {
     match stmt {
-        AstStmt::Assign { name, value } => {
-            if let AstExpr::LiteralI32(v) = value {
-                map.insert(name.clone(), *v);
-            }
+        AstStmt::Assign { name, value: AstExpr::LiteralI32(v) } => {
+            map.insert(name.clone(), *v);
         }
         AstStmt::Block(stmts) => stmts.iter().for_each(|s| collect_constants(s, map)),
         AstStmt::If { then_branch, else_branch, .. } => {

@@ -154,6 +154,7 @@ impl JavaPrettyPrinter {
         out
     }
 
+    #[allow(clippy::only_used_in_recursion)]
     fn print_expr(&self, expr: &AstExpr) -> String {
         match expr {
             AstExpr::LiteralI32(v) => v.to_string(),

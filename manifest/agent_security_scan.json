@@ -1,5 +1,5 @@
 {
-  "verified_at": "2026-08-07T18:19:47.184735Z",
+  "verified_at": "2026-08-08T01:13:42.529266Z",
   "script": "scripts/verify_agent_security.py",
   "pass": true,
   "results": [
@@ -10,7 +10,7 @@
       "findings": []
     },
     {
-      "path": ".cursor\\symbiotic_agents.py",
+      "path": ".cursor/symbiotic_agents.py",
       "present": true,
       "pass": true,
       "findings": []

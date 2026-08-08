@@ -1,18 +1,36 @@
 {
-  "generated_at": "2026-08-07T05:22:17.601988Z",
+  "generated_at": "2026-08-08T01:17:11.309888Z",
   "phase_0_pass": true,
-  "phase_1_pass": true,
-  "phase_2_pass": true,
-  "phase_3_pass": true,
-  "phases_4_8": "frozen",
-  "all_pass": true,
-  "open_issues": [],
+  "phase_1_pass": false,
+  "phase_2_pass": false,
+  "phase_3_pass": false,
+  "phase_4_pass": false,
+  "phase_5_pass": false,
+  "phase_6_pass": false,
+  "phase_7_pass": false,
+  "phase_8_pass": false,
+  "max_phase": 8,
+  "phases_8": "blocked",
+  "all_pass": false,
+  "open_issues": [
+    44,
+    45,
+    46,
+    47,
+    48
+  ],
   "no_partial_credit": true,
   "evidence": [
     {
       "check": "0.1_issue_dedupe",
       "pass": true,
-      "open_issues": [],
+      "open_issues": [
+        44,
+        45,
+        46,
+        47,
+        48
+      ],
       "expected": [
         44,
         45,
@@ -35,23 +53,23 @@
       "tests_pass": true,
       "wasmtime_exec_pass": true,
       "wasmtime_manifest": "manifest/wasm_codegen_verify.json",
-      "issue_closed": true,
-      "pass": true,
-      "status": "validated",
-      "reason": null,
-      "output": "lf, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {\n    |        ^^^^^^^^^^^^^^^^^\n\nwarning: function `export_section_multi` is never used\n   --> src/wasm_codegen.rs:633:4\n    |\n633 | fn export_section_multi(names: &[String], main_func_count: usize) -> Vec<u8> {\n    |    ^^^^^^^^^^^^^^^^^^^^\n\nwarning: `frontier` (lib test) generated 13 warnings (run `cargo fix --lib -p frontier --tests` to apply 3 suggestions)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.61s\n     Running unittests src/lib.rs (target/debug/deps/frontier-bd04effebbbfa3e0)\n",
-      "command": "cargo test --lib wasm_codegen::"
+      "issue_closed": false,
+      "pass": false,
+      "status": "fail",
+      "reason": "issue #44 still open",
+      "output": "lf, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {\n    |        ^^^^^^^^^^^^^^^^^\n\nwarning: function `export_section_multi` is never used\n   --> src/wasm_codegen.rs:648:4\n    |\n648 | fn export_section_multi(names: &[String], main_func_count: usize) -> Vec<u8> {\n    |    ^^^^^^^^^^^^^^^^^^^^\n\nwarning: `frontier` (lib test) generated 13 warnings (run `cargo fix --lib -p frontier --tests` to apply 3 suggestions)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.84s\n     Running unittests src/lib.rs (target/debug/deps/frontier-bd04effebbbfa3e0)\n",
+      "command": "cargo test --lib -p frontier wasm_codegen::"
     },
     {
       "check": "1.2_knowledge_codegen",
       "ref": "issue_45",
       "tests_pass": true,
-      "issue_closed": true,
-      "pass": true,
+      "issue_closed": false,
+      "pass": false,
       "status": "fail",
-      "reason": null,
-      "output": "lf, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {\n    |        ^^^^^^^^^^^^^^^^^\n\nwarning: function `export_section_multi` is never used\n   --> src/wasm_codegen.rs:633:4\n    |\n633 | fn export_section_multi(names: &[String], main_func_count: usize) -> Vec<u8> {\n    |    ^^^^^^^^^^^^^^^^^^^^\n\nwarning: `frontier` (lib test) generated 13 warnings (run `cargo fix --lib -p frontier --tests` to apply 3 suggestions)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.62s\n     Running unittests src/lib.rs (target/debug/deps/frontier-bd04effebbbfa3e0)\n",
-      "command": "cargo test --lib wasm_codegen::tests::test_knowledge_changes_wasm"
+      "reason": "issue #45 still open \u2014 self-validation insufficient",
+      "output": "lf, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {\n    |        ^^^^^^^^^^^^^^^^^\n\nwarning: function `export_section_multi` is never used\n   --> src/wasm_codegen.rs:648:4\n    |\n648 | fn export_section_multi(names: &[String], main_func_count: usize) -> Vec<u8> {\n    |    ^^^^^^^^^^^^^^^^^^^^\n\nwarning: `frontier` (lib test) generated 13 warnings (run `cargo fix --lib -p frontier --tests` to apply 3 suggestions)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.79s\n     Running unittests src/lib.rs (target/debug/deps/frontier-bd04effebbbfa3e0)\n",
+      "command": "cargo test --lib -p frontier wasm_codegen::tests::test_knowledge_changes_wasm"
     },
     {
       "check": "1.3_self_hosting",
@@ -59,37 +77,22 @@
       "bootstrap_script_pass": true,
       "native_self_host_pass": true,
       "native_manifest": "manifest/native_self_host.json",
-      "issue_closed": true,
-      "pass": true,
-      "status": "validated",
-      "reason": null
+      "issue_closed": false,
+      "pass": false,
+      "status": "fail",
+      "reason": "issue #46 still open"
     },
     {
-      "check": "2.1_spec_impl",
-      "ref": "issue_47",
-      "pass": true,
-      "issue_closed": true,
-      "output": "PASS: Spec/impl bridge \u2014 10 core modules mapped\n",
-      "command": "python3 scripts/spec_impl_bridge.py"
+      "check": "phase_2",
+      "pass": false,
+      "status": "blocked",
+      "reason": "phase_1 not validated"
     },
     {
-      "check": "2.2_lib_tests",
-      "pass": true,
-      "output": "lf, type_spec: &TypeSpec, line: usize, column: usize) -> Result<(), FrontierError> {\n    |        ^^^^^^^^^^^^^^^^^\n\nwarning: function `export_section_multi` is never used\n   --> src/wasm_codegen.rs:633:4\n    |\n633 | fn export_section_multi(names: &[String], main_func_count: usize) -> Vec<u8> {\n    |    ^^^^^^^^^^^^^^^^^^^^\n\nwarning: `frontier` (lib test) generated 13 warnings (run `cargo fix --lib -p frontier --tests` to apply 3 suggestions)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.61s\n     Running unittests src/lib.rs (target/debug/deps/frontier-bd04effebbbfa3e0)\n",
-      "command": "cargo test --lib"
-    },
-    {
-      "check": "3.1_wasm_size",
-      "ref": "issue_48",
-      "pass": true,
-      "status": "validated",
-      "size_kb": 93.0,
-      "target_kb": 100,
-      "authoritative_manifest": "manifest/wasm_size.json",
-      "issue_closed": true,
-      "reason": null,
-      "output": "-features wasm-slim\",\n  \"build_profile\": \"wasm-slim\",\n  \"artifact_path\": \"target/wasm32-unknown-unknown/release/frontier.wasm\",\n  \"raw_artifact_path\": \"target/wasm32-unknown-unknown/release/frontier.wasm\",\n  \"raw_size_bytes\": 95194,\n  \"raw_size_kb\": 93.0,\n  \"wasm_opt_applied\": false,\n  \"size_bytes\": 95194,\n  \"size_kb\": 93.0,\n  \"target_kb\": 100,\n  \"met\": true,\n  \"git_sha\": \"79e8154\",\n  \"note\": \"wasm-slim build: parser + codegen + compile_frontier_wasm export. Full browser API (BrowserCompiler) requires --features full. Baseline monolithic build was ~885 KB; slim + wasm-opt is measured here.\"\n}\n",
-      "command": "python3 scripts/measure_wasm_size.py"
+      "check": "phase_3",
+      "pass": false,
+      "status": "blocked",
+      "reason": "phase_2 not validated"
     },
     {
       "check": "phase_4",

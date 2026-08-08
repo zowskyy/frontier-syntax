@@ -1,47 +1,44 @@
 # Release Readiness Report
 
-**Verdict:** `RC_READY`
+**Verdict:** `NOT_READY`
 **Version target:** 1.0.0-rc.1
-**Generated:** 2026-08-07T21:10:43.871299Z
+**Generated:** 2026-08-08T01:11:19.770168Z
 
 ## Summary
 
-- RC ready: **True**
+- RC ready: **False**
 - GA ready: **False**
 
 ## Gate summary
 
 | Check | Pass | Notes |
 |-------|------|-------|
-| wave_0_tracking_gate | yes |  |
-| wave_0_wasm_codegen_verify | yes |  |
-| wave_0_wasm_size | yes |  |
-| wave_0_native_self_host | yes |  |
+| wave_0_tracking_gate | no | 
+  "phase_1_pass": false,
+  "phase_2_pass": false,
+  "phase_ |
+| wave_0_wasm_codegen_verify | yes | y_wasm_codegen.py",
+  "wasmtime": "/home/ubuntu/.wasmtime/bi |
+| wave_0_wasm_size | yes | ured_at": "2026-08-08T01:10:44.444127Z",
+  "measurement_scri |
+| wave_0_native_self_host | yes | {
+  "verified_at": "2026-08-08T01:11:19.763181Z",
+  "script" |
 | wave_1_security_md | yes |  |
 | wave_1_release_checklist | yes |  |
 | wave_2_compiler_ci | yes |  |
-| wave_3_m5_compiler | no | compiler wasm build failed: ling futures-task v0.3.33
-   Compiling cfg-if v1.0.4
-error[E0463]: can't find crate for `core`
-  |
-  = note: the `wasm32-unknown-unknown` target may not be installed
-  = help: consider downloading the target with `rustup target add wasm32-unknown-unknown`
-
-For more information about this error, try `rustc --explain E0463`.
-error: could not compile `unicode-ident` (lib) due to 1 previous error
-warning: build failed, waiting for other jobs to finish...
-error: could not compile `pin-project-lite` (lib) due to 1 previous error
-error: could not compile `once_cell` (lib) due to 1 previous error
-error: could not compile `futures-task` (lib) due to 1 previous error
-error: could not compile `futures-core` (lib) due to 1 previous error
-error: could not compile `cfg-if` (lib) due to 1 previous error
- |
+| wave_3_m5_compiler | yes |  |
 | wave_3_phase4_validated | no | phases 4-8 not all validated (required for GA RELEASE_READY) |
 | wave_5_launch_external | yes |  |
 
 ## Blockers
 
-- None (RC gates)
+- wave_0_tracking_gate
+
+## GA blockers
+
+- wave_0_tracking_gate
+- wave_3_phase4_validated
 
 ## Evidence manifests
 
@@ -53,4 +50,4 @@ error: could not compile `cfg-if` (lib) due to 1 previous error
 
 ## Recommendation
 
-**RC GO** (compiler release candidate)
+**NO-GO** — resolve blockers above
