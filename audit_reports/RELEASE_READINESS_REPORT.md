@@ -1,13 +1,13 @@
 # Release Readiness Report
 
-**Verdict:** `RELEASE_READY`
+**Verdict:** `RC_READY`
 **Version target:** 1.0.0-rc.1
-**Generated:** 2026-08-08T04:33:05.431582Z
+**Generated:** 2026-08-08T20:11:43.729149Z
 
 ## Summary
 
 - RC ready: **True**
-- GA ready: **True**
+- GA ready: **False**
 
 ## Gate summary
 
@@ -23,6 +23,7 @@
 | wave_3_m5_compiler | yes |  |
 | wave_3_phase4_validated | yes |  |
 | wave_5_launch_external | yes |  |
+| wave_blueprint_completion | no |  |
 
 ## Blockers
 
@@ -38,4 +39,4 @@
 
 ## Recommendation
 
-**GO**
+**RC GO** (compiler release candidate)

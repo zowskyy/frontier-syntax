@@ -6,6 +6,8 @@ This policy applies **automatically on every agent session** in this repo. The u
 
 ## Completion policy
 
+**Blueprint first.** See [`.cursor/rules/blueprint-completion.mdc`](.cursor/rules/blueprint-completion.mdc). The user/canonical blueprint (`PROJECT_BLUEPRINT.md` by default) is the supreme Definition of Done. If any blueprint slice is open, the job is not done — even when `RELEASE_READY`, gates pass, or CI is green. Audit every slice before delivery; do not hand off as complete until the blueprint is 100%.
+
 **Ship finished work only.** Do not stop at arbitrary iteration limits. Do not deliver half-filled answer sheets.
 
 When you produce or modify code:

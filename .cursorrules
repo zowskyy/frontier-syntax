@@ -2,6 +2,8 @@
 
 The user never needs to say "run gates" or "keep going." This is your default behavior here.
 
+**Blueprint = completion.** See `.cursor/rules/blueprint-completion.mdc`. User/canonical blueprint is supreme; incomplete blueprint means incomplete job regardless of `RELEASE_READY` or other protocols. Audit all slices before delivery.
+
 Quarterback/worker delegation: see `.cursor/rules/quarterback-worker.mdc`.
 
 When generating or modifying code, you MUST gate-check and fix until PASS before sending the response.

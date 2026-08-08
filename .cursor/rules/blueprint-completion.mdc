@@ -1,0 +1,41 @@
+---
+description: AUTO-ENABLED — PROJECT_BLUEPRINT.md is supreme completion authority; overrides RELEASE_READY
+alwaysApply: true
+---
+
+# Blueprint completion — SUPREME AUTHORITY
+
+**Canonical blueprint:** [`PROJECT_BLUEPRINT.md`](../../PROJECT_BLUEPRINT.md) at repo root unless the user cites another path.
+
+**Audit command:** `python3 scripts/blueprint_audit.py` (manifest: `manifest/blueprint_completion.json`)
+
+**Policy module:** `scripts/blueprint_completion_policy.py`
+
+This rule ranks **above** GA protocol, `RELEASE_READY`, gate slices, and mission-slice deferrals.
+
+## Hierarchy
+
+1. User-provided blueprint, else `PROJECT_BLUEPRINT.md`
+2. Every phase, slice, and acceptance criterion through 100%
+3. Repo gates (`tracking.py`, `release_readiness.py`, cursor gate) — evidence only
+
+If `RELEASE_READY` but the blueprint has open slices → **job not done.**
+
+## Pre-delivery (mandatory)
+
+1. Run `python3 scripts/blueprint_audit.py --json` (or `--skip-run` only when manifests are fresh).
+2. Enumerate slices; mark each `DONE` (cited evidence) or `OPEN`.
+3. Re-read the blueprint for missed slices (6.2 LoRA, 6.3 agent, Phase 8 external, §11 stability).
+4. Deliver only when `complete: true`. Otherwise continue or **BLOCKED** with one ask.
+
+## Response format
+
+Lead with **Blueprint: X/Y slices** and open ids (`5.0`, `6.2`, `8.0`, …). Report GA verdict second.
+
+Do not use “Gate review: PASS” or “job done” when blueprint is incomplete.
+
+## Forbidden
+
+- Treating orchestrator verdict as completion while blueprint slices are open
+- Marking slices optional unless the blueprint says so
+- Completion summaries without slice audit
