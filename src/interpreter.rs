@@ -39,6 +39,11 @@ impl Interpreter {
                 self.declare(name, val.clone())?;
                 Ok(Some(val))
             }
+            Stmt::Assign { name, value } => {
+                let val = self.eval_expr(value)?;
+                self.assign(name, val.clone())?;
+                Ok(Some(val))
+            }
             Stmt::Return { value } => {
                 if let Some(v) = value {
                     Ok(Some(self.eval_expr(v)?))
@@ -132,6 +137,21 @@ impl Interpreter {
         }
         scope.insert(name.to_string(), val);
         Ok(())
+    }
+
+    fn assign(&mut self, name: &str, val: Value) -> Result<(), FrontierError> {
+        for scope in self.scopes.iter_mut().rev() {
+            if scope.contains_key(name) {
+                scope.insert(name.to_string(), val);
+                return Ok(());
+            }
+        }
+        Err(FrontierError::resolve(
+            "E-UNDEF",
+            format!("Undefined symbol '{}'", name),
+            1,
+            1,
+        ))
     }
 
     fn lookup(&self, name: &str) -> Option<Value> {

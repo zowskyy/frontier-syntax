@@ -2,7 +2,7 @@
 
 **Verdict:** `RELEASE_READY`
 **Version target:** 1.0.0-rc.1
-**Generated:** 2026-08-08T04:33:05.431582Z
+**Generated:** 2026-08-08T06:51:57.180194Z
 
 ## Summary
 
@@ -17,6 +17,7 @@
 | wave_0_wasm_codegen_verify | yes |  |
 | wave_0_wasm_size | yes |  |
 | wave_0_native_self_host | yes |  |
+| wave_0_independent_validation | yes |  |
 | wave_1_security_md | yes |  |
 | wave_1_release_checklist | yes |  |
 | wave_2_compiler_ci | yes |  |
@@ -34,6 +35,7 @@
 - manifest/wasm_codegen_verify.json
 - manifest/wasm_size.json
 - manifest/native_self_host.json
+- manifest/independent_validation.json
 - manifest/compiler_self_host_mission.json
 
 ## Recommendation
