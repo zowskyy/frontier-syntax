@@ -13,7 +13,7 @@
       "id": "APK-002",
       "name": "APK SHA256 matches evidence",
       "passed": true,
-      "detail": "expected=536a85572d68 actual=536a85572d68"
+      "detail": "expected=266ebcc05741 actual=266ebcc05741"
     },
     {
       "id": "APK-003",
@@ -49,13 +49,13 @@
       "id": "APK-008",
       "name": "UI scroll + pinned copy button",
       "passed": true,
-      "detail": "scroll=True pinned=True scroll_above_button=True bootstrap_lines=32"
+      "detail": "scroll=True pinned=True scroll_above_button=True bootstrap_lines=33"
     }
   ],
   "passed": true,
   "device_runtime": "UNEXECUTED_REQUIRES_RUNTIME",
   "launch_scope": "apk_artifact_only",
-  "updated_at": "2026-08-09T01:35:37.418252Z",
+  "updated_at": "2026-08-09T02:44:44.266126Z",
   "taylor_workers": [
     {
       "id": "APK-W1_Build",
