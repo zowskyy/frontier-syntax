@@ -17,8 +17,8 @@
   "device_runtime": "UNEXECUTED_REQUIRES_RUNTIME",
   "apk_build": {
     "apk": "releases/local-coding-agent-0.1.0-rc.1/android/local-coding-agent-0.1.0-rc.1-android.apk",
-    "sha256": "536a85572d684719b7e470a8695187e67b0aca6d5db76fffe9d8a249bc767193",
-    "size_bytes": 4729738,
+    "sha256": "1c4e3d3f3a0869d3591421be13d5e533f6f63d54853cf72fa22468929c038d13",
+    "size_bytes": 4729954,
     "sdk_root": "/workspace/.android-sdk",
     "source_apk": "app/build/outputs/apk/release/app-release.apk"
   }

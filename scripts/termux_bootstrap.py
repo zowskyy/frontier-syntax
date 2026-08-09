@@ -32,13 +32,26 @@ WHEEL_URL = (
 BOOTSTRAP_SCRIPT = """#!/data/data/com.termux/files/usr/bin/bash
 set -euo pipefail
 pkg update -y
-pkg install -y python-3.12 clang cmake git
-PY=python3.12
+pkg install -y python python-pip clang cmake git
+resolve_python() {
+  if command -v python3.12 >/dev/null 2>&1; then echo python3.12; return 0; fi
+  ver="$(python3 -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')"
+  if [ "$ver" = "3.12" ]; then echo python3; return 0; fi
+  if ! pkg search python3.12 2>/dev/null | grep -qE '^python3\\.12/'; then
+    pkg install -y tur-repo || true; pkg update -y || true
+  fi
+  if pkg install -y python3.12 2>/dev/null && command -v python3.12 >/dev/null 2>&1; then
+    echo python3.12; return 0
+  fi
+  echo python3
+}
+PY="$(resolve_python)"
+WHEEL_PY="$("$PY" -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')"
 PIP="$PY -m pip"
 $PIP install --user --upgrade pip wheel
 $PIP install --user \\
   --platform manylinux2014_aarch64 \\
-  --python-version 3.12 \\
+  --python-version "$WHEEL_PY" \\
   --implementation cp \\
   --only-binary=:all: \\
   "pydantic>=2,<3" "pydantic-settings>=2,<3" typing-extensions annotated-types

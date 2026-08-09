@@ -23,7 +23,7 @@ The APK is an offline-first launcher that displays the mobile workflow checklist
 
 ### Termux bootstrap
 
-The agent is **not on PyPI**. Use **Python 3.12** on Termux (not 3.13) so `pydantic-core` installs from prebuilt wheels instead of compiling Rust on-device.
+The agent is **not on PyPI**. Termux main repo package is **`python`** (currently 3.13), not `python-3.12`. The bootstrap auto-resolves Python and uses manylinux wheels only.
 
 ```bash
 bash scripts/termux_bootstrap.sh
@@ -32,11 +32,13 @@ bash scripts/termux_bootstrap.sh
 Or paste manually in Termux:
 
 ```bash
-pkg update -y && pkg install -y python-3.12 clang cmake git
-PY=python3.12
+pkg update -y && pkg install -y python python-pip clang cmake git
+PY=python3
+if command -v python3.12 >/dev/null 2>&1; then PY=python3.12; fi
+WHEEL_PY=$($PY -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')
 $PY -m pip install --user --upgrade pip wheel
 $PY -m pip install --user \
-  --platform manylinux2014_aarch64 --python-version 3.12 --implementation cp \
+  --platform manylinux2014_aarch64 --python-version "$WHEEL_PY" --implementation cp \
   --only-binary=:all: \
   "pydantic>=2,<3" "pydantic-settings>=2,<3" typing-extensions annotated-types
 $PY -m pip install --user --no-deps \
@@ -46,7 +48,7 @@ echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 mkdir -p ~/models && agent benchmark --profile android
 ```
 
-If install still fails, confirm `python3.12 --version` shows 3.12.x (not 3.13).
+If pydantic still tries to compile Rust, install Python 3.12 from TUR: `pkg install tur-repo && pkg install python3.12`, then re-run the bootstrap.
 
 ## iOS
 
