@@ -1,0 +1,40 @@
+---
+description: AUTO-ENABLED — multi-pass audit and debug until full package; no iteration cap
+alwaysApply: true
+---
+
+# Audit-debug loop — full package only — AUTOMATIC
+
+**This rule is always on.** Every task ends as a complete, shippable package — not a partial fix, not a failure list, not "try this and tell me what happens."
+
+## Mandatory loop (no cap)
+
+```
+implement → gate → domain audit → debug → fix → (repeat until all PASS)
+```
+
+1. **Implement** the smallest correct fix.
+2. **Gate** every changed code file (both reviewers until PASS).
+3. **Domain audit** — run the relevant script until its verdict is PASS:
+   - APK/mobile: `python3 scripts/audit_apk_launch_ready.py`
+   - GA: `python3 scripts/release_readiness.py --audit --skip-run`
+   - Global rules: `python3 scripts/verify_global_rules.py`
+4. **Debug** any failure; fix root cause; return to step 2.
+5. **Taylor shadow** when code or evidence changed: `python3 scripts/agent_shadow_worker.py run --taylor`
+
+Stop only when **all** applicable checks PASS, or you are **BLOCKED** with one specific ask.
+
+## Multi-pass requirement
+
+A single PASS is not enough when evidence changed mid-task. After any fix that touches bootstrap, APK assets, manifests, or user-reported errors:
+
+- Re-run the full domain audit from scratch
+- Re-verify bootstrap script sync (`scripts/termux_bootstrap.py` output matches shipped assets)
+- Re-gate every touched file
+
+## Forbidden
+
+- ❌ "Should work now" without re-running audits
+- ❌ Delivering after one failed audit with "you can try again"
+- ❌ Stopping at N iterations
+- ❌ Skipping `verify_global_rules.py` when changing the rules library itself

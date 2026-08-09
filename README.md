@@ -288,7 +288,10 @@ bash scripts/gate-all-changed.sh
 |----------|------|
 | `cursor_gate.py` / `cursor_gate_fastest.py` | Dual reviewers (15 gates each) |
 | `AGENTS.md` | Agent completion policy |
-| `.cursor/rules/*.mdc` | Quarterback/worker delegation rules |
+| `.cursor/rules/*.mdc` | Always-on project rules (gates, audit loop, delegation) |
+| `docs/USER_RULES_PASTE.md` | Paste into Cursor User Rules (all projects/chats) |
+| `docs/GLOBAL_RULES_LIBRARY.md` | Global rules index + bootstrap |
+| `scripts/verify_global_rules.py` | Verify rules complete + synced |
 | `.github/workflows/gate-check.yml` | CI gate on pull requests |
 | `samples/hello_passing.py` | Smoke-test fixture that passes all gates |
 

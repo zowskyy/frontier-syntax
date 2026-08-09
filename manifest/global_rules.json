@@ -1,0 +1,42 @@
+{
+  "version": "1",
+  "updated_at": "2026-08-09T00:39:49.624923Z",
+  "user_rules": {
+    "path": "docs/USER_RULES_PASTE.md",
+    "sha256": "9959bedb063cc56eb32978f35ba3f15dba0e81fc375e5d56aed2468b23d47305"
+  },
+  "rules": {
+    "audit-debug-loop.mdc": {
+      "path": ".cursor/rules/audit-debug-loop.mdc",
+      "sha256": "29f3e83e28ba86400266cd7bff17afe183345534bbe087bd87a7e6ff2763351e",
+      "always_apply": true
+    },
+    "ga-protocol.mdc": {
+      "path": ".cursor/rules/ga-protocol.mdc",
+      "sha256": "6d8063d1d23188d1cfca3fb952c99ee91b35257ff77fc81c8aa3ab0b2b59e955",
+      "always_apply": true
+    },
+    "quarterback-worker.mdc": {
+      "path": ".cursor/rules/quarterback-worker.mdc",
+      "sha256": "3db1d562066ed2e29ceb78f2e39a5716026fbe971e8bbd10e3fe7565c8276b7b",
+      "always_apply": true
+    },
+    "ship-finished-work.mdc": {
+      "path": ".cursor/rules/ship-finished-work.mdc",
+      "sha256": "ef25d950bd854dd14fbc13a918764d854c7b7f4c886f02834f99d8f66042bad2",
+      "always_apply": true
+    },
+    "visual-evidence-audit.mdc": {
+      "path": ".cursor/rules/visual-evidence-audit.mdc",
+      "sha256": "610021742ae87bf8945112471c3cceecfb3cfcc907688d867f24e71af21b5232",
+      "always_apply": true
+    }
+  },
+  "required_mdc": [
+    "ship-finished-work.mdc",
+    "visual-evidence-audit.mdc",
+    "audit-debug-loop.mdc",
+    "quarterback-worker.mdc",
+    "ga-protocol.mdc"
+  ]
+}

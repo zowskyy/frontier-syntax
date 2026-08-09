@@ -117,4 +117,6 @@ cargo build --release --lib --target wasm32-unknown-unknown --features full
 
 health >/dev/null
 test_install_smoke
+echo "==> Bootstrapping agent policy + global rules"
+bash "$ROOT/scripts/install-agent-environment.sh"
 echo "==> Frontier install complete"
