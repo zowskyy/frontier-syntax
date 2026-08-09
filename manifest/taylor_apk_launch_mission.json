@@ -2,7 +2,7 @@
   "mission": "apk_launch_ready",
   "complete": true,
   "verdict": "LAUNCH_READY",
-  "updated_at": "2026-08-09T00:26:22.868661Z",
+  "updated_at": "2026-08-09T01:26:54.168931Z",
   "workers": [
     {
       "id": "APK-W1_Build",
@@ -13,7 +13,7 @@
           "command": "/usr/bin/python3 /workspace/scripts/build_android_apk.py --json",
           "pass": true,
           "exit_code": 0,
-          "output_tail": "aseArtProfile UP-TO-DATE\n> Task :app:mergeReleaseShaders UP-TO-DATE\n> Task :app:compileReleaseShaders NO-SOURCE\n> Task :app:generateReleaseAssets UP-TO-DATE\n> Task :app:mergeReleaseAssets UP-TO-DATE\n> Task :app:compressReleaseAssets UP-TO-DATE\n> Task :app:extractReleaseVersionControlInfo UP-TO-DATE\n> Task :app:processReleaseJavaRes UP-TO-DATE\n> Task :app:mergeReleaseJavaResource UP-TO-DATE\n> Task :app:optimizeReleaseResources UP-TO-DATE\n> Task :app:collectReleaseDependencies UP-TO-DATE\n> Task :app:sdkReleaseDependencyData UP-TO-DATE\n> Task :app:validateSigningRelease UP-TO-DATE\n> Task :app:writeReleaseAppMetadata UP-TO-DATE\n> Task :app:writeReleaseSigningConfigVersions UP-TO-DATE\n> Task :app:packageRelease UP-TO-DATE\n> Task :app:createReleaseApkListingFileRedirect UP-TO-DATE\n> Task :app:assembleRelease\n\nBUILD SUCCESSFUL in 6s\n49 actionable tasks: 2 executed, 47 up-to-date\n{\n  \"apk\": \"releases/local-coding-agent-0.1.0-rc.1/android/local-coding-agent-0.1.0-rc.1-android.apk\",\n  \"sha256\": \"0b437a060c78f064d9c631144d22e160da18783e7a6b06484afd699b991cdbb2\",\n  \"size_bytes\": 4729310,\n  \"sdk_root\": \"/workspace/.android-sdk\",\n  \"source_apk\": \"app/build/outputs/apk/release/app-release.apk\"\n}\n"
+          "output_tail": "aseArtProfile UP-TO-DATE\n> Task :app:mergeReleaseShaders UP-TO-DATE\n> Task :app:compileReleaseShaders NO-SOURCE\n> Task :app:generateReleaseAssets UP-TO-DATE\n> Task :app:mergeReleaseAssets UP-TO-DATE\n> Task :app:compressReleaseAssets UP-TO-DATE\n> Task :app:extractReleaseVersionControlInfo UP-TO-DATE\n> Task :app:processReleaseJavaRes UP-TO-DATE\n> Task :app:mergeReleaseJavaResource UP-TO-DATE\n> Task :app:optimizeReleaseResources UP-TO-DATE\n> Task :app:collectReleaseDependencies UP-TO-DATE\n> Task :app:sdkReleaseDependencyData UP-TO-DATE\n> Task :app:validateSigningRelease UP-TO-DATE\n> Task :app:writeReleaseAppMetadata UP-TO-DATE\n> Task :app:writeReleaseSigningConfigVersions UP-TO-DATE\n> Task :app:packageRelease UP-TO-DATE\n> Task :app:createReleaseApkListingFileRedirect UP-TO-DATE\n> Task :app:assembleRelease\n\nBUILD SUCCESSFUL in 6s\n49 actionable tasks: 2 executed, 47 up-to-date\n{\n  \"apk\": \"releases/local-coding-agent-0.1.0-rc.1/android/local-coding-agent-0.1.0-rc.1-android.apk\",\n  \"sha256\": \"536a85572d684719b7e470a8695187e67b0aca6d5db76fffe9d8a249bc767193\",\n  \"size_bytes\": 4729738,\n  \"sdk_root\": \"/workspace/.android-sdk\",\n  \"source_apk\": \"app/build/outputs/apk/release/app-release.apk\"\n}\n"
         },
         {
           "command": "APK-001",
@@ -25,7 +25,7 @@
           "command": "APK-002",
           "pass": true,
           "exit_code": 0,
-          "output_tail": "expected=0b437a060c78 actual=0b437a060c78"
+          "output_tail": "expected=536a85572d68 actual=536a85572d68"
         }
       ]
     },
@@ -123,7 +123,7 @@
       "id": "APK-002",
       "name": "APK SHA256 matches evidence",
       "passed": true,
-      "detail": "expected=0b437a060c78 actual=0b437a060c78"
+      "detail": "expected=536a85572d68 actual=536a85572d68"
     },
     {
       "id": "APK-003",

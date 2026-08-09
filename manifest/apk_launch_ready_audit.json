@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-08-09T00:08:35.942616Z",
+  "timestamp": "2026-08-09T01:26:54.198660Z",
   "verdict": "LAUNCH_READY",
   "passed": true,
   "launch_ready": true,
   "taylor_complete": true,
-  "iterations": 1,
+  "iterations": 2,
   "checks": [
     {
       "id": "APK-001",
@@ -16,7 +16,7 @@
       "id": "APK-002",
       "name": "APK SHA256 matches evidence",
       "passed": true,
-      "detail": "expected=ecaad29d1746 actual=ecaad29d1746"
+      "detail": "expected=536a85572d68 actual=536a85572d68"
     },
     {
       "id": "APK-003",
