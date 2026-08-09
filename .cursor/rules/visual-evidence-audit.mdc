@@ -1,0 +1,54 @@
+---
+description: AUTO-ENABLED — cite all images/screenshots; audit-debug loop before user delivery
+alwaysApply: true
+---
+
+# Visual evidence citation + audit-debug loop — AUTOMATIC
+
+**This rule is always on.** The user does NOT need to remind you. Apply on every turn that uses or references images, screenshots, or user-attached visuals.
+
+## Image / screenshot citation (mandatory)
+
+Whenever you reference, interpret, or act on a picture, screenshot, diagram, or user attachment:
+
+1. **Cite the source** in the response under a `### Visual evidence` heading:
+   - **Source:** where it came from (e.g. user attachment in this chat, repo path, URL, tool output).
+   - **Captured:** timestamp or commit/PR if known.
+   - **What it shows:** one factual sentence — no speculation beyond visible content.
+2. **Do not** treat image descriptions as ground truth without stating they are model-generated interpretations of the attachment.
+3. **Do not** reuse stale screenshots from prior turns without noting they may be outdated; prefer re-checking repo evidence manifests when diagnosing regressions.
+
+## Audit-debug loop before delivery (mandatory)
+
+Before delivering a fix, diagnosis, or ship claim to the user:
+
+1. **Re-read** applicable global rules (`.cursorrules`, `.cursor/rules/*.mdc`, `AGENTS.md`).
+2. **Verify** the fix against the cited visual evidence (error text, versions, paths visible in the screenshot).
+3. **Run** the relevant audit/remediation loop for the domain:
+   - Code changes: both gate scripts until PASS on every changed file.
+   - Mobile/APK: `python3 scripts/audit_apk_launch_ready.py` until `LAUNCH_READY`.
+   - GA claims: `python3 scripts/release_readiness.py --audit --skip-run`.
+4. **Debug pass:** if audit or gates fail, fix and re-run — **no iteration cap**. Only stop on concrete BLOCKED.
+5. **End-of-turn audit:** `python3 scripts/agent_shadow_worker.py run --taylor` when code or evidence changed.
+
+## Response footer (when visuals were involved)
+
+Include:
+
+```
+Visual evidence: cited
+Audit-debug loop: PASS (gates + domain audit)
+```
+
+If blocked:
+
+```
+Visual evidence: cited
+Audit-debug loop: BLOCKED — <reason>
+```
+
+## Forbidden
+
+- ❌ Acting on screenshots without citing source
+- ❌ Delivering fixes without re-running domain audit after evidence-changing edits
+- ❌ Assuming global rules from a prior chat without checking `.cursor/rules/`

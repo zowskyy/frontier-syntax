@@ -26,6 +26,23 @@ The main agent is the **quarterback**; Task subagents are **workers**. Full poli
 - **Delegate** when 3+ files, research+implementation split, or long investigation. **Inline** single small fixes.
 - **Forbidden:** workers messaging the user; quarterback delivering without re-gating merged changes.
 
+## Visual evidence + audit-debug loop
+
+**Always on.** See [`.cursor/rules/visual-evidence-audit.mdc`](.cursor/rules/visual-evidence-audit.mdc) and [`.cursor/rules/audit-debug-loop.mdc`](.cursor/rules/audit-debug-loop.mdc).
+
+- Cite every image/screenshot you reference (source, capture context, what it shows).
+- Before delivery: re-read global rules, verify against cited evidence, run gates + domain audit loops until PASS (no iteration cap).
+
+## Global rules library (all chats / all repos)
+
+| Layer | File | Scope |
+|-------|------|-------|
+| User Rules | [`docs/USER_RULES_PASTE.md`](docs/USER_RULES_PASTE.md) | Paste into Cursor Settings → Rules → User Rules |
+| Project rules | [`.cursor/rules/*.mdc`](.cursor/rules/) | Repo + synced to `~/.cursor/rules/` on VM boot |
+| Verify | `python3 scripts/verify_global_rules.py` | CI + local check |
+
+Full index: [`docs/GLOBAL_RULES_LIBRARY.md`](docs/GLOBAL_RULES_LIBRARY.md)
+
 ## Environment
 
 Gate scripts are installed to `~/.cursor/` on every environment bootstrap via `scripts/install-agent-environment.sh`.
