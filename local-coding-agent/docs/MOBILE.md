@@ -21,6 +21,26 @@ python3 scripts/build_android_apk.py --help
 
 The APK is an offline-first launcher that displays the mobile workflow checklist and copies a Termux bootstrap script for the Python agent runtime (`Termux + Python + llama.cpp GGUF` on ARM64).
 
+### Termux bootstrap
+
+The agent is **not on PyPI**. First-time setup downloads the release wheel from GitHub, then installs the `agent` CLI to `~/.local/bin`.
+
+```bash
+bash scripts/termux_bootstrap.sh
+```
+
+Or paste manually in Termux:
+
+```bash
+pkg update -y && pkg install -y python clang cmake git
+pip install --user --upgrade https://github.com/zowskyy/frontier-syntax/raw/main/releases/local-coding-agent-0.1.0-rc.1/dist/local_coding_agent-0.1.0rc1-py3-none-any.whl
+export PATH="$HOME/.local/bin:$PATH"
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+mkdir -p ~/models && agent benchmark --profile android
+```
+
+If `agent` is not found after install, run `export PATH="$HOME/.local/bin:$PATH"` or open a new Termux session.
+
 ## iOS
 
 Swift host + llama.cpp XCFramework. **No iOS Python** for core product.

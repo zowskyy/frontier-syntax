@@ -1,7 +1,7 @@
 {
   "apk": "releases/local-coding-agent-0.1.0-rc.1/android/local-coding-agent-0.1.0-rc.1-android.apk",
-  "sha256": "ae8ba4b7407cdbe7739008a3b16321d9c956c77923e6f5b3f9021fc57600c4bd",
-  "size_bytes": 4728782,
+  "sha256": "ecaad29d174686f8e52111bfac340992c078eabdc150cfba7c33b1aa59e10adf",
+  "size_bytes": 4728998,
   "sdk_root": "/workspace/.android-sdk",
   "source_apk": "app/build/outputs/apk/release/app-release.apk"
 }
