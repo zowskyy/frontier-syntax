@@ -23,32 +23,34 @@ The APK is an offline-first launcher that displays the mobile workflow checklist
 
 ### Termux bootstrap
 
-The agent is **not on PyPI**. Termux main repo package is **`python`** (currently 3.13), not `python-3.12`. The bootstrap auto-resolves Python and uses manylinux wheels only.
+The agent is **not on PyPI**. Termux ships **Python 3.13** as package `python`. There is no `python3.12` in main or TUR on many devices.
+
+Install deps with **`pip install --target`** + manylinux aarch64 wheels (required on pip 26+):
 
 ```bash
 bash scripts/termux_bootstrap.sh
 ```
 
-Or paste manually in Termux:
+Or paste in Termux:
 
 ```bash
 pkg update -y && pkg install -y python python-pip clang cmake git
 PY=python3
-if command -v python3.12 >/dev/null 2>&1; then PY=python3.12; fi
-WHEEL_PY=$($PY -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')
-$PY -m pip install --user --upgrade pip wheel
-$PY -m pip install --user \
-  --platform manylinux2014_aarch64 --python-version "$WHEEL_PY" --implementation cp \
+SITE="$($PY -m site --user-site)"
+mkdir -p "$SITE"
+VER=$($PY -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')
+$PY -m pip install --target "$SITE" \
+  --platform manylinux2014_aarch64 --python-version "$VER" --implementation cp \
   --only-binary=:all: \
-  "pydantic>=2,<3" "pydantic-settings>=2,<3" typing-extensions annotated-types
-$PY -m pip install --user --no-deps \
+  pydantic==2.10.6 pydantic-settings==2.7.1 typing-extensions annotated-types
+$PY -m pip install --target "$SITE" --no-deps \
   https://github.com/zowskyy/frontier-syntax/raw/main/releases/local-coding-agent-0.1.0-rc.1/dist/local_coding_agent-0.1.0rc1-py3-none-any.whl
 export PATH="$HOME/.local/bin:$PATH"
-echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+grep -q '.local/bin' ~/.bashrc 2>/dev/null || echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 mkdir -p ~/models && agent benchmark --profile android
 ```
 
-If pydantic still tries to compile Rust, install Python 3.12 from TUR: `pkg install tur-repo && pkg install python3.12`, then re-run the bootstrap.
+Do **not** run `pip install --upgrade pip` on Termux (breaks `python-pip`).
 
 ## iOS
 

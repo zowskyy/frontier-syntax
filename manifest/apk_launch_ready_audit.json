@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-09T02:25:37.590008Z",
+  "timestamp": "2026-08-09T02:44:44.291385Z",
   "verdict": "LAUNCH_READY",
   "passed": true,
   "launch_ready": true,
@@ -16,7 +16,7 @@
       "id": "APK-002",
       "name": "APK SHA256 matches evidence",
       "passed": true,
-      "detail": "expected=1c4e3d3f3a08 actual=1c4e3d3f3a08"
+      "detail": "expected=266ebcc05741 actual=266ebcc05741"
     },
     {
       "id": "APK-003",
@@ -52,7 +52,7 @@
       "id": "APK-008",
       "name": "UI scroll + pinned copy button",
       "passed": true,
-      "detail": "scroll=True pinned=True scroll_above_button=True bootstrap_lines=55"
+      "detail": "scroll=True pinned=True scroll_above_button=True bootstrap_lines=33"
     }
   ],
   "remediation_actions": [],

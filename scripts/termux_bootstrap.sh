@@ -6,44 +6,23 @@ set -euo pipefail
 pkg update -y
 pkg install -y python python-pip clang cmake git
 
-resolve_python() {
-  if command -v python3.12 >/dev/null 2>&1; then
-    echo python3.12
-    return 0
-  fi
-  ver="$(python3 -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')"
-  if [ "$ver" = "3.12" ]; then
-    echo python3
-    return 0
-  fi
-  if ! pkg search python3.12 2>/dev/null | grep -qE '^python3\.12/'; then
-    pkg install -y tur-repo || true
-    pkg update -y || true
-  fi
-  if pkg install -y python3.12 2>/dev/null && command -v python3.12 >/dev/null 2>&1; then
-    echo python3.12
-    return 0
-  fi
-  echo python3
-}
-
-PY="$(resolve_python)"
-WHEEL_PY="$("$PY" -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')"
+PY=python3
+SITE="$("$PY" -m site --user-site)"
+mkdir -p "$SITE"
 PIP="$PY -m pip"
 
-echo "Using $PY (wheel tag cp${WHEEL_PY//./})"
+VER="$("$PY" -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')"
+echo "Using $PY ($VER) site-packages: $SITE"
 
-$PIP install --user --upgrade pip wheel
-
-$PIP install --user \
+"$PIP" install --target "$SITE" \
   --platform manylinux2014_aarch64 \
-  --python-version "$WHEEL_PY" \
+  --python-version "$VER" \
   --implementation cp \
   --only-binary=:all: \
-  "pydantic>=2,<3" "pydantic-settings>=2,<3" typing-extensions annotated-types
+  "pydantic==2.10.6" "pydantic-settings==2.7.1" "typing-extensions" "annotated-types"
 
 WHEEL_URL="https://github.com/zowskyy/frontier-syntax/raw/main/releases/local-coding-agent-0.1.0-rc.1/dist/local_coding_agent-0.1.0rc1-py3-none-any.whl"
-$PIP install --user --no-deps "$WHEEL_URL"
+"$PIP" install --target "$SITE" --no-deps "$WHEEL_URL"
 
 export PATH="$HOME/.local/bin:$PATH"
 grep -q '.local/bin' "$HOME/.bashrc" 2>/dev/null || echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$HOME/.bashrc"
