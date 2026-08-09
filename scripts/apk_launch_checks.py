@@ -180,6 +180,30 @@ def check_sha256sums_include_apk() -> CheckResult:
     return CheckResult("APK-007", "SHA256SUMS includes APK", ok, detail)
 
 
+LAYOUT_XML = ROOT / "local-coding-agent/mobile/android/app/src/main/res/layout/activity_main.xml"
+BOOTSTRAP_ASSET = ROOT / "local-coding-agent/mobile/android/app/src/main/assets/termux_bootstrap.sh"
+
+
+def check_ui_scroll_and_pinned_copy() -> CheckResult:
+    """APK-008: primary copy action visible on small screens (ScrollView + pinned button)."""
+    if not LAYOUT_XML.is_file():
+        return CheckResult("APK-008", "UI scroll + pinned copy button", False, "layout missing")
+    xml = LAYOUT_XML.read_text(encoding="utf-8")
+    has_scroll = "ScrollView" in xml
+    has_copy_id = 'android:id="@+id/copyBootstrapButton"' in xml
+    pinned = has_copy_id and 'layout_constraintBottom_toBottomOf="parent"' in xml
+    scroll_above_button = 'layout_constraintBottom_toTopOf="@id/copyBootstrapButton"' in xml
+    bootstrap_lines = 0
+    if BOOTSTRAP_ASSET.is_file():
+        bootstrap_lines = len(BOOTSTRAP_ASSET.read_text(encoding="utf-8").splitlines())
+    ok = has_scroll and pinned and scroll_above_button
+    detail = (
+        f"scroll={has_scroll} pinned={pinned} scroll_above_button={scroll_above_button} "
+        f"bootstrap_lines={bootstrap_lines}"
+    )
+    return CheckResult("APK-008", "UI scroll + pinned copy button", ok, detail)
+
+
 def run_static_checks() -> list[CheckResult]:
     return [
         check_apk_exists(),
@@ -189,6 +213,7 @@ def run_static_checks() -> list[CheckResult]:
         check_no_internet_permission(),
         check_release_bundle_lists_apk(),
         check_sha256sums_include_apk(),
+        check_ui_scroll_and_pinned_copy(),
     ]
 
 

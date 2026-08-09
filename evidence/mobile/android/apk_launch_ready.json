@@ -44,12 +44,18 @@
       "name": "SHA256SUMS includes APK",
       "passed": true,
       "detail": "listed"
+    },
+    {
+      "id": "APK-008",
+      "name": "UI scroll + pinned copy button",
+      "passed": true,
+      "detail": "scroll=True pinned=True scroll_above_button=True bootstrap_lines=32"
     }
   ],
   "passed": true,
   "device_runtime": "UNEXECUTED_REQUIRES_RUNTIME",
   "launch_scope": "apk_artifact_only",
-  "updated_at": "2026-08-09T01:26:54.168696Z",
+  "updated_at": "2026-08-09T01:35:37.418252Z",
   "taylor_workers": [
     {
       "id": "APK-W1_Build",

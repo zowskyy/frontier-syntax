@@ -32,6 +32,7 @@ The main agent is the **quarterback**; Task subagents are **workers**. Full poli
 
 - Cite every image/screenshot you reference (source, capture context, what it shows).
 - Before delivery: re-read global rules, verify against cited evidence, run gates + domain audit loops until PASS (no iteration cap).
+- Android/APK: follow [`docs/ANDROID_DEBUG_AUDIT_LOOP.md`](docs/ANDROID_DEBUG_AUDIT_LOOP.md) and `.cursor/rules/android-debug-audit-loop.mdc`.
 
 ## Global rules library (all chats / all repos)
 

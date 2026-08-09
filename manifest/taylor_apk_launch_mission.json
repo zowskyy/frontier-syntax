@@ -2,7 +2,7 @@
   "mission": "apk_launch_ready",
   "complete": true,
   "verdict": "LAUNCH_READY",
-  "updated_at": "2026-08-09T01:26:54.168931Z",
+  "updated_at": "2026-08-09T01:35:37.418527Z",
   "workers": [
     {
       "id": "APK-W1_Build",
@@ -154,6 +154,12 @@
       "name": "SHA256SUMS includes APK",
       "passed": true,
       "detail": "listed"
+    },
+    {
+      "id": "APK-008",
+      "name": "UI scroll + pinned copy button",
+      "passed": true,
+      "detail": "scroll=True pinned=True scroll_above_button=True bootstrap_lines=32"
     }
   ],
   "manifest": "manifest/taylor_apk_launch_mission.json",

@@ -1,0 +1,3 @@
+{"ts":"2026-08-09T01:25:00Z","action":"user_report","step":1,"result":"copy_button_not_visible","device":null,"notes":"Longer bootstrap pushed copyBootstrapButton below fold; no ScrollView"}
+{"ts":"2026-08-09T01:28:00Z","action":"layout_fix","step":2,"result":"ScrollView_plus_pinned_bottom_button","device":null,"notes":"PR #91 activity_main.xml"}
+{"ts":"2026-08-09T01:31:00Z","action":"policy","step":3,"result":"android_debug_audit_loop_documented","device":null,"notes":"docs/ANDROID_DEBUG_AUDIT_LOOP.md + APK-008 static check"}

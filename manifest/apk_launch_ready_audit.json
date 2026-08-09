@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-08-09T01:26:54.198660Z",
+  "timestamp": "2026-08-09T01:35:37.445239Z",
   "verdict": "LAUNCH_READY",
   "passed": true,
   "launch_ready": true,
   "taylor_complete": true,
-  "iterations": 2,
+  "iterations": 1,
   "checks": [
     {
       "id": "APK-001",
@@ -47,6 +47,12 @@
       "name": "SHA256SUMS includes APK",
       "passed": true,
       "detail": "listed"
+    },
+    {
+      "id": "APK-008",
+      "name": "UI scroll + pinned copy button",
+      "passed": true,
+      "detail": "scroll=True pinned=True scroll_above_button=True bootstrap_lines=32"
     }
   ],
   "remediation_actions": [],

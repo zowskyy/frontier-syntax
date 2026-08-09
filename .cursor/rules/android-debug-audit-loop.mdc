@@ -1,0 +1,49 @@
+---
+description: AUTO-ENABLED — Android debug audit loop; document, one change, reproduce, close loop
+alwaysApply: true
+---
+
+# Android debug audit loop — AUTOMATIC
+
+**Always on** when debugging, changing, or shipping Android/APK work. Combines artifact audits with UI/runtime discipline per [Google Android Developer Fundamentals](https://google-developer-training.github.io/android-developer-fundamentals-course-concepts-v2/) and [Android Studio debug tools](https://developer.android.com/studio/debug).
+
+Full reference: `docs/ANDROID_DEBUG_AUDIT_LOOP.md`
+
+## Before claiming APK/mobile work is done
+
+1. **Static audit** — `python3 scripts/audit_apk_launch_ready.py` → `LAUNCH_READY` (includes APK-008 UI layout check).
+2. **Layout vs content** — if bootstrap strings, assets, or layouts changed, verify primary actions (e.g. copy button) remain visible on small screens.
+3. **Document the loop** — append to `evidence/mobile/android/debug_audit_log.jsonl` (action, order, outcome, device/emulator if run).
+
+## Core loop rules (mandatory)
+
+| Rule | Requirement |
+|------|-------------|
+| **Document** | Record what you did, step order, result (success/crash/unexpected) |
+| **One change** | Change one variable at a time; re-run after each change |
+| **Check details** | Log device model, API level, permissions, build variant, network |
+| **Reproduce** | Same environment each run; note intermittent failures |
+| **Timestamp** | Correlate actions with Logcat / audit log timestamps |
+| **Close loop** | After fix: re-run full audit; confirm no regression; update docs |
+
+## Tools (use when runtime available)
+
+- **Logcat** — capture before/after each change
+- **Layout Inspector** — verify views visible in hierarchy (copy button not off-screen)
+- **Debugger** — breakpoints, step through, inspect variables, call stack
+- **ADB** — `adb install`, `adb logcat`, `adb shell dumpsys`
+- **Layout XML review** — when no device: ScrollView + pinned critical buttons
+
+## Forbidden
+
+- ❌ `LAUNCH_READY` from static checks only when user reports UI failure — treat as open loop
+- ❌ Changing bootstrap/assets without checking `activity_main.xml` scroll/pin constraints
+- ❌ Skipping documentation because "it was a small fix"
+- ❌ Multiple simultaneous changes without recording which caused the fix
+
+## Response footer (Android work shipped)
+
+```
+Android audit loop: PASS (static + layout check)
+device_runtime: UNEXECUTED | VERIFIED — <how>
+```

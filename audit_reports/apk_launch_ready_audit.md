@@ -1,7 +1,7 @@
 # APK Launch-Ready Audit
-- Timestamp: 2026-08-09T01:26:54.198660Z
+- Timestamp: 2026-08-09T01:35:37.445239Z
 - Verdict: **LAUNCH_READY**
-- Iterations: 2
+- Iterations: 1
 - Taylor complete: True
 
 ## Checks
@@ -15,5 +15,6 @@
 | APK-005 | No INTERNET permission | PASS |
 | APK-006 | Release MANIFEST lists APK | PASS |
 | APK-007 | SHA256SUMS includes APK | PASS |
+| APK-008 | UI scroll + pinned copy button | PASS |
 
 Manifest: `manifest/apk_launch_ready_audit.json`
