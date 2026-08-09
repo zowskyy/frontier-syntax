@@ -15,6 +15,7 @@ Rules apply in **three layers**. All three must stay in sync.
 | `ship-finished-work.mdc` | Gate until PASS; no partial deliveries |
 | `visual-evidence-audit.mdc` | Cite images; audit-debug loop before delivery |
 | `audit-debug-loop.mdc` | Multi-pass audit/debug until full package |
+| `android-debug-audit-loop.mdc` | Android debug audit loop (document, one change, close loop) |
 | `quarterback-worker.mdc` | Delegate to workers; re-gate merged changes |
 | `ga-protocol.mdc` | Release readiness north star |
 

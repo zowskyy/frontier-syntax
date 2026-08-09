@@ -4,6 +4,7 @@ The user never needs to say "run gates" or "keep going." This is your default be
 
 Quarterback/worker delegation: see `.cursor/rules/quarterback-worker.mdc`.
 Visual evidence + audit-debug loop: see `.cursor/rules/visual-evidence-audit.mdc` and `.cursor/rules/audit-debug-loop.mdc`.
+Android debug audit loop: see `.cursor/rules/android-debug-audit-loop.mdc` and `docs/ANDROID_DEBUG_AUDIT_LOOP.md`.
 Global rules library (all chats/repos): see `docs/GLOBAL_RULES_LIBRARY.md` and `docs/USER_RULES_PASTE.md`.
 
 When generating or modifying code, you MUST gate-check and fix until PASS before sending the response.

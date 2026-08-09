@@ -57,6 +57,8 @@ Swift host + llama.cpp XCFramework. **No iOS Python** for core product.
 APK build is recorded in `evidence/mobile/android/apk_build.json` (`BUILD_VERIFIED`).
 Launch-ready audit: `evidence/mobile/android/apk_launch_ready.json` (`LAUNCH_READY` for artifact; device runtime still required).
 
+Android debug audit loop: [`docs/ANDROID_DEBUG_AUDIT_LOOP.md`](../../docs/ANDROID_DEBUG_AUDIT_LOOP.md) — document every debug step in `evidence/mobile/android/debug_audit_log.jsonl`.
+
 ```bash
 python3 scripts/audit_apk_launch_ready.py
 python3 scripts/taylor_apk_launch_mission.py --apply

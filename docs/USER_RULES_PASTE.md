@@ -25,7 +25,8 @@ Before telling the user a fix is done:
 
 1. Re-read repo rules: `.cursorrules`, `.cursor/rules/*.mdc`, `AGENTS.md`.
 2. Run domain audits until PASS (no cap):
-   - Mobile/APK: `python3 scripts/audit_apk_launch_ready.py` → `LAUNCH_READY`
+   - Mobile/APK: `python3 scripts/audit_apk_launch_ready.py` → `LAUNCH_READY` (includes APK-008 UI layout)
+   - Android debug loop: see `docs/ANDROID_DEBUG_AUDIT_LOOP.md` — document actions in `evidence/mobile/android/debug_audit_log.jsonl`
    - GA: `python3 scripts/release_readiness.py --audit --skip-run`
    - End-of-turn: `python3 scripts/agent_shadow_worker.py run --taylor` when code/evidence changed
 3. Debug any failure; fix; re-run the full loop. Do not hand remediation back to the user when you can fix it.

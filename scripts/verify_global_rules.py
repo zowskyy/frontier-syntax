@@ -30,6 +30,7 @@ REQUIRED = (
     "ship-finished-work.mdc",
     "visual-evidence-audit.mdc",
     "audit-debug-loop.mdc",
+    "android-debug-audit-loop.mdc",
     "quarterback-worker.mdc",
     "ga-protocol.mdc",
 )
