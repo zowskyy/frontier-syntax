@@ -23,7 +23,7 @@ The APK is an offline-first launcher that displays the mobile workflow checklist
 
 ### Termux bootstrap
 
-The agent is **not on PyPI**. First-time setup downloads the release wheel from GitHub, then installs the `agent` CLI to `~/.local/bin`.
+The agent is **not on PyPI**. Use **Python 3.12** on Termux (not 3.13) so `pydantic-core` installs from prebuilt wheels instead of compiling Rust on-device.
 
 ```bash
 bash scripts/termux_bootstrap.sh
@@ -32,14 +32,21 @@ bash scripts/termux_bootstrap.sh
 Or paste manually in Termux:
 
 ```bash
-pkg update -y && pkg install -y python clang cmake git
-pip install --user --upgrade https://github.com/zowskyy/frontier-syntax/raw/main/releases/local-coding-agent-0.1.0-rc.1/dist/local_coding_agent-0.1.0rc1-py3-none-any.whl
+pkg update -y && pkg install -y python-3.12 clang cmake git
+PY=python3.12
+$PY -m pip install --user --upgrade pip wheel
+$PY -m pip install --user \
+  --platform manylinux2014_aarch64 --python-version 3.12 --implementation cp \
+  --only-binary=:all: \
+  "pydantic>=2,<3" "pydantic-settings>=2,<3" typing-extensions annotated-types
+$PY -m pip install --user --no-deps \
+  https://github.com/zowskyy/frontier-syntax/raw/main/releases/local-coding-agent-0.1.0-rc.1/dist/local_coding_agent-0.1.0rc1-py3-none-any.whl
 export PATH="$HOME/.local/bin:$PATH"
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 mkdir -p ~/models && agent benchmark --profile android
 ```
 
-If `agent` is not found after install, run `export PATH="$HOME/.local/bin:$PATH"` or open a new Termux session.
+If install still fails, confirm `python3.12 --version` shows 3.12.x (not 3.13).
 
 ## iOS
 

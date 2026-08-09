@@ -13,7 +13,7 @@
       "id": "APK-002",
       "name": "APK SHA256 matches evidence",
       "passed": true,
-      "detail": "expected=ecaad29d1746 actual=ecaad29d1746"
+      "detail": "expected=0b437a060c78 actual=0b437a060c78"
     },
     {
       "id": "APK-003",
@@ -49,7 +49,7 @@
   "passed": true,
   "device_runtime": "UNEXECUTED_REQUIRES_RUNTIME",
   "launch_scope": "apk_artifact_only",
-  "updated_at": "2026-08-09T00:08:35.908800Z",
+  "updated_at": "2026-08-09T00:26:22.868435Z",
   "taylor_workers": [
     {
       "id": "APK-W1_Build",
